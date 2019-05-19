@@ -1,0 +1,100 @@
+﻿/*
+In NativeScript, the app.css file is where you place CSS rules that
+you would like to apply to your entire application. Check out
+http://docs.nativescript.org/ui/styling for a full list of the CSS
+selectors and properties you can use to style UI components.
+
+/*
+In many cases you may want to use the NativeScript core theme instead
+of writing your own CSS rules. For a full list of class names in the theme
+refer to http://docs.nativescript.org/ui/theme.
+*/
+
+.btn {
+    color:#009432;
+    border-color:#009432;
+    text-align: center;
+    text-transform: none;
+    border-width: 2;
+    border-radius: 2 2 2 2;
+    font-family: Montserrat-Regular;
+    height: 45;
+    font-size:17;
+}
+.btn:focus
+{
+    border-color: #5CC77A;
+    color:#5CC77A;
+}
+
+.btn-menu
+{
+    color: white;
+    border-color: white;
+    text-align: center;
+    text-transform: none;
+    border-width: 2;
+    border-radius: 2 2 2 2;
+    font-family: Montserrat-Regular;
+    height: 45;
+    font-size:17;
+    width: 90%;
+}
+.btn-menu:pressed
+{
+    border-color: #5CC77A;
+    color:#5CC77A;
+}
+
+
+.roundedBtn
+{
+    border-color: white;
+    border-width: 5;
+    border-radius: 100%;
+    background-color: #009432;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30% 30%;
+    height: 70;
+    width: 70;
+}
+.roundedBtn:active
+{
+    background-color: #5CC77A;
+    border-color: #5CC77A;
+}
+
+.action-bar
+{
+    font-size:18;
+    font-family: Montserrat-Regular;
+    vertical-align:center
+}
+
+.two-color-gradient {
+    background: linear-gradient(135deg, #5CC77A, #009432);
+}
+.topTitle
+{
+    font-family: Rasa-Medium;
+    color: white;
+    font-size: 30;
+}
+.form-input {
+    border-bottom-color: #5CC77A;
+    border-bottom-width: 1;
+    color: white;
+    placeholder-color: #5CC77A;
+    width: 90%;
+}
+.textPrimary
+{
+    font-family: Montserrat-Regular;
+    font-size: 18;
+    color: white;
+}
+ActionBar {
+    background-color: #009432;
+    color: white;
+}

@@ -1,0 +1,34 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#009432" />
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <GridLayout>
+        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <Label class="textPrimary" text="Settings" horizontalAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+
+        <Button  class="btn" text="Logout" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
+    </GridLayout>
+</Page>

@@ -1,0 +1,63 @@
+<nsDrawer:RadSideDrawer id="sideDrawer"
+                        xmlns:nsDrawer="nativescript-ui-sidedrawer"
+                        xmlns:cb="nativescript-checkbox"
+                        loaded="onLoaded">
+    <nsDrawer:RadSideDrawer.drawerTransition>
+        <nsDrawer:SlideInOnTopTransition/>
+    </nsDrawer:RadSideDrawer.drawerTransition>
+
+    <nsDrawer:RadSideDrawer.drawerContent>
+        <GridLayout backgroundColor="#009432">
+        <!--     Top Menu, foto e nome       -->
+            <StackLayout orientation="vertical" verticalAlignment="top" height="80%">
+                <StackLayout height="30%" orientation="vertical" verticalAlignment="top" marginTop="10">
+                    <StackLayout class="roundedBtn" backgroundImage="~/images/social/twi.png" horizontalAlignment="center" backgroundColor="#5CC77A" width="125" height="125"/>
+                    <Label text="Benvenuto!" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>
+                </StackLayout>
+                <!--     Centrale       -->
+                <ScrollView height="70%" >
+                    <GridLayout>
+
+                    <!--     Login       -->
+                    <StackLayout id="loginForm" visibility="visible">
+                        <TextField class="form-input" hint="Username"/>
+                        <TextField class="form-input" hint="Password" secure="true"/>
+                        <cb:CheckBox checked="{{ checkProp }}" text="Remember me" id="myCheckbox" color="white" fillColor="white" marginTop="5" marginLeft="5"/>
+                        <Button class="btn-menu" text="Login" marginBottom="5" marginTop="20"/>
+                        <Label text="Dimenticato account?" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10"/>
+
+                    </StackLayout>
+
+                    <!--     Studente       -->
+                    <StackLayout id="userForm" visibility="collapsed">
+
+                        <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20"/>
+                        <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5"/>
+                        <Button class="btn-menu" text="Esami" marginBottom="5" marginTop="5"/>
+                        <Button class="btn-menu" text="Corsi" marginBottom="5" marginTop="5"/>
+                        <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5"/>
+                        <Button class="btn-menu" text="Segreteria" marginBottom="5" marginTop="5"/>
+                        <Button class="btn-menu" text="Trasporti" marginBottom="5" marginTop="5"/>
+                        <Button class="btn-menu" text="Convenzioni" marginBottom="5" marginTop="5"/>
+
+                    </StackLayout>
+                    </GridLayout>
+
+                </ScrollView>
+            </StackLayout>
+
+            <!--     Bottom Menu, about e settings       -->
+            <StackLayout verticalAlignment="bottom" width="100%" height="20%" marginBottom="10" >
+                <Button class="btn-menu" text="Settings" marginBottom="5" tap="goto_settings"/>
+                <Button class="btn-menu" text="About"/>
+
+            </StackLayout>
+
+        </GridLayout>
+    </nsDrawer:RadSideDrawer.drawerContent>
+
+    <nsDrawer:RadSideDrawer.mainContent>
+        <Frame defaultPage="home/home-page"></Frame>
+    </nsDrawer:RadSideDrawer.mainContent>
+</nsDrawer:RadSideDrawer>
+
