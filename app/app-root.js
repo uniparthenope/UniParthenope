@@ -1,19 +1,52 @@
 const app = require("tns-core-modules/application");
 const frame = require("tns-core-modules/ui/frame");
 const observableModule = require("tns-core-modules/data/observable");
+const httpModule = require("tns-core-modules/http");
+var base64= require('base-64');
+var utf8 = require('utf8');
 
-let page;
 let viewModel;
 
 function pageLoaded(args) {
-    page = args.object;
-
+    const page = args.object;
     viewModel = observableModule.fromObject({});
-
     page.bindingContext = viewModel;
 
 }
 
+exports.onTapLogin = function() {
+    let sideDrawer = app.getRootView();
+    let user = sideDrawer.getViewById("username").text;
+    let pass = sideDrawer.getViewById("password").text;
+    let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/login";
+    let indicator = sideDrawer.getViewById("activityIndicator");
+    indicator.visibility = "visible";
+
+    let token = user + ":" + pass;
+    var bytes = utf8.encode(token);
+    var encodedStr = base64.encode(bytes);
+
+
+    console.log("Username: " + user);
+    console.log("Password= " + pass);
+    console.log("Token= " + encodedStr);
+
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {"Content-Type": "application/json",
+                "Authorization":"Basic "+ encodedStr}
+    }).then((response) => {
+        const result = response.content.toJSON();
+
+        console.log(result);
+        indicator.visibility = "collapsed";
+
+    },(e) => {
+        console.log("Error", e);
+        indicator.visibility = "collapsed";
+    });
+};
 
 //Go to Settings page
 exports.goto_settings = function () {
@@ -27,121 +60,4 @@ exports.goto_settings = function () {
 
 };
 
-function drawer_button1(){
-    const sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-    //Set link to open in webview
-    const nav =
-        {
-            moduleName: "home/home-page",
-            context: {
-                link : 'https://www.google.it'
-            }
-        };
-
-    frame.topmost().navigate(nav);
-}
-
-function drawer_button2(){
-    const sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-
-    const nav =
-        {
-            moduleName: "home/home-page",
-            context: {
-                link : 'https://www.facebook.com'
-            }
-        };
-
-    frame.topmost().navigate(nav);
-}
-
-function drawer_button3(){
-    const sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-
-    //Set link to open in webview
-    const nav =
-        {
-            moduleName: "home/home-page",
-            context: {
-                link : 'https://www.google.it'
-            }
-        };
-
-    frame.topmost().navigate(nav);
-}
-
-function drawer_button4(){
-    const sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-
-    //Set link to open in webview
-    const nav =
-        {
-            moduleName: "home/home-page",
-            context: {
-                link : 'https://www.google.it'
-            }
-        };
-
-    frame.topmost().navigate(nav);
-}
-
-function drawer_button5(){
-    const sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-
-    //Set link to open in webview
-    const nav =
-        {
-            moduleName: "home/home-page",
-            context: {
-                link : 'https://www.google.it'
-            }
-        };
-
-    frame.topmost().navigate(nav);
-}
-
-function drawer_button6(){
-    const sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-
-    //Set link to open in webview
-    const nav =
-        {
-            moduleName: "home/home-page",
-            context: {
-                link : 'https://www.google.it'
-            }
-        };
-
-    frame.topmost().navigate(nav);
-}
-
-function drawer_button7(){
-    const sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-
-    //Set link to open in webview
-    const nav =
-        {
-            moduleName: "home/home-page",
-            context: {
-                link : 'https://www.google.it'
-            }
-        };
-
-    frame.topmost().navigate(nav);
-}
-
-exports.drawer_button1 = drawer_button1;
-exports.drawer_button2 = drawer_button2;
-exports.drawer_button3 = drawer_button3;
-exports.drawer_button4 = drawer_button4;
-exports.drawer_button5 = drawer_button5;
-exports.drawer_button6 = drawer_button6;
-exports.drawer_button7 = drawer_button7;
 exports.pageLoaded = pageLoaded;
