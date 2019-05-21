@@ -22,18 +22,20 @@ exports.onTapLogin = function() {
     let user = sideDrawer.getViewById("username").text;
     let pass = sideDrawer.getViewById("password").text;
 
-    let remember = sideDrawer.getViewById("rememberMe").checked;
-    if (remember){
-        appSettings.setString("username",user);
-        appSettings.setString("password",pass);
-        appSettings.setBoolean("rememberMe",true);
+    if (user != "" && pass!= "")
+    {
+        let token = user + ":" + pass;
+        var bytes = utf8.encode(token);
+        global.encodedStr = base64.encode(bytes);
+        sideDrawer.showModal(modalViewModule, {user:user, pass:pass}, () => {}, false);
     }
-
-    let token = user + ":" + pass;
-    var bytes = utf8.encode(token);
-    global.encodedStr = base64.encode(bytes);
-    sideDrawer.showModal(modalViewModule, "", () => {}, false);
-    //global.loginT(user,pass);
+    else{
+        dialogs.alert({
+            title: "Errore!",
+            message: "I campi Username e Password non possono essere vuoti!",
+            okButtonText: "OK"
+        });
+    }
 
 };
 
@@ -46,10 +48,11 @@ exports.goto_settings = function () {
     frame.topmost().navigate(nav);
 
 };
+
 exports.goto_about = function () {
     const nav =
         {
-            moduleName: "userHome/userHome",
+            moduleName: "userCalendar/userCalendar",
         };
     frame.topmost().navigate(nav);
 
@@ -58,7 +61,7 @@ exports.goto_about = function () {
 exports.goto_home = function () {
     const nav =
         {
-            moduleName: "userHome/userHome",
+            moduleName: "userCalendar/userCalendar",
             clearHistory: true
         };
     frame.topmost().navigate(nav);

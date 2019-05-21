@@ -10,19 +10,23 @@ const appSettings = require("application-settings");
 
 
 let page;
+let account;
 let items;
 let carriere;
 let viewModel;
+let user;
+let pass;
 
 function onShownModally(args) {
-    const context = args.context;
     closeCallback = args.closeCallback;
     page = args.object;
     items = new ObservableArray();
     let userList = page.getViewById("listview");
     let indicator = page.getViewById("activityIndicator");
     indicator.visibility = "visible";
-
+    const contex = args.context;
+    user = contex.user;
+    pass = contex.pass;
     viewModel = Observable.fromObject({
         items:items
     });
@@ -43,23 +47,34 @@ function onShownModally(args) {
                 title: "Autenticazione Fallita!",
                 message: result.retErrMsg,
                 okButtonText: "OK"
-            });
+            }).then(
+                args.object.closeModal()
+            );
         }
         else
         {
+            account = result;
             carriere = result.user.trattiCarriera;
-            global.saveInfo(result);
-            indicator.visibility = "collapsed";
-            //Mostro le carriere
-            for (let i=0; i<carriere.length; i++)
+
+            if (carriere.length > 1)
             {
-                console.log(carriere[i].cdsDes);
-                items.push({ "title": carriere[i].cdsDes,
-                    "mat" : carriere[i].matricola,
-                    "status" :carriere[i].staStuDes
-                });
-                userList.refresh();
+                indicator.visibility = "collapsed";
+                //Mostro le carriere
+                for (let i=0; i<carriere.length; i++)
+                {
+                    console.log(carriere[i].cdsDes);
+                    items.push({ "title": carriere[i].cdsDes,
+                        "mat" : carriere[i].matricola,
+                        "status" :carriere[i].staStuDes
+                    });
+                    userList.refresh();
+                }
             }
+            else
+            {
+                selectedCarrer(0);
+            }
+
         }
 
     },(e) => {
@@ -69,6 +84,7 @@ function onShownModally(args) {
             message: e.retErrMsg,
             okButtonText: "OK"
         });
+        args.object.closeModal();
     });
 
 
@@ -78,13 +94,24 @@ function onShownModally(args) {
 
 function onTap(args)
 {
-    const sideDrawer = app.getRootView();
     const index = args.index;
+    selectedCarrer(index);
+}
+
+function selectedCarrer(index)
+{
+    const sideDrawer = app.getRootView();
+    global.saveInfo(account);
     appSettings.setNumber("carriera",index);
+    let remember = sideDrawer.getViewById("rememberMe").checked;
+    if (remember){
+        appSettings.setString("username",user);
+        appSettings.setString("password",pass);
+        appSettings.setBoolean("rememberMe",true);
+    }
     global.isConnected = true;
     let nome = appSettings.getString("nome");
     let cognome = appSettings.getString("cognome");
-
     sideDrawer.getViewById("topName").text = nome + " " + cognome;
     global.saveCarr(carriere[index]);
 
@@ -96,10 +123,10 @@ function onTap(args)
         let loginForm = sideDrawer.getViewById("loginForm");
         loginForm.visibility = "collapsed";
         userForm.visibility = "visible";
-        args.object.closeModal();
+        closeCallback();
         const nav =
             {
-                moduleName: "userHome/userHome",
+                moduleName: "userCalendar/userCalendar",
                 clearHistory: true
             };
         frame.topmost().navigate(nav);
@@ -111,9 +138,9 @@ function onTap(args)
             message: "Siamo spiacenti, ma il tipo di utente che ha effettuato l'accesso non e' ancora supportato dalla app!",
             okButtonText: "OK"
         });
+        args.object.closeModal();
         //logout();
     }
-
 }
 exports.onTap = onTap;
 exports.onShownModally = onShownModally;

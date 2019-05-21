@@ -105,6 +105,24 @@ refer to http://docs.nativescript.org/ui/theme.
     font-size: 18;
     color: white;
 }
+.badge {
+    margin: 5 10 0 0;
+    horizontal-align: right;
+    width: 20;
+    height: 20;
+    border-color: red;
+    border-width: 1;
+    border-radius: 50%;
+    background-color: red;
+}
+.badge-text {
+    margin: 2 0 0 0;
+    font-size: 8;
+    font-weight: bold;
+    color: white;
+    vertical-align: center;
+    horizontal-align: center;
+}
 ActionBar {
     background-color: #009432;
     color: white;

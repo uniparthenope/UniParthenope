@@ -78,7 +78,7 @@ function autoconnect()
                     indicator.visibility = "collapsed";
                     const nav =
                         {
-                            moduleName: "userHome/userHome",
+                            moduleName: "userCalendar/userCalendar",
                             clearHistory: true
                         };
                     frame.topmost().navigate(nav);
