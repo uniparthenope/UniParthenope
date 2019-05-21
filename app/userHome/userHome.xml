@@ -1,0 +1,91 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:rc="nativescript-ui-calendar"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#009432" />
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <GridLayout>
+        <StackLayout orientation="vertical">
+            <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+                <Label class="textPrimary" text="Home" horizontalAlignment="center" verticalAlignment="center"/>
+            </GridLayout>
+
+            <rc:RadCalendar id="myCalendar" viewMode="Day" eventsViewMode="Inline|Popover">
+                <rc:RadCalendar.dayViewStyle>
+                    <rc:CalendarDayViewStyle showTitle="true" showDayNames="true" >
+                        <rc:CalendarDayViewStyle.todayCellStyle>
+                            <rc:DayCellStyle cellBorderColor="#940400" cellTextColor="#940400" cellTextFontName="Montserrat-Bold" cellTextSize="14" />
+                        </rc:CalendarDayViewStyle.todayCellStyle>
+
+                        <rc:CalendarDayViewStyle.dayCellStyle>
+                            <rc:DayCellStyle showEventsText="true" eventTextColor="White" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
+                                             cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#5CC77A"
+                                             cellTextColor="#ffffff" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" ios:cellTextSize="12" android:cellTextSize="10"/>
+                        </rc:CalendarDayViewStyle.dayCellStyle>
+
+                        <rc:CalendarDayViewStyle.weekendCellStyle>
+                            <rc:DayCellStyle eventTextColor="BlueViolet" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
+                                             cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#940400"
+                                             cellTextColor="#ffffff" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="12" />
+                        </rc:CalendarDayViewStyle.weekendCellStyle>
+
+                        <rc:CalendarDayViewStyle.selectedDayCellStyle>
+                            <rc:DayCellStyle eventTextColor="Blue" eventFontName="Times New Roman" eventFontStyle="Bold" eventTextSize="8"
+                                             cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="White"
+                                             cellBorderWidth="2" cellBorderColor="White" cellTextColor="#009432" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="22" />
+                        </rc:CalendarDayViewStyle.selectedDayCellStyle>
+
+
+
+                        <rc:CalendarDayViewStyle.dayNameCellStyle>
+                            <rc:CellStyle  cellBackgroundColor="#ffffff" cellBorderWidth="1" cellBorderColor="#009432" cellTextColor="#009432" cellTextFontName="Montserrat-Regular" cellTextSize="10" />
+                        </rc:CalendarDayViewStyle.dayNameCellStyle>
+
+                        <rc:CalendarDayViewStyle.titleCellStyle>
+                            <rc:CellStyle cellTextColor="#009432" cellTextFontName="Montserrat-Regular" cellTextSize="18" />
+                        </rc:CalendarDayViewStyle.titleCellStyle>
+
+                        <rc:CalendarDayViewStyle.dayEventsViewStyle>
+                            <rc:DayEventsViewStyle
+                                                   timeLabelFormat="HH:mm" timeLabelTextColor="#009432"
+                                                   timeLabelTextSize="12"/>
+                        </rc:CalendarDayViewStyle.dayEventsViewStyle>
+
+                        <rc:CalendarDayViewStyle.allDayEventsViewStyle>
+                            <rc:AllDayEventsViewStyle backgroundColor="#00ffff"
+                                                      allDayText="DAILY" allDayTextIsVisible="true" />
+                        </rc:CalendarDayViewStyle.allDayEventsViewStyle>
+
+                    </rc:CalendarDayViewStyle>
+
+                </rc:RadCalendar.dayViewStyle>
+            </rc:RadCalendar>
+
+        </StackLayout>
+        <GridLayout backgroundColor="#5CC77A" width="100%" height="9%" verticalAlignment="bottom">
+            <Label class="textPrimary" text="Bottom Bar" horizontalAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+    </GridLayout>
+
+</Page>

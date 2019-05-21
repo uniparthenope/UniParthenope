@@ -29,6 +29,6 @@
             <Label class="textPrimary" text="Settings" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
 
-        <Button  class="btn" text="Logout" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
+        <Button id="deleteBtn" visibility="collapsed" tap="onTapDelete" class="btn" text="Dimentica Account" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
     </GridLayout>
 </Page>

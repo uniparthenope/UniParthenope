@@ -13,6 +13,7 @@ refer to http://docs.nativescript.org/ui/theme.
 .btn {
     color:#009432;
     border-color:#009432;
+    background-color: white;
     text-align: center;
     text-transform: none;
     border-width: 2;
@@ -64,6 +65,16 @@ refer to http://docs.nativescript.org/ui/theme.
     background-color: #5CC77A;
     border-color: #5CC77A;
 }
+.imageTop
+{
+    border-color: white;
+    border-width: 5;
+    border-radius: 100%;
+    background-color: #009432;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
 
 .action-bar
 {
@@ -97,4 +108,10 @@ refer to http://docs.nativescript.org/ui/theme.
 ActionBar {
     background-color: #009432;
     color: white;
+}
+Button
+{
+    color:#fff;
+    background-color: #009432;
+    font-family: Montserrat-Regular;
 }
