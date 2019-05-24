@@ -68,6 +68,25 @@ exports.goto_home = function () {
 
 };
 
+exports.goto_libretto = function () {
+    const nav =
+        {
+            moduleName: "Libretto/libretto",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+
+};
+exports.goto_segreteria = function () {
+    const nav =
+        {
+            moduleName: "segreteria/segreteria",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+
+};
+
 function logout()
 {
     let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/logout";

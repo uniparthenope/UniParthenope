@@ -76,6 +76,17 @@ refer to http://docs.nativescript.org/ui/theme.
     background-size: cover;
 }
 
+.roundedInfo
+{
+    border-color: #009432;
+    color: #009432;
+    border-width: 5;
+    border-radius: 100%;
+    background-color: white;
+    height: 70;
+    width: 70;
+}
+
 .action-bar
 {
     font-size:18;
@@ -104,6 +115,10 @@ refer to http://docs.nativescript.org/ui/theme.
     font-family: Montserrat-Regular;
     font-size: 18;
     color: white;
+}
+.textMontserratRegular
+{
+    font-family: Montserrat-Regular;
 }
 .badge {
     margin: 5 10 0 0;
