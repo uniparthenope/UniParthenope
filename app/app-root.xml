@@ -47,7 +47,7 @@
 
             <!--     Bottom Menu, about e settings       -->
             <StackLayout verticalAlignment="bottom" width="100%" height="20%" marginBottom="10" >
-                <Button class="btn-menu" text="Settings" marginBottom="5" tap="goto_segreteria"/>
+                <Button class="btn-menu" text="Settings" marginBottom="5" tap="goto_settings"/>
                 <Button class="btn-menu" text="About" tap="goto_about"/>
             </StackLayout>
 

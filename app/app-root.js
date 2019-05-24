@@ -52,7 +52,7 @@ exports.goto_settings = function () {
 exports.goto_about = function () {
     const nav =
         {
-            moduleName: "userCalendar/userCalendar",
+            moduleName: "userAppelli/appelli",
         };
     frame.topmost().navigate(nav);
 
