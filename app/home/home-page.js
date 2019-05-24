@@ -15,7 +15,8 @@ function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
-    if (!global.isConnected)
+
+   // if (!global.isConnected)
         autoconnect();
 
     page.bindingContext = viewModel;

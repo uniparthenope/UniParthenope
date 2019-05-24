@@ -120,6 +120,15 @@ refer to http://docs.nativescript.org/ui/theme.
 {
     font-family: Montserrat-Regular;
 }
+.lode
+{
+    font-family: Montserrat-Bold;
+    font-size: 18;
+    vertical-align: center;
+    horizontal-align: center;
+    color: rgba(216, 71, 71,0.5);
+    rotate:-45;
+}
 .badge {
     margin: 5 10 0 0;
     horizontal-align: right;

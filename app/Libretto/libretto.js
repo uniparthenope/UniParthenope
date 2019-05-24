@@ -148,11 +148,25 @@ function getExams(matId)
             {
                 if (result[i].esito.superatoFlg === 1)
                 {
+                    let lode = "collapsed";
+                    let voto = result[i].esito.votoEsa;
+                    let size = 26;
+
+                    if (voto === null)
+                        {
+                            voto = result[i].esito.tipoGiudCod;
+                            size = 20;
+                        }
+
+                    if (result[i].esito.votoEsa === 31)
+                        lode = "visible";
                     //console.log(result[i].adStuCod);
                     items.push({ "esame": result[i].adStuCod,
-                        "voto" : result[i].esito.votoEsa,
+                        "voto" : voto,
                         "cfu" :result[i].pesoAd,
-                        "data" : result[i].dataIns
+                        "data" : result[i].dataIns,
+                        "lode" : lode,
+                        "size" : size
                     });
                     esamiList.refresh();
                 }
