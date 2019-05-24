@@ -23,7 +23,7 @@
         <Label class="action-bar-title" text="UniParthenope"></Label>
     </ActionBar>
     <GridLayout>
-        <GridLayout class="two-color-gradient" width="100%" height="30%" verticalAlignment="top">
+        <GridLayout class="two-color-gradient" width="100%" height="35%" verticalAlignment="top">
             <Label class="textPrimary" text="Libretto" horizontalAlignment="center" verticalAlignment="top" marginTop="10"/>
             <GridLayout verticalAlignment="center" marginBottom="5">
 
@@ -39,7 +39,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                <GridLayout class="roundedBtn" backgroundColor="Transparent" horizontalAlignment="center" width="100" height="100" >
+                <GridLayout class="roundedBtn" backgroundColor="Transparent" horizontalAlignment="center" width="100" height="100" marginTop="20" >
                     <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
                         <Label  id="doneExams" class="textPrimary" text="" fontSize="30" verticalAlignment="center"/>
                         <Label  id="totExams" class="textPrimary" text=""  fontSize="16" verticalAlignment="center"/>
@@ -61,7 +61,7 @@
             </GridLayout>
         </GridLayout>
 
-        <ScrollView height="70%" verticalAlignment="bottom">
+        <ScrollView height="65%" verticalAlignment="bottom">
             <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5">
                 <ListView.itemTemplate >
                     <FlexboxLayout flexDirection="row">

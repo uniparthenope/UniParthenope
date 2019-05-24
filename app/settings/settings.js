@@ -29,7 +29,7 @@ function onDrawerButtonTap() {
 
 function onGeneralMenu()
 {
-    page.frame.navigate("home/home-page")
+    page.frame.goBack();
 }
 
 function onTapDelete(){
