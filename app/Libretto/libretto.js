@@ -153,13 +153,16 @@ function getExams(matId)
                     let size = 26;
 
                     if (voto === null)
-                        {
-                            voto = result[i].esito.tipoGiudCod;
-                            size = 20;
-                        }
+                    {
+                        voto = result[i].esito.tipoGiudCod;
+                        size = 20;
+                    }
 
-                    if (result[i].esito.votoEsa === 31)
+                    if (result[i].esito.votoEsa === 31){
                         lode = "visible";
+                        voto = 30;
+                    }
+
                     //console.log(result[i].adStuCod);
                     items.push({ "esame": result[i].adStuCod,
                         "voto" : voto,
