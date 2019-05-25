@@ -84,9 +84,9 @@
 
         </StackLayout>
 <!--        Bottom bar  -->
-            <GridLayout backgroundColor="#5CC77A" height="60" verticalAlignment="bottom" width="100%">
+            <GridLayout backgroundColor="#5CC77A" height="9%" verticalAlignment="bottom" width="100%">
                 <GridLayout columns="*, *, *, *, *" height="60">
-                    <GridLayout col="{{ selected_button }}" backgroundColor="#009432"/>
+                    <GridLayout id="selected_col" col="0" backgroundColor="#009432"/>
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>

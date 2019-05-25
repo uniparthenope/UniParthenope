@@ -10,14 +10,26 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 let page;
 let viewModel;
 let sideDrawer;
+let remember
 
 function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
+    remember = appSettings.getBoolean("rememberMe");
 
    if (!global.isConnected)
         autoconnect();
+   else if (remember)
+   {
+       const nav =
+           {
+               moduleName: "userCalendar/userCalendar",
+               clearHistory: true
+           };
+       frame.topmost().navigate(nav);
+   }
+
 
     page.bindingContext = viewModel;
 }
@@ -28,7 +40,6 @@ function onDrawerButtonTap() {
 }
 function autoconnect()
 {
-    let remember = appSettings.getBoolean("rememberMe");
     console.log("REMEMBER= "+remember);
     if (remember){
         const sideDrawer = app.getRootView();
