@@ -24,6 +24,7 @@ function onNavigatingTo(args) {
         items:items
     });
     let matId = appSettings.getNumber("matId");
+
     getTotExams(matId);
     getMedie(matId);
 
@@ -110,11 +111,17 @@ function getTotExams(matId) {
 function getExams()
 {
     let exams = global.myExams;
-    console.log(exams);
+    //console.log(exams);
 
     let dim = exams.length;
+    console.log(dim);
+
     for (let i = 0; i<dim; i++)
     {
+        console.log(exams[i].nome);
+        console.log(exams[i].superata);
+        console.log(exams[i].superata_voto);
+        console.log(exams[i].superata_lode);
 
         if (exams[i].superata === "Superata" && exams[i].superata === undefined)
         {

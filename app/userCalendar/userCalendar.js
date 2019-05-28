@@ -9,7 +9,6 @@ const appSettings = require("application-settings");
 
 let page;
 let viewModel;
-let array = new ObservableArray();
 let sideDrawer;
 
 function onNavigatingTo(args) {
@@ -53,6 +52,9 @@ function myExams() {
         }
         else
         {
+            let array = [];
+
+            console.log(result.length);
             for (let i=0; i<result.length; i++)
             {
                 httpModule.request({
@@ -72,8 +74,7 @@ function myExams() {
                         }).then(
                         );
                     }
-                    else
-                    {
+                    else {
                         exams.nome = result[i].nome;
                         exams.codice = result[i].codice;
                         exams.annoId = result[i].annoId;
@@ -85,37 +86,42 @@ function myExams() {
                         exams.superata_voto = result_n.voto;
                         exams.superata_lode = result_n.lode;
 
-                        if (exams.superata === "Frequentata")
-                            global.freqExams.push(exams);
+                        /*if (exams.superata === "Frequentata")
+                            global.freqExams.push(exams);*/
 
-                        array.push({"BOH" : exams.CFU});
-                        //global.myExams.push(exams);
-                        //console.log(global.myExams);
+                        global.myExams.push({
+                            "nome" : result[i].nome,
+                            "codice" : result[i].codice,
+                            "annoId" : result[i].annoId,
+                            "adsceId" : result[i].adsceId,
+                            "adId" : result[i].adId,
+                            "CFU" : result[i].CFU,
+                            "superata" : result_n.stato,
+                            "superata_data" : result_n.data,
+                            "superata_voto" : result_n.voto,
+                            "superata_lode" : result_n.lode
+                        });
                     }
-
                 },(e) => {
-                    console.log("Error", e.retErrMsg);
+                    console.log("Error", e);
                     dialogs.alert({
                         title: "Errore Sincronizzazione Esami!",
-                        message: e.retErrMsg,
+                        message: e,
                         okButtonText: "OK"
                     });
                 });
             }
-
         }
-        console.log("ARRAY= "+ array.length);
-        console.log("Done!");
 
         },(e) => {
-        console.log("Error", e.retErrMsg);
+        console.log("Error", e);
         dialogs.alert({
             title: "Errore Server!",
-            message: e.retErrMsg,
+            message: e,
             okButtonText: "OK"
         });
     });
-    global.updatedExams = true;
+    //global.updatedExams = true;
 }
 
 function getPianoId(stuId)
