@@ -19,55 +19,45 @@ function onNavigatingTo(args) {
     esamiList = page.getViewById("listview");
     const sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
+
     viewModel = Observable.fromObject({
         items:items
     });
     let matId = appSettings.getNumber("matId");
-    getExams(matId);
     getTotExams(matId);
     getMedie(matId);
+
+    getExams();
 
     page.bindingContext = viewModel;
 }
 function getMedie(matId) {
-    let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/libretto-service-v1/libretti/"+ matId +"/medie";
+
+    let media = appSettings.getString("tipoMedia","P");
+    console.log(media);
     httpModule.request({
-        url: url,
+        url: global.url + "average/"+ global.encodedStr +"/" + matId +"/" + media,
         method: "GET",
-        headers: {"Content-Type": "application/json",
-            "Authorization":"Basic "+ global.encodedStr}
+        headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
-
         if (result.statusCode === 401 || result.statusCode === 500)
         {
             dialogs.alert({
                 title: "Errore Server!",
                 message: result.retErrMsg,
                 okButtonText: "OK"
+
             }).then(
             );
         }
         else
         {
-            let media = appSettings.getString("tipoMedia","P");
-            for (let i=0; i<result.length; i++)
-            {
-                if (result[i].tipoMediaCod.value === media)
-                {
-                    if (result[i].base === 30)
-                    {
-                        page.getViewById("medExam").text = result[i].media;
-                        page.getViewById("medExam_tot").text = " /"+result[i].base;
-                    }
-                    if (result[i].base === 110)
-                    {
-                        page.getViewById("medPond").text = result[i].media;
-                        page.getViewById("medPond_tot").text =" /"+ result[i].base;
-                    }
-                }
-            }
+            page.getViewById("medExam").text = result.trenta;
+            page.getViewById("medExam_tot").text = " /"+result.base_trenta;
+            page.getViewById("medPond").text = result.centodieci;
+            page.getViewById("medPond_tot").text =" /"+ result.base_centodieci;
         }
 
     },(e) => {
@@ -80,12 +70,11 @@ function getMedie(matId) {
     });
 }
 function getTotExams(matId) {
-    let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/libretto-service-v1/libretti/"+ matId +"/stats";
+
     httpModule.request({
-        url: url,
+        url: global.url + "totalexams/"+ global.encodedStr +"/" + matId,
         method: "GET",
-        headers: {"Content-Type": "application/json",
-            "Authorization":"Basic "+ global.encodedStr}
+        headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
@@ -101,13 +90,12 @@ function getTotExams(matId) {
         }
         else
         {
-            console.log(result.numAdSuperate);
+            //console.log(result.numAdSuperate);
             page.getViewById("doneExams").text = result.numAdSuperate;
-            let tot = result.numAdSuperate + result.numAdFrequentate;
-            page.getViewById("totExams").text = "/"+ (tot);
+            page.getViewById("totExams").text = "/"+ result.totAdSuperate;
 
-            page.getViewById("cfuPar").text = result.umPesoSuperato;
-            page.getViewById("cfuTot").text = " /"+ result.umPesoPiano;
+            page.getViewById("cfuPar").text = result.cfuPar;
+            page.getViewById("cfuTot").text = " /"+ result.cfuTot;
         }
 
     },(e) => {
@@ -119,72 +107,45 @@ function getTotExams(matId) {
         });
     });
 }
-function getExams(matId)
+function getExams()
 {
-    let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/calesa-service-v1/prenotazioni/"+ matId +"/";
-    httpModule.request({
-        url: url,
-        method: "GET",
-        headers: {"Content-Type": "application/json",
-            "Authorization":"Basic "+ global.encodedStr}
-    }).then((response) => {
-        const result = response.content.toJSON();
-        //console.log(result);
+    let exams = global.myExams;
+    console.log(exams);
 
-        if (result.statusCode === 401 || result.statusCode === 500)
+    let dim = exams.length;
+    for (let i = 0; i<dim; i++)
+    {
+
+        if (exams[i].superata === "Superata" && exams[i].superata === undefined)
         {
-            dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
-                okButtonText: "OK"
-            }).then(
-            );
+            let lode = "collapsed";
+            let voto = "--";
+            let data = "";
+
+            if(exams[i].superata_lode === 1)
+                lode = "visible";
+            if(exams[i].superata_voto != null)
+                voto = exams[i].superata_voto;
+            if(exams[i].superata_data != null)
+                data = exams[i].superata_data;
+
+            items.push({ "esame": exams[i].nome,
+                "voto" : voto,
+                "cfu" :exams[i].CFU,
+                "data" : data,
+                "lode" : lode,
+                "size" : size,
+                "classe" : "examPass"
+            });
+            esamiList.refresh();
         }
-        else
-        {
-            let dim = result.length;
-            console.log(dim);
-            for (let i = 0; i<dim; i++)
-            {
-                if (result[i].esito.superatoFlg === 1)
-                {
-                    let lode = "collapsed";
-                    let voto = result[i].esito.votoEsa;
-                    let size = 26;
-
-                    if (voto === null)
-                    {
-                        voto = result[i].esito.tipoGiudCod;
-                        size = 20;
-                    }
-
-                    if (result[i].esito.votoEsa === 31){
-                        lode = "visible";
-                        voto = 30;
-                    }
-
-                    //console.log(result[i].adStuCod);
-                    items.push({ "esame": result[i].adStuCod,
-                        "voto" : voto,
-                        "cfu" :result[i].pesoAd,
-                        "data" : result[i].dataIns,
-                        "lode" : lode,
-                        "size" : size
-                    });
-                    esamiList.refresh();
-                }
-            }
+        else if (exams[i].superata === "Frequentata"){
+            items.push({ "esame": exams[i].nome,
+                "cfu" :exams[i].CFU,
+                "classe" : "examFreq"
+            });
         }
-
-    },(e) => {
-        console.log("Error", e.retErrMsg);
-        dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
-            okButtonText: "OK"
-        });
-    });
-
+    }
 }
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();

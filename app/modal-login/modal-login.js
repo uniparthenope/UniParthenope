@@ -30,15 +30,13 @@ function onShownModally(args) {
     viewModel = Observable.fromObject({
         items:items
     });
-    let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/login";
 
     httpModule.request({
-        url: url,
-        method: "GET",
-        headers: {"Content-Type": "application/json",
-            "Authorization":"Basic "+ global.encodedStr}
+        url: global.url + "login/" + global.encodedStr,
+        method: "GET"
     }).then((response) => {
-        const result = response.content.toJSON();
+        let result = response.content.toJSON();
+        result = result.response;
         console.log(result);
 
         if (result.statusCode === 401 || result.statusCode === 500)
@@ -78,7 +76,7 @@ function onShownModally(args) {
         }
 
     },(e) => {
-        console.log("Error", e.retErrMsg);
+        console.log("Error", e);
         dialogs.alert({
             title: "Autenticazione Fallita!",
             message: e.retErrMsg,

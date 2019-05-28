@@ -68,14 +68,14 @@
                         <GridLayout  width="100%" marginBottom="5" marginTop="5">
                             <GridLayout class="roundedInfo" horizontalAlignment="left">
                                 <Label  visibility="{{ lode }}" class="lode" text="LODE"/>
-                                <Label  class="textPrimary" text="{{ voto }}" color="#009432" horizontalAlignment="center" fontSize="{{ size }}" verticalAlignment="center"/>
+                                <Label  class="{{ classe }}" text="{{ voto }}" color="#009432" horizontalAlignment="center" fontSize="{{ size }}" verticalAlignment="center"/>
                             </GridLayout>
                                 <StackLayout orientation="vertical" horizontalAlignment="center">
-                                    <Label class="textPrimary" text="{{ esame }}" color="#009432" marginBottom="5"/>
-                                    <Label text="{{ data }}" color="#009432"/>
+                                    <Label class="{{ classe }}" text="{{ esame }}" marginBottom="5"/>
+                                    <Label class="{{ classe }}" text="{{ data }}" fontSize="11"/>
                                 </StackLayout>
                             <GridLayout horizontalAlignment="right" width="70">
-                                <Label  text="{{ cfu }}" horizontalAlignment="center" verticalAlignment="center" color="#009432"/>
+                                <Label  class="{{ classe }}" text="{{ cfu }}" horizontalAlignment="center" verticalAlignment="center"/>
                             </GridLayout>
                         </GridLayout>
                     </FlexboxLayout>

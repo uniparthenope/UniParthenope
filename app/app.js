@@ -7,8 +7,13 @@ const application = require("tns-core-modules/application");
 const appSettings = require("application-settings");
 
 application.run({ moduleName: "app-root" });
+global.url = "http://museonavale.uniparthenope.it:8080/api/uniparthenope/";
 global.isConnected = false;
+global.updatedExam = false;
 global.encodedStr = "";
+
+global.freqExams = [];
+global.myExams = [];
 
 global.saveInfo = function(result)
 {
@@ -25,6 +30,7 @@ global.saveCarr = function(result)
     appSettings.setNumber("matId",result.matId);
     appSettings.setNumber("stuId",result.stuId);
     appSettings.setString("matricola",result.matricola);
+
 };
 
 /*

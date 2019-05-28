@@ -153,6 +153,19 @@ refer to http://docs.nativescript.org/ui/theme.
     border-color: #009432;
     border-radius: 5;
 }
+.examPass
+{
+    font-family: Montserrat-Regular;
+    font-size: 18;
+    color: #009432;
+}
+
+.examFreq
+{
+    font-family: Montserrat-Regular;
+    font-size: 18;
+    color: palegoldenrod;
+}
 ActionBar {
     background-color: #009432;
     color: white;
