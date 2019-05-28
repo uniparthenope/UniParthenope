@@ -86,8 +86,19 @@ function myExams() {
                         exams.superata_voto = result_n.voto;
                         exams.superata_lode = result_n.lode;
 
-                        /*if (exams.superata === "Frequentata")
-                            global.freqExams.push(exams);*/
+                        if (exams.superata === "Frequentata")
+                            global.freqExams.push({
+                                "nome" : result[i].nome,
+                                "codice" : result[i].codice,
+                                "annoId" : result[i].annoId,
+                                "adsceId" : result[i].adsceId,
+                                "adId" : result[i].adId,
+                                "CFU" : result[i].CFU,
+                                "superata" : result_n.stato,
+                                "superata_data" : result_n.data,
+                                "superata_voto" : result_n.voto,
+                                "superata_lode" : result_n.lode
+                            });
 
                         global.myExams.push({
                             "nome" : result[i].nome,

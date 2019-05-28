@@ -68,7 +68,7 @@
                         <GridLayout  width="100%" marginBottom="5" marginTop="5">
                             <GridLayout class="roundedInfo" horizontalAlignment="left">
                                 <Label  visibility="{{ lode }}" class="lode" text="LODE"/>
-                                <Label  class="{{ classe }}" text="{{ voto }}" color="#009432" horizontalAlignment="center" fontSize="{{ size }}" verticalAlignment="center"/>
+                                <Label  class="{{ classe }}" text="{{ voto }}" color="#009432" horizontalAlignment="center" verticalAlignment="center"/>
                             </GridLayout>
                                 <StackLayout orientation="vertical" horizontalAlignment="center">
                                     <Label class="{{ classe }}" text="{{ esame }}" marginBottom="5"/>

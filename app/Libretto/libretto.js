@@ -123,12 +123,12 @@ function getExams()
         console.log(exams[i].superata_voto);
         console.log(exams[i].superata_lode);
 
-        if (exams[i].superata === "Superata" && exams[i].superata === undefined)
-        {
-            let lode = "collapsed";
-            let voto = "--";
-            let data = "";
+        let lode = "collapsed";
+        let voto = "--";
+        let data = "";
 
+        if (exams[i].superata === "Superata")
+        {
             if(exams[i].superata_lode === 1)
                 lode = "visible";
             if(exams[i].superata_voto != null)
@@ -141,7 +141,6 @@ function getExams()
                 "cfu" :exams[i].CFU,
                 "data" : data,
                 "lode" : lode,
-                "size" : size,
                 "classe" : "examPass"
             });
             esamiList.refresh();
@@ -149,7 +148,10 @@ function getExams()
         else if (exams[i].superata === "Frequentata"){
             items.push({ "esame": exams[i].nome,
                 "cfu" :exams[i].CFU,
-                "classe" : "examFreq"
+                "classe" : "examFreq",
+                "voto" : voto,
+                "data" : data,
+                "lode" : lode
             });
         }
     }
