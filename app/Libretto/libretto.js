@@ -35,7 +35,7 @@ function onNavigatingTo(args) {
 function getMedie(matId) {
 
     let media = appSettings.getString("tipoMedia","P");
-    console.log(media);
+    //console.log(media);
     httpModule.request({
         url: global.url + "average/"+ global.encodedStr +"/" + matId +"/" + media,
         method: "GET",
@@ -118,21 +118,23 @@ function getExams()
 
     for (let i = 0; i<dim; i++)
     {
-        console.log(exams[i].nome);
-        console.log(exams[i].superata);
-        console.log(exams[i].superata_voto);
-        console.log(exams[i].superata_lode);
+        //console.log(exams[i].nome);
+        //console.log(exams[i].superata);
+        //console.log(exams[i].superata_voto);
+        //console.log(exams[i].superata_lode);
 
         let lode = "collapsed";
-        let voto = "--";
+        let voto = "?";
         let data = "";
 
-        if (exams[i].superata === "Superata")
+        if (exams[i].superata === "Superata" || exams[i].superata === "Indefinito" )
         {
             if(exams[i].superata_lode === 1)
                 lode = "visible";
             if(exams[i].superata_voto != null)
                 voto = exams[i].superata_voto;
+            else
+                voto = "OK";
             if(exams[i].superata_data != null)
                 data = exams[i].superata_data;
 
@@ -154,6 +156,21 @@ function getExams()
                 "lode" : lode
             });
         }
+        else {
+            //TODO Da controllare con account che non ha esami!
+            items.push({ "esame": exams[i].nome,
+                "voto" : voto,
+                "cfu" :exams[i].CFU,
+                "data" : data,
+                "lode" : lode,
+                "classe" : "examNA"
+            });
+        }
+        items.sort(function (orderA, orderB) {
+            var nameA = orderA.esame;
+            var nameB = orderB.esame;
+            return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+        });
     }
 }
 function onDrawerButtonTap() {

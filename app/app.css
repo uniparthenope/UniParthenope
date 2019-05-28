@@ -141,7 +141,7 @@ refer to http://docs.nativescript.org/ui/theme.
 }
 .badge-text {
     margin: 2 0 0 0;
-    font-size: 8;
+    font-size: 9;
     font-weight: bold;
     color: white;
     vertical-align: center;
@@ -158,13 +158,29 @@ refer to http://docs.nativescript.org/ui/theme.
     font-family: Montserrat-Regular;
     font-size: 18;
     color: #009432;
+    border-color: #009432;
+    border-width: 5;
+    border-radius: 100%;
+}
+
+.examNA
+{
+    font-family: Montserrat-Regular;
+    font-size: 18;
+    color: gray;
+    border-color: gray;
+    border-width: 5;
+    border-radius: 100%;
 }
 
 .examFreq
 {
     font-family: Montserrat-Regular;
     font-size: 18;
-    color: palegoldenrod;
+    color: sandybrown;
+    border-color: sandybrown;
+    border-width: 5;
+    border-radius: 100%;
 }
 ActionBar {
     background-color: #009432;
@@ -175,4 +191,7 @@ Button
     color:#fff;
     background-color: #009432;
     font-family: Montserrat-Regular;
+}
+ListView{
+    separator-color: #009432;
 }

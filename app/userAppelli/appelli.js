@@ -11,9 +11,9 @@ const Observable = require("data/observable");
 let page;
 let viewModel;
 let sideDrawer;
-let prenotazioni_listview;
-let items_prenotazioni;
+let appelli_listview;
 let items_appelli;
+let loading;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -21,16 +21,18 @@ function onNavigatingTo(args) {
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-    items_prenotazioni = new ObservableArray();
-    prenotazioni_listview = page.getViewById("prenotazioni_listview");
+    items_appelli = new ObservableArray();
+    appelli_listview = page.getViewById("appelli_listview");
+    loading = page.getViewById("activityIndicator");
 
     viewModel = Observable.fromObject({
-        items_prenotazioni: items_prenotazioni,
         items_appelli: items_appelli
     });
-    let matId = appSettings.getNumber("matId");
-    getPrenotazioni(matId);
 
+    loading.visibility = "visible";
+    getAppelli("4061");
+    appSettings.setNumber("examsBadge",global.tempNum);
+    global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
 
@@ -53,18 +55,14 @@ exports.tapCalendar = function(){
     frame.topmost().navigate(nav);
 };
 
-function getPrenotazioni(matId)
-{
-    let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/calesa-service-v1/appelli?matId="+ matId;
-
+function getAppelli(adId) {
+    let num = 0;
     httpModule.request({
-        url: url,
+        url: global.url + "checkAppello/"+ global.encodedStr +"/" + appSettings.getNumber("cdsId") +"/" + adId,
         method: "GET",
-        headers: {"Content-Type": "application/json",
-            "Authorization":"Basic "+ global.encodedStr}
+        headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
-        console.log(result);
 
         if (result.statusCode === 401 || result.statusCode === 500)
         {
@@ -72,19 +70,54 @@ function getPrenotazioni(matId)
                 title: "Errore Server!",
                 message: result.retErrMsg,
                 okButtonText: "OK"
+
             }).then(
             );
         }
         else
         {
-            let dim = result.length;
-            for (let i = 0; i<dim; i++)
+            for (let i=0; i<result.length; i++)
             {
-                items_prenotazioni.push({ "title_app": result[i].adDes
-                    });
-                prenotazioni_listview.refresh();
+                let classe;
+                if (result[i].stato === "P")
+                {
+                    ++num;
+                    classe = "examPass";
+                }
+                else
+                    classe = "examFreq";
+
+
+                let day,year,month;
+                let final_data ="" + dayOfWeek(result[i].dataEsame) + " " + result[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result[i].dataEsame) + " " + result[i].dataEsame.substring(6, 10);
+                day = result[i].dataEsame.substring(0, 2);
+                month = result[i].dataEsame.substring(3, 5);
+                year = result[i].dataEsame.substring(6, 10);
+                let date = new Date(year,month-1,day);
+
+                items_appelli.push({
+                    "esame": result[i].esame,
+                    "docente": result[i].docente_completo,
+                    "descrizione": result[i].descrizione,
+                    "note": result[i].note,
+                    "dataEsame": final_data,
+                    "dataInizio": result[i].dataInizio,
+                    "dataFine": result[i].dataFine,
+                    "iscritti": result[i].numIscritti,
+                    "classe" : classe,
+                    "date" : date
+                });
+                items_appelli.sort(function (orderA, orderB) {
+                    var nameA = orderA.date;
+                    var nameB = orderB.date;
+                    return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+                });
+                appelli_listview.refresh();
             }
+            global.tempNum = num;
         }
+
+        loading.visibility = "collapsed";
 
     },(e) => {
         console.log("Error", e.retErrMsg);
@@ -94,7 +127,25 @@ function getPrenotazioni(matId)
             okButtonText: "OK"
         });
     });
+
+ console.log(global.tempNum);
 }
+
+function dayOfWeek(date) {
+    let day = date.substring(0, 2);
+    let month = date.substring(3, 5);
+    let year = date.substring(6, 10);
+
+    let dayOfWeek = new Date(year,month-1,day).getDay();
+    return isNaN(dayOfWeek) ? null : ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'][dayOfWeek];
+
+};
+
+function monthOfYear(date) {
+    let month = parseInt(date.substring(3, 5)) - 1;
+        return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
+
+};
 
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;

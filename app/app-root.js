@@ -77,6 +77,15 @@ exports.goto_libretto = function () {
     frame.topmost().navigate(nav);
 
 };
+exports.goto_corsi = function () {
+    const nav =
+        {
+            moduleName: "corsi/corsi",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+
+};
 exports.goto_segreteria = function () {
     const nav =
         {

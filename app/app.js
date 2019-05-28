@@ -11,6 +11,7 @@ global.url = "http://museonavale.uniparthenope.it:8080/api/uniparthenope/";
 global.isConnected = false;
 global.updatedExam = false;
 global.encodedStr = "";
+global.tempNum = 0;
 
 global.freqExams = [];
 global.myExams = [];
@@ -30,6 +31,38 @@ global.saveCarr = function(result)
     appSettings.setNumber("matId",result.matId);
     appSettings.setNumber("stuId",result.stuId);
     appSettings.setString("matricola",result.matricola);
+
+};
+
+global.getAllBadge = function(page)
+{
+    let calendar = appSettings.getNumber("calendarBadge",0);
+    let exams = appSettings.getNumber("examsBadge",0);
+    let food = appSettings.getNumber("foodBadge",0);
+    let trasport = appSettings.getNumber("trasportBadge",0);
+    let alert = appSettings.getNumber("alertBadge",0);
+
+    if (calendar === 0)
+        {
+            page.getViewById("badge_Calendar").visibility = "collapsed";
+
+        }
+    else
+        {
+            page.getViewById("badge_Calendar").visibility = "visible";
+            page.getViewById("text_badgeCalendar").text = calendar;
+        }
+
+    if (exams === 0)
+    {
+        page.getViewById("badge_Courses").visibility = "collapsed";
+    }
+    else
+    {
+        page.getViewById("badge_Courses").visibility = "visible";
+        page.getViewById("text_badgeCourses").text = exams;
+    }
+
 
 };
 

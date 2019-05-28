@@ -65,19 +65,19 @@
             <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5">
                 <ListView.itemTemplate >
                     <FlexboxLayout flexDirection="row">
-                        <GridLayout  width="100%" marginBottom="5" marginTop="5">
-                            <GridLayout class="roundedInfo" horizontalAlignment="left">
+                        <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
+                            <GridLayout class="{{ classe }}" width="70" height="70">
                                 <Label  visibility="{{ lode }}" class="lode" text="LODE"/>
-                                <Label  class="{{ classe }}" text="{{ voto }}" color="#009432" horizontalAlignment="center" verticalAlignment="center"/>
+                                <Label  class="{{ classe }}" borderWidth="0" text="{{ voto }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
                             </GridLayout>
-                                <StackLayout orientation="vertical" horizontalAlignment="center">
-                                    <Label class="{{ classe }}" text="{{ esame }}" marginBottom="5"/>
-                                    <Label class="{{ classe }}" text="{{ data }}" fontSize="11"/>
-                                </StackLayout>
-                            <GridLayout horizontalAlignment="right" width="70">
-                                <Label  class="{{ classe }}" text="{{ cfu }}" horizontalAlignment="center" verticalAlignment="center"/>
+                            <StackLayout orientation="vertical" width="70%">
+                                <Label class="{{ classe }}" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15"/>
+                                <Label class="{{ classe }}" borderWidth="0"  text="{{ data }}" fontSize="11" horizontalAlignment="center"/>
+                            </StackLayout>
+                            <GridLayout  width="70">
+                                <Label  class="{{ classe }}" borderWidth="0" text="{{ cfu }}" horizontalAlignment="center" fontSize="14" verticalAlignment="center"/>
                             </GridLayout>
-                        </GridLayout>
+                        </StackLayout>
                     </FlexboxLayout>
                 </ListView.itemTemplate>
             </ListView>

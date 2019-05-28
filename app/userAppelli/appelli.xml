@@ -25,59 +25,60 @@
         <Label class="action-bar-title" text="UniParthenope"></Label>
     </ActionBar>
     <GridLayout>
-        <StackLayout>
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-            <Label class="textPrimary" text="Appelli" horizontalAlignment="center" verticalAlignment="center"/>
+            <Label class="textPrimary" text="Appelli Disponibili" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
+        <GridLayout height="100%">
 
-        <GridLayout rows="*,*" verticalAlignment="center">
-            <StackLayout row="0" class="border" orientation="vertical"  margin="10 10 10 10">
-                <Label class="textPrimary" text="Disponibili:" color="#009432" horizontalAlignment="center" margin="5"/>
-                <ScrollView height="65%" verticalAlignment="bottom">
-                    <ListView id="appelli_listview" class="list-group" items="{{ items_appelli }}" itemTap="onTap" marginRight="5" marginLeft="5">
-                        <ListView.itemTemplate >
-                            <FlexboxLayout flexDirection="row">
-                                <GridLayout  width="100%" marginBottom="5" marginTop="5">
-                                    <Label class="textMontserratRegular" fontSize="14" text="{{ title_pre }}" horizontalAlignment="center"/>
-                                </GridLayout>
-                            </FlexboxLayout>
-                        </ListView.itemTemplate>
-                    </ListView>
-                </ScrollView>
-            </StackLayout>
-            <StackLayout row="1" class="border" orientation="vertical"  margin="10 10 10 10">
-                <Label class="textPrimary" text="Prenotati:" color="#009432" horizontalAlignment="center" margin="5"/>
-                <ScrollView>
-                    <ListView id="prenotazioni_listview" class="list-group" items="{{ items_prenotazioni }}" itemTap="onTap" marginRight="5" marginLeft="5">
-                        <ListView.itemTemplate >
-                            <FlexboxLayout flexDirection="row">
-                                <GridLayout  width="100%" marginBottom="5" marginTop="5">
-                                    <Label class="textMontserratRegular" fontSize="14" text="{{ title_app }}" horizontalAlignment="center" color="gray"/>
-                                </GridLayout>
-                            </FlexboxLayout>
-                        </ListView.itemTemplate>
-                    </ListView>
-                </ScrollView>
-            </StackLayout>
-        </GridLayout>
 
-        </StackLayout>
+            <ScrollView verticalAlignment="center" height="80%">
+                <ListView id="appelli_listview" class="list-group" items="{{ items_appelli }}" itemTap="onTap" marginRight="5" marginLeft="5">
+                    <ListView.itemTemplate >
+                        <FlexboxLayout flexDirection="row">
+                            <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
+                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                    <Label class="{{ classe }}" borderWidth="0" fontSize="16" text="{{ dataEsame }}"/>
+                                </StackLayout>
+                                <Label class="{{ classe }}" borderWidth="0" text="{{ esame }}" horizontalAlignment="center"/>
+                                <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ docente }}" horizontalAlignment="center" marginBottom="10"/>
+                                <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ descrizione }}" horizontalAlignment="center"/>
+                                <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="{{ note }}" horizontalAlignment="center"/>
+
+                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="Prenotazioni: da " />
+                                        <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="{{ dataInizio }}"/>
+                                        <Label class="{{ classe }}" borderWidth="0" fontSize="12" text=" a " />
+                                        <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="{{ dataFine }}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                    <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="Iscritti: "/>
+                                    <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </FlexboxLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </ScrollView>
+
+
         <GridLayout backgroundColor="#5CC77A" height="9%" verticalAlignment="bottom" width="100%">
             <GridLayout columns="*, *, *, *, *" height="60">
                 <GridLayout id="selected_col" backgroundColor="#009432"/>
                 <GridLayout col="0" tap="tapCalendar">
                     <Image src="~/images/icon/calendar.png" height="23" width="23" />
                     <StackLayout>
-                        <StackLayout class="badge" id="badge_Calendar" visibility="{{ badgeCalendar }}">
-                            <Label text="{{ text_badgeCalendar }}" class="badge-text" />
+                        <StackLayout class="badge" id="badge_Calendar">
+                            <Label id="text_badgeCalendar" class="badge-text" />
                         </StackLayout>
                     </StackLayout>
                 </GridLayout>
                 <GridLayout col="1" tap="tapCourses">
                     <Image src="~/images/icon/courses.png" height="23" width="23" />
                     <StackLayout>
-                        <StackLayout class="badge" id="badge_Courses" visibility="{{ badgeCourses }}">
-                            <Label text="{{ text_badgeCourses }}" class="badge-text" />
+                        <StackLayout class="badge" id="badge_Courses" >
+                            <Label id="text_badgeCourses" class="badge-text" />
                         </StackLayout>
                     </StackLayout>
                 </GridLayout>
@@ -107,5 +108,11 @@
                 </GridLayout>
             </GridLayout>
         </GridLayout>
+        </GridLayout>
+
+        <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Recupero Esami..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
     </GridLayout>
 </Page>

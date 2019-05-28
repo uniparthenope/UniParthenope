@@ -90,16 +90,16 @@
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>
-                            <StackLayout class="badge" id="badge_Calendar" visibility="{{ badgeCalendar }}">
-                                <Label text="{{ text_badgeCalendar }}" class="badge-text" />
+                            <StackLayout class="badge" id="badge_Calendar">
+                                <Label id=" text_badgeCalendar" class="badge-text" />
                             </StackLayout>
                         </StackLayout>
                     </GridLayout>
                     <GridLayout col="1" tap="tapCourses">
                         <Image src="~/images/icon/courses.png" height="23" width="23" />
                         <StackLayout>
-                            <StackLayout class="badge" id="badge_Courses" visibility="{{ badgeCourses }}">
-                                <Label text="{{ text_badgeCourses }}" class="badge-text" />
+                            <StackLayout class="badge" id="badge_Courses">
+                                <Label id="text_badgeCourses" class="badge-text" />
                             </StackLayout>
                         </StackLayout>
                     </GridLayout>

@@ -21,8 +21,10 @@ function onNavigatingTo(args) {
     if (!global.updatedExam)
     {
         myExams();
-    }
+        global.updatedExam = true;
 
+    }
+    global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
 function myExams() {
@@ -86,8 +88,9 @@ function myExams() {
                         exams.superata_voto = result_n.voto;
                         exams.superata_lode = result_n.lode;
 
+
                         if (exams.superata === "Frequentata")
-                            global.freqExams.push({
+                            {global.freqExams.push({
                                 "nome" : result[i].nome,
                                 "codice" : result[i].codice,
                                 "annoId" : result[i].annoId,
@@ -98,7 +101,9 @@ function myExams() {
                                 "superata_data" : result_n.data,
                                 "superata_voto" : result_n.voto,
                                 "superata_lode" : result_n.lode
-                            });
+                                });
+                                }
+
 
                         global.myExams.push({
                             "nome" : result[i].nome,
@@ -132,7 +137,6 @@ function myExams() {
             okButtonText: "OK"
         });
     });
-    //global.updatedExams = true;
 }
 
 function getPianoId(stuId)

@@ -33,8 +33,7 @@
 
                         <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_home"/>
                         <Button class="btn-menu" text="Libretto" marginBottom="5" marginTop="5" tap="goto_libretto"/>
-                        <Button class="btn-menu" text="Esami" marginBottom="5" marginTop="5"/>
-                        <Button class="btn-menu" text="Corsi" marginBottom="5" marginTop="5"/>
+                        <Button class="btn-menu" text="Corsi" marginBottom="5" marginTop="5" tap="goto_corsi"/>
                         <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5"/>
                         <Button class="btn-menu" text="Segreteria" marginBottom="5" marginTop="5" tap="goto_segreteria"/>
 
