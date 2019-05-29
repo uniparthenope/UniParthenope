@@ -24,7 +24,7 @@
         </ActionItem>
         <Label class="action-bar-title" text="UniParthenope"></Label>
     </ActionBar>
-    <GridLayout>
+    <StackLayout>
         <StackLayout class="two-color-gradient" width="100%" height="15%" verticalAlignment="top">
             <Label class="textPrimary" text="Miei Corsi" horizontalAlignment="center" verticalAlignment="center" marginBottom="15" marginTop="5"/>
             <Label class="textPrimary" id="semestre" horizontalAlignment="center" verticalAlignment="center" marginBottom="5"/>
@@ -32,7 +32,7 @@
         </StackLayout>
 
         <ScrollView height="85%">
-            <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5">
+            <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
                 <ListView.itemTemplate >
                     <FlexboxLayout flexDirection="row">
                         <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
@@ -42,8 +42,14 @@
                             <StackLayout orientation="vertical" width="70%">
                                 <Label class="examPass" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15"/>
                                 <Label class="examPass" borderWidth="0"  text="{{ prof }}" fontSize="14" horizontalAlignment="center"/>
-                                <Label class="examPass" borderWidth="0"  text="{{ data_inizio }}" fontSize="11" horizontalAlignment="center"/>
-                                <Label class="examPass" borderWidth="0"  text="{{ data_fine }}" fontSize="11" horizontalAlignment="center"/>
+                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                    <Label class="examPass" borderWidth="0"  text="{{ data_inizio }}" fontSize="14" horizontalAlignment="center"/>
+                                    <Label class="examPass" borderWidth="0"  text="{{ data_fine }}" fontSize="14" horizontalAlignment="center"/>
+                                </StackLayout>
+                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                    <Label class="examPass" borderWidth="0"  text="Ult.Mod. :" fontSize="11" horizontalAlignment="center" color="#8b0000"/>
+                                    <Label class="examPass" borderWidth="0"  text="{{ ult_mod }}" fontSize="11" horizontalAlignment="center" color="#8b0000"/>
+                                </StackLayout>
                             </StackLayout>
                             <GridLayout  width="70">
                                 <Label  class="examPass" borderWidth="0" text="MAR" horizontalAlignment="center" fontSize="14" verticalAlignment="center"/>
@@ -54,5 +60,5 @@
             </ListView>
         </ScrollView>
 
-    </GridLayout>
+    </StackLayout>
 </Page>

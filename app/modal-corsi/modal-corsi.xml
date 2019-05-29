@@ -1,0 +1,28 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+      shownModally="onShownModally"
+      xmlns:accordion="nativescript-accordion">
+
+    <StackLayout height="75%">
+        <StackLayout backgroundColor="#009432" marginBottom="10">
+            <Label class="textPrimary" id="esame" textWrap="true" textAlignment="center"/>
+            <Label class="textPrimary" id="docente" textWrap="true" textAlignment="center"/>
+        </StackLayout>
+
+        <ScrollView height="100%" marginLeft="5" marginRight="5">
+            <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%">
+                <accordion:Accordion.itemHeaderTemplate>
+                    <GridLayout  columns="auto" marginBottom="10">
+                        <Label class="textPrimary" color="#009432" text="{{obiettivi}}" horizontalAlignment="center"/>
+                    </GridLayout>
+                </accordion:Accordion.itemHeaderTemplate>
+
+                <accordion:Accordion.itemContentTemplate>
+                    <StackLayout>
+                        <Label class="textPrimary" fontSize="12" color="#5CC77A" text="{{ desc }}" textWrap="true"/>
+                    </StackLayout>
+                </accordion:Accordion.itemContentTemplate>
+            </accordion:Accordion>
+        </ScrollView>
+
+    </StackLayout>
+</Page>

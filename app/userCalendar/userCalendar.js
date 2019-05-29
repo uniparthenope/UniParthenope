@@ -22,6 +22,8 @@ function onNavigatingTo(args) {
     {
         getMainInfo();
         myExams();
+        getCourses();
+
         global.updatedExam = true;
 
     }
@@ -79,32 +81,7 @@ function myExams()
                         );
                     }
                     else {
-                        exams.nome = result[i].nome;
-                        exams.codice = result[i].codice;
-                        exams.annoId = result[i].annoId;
-                        exams.adsceId = result[i].adsceId;
-                        exams.adId = result[i].adId;
-                        exams.CFU = result[i].CFU;
                         exams.superata = result_n.stato;
-                        exams.superata_data = result_n.data;
-                        exams.superata_voto = result_n.voto;
-                        exams.superata_lode = result_n.lode;
-
-
-                        if (exams.superata === "Frequentata")
-                            {global.freqExams.push({
-                                "nome" : result[i].nome,
-                                "codice" : result[i].codice,
-                                "annoId" : result[i].annoId,
-                                "adsceId" : result[i].adsceId,
-                                "adId" : result[i].adId,
-                                "CFU" : result[i].CFU,
-                                "orario" : [],
-                                "semestre" : "",
-                                "prof" : ""
-                                });
-                            }
-
 
                         global.myExams.push({
                             "nome" : result[i].nome,
@@ -211,7 +188,73 @@ function getMainInfo()
     });
 
 }
+function getCourses() {
+    const stuId = appSettings.getNumber("stuId");
+    const matId = appSettings.getNumber("matId");
+    getPianoId(stuId);
+    httpModule.request({
+        url: global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId ,
+        method: "GET",
+        headers: {"Content-Type": "application/json"}
+    }).then((response) => {
+        const result = response.content.toJSON();
+        console.log("QUIII");
+        console.log(result);
 
+
+        if (result.statusCode === 401 || result.statusCode === 500)
+        {
+            dialogs.alert({
+                title: "Errore Server!",
+                message: result_n.retErrMsg,
+                okButtonText: "OK"
+            }).then(
+            );
+        }
+        else {
+            for (let i=0; i<result.length; i++)
+            {
+                global.freqExams.push({
+                    "nome" : result[i].nome,
+                    "codice" : result[i].codice,
+                    "annoId" : result[i].annoId,
+                    "adsceId" : result[i].adsceId,
+                    "adLogId" : result[i].adLogId,
+                    "adId" : result[i].adId,
+                    "CFU" : result[i].CFU,
+                    "docente" : result[i].docente,
+                    "docenteID" : result[i].docenteID,
+                    "semestre" : result[i].semestre,
+                    "inizio" : result[i].inizio,
+                    "fine" : result[i].fine,
+                    "modifica" : result[i].ultMod,
+                    "orario" : []
+                });
+            }
+        }
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore Sincronizzazione Esami!",
+            message: e,
+            okButtonText: "OK"
+        });
+    });
+    /*if (exams.superata === "Frequentata")
+    {
+        global.freqExams.push({
+            "nome" : result[i].nome,
+            "codice" : result[i].codice,
+            "annoId" : result[i].annoId,
+            "adsceId" : result[i].adsceId,
+            "adId" : result[i].adId,
+            "CFU" : result[i].CFU,
+            "orario" : [],
+            "semestre" : "",
+            "prof" : ""
+        });
+    }*/
+}
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();

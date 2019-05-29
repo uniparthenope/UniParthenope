@@ -6,6 +6,7 @@ purpose of the file is to pass control to the app’s first module.
 appSettings.setString("aa_accad", result.aa_accad);
 appSettings.setString("sessione", result.curr_sem);
 appSettings.setString("semestre", result.semestre);
+appSettings.setNumber("pianoId", result.pianoId);
 */
 const application = require("tns-core-modules/application");
 const appSettings = require("application-settings");

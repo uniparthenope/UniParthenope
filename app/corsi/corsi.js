@@ -1,51 +1,94 @@
 const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
+const modalViewModule = "modal-corsi/modal-corsi";
 const appSettings = require("application-settings");
 const ObservableArray = require("data/observable-array").ObservableArray;
 const Observable = require("data/observable");
 
 let page;
-let viewModel;
 let sideDrawer;
 let items;
 let esamiList;
 
 function onNavigatingTo(args) {
     page = args.object;
-    viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     drawTitle();
 
     items = new ObservableArray();
     esamiList = page.getViewById("listview");
-    viewModel = Observable.fromObject({
+    let viewModel = Observable.fromObject({
         items:items
     });
 
-    getExams();
+    getCourses();
     page.bindingContext = viewModel;
 }
-function getExams() {
-    let exams = global.freqExams;
-    console.log(exams);
-    for (let i=0; i<exams.length; i++)
-    {
-        console.log(exams[i].annoId);
-        //TODO continuare...
-    }
-}
+
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
 
+function getCourses()
+{
+    let courses = global.freqExams;
+    const act_sem = appSettings.getString("semestre");
+    for (let i=0; i<courses.length; i++)
+    {
+        if (act_sem == "Secondo Semestre" && courses[i].semestre == "S2")
+        {
+            items.push({ "anno": drawYear(courses[i].annoId),
+                "esame": courses[i].nome,
+                "prof": courses[i].docente,
+                "data_inizio": "Dal " + courses[i].inizio,
+                "data_fine": " al " + courses[i].fine,
+                "ult_mod": courses[i].modifica
+            });
+            esamiList.refresh();
+        }
+        else if (act_sem == "Primo Semestre" && courses[i].semestre == "S1")
+        {
+            items.push({ "anno": drawYear(courses[i].annoId),
+                "esame": courses[i].nome,
+                "prof": courses[i].docente,
+                "data_inizio": "Dal " + courses[i].inizio,
+                "data_fine": " al " + courses[i].fine,
+                "ult_mod": courses[i].modifica
+            });
+            esamiList.refresh();
+        }
+    }
+
+}
+function drawYear(year)
+{
+    if (year == 1)
+        return "I";
+    else if (year == 2)
+        return "II";
+    else if (year == 3)
+        return "III";
+    else
+        return "SCE";
+}
 function onGeneralMenu()
 {
     page.frame.goBack();
 
 }
+function onItemTap(args) {
+    let courses = global.freqExams;
+    const mainView = args.object;
+    const index = args.index;
+    const adLogId = { adLogId: courses[index].adLogId, esame: courses[index].nome, docente:courses[index].docente};
+
+    mainView.showModal(modalViewModule, adLogId, false);
+
+}
+exports.onItemTap = onItemTap;
 
 function drawTitle() {
     page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
