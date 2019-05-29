@@ -21,6 +21,8 @@ function onNavigatingTo(args) {
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
+    drawTitle();
+
     items_appelli = new ObservableArray();
     appelli_listview = page.getViewById("appelli_listview");
     loading = page.getViewById("activityIndicator");
@@ -40,7 +42,10 @@ function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
-
+function drawTitle() {
+    page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
+    page.getViewById("sessione").text = appSettings.getString("sessione");
+}
 function onGeneralMenu()
 {
     page.frame.goBack();

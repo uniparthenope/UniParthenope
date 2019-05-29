@@ -15,6 +15,8 @@ let esamiList;
 function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
+    drawTitle();
+
     items = new ObservableArray();
     esamiList = page.getViewById("listview");
     const sideDrawer = app.getRootView();
@@ -32,7 +34,8 @@ function onNavigatingTo(args) {
 
     page.bindingContext = viewModel;
 }
-function getMedie(matId) {
+function getMedie(matId)
+{
 
     let media = appSettings.getString("tipoMedia","P");
     //console.log(media);
@@ -70,7 +73,8 @@ function getMedie(matId) {
         });
     });
 }
-function getTotExams(matId) {
+function getTotExams(matId)
+{
 
     httpModule.request({
         url: global.url + "totalexams/"+ global.encodedStr +"/" + matId,
@@ -172,6 +176,9 @@ function getExams()
             return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
         });
     }
+}
+function drawTitle() {
+    page.getViewById("cdsDes").text ="CdS in "+ appSettings.getString("cdsDes");
 }
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();

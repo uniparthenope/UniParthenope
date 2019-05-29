@@ -23,45 +23,48 @@
         <Label class="action-bar-title" text="UniParthenope"></Label>
     </ActionBar>
     <GridLayout>
-        <GridLayout class="two-color-gradient" width="100%" height="35%" verticalAlignment="top">
-            <Label class="textPrimary" text="Libretto" horizontalAlignment="center" verticalAlignment="top" marginTop="10"/>
-            <GridLayout verticalAlignment="center" marginBottom="5">
+        <GridLayout class="two-color-gradient" width="100%" height="30%" verticalAlignment="top">
+            <StackLayout verticalAlignment="top" height="100%" marginTop="5">
+                <Label class="textPrimary" id="cdsDes" horizontalAlignment="center"/>
+                <GridLayout height="70%" marginBottom="5">
 
-                <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="20" verticalAlignment="bottom">
-                    <Label class="textMontserratRegular" text="Medie" horizontalAlignment="left" color="white" marginBottom="5"/>
-                    <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
-                        <Label class="textMontserratRegular" id="medExam" fontSize="18" color="white" text="" verticalAlignment="center"/>
-                        <Label class="textMontserratRegular" id="medExam_tot" color="white" text=""  verticalAlignment="center"/>
+                    <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="20" verticalAlignment="bottom">
+                        <Label class="textMontserratRegular" text="Medie" horizontalAlignment="left" color="white" marginBottom="5"/>
+                        <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+                            <Label class="textMontserratRegular" id="medExam" fontSize="18" color="white" text="" verticalAlignment="center"/>
+                            <Label class="textMontserratRegular" id="medExam_tot" color="white" text=""  verticalAlignment="center"/>
+                        </StackLayout>
+                        <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+                            <Label class="textMontserratRegular" id="medPond" fontSize="18" color="white" text="" verticalAlignment="center"/>
+                            <Label class="textMontserratRegular" id="medPond_tot" color="white" text=""  verticalAlignment="center"/>
+                        </StackLayout>
                     </StackLayout>
-                    <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
-                        <Label class="textMontserratRegular" id="medPond" fontSize="18" color="white" text="" verticalAlignment="center"/>
-                        <Label class="textMontserratRegular" id="medPond_tot" color="white" text=""  verticalAlignment="center"/>
-                    </StackLayout>
-                </StackLayout>
 
-                <GridLayout class="roundedBtn" backgroundColor="Transparent" horizontalAlignment="center" width="100" height="100" marginTop="20" >
-                    <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
-                        <Label  id="doneExams" class="textPrimary" text="" fontSize="30" verticalAlignment="center"/>
-                        <Label  id="totExams" class="textPrimary" text=""  fontSize="16" verticalAlignment="center"/>
+                    <GridLayout class="roundedBtn" backgroundColor="Transparent" horizontalAlignment="center" width="100" height="100" marginTop="20" >
+                        <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+                            <Label  id="doneExams" class="textPrimary" text="" fontSize="30" verticalAlignment="center"/>
+                            <Label  id="totExams" class="textPrimary" text=""  fontSize="16" verticalAlignment="center"/>
+                        </StackLayout>
+                    </GridLayout>
+
+                    <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="20" verticalAlignment="bottom">
+                        <Label class="textMontserratRegular" text="Tot. CFU" horizontalAlignment="left" color="white" marginBottom="5"/>
+                        <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+                            <Label class="textMontserratRegular" id="cfuPar" fontSize="18" color="white" text="" verticalAlignment="center"/>
+                            <Label class="textMontserratRegular" id="cfuTot" color="white" text=""  verticalAlignment="center"/>
+                        </StackLayout>
                     </StackLayout>
                 </GridLayout>
 
-                <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="20" verticalAlignment="bottom">
-                    <Label class="textMontserratRegular" text="Tot. CFU" horizontalAlignment="left" color="white" marginBottom="5"/>
-                    <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
-                        <Label class="textMontserratRegular" id="cfuPar" fontSize="18" color="white" text="" verticalAlignment="center"/>
-                        <Label class="textMontserratRegular" id="cfuTot" color="white" text=""  verticalAlignment="center"/>
-                    </StackLayout>
-                </StackLayout>
-            </GridLayout>
-            <GridLayout verticalAlignment="bottom" marginBottom="5">
-                <Label text="Voto" horizontalAlignment="left" marginLeft="20" color="white"/>
-                <Label text="Nome" horizontalAlignment="center" color="white"/>
-                <Label text="CFU" horizontalAlignment="right" marginRight="20" color="white"/>
-            </GridLayout>
+                <GridLayout  height="10%" verticalAlignment="bottom" marginBottom="5">
+                    <Label text="Voto" horizontalAlignment="left" marginLeft="20" color="white"/>
+                    <Label text="Nome" horizontalAlignment="center" color="white"/>
+                    <Label text="CFU" horizontalAlignment="right" marginRight="20" color="white"/>
+                </GridLayout>
+            </StackLayout>
         </GridLayout>
 
-        <ScrollView height="65%" verticalAlignment="bottom">
+        <ScrollView height="70%" verticalAlignment="bottom">
             <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5">
                 <ListView.itemTemplate >
                     <FlexboxLayout flexDirection="row">

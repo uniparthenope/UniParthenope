@@ -20,6 +20,7 @@ function onNavigatingTo(args) {
 
     if (!global.updatedExam)
     {
+        getMainInfo();
         myExams();
         global.updatedExam = true;
 
@@ -27,13 +28,14 @@ function onNavigatingTo(args) {
     global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
-function myExams() {
+function myExams()
+{
     let exams = {};
     const matId = appSettings.getNumber("matId");
     const stuId = appSettings.getNumber("stuId");
     getPianoId(stuId);
     const pianoId = appSettings.getNumber("pianoId");
-    console.log("IN CONNESSIONE A ="+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId);
+    console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId);
 
     httpModule.request({
         url: global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId,
@@ -97,12 +99,11 @@ function myExams() {
                                 "adsceId" : result[i].adsceId,
                                 "adId" : result[i].adId,
                                 "CFU" : result[i].CFU,
-                                "superata" : result_n.stato,
-                                "superata_data" : result_n.data,
-                                "superata_voto" : result_n.voto,
-                                "superata_lode" : result_n.lode
+                                "orario" : [],
+                                "semestre" : "",
+                                "prof" : ""
                                 });
-                                }
+                            }
 
 
                         global.myExams.push({
@@ -138,7 +139,6 @@ function myExams() {
         });
     });
 }
-
 function getPianoId(stuId)
 {
     httpModule.request({
@@ -171,6 +171,45 @@ function getPianoId(stuId)
             okButtonText: "OK"
         });
     });
+}
+function getMainInfo()
+{
+    let cdsId = appSettings.getNumber("cdsId");
+
+    httpModule.request({
+        url: global.url + "current_aa/" + global.encodedStr + "/" + cdsId,
+        method: "GET",
+        headers: {"Content-Type": "application/json"}
+    }).then((response) => {
+        const result = response.content.toJSON();
+        //console.log(result);
+
+        if (result.statusCode === 401 || result.statusCode === 500)
+        {
+            dialogs.alert({
+                title: "Errore Server!",
+                message: result.retErrMsg,
+                okButtonText: "OK"
+            }).then(
+            );
+        }
+        else
+        {
+            appSettings.setString("aa_accad", result.aa_accad);
+            appSettings.setString("sessione", result.curr_sem);
+            appSettings.setString("semestre", result.semestre);
+            //console.log("AA= "+ appSettings.getString("aa_accad"));
+        }
+
+    },(e) => {
+        console.log("Error", e.retErrMsg);
+        dialogs.alert({
+            title: "Errore Server!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
+
 }
 
 function onDrawerButtonTap() {

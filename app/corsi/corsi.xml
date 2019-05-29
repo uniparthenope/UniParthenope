@@ -25,9 +25,34 @@
         <Label class="action-bar-title" text="UniParthenope"></Label>
     </ActionBar>
     <GridLayout>
-        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-            <Label class="textPrimary" text="Corsi" horizontalAlignment="center" verticalAlignment="center"/>
-        </GridLayout>
+        <StackLayout class="two-color-gradient" width="100%" height="15%" verticalAlignment="top">
+            <Label class="textPrimary" text="Miei Corsi" horizontalAlignment="center" verticalAlignment="center" marginBottom="15" marginTop="5"/>
+            <Label class="textPrimary" id="semestre" horizontalAlignment="center" verticalAlignment="center" marginBottom="5"/>
+            <Label class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="center" fontSize="12" marginBottom="5"/>
+        </StackLayout>
+
+        <ScrollView height="85%">
+            <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5">
+                <ListView.itemTemplate >
+                    <FlexboxLayout flexDirection="row">
+                        <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
+                            <GridLayout class="examPass" width="70" height="70">
+                                <Label  class="examPass" borderWidth="0" text="{{ anno }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
+                            </GridLayout>
+                            <StackLayout orientation="vertical" width="70%">
+                                <Label class="examPass" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15"/>
+                                <Label class="examPass" borderWidth="0"  text="{{ prof }}" fontSize="14" horizontalAlignment="center"/>
+                                <Label class="examPass" borderWidth="0"  text="{{ data_inizio }}" fontSize="11" horizontalAlignment="center"/>
+                                <Label class="examPass" borderWidth="0"  text="{{ data_fine }}" fontSize="11" horizontalAlignment="center"/>
+                            </StackLayout>
+                            <GridLayout  width="70">
+                                <Label  class="examPass" borderWidth="0" text="MAR" horizontalAlignment="center" fontSize="14" verticalAlignment="center"/>
+                            </GridLayout>
+                        </StackLayout>
+                    </FlexboxLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </ScrollView>
 
     </GridLayout>
 </Page>

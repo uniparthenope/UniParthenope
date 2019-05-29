@@ -2,6 +2,10 @@
 In NativeScript, the app.js file is the entry point to your application.
 You can use this file to perform app-level initialization, but the primary
 purpose of the file is to pass control to the app’s first module.
+
+appSettings.setString("aa_accad", result.aa_accad);
+appSettings.setString("sessione", result.curr_sem);
+appSettings.setString("semestre", result.semestre);
 */
 const application = require("tns-core-modules/application");
 const appSettings = require("application-settings");
@@ -14,6 +18,17 @@ global.encodedStr = "";
 global.tempNum = 0;
 
 global.freqExams = [];
+/*
+"nome" : result[i].nome,
+"codice" : result[i].codice,
+"annoId" : result[i].annoId,
+"adsceId" : result[i].adsceId,
+"adId" : result[i].adId,
+"CFU" : result[i].CFU,
+semstre
+prof
+orario aula []
+*/
 global.myExams = [];
 
 global.saveInfo = function(result)

@@ -31,7 +31,7 @@
                 <Label class="textPrimary" text="La Mia Giornata" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
-            <rc:RadCalendar id="myCalendar" viewMode="Day" eventsViewMode="Inline|Popover">
+            <rc:RadCalendar height="81%" id="myCalendar" viewMode="Day" eventsViewMode="Inline|Popover">
                 <rc:RadCalendar.dayViewStyle>
                     <rc:CalendarDayViewStyle showTitle="true" showDayNames="true" >
                         <rc:CalendarDayViewStyle.todayCellStyle>
@@ -81,10 +81,8 @@
 
                 </rc:RadCalendar.dayViewStyle>
             </rc:RadCalendar>
-
-        </StackLayout>
 <!--        Bottom bar  -->
-            <GridLayout backgroundColor="#5CC77A" height="9%" verticalAlignment="bottom" width="100%">
+            <GridLayout backgroundColor="#5CC77A" height="10%" verticalAlignment="bottom" width="100%">
                 <GridLayout columns="*, *, *, *, *" height="60">
                     <GridLayout id="selected_col" col="0" backgroundColor="#009432"/>
                     <GridLayout col="0" tap="tapCalendar">
@@ -129,6 +127,8 @@
                     </GridLayout>
                 </GridLayout>
             </GridLayout>
-        </GridLayout>
+
+        </StackLayout>
+    </GridLayout>
 
 </Page>
