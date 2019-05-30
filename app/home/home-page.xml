@@ -34,8 +34,8 @@
                 <!--    Buttons    -->
                 <GridLayout rows="auto,*" height="20%" marginRight="10" marginLeft="10" verticalAlignment="center" >
                     <StackLayout orientation="horizontal" row="0" horizontalAlignment="stretch">
-                        <Button  class="btn" text="Ateneo" horizontalAlignment="center" width="50%" marginRight="5" />
-                        <Button  class="btn" text="Dipartimento" horizontalAlignment="center" width="50%" />
+                        <Button  class="btn" text="Ateneo" horizontalAlignment="center" width="50%" marginRight="5" ontap="onTapAteneo" />
+                        <Button  class="btn" text="Dipartimento" horizontalAlignment="center" width="50%" ontap="onTapDipartimento" />
                     </StackLayout>
                     <StackLayout orientation="horizontal" row="1" horizontalAlignment="stretch">
                         <Button  class="btn" text="Trasporti" horizontalAlignment="center" width="50%" marginRight="5" />

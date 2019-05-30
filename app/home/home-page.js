@@ -110,6 +110,26 @@ exports.onTapNotizie = function(){
   page.frame.navigate("notizie/notizie");
 };
 
+exports.onTapAteneo = function(){
+    const nav =
+        {
+            moduleName: "portale/portale",
+            context: {link:"https://www.uniparthenope.it/"}
+        };
+        page.frame.navigate(nav);
+
+};
+
+exports.onTapDipartimento = function(){
+    const nav =
+        {
+            moduleName: "portale/portale",
+            context: {link:"http://www.scienzeetecnologie.uniparthenope.it/index.html"}
+        };
+    page.frame.navigate(nav);
+
+};
+
 //TODO Social Buttons
 //TODO Trasporti
 //TODO Ateneo
