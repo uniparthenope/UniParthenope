@@ -1,19 +1,24 @@
 const observableModule = require("tns-core-modules/data/observable");
+const ObservableArray = require("data/observable-array").ObservableArray;
+const Observable = require("data/observable");
 const app = require("tns-core-modules/application");
 let xml2js = require('nativescript-xml2js');
 let fs = require("tns-core-modules/file-system");
 const httpModule = require("tns-core-modules/http");
-var imageSource = require("image-source");
+const imageSource = require("image-source");
 
 let page;
 let viewModel;
 let sideDrawer;
-var image;
+let image;
+let items;
 
 function onNavigatingTo(args) {
     page = args.object;
+    items = new ObservableArray();
     viewModel = observableModule.fromObject({
-        image:image
+        image:image,
+        items:items
     });
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
@@ -25,32 +30,49 @@ function onNavigatingTo(args) {
         var parser = new xml2js.Parser();
         r.readText().then(function  (data){
             parser.parseString(data, function (err, result) {
-                /*for(let i=0; i<result.rss.channel[0].item.length; i++){
-                    console.dir(result.rss.channel[0].item[i]);
-                    //console.dir(result.rss.channel[0].item[i].description);
-                }*/
-                const myHtmlString = result.rss.channel[0].item[1].description.toString();
-                let inizio = myHtmlString.search("Testo:");
-                let fine = myHtmlString.search("Foto/Video:");
-                console.log("Inizio: " + inizio);
-                console.log("Fine: " + fine);
-                let final_string = myHtmlString.slice(inizio+6, fine);
+                for(let i=0; i<result.rss.channel[0].item.length; i++)
+                {
+                    const myHtmlString = result.rss.channel[0].item[i].description.toString();
+                    const title = result.rss.channel[0].item[i].title.toString();
+                    const date = result.rss.channel[0].item[i].pubDate.toString();
+                    //console.log(date);
+                    let data = extractData(date);
 
-                let inizio_link = myHtmlString.search("https://www.uniparthenope.it/sites/default/files/immagini");
-                let fine_link;
-                fine_link = myHtmlString.search(".jpg");
-                if(fine_link === -1){
-                    fine_link = myHtmlString.search(".png");
+                    let inizio = myHtmlString.search("Testo:");
+                    let fine = myHtmlString.search("Foto/Video:");
+                    //console.log("Inizio: " + inizio);
+                    //console.log("Fine: " + fine);
+                    let final_string = myHtmlString.slice(inizio+6, fine);
+
+                    let inizio_link = myHtmlString.search("https://www.uniparthenope.it/sites/default/files/immagini");
+                    let fine_link;
+                    fine_link = myHtmlString.search(".jpg");
+                    if(fine_link === -1){
+                        fine_link = myHtmlString.search(".png");
+                    }
+                    let final_string_link = myHtmlString.slice(inizio_link, fine_link+4);
+                    //console.log(final_string_link);
+
+                    imageSource.fromUrl(final_string_link)
+                        .then(function () {
+                            items.push({
+                                title: title,
+                                date:data,
+                                date_text: data.getDate() + "/" +(data.getMonth()+1) + "/" +data.getFullYear() + " " + data.getHours() + ":" +data.getMinutes(),
+                                image: final_string_link,
+                                items: [
+                                    {
+                                        desc: final_string
+                                    }
+                                ]
+                            });
+                            items.sort(function (orderA, orderB) {
+                                let nameA = orderA.date;
+                                let nameB = orderB.date;
+                                return (nameA > nameB) ? -1 : (nameA < nameB) ? 1 : 0;
+                            });
+                        }).catch(err => {console.log("Somthing went wrong!");});
                 }
-                let final_string_link = myHtmlString.slice(inizio_link, fine_link+4);
-                console.log(final_string_link);
-
-                imageSource.fromUrl(final_string_link)
-                    .then(function () {
-                        viewModel.image = final_string_link;
-                    }).catch(err => {console.log("Somthing went wrong!");});
-
-                viewModel.set("htmlString", final_string);
             });
         });
     },function (e) {
@@ -60,7 +82,20 @@ function onNavigatingTo(args) {
 
     page.bindingContext = viewModel;
 }
+function extractData(data) {
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
 
+    let day = data.substr(5,2);
+    let month = data.substr(8,3);
+    let year = data.substr(12,4);
+    let hour = data.substr(17,2);
+    let min = data.substr(20,2);
+
+    let index_month = months.indexOf(month);
+    let d = new Date(year, index_month, day, hour, min);
+
+    return d;
+}
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();

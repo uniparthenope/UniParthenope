@@ -35,11 +35,11 @@
                 <GridLayout rows="auto,*" height="20%" marginRight="10" marginLeft="10" verticalAlignment="center" >
                     <StackLayout orientation="horizontal" row="0" horizontalAlignment="stretch">
                         <Button  class="btn" text="Ateneo" horizontalAlignment="center" width="50%" marginRight="5" />
-                        <Button  class="btn" text="Notizie" horizontalAlignment="center" width="50%" tap="onTapNotizie"/>
+                        <Button  class="btn" text="Dipartimento" horizontalAlignment="center" width="50%" />
                     </StackLayout>
                     <StackLayout orientation="horizontal" row="1" horizontalAlignment="stretch">
                         <Button  class="btn" text="Trasporti" horizontalAlignment="center" width="50%" marginRight="5" />
-                        <Button  class="btn" text="Bar" horizontalAlignment="center" width="50%"/>
+                        <Button  class="btn" text="Notizie" horizontalAlignment="center" width="50%" tap="onTapNotizie"/>
                     </StackLayout>
                 </GridLayout>
 

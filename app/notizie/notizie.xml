@@ -2,9 +2,8 @@
       navigatingTo="onNavigatingTo"
       actionBarHidden="false"
       xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:x="nativescript-statusbar">
+      xmlns:accordion="nativescript-accordion">
 
-    <x:StatusBar ios:barStyle="light" barColor="#009432" />
     <ActionBar class="action-bar">
         <ActionItem icon="~/images/logo_parth.png"
                     tap="onGeneralMenu"
@@ -30,16 +29,25 @@
             <Label class="textPrimary" text="Notizie" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
 
-        <StackLayout>
-            <StackLayout height="30%" width="100%">
-                <Image src="{{ image }}" marginTop="15"/>
-            </StackLayout>
+        <ScrollView height="100%" marginLeft="5" marginRight="5">
+            <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%">
+                <accordion:Accordion.itemHeaderTemplate>
+                    <GridLayout marginBottom="10" height="250">
+                        <Image src="{{ image }}" marginTop="5" horizontalAlignment="center" stretch="aspectFill"/>
+                        <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.6)">
+                            <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textWrap="true" margin="5 5 5 5"/>
+                            <Label class="textPrimary" text="{{date_text}}" fontSize="11" margin="5 5 5 5"/>
+                        </StackLayout>
+                    </GridLayout>
+                </accordion:Accordion.itemHeaderTemplate>
 
-            <ScrollView height="70%">
-                <StackLayout>
-                    <HtmlView html="{{ htmlString }}"></HtmlView>
-                </StackLayout>
-            </ScrollView>
-        </StackLayout>
+                <accordion:Accordion.itemContentTemplate>
+                    <StackLayout>
+                        <HtmlView html="{{ desc }}" color="#009432"></HtmlView>
+                    </StackLayout>
+                </accordion:Accordion.itemContentTemplate>
+            </accordion:Accordion>
+        </ScrollView>
+
     </StackLayout>
 </Page>

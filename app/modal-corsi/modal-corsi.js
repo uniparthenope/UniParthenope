@@ -54,19 +54,8 @@ function onShownModally(args) {
                         }
                     ]
                 });
+
             }
-
-            /*
-            page.getViewById("contenuti").text = result.contenuti;
-            page.getViewById("verifica").text = result.verifica;
-            page.getViewById("obiettivi").text = result.obiettivi;
-            page.getViewById("prerequisiti").text = result.prerequisiti;
-            page.getViewById("testi").text = result.testi;
-            page.getViewById("altro").text = result.altro;
-            page.getViewById("metodi").text = result.metodi;
-*/
-
-
 
         }
     },(e) => {
