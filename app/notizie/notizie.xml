@@ -31,13 +31,13 @@
         </GridLayout>
 
         <StackLayout>
-            <!-- >> html-view-xml
-            <HtmlView html="{{ htmlString }}"></HtmlView>
-            -->
-            <ScrollView height="100%">
+            <StackLayout height="30%" width="100%">
+                <Image src="{{ image }}" marginTop="15"/>
+            </StackLayout>
+
+            <ScrollView height="70%">
                 <StackLayout>
                     <HtmlView html="{{ htmlString }}"></HtmlView>
-                    <Image src="{{ image }}" marginTop="15"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
