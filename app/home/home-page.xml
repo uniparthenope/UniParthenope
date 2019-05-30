@@ -38,7 +38,7 @@
                         <Button  class="btn" text="Dipartimento" horizontalAlignment="center" width="50%" ontap="onTapDipartimento" />
                     </StackLayout>
                     <StackLayout orientation="horizontal" row="1" horizontalAlignment="stretch">
-                        <Button  class="btn" text="Trasporti" horizontalAlignment="center" width="50%" marginRight="5" />
+                        <Button  class="btn" text="Trasporti" horizontalAlignment="center" width="50%" marginRight="5" tap="onTapTrasporti"/>
                         <Button  class="btn" text="Notizie" horizontalAlignment="center" width="50%" tap="onTapNotizie"/>
                     </StackLayout>
                 </GridLayout>

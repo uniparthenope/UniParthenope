@@ -110,6 +110,10 @@ exports.onTapNotizie = function(){
   page.frame.navigate("notizie/notizie");
 };
 
+exports.onTapTrasporti = function(){
+    page.frame.navigate("menu/menu");
+};
+
 exports.onTapAteneo = function(){
     const nav =
         {

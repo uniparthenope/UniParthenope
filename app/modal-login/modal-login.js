@@ -27,6 +27,7 @@ function onShownModally(args) {
     const contex = args.context;
     user = contex.user;
     pass = contex.pass;
+
     viewModel = Observable.fromObject({
         items:items
     });
@@ -49,6 +50,7 @@ function onShownModally(args) {
                 args.object.closeModal()
             );
         }
+        //TODO else tenta login ristorante
         else
         {
             account = result;
