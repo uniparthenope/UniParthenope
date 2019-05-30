@@ -105,8 +105,12 @@ function autoconnect()
         indicator.visibility = "collapsed";
     }
 }
+
+exports.onTapNotizie = function(){
+  page.frame.navigate("notizie/notizie");
+};
+
 //TODO Social Buttons
-//TODO Notizie
 //TODO Trasporti
 //TODO Ateneo
 //TODO Convenzioni

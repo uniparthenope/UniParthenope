@@ -1,0 +1,45 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#009432" />
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+
+    <StackLayout>
+        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <Label class="textPrimary" text="Notizie" horizontalAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+
+        <StackLayout>
+            <!-- >> html-view-xml
+            <HtmlView html="{{ htmlString }}"></HtmlView>
+            -->
+            <ScrollView height="100%">
+                <StackLayout>
+                    <HtmlView html="{{ htmlString }}"></HtmlView>
+                    <Image src="{{ image }}" marginTop="15"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </StackLayout>
+</Page>
