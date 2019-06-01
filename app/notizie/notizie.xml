@@ -34,7 +34,7 @@
                 <accordion:Accordion.itemHeaderTemplate>
                     <GridLayout marginBottom="10" height="250">
                         <Image src="{{ image }}" marginTop="5" horizontalAlignment="center" stretch="aspectFill"/>
-                        <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.6)">
+                        <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.6)" width="100%">
                             <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textWrap="true" margin="5 5 5 5"/>
                             <Label class="textPrimary" text="{{date_text}}" fontSize="11" margin="5 5 5 5"/>
                         </StackLayout>

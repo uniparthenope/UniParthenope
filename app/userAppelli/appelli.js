@@ -151,7 +151,15 @@ function monthOfYear(date) {
         return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
 
 };
+exports.tapFood = function(){
+    const nav =
+        {
+            moduleName: "menu/menu",
 
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

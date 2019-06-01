@@ -36,21 +36,45 @@ function onShownModally(args) {
         url: global.url + "login/" + global.encodedStr,
         method: "GET"
     }).then((response) => {
-        let result = response.content.toJSON();
-        result = result.response;
-        console.log(result);
+        let _result = response.content.toJSON();
+        let result = _result.response;
 
-        if (result.statusCode === 401 || result.statusCode === 500)
+        if(_result.statusCode === 401)
         {
             dialogs.alert({
                 title: "Autenticazione Fallita!",
-                message: result.retErrMsg,
+                message: _result.errMsg,
                 okButtonText: "OK"
             }).then(
                 args.object.closeModal()
             );
         }
-        //TODO else tenta login ristorante
+/* Se un utente è di tipo USER TECNICO (ristorante) */
+        else if (_result.statusCode === 600)
+        {
+            const sideDrawer = app.getRootView();
+            let remember = sideDrawer.getViewById("rememberMe").checked;
+
+            if (remember){
+                appSettings.setString("username",user);
+                appSettings.setString("password",pass);
+                appSettings.setBoolean("rememberMe",true);
+            }
+            console.log("UserTecnico:" + _result.username);
+            sideDrawer.getViewById("topName").text = _result.username;
+            let userForm = sideDrawer.getViewById("userTecnico");
+            let loginForm = sideDrawer.getViewById("loginForm");
+            loginForm.visibility = "collapsed";
+            userForm.visibility = "visible";
+
+            closeCallback();
+            const nav =
+                {
+                    moduleName: "usertecnico/usertecnico",
+                    clearHistory: true
+                };
+            frame.topmost().navigate(nav);
+        }
         else
         {
             account = result;
@@ -142,6 +166,7 @@ function selectedCarrer(index)
         //logout();
     }
 }
+
 exports.onTap = onTap;
 exports.onShownModally = onShownModally;
 

@@ -2,6 +2,7 @@ const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const httpModule = require("tns-core-modules/http");
+const frame = require("tns-core-modules/ui/frame");
 require("nativescript-accordion");
 const ObservableArray = require("data/observable-array").ObservableArray;
 const Observable = require("data/observable");
@@ -17,15 +18,19 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
+    global.getAllBadge(page);
+    page.getViewById("selected_col").col = "2";
+
     items = new ObservableArray();
     viewModel = Observable.fromObject({
         items:items
     });
-    console.log("CURR DATA = " + getCurrentData());
-    //let data = getCurrentData();
+    let curr = new Date();
+    let data = ""+ ("0" + curr.getDate()).slice(-2)+ ("0" + (curr.getMonth() + 1)).slice(-2) + curr.getFullYear();
+    console.log("CURR DATA = " + data);
 
     httpModule.request({
-        url: global.url + "foods/menuSearchData/" + "30052019",
+        url: global.url + "foods/menuSearchData/" + data,
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
@@ -42,10 +47,10 @@ function onNavigatingTo(args) {
             );
         }
         else {
-
-
+            let count =0;
             for (let i=0; i<result.length; i++)
             {
+                count++;
                 items.push({
                     nome_bar: result[i].nome,
                     apertura: "Orario Apertura Mensa: " + result[i].apertura,
@@ -69,7 +74,7 @@ function onNavigatingTo(args) {
                 });
 
             }
-
+            appSettings.setNumber("foodBadge",count);
         }
     },(e) => {
         console.log("Error", e);
@@ -98,7 +103,22 @@ function onGeneralMenu()
 {
     page.frame.goBack();
 }
-
+exports.tapCourses = function(){
+    const nav =
+        {
+            moduleName: "userAppelli/appelli",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+exports.tapCalendar = function(){
+    const nav =
+        {
+            moduleName: "userCalendar/userCalendar",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

@@ -55,16 +55,41 @@ function autoconnect()
             url:  global.url + "login/" + global.encodedStr,
             method: "GET"
         }).then((response) => {
-            let result = response.content.toJSON();
-            result = result.response;
-            console.log(result);
-            if (result.statusCode === 401 || result.statusCode === 500)
+            let _result = response.content.toJSON();
+            let result = _result.response;
+
+            if(_result.statusCode === 401)
             {
                 dialogs.alert({
                     title: "Autenticazione Fallita!",
-                    message: result.retErrMsg,
+                    message: _result.errMsg,
                     okButtonText: "OK"
-                });
+                }).then(
+                    args.object.closeModal()
+                );
+            }
+            /* Se un utente è di tipo USER TECNICO (ristorante) */
+            else if (_result.statusCode === 600)
+            {
+                let remember = sideDrawer.getViewById("rememberMe").checked;
+                console.log("UserTecnico:" + _result.username);
+                if (remember){
+                    appSettings.setString("username",user);
+                    appSettings.setString("password",pass);
+                    appSettings.setBoolean("rememberMe",true);
+                }
+                sideDrawer.getViewById("topName").text = _result.username;
+                let userForm = sideDrawer.getViewById("userTecnico");
+                let loginForm = sideDrawer.getViewById("loginForm");
+                loginForm.visibility = "collapsed";
+                userForm.visibility = "visible";
+
+                const nav =
+                    {
+                        moduleName: "usertecnico/usertecnico",
+                        clearHistory: true
+                    };
+                frame.topmost().navigate(nav);
             }
             else
             {
@@ -111,7 +136,7 @@ exports.onTapNotizie = function(){
 };
 
 exports.onTapTrasporti = function(){
-    page.frame.navigate("menu/menu");
+    page.frame.navigate("usertecnico/usertecnico");
 };
 
 exports.onTapAteneo = function(){

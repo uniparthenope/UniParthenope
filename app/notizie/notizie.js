@@ -30,28 +30,31 @@ function onNavigatingTo(args) {
         var parser = new xml2js.Parser();
         r.readText().then(function  (data){
             parser.parseString(data, function (err, result) {
+                console.log(result.rss.channel[0].item.length);
                 for(let i=0; i<result.rss.channel[0].item.length; i++)
                 {
                     const myHtmlString = result.rss.channel[0].item[i].description.toString();
                     const title = result.rss.channel[0].item[i].title.toString();
                     const date = result.rss.channel[0].item[i].pubDate.toString();
-                    //console.log(date);
+                    console.log(title);
                     let data = extractData(date);
 
                     let inizio = myHtmlString.search("Testo:");
                     let fine = myHtmlString.search("Foto/Video:");
-                    //console.log("Inizio: " + inizio);
-                    //console.log("Fine: " + fine);
+
                     let final_string = myHtmlString.slice(inizio+6, fine);
 
                     let inizio_link = myHtmlString.search("https://www.uniparthenope.it/sites/default/files/immagini");
                     let fine_link;
+                    console.log("Inizio: " + inizio_link);
                     fine_link = myHtmlString.search(".jpg");
+
+                    console.log("Fine: " + fine_link);
                     if(fine_link === -1){
                         fine_link = myHtmlString.search(".png");
                     }
                     let final_string_link = myHtmlString.slice(inizio_link, fine_link+4);
-                    //console.log(final_string_link);
+                    console.log(final_string_link);
 
                     imageSource.fromUrl(final_string_link)
                         .then(function () {

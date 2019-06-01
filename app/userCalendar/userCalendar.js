@@ -272,6 +272,15 @@ exports.tapCourses = function(){
         };
     frame.topmost().navigate(nav);
 };
+exports.tapFood = function(){
+    const nav =
+        {
+            moduleName: "menu/menu",
+
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

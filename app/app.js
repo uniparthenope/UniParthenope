@@ -79,6 +79,16 @@ global.getAllBadge = function(page)
         page.getViewById("text_badgeCourses").text = exams;
     }
 
+    if (food === 0)
+    {
+        page.getViewById("badge_Food").visibility = "collapsed";
+    }
+    else
+    {
+        page.getViewById("badge_Food").visibility = "visible";
+        page.getViewById("text_badgeFood").text = food;
+    }
+
 
 };
 
