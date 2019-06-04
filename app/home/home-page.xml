@@ -4,7 +4,7 @@
       xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:x="nativescript-statusbar">
 
-    <x:StatusBar ios:barStyle="light" barColor="#009432" />
+    <x:StatusBar ios:barStyle="light" barColor="rgb(0, 148, 50)" />
 
     <ActionBar class="action-bar">
         <ActionItem icon="res://menu"
@@ -49,6 +49,7 @@
                 <Label class="topTitle" text="DiST&#xA;Dipartimento di Scienze e Tecnologie" textWrap="true" marginRight="5" marginLeft="5" marginTop="15"/>
                 <Image src="~/images/logo_parth.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>
             </StackLayout>
+
             <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
                 <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
                 <ActivityIndicator horizontalAlignment="center" busy="true"/>

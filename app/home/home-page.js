@@ -11,22 +11,28 @@ let page;
 let viewModel;
 let sideDrawer;
 let remember;
+let user;
 
 function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
     remember = appSettings.getBoolean("rememberMe");
-   if (!global.isConnected)
-        autoconnect();
+    user = appSettings.getString("username");
+   if (!global.isConnected){
+       dialogs.alert({
+           title: "Bentornato!",
+           message: "Bentornato "+ user,
+           okButtonText: "OK"
+       }).then(
+       );
+       autoconnect();
+   }
+
    else if (remember)
    {
-       const nav =
-           {
-               moduleName: "userCalendar/userCalendar",
-               clearHistory: true
-           };
-       frame.topmost().navigate(nav);
+      setSideMenu(global.myform,global.username);
+
    }
 
 
@@ -78,15 +84,12 @@ function autoconnect()
                     appSettings.setString("password",pass);
                     appSettings.setBoolean("rememberMe",true);
                 }
-                sideDrawer.getViewById("topName").text = _result.username;
-                let userForm = sideDrawer.getViewById("userTecnico");
-                let loginForm = sideDrawer.getViewById("loginForm");
-                loginForm.visibility = "collapsed";
-                userForm.visibility = "visible";
 
+                sideDrawer.getViewById("topName").text = _result.username;
+                setSideMenu("userTecnico",_result.username);
                 const nav =
                     {
-                        moduleName: "usertecnico/usertecnico",
+                        moduleName: "usertecnico-all/usertecnico-all",
                         clearHistory: true
                     };
                 frame.topmost().navigate(nav);
@@ -101,14 +104,11 @@ function autoconnect()
                 global.isConnected = true;
                 let nome = appSettings.getString("nome");
                 let cognome = appSettings.getString("cognome");
-                sideDrawer.getViewById("topName").text = nome + " " + cognome;
+                let user = nome + " " + cognome;
                 let grpDes = appSettings.getString("grpDes");
                 if (grpDes === "Studenti")
                 {
-                    let userForm = sideDrawer.getViewById("userForm");
-                    let loginForm = sideDrawer.getViewById("loginForm");
-                    loginForm.visibility = "collapsed";
-                    userForm.visibility = "visible";
+                    setSideMenu("userForm",user);
                     indicator.visibility = "collapsed";
                     const nav =
                         {
@@ -158,10 +158,19 @@ exports.onTapDipartimento = function(){
     page.frame.navigate(nav);
 
 };
+ function setSideMenu(type,username)
+ {
+     let actualForm = sideDrawer.getViewById(type);
+     let loginForm = sideDrawer.getViewById("loginForm");
+     loginForm.visibility = "collapsed";
+     actualForm.visibility = "visible";
+     global.myform = type;
+
+     sideDrawer.getViewById("topName").text = username;
+     global.username = username;
+ }
 
 //TODO Social Buttons
 //TODO Trasporti
-//TODO Ateneo
-//TODO Convenzioni
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

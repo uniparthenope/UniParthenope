@@ -96,6 +96,24 @@ exports.goto_segreteria = function () {
 
 };
 
+exports.goto_menuList = function () {
+    const nav =
+        {
+            moduleName: "usertecnico-all/usertecnico-all",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+
+exports.goto_menuNew = function () {
+    const nav =
+        {
+            moduleName: "usertecnico/usertecnico",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+
 function logout()
 {
     let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/logout";

@@ -22,15 +22,17 @@ function onNavigatingTo(args) {
     });
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-
+    page.getViewById("loading").busy= true;
 
     let dest = fs.path.join(fs.knownFolders.currentApp().path, "/assets/rss.xml");
     let url = "https://www.uniparthenope.it/rss.xml";
     httpModule.getFile(url, dest).then(function (r) {
-        var parser = new xml2js.Parser();
+        let parser = new xml2js.Parser();
+
         r.readText().then(function  (data){
             parser.parseString(data, function (err, result) {
                 console.log(result.rss.channel[0].item.length);
+                let count = 0;
                 for(let i=0; i<result.rss.channel[0].item.length; i++)
                 {
                     const myHtmlString = result.rss.channel[0].item[i].description.toString();
@@ -44,20 +46,23 @@ function onNavigatingTo(args) {
 
                     let final_string = myHtmlString.slice(inizio+6, fine);
 
-                    let inizio_link = myHtmlString.search("https://www.uniparthenope.it/sites/default/files/immagini");
+                    let inizio_link = myHtmlString.search("https://www.uniparthenope.it/sites/default/files/");
+                    let new_string = myHtmlString.slice(inizio_link);
                     let fine_link;
                     console.log("Inizio: " + inizio_link);
-                    fine_link = myHtmlString.search(".jpg");
+                    fine_link = new_string.search(".jpg");
 
                     console.log("Fine: " + fine_link);
                     if(fine_link === -1){
-                        fine_link = myHtmlString.search(".png");
+                        fine_link = new_string.search(".png");
                     }
-                    let final_string_link = myHtmlString.slice(inizio_link, fine_link+4);
+                    let final_string_link = new_string.slice(0, fine_link+4);
                     console.log(final_string_link);
 
                     imageSource.fromUrl(final_string_link)
                         .then(function () {
+                            if (++count == result.rss.channel[0].item.length)
+                                page.getViewById("loading").busy= false;
                             items.push({
                                 title: title,
                                 date:data,
@@ -74,7 +79,12 @@ function onNavigatingTo(args) {
                                 let nameB = orderB.date;
                                 return (nameA > nameB) ? -1 : (nameA < nameB) ? 1 : 0;
                             });
-                        }).catch(err => {console.log("Somthing went wrong!");});
+                        }).catch(err => {
+                            console.log("Somthing went wrong!");
+                        if (++count == result.rss.channel[0].item.length)
+                            page.getViewById("loading").busy= false;
+                        });
+
                 }
             });
         });

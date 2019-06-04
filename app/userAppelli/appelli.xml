@@ -42,19 +42,19 @@
                                 <Label class="{{ classe }}" borderWidth="0" text="{{ esame }}" horizontalAlignment="center"/>
                                 <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ docente }}" horizontalAlignment="center" marginBottom="10"/>
                                 <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ descrizione }}" horizontalAlignment="center"/>
-                                <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="{{ note }}" horizontalAlignment="center"/>
+                                <Label class="{{ classe }}" color="gray" borderWidth="0" fontSize="12" text="{{ note }}" horizontalAlignment="center"/>
 
                                 <StackLayout orientation="horizontal" horizontalAlignment="center">
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="Prenotazioni: da " />
-                                        <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="{{ dataInizio }}"/>
-                                        <Label class="{{ classe }}" borderWidth="0" fontSize="12" text=" a " />
-                                        <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="{{ dataFine }}"/>
+                                        <Label class="{{ classe }}" color="gray" borderWidth="0" fontSize="12" text="Prenotazioni: da " />
+                                        <Label class="{{ classe }}" color="gray" borderWidth="0" fontSize="12" text="{{ dataInizio }}"/>
+                                        <Label class="{{ classe }}" color="gray" borderWidth="0" fontSize="12" text=" a " />
+                                        <Label class="{{ classe }}" color="gray" borderWidth="0" fontSize="12" text="{{ dataFine }}"/>
                                     </StackLayout>
                                 </StackLayout>
                                 <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                    <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="Iscritti: "/>
-                                    <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
+                                    <Label class="{{ classe }}" color="gray" borderWidth="0" fontSize="12" text="Iscritti: "/>
+                                    <Label class="{{ classe }}" color="gray" borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
                                 </StackLayout>
                             </StackLayout>
                         </FlexboxLayout>

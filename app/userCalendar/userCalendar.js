@@ -20,6 +20,7 @@ function onNavigatingTo(args) {
 
     if (!global.updatedExam)
     {
+        page.getViewById("activityIndicator").visibility = "visible";
         getMainInfo();
         myExams();
         getCourses();
@@ -29,6 +30,8 @@ function onNavigatingTo(args) {
     }
     global.getAllBadge(page);
     page.bindingContext = viewModel;
+}
+function calendarCourses() {
 }
 function myExams()
 {
@@ -188,7 +191,8 @@ function getMainInfo()
     });
 
 }
-function getCourses() {
+function getCourses()
+{
     const stuId = appSettings.getNumber("stuId");
     const matId = appSettings.getNumber("matId");
     getPianoId(stuId);
@@ -198,9 +202,8 @@ function getCourses() {
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
-        console.log("QUIII");
         console.log(result);
-
+        page.getViewById("activityIndicator").visibility = "visible";
 
         if (result.statusCode === 401 || result.statusCode === 500)
         {
@@ -210,6 +213,7 @@ function getCourses() {
                 okButtonText: "OK"
             }).then(
             );
+            page.getViewById("activityIndicator").visibility = "collapsed";
         }
         else {
             for (let i=0; i<result.length; i++)
@@ -231,6 +235,7 @@ function getCourses() {
                     "orario" : []
                 });
             }
+            page.getViewById("activityIndicator").visibility = "collapsed";
         }
     },(e) => {
         console.log("Error", e);
@@ -239,21 +244,9 @@ function getCourses() {
             message: e,
             okButtonText: "OK"
         });
+        page.getViewById("activityIndicator").visibility = "collapsed";
     });
-    /*if (exams.superata === "Frequentata")
-    {
-        global.freqExams.push({
-            "nome" : result[i].nome,
-            "codice" : result[i].codice,
-            "annoId" : result[i].annoId,
-            "adsceId" : result[i].adsceId,
-            "adId" : result[i].adId,
-            "CFU" : result[i].CFU,
-            "orario" : [],
-            "semestre" : "",
-            "prof" : ""
-        });
-    }*/
+
 }
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();

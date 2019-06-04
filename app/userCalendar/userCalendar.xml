@@ -129,6 +129,11 @@
             </GridLayout>
 
         </StackLayout>
+
+        <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Recupero informazioni..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
     </GridLayout>
 
 </Page>

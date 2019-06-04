@@ -4,6 +4,8 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("application-settings");
 const textFieldModule = require("tns-core-modules/ui/text-field");
 const httpModule = require("http");
+const frame = require("tns-core-modules/ui/frame");
+
 
 let page;
 let viewModel;
@@ -83,6 +85,19 @@ function onTapSave() {
             }).then((r) => r.json())
                 .then((response) => {
                     const result = response.json;
+                    console.log(result);
+                    dialogs.alert({
+                        title: "Menu Caricato!",
+                        message: "Il nuovo menu è stato caricato con successo!",
+                        okButtonText: "OK"
+                    }).then(function(){
+                        const nav =
+                            {
+                                moduleName: "usertecnico-all/usertecnico-all",
+                                clearHistory: true
+                            };
+                        frame.topmost().navigate(nav);
+                    });
                 }).catch((e) => {
             });
         }

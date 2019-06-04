@@ -104,15 +104,21 @@ refer to http://docs.nativescript.org/ui/theme.
     font-size: 30;
 }
 .form-input {
-    border-bottom-color: #5CC77A;
+    border-bottom-color: #92efac;
     border-bottom-width: 1;
     color: white;
-    placeholder-color: #5CC77A;
+    placeholder-color: #92efac;
     width: 90%;
 }
 .textPrimary
 {
     font-family: Montserrat-Regular;
+    font-size: 18;
+    color: white;
+}
+.textPrimary-bold
+{
+    font-family: Montserrat-Bold;
     font-size: 18;
     color: white;
 }
@@ -187,7 +193,14 @@ refer to http://docs.nativescript.org/ui/theme.
     vertical-align: center;
     margin: 6;
 }
-
+.color-green{
+    color: #009432;
+    border-color: #009432;
+}
+.color-gray{
+    color:gray;
+    border-color: gray;
+}
 ActionBar {
     background-color: #009432;
     color: white;
@@ -195,7 +208,7 @@ ActionBar {
 Button
 {
     color:#fff;
-    background-color: #009432;
+    background-color: rgba(0, 148, 50, 0.7);
     font-family: Montserrat-Regular;
 }
 ListView{

@@ -7,7 +7,7 @@
     </nsDrawer:RadSideDrawer.drawerTransition>
 
     <nsDrawer:RadSideDrawer.drawerContent>
-        <GridLayout backgroundColor="#009432">
+        <GridLayout backgroundColor="rgba(0,0,0,0.4)">
         <!--     Top Menu, foto e nome       -->
             <StackLayout orientation="vertical" verticalAlignment="top" height="80%">
                 <StackLayout height="30%" orientation="vertical" verticalAlignment="top" marginTop="10">
@@ -40,6 +40,9 @@
                     </StackLayout>
                     <!--     UserTecnico       -->
                     <StackLayout id="userTecnico" visibility="collapsed">
+
+                        <Button class="btn-menu" text="Lista Menu" marginBottom="5" marginTop="20" tap="goto_menuList"/>
+                        <Button class="btn-menu" text="Nuovo Menu" marginBottom="5" marginTop="20" tap="goto_menuNew"/>
 
 
                     </StackLayout>

@@ -70,7 +70,7 @@ function onShownModally(args) {
             closeCallback();
             const nav =
                 {
-                    moduleName: "usertecnico/usertecnico",
+                    moduleName: "usertecnico-all/usertecnico-all",
                     clearHistory: true
                 };
             frame.topmost().navigate(nav);

@@ -8,17 +8,17 @@
             <Label class="textPrimary" id="docente" textWrap="true" textAlignment="center"/>
         </StackLayout>
 
-        <ScrollView height="100%" marginLeft="5" marginRight="5">
+        <ScrollView height="100%" marginLeft="5" marginRight="5" >
             <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%">
                 <accordion:Accordion.itemHeaderTemplate>
-                    <GridLayout  columns="auto" marginBottom="10">
-                        <Label class="textPrimary" color="#009432" text="{{obiettivi}}" horizontalAlignment="center"/>
+                    <GridLayout horizontalAlignment="center">
+                        <Label class="btn" color="#009432" text="{{obiettivi}}" horizontalAlignment="center" width="90%" marginBottom="10" verticalAlignment="center"/>
                     </GridLayout>
                 </accordion:Accordion.itemHeaderTemplate>
 
                 <accordion:Accordion.itemContentTemplate>
                     <StackLayout>
-                        <Label class="textPrimary" fontSize="12" color="#5CC77A" text="{{ desc }}" textWrap="true"/>
+                        <Label class="textPrimary" color="black" fontSize="12" text="{{ desc }}" textWrap="true" margin="5 5 5 5"/>
                     </StackLayout>
                 </accordion:Accordion.itemContentTemplate>
             </accordion:Accordion>

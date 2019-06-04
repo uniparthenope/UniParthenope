@@ -17,6 +17,9 @@ global.isConnected = false;
 global.updatedExam = false;
 global.encodedStr = "";
 global.tempNum = 0;
+global.myform = "";
+global.username = "";
+global.data_today;
 
 global.freqExams = [];
 /*

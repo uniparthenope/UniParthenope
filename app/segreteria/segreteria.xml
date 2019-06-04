@@ -32,38 +32,53 @@
         <StackLayout orientation="vertical">
             <StackLayout orientation="vertical" marginTop="10">
                 <Label class="textPrimary" text="Segreteria Didattica" color="#009432" horizontalAlignment="center"/>
-                <Label fontSize="14" class="textPrimary" text="APERTA" color="#009432" horizontalAlignment="center"/>
-                <GridLayout rows="30,30,30" marginRight="10" marginLeft="10">
+                <Label fontSize="14" class="textPrimary-bold" text="APERTA" id="aperturaDidattica" color="#009432" horizontalAlignment="center"/>
+                <GridLayout rows="30,30,30,30,30" marginRight="10" marginLeft="10" class="border" borderWidth="2">
                     <GridLayout row="0">
-                        <Label fontSize="14" class="textPrimary" text="VEN" color="#009432" horizontalAlignment="left"/>
-                        <Label fontSize="14" class="textPrimary" text="12:00 - 16:00" color="#009432" horizontalAlignment="right"/>
+                        <Label fontSize="14" class="textPrimary" id="did_0" color="#009432" horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_did_0" color="#009432" horizontalAlignment="right"/>
                     </GridLayout>
-                    <GridLayout row="1">
-                        <Label fontSize="14" class="textPrimary" text="VEN" color="#009432" horizontalAlignment="left"/>
-                        <Label fontSize="14" class="textPrimary" text="12:00 - 16:00" color="#009432" horizontalAlignment="right"/>
+                    <GridLayout row="1" backgroundColor="#5CC77A">
+                        <Label fontSize="14" class="textPrimary" id="did_1"  horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_did_1" horizontalAlignment="right"/>
                     </GridLayout>
                     <GridLayout row="2">
-                        <Label fontSize="14" class="textPrimary" text="LUN" color="#009432" horizontalAlignment="left"/>
-                        <Label fontSize="14" class="textPrimary" text="12:00 - 16:00" color="#009432" horizontalAlignment="right"/>
+                        <Label fontSize="14" class="textPrimary" id="did_2" color="#009432" horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_did_2" color="#009432" horizontalAlignment="right"/>
+                    </GridLayout>
+                    <GridLayout row="3" backgroundColor="#5CC77A">
+                        <Label fontSize="14" class="textPrimary" id="did_3"  horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_did_3" horizontalAlignment="right"/>
+                    </GridLayout>
+                    <GridLayout row="4">
+                        <Label fontSize="14" class="textPrimary" id="did_4" color="#009432" horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_did_4" color="#009432" horizontalAlignment="right"/>
                     </GridLayout>
                 </GridLayout>
             </StackLayout>
-            <StackLayout height="1" backgroundColor="#009432" marginLeft="10" marginRight="10" marginTop="5" marginBottom="5"/>
-            <StackLayout orientation="vertical">
+            <StackLayout orientation="vertical" marginTop="10" >
                 <Label class="textPrimary" text="Segreteria Studenti" color="#009432" horizontalAlignment="center"/>
-                <Label fontSize="14" class="textPrimary" text="CHIUSA" color="#009432" horizontalAlignment="center"/>
-                <GridLayout rows="30,30,30" marginRight="10" marginLeft="10">
+                <Label fontSize="14" class="textPrimary-bold" text="APERTA" id="aperturaStudente" color="#009432" horizontalAlignment="center"/>
+                <GridLayout rows="30,30,30,30,30" marginRight="10" marginLeft="10" class="border" borderWidth="2">
                     <GridLayout row="0">
-                        <Label fontSize="14" class="textPrimary" text="VEN" color="#009432" horizontalAlignment="left"/>
-                        <Label fontSize="14" class="textPrimary" text="12:00 - 16:00" color="#009432" horizontalAlignment="right"/>
+                        <Label fontSize="14" class="textPrimary" id="stu_0" color="#009432" horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_stu_0" color="#009432" horizontalAlignment="right"/>
                     </GridLayout>
-                    <GridLayout row="1">
-                        <Label fontSize="14" class="textPrimary" text="VEN" color="#009432" horizontalAlignment="left"/>
-                        <Label fontSize="14" class="textPrimary" text="12:00 - 16:00" color="#009432" horizontalAlignment="right"/>
+                    <GridLayout row="1" backgroundColor="#5CC77A">
+                        <Label fontSize="14" class="textPrimary" id="stu_1"  horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_stu_1" horizontalAlignment="right"/>
                     </GridLayout>
                     <GridLayout row="2">
-                        <Label fontSize="14" class="textPrimary" text="LUN" color="#009432" horizontalAlignment="left"/>
-                        <Label fontSize="14" class="textPrimary" text="12:00 - 16:00" color="#009432" horizontalAlignment="right"/>
+                        <Label fontSize="14" class="textPrimary" id="stu_2" color="#009432" horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_stu_2" color="#009432" horizontalAlignment="right"/>
+                    </GridLayout>
+                    <GridLayout row="3" backgroundColor="#5CC77A">
+                        <Label fontSize="14" class="textPrimary" id="stu_3"  horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_stu_3" horizontalAlignment="right"/>
+                    </GridLayout>
+                    <GridLayout row="4">
+                        <Label fontSize="14" class="textPrimary" id="stu_4" color="#009432" horizontalAlignment="left"/>
+                        <Label fontSize="14" class="textPrimary" id="time_stu_4" color="#009432" horizontalAlignment="right"/>
                     </GridLayout>
                 </GridLayout>
             </StackLayout>
