@@ -149,11 +149,10 @@ exports.onTapAteneo = function(){
 
 };
 
-exports.onTapDipartimento = function(){
+exports.onTapEventi = function(){
     const nav =
         {
-            moduleName: "portale/portale",
-            context: {link:"http://www.scienzeetecnologie.uniparthenope.it/index.html"}
+            moduleName: "orari/orari"
         };
     page.frame.navigate(nav);
 
