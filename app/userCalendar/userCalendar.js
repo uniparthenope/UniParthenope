@@ -1,22 +1,30 @@
 const observableModule = require("tns-core-modules/data/observable");
-const ObservableArray = require("data/observable-array").ObservableArray;
+const Observable = require("data/observable").Observable;
 const app = require("tns-core-modules/application");
 const frame = require("tns-core-modules/ui/frame");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const httpModule = require("http");
 const appSettings = require("application-settings");
+const calendarModule = require("nativescript-ui-calendar");
+const Color = require("tns-core-modules/color");
+const modalViewModule = "modal-event/modal-event";
 
 
+
+let colors = ["#c47340","#4566c1","#824bc1","#a32d13","#382603","#fff766"];
 let page;
 let viewModel;
 let sideDrawer;
+let calendar;
 
 function onNavigatingTo(args) {
     page = args.object;
     page.getViewById("selected_col").col = "0";
-    viewModel = observableModule.fromObject({});
+    viewModel = new Observable();
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
+    calendar = page.getViewById("myCalendar");
+    console.log("UPDATED= "+global.updatedExam);
 
     if (!global.updatedExam)
     {
@@ -24,14 +32,84 @@ function onNavigatingTo(args) {
         getMainInfo();
         myExams();
         getCourses();
-
-        global.updatedExam = true;
-
     }
+    else {
+        calendarCourses();
+    }
+
     global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
 function calendarCourses() {
+    console.log(global.freqExams.length);
+    global.events = [];
+
+    let esami = global.freqExams;
+
+
+    for (let i = 0; i<esami.length; i++)
+    {
+        let esame = esami[i].nome;
+        let docente = esami[i].docente.split(" ");
+        const periodo = appSettings.getNumber("periodo",3);
+        const corso = "AB"; //TODO modificare da server IDCORSO!
+        const color = new Color.Color(colors[i]);
+
+        httpModule.request({
+            url: global.url + "orari/cercaCorso/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
+            method: "GET",
+            headers: {"Content-Type": "application/json"}
+        }).then((response) => {
+            const result = response.content.toJSON();
+            //console.log(result);
+
+
+            if (result.statusCode === 401 || result.statusCode === 500)
+            {
+                dialogs.alert({
+                    title: "Errore Server!",
+                    message: result_n.retErrMsg,
+                    okButtonText: "OK"
+                }).then(
+                );
+            }
+            else {
+                for (let x = 0; x < result.length; x++) {
+                    let data_inizio = new Date(result[x].inizio);
+                    let data_fine = new Date(result[x].fine);
+                    let title = esame + "\n" + esami[i].docente + "\n\n" + result[x].aula;
+                    global.events.push({
+                        title : title,
+                        data_inizio: data_inizio,
+                        data_fine:data_fine,
+                        color: color
+                    });
+                }
+                insert_event();
+
+            }
+        },(e) => {
+            console.log("Error", e);
+            dialogs.alert({
+                title: "Errore Sincronizzazione Esami!",
+                message: e,
+                okButtonText: "OK"
+            });
+        });
+    }
+}
+
+
+function insert_event() {
+    console.log("EVENT INSERT");
+    let temp_array = [];
+    let temp = global.events;
+
+    for (let x=0; x<temp.length; x++){
+        let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
+        temp_array.push(event);
+    }
+    calendar.eventSource = temp_array;
 }
 function myExams()
 {
@@ -202,7 +280,7 @@ function getCourses()
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
-        console.log(result);
+        //console.log(result);
         page.getViewById("activityIndicator").visibility = "visible";
 
         if (result.statusCode === 401 || result.statusCode === 500)
@@ -236,6 +314,9 @@ function getCourses()
                 });
             }
             page.getViewById("activityIndicator").visibility = "collapsed";
+            calendarCourses();
+            global.updatedExam = true;
+
         }
     },(e) => {
         console.log("Error", e);
@@ -257,10 +338,18 @@ function onGeneralMenu()
 {
     page.frame.navigate("home/home-page")
 }
-exports.tapCourses = function(){
+exports.tapAppello = function(){
     const nav =
         {
             moduleName: "userAppelli/appelli",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+exports.tapCourses = function(){
+    const nav =
+        {
+            moduleName: "corsi/corsi",
             clearHistory: true
         };
     frame.topmost().navigate(nav);
@@ -273,6 +362,14 @@ exports.tapFood = function(){
             clearHistory: true
         };
     frame.topmost().navigate(nav);
+};
+exports.onDaySelected = function(args){
+    console.log(args.eventData);
+    const mainView = args.object;
+
+    const context = { title: args.eventData.title, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
+
+    mainView.showModal(modalViewModule, context, false);
 };
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;

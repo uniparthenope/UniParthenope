@@ -19,7 +19,7 @@ function onNavigatingTo(args) {
     sideDrawer.closeDrawer();
 
     global.getAllBadge(page);
-    page.getViewById("selected_col").col = "2";
+    page.getViewById("selected_col").col = "3";
 
     items = new ObservableArray();
     viewModel = Observable.fromObject({
@@ -106,7 +106,7 @@ function onGeneralMenu()
 exports.tapCourses = function(){
     const nav =
         {
-            moduleName: "userAppelli/appelli",
+            moduleName: "corsi/corsi",
             clearHistory: true
         };
     frame.topmost().navigate(nav);
@@ -115,6 +115,14 @@ exports.tapCalendar = function(){
     const nav =
         {
             moduleName: "userCalendar/userCalendar",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+exports.tapAppello = function(){
+    const nav =
+        {
+            moduleName: "userAppelli/appelli",
             clearHistory: true
         };
     frame.topmost().navigate(nav);

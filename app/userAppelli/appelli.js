@@ -17,7 +17,7 @@ let loading;
 
 function onNavigatingTo(args) {
     page = args.object;
-    page.getViewById("selected_col").col = "1";
+    page.getViewById("selected_col").col = "2";
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
@@ -32,8 +32,10 @@ function onNavigatingTo(args) {
     });
 
     loading.visibility = "visible";
-    getAppelli("4061");
-    appSettings.setNumber("examsBadge",global.tempNum);
+    let exams = global.freqExams;
+    for (let i=0; i<exams.length; i++)
+        getAppelli(exams[i].adId);
+    appSettings.setNumber("appelloBadge",global.tempNum);
     global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
@@ -155,6 +157,24 @@ exports.tapFood = function(){
     const nav =
         {
             moduleName: "menu/menu",
+
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+exports.tapCourses = function(){
+    const nav =
+        {
+            moduleName: "corsi/corsi",
+
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+exports.tapAppello = function(){
+    const nav =
+        {
+            moduleName: "userAppelli/appelli",
 
             clearHistory: true
         };

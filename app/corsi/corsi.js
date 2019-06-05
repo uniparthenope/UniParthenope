@@ -5,6 +5,8 @@ const modalViewModule = "modal-corsi/modal-corsi";
 const appSettings = require("application-settings");
 const ObservableArray = require("data/observable-array").ObservableArray;
 const Observable = require("data/observable");
+const frame = require("tns-core-modules/ui/frame");
+
 
 let page;
 let sideDrawer;
@@ -17,6 +19,8 @@ function onNavigatingTo(args) {
     sideDrawer.closeDrawer();
     drawTitle();
 
+    page.getViewById("selected_col").col = "1";
+
     items = new ObservableArray();
     esamiList = page.getViewById("listview");
     let viewModel = Observable.fromObject({
@@ -24,6 +28,8 @@ function onNavigatingTo(args) {
     });
 
     getCourses();
+    appSettings.setNumber("examsBadge",global.freqExams.length);
+    global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
 
@@ -95,6 +101,33 @@ function drawTitle() {
     page.getViewById("semestre").text = appSettings.getString("semestre");
 }
 
+exports.tapFood = function(){
+    const nav =
+        {
+            moduleName: "menu/menu",
+
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+exports.tapAppello = function(){
+    const nav =
+        {
+            moduleName: "userAppelli/appelli",
+
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+exports.tapCalendar = function(){
+    const nav =
+        {
+            moduleName: "userCalendar/userCalendar",
+
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

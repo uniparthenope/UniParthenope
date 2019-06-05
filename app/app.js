@@ -20,6 +20,7 @@ global.tempNum = 0;
 global.myform = "";
 global.username = "";
 global.data_today;
+global.events = [];
 
 global.freqExams = [];
 /*
@@ -59,7 +60,7 @@ global.getAllBadge = function(page)
     let exams = appSettings.getNumber("examsBadge",0);
     let food = appSettings.getNumber("foodBadge",0);
     let trasport = appSettings.getNumber("trasportBadge",0);
-    let alert = appSettings.getNumber("alertBadge",0);
+    let appello = appSettings.getNumber("appelloBadge",0);
 
     if (calendar === 0)
         {
@@ -71,6 +72,16 @@ global.getAllBadge = function(page)
             page.getViewById("badge_Calendar").visibility = "visible";
             page.getViewById("text_badgeCalendar").text = calendar;
         }
+    if (appello === 0)
+    {
+        page.getViewById("badge_appello").visibility = "collapsed";
+
+    }
+    else
+    {
+        page.getViewById("badge_appello").visibility = "visible";
+        page.getViewById("text_badgeAppello").text = appello;
+    }
 
     if (exams === 0)
     {
