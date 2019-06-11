@@ -19,7 +19,7 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
-   if (!global.isConnected){
+   if (!global.isConnected & user !== undefined){
        dialogs.alert({
            title: "Bentornato!",
            message: "Bentornato "+ user,
@@ -47,6 +47,7 @@ function autoconnect()
 {
     console.log("REMEMBER= "+remember);
     if (remember){
+
         const sideDrawer = app.getRootView();
         let indicator = page.getViewById("activityIndicator");
         indicator.visibility = "visible";

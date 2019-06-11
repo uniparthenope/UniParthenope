@@ -87,8 +87,11 @@ function onShownModally(args) {
                 for (let i=0; i<carriere.length; i++)
                 {
                     console.log(carriere[i].cdsDes);
-                    items.push({ "title": carriere[i].cdsDes,
-                        "mat" : carriere[i].matricola,
+                    items.push({ "cdsDes": carriere[i].cdsDes,
+                        "cdsId": carriere[i].cdsId,
+                        "matricola" : carriere[i].matricola,
+                        "matId" : carriere[i].matId,
+                        "stuId" : carriere[i].stuId,
                         "status" :carriere[i].staStuDes
                     });
                     userList.refresh();
@@ -119,6 +122,8 @@ function onShownModally(args) {
 function onTap(args)
 {
     const index = args.index;
+    global.saveCarr(items.getItem(index));
+
     selectedCarrer(index);
 }
 
@@ -137,7 +142,7 @@ function selectedCarrer(index)
     let nome = appSettings.getString("nome");
     let cognome = appSettings.getString("cognome");
     sideDrawer.getViewById("topName").text = nome + " " + cognome;
-    global.saveCarr(carriere[index]);
+    //global.saveCarr(carriere[index]);
 
     //Se login è studente
     let grpDes = appSettings.getString("grpDes");
