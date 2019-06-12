@@ -17,6 +17,7 @@ let viewModel;
 let user;
 let pass;
 
+
 function onShownModally(args) {
     closeCallback = args.closeCallback;
     page = args.object;
@@ -80,7 +81,7 @@ function onShownModally(args) {
             account = result;
             carriere = result.user.trattiCarriera;
 
-            if (carriere.length > 1)
+            if (carriere.length > 0)
             {
                 indicator.visibility = "collapsed";
                 //Mostro le carriere
@@ -127,6 +128,7 @@ function onTap(args)
     selectedCarrer(index);
 }
 
+
 function selectedCarrer(index)
 {
     const sideDrawer = app.getRootView();
@@ -142,7 +144,7 @@ function selectedCarrer(index)
     let nome = appSettings.getString("nome");
     let cognome = appSettings.getString("cognome");
     sideDrawer.getViewById("topName").text = nome + " " + cognome;
-    //global.saveCarr(carriere[index]);
+    global.saveCarr(carriere[index]);
 
     //Se login è studente
     let grpDes = appSettings.getString("grpDes");

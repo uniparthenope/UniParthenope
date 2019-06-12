@@ -11,7 +11,6 @@ appSettings.setNumber("pianoId", result.pianoId);
 const application = require("tns-core-modules/application");
 const appSettings = require("application-settings");
 
-application.run({ moduleName: "app-root" });
 global.url = "http://museonavale.uniparthenope.it:8080/api/uniparthenope/";
 global.isConnected = false;
 global.updatedExam = false;
@@ -35,6 +34,8 @@ prof
 orario aula []
 */
 global.myExams = [];
+
+application.run({ moduleName: "app-root" });
 
 global.saveInfo = function(result)
 {
@@ -105,6 +106,8 @@ global.getAllBadge = function(page)
 
 
 };
+
+
 
 /*
 Do not place any code after the application has been started as it will not

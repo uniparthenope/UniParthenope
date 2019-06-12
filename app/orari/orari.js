@@ -28,9 +28,12 @@ function onNavigatingTo(args) {
 
 function getTime() {
     let periodo = appSettings.getNumber("periodo_altri",3);
+    let url = global.url + "orari/altriCorsi/" + periodo ;
+    url = url.replace(/ /g, "%20");
+    console.log(url);
 
     httpModule.request({
-            url: global.url + "orari/altriCorsi/" + periodo ,
+            url: url,
             method: "GET",
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
