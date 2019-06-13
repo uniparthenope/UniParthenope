@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "it.uniparthenope.uniparth",
+    "id": "it.uniparthenope.dist",
     "tns-android": {
       "version": "5.3.1"
     },

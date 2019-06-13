@@ -6,6 +6,8 @@ const appSettings = require("application-settings");
 const httpModule = require("tns-core-modules/http");
 const ObservableArray = require("data/observable-array").ObservableArray;
 const Observable = require("data/observable");
+const modalViewModule = "modal-esame/modal-esame";
+
 
 
 let page;
@@ -112,7 +114,10 @@ function getAppelli(adId) {
                     "dataFine": result[i].dataFine,
                     "iscritti": result[i].numIscritti,
                     "classe" : classe,
-                    "date" : date
+                    "date" : date,
+                    "adId": adId,
+                    "appId": result[i].appId
+
                 });
                 items_appelli.sort(function (orderA, orderB) {
                     var nameA = orderA.date;
@@ -180,6 +185,16 @@ exports.tapAppello = function(){
         };
     frame.topmost().navigate(nav);
 };
+function onItemTap(args) {
+    const mainView = args.object;
+    const index = args.index;
+    const adLogId = { adId: items_appelli.getItem(index).adId, appId: items_appelli.getItem(index).appId, docente: items_appelli.getItem(index).docente,
+        esame: items_appelli.getItem(index).esame};
+
+    mainView.showModal(modalViewModule, adLogId, false);
+
+}
+exports.onItemTap = onItemTap;
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

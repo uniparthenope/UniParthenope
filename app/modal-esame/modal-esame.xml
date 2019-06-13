@@ -1,0 +1,18 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+      shownModally="onShownModally">
+
+    <StackLayout height="45%">
+        <GridLayout>
+            <StackLayout backgroundColor="#009432" marginBottom="10" verticalAlignment="top">
+                <Label class="textPrimary" id="esame" textWrap="true" textAlignment="center"/>
+                <Label class="textPrimary" id="docente" textWrap="true" textAlignment="center"/>
+            </StackLayout>
+            <StackLayout verticalAlignment="center">
+                <Label class="textPrimary" id="prenotazione" color="black" textWrap="true" textAlignment="center"/>
+                <Label class="textPrimary" id="data" color="black" textWrap="true" textAlignment="center"/>
+            </StackLayout>
+            <Button id="prenotati" class="btn" text="Prenotati" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="25" width="85%" ontap="onTapPrenotati"/>
+            <Button id="disiscriviti" class="btn" text="Disiscriviti" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="25" width="85%" ontap="onTapDisiscriviti"/>
+        </GridLayout>
+    </StackLayout>
+</Page>

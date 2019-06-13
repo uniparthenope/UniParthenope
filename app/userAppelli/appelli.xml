@@ -33,7 +33,7 @@
                 <Label class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="10" fontSize="12"/>
             </GridLayout>
             <ScrollView row="1" verticalAlignment="top"  height="100%">
-                    <ListView id="appelli_listview" class="list-group" items="{{ items_appelli }}" itemTap="onTap" marginRight="5" marginLeft="5">
+                    <ListView id="appelli_listview" class="list-group" items="{{ items_appelli }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
                         <ListView.itemTemplate >
                             <FlexboxLayout flexDirection="row">
                                 <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
