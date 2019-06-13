@@ -29,6 +29,7 @@ function onShownModally(args) {
     user = contex.user;
     pass = contex.pass;
 
+
     viewModel = Observable.fromObject({
         items:items
     });
@@ -123,6 +124,8 @@ function onShownModally(args) {
 function onTap(args)
 {
     const index = args.index;
+    console.log(items.getItem(index).matId);
+
     global.saveCarr(items.getItem(index));
 
     selectedCarrer(index);
@@ -144,7 +147,7 @@ function selectedCarrer(index)
     let nome = appSettings.getString("nome");
     let cognome = appSettings.getString("cognome");
     sideDrawer.getViewById("topName").text = nome + " " + cognome;
-    global.saveCarr(carriere[index]);
+    //global.saveCarr(carriere[index]);
 
     //Se login è studente
     let grpDes = appSettings.getString("grpDes");

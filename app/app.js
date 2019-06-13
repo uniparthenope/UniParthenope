@@ -43,10 +43,20 @@ global.saveInfo = function(result)
     appSettings.setString("nome",result.user.firstName);
     appSettings.setString("cognome",result.user.lastName);
     appSettings.setString("grpDes",result.user.grpDes);
+    console.log("SAVE_INFO = "+result.user.codFis);
+    console.log("SAVE_INFO = "+result.user.firstName);
+    console.log("SAVE_INFO = "+result.user.lastName);
+    console.log("SAVE_INFO = "+result.user.grpDes);
 };
 
 global.saveCarr = function(result)
 {
+    console.log("SAVE_CARR = "+result.cdsDes);
+    console.log("SAVE_CARR = "+result.cdsId);
+    console.log("SAVE_CARR = "+result.matId);
+    console.log("SAVE_CARR = "+result.stuId);
+    console.log("SAVE_CARR = "+result.matricola);
+
     appSettings.setString("cdsDes",result.cdsDes);
     appSettings.setNumber("cdsId",result.cdsId);
     appSettings.setNumber("matId",result.matId);

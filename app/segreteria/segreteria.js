@@ -41,7 +41,8 @@ function getOrari() {
         else
         {
             let aperturaStudente = result.orario_studenti;
-            let aperturaDidattica = result.orario_studenti;
+            let aperturaDidattica = result.orario_didattica;
+
             console.log(aperturaStudente);
             console.log(aperturaDidattica);
             page.getViewById("aperturaStudente").text = aperturaStudente;
