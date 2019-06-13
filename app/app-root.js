@@ -50,11 +50,11 @@ exports.goto_settings = function () {
 };
 
 exports.goto_about = function () {
-    const nav =
+    /*const nav =
         {
             moduleName: "userAppelli/appelli",
         };
-    frame.topmost().navigate(nav);
+    frame.topmost().navigate(nav);*/
 
 };
 
