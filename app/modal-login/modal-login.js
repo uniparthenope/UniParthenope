@@ -101,7 +101,7 @@ function onShownModally(args) {
             }
             else
             {
-                selectedCarrer(0);
+                //selectedCarrer(0);
             }
 
         }
@@ -124,11 +124,10 @@ function onShownModally(args) {
 function onTap(args)
 {
     const index = args.index;
-    console.log(items.getItem(index).matId);
+    console.log("MATID= "+items.getItem(index).matId);
 
-    global.saveCarr(items.getItem(index));
-
-    selectedCarrer(index);
+    if(global.saveCarr(items.getItem(index)))
+        selectedCarrer(index);
 }
 
 

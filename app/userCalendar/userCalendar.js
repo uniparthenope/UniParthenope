@@ -116,8 +116,14 @@ function myExams()
     let exams = {};
     const matId = appSettings.getNumber("matId");
     const stuId = appSettings.getNumber("stuId");
-    getPianoId(stuId);
-    const pianoId = appSettings.getNumber("pianoId");
+    let pianoId = appSettings.getNumber("pianoId");
+    while(pianoId === undefined)
+    {
+        getPianoId(stuId);
+        pianoId = appSettings.getNumber("pianoId");
+    }
+
+
     console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId);
 
     httpModule.request({
@@ -273,7 +279,7 @@ function getCourses()
 {
     const stuId = appSettings.getNumber("stuId");
     const matId = appSettings.getNumber("matId");
-    getPianoId(stuId);
+    //getPianoId(stuId);
     httpModule.request({
         url: global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId ,
         method: "GET",

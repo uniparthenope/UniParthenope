@@ -63,6 +63,7 @@ global.saveCarr = function(result)
     appSettings.setNumber("stuId",result.stuId);
     appSettings.setString("matricola",result.matricola);
 
+    return true;
 };
 
 global.getAllBadge = function(page)
