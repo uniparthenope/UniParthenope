@@ -170,6 +170,7 @@ exports.onTapEventi = function(){
      global.username = username;
  }
 
+
 //TODO Social Buttons
 //TODO Trasporti
 exports.onNavigatingTo = onNavigatingTo;

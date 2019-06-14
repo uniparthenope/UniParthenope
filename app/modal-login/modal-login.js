@@ -101,7 +101,22 @@ function onShownModally(args) {
             }
             else
             {
-                //selectedCarrer(0);
+                if(result.user.grpDes === "Docenti"){
+                    dialogs.alert({
+                        title: "Il docente non è ancora supportato!! Lavori in corso.....",
+                        message: e.retErrMsg,
+                        okButtonText: "OK"
+                    });
+                    args.object.closeModal();
+                }
+                else{
+                    dialogs.alert({
+                        title: "Lavori in corso.....",
+                        message: e.retErrMsg,
+                        okButtonText: "OK"
+                    });
+                    args.object.closeModal();
+                }
             }
 
         }
