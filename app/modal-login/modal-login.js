@@ -103,16 +103,16 @@ function onShownModally(args) {
             {
                 if(result.user.grpDes === "Docenti"){
                     dialogs.alert({
-                        title: "Il docente non è ancora supportato!! Lavori in corso.....",
-                        message: e.retErrMsg,
+                        title: "Attenzione!",
+                        message: "Il docente non è ancora supportato!! Lavori in corso.....",
                         okButtonText: "OK"
                     });
                     args.object.closeModal();
                 }
                 else{
                     dialogs.alert({
-                        title: "Lavori in corso.....",
-                        message: e.retErrMsg,
+                        title: "Attenzione!",
+                        message: "Lavori in corso.....",
                         okButtonText: "OK"
                     });
                     args.object.closeModal();
