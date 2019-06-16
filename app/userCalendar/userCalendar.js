@@ -38,6 +38,7 @@ function onNavigatingTo(args) {
     }
 
     global.getAllBadge(page);
+
     page.bindingContext = viewModel;
 }
 function calendarCourses() {
@@ -111,100 +112,12 @@ function insert_event() {
     }
     calendar.eventSource = temp_array;
 }
-function myExams()
-{
+
+function myExams() {
     let exams = {};
     const matId = appSettings.getNumber("matId");
     const stuId = appSettings.getNumber("stuId");
-    let pianoId = appSettings.getNumber("pianoId");
-    while(pianoId === undefined)
-    {
-        getPianoId(stuId);
-        pianoId = appSettings.getNumber("pianoId");
-    }
 
-
-    console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId);
-
-    httpModule.request({
-        url: global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId,
-        method: "GET",
-        headers: {"Content-Type": "application/json"}
-    }).then((response) => {
-        const result = response.content.toJSON();
-        //console.log(result);
-
-        if (result.statusCode === 401 || result.statusCode === 500)
-        {
-            dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
-                okButtonText: "OK"
-            }).then(
-            );
-        }
-        else
-        {
-            let array = [];
-
-            console.log(result.length);
-            for (let i=0; i<result.length; i++)
-            {
-                httpModule.request({
-                    url: global.url + "checkExam/" + global.encodedStr + "/" + matId + "/" + result[i].adsceId,
-                    method: "GET",
-                    headers: {"Content-Type": "application/json"}
-                }).then((response) => {
-                    const result_n = response.content.toJSON();
-                    //console.log(result_n);
-
-                    if (result_n.statusCode === 401 || result_n.statusCode === 500)
-                    {
-                        dialogs.alert({
-                            title: "Errore Server!",
-                            message: result_n.retErrMsg,
-                            okButtonText: "OK"
-                        }).then(
-                        );
-                    }
-                    else {
-                        exams.superata = result_n.stato;
-
-                        global.myExams.push({
-                            "nome" : result[i].nome,
-                            "codice" : result[i].codice,
-                            "annoId" : result[i].annoId,
-                            "adsceId" : result[i].adsceId,
-                            "adId" : result[i].adId,
-                            "CFU" : result[i].CFU,
-                            "superata" : result_n.stato,
-                            "superata_data" : result_n.data,
-                            "superata_voto" : result_n.voto,
-                            "superata_lode" : result_n.lode
-                        });
-                    }
-                },(e) => {
-                    console.log("Error", e);
-                    dialogs.alert({
-                        title: "Errore Sincronizzazione Esami!",
-                        message: e,
-                        okButtonText: "OK"
-                    });
-                });
-            }
-        }
-
-        },(e) => {
-        console.log("Error", e);
-        dialogs.alert({
-            title: "Errore Server!",
-            message: e,
-            okButtonText: "OK"
-        });
-    });
-}
-function getPianoId(stuId)
-{
     httpModule.request({
         url: global.url + "pianoId/" + global.encodedStr + "/" + stuId,
         method: "GET",
@@ -227,6 +140,87 @@ function getPianoId(stuId)
             appSettings.setNumber("pianoId", result.pianoId);
         }
 
+        let pianoId = appSettings.getNumber("pianoId");
+
+        console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId);
+
+        httpModule.request({
+            url: global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId,
+            method: "GET",
+            headers: {"Content-Type": "application/json"}
+        }).then((response) => {
+            const result = response.content.toJSON();
+            //console.log(result);
+
+            if (result.statusCode === 401 || result.statusCode === 500)
+            {
+                dialogs.alert({
+                    title: "Errore Server!",
+                    message: result.retErrMsg,
+                    okButtonText: "OK"
+                }).then(
+                );
+            }
+            else
+            {
+                let array = [];
+
+                console.log(result.length);
+                for (let i=0; i<result.length; i++)
+                {
+                    httpModule.request({
+                        url: global.url + "checkExam/" + global.encodedStr + "/" + matId + "/" + result[i].adsceId,
+                        method: "GET",
+                        headers: {"Content-Type": "application/json"}
+                    }).then((response) => {
+                        const result_n = response.content.toJSON();
+                        //console.log(result_n);
+
+                        if (result_n.statusCode === 401 || result_n.statusCode === 500)
+                        {
+                            dialogs.alert({
+                                title: "Errore Server!",
+                                message: result_n.retErrMsg,
+                                okButtonText: "OK"
+                            }).then(
+                            );
+                        }
+                        else {
+                            exams.superata = result_n.stato;
+
+                            global.myExams.push({
+                                "nome" : result[i].nome,
+                                "codice" : result[i].codice,
+                                "annoId" : result[i].annoId,
+                                "adsceId" : result[i].adsceId,
+                                "adId" : result[i].adId,
+                                "CFU" : result[i].CFU,
+                                "superata" : result_n.stato,
+                                "superata_data" : result_n.data,
+                                "superata_voto" : result_n.voto,
+                                "superata_lode" : result_n.lode
+                            });
+                        }
+                    },(e) => {
+                        console.log("Error", e);
+                        dialogs.alert({
+                            title: "Errore Sincronizzazione Esami!",
+                            message: e,
+                            okButtonText: "OK"
+                        });
+                    });
+                }
+            }
+
+        },(e) => {
+            console.log("Error", e);
+            dialogs.alert({
+                title: "Errore Server!",
+                message: e,
+                okButtonText: "OK"
+            });
+        });
+
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({
@@ -236,6 +230,7 @@ function getPianoId(stuId)
         });
     });
 }
+
 function getMainInfo()
 {
     let cdsId = appSettings.getNumber("cdsId");

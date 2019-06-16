@@ -35,8 +35,6 @@ orario aula []
 */
 global.myExams = [];
 
-application.run({ moduleName: "app-root" });
-
 global.saveInfo = function(result)
 {
     appSettings.setString("codFis",result.user.codFis);
@@ -118,7 +116,7 @@ global.getAllBadge = function(page)
 
 };
 
-
+application.run({ moduleName: "app-root" });
 
 /*
 Do not place any code after the application has been started as it will not

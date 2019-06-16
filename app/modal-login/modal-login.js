@@ -51,7 +51,7 @@ function onShownModally(args) {
                 args.object.closeModal()
             );
         }
-/* Se un utente è di tipo USER TECNICO (ristorante) */
+        /* Se un utente è di tipo USER TECNICO (ristorante) */
         else if (_result.statusCode === 600)
         {
             const sideDrawer = app.getRootView();
@@ -144,7 +144,6 @@ function onTap(args)
     if(global.saveCarr(items.getItem(index)))
         selectedCarrer(index);
 }
-
 
 function selectedCarrer(index)
 {
