@@ -35,36 +35,16 @@
                     <accordion:Accordion.itemHeaderTemplate>
                         <StackLayout class="border" marginBottom="10" height="50">
                             <Label class="textPrimary" color="#009432" text="{{ nome_bar }}" horizontalAlignment="center" textAlignment="center"/>
-                            <Label class="textPrimary" color="#009432" fontSize="12" text="{{ apertura }}" horizontalAlignment="center"/>
                         </StackLayout>
                     </accordion:Accordion.itemHeaderTemplate>
 
                     <accordion:Accordion.itemContentTemplate>
                         <StackLayout>
-                            <StackLayout margin="5 5 5 5">
-                                <Label class="textPrimary" fontSize="16" color="#009432" text="Primi:" textWrap="true" horizontalAlignment="center"/>
-                                <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ primo_1 }}" textWrap="true"/>
-                                <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ primo_2 }}" textWrap="true"/>
-                                <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ primo_3 }}" textWrap="true"/>
-                            </StackLayout>
-                            <StackLayout backgroundColor="#5CC77A" margin="5 5 5 5">
-                                <Label class="textPrimary" fontSize="16"  text="Secondi:" textWrap="true" horizontalAlignment="center"/>
-                                <Label class="textPrimary" fontSize="14"  text="{{ secondi_1 }}" textWrap="true"/>
-                                <Label class="textPrimary" fontSize="14"  text="{{ secondi_2 }}" textWrap="true"/>
-                                <Label class="textPrimary" fontSize="14"  text="{{ secondi_3 }}" textWrap="true"/>
-                            </StackLayout>
-                            <StackLayout margin="5 5 5 5">
-                                <Label class="textPrimary" fontSize="16" color="#009432" text="Contorni:" textWrap="true" horizontalAlignment="center"/>
-                                <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ contorni_1 }}" textWrap="true"/>
-                                <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ contorni_2 }}" textWrap="true"/>
-                                <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ contorni_3 }}" textWrap="true"/>
-                            </StackLayout>
-                            <StackLayout backgroundColor="#5CC77A" margin="5 5 5 5">
-                                <Label class="textPrimary" fontSize="16"  text="Altro:" textWrap="true" horizontalAlignment="center"/>
-                                <Label class="textPrimary" fontSize="14"  text="{{ altro_1 }}" textWrap="true"/>
-                                <Label class="textPrimary" fontSize="14"  text="{{ altro_2 }}" textWrap="true"/>
-                                <Label class="textPrimary" fontSize="14"  text="{{ altro_3 }}" textWrap="true"/>
-                            </StackLayout>
+                                <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ nome }}" textWrap="true"/>
+                                <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ descrizione }}" textWrap="true"/>
+                                <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ tipologia }}" textWrap="true"/>
+                            <Label class="textPrimary" fontSize="14" color="#5CC77A" text="{{ prezzo }}" textWrap="true"/>
+                            <Image src="{{ image }}"/>
                         </StackLayout>
                     </accordion:Accordion.itemContentTemplate>
                 </accordion:Accordion>

@@ -12,6 +12,7 @@ const application = require("tns-core-modules/application");
 const appSettings = require("application-settings");
 
 global.url = "http://museonavale.uniparthenope.it:8080/api/uniparthenope/";
+global.localurl = "http://192.168.1.198:5000/api/uniparthenope/";
 global.isConnected = false;
 global.updatedExam = false;
 global.encodedStr = "";

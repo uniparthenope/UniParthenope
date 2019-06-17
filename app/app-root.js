@@ -114,6 +114,7 @@ exports.goto_menuNew = function () {
     frame.topmost().navigate(nav);
 };
 
+
 function logout()
 {
     let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/logout";

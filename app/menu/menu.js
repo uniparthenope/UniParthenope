@@ -1,3 +1,4 @@
+const base64 = require("tns-core-modules/image-source");
 const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
@@ -30,13 +31,12 @@ function onNavigatingTo(args) {
     console.log("CURR DATA = " + data);
 
     httpModule.request({
-        url: global.url + "foods/menuSearchData/" + data,
+        url: global.localurl + "foods/getAllToday",
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
-
         if (result.statusCode === 401 || result.statusCode === 500)
         {
             dialogs.alert({
@@ -51,24 +51,18 @@ function onNavigatingTo(args) {
             for (let i=0; i<result.length; i++)
             {
                 count++;
+                let img = base64.fromBase64(result[i].image);
+                //TODO COntinuare qui!!!!!
                 items.push({
-                    nome_bar: result[i].nome,
-                    apertura: "Orario Apertura Mensa: " + result[i].apertura,
+                    nome_bar: result[i].nome_bar,
 
                     items: [
                         {
-                            primo_1: result[i].primo[0].piatto_1,
-                            primo_2: result[i].primo[1].piatto_2,
-                            primo_3: result[i].primo[2].piatto_3,
-                            secondi_1: result[i].secondo[0].piatto_1,
-                            secondi_2: result[i].secondo[1].piatto_2,
-                            secondi_3: result[i].secondo[2].piatto_3,
-                            contorni_1: result[i].contorno[0].piatto_1,
-                            contorni_2: result[i].contorno[1].piatto_2,
-                            contorni_3: result[i].contorno[2].piatto_3,
-                            altro_1: result[i].altro[0].piatto_1,
-                            altro_2: result[i].altro[1].piatto_2,
-                            altro_3: result[i].altro[2].piatto_3
+                            nome: result[i].nome,
+                            descrizione: result[i].descrizione,
+                            prezzo: result[i].prezzo,
+                            tipologia: result[i].tipologia,
+                            image: img
                         }
                     ]
                 });

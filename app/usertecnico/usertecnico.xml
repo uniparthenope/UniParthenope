@@ -1,7 +1,8 @@
 <Page class="page"
       navigatingTo="onNavigatingTo"
       actionBarHidden="false"
-      xmlns="http://schemas.nativescript.org/tns.xsd">
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:cb="nativescript-checkbox">
 
 
     <ActionBar class="action-bar">
@@ -31,32 +32,13 @@
     <ScrollView height="100%">
 
         <StackLayout marginRight="5" marginLeft="5">
-            <Label horizontalAlignment="center" text="Crea nuovo Menu: " fontSize="18"/>
-            <TextField id="orario" hint="Orario inizio mensa (hh:mm)" class="input input-border"  marginBottom="10"/>
-            <StackLayout>
-                <Label horizontalAlignment="center" text="Primi Piatti: " fontSize="18"/>
-                <TextField id="p1" hint="Primo piatto 1" class="input input-border" marginBottom="10"/>
-                <TextField id="p2" hint="Primo piatto 2" class="input input-border" marginBottom="10"/>
-                <TextField id="p3" hint="Primo piatto 3" class="input input-border" marginBottom="10"/>
-            </StackLayout>
-            <StackLayout>
-                <Label horizontalAlignment="center" text="Secondi Piatti: " fontSize="18"/>
-                <TextField id="s1" hint="Secondo piatto 1" class="input input-border" marginBottom="10"/>
-                <TextField id="s2" hint="Secondo piatto 2" class="input input-border" marginBottom="10"/>
-                <TextField id="s3" hint="Secondo piatto 3" class="input input-border" marginBottom="10"/>
-            </StackLayout>
-            <StackLayout>
-                <Label horizontalAlignment="center" text="Contorni: " fontSize="18"/>
-                <TextField id="c1" hint="Contorni 1" class="input input-border" marginBottom="10"/>
-                <TextField id="c2" hint="Contorni 2" class="input input-border" marginBottom="10"/>
-                <TextField id="c3" hint="Contorni 3" class="input input-border" marginBottom="10"/>
-            </StackLayout>
-            <StackLayout>
-                <Label horizontalAlignment="center" text="Altro: " fontSize="18"/>
-                <TextField id="a1" hint="Altro 1" class="input input-border" marginBottom="10"/>
-                <TextField id="a2" hint="Altro 2" class="input input-border" marginBottom="10"/>
-                <TextField id="a3" hint="Altro 3" class="input input-border" marginBottom="10"/>
-            </StackLayout>
+
+            <TextField id="nome" hint="Nome" class="input input-border" marginBottom="10"/>
+            <TextField id="desc" hint="Descrizione" class="input input-border" marginBottom="10"/>
+            <TextField id="prezzo" hint="Prezzo" class="input input-border" marginBottom="10"/>
+            <cb:CheckBox checked="false" text="Sempre attivo" id="alwaysActive" color="black" fillColor="black" marginTop="5" marginLeft="5"/>
+            <TextField id="tipo" hint="Tipologia" class="input input-border" marginBottom="10"/>
+
             <Button text="Pubblica" ontap="onTapSave"/>
 
         </StackLayout>
