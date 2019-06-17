@@ -284,6 +284,7 @@ function getCourses()
         //console.log(result);
         page.getViewById("activityIndicator").visibility = "visible";
 
+
         if (result.statusCode === 401 || result.statusCode === 500)
         {
             dialogs.alert({

@@ -35,8 +35,11 @@ function onNavigatingTo(args) {
 
     loading.visibility = "visible";
     let exams = global.freqExams;
-    for (let i=0; i<exams.length; i++)
+    for (let i=0; i<exams.length; i++){
+        console.log("EXAMS "+exams[i].adId);
         getAppelli(exams[i].adId);
+    }
+
     appSettings.setNumber("appelloBadge",global.tempNum);
     global.getAllBadge(page);
     page.bindingContext = viewModel;
