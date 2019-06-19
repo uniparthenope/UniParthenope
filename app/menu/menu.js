@@ -28,10 +28,10 @@ function onNavigatingTo(args) {
     });
     let curr = new Date();
     let data = ""+ ("0" + curr.getDate()).slice(-2)+ ("0" + (curr.getMonth() + 1)).slice(-2) + curr.getFullYear();
-    console.log("CURR DATA = " + data);
+    //console.log("CURR DATA = " + data);
 
     httpModule.request({
-        url: global.localurl + "foods/getAllToday",
+        url: global.url + "foods/getAllNames",
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
@@ -50,21 +50,60 @@ function onNavigatingTo(args) {
             let count =0;
             for (let i=0; i<result.length; i++)
             {
+                let temp_items =[];
                 count++;
-                let img = base64.fromBase64(result[i].image);
-                //TODO COntinuare qui!!!!!
-                items.push({
-                    nome_bar: result[i].nome_bar,
 
-                    items: [
+                httpModule.request({
+                    url: global.url + "foods/getAllToday",
+                    method: "GET",
+                    headers: {"Content-Type": "application/json"}
+                }).then((response) => {
+                    const result_2 = response.content.toJSON();
+                    if (result_2.statusCode === 401 || result_2.statusCode === 500)
+                    {
+                        dialogs.alert({
+                            title: "Errore Server!",
+                            message: result_2.retErrMsg,
+                            okButtonText: "OK"
+                        }).then(
+                        );
+                    }
+                    else {
+                        for (let x=0; x<result_2.length; x++)
                         {
-                            nome: result[i].nome,
-                            descrizione: result[i].descrizione,
-                            prezzo: result[i].prezzo,
-                            tipologia: result[i].tipologia,
-                            image: img
+                            if(result[i] === result_2[x].nome_bar)
+                            {
+                                let prezzo = result_2[x].prezzo.toString();
+                                let pr = prezzo.split("."||",");
+
+                                if (pr[1].length < 2)
+                                    prezzo = prezzo + "0";
+
+                                let img = base64.fromBase64(result_2[x].image);
+                                temp_items.push({
+                                    nome: result_2[x].nome,
+                                    descrizione: result_2[x].descrizione,
+                                    prezzo: prezzo + " €",
+                                    tipologia: result_2[x].tipologia,
+                                    image: img
+                                })
+
+                            }
                         }
-                    ]
+                    }
+                },(e) => {
+                    console.log("Error", e);
+                    dialogs.alert({
+                        title: "Errore Sincronizzazione Esami!",
+                        message: e,
+                        okButtonText: "OK"
+                    });
+                });
+
+                items.push({
+                    nome_bar: result[i],
+
+                    items: temp_items
                 });
 
             }

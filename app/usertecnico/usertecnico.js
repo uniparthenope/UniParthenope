@@ -1,34 +1,56 @@
 const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
+const camera = require("nativescript-camera");
+const imageModule = require("tns-core-modules/ui/image");
+const base64 = require("tns-core-modules/image-source");
 const appSettings = require("application-settings");
 const textFieldModule = require("tns-core-modules/ui/text-field");
+const fileSystemModule = require("tns-core-modules/file-system");
 const httpModule = require("http");
 const frame = require("tns-core-modules/ui/frame");
+const ListPicker = require("tns-core-modules/ui/list-picker").ListPicker;
+const imageSourceModule = require("tns-core-modules/image-source");
 
 
 let page;
 let viewModel;
 let sideDrawer;
+let img;
+let values = ["Offerta","Primo","Secondo","Contorno","Bibita","Altro"];
 
 function onNavigatingTo(args) {
     page = args.object;
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
+    // TEST IMMAGINE default
+    let image = new imageModule.Image();
+    image.src = "~/images/no_food.png";
 
+    const folder = fileSystemModule.knownFolders.currentApp();
+    const path = fileSystemModule.path.join(folder.path, "images/no_food.png");
+    const imageFromLocalFile = imageSourceModule.fromFile(path);
+
+    page.getViewById("image").src = imageFromLocalFile;
+
+    // FINE TEST IMMAGINE
+    //Associare a img l'immagine di default in base64
+
+    viewModel = observableModule.fromObject({
+       items_picker: values,
+        sel: 2
+    });
 
 
     page.bindingContext = viewModel;
 }
-function onTapSave() {
 
-    let orario = page.getViewById("orario").text;
-    //TODO inserire limitazioni orario
+function onTapSave() {
     let nome = page.getViewById("nome").text;
     let desc = page.getViewById("desc").text;
-    let tipo = page.getViewById("tipo").text;
     let prezzo = page.getViewById("prezzo").text;
+    let tipo = values[page.getViewById("lp").selectedIndex];
     let active = page.getViewById("alwaysActive").checked;
 
 
@@ -39,9 +61,8 @@ function onTapSave() {
         cancelButtonText: "No"
     }).then(function (result) {
         // result argument is boolean
-        if (result && orario !== "")
+        if (result)
         {
-
             fetch(global.url + "foods/addMenu/" + global.encodedStr, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -50,7 +71,9 @@ function onTapSave() {
                     descrizione: desc,
                     tipologia: tipo,
                     prezzo:prezzo,
-                    attivo: active
+                    attivo: active,
+                    img:img
+
                 })
             }).then((r) => r.json())
                 .then((response) => {
@@ -61,25 +84,16 @@ function onTapSave() {
                         message: "Il nuovo menu è stato caricato con successo!",
                         okButtonText: "OK"
                     }).then(function(){
-                        /*const nav =
+                        const nav =
                             {
                                 moduleName: "usertecnico-all/usertecnico-all",
                                 clearHistory: true
                             };
-                        frame.topmost().navigate(nav);*/
+                        frame.topmost().navigate(nav);
                     });
                 }).catch((e) => {
             });
         }
-        else if (orario === "")
-            {
-                dialogs.alert({
-                    title: "Errore",
-                    message: "Il campo ORARIO non può essere vuoto!",
-                    okButtonText: "OK"
-                }).then(
-                );
-            }
     });
 
 }
@@ -92,7 +106,31 @@ function onGeneralMenu()
 {
     page.frame.goBack();
 }
+exports.onTapAdd = function(){
 
+    camera.requestPermissions().then(
+        function success() {
+            let options = { width: 150, height: 100, keepAspectRatio: true, saveToGallery: false };
+            camera.takePicture(options)
+                .then(function (imageAsset) {
+                    let image = new imageModule.Image();
+                    image.src = imageAsset;
+                    base64.fromAsset(imageAsset).then(res=>{
+                        let myImageSource = res;
+                        page.getViewById("image").src = myImageSource;
+                        img = myImageSource.toBase64String("jpeg", 50);
+                        //console.log(img);
+                    })
+                }).catch(function (err) {
+                console.log("Error -> " + err.message);
+            });
+        },
+        function failure() {
+// permission request rejected
+// ... tell the user ...
+        }
+    );
+};
 exports.onTapSave = onTapSave;
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;

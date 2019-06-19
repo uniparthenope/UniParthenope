@@ -1,8 +1,7 @@
 <Page class="page"
       navigatingTo="onNavigatingTo"
       actionBarHidden="false"
-      xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:accordion="nativescript-accordion">
+      xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar">
         <ActionItem icon="~/images/logo_parth.png"
@@ -30,47 +29,29 @@
         </GridLayout>
 
         <ScrollView height="80%" marginLeft="5" marginRight="5" marginTop="10">
-            <accordion:Accordion id="accordion" items="{{ items }}" allowMultiple="false" height="100%" itemHeaderTap="tapped">
-                <accordion:Accordion.itemHeaderTemplate>
-                    <GridLayout marginBottom="10">
-                    <StackLayout class="{{classe}}" height="50" marginBottom="10">
-                        <Label class="{{ classe }}" borderWidth="0"  text="{{ nome_bar }}" horizontalAlignment="center" textAlignment="center"/>
-                        <Label class="{{ classe }}" borderWidth="0" fontSize="12" text="{{ apertura }}" horizontalAlignment="center"/>
-                    </StackLayout>
+            <ListView id="listview" items="{{ items }}" itemTap="tapped">
+                <ListView.itemTemplate>
+
+                    <GridLayout >
+                        <Image src="{{ image }}" height="150" width="100%" stretch="aspectFill" marginBottom="10"/>
+                        <StackLayout orientation="vertical" >
+                            <Label class="textPrimary textPrimary-bold" fontSize="16" color="#5CC77A" text="{{ nome }}" textWrap="true" horizontalAlignment="center"/>
+                                <StackLayout  orientation="vertical" verticalAlignment="center" marginLeft="5">
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ descrizione }}" textWrap="true"/>
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ full_data }}" textWrap="true"/>
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ tipologia }}" textWrap="true"/>
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ prezzo }}" textWrap="true"/>
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ sempre_att }}" textWrap="true"/>
+                                </StackLayout>
+
+                            </StackLayout>
                     </GridLayout>
-                </accordion:Accordion.itemHeaderTemplate>
 
-                <accordion:Accordion.itemContentTemplate>
+                </ListView.itemTemplate>
 
-                    <StackLayout>
-                        <Button class="btn" text="Copia menu" tap="onTap"/>
-                        <StackLayout margin="5 5 5 5">
-                            <Label class="textPrimary" fontSize="16" color="#009432" text="Primi:" textWrap="true" horizontalAlignment="center"/>
-                            <Label class="textPrimary" fontSize="14" color="black" text="{{ primo_1 }}" textWrap="true"/>
-                            <Label class="textPrimary" fontSize="14" color="black" text="{{ primo_2 }}" textWrap="true"/>
-                            <Label class="textPrimary" fontSize="14" color="black" text="{{ primo_3 }}" textWrap="true"/>
-                        </StackLayout>
-                        <StackLayout backgroundColor="#5CC77A" margin="5 5 5 5">
-                            <Label class="textPrimary" fontSize="16"  text="Secondi:" textWrap="true" horizontalAlignment="center"/>
-                            <Label class="textPrimary" fontSize="14"  text="{{ secondi_1 }}" textWrap="true"/>
-                            <Label class="textPrimary" fontSize="14"  text="{{ secondi_2 }}" textWrap="true"/>
-                            <Label class="textPrimary" fontSize="14"  text="{{ secondi_3 }}" textWrap="true"/>
-                        </StackLayout>
-                        <StackLayout margin="5 5 5 5">
-                            <Label class="textPrimary" fontSize="16" color="#009432" text="Contorni:" textWrap="true" horizontalAlignment="center"/>
-                            <Label class="textPrimary" fontSize="14" color="black" text="{{ contorni_1 }}" textWrap="true"/>
-                            <Label class="textPrimary" fontSize="14" color="black" text="{{ contorni_2 }}" textWrap="true"/>
-                            <Label class="textPrimary" fontSize="14" color="black" text="{{ contorni_3 }}" textWrap="true"/>
-                        </StackLayout>
-                        <StackLayout backgroundColor="#5CC77A" margin="5 5 5 5">
-                            <Label class="textPrimary" fontSize="16"  text="Altro:" textWrap="true" horizontalAlignment="center"/>
-                            <Label class="textPrimary" fontSize="14"  text="{{ altro_1 }}" textWrap="true"/>
-                            <Label class="textPrimary" fontSize="14"  text="{{ altro_2 }}" textWrap="true"/>
-                            <Label class="textPrimary" fontSize="14"  text="{{ altro_3 }}" textWrap="true"/>
-                        </StackLayout>
-                    </StackLayout>
-                </accordion:Accordion.itemContentTemplate>
-            </accordion:Accordion>
+            </ListView>
+
+
         </ScrollView>
         </StackLayout>
     </GridLayout>
