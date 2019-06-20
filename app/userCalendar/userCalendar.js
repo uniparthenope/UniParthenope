@@ -9,8 +9,6 @@ const calendarModule = require("nativescript-ui-calendar");
 const Color = require("tns-core-modules/color");
 const modalViewModule = "modal-event/modal-event";
 
-
-
 let colors = ["#c47340","#4566c1","#824bc1","#a32d13","#382603","#fff766"];
 let page;
 let viewModel;
@@ -268,68 +266,101 @@ function getMainInfo()
             okButtonText: "OK"
         });
     });
-
 }
+
+
 function getCourses()
 {
     const stuId = appSettings.getNumber("stuId");
     const matId = appSettings.getNumber("matId");
-    //getPianoId(stuId);
+
     httpModule.request({
-        url: global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId ,
+        url: global.url + "pianoId/" + global.encodedStr + "/" + stuId,
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
-        page.getViewById("activityIndicator").visibility = "visible";
-
 
         if (result.statusCode === 401 || result.statusCode === 500)
         {
             dialogs.alert({
                 title: "Errore Server!",
-                message: result_n.retErrMsg,
+                message: result.retErrMsg,
                 okButtonText: "OK"
             }).then(
             );
-            page.getViewById("activityIndicator").visibility = "collapsed";
         }
-        else {
-            for (let i=0; i<result.length; i++)
-            {
-                global.freqExams.push({
-                    "nome" : result[i].nome,
-                    "codice" : result[i].codice,
-                    "annoId" : result[i].annoId,
-                    "adsceId" : result[i].adsceId,
-                    "adLogId" : result[i].adLogId,
-                    "adId" : result[i].adId,
-                    "CFU" : result[i].CFU,
-                    "docente" : result[i].docente,
-                    "docenteID" : result[i].docenteID,
-                    "semestre" : result[i].semestre,
-                    "inizio" : result[i].inizio,
-                    "fine" : result[i].fine,
-                    "modifica" : result[i].ultMod,
-                    "orario" : []
-                });
-            }
-            page.getViewById("activityIndicator").visibility = "collapsed";
-            calendarCourses();
-            global.updatedExam = true;
+        else
+        {
+            appSettings.setNumber("pianoId", result.pianoId);
+        }
 
-        }
+        let pianoId = appSettings.getNumber("pianoId");
+
+        httpModule.request({
+            url: global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId ,
+            method: "GET",
+            headers: {"Content-Type": "application/json"}
+        }).then((response) => {
+            const result = response.content.toJSON();
+            //console.log(result);
+            page.getViewById("activityIndicator").visibility = "visible";
+
+
+            if (result.statusCode === 401 || result.statusCode === 500)
+            {
+                dialogs.alert({
+                    title: "Errore Server!",
+                    message: result_n.retErrMsg,
+                    okButtonText: "OK"
+                }).then(
+                );
+                page.getViewById("activityIndicator").visibility = "collapsed";
+            }
+            else {
+                for (let i=0; i<result.length; i++)
+                {
+                    global.freqExams.push({
+                        "nome" : result[i].nome,
+                        "codice" : result[i].codice,
+                        "annoId" : result[i].annoId,
+                        "adsceId" : result[i].adsceId,
+                        "adLogId" : result[i].adLogId,
+                        "adId" : result[i].adId,
+                        "CFU" : result[i].CFU,
+                        "docente" : result[i].docente,
+                        "docenteID" : result[i].docenteID,
+                        "semestre" : result[i].semestre,
+                        "inizio" : result[i].inizio,
+                        "fine" : result[i].fine,
+                        "modifica" : result[i].ultMod,
+                        "orario" : []
+                    });
+                }
+                page.getViewById("activityIndicator").visibility = "collapsed";
+                calendarCourses();
+                global.updatedExam = true;
+
+            }
+        },(e) => {
+            console.log("Error", e);
+            dialogs.alert({
+                title: "Errore Sincronizzazione Esami!",
+                message: e,
+                okButtonText: "OK"
+            });
+            page.getViewById("activityIndicator").visibility = "collapsed";
+        });
+
     },(e) => {
-        console.log("Error", e);
+        console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore Sincronizzazione Esami!",
-            message: e,
+            title: "Errore Server!",
+            message: e.retErrMsg,
             okButtonText: "OK"
         });
-        page.getViewById("activityIndicator").visibility = "collapsed";
     });
-
 }
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
