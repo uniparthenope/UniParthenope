@@ -84,7 +84,6 @@ function onNavigatingTo(args) {
                         if (++count == result.rss.channel[0].item.length)
                             page.getViewById("loading").busy= false;
                         });
-
                 }
             });
         });
