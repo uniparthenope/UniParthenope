@@ -24,26 +24,14 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
-    // TEST IMMAGINE default
-    let image = new imageModule.Image();
-    image.src = "~/images/no_food.png";
-
-    const folder = fileSystemModule.knownFolders.currentApp();
-    const path = fileSystemModule.path.join(folder.path, "images/no_food.png");
-    const imageFromLocalFile = imageSourceModule.fromFile(path);
-
-    page.getViewById("image").src = imageFromLocalFile;
-
-    // FINE TEST IMMAGINE
-    //Associare a img l'immagine di default in base64
-
     viewModel = observableModule.fromObject({
        items_picker: values,
-        sel: 2
+        sel: 2,
     });
 
 
     page.bindingContext = viewModel;
+    //page.getViewById("image").src = "~/images/no_food.png";
 }
 
 function onTapSave() {

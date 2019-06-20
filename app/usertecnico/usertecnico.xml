@@ -33,7 +33,7 @@
 
         <StackLayout marginRight="5" marginLeft="5">
             <StackLayout marginTop="10">
-                <Image id="image" src="{{ source }}"  width="100%"/>
+                <Image id="image"  width="100%"/>
                 <Button class="btn" text="Aggiungi Foto" ontap="onTapAdd" marginTop="10"/>
             </StackLayout>
             <TextField id="nome" hint="Nome" class="input input-border" marginBottom="5"/>

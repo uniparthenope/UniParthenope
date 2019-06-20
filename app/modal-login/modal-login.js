@@ -63,7 +63,9 @@ function onShownModally(args) {
                 appSettings.setBoolean("rememberMe",true);
             }
             console.log("UserTecnico:" + _result.username);
+
             sideDrawer.getViewById("topName").text = _result.username;
+            global.username = _result.username;
             let userForm = sideDrawer.getViewById("userTecnico");
             let loginForm = sideDrawer.getViewById("loginForm");
             loginForm.visibility = "collapsed";

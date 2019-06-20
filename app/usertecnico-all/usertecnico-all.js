@@ -27,7 +27,7 @@ function onNavigatingTo(args) {
         items:items
     });
     page.bindingContext = viewModel;
-
+    console.log(global.username);
     httpModule.request({
 
         url: global.url + "foods/menuSearchUser/" + global.username,
@@ -50,34 +50,28 @@ function onNavigatingTo(args) {
             console.log(result.length);
             for (let i=0; i<result.length; i++)
             {
-                let data2 = new Date(result[i].data);
-                let tod = new Date();
-                let title ="";
                 let classe = "textPrimary border ";
 
-                if (data2.getDate() === tod.getDate() && data2.getMonth() === tod.getMonth() && data2.getFullYear() === tod.getFullYear())
-                {
-                    classe = classe + "color-green";
-                    title = "(OGGI) "+data2.getDate() + "/"+(data2.getMonth()+1) + "/"+data2.getFullYear() + " "+data2.getHours() + ":"+data2.getMinutes();
-                }
-                else {
-                    classe = classe + "color-gray";
-                    title = data2.getDate() + "/"+(data2.getMonth()+1) + "/"+data2.getFullYear() + " "+data2.getHours() + ":"+data2.getMinutes();
-                }
                 let insert = "Sempre Attivo: ";
                 if(result[i].sempre_attivo)
                     insert += "SI";
                 else
                     insert += "NO";
-                let img = base64.fromBase64(result[i].image);
+
                 let prezzo = result[i].prezzo.toString();
-                if(prezzo.search("." ||",") != -1)
+                if(prezzo.includes(","))
                 {
                     let pr = prezzo.split("."||",");
-
                     if (pr[1].length < 2)
                         prezzo = prezzo + "0";
                 }
+
+                let img;
+                if (result[i].image === "")
+                    img = "~/images/no_food.png";
+
+                else
+                    img = base64.fromBase64(result[i].image);
 
                 items.push({
                     nome: result[i].nome,
@@ -121,26 +115,24 @@ exports.tapped = function (args) {
         cancelButtonText: "No"
     }).then(function (result) {
         // result argument is boolean
-
-
         if (result)
         {
-                fetch(global.url + "foods/removeMenu/" + global.encodedStr + "/" + header_index, {
-                    method: "GET",
-                    headers: {"Content-Type": "application/json"}
-                }).then((r) => r.json())
-                    .then((response) => {
-                        if (response.code === 200)
-                        {
-                            dialogs.alert({
-                                title: "Menu Cancellato!",
-                                message: "Il menu è stato cancellato con successo!",
-                                okButtonText: "OK"
-                            }).then(function () {
-                                const nav =
-                                    {
-                                        moduleName: "usertecnico-all/usertecnico-all",
-                                        clearHistory: true
+            fetch(global.url + "foods/removeMenu/" + global.encodedStr + "/" + header_index, {
+                method: "GET",
+                headers: {"Content-Type": "application/json"}
+            }).then((r) => r.json())
+                .then((response) => {
+                    if (response.code === 200)
+                    {
+                        dialogs.alert({
+                            title: "Menu Cancellato!",
+                            message: "Il menu è stato cancellato con successo!",
+                            okButtonText: "OK"
+                        }).then(function () {
+                            const nav =
+                                {
+                                    moduleName: "usertecnico-all/usertecnico-all",
+                                    clearHistory: true
                                     };
                                 frame.topmost().navigate(nav);
                             });

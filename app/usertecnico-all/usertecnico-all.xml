@@ -36,7 +36,7 @@
                         <Image src="{{ image }}" height="150" width="100%" stretch="aspectFill" marginBottom="10"/>
                         <StackLayout orientation="vertical" >
                             <Label class="textPrimary textPrimary-bold" fontSize="16" color="#5CC77A" text="{{ nome }}" textWrap="true" horizontalAlignment="center"/>
-                                <StackLayout  orientation="vertical" verticalAlignment="center" marginLeft="5">
+                                <StackLayout  orientation="vertical" horizontalAlignment="left" verticalAlignment="center" marginLeft="5" backgroundColor="rgba(0,0,0,0.5)" width="70%">
                                     <Label class="textPrimary" fontSize="14" color="white" text="{{ descrizione }}" textWrap="true"/>
                                     <Label class="textPrimary" fontSize="14" color="white" text="{{ full_data }}" textWrap="true"/>
                                     <Label class="textPrimary" fontSize="14" color="white" text="{{ tipologia }}" textWrap="true"/>

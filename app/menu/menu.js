@@ -69,17 +69,26 @@ function onNavigatingTo(args) {
                         );
                     }
                     else {
+                        console.log("Size: "+ result_2.length);
                         for (let x=0; x<result_2.length; x++)
                         {
                             if(result[i] === result_2[x].nome_bar)
                             {
+
                                 let prezzo = result_2[x].prezzo.toString();
-                                let pr = prezzo.split("."||",");
+                                if(prezzo.includes(","))
+                                {
+                                    let pr = prezzo.split("."||",");
+                                    if (pr[1].length < 2)
+                                        prezzo = prezzo + "0";
+                                }
 
-                                if (pr[1].length < 2)
-                                    prezzo = prezzo + "0";
+                                let img;
+                                if (result_2[x].image === "")
+                                    img = "~/images/no_food.png";
+                                else
+                                    img = base64.fromBase64(result_2[x].image);
 
-                                let img = base64.fromBase64(result_2[x].image);
                                 temp_items.push({
                                     nome: result_2[x].nome,
                                     descrizione: result_2[x].descrizione,
