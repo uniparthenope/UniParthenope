@@ -114,6 +114,30 @@ exports.goto_menuNew = function () {
     frame.topmost().navigate(nav);
 };
 
+exports.goto_adminHome = function () {
+    const nav =
+        {
+            moduleName: "admin/admin-home/admin-home",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+exports.goto_adminAccount = function () {
+    const nav =
+        {
+            moduleName: "admin/allUser/allUser",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
+exports.goto_adminNew = function () {
+    const nav =
+        {
+            moduleName: "admin/addUser/addUser",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
 
 function logout()
 {

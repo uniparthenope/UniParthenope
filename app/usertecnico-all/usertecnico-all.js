@@ -150,15 +150,6 @@ exports.tapped = function (args) {
                     console.log(e);
                 });
         }
-        else if (orario === "")
-        {
-            dialogs.alert({
-                title: "Errore",
-                message: "Il campo ORARIO non può essere vuoto!",
-                okButtonText: "OK"
-            }).then(
-            );
-        }
     });
 };
 function onDrawerButtonTap() {

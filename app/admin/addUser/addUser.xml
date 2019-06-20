@@ -1,0 +1,42 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <GridLayout>
+        <StackLayout>
+            <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+                <Label class="textPrimary" text="Nuovo User" horizontalAlignment="center" verticalAlignment="center"/>
+            </GridLayout>
+
+            <StackLayout marginRight="5" marginLeft="5">
+                <TextField id="username" hint="Username" class="input input-border" marginBottom="5"/>
+                <TextField id="pass" hint="Password" secure="true" class="input input-border" marginBottom="15"/>
+                <TextField id="email" hint="Email" keyboardType="email" class="input input-border" marginBottom="5"/>
+                <TextField id="locale" hint="Nome Ristorante" class="input input-border" marginBottom="5"/>
+
+                <Button class="btn" text="Aggiungi" ontap="onTapSave" marginBottom="10"/>
+
+            </StackLayout>
+        </StackLayout>
+    </GridLayout>
+</Page>

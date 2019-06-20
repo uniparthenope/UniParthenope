@@ -79,6 +79,34 @@ function onShownModally(args) {
                 };
             frame.topmost().navigate(nav);
         }
+        /* Se un utente è di tipo ADMIN (ristorante) */
+        else if (_result.statusCode === 666)
+        {
+            const sideDrawer = app.getRootView();
+            let remember = sideDrawer.getViewById("rememberMe").checked;
+
+            if (remember){
+                appSettings.setString("username",user);
+                appSettings.setString("password",pass);
+                appSettings.setBoolean("rememberMe",true);
+            }
+            console.log("Admin:" + _result.username);
+
+            sideDrawer.getViewById("topName").text = _result.username;
+            global.username = _result.username;
+            let userForm = sideDrawer.getViewById("userAdmin");
+            let loginForm = sideDrawer.getViewById("loginForm");
+            loginForm.visibility = "collapsed";
+            userForm.visibility = "visible";
+
+            closeCallback();
+            const nav =
+                {
+                    moduleName: "admin/admin-home/admin-home",
+                    clearHistory: true
+                };
+            frame.topmost().navigate(nav);
+        }
         else
         {
             account = result;

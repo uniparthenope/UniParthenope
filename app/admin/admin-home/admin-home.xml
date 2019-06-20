@@ -1,0 +1,50 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+     >
+
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <StackLayout>
+        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <Label class="textPrimary" text="Admin Page" horizontalAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+
+        <GridLayout margin="10 10 10 10" height="30%" rows="*,*,*,*">
+            <Label row="0" text="Server Status:" class="textPrimary" color="black" fontSize="24"/>
+
+            <GridLayout row="1" marginTop="10">
+                <Label text="uniparthenope.esse3.cineca.it" fontSize="18" horizontalAlignment="left"/>
+                <Label id="esse3" text="--" fontSize="22" horizontalAlignment="right"/>
+            </GridLayout>
+
+            <GridLayout row="2" marginTop="5">
+                <Label text="ga.uniparthenope.it" fontSize="18" horizontalAlignment="left"/>
+                <Label id="ga" text="--" fontSize="22" horizontalAlignment="right"/>
+            </GridLayout>
+
+            <GridLayout row="3" marginTop="5">
+                <Label text="UniParthenope RSS" fontSize="18" horizontalAlignment="left"/>
+                <Label id="rss" text="--"  fontSize="22" horizontalAlignment="right"/>
+            </GridLayout>
+
+        </GridLayout>
+    </StackLayout>
+</Page>

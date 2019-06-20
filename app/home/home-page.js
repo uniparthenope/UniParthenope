@@ -95,6 +95,26 @@ function autoconnect()
                     };
                 frame.topmost().navigate(nav);
             }
+            /* Se un utente è di tipoADMIN */
+            else if (_result.statusCode === 666)
+            {
+                let remember = sideDrawer.getViewById("rememberMe").checked;
+                console.log("Admin:" + _result.username);
+                if (remember){
+                    appSettings.setString("username",user);
+                    appSettings.setString("password",pass);
+                    appSettings.setBoolean("rememberMe",true);
+                }
+
+                sideDrawer.getViewById("topName").text = _result.username;
+                setSideMenu("userAdmin",_result.username);
+                const nav =
+                    {
+                        moduleName: "admin/admin-home/admin-home",
+                        clearHistory: true
+                    };
+                frame.topmost().navigate(nav);
+            }
             else
             {
                 let carriere = result.user.trattiCarriera;

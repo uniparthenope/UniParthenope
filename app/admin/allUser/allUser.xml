@@ -1,0 +1,51 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+>
+
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <StackLayout>
+        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <Label class="textPrimary" text="Utenti" horizontalAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+        <StackLayout height="100%">
+            <GridLayout class="textPrimary" color="#009432" columns="30,*,*,*" verticalAlignment="top" marginLeft="5" marginRight="5">
+                <Label col="0" text="ID"/>
+                <Label col="1" text="Username"/>
+                <Label col="2" text="Email"/>
+                <Label col="3" text="Nome Bar"/>
+            </GridLayout>
+        <ScrollView height="80%" marginLeft="5" marginRight="5" marginTop="10">
+            <ListView id="listview" items="{{ items }}" itemTap="tapped">
+                <ListView.itemTemplate>
+                    <GridLayout columns="20,*,*,*" marginTop="10" verticalAlignment="center">
+                        <Label col="0" text="{{ id }}" fontSize="16"/>
+                        <Label col="1" text="{{ username }}" fontSize="16"/>
+                        <Label col="2" text="{{ email }}" fontSize="16"/>
+                        <Label col="3" text="{{ nome_bar }}" fontSize="16"/>
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </ScrollView>
+        </StackLayout>
+
+    </StackLayout>
+</Page>
