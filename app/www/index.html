@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Test</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+          crossorigin="" />
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+            integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+            crossorigin=""></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet-src.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <style>
+        #mapid {
+            height: 480px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="mapid"></div>
+
+<script src="./lib/es6-promise.min.js"></script>
+<script src="./lib/nativescript-webview-interface.js"></script>
+
+<script>
+    var oWebViewInterface1 = window.nsWebViewInterface;
+
+    var mymap = L.map('mapid').setView([40.8553396,14.2830908], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: ''
+    }).addTo(mymap);
+
+    L.marker([40.838780, 14.251921]).addTo(mymap);
+    L.marker([40.849001, 14.283039]).addTo(mymap);
+
+    L.Routing.control({
+        waypoints: [
+            L.latLng(40.8553396,14.2830908),
+            L.latLng(40.848854, 14.283216)
+        ],
+        waypointMode: 'snap',
+        routeWhileDragging: true
+    }).addTo(mymap);
+
+    L.Routing.control({
+        waypoints: [
+            L.latLng(40.849001, 14.283039),
+            L.latLng(40.851737, 14.271901),
+            L.latLng(40.838780, 14.251921)
+        ],
+        createMarker: function() { return null; },
+        waypointMode: 'snap',
+        routeWhileDragging: true
+    }).addTo(mymap);
+
+    oWebViewInterface1.on('location', function (cor) {
+        latitudine = cor.lat;
+        longitudine = cor.lang;
+        var DynaMarker = L.marker([cor.lat,cor.lang]);
+        DynaMarker.setLatLng([cor.lat, cor.lang]).addTo(mymap);
+    });
+</script>
+</body>
+</html>

@@ -157,7 +157,7 @@ exports.onTapNotizie = function(){
 };
 
 exports.onTapTrasporti = function(){
-   // page.frame.navigate("usertecnico/usertecnico");
+   page.frame.navigate("trasporti/trasporti");
 };
 
 exports.onTapAteneo = function(){

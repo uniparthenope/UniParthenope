@@ -24,11 +24,14 @@
         </ActionItem>
         <Label class="action-bar-title" text="UniParthenope"></Label>
     </ActionBar>
-    <GridLayout>
+    <StackLayout>
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-            <Label class="textPrimary" text="Settings" horizontalAlignment="center" verticalAlignment="center"/>
+            <Label class="textPrimary" text="Trasporti" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
 
+        <ContentView class="map">
+            <web-view id="webView"></web-view>
+        </ContentView>
 
-    </GridLayout>
+    </StackLayout>
 </Page>
