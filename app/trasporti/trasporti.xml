@@ -28,10 +28,25 @@
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
             <Label class="textPrimary" text="Trasporti" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
+        <GridLayout height="100%">
+            <ContentView class="map" height="100%">
+                <web-view id="webView"></web-view>
+            </ContentView>
 
-        <ContentView class="map">
-            <web-view id="webView"></web-view>
-        </ContentView>
+            <GridLayout rows="*,*,*" verticalAlignment="bottom" height="10%" width="100%" backgroundColor="rgba(0,0,0,0.3)">
+                <Label row="0" id="sede"  text="Sede:" horizontalAlignment="center" class="textPrimary" fontSize="14"/>
+                <GridLayout row="1" columns="*,*">
+                    <Label col="0" id="sede_1" text="Via Acton" horizontalAlignment="center" class="textPrimary" fontSize="14" color="red"/>
+                    <Label col="1" id="sede_2" text="Villa D'Angri" horizontalAlignment="center" class="textPrimary" fontSize="14" color="blue"/>
+                </GridLayout>
+                <GridLayout row="2" columns="*,*">
+                    <Label col="0" id="sede_3" text="Via Medina" horizontalAlignment="center" class="textPrimary" fontSize="14" color="yellow"/>
+                    <Label col="1" id="sede_4" text="Via Parisi" horizontalAlignment="center" class="textPrimary" fontSize="14" color="green"/>
+                </GridLayout>
+            </GridLayout >
+        </GridLayout>
+
+
 
     </StackLayout>
 </Page>

@@ -37,23 +37,64 @@
     var oWebViewInterface1 = window.nsWebViewInterface;
 
     var mymap = L.map('mapid').setView([40.8553396,14.2830908], 12);
+    var sedeIcon = L.icon({
+        iconUrl: 'sede.png',
+        iconSize:     [45, 45], // size of the icon
+    });
+    var fermataIcon = L.icon({
+        iconUrl: 'fermata.png',
+        iconSize:     [30, 30], // size of the icon
+    });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: ''
     }).addTo(mymap);
 
-    L.marker([40.838780, 14.251921]).addTo(mymap);
-    L.marker([40.849001, 14.283039]).addTo(mymap);
+    //Sedi Universitarie
 
+    //Centro Direzionale
+    L.marker([40.856831, 14.284553], {icon: sedeIcon}).addTo(mymap)
+        .bindPopup('<strong>Sede Centro Direzionale</strong><br><i>Centro Direzionale, Isola C4</i><br>Dipartimento di Ingegneria<br>Dipartimento di Scienze e Tecnologie');
+    //Via Acton
+    L.marker([40.837372, 14.253502],{icon: sedeIcon}).addTo(mymap)
+        .bindPopup('<strong>Sede Centrale</strong><br><i>Via Amm. Acton, 38</i><br>La sede principale dell\'Università degli Studi di Napoli "Parthenope" è collocata in Napoli alla Via Ammiraglio Ferdinando Acton n. 38 e consiste in un nucleo storico, la c.d. "Palazzina Spagnola", risalente al XVI secolo ed in un fabbricato più moderno realizzato alla fine degli anni \'60.');
+    //Via Parisi
+    L.marker([40.832308, 14.245027], {icon: sedeIcon}).addTo(mymap)
+        .bindPopup('<strong>Sede Palazzo Pacanowski</strong><br><i>Via Generale Parisi n. 13</i><br>Dipartimento di Giurisprudenza<br>Dipartimento di Studi Aziendali ed Economici<br>Dipartimento di Studi Aziendali e Quantitativi<br>Dipartimento di Economici e Giuridici');
+    //Via Medina
+    L.marker([40.840447, 14.251863],{icon: sedeIcon}).addTo(mymap)
+        .bindPopup('<strong>Sede Via Medina</strong><br><i>Via Medina</i><br>Dipartimento di Scienze Motorie e del Benessere');
+    //Villa Doria
+    L.marker([40.823872, 14.216225], {icon: sedeIcon}).addTo(mymap)
+        .bindPopup('<strong>Villa Doria D\'Angri</strong><br><i>Via Francesco Petrarca</i><br>Apple iOS Foundation<br>Museo Navale');
+
+/** CENTRO DIREZIONALE to VIA ACTON */
+
+    //Fermate
+    L.marker([40.838780, 14.251921], {icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>N8<br><i>Ghilsedi</i></strong><br>Orario ...');
+    L.marker([40.849001, 14.283039],{icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>N8<br><i>Medina Municipio</i></strong><br>Orario ...');
+    L.marker([40.8553396, 14.2830908], {icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>N5<br><i>Brin Attestamento</i></strong><br>Orario ...');
+    L.marker([40.848854, 14.283216],{icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>N5<br><i>Taddeo da Sessa</i></strong><br>Orario ...');
+
+
+    //Percorso 1
     L.Routing.control({
         waypoints: [
             L.latLng(40.8553396,14.2830908),
             L.latLng(40.848854, 14.283216)
         ],
-        waypointMode: 'snap',
-        routeWhileDragging: true
-    }).addTo(mymap);
+        createMarker: function() { return null},
+        lineOptions: {
+            styles: [
+                {color: 'red', opacity: 1, weight: 5}
+            ]}
+    }).addTo(mymap).hide();
 
+    //Percorso 2
     L.Routing.control({
         waypoints: [
             L.latLng(40.849001, 14.283039),
@@ -61,9 +102,13 @@
             L.latLng(40.838780, 14.251921)
         ],
         createMarker: function() { return null; },
-        waypointMode: 'snap',
-        routeWhileDragging: true
-    }).addTo(mymap);
+        lineOptions: {
+            styles: [
+                {color: 'red', opacity: 1, weight: 5}
+            ]
+        }
+    }).addTo(mymap).hide();
+
 
     oWebViewInterface1.on('location', function (cor) {
         latitudine = cor.lat;
