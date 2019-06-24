@@ -35,6 +35,7 @@
 
 <script>
     var oWebViewInterface1 = window.nsWebViewInterface;
+    var DynaMarker;
 
     var mymap = L.map('mapid').setView([40.8553396,14.2830908], 12);
     var sedeIcon = L.icon({
@@ -50,7 +51,7 @@
         attribution: ''
     }).addTo(mymap);
 
-    //Sedi Universitarie
+/**SEDI UNIVERSITARIE */
 
     //Centro Direzionale
     L.marker([40.856831, 14.284553], {icon: sedeIcon}).addTo(mymap)
@@ -68,7 +69,7 @@
     L.marker([40.823872, 14.216225], {icon: sedeIcon}).addTo(mymap)
         .bindPopup('<strong>Villa Doria D\'Angri</strong><br><i>Via Francesco Petrarca</i><br>Apple iOS Foundation<br>Museo Navale');
 
-/** CENTRO DIREZIONALE to VIA ACTON */
+/** CENTRO DIREZIONALE to VIA ACTON e VIA MEDINA*/
 
     //Fermate
     L.marker([40.838780, 14.251921], {icon: fermataIcon}).addTo(mymap)
@@ -81,6 +82,7 @@
         .bindPopup('<strong>N5<br><i>Taddeo da Sessa</i></strong><br>Orario ...');
 
 
+
     //Percorso 1
     L.Routing.control({
         waypoints: [
@@ -90,7 +92,7 @@
         createMarker: function() { return null},
         lineOptions: {
             styles: [
-                {color: 'red', opacity: 1, weight: 5}
+                {color: 'red', opacity: 0.7, weight: 5}
             ]}
     }).addTo(mymap).hide();
 
@@ -104,7 +106,87 @@
         createMarker: function() { return null; },
         lineOptions: {
             styles: [
-                {color: 'red', opacity: 1, weight: 5}
+                {color: 'red', opacity: 0.7, weight: 5}
+            ]
+        }
+    }).addTo(mymap).hide();
+
+    /** CENTRO DIREZIONALE to VILLA DORIA */
+
+    //Fermate
+    L.marker([40.852336, 14.268574], {icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>N1<br><i>P.zza Garibaldi</i></strong><br>Orario ...');
+    L.marker([40.829910, 14.220250],{icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>N1<br><i>Bruno Sannazaro</i></strong><br>Orario ...');
+    L.marker([40.828109, 14.219892], {icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>C21<br><i>Mergellina Sannazaro</i></strong><br>Orario ...');
+    L.marker([40.823922, 14.216277],{icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>C21<br><i>Petrarca</i></strong><br>Orario ...');
+
+
+    //Percorso 1
+    L.Routing.control({
+        waypoints: [
+            L.latLng(40.852336, 14.268574),
+            L.latLng(40.832029, 14.224641),
+            L.latLng(40.829910, 14.220250)
+        ],
+        createMarker: function() { return null},
+        lineOptions: {
+            styles: [
+                {color: 'blue', opacity: 0.9, weight: 3}
+            ]}
+    }).addTo(mymap).hide();
+
+    //Percorso 2
+    L.Routing.control({
+        waypoints: [
+            L.latLng(40.827933, 14.219657),
+            L.latLng(40.823922, 14.216277)
+        ],
+        createMarker: function() { return null; },
+        lineOptions: {
+            styles: [
+                {color: 'blue', opacity: 0.9, weight: 3}
+            ]
+        }
+    }).addTo(mymap).hide();
+    /** CENTRO DIREZIONALE to VIA PARISI */
+
+    //Fermate
+    L.marker([40.851775, 14.271998], {icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>N3<br><i>Lucci - Garibaldi</i></strong><br>Orario ...');
+    L.marker([40.837821, 14.249351],{icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>N3<br><i>San Carlo - Trieste e Trento</i></strong><br>Orario ...');
+    L.marker([40.837001, 14.248906], {icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>E6<br><i>Trieste e Trento</i></strong><br>Orario ...');
+    L.marker([40.833264, 14.245753],{icon: fermataIcon}).addTo(mymap)
+        .bindPopup('<strong>E6<br><i>Monte Di Dio</i></strong><br>Orario ...');
+
+
+    //Percorso 1
+    L.Routing.control({
+        waypoints: [
+            L.latLng(40.851775, 14.271998),
+            L.latLng(40.837821, 14.249351)
+        ],
+        createMarker: function() { return null},
+        lineOptions: {
+            styles: [
+                {color: 'green', opacity: 1, weight: 2}
+            ]}
+    }).addTo(mymap).hide();
+
+    //Percorso 2
+    L.Routing.control({
+        waypoints: [
+            L.latLng(40.837001, 14.248906),
+            L.latLng(40.833264, 14.245753)
+        ],
+        createMarker: function() { return null; },
+        lineOptions: {
+            styles: [
+                {color: 1, opacity: 1, weight: 2}
             ]
         }
     }).addTo(mymap).hide();
@@ -113,7 +195,7 @@
     oWebViewInterface1.on('location', function (cor) {
         latitudine = cor.lat;
         longitudine = cor.lang;
-        var DynaMarker = L.marker([cor.lat,cor.lang]);
+        DynaMarker = L.marker([cor.lat,cor.lang]);
         DynaMarker.setLatLng([cor.lat, cor.lang]).addTo(mymap);
     });
 </script>
