@@ -37,13 +37,13 @@
                 <Label row="0" id="sede"  text="Sede:" horizontalAlignment="center" class="textPrimary" fontSize="14"/>
                 <GridLayout row="1" columns="*,*">
                     <Label col="0" id="sede_1" text="Via Acton" horizontalAlignment="center" class="textPrimary" fontSize="14" color="red"/>
-                    <Label col="1" id="sede_2" text="Villa D'Angri" horizontalAlignment="center" class="textPrimary" fontSize="14" color="blue"/>
+                    <Label col="1" id="sede_2" text="Villa D&#39;Angri" horizontalAlignment="center" class="textPrimary" fontSize="14" color="blue"/>
                 </GridLayout>
                 <GridLayout row="2" columns="*,*">
                     <Label col="0" id="sede_3" text="Via Medina" horizontalAlignment="center" class="textPrimary" fontSize="14" color="yellow"/>
                     <Label col="1" id="sede_4" text="Via Parisi" horizontalAlignment="center" class="textPrimary" fontSize="14" color="green"/>
                 </GridLayout>
-            </GridLayout >
+            </GridLayout>
         </GridLayout>
 
 
