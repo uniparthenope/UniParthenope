@@ -19,7 +19,7 @@ function onShownModally(args) {
     let viewModel = Observable.fromObject({
         items:items
     });
-
+    console.log("adLOGID= "+ adLogId);
     httpModule.request({
         url: global.url + "infoCourse/" + adLogId ,
         method: "GET",

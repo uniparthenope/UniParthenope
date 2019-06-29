@@ -80,7 +80,7 @@ exports.goto_libretto = function () {
 exports.goto_corsi = function () {
     const nav =
         {
-            moduleName: "corsi/corsi",
+            moduleName: "tutticorsi/tutticorsi",
             clearHistory: true
         };
     frame.topmost().navigate(nav);

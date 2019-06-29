@@ -196,7 +196,8 @@ function myExams() {
                                 "superata" : result_n.stato,
                                 "superata_data" : result_n.data,
                                 "superata_voto" : result_n.voto,
-                                "superata_lode" : result_n.lode
+                                "superata_lode" : result_n.lode,
+                                "annoCorso": result_n.anno
                             });
                         }
                     },(e) => {
