@@ -105,7 +105,6 @@ exports.tapFood = function(){
     const nav =
         {
             moduleName: "menu/menu",
-
             clearHistory: true
         };
     frame.topmost().navigate(nav);
