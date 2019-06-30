@@ -60,10 +60,10 @@
             <StackLayout width="100%" height="12%" backgroundColor="#5CC77A"/>
         </GridLayout>
         <StackLayout orientation="horizontal" verticalAlignment="bottom" marginBottom="40" horizontalAlignment="center">
-            <Button class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/fb.png"/>
-            <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/twi.png"/>
-            <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/insta.png"/>
-            <Button  class="roundedBtn" text="" backgroundImage="~/images/social/you.png"/>
+            <Button class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/fb.png" ontap="ontap_fb"/>
+            <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/twi.png" ontap="ontap_twi"/>
+            <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/insta.png" ontap="ontap_insta"/>
+            <Button  class="roundedBtn" text="" backgroundImage="~/images/social/you.png" ontap="ontap_you"/>
         </StackLayout>
         <StackLayout orientation="vertical" verticalAlignment="bottom">
             <Label text="Universitá degli Studi di Napoli ''Parthenope''" horizontalAlignment="center" color="white"  marginBottom="5" fontSize="10"/>

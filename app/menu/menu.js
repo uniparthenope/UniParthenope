@@ -153,6 +153,14 @@ exports.tapCourses = function(){
         };
     frame.topmost().navigate(nav);
 };
+exports.tapBus = function(){
+    const nav =
+        {
+            moduleName: "trasporti/trasporti",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
 exports.tapCalendar = function(){
     const nav =
         {

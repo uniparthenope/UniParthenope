@@ -100,9 +100,17 @@ function drawTitle() {
     page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
     page.getViewById("semestre").text = appSettings.getString("semestre");
 }
-
+exports.tapBus = function(){
+    const nav =
+        {
+            moduleName: "trasporti/trasporti",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
 exports.tapFood = function(){
     const nav =
+
         {
             moduleName: "menu/menu",
             clearHistory: true

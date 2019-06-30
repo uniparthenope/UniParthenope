@@ -4,6 +4,7 @@ const appSettings = require("application-settings");
 const frame = require("tns-core-modules/ui/frame");
 const httpModule = require("http");
 const base64= require('base-64');
+const utilsModule = require("tns-core-modules/utils/utils");
 const utf8 = require('utf8');
 const dialogs = require("tns-core-modules/ui/dialogs");
 
@@ -190,7 +191,18 @@ exports.onTapEventi = function(){
      global.username = username;
  }
 
-
+exports.ontap_fb = function(){
+    utilsModule.openUrl("https://www.facebook.com/Parthenope");
+};
+exports.ontap_you = function(){
+    utilsModule.openUrl("https://www.youtube.com/channel/UCNBZALzU97MuIKSMS_gnO6A");
+};
+exports.ontap_twi = function(){
+    utilsModule.openUrl("https://twitter.com/uniparthenope");
+};
+exports.ontap_insta = function(){
+    utilsModule.openUrl("https://www.instagram.com/uniparthenope");
+};
 //TODO Social Buttons
 //TODO Trasporti
 exports.onNavigatingTo = onNavigatingTo;

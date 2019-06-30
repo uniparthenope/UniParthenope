@@ -188,6 +188,14 @@ exports.tapAppello = function(){
         };
     frame.topmost().navigate(nav);
 };
+exports.tapBus = function(){
+    const nav =
+        {
+            moduleName: "trasporti/trasporti",
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
+};
 function onItemTap(args) {
     const mainView = args.object;
     const index = args.index;
