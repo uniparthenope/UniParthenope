@@ -203,7 +203,7 @@ exports.ontap_twi = function(){
 exports.ontap_insta = function(){
     utilsModule.openUrl("https://www.instagram.com/uniparthenope");
 };
-//TODO Social Buttons
+
 //TODO Trasporti
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
