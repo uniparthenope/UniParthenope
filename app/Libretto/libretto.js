@@ -34,11 +34,12 @@ function onNavigatingTo(args) {
 
     page.bindingContext = viewModel;
 }
+
 function getMedie(matId)
 {
 
     let media = appSettings.getString("tipoMedia","P");
-    //console.log(media);
+    console.log("Media: " + media);
     httpModule.request({
         url: global.url + "average/"+ global.encodedStr +"/" + matId +"/" + media,
         method: "GET",
@@ -73,6 +74,7 @@ function getMedie(matId)
         });
     });
 }
+
 function getTotExams(matId)
 {
 
@@ -112,6 +114,7 @@ function getTotExams(matId)
         });
     });
 }
+
 function getExams()
 {
     let exams = global.myExams;
@@ -177,9 +180,11 @@ function getExams()
         });
     }
 }
+
 function drawTitle() {
     page.getViewById("cdsDes").text ="CdS in "+ appSettings.getString("cdsDes");
 }
+
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();

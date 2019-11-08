@@ -40,19 +40,21 @@ function onNavigatingTo(args) {
     page.bindingContext = viewModel;
 }
 function calendarCourses() {
-    console.log(global.freqExams.length);
+    //console.log(global.freqExams.length);
     global.events = [];
 
     let esami = global.freqExams;
-
 
     for (let i = 0; i<esami.length; i++)
     {
         let esame = esami[i].nome;
         let docente = esami[i].docente.split(" ");
         const periodo = appSettings.getNumber("periodo",3);
-        const corso = "AB"; //TODO modificare da server IDCORSO!
+        const corso = "AC"; //TODO modificare da server IDCORSO!
         const color = new Color.Color(colors[i]);
+
+        console.log("Esame: " + esame.toUpperCase());
+        console.log("Docente: " + docente[0].toUpperCase());
 
         httpModule.request({
             url: global.url + "orari/cercaCorso/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
@@ -60,7 +62,7 @@ function calendarCourses() {
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
             const result = response.content.toJSON();
-            //console.log(result);
+            //console.log("Calendario: " + result);
 
 
             if (result.statusCode === 401 || result.statusCode === 500)
@@ -256,7 +258,8 @@ function getMainInfo()
             appSettings.setString("aa_accad", result.aa_accad);
             appSettings.setString("sessione", result.curr_sem);
             appSettings.setString("semestre", result.semestre);
-            //console.log("AA= "+ appSettings.getString("aa_accad"));
+            console.log("AA= "+ appSettings.getString("aa_accad"));
+            console.log("Semestre= "+ appSettings.getString("semestre"));
         }
 
     },(e) => {
@@ -300,12 +303,13 @@ function getCourses()
         let pianoId = appSettings.getNumber("pianoId");
 
         httpModule.request({
-            url: global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId ,
+            url: global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId,
             method: "GET",
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
             const result = response.content.toJSON();
-            //console.log(result);
+            console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId)
+            console.log(result);
             page.getViewById("activityIndicator").visibility = "visible";
 
 

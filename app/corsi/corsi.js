@@ -42,9 +42,11 @@ function getCourses()
 {
     let courses = global.freqExams;
     const act_sem = appSettings.getString("semestre");
+    console.log(act_sem);
+
     for (let i=0; i<courses.length; i++)
     {
-        if (act_sem == "Secondo Semestre" && courses[i].semestre == "S2")
+        if (act_sem == "Secondo Semestre" && (courses[i].semestre == "S2" || courses[i].semestre == "A2" || courses[i].semestre == "N/A"))
         {
             items.push({ "anno": drawYear(courses[i].annoId),
                 "esame": courses[i].nome,
@@ -55,7 +57,7 @@ function getCourses()
             });
             esamiList.refresh();
         }
-        else if (act_sem == "Primo Semestre" && courses[i].semestre == "S1")
+        else if (act_sem == "Primo Semestre" && (courses[i].semestre == "S1" || courses[i].semestre == "A1" || courses[i].semestre == "N/A"))
         {
             items.push({ "anno": drawYear(courses[i].annoId),
                 "esame": courses[i].nome,
@@ -65,6 +67,10 @@ function getCourses()
                 "ult_mod": courses[i].modifica
             });
             esamiList.refresh();
+        }
+        else
+        {
+            console.log(courses[i].nome + " :Esame non presente nel semestre attuale!!");
         }
     }
 

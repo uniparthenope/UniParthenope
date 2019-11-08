@@ -28,7 +28,7 @@ function onShownModally(args) {
     const contex = args.context;
     user = contex.user;
     pass = contex.pass;
-
+    console.log("Token: " + global.encodedStr);
 
     viewModel = Observable.fromObject({
         items:items
