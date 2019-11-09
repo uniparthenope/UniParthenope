@@ -12,11 +12,11 @@
                         <StackLayout orientation="horizontal" width="100%">
                             <StackLayout orientation="vertical" marginBottom="10" marginTop="10">
                                 <Label text="{{ cdsDes }}" color="#009432" fontSize="16" marginBottom="5"/>
-                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                <StackLayout orientation="horizontal" horizontalAlignment="left">
                                     <Label text="Matricola: " color="#009432"/>
                                     <Label text="{{ matricola }}" color="#5CC77A"/>
                                 </StackLayout>
-                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                <StackLayout orientation="horizontal" horizontalAlignment="left">
                                     <Label text="Stato: " color="#009432"/>
                                     <Label text="{{ status }}" color="#5CC77A"/>
                                 </StackLayout>

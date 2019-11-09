@@ -48,23 +48,27 @@ function getCourses()
     {
         if (act_sem == "Secondo Semestre" && (courses[i].semestre == "S2" || courses[i].semestre == "A2" || courses[i].semestre == "N/A"))
         {
-            items.push({ "anno": drawYear(courses[i].annoId),
+            items.push({
+                "anno": drawYear(courses[i].annoId),
                 "esame": courses[i].nome,
                 "prof": courses[i].docente,
                 "data_inizio": "Dal " + courses[i].inizio,
                 "data_fine": " al " + courses[i].fine,
-                "ult_mod": courses[i].modifica
+                "ult_mod": courses[i].modifica,
+                "adLogId": courses[i].adLogId
             });
             esamiList.refresh();
         }
         else if (act_sem == "Primo Semestre" && (courses[i].semestre == "S1" || courses[i].semestre == "A1" || courses[i].semestre == "N/A"))
         {
-            items.push({ "anno": drawYear(courses[i].annoId),
+            items.push({
+                "anno": drawYear(courses[i].annoId),
                 "esame": courses[i].nome,
                 "prof": courses[i].docente,
                 "data_inizio": "Dal " + courses[i].inizio,
                 "data_fine": " al " + courses[i].fine,
-                "ult_mod": courses[i].modifica
+                "ult_mod": courses[i].modifica,
+                "adLogId": courses[i].adLogId
             });
             esamiList.refresh();
         }
@@ -91,14 +95,14 @@ function onGeneralMenu()
     page.frame.goBack();
 
 }
+
 function onItemTap(args) {
-    let courses = global.freqExams;
     const mainView = args.object;
     const index = args.index;
-    const adLogId = { adLogId: courses[index].adLogId, esame: courses[index].nome, docente:courses[index].docente};
+
+    const adLogId = { adLogId: items.getItem(index).adLogId, esame: items.getItem(index).esame, docente: items.getItem(index).prof};
 
     mainView.showModal(modalViewModule, adLogId, false);
-
 }
 exports.onItemTap = onItemTap;
 
