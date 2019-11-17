@@ -1,5 +1,6 @@
 <Page class="page"
       navigatingTo="onNavigatingTo"
+      navigatingFrom="onNavigatingFrom"
       actionBarHidden="false"
       xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:x="nativescript-statusbar">

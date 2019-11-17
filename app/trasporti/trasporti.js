@@ -51,7 +51,7 @@ function onNavigatingTo(args) {
                         console.log(latitudine);
                         console.log(longitudine);
                         setTimeout(function () {
-                            oLangWebViewInterface.emit('location', {lat: latitudine, lang: longitudine});
+                            //oLangWebViewInterface.emit('location', {lat: latitudine, lang: longitudine});
                         }, 800);
                     }
                 },
@@ -106,6 +106,13 @@ function loadGraphic(array_location){
     page.getViewById("sede_3").visibility = "visible";
     page.getViewById("sede_4").visibility = "visible";
 }
+
+function onNavigatingFrom(args) {
+
+    //TODO Disattivare la posizione
+
+}
+exports.onNavigatingFrom = onNavigatingFrom;
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

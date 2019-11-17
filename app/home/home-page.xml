@@ -4,7 +4,7 @@
       xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:x="nativescript-statusbar">
 
-    <x:StatusBar ios:barStyle="light" barColor="rgb(0, 148, 50)" />
+    <x:StatusBar ios:barStyle="light" barColor="rgb(34, 56, 79)" />
 
     <ActionBar class="action-bar">
         <ActionItem icon="res://menu"
@@ -27,7 +27,7 @@
             <StackLayout orientation="vertical">
                 <!--    Background squares    -->
                 <StackLayout  class="two-color-gradient" width="100%" height="20%" verticalAlignment="center"/>
-                <StackLayout height="5" width="100%" backgroundColor="#5CC77A"/>
+                <StackLayout height="5" width="100%" backgroundColor="#107dd0"/>
 
                 <Image src="~/images/image1.png" marginBottom="30"/>
 
@@ -46,7 +46,7 @@
             </StackLayout>
             <!--    Testo sovrapposto    -->
             <StackLayout orientation="vertical" verticalAlignment="top">
-                <Label class="topTitle" text="DiST&#xA;Dipartimento di Scienze e Tecnologie" textWrap="true" marginRight="5" marginLeft="5" marginTop="15"/>
+                <Label class="topTitle" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="15"/>
                 <Image src="~/images/logo_parth.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>
             </StackLayout>
 
@@ -57,7 +57,7 @@
         </GridLayout>
 <!--Bottom/Social-->
         <GridLayout verticalAlignment="bottom">
-            <StackLayout width="100%" height="12%" backgroundColor="#5CC77A"/>
+            <StackLayout width="100%" height="12%" backgroundColor="#107dd0"/>
         </GridLayout>
         <StackLayout orientation="horizontal" verticalAlignment="bottom" marginBottom="40" horizontalAlignment="center">
             <Button class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/fb.png" ontap="ontap_fb"/>
