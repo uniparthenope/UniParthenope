@@ -9,13 +9,14 @@ appSettings.setString("semestre", result.semestre);
 appSettings.setNumber("pianoId", result.pianoId);
 */
 const application = require("tns-core-modules/application");
-const appSettings = require("application-settings");
+const appSettings = require("tns-core-modules/application-settings");
 
 global.url = "http://museonavale.uniparthenope.it:8080/api/uniparthenope/";
 global.localurl = "http://192.168.1.198:5000/api/uniparthenope/";
 global.isConnected = false;
 global.updatedExam = false;
 global.encodedStr = "";
+global.authToken="";
 global.tempNum = 0;
 global.myform = "";
 global.username = "";
@@ -42,19 +43,21 @@ global.saveInfo = function(result)
     appSettings.setString("nome",result.user.firstName);
     appSettings.setString("cognome",result.user.lastName);
     appSettings.setString("grpDes",result.user.grpDes);
-    console.log("SAVE_INFO = "+result.user.codFis);
-    console.log("SAVE_INFO = "+result.user.firstName);
-    console.log("SAVE_INFO = "+result.user.lastName);
-    console.log("SAVE_INFO = "+result.user.grpDes);
+    global.authToken= result.authToken;
+    console.log("SAVE_INFO CF= "+result.user.codFis);
+    console.log("SAVE_INFO Name= "+result.user.firstName);
+    console.log("SAVE_INFO Surname= "+result.user.lastName);
+    console.log("SAVE_INFO grpDes= "+result.user.grpDes);
+    console.log("SAVE_INFO AuthToken= "+global.authToken);
 };
 
 global.saveCarr = function(result)
 {
-    console.log("SAVE_CARR = "+result.cdsDes);
-    console.log("SAVE_CARR = "+result.cdsId);
-    console.log("SAVE_CARR = "+result.matId);
-    console.log("SAVE_CARR = "+result.stuId);
-    console.log("SAVE_CARR = "+result.matricola);
+    console.log("SAVE_CARR cdsDes= "+result.cdsDes);
+    console.log("SAVE_CARR cdsId= "+result.cdsId);
+    console.log("SAVE_CARR matId= "+result.matId);
+    console.log("SAVE_CARR stuId= "+result.stuId);
+    console.log("SAVE_CARR Mat.= "+result.matricola);
 
     appSettings.setString("cdsDes",result.cdsDes);
     appSettings.setNumber("cdsId",result.cdsId);

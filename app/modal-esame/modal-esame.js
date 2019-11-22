@@ -1,9 +1,9 @@
 const observableModule = require("tns-core-modules/data/observable");
 const dialogs = require("tns-core-modules/ui/dialogs");
-const appSettings = require("application-settings");
+const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
-const ObservableArray = require("data/observable-array").ObservableArray;
-const Observable = require("data/observable");
+const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
+const Observable = require("tns-core-modules/data/observable");
 let closeCallback;
 
 let items;

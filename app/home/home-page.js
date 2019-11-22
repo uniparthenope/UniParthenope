@@ -1,6 +1,6 @@
 const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
-const appSettings = require("application-settings");
+const appSettings = require("tns-core-modules/application-settings");
 const frame = require("tns-core-modules/ui/frame");
 const httpModule = require("http");
 const base64= require('base-64');
@@ -35,7 +35,6 @@ function onNavigatingTo(args) {
       setSideMenu(global.myform,global.username);
 
    }
-
 
     page.bindingContext = viewModel;
 }
@@ -94,7 +93,7 @@ function autoconnect()
                         moduleName: "usertecnico-all/usertecnico-all",
                         clearHistory: true
                     };
-                frame.topmost().navigate(nav);
+                page.frame.navigate(nav);
             }
             /* Se un utente è di tipoADMIN */
             else if (_result.statusCode === 666)
@@ -114,7 +113,7 @@ function autoconnect()
                         moduleName: "admin/admin-home/admin-home",
                         clearHistory: true
                     };
-                frame.topmost().navigate(nav);
+                page.frame.navigate(nav);
             }
             else
             {
@@ -137,7 +136,7 @@ function autoconnect()
                             moduleName: "userCalendar/userCalendar",
                             clearHistory: true
                         };
-                    frame.topmost().navigate(nav);
+                    page.frame.navigate(nav);
                 }
             }
 

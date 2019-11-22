@@ -2,7 +2,7 @@ let geolocation = require("nativescript-geolocation");
 const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
-const appSettings = require("application-settings");
+const appSettings = require("tns-core-modules/application-settings");
 var nativescript_webview_interface_1 = require("nativescript-webview-interface");
 
 let page;

@@ -1,7 +1,7 @@
 const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
-const appSettings = require("application-settings");
+const appSettings = require("tns-core-modules/application-settings");
 
 let page;
 let viewModel;

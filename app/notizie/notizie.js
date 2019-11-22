@@ -1,11 +1,11 @@
 const observableModule = require("tns-core-modules/data/observable");
-const ObservableArray = require("data/observable-array").ObservableArray;
-const Observable = require("data/observable");
+const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
+const Observable = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 let xml2js = require('nativescript-xml2js');
 let fs = require("tns-core-modules/file-system");
 const httpModule = require("tns-core-modules/http");
-const imageSource = require("image-source");
+const imageSource = require("tns-core-modules/image-source");
 
 let page;
 let viewModel;

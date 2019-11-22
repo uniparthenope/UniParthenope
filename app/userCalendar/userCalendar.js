@@ -1,10 +1,10 @@
 const observableModule = require("tns-core-modules/data/observable");
-const Observable = require("data/observable").Observable;
+const Observable = require("tns-core-modules/data/observable").Observable;
 const app = require("tns-core-modules/application");
 const frame = require("tns-core-modules/ui/frame");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const httpModule = require("http");
-const appSettings = require("application-settings");
+const appSettings = require("tns-core-modules/application-settings");
 const calendarModule = require("nativescript-ui-calendar");
 const Color = require("tns-core-modules/color");
 const modalViewModule = "modal-event/modal-event";
@@ -119,14 +119,14 @@ function myExams() {
     const stuId = appSettings.getNumber("stuId");
 
     httpModule.request({
-        url: global.url + "pianoId/" + global.encodedStr + "/" + stuId,
+        url: global.url + "pianoId/" + global.encodedStr + "/" + stuId + "/" + global.authToken,
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
 
-        if (result.statusCode === 401 || result.statusCode === 500)
+        if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
         {
             dialogs.alert({
                 title: "Errore Server!",
@@ -142,17 +142,17 @@ function myExams() {
 
         let pianoId = appSettings.getNumber("pianoId");
 
-        console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId);
+        console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId +"/" + global.authToken);
 
         httpModule.request({
-            url: global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId,
+            url: global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId + "/" + global.authToken,
             method: "GET",
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
             const result = response.content.toJSON();
             //console.log(result);
 
-            if (result.statusCode === 401 || result.statusCode === 500)
+            if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
             {
                 dialogs.alert({
                     title: "Errore Server!",
@@ -169,14 +169,14 @@ function myExams() {
                 for (let i=0; i<result.length; i++)
                 {
                     httpModule.request({
-                        url: global.url + "checkExam/" + global.encodedStr + "/" + matId + "/" + result[i].adsceId,
+                        url: global.url + "checkExam/" + global.encodedStr + "/" + matId + "/" + result[i].adsceId + "/" + global.authToken,
                         method: "GET",
                         headers: {"Content-Type": "application/json"}
                     }).then((response) => {
                         const result_n = response.content.toJSON();
                         //console.log(result_n);
 
-                        if (result_n.statusCode === 401 || result_n.statusCode === 500)
+                        if (result_n.statusCode === 401 || result_n.statusCode === 500 || result_n.statusCode === 403)
                         {
                             dialogs.alert({
                                 title: "Errore Server!",
@@ -237,7 +237,7 @@ function getMainInfo()
     let cdsId = appSettings.getNumber("cdsId");
 
     httpModule.request({
-        url: global.url + "current_aa/" + global.encodedStr + "/" + cdsId,
+        url: global.url + "current_aa/" + global.encodedStr + "/" + cdsId + "/" + global.authToken,
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
@@ -279,14 +279,14 @@ function getCourses()
     const matId = appSettings.getNumber("matId");
 
     httpModule.request({
-        url: global.url + "pianoId/" + global.encodedStr + "/" + stuId,
+        url: global.url + "pianoId/" + global.encodedStr + "/" + stuId + "/" + global.authToken,
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
 
-        if (result.statusCode === 401 || result.statusCode === 500)
+        if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
         {
             dialogs.alert({
                 title: "Errore Server!",
@@ -303,17 +303,18 @@ function getCourses()
         let pianoId = appSettings.getNumber("pianoId");
 
         httpModule.request({
-            url: global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId,
+            url: global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken,
             method: "GET",
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
             const result = response.content.toJSON();
-            console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId)
+
+            console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken)
             console.log(result);
             page.getViewById("activityIndicator").visibility = "visible";
 
 
-            if (result.statusCode === 401 || result.statusCode === 500)
+            if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
             {
                 dialogs.alert({
                     title: "Errore Server!",

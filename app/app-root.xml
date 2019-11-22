@@ -1,6 +1,6 @@
 <nsDrawer:RadSideDrawer id="sideDrawer"
                         xmlns:nsDrawer="nativescript-ui-sidedrawer"
-                        xmlns:cb="nativescript-checkbox"
+                        xmlns:cb="@nstudio/nativescript-checkbox"
                         loaded="onLoaded">
     <nsDrawer:RadSideDrawer.drawerTransition>
         <nsDrawer:SlideInOnTopTransition/>
