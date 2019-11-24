@@ -178,6 +178,15 @@ exports.onTapEventi = function(){
     page.frame.navigate(nav);
 
 };
+
+exports.onTapFood = function(){
+    const nav =
+        {
+            moduleName: "menu/menu"
+        };
+    page.frame.navigate(nav);
+
+};
  function setSideMenu(type,username)
  {
      let actualForm = sideDrawer.getViewById(type);

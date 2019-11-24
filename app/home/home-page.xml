@@ -32,7 +32,7 @@
                 <Image src="~/images/image1.png" marginBottom="30"/>
 
                 <!--    Buttons    -->
-                <GridLayout rows="auto,*" height="20%" marginRight="10" marginLeft="10" verticalAlignment="center" >
+                <GridLayout rows="*,*,*" height="25%" marginRight="10" marginLeft="10" verticalAlignment="center" >
                     <StackLayout orientation="horizontal" row="0" horizontalAlignment="stretch">
                         <Button  class="btn" text="Ateneo" horizontalAlignment="center" width="50%" marginRight="5" ontap="onTapAteneo" />
                         <Button  class="btn" text="Eventi" horizontalAlignment="center" width="50%" ontap="onTapEventi" />
@@ -41,10 +41,16 @@
                         <Button  class="btn" text="Trasporti" horizontalAlignment="center" width="50%" marginRight="5" tap="onTapTrasporti"/>
                         <Button  class="btn" text="Notizie" horizontalAlignment="center" width="50%" tap="onTapNotizie"/>
                     </StackLayout>
+                    <StackLayout orientation="horizontal" row="2" horizontalAlignment="stretch">
+                        <Button  class="btn" text="Mensa" horizontalAlignment="center" width="50%" tap="onTapFood"/>
+                    </StackLayout>
                 </GridLayout>
 
             </StackLayout>
             <!--    Testo sovrapposto    -->
+            <StackLayout orientation="vertical" verticalAlignment="top">
+                <Button backgroundImage="res://menu" ontap="onDrawerButtonTap" horizontalAlignment="right" height="20" width="20" marginRight="15" marginTop="15"/>
+            </StackLayout>
             <StackLayout orientation="vertical" verticalAlignment="top">
                 <Label class="topTitle" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="15"/>
                 <Image src="~/images/logo_parth.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>
