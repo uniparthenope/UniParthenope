@@ -27,7 +27,7 @@
             <Label class="textPrimary" text="Utenti" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
         <StackLayout height="100%">
-            <GridLayout class="textPrimary" color="#009432" columns="30,*,*,*" verticalAlignment="top" marginLeft="5" marginRight="5">
+            <GridLayout class="textPrimary" color="#22384f" columns="30,*,*,*" verticalAlignment="top" marginLeft="5" marginRight="5">
                 <Label col="0" text="ID"/>
                 <Label col="1" text="Username"/>
                 <Label col="2" text="Email"/>

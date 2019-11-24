@@ -4,7 +4,7 @@
       xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:x="nativescript-statusbar">
 
-    <x:StatusBar ios:barStyle="light" barColor="#009432" />
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
     <ActionBar class="action-bar">
         <ActionItem icon="~/images/logo_parth.png"
                     tap="onGeneralMenu"
@@ -61,9 +61,9 @@
                 </ListView>
             </ScrollView>
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#5CC77A" height="10%" verticalAlignment="bottom" width="100%">
+            <GridLayout row="2" backgroundColor="#107dd0" height="10%" verticalAlignment="bottom" width="100%">
                 <GridLayout columns="*, *, *, *,*" height="60">
-                    <GridLayout id="selected_col" col="0" backgroundColor="#009432"/>
+                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>

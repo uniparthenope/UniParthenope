@@ -42,7 +42,7 @@
                 <TextField id="prezzo" keyboardType="number" hint="Prezzo" class="input input-border" width="30%" marginBottom="10" horizontalAlignment="left"/>
                 <Label text="€" verticalAlignment="center" textAlignment="center"/>
             </StackLayout>
-            <cb:CheckBox checked="false" text="Mostra pasto ogni giorno" id="alwaysActive" color="black" fillColor="#009432" marginTop="5"/>
+            <cb:CheckBox checked="false" text="Mostra pasto ogni giorno" id="alwaysActive" color="black" fillColor="#22384f" marginTop="5"/>
             <StackLayout orientation="horizontal" width="100%">
                 <Label text="Tipologia:" verticalAlignment="center" textAlignment="center" marginRight="10"/>
                 <ListPicker id="lp" items="{{ items_picker }}" selectedIndex="{{ sel }}" width="40%"/>

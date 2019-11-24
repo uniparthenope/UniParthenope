@@ -3,7 +3,7 @@
 
     <StackLayout height="45%">
         <GridLayout>
-            <StackLayout backgroundColor="#009432" marginBottom="10" verticalAlignment="top">
+            <StackLayout backgroundColor="#22384f" marginBottom="10" verticalAlignment="top">
                 <Label class="textPrimary" id="esame" textWrap="true" textAlignment="center"/>
                 <Label class="textPrimary" id="docente" textWrap="true" textAlignment="center"/>
             </StackLayout>

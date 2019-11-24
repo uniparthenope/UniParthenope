@@ -11,14 +11,14 @@
                     <FlexboxLayout flexDirection="row">
                         <StackLayout orientation="horizontal" width="100%">
                             <StackLayout orientation="vertical" marginBottom="10" marginTop="10">
-                                <Label text="{{ cdsDes }}" color="#009432" fontSize="16" marginBottom="5"/>
+                                <Label text="{{ cdsDes }}" color="#22384f" fontSize="16" marginBottom="5"/>
                                 <StackLayout orientation="horizontal" horizontalAlignment="left">
-                                    <Label text="Matricola: " color="#009432"/>
-                                    <Label text="{{ matricola }}" color="#5CC77A"/>
+                                    <Label text="Matricola: " color="#22384f"/>
+                                    <Label text="{{ matricola }}" color="#107dd0"/>
                                 </StackLayout>
                                 <StackLayout orientation="horizontal" horizontalAlignment="left">
-                                    <Label text="Stato: " color="#009432"/>
-                                    <Label text="{{ status }}" color="#5CC77A"/>
+                                    <Label text="Stato: " color="#22384f"/>
+                                    <Label text="{{ status }}" color="#107dd0"/>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>

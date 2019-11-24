@@ -5,7 +5,7 @@
       xmlns:rc="nativescript-ui-calendar"
       xmlns:x="nativescript-statusbar">
 
-    <x:StatusBar ios:barStyle="light" barColor="#009432" />
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
     <ActionBar class="action-bar">
         <ActionItem icon="~/images/logo_parth.png"
                     tap="onGeneralMenu"
@@ -41,7 +41,7 @@
 
                         <rc:CalendarDayViewStyle.dayCellStyle>
                             <rc:DayCellStyle showEventsText="true" eventTextColor="White" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
-                                             cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#5CC77A"
+                                             cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#107dd0"
                                              cellTextColor="#ffffff" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" ios:cellTextSize="12" android:cellTextSize="10"/>
                         </rc:CalendarDayViewStyle.dayCellStyle>
 
@@ -54,22 +54,22 @@
                         <rc:CalendarDayViewStyle.selectedDayCellStyle>
                             <rc:DayCellStyle eventTextColor="Blue" eventFontName="Times New Roman" eventFontStyle="Bold" eventTextSize="8"
                                              cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="White"
-                                             cellBorderWidth="2" cellBorderColor="White" cellTextColor="#009432" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="22" />
+                                             cellBorderWidth="2" cellBorderColor="White" cellTextColor="#22384f" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="22" />
                         </rc:CalendarDayViewStyle.selectedDayCellStyle>
 
 
 
                         <rc:CalendarDayViewStyle.dayNameCellStyle>
-                            <rc:CellStyle  cellBackgroundColor="#ffffff" cellBorderWidth="1" cellBorderColor="#009432" cellTextColor="#009432" cellTextFontName="Montserrat-Regular" cellTextSize="10" />
+                            <rc:CellStyle  cellBackgroundColor="#ffffff" cellBorderWidth="1" cellBorderColor="#22384f" cellTextColor="#22384f" cellTextFontName="Montserrat-Regular" cellTextSize="10" />
                         </rc:CalendarDayViewStyle.dayNameCellStyle>
 
                         <rc:CalendarDayViewStyle.titleCellStyle>
-                            <rc:CellStyle cellTextColor="#009432" cellTextFontName="Montserrat-Regular" cellTextSize="18" />
+                            <rc:CellStyle cellTextColor="#22384f" cellTextFontName="Montserrat-Regular" cellTextSize="18" />
                         </rc:CalendarDayViewStyle.titleCellStyle>
 
                         <rc:CalendarDayViewStyle.dayEventsViewStyle>
                             <rc:DayEventsViewStyle
-                                                   timeLabelFormat="HH:mm" timeLabelTextColor="#009432"
+                                                   timeLabelFormat="HH:mm" timeLabelTextColor="#22384f"
                                                    timeLabelTextSize="12"/>
                         </rc:CalendarDayViewStyle.dayEventsViewStyle>
 
@@ -79,9 +79,9 @@
                 </rc:RadCalendar.dayViewStyle>
             </rc:RadCalendar>
 <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#5CC77A" height="50" width="100%" verticalAlignment="bottom">
+            <GridLayout row="2" backgroundColor="#107dd0" height="50" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
-                    <GridLayout id="selected_col" col="0" backgroundColor="#009432"/>
+                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>

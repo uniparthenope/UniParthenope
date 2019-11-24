@@ -44,7 +44,7 @@
 
                 <accordion:Accordion.itemContentTemplate>
                     <StackLayout>
-                        <HtmlView html="{{ desc }}" color="#009432"></HtmlView>
+                        <HtmlView html="{{ desc }}" color="#22384f"></HtmlView>
                     </StackLayout>
                 </accordion:Accordion.itemContentTemplate>
             </accordion:Accordion>

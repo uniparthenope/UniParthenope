@@ -4,7 +4,7 @@
       xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:x="nativescript-statusbar">
 
-    <x:StatusBar ios:barStyle="light" barColor="#009432" />
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
     <ActionBar class="action-bar">
         <ActionItem icon="~/images/logo_parth.png"
                     tap="onGeneralMenu"
