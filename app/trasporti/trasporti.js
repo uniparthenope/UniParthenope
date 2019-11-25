@@ -3,7 +3,7 @@ const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
-var nativescript_webview_interface_1 = require("nativescript-webview-interface");
+const nativescript_webview_interface_1 = require("nativescript-webview-interface");
 
 let page;
 let viewModel;
@@ -16,8 +16,9 @@ let array_locations = [{name: 'Centro Direzionale', lat: 40.856831, long: 14.284
                         {name: 'Villa Doria', lat: 40.823872, long: 14.216225, sede_1:"Via Acton", sede_2:"Via Medina", sede_3:"Via Parisi", sede_4:"Centro Direzionale"}];
 
 function setupWebViewInterface(page){
-    var webView = page.getViewById('webView');
+    let webView = page.getViewById('webView');
     oLangWebViewInterface = new nativescript_webview_interface_1.WebViewInterface(webView, '~/www/index.html');
+    console.log(oLangWebViewInterface);
 }
 
 function onNavigatingTo(args) {
@@ -91,7 +92,7 @@ function calculateDistance(position){
             loadGraphic(array_locations[i]);
         }
 
-        console.log("Distance between loc1 and loc2 is: " + geolocation.distance(position, loc));
+        //console.log("Distance between loc1 and loc2 is: " + geolocation.distance(position, loc));
     }
     return closer;
 }

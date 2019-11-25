@@ -168,48 +168,52 @@ function myExams() {
                 console.log(result.length);
                 for (let i=0; i<result.length; i++)
                 {
-                    httpModule.request({
-                        url: global.url + "checkExam/" + global.encodedStr + "/" + matId + "/" + result[i].adsceId + "/" + global.authToken,
-                        method: "GET",
-                        headers: {"Content-Type": "application/json"}
-                    }).then((response) => {
-                        const result_n = response.content.toJSON();
-                        //console.log(result_n);
+                    console.log("ADSCEID = "+ result[i].adsceId);
+                    if(result[i].adsceId !== null) {
+                        httpModule.request({
+                            url: global.url + "checkExam/" + global.encodedStr + "/" + matId + "/" + result[i].adsceId + "/" + global.authToken,
+                            method: "GET",
+                            headers: {"Content-Type": "application/json"}
+                        }).then((response) => {
+                            const result_n = response.content.toJSON();
+                            //console.log(result_n);
 
-                        if (result_n.statusCode === 401 || result_n.statusCode === 500 || result_n.statusCode === 403)
-                        {
+                            if (result_n.statusCode === 401 || result_n.statusCode === 500 || result_n.statusCode === 403) {
+                                dialogs.alert({
+                                    title: "Errore Server!",
+                                    message: result_n.retErrMsg,
+                                    okButtonText: "OK"
+                                }).then(
+                                );
+                            } else {
+                                exams.superata = result_n.stato;
+
+                                global.myExams.push({
+                                    "nome": result[i].nome,
+                                    "codice": result[i].codice,
+                                    "annoId": result[i].annoId,
+                                    "adsceId": result[i].adsceId,
+                                    "adId": result[i].adId,
+                                    "CFU": result[i].CFU,
+                                    "superata": result_n.stato,
+                                    "superata_data": result_n.data,
+                                    "superata_voto": result_n.voto,
+                                    "superata_lode": result_n.lode,
+                                    "annoCorso": result_n.anno
+                                });
+                            }
+                        }, (e) => {
+                            console.log("Error", e);
                             dialogs.alert({
-                                title: "Errore Server!",
-                                message: result_n.retErrMsg,
+                                title: "Errore Sincronizzazione Esami!",
+                                message: e,
                                 okButtonText: "OK"
-                            }).then(
-                            );
-                        }
-                        else {
-                            exams.superata = result_n.stato;
-
-                            global.myExams.push({
-                                "nome" : result[i].nome,
-                                "codice" : result[i].codice,
-                                "annoId" : result[i].annoId,
-                                "adsceId" : result[i].adsceId,
-                                "adId" : result[i].adId,
-                                "CFU" : result[i].CFU,
-                                "superata" : result_n.stato,
-                                "superata_data" : result_n.data,
-                                "superata_voto" : result_n.voto,
-                                "superata_lode" : result_n.lode,
-                                "annoCorso": result_n.anno
                             });
-                        }
-                    },(e) => {
-                        console.log("Error", e);
-                        dialogs.alert({
-                            title: "Errore Sincronizzazione Esami!",
-                            message: e,
-                            okButtonText: "OK"
                         });
-                    });
+                    }
+                    else {
+                        console.log("ADSCE NULL!");
+                    }
                 }
             }
 
@@ -234,17 +238,18 @@ function myExams() {
 
 function getMainInfo()
 {
+    console.log("Sono in GETMAININFO");
     let cdsId = appSettings.getNumber("cdsId");
 
     httpModule.request({
-        url: global.url + "current_aa/" + global.encodedStr + "/" + cdsId + "/" + global.authToken,
+        url: global.url + "current_aa/" + cdsId,
         method: "GET",
         headers: {"Content-Type": "application/json"}
+
     }).then((response) => {
         const result = response.content.toJSON();
-        //console.log(result);
-
-        if (result.statusCode === 401 || result.statusCode === 500)
+        console.log("GetMainInfo() ="+ result);
+        if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
         {
             dialogs.alert({
                 title: "Errore Server!",
