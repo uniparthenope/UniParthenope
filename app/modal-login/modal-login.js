@@ -119,7 +119,8 @@ function onShownModally(args) {
                 for (let i=0; i<carriere.length; i++)
                 {
                     console.log(carriere[i].cdsDes);
-                    items.push({ "cdsDes": carriere[i].cdsDes,
+                    items.push({
+                        "cdsDes": carriere[i].cdsDes,
                         "cdsId": carriere[i].cdsId,
                         "matricola" : carriere[i].matricola,
                         "matId" : carriere[i].matId,
@@ -180,6 +181,7 @@ function selectedCarrer(index)
     const sideDrawer = app.getRootView();
     global.saveInfo(account);
     appSettings.setNumber("carriera",index);
+
     let remember = sideDrawer.getViewById("rememberMe").checked;
     if (remember){
         appSettings.setString("username",user);

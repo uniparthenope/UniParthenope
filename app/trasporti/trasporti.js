@@ -4,6 +4,8 @@ const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const nativescript_webview_interface_1 = require("nativescript-webview-interface");
+const httpModule = require("tns-core-modules/http");
+let timer = require("tns-core-modules/timer");
 
 let page;
 let viewModel;
@@ -52,7 +54,7 @@ function onNavigatingTo(args) {
                         console.log(latitudine);
                         console.log(longitudine);
                         setTimeout(function () {
-                            //oLangWebViewInterface.emit('location', {lat: latitudine, lang: longitudine});
+                            oLangWebViewInterface.emit('location', {lat: latitudine, lang: longitudine});
                         }, 800);
                     }
                 },
@@ -63,6 +65,12 @@ function onNavigatingTo(args) {
         })
     });
 
+    getBusPosition();
+    timer.setInterval(() => {
+        console.log("Timer....");
+        getBusPosition();
+    }, 10000);
+
     page.bindingContext = viewModel;
 }
 
@@ -72,8 +80,10 @@ function onDrawerButtonTap() {
 }
 
 function onGeneralMenu() {
+    oLangWebViewInterface.destroy();
     page.frame.goBack();
 }
+
 function calculateDistance(position){
     let closer = "";
     page.getViewById("sede_1").visibility = "collapsed";
@@ -96,6 +106,7 @@ function calculateDistance(position){
     }
     return closer;
 }
+
 function loadGraphic(array_location){
     page.getViewById("sede").text = array_location.name;
     page.getViewById("sede_1").text = array_location.sede_1;
@@ -108,11 +119,43 @@ function loadGraphic(array_location){
     page.getViewById("sede_4").visibility = "visible";
 }
 
-function onNavigatingFrom(args) {
+function getBusPosition() {
+    httpModule.request({
+        url: global.url + "anm/bus/CDN",
+        method: "GET"
+    }).then((response) => {
+        const result = response.content.toJSON();
 
-    //TODO Disattivare la posizione
+        if (result.statusCode === 500)
+        {
+            dialogs.alert({
+                title: "Errore Server!",
+                message: result.retErrMsg,
+                okButtonText: "OK"
 
+            });
+        }
+        else
+        {
+            setTimeout(function () {
+                oLangWebViewInterface.emit('bus', {bus: result});
+            }, 800);
+        }
+
+    },(e) => {
+        console.log("Error", e.retErrMsg);
+        dialogs.alert({
+            title: "Errore Server!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
 }
+
+function onNavigatingFrom(args) {
+    //TODO Disattivare la posizione
+}
+
 exports.onNavigatingFrom = onNavigatingFrom;
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;

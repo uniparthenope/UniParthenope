@@ -18,8 +18,10 @@ function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
+
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
+
    if (!global.isConnected & user !== undefined){
        dialogs.alert({
            title: "Bentornato!",
@@ -33,7 +35,6 @@ function onNavigatingTo(args) {
    else if (remember)
    {
       setSideMenu(global.myform,global.username);
-
    }
 
     page.bindingContext = viewModel;
