@@ -22,6 +22,7 @@ global.myform = "";
 global.username = "";
 global.data_today;
 global.events = [];
+global.tempPos = false;
 
 global.freqExams = [];
 /*

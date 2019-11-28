@@ -1,7 +1,7 @@
 const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
-const frame = require("tns-core-modules/ui/frame");
+let geolocation = require("nativescript-geolocation");
 const httpModule = require("http");
 const base64= require('base-64');
 const utilsModule = require("tns-core-modules/utils/utils");
@@ -22,7 +22,12 @@ function onNavigatingTo(args) {
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
 
-   if (!global.isConnected & user !== undefined){
+    if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
+        getPosition();
+        global.tempPos = true;
+    }
+
+   if (!global.isConnected && user !== undefined){
        dialogs.alert({
            title: "Bentornato!",
            message: "Bentornato "+ user,
@@ -212,6 +217,43 @@ exports.ontap_twi = function(){
 exports.ontap_insta = function(){
     utilsModule.openUrl("https://www.instagram.com/uniparthenope");
 };
-//TODO Trasporti
+
+function getPosition(){
+    geolocation.enableLocationRequest().then(function () {
+        geolocation.isEnabled().then(function (isEnabled) {
+            geolocation.getCurrentLocation({desiredAccuracy: 3, updateDistance: 10, maximumAge: 20000, timeout: 20000}).
+            then(function(loc) {
+                if (loc) {
+                    let position = calculateDistance(loc);
+                    appSettings.setString("position", position);
+                    console.log("MY_POSITION = "+ position);
+                }
+            }, function(e){
+                console.log("Position Error: " + e.message);
+            });
+        })
+    });
+}
+function calculateDistance(position) {
+    let closer = "None";
+    let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553},
+        {id: 'Acton', lat: 40.837372, long: 14.253502},
+        {id: 'Medina', lat: 40.840447, long: 14.251863},
+        {id: 'Parisi', lat: 40.832308, long: 14.245027},
+        {id: 'Villa', lat: 40.823872, long: 14.216225}];
+
+
+    for (let i = 0; i < array_locations.length; i++) {
+        let loc = new geolocation.Location();
+        loc.latitude = array_locations[i].lat;
+        loc.longitude = array_locations[i].long;
+
+        if (geolocation.distance(position, loc) < 200) {
+            closer = array_locations[i].id;
+        }
+    }
+    return closer;
+}
+
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
