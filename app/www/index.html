@@ -208,12 +208,16 @@
 
     var mymap = L.map('mapid').setView([40.8553396,14.2830908], 12);
     var sedeIcon = L.icon({
-        iconUrl: 'sede.png',
+        iconUrl: 'school.png',
         iconSize:     [45, 45], // size of the icon
     });
-    var fermataIcon = L.icon({
-        iconUrl: 'fermata.png',
-        iconSize:     [30, 30], // size of the icon
+    var busIcon = L.icon({
+        iconUrl: 'bus.png',
+        iconSize:     [45, 45], // size of the icon
+    });
+    var my_location = L.icon({
+        iconUrl: 'my_location.png',
+        iconSize:     [45, 45], // size of the icon
     });
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -243,7 +247,7 @@
     oWebViewInterface1.on('location', function (cor) {
         latitudine = cor.lat;
         longitudine = cor.lang;
-        DynaMarker = L.marker([cor.lat,cor.lang]);
+        DynaMarker = L.marker([cor.lat,cor.lang], {icon: my_location});
         DynaMarker.setLatLng([cor.lat, cor.lang]).addTo(mymap);
     });
 
@@ -258,7 +262,7 @@
                 for(let k=0; k<result[i]["linea"][j]["bus"].length; k++){
                     //console.log(result[i]["linea"][j]["bus"][k]["lat"]);
                     //console.log(result[i]["linea"][j]["bus"][k]["lat"]);
-                    let x = L.marker([result[i]["linea"][j]["bus"][k]["lat"], result[i]["linea"][j]["bus"][k]["long"]]).bindPopup(result[i]["linea"][j]["linea"]);
+                    let x = L.marker([result[i]["linea"][j]["bus"][k]["lat"], result[i]["linea"][j]["bus"][k]["long"]], {icon: busIcon}).bindPopup(result[i]["linea"][j]["linea"]);
                     layerGroup.addLayer(x);
                 }
             }
