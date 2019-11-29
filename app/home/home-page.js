@@ -236,12 +236,13 @@ function getPosition(){
 }
 function calculateDistance(position) {
     let closer = "None";
-    let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553},
-        {id: 'Acton', lat: 40.837372, long: 14.253502},
-        {id: 'Medina', lat: 40.840447, long: 14.251863},
-        {id: 'Parisi', lat: 40.832308, long: 14.245027},
-        {id: 'Villa', lat: 40.823872, long: 14.216225}];
+    let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553, color: 'linear-gradient(135deg, #5CC77A, #009432)'},
+        {id: 'Acton', lat: 40.837372, long: 14.253502, color: 'linear-gradient(135deg, #107dd0, #22384f)'},
+        {id: 'Medina', lat: 40.840447, long: 14.251863, color: 'linear-gradient(135deg, #107dd0, #22384f)'},
+        {id: 'Parisi', lat: 40.832308, long: 14.245027, color: 'linear-gradient(135deg, #107dd0, #22384f)'},
+        {id: 'Villa', lat: 40.823872, long: 14.216225, color: 'linear-gradient(135deg, #107dd0, #22384f)'}];
 
+    let bottom_bar = page.getViewById("bottom_bar");
 
     for (let i = 0; i < array_locations.length; i++) {
         let loc = new geolocation.Location();
@@ -250,10 +251,10 @@ function calculateDistance(position) {
 
         if (geolocation.distance(position, loc) < 200) {
             closer = array_locations[i].id;
+            bottom_bar.background = array_locations[i].color;
         }
     }
     return closer;
 }
-
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
