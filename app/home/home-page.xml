@@ -29,7 +29,23 @@
                 <StackLayout  class="two-color-gradient" width="100%" height="20%" verticalAlignment="center"/>
                 <StackLayout id="bottom_bar" height="5" width="100%" backgroundColor="#107dd0"/>
 
-                <Image src="~/images/image1.png" marginBottom="30"/>
+                <GridLayout columns="*,*,auto,*,*" class="main_image" id="main_image" backgroundImage="~/images/image1.png" marginBottom="30" height="34%">
+                    <GridLayout col="0" id="bg_0" height="100" verticalAlignment="bottom">
+                        <StackLayout backgroundColor="white" class="circle" verticalAlignment="center"/>
+                    </GridLayout>
+                    <GridLayout col="1" id="bg_1" height="100" verticalAlignment="bottom">
+                        <StackLayout backgroundColor="white" class="circle" verticalAlignment="center"/>
+                    </GridLayout>
+                    <GridLayout col="2" id="main_bg" height="100" verticalAlignment="bottom">
+                        <StackLayout backgroundColor="white" height="256px" width="256px" class="circle" verticalAlignment="center"/>
+                    </GridLayout>
+                    <GridLayout col="3" id="bg_2" height="100" verticalAlignment="bottom">
+                        <StackLayout backgroundColor="white" class="circle" verticalAlignment="center"/>
+                    </GridLayout>
+                    <GridLayout col="4" id="bg_3" height="100" verticalAlignment="bottom">
+                        <StackLayout backgroundColor="white" class="circle" verticalAlignment="center"/>
+                    </GridLayout>
+                </GridLayout>
 
                 <!--    Buttons    -->
                 <GridLayout rows="*,*,*" height="25%" marginRight="10" marginLeft="10" verticalAlignment="center" >

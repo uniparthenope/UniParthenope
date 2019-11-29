@@ -208,6 +208,16 @@ refer to http://docs.nativescript.org/ui/theme.
     color:gray;
     border-color: gray;
 }
+.main_image{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.circle{
+    border-radius: 100%;
+    height: 180px;
+    width: 180px;
+}
 ActionBar {
     background-color: #22384f;
     color: white;
