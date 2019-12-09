@@ -236,8 +236,7 @@ function myExams() {
     });
 }
 
-function getMainInfo()
-{
+function getMainInfo() {
     console.log("Sono in GETMAININFO");
     let cdsId = appSettings.getNumber("cdsId");
 
@@ -278,8 +277,7 @@ function getMainInfo()
 }
 
 
-function getCourses()
-{
+function getCourses() {
     const stuId = appSettings.getNumber("stuId");
     const matId = appSettings.getNumber("matId");
 
@@ -373,6 +371,7 @@ function getCourses()
         });
     });
 }
+
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();

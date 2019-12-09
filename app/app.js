@@ -10,6 +10,7 @@ appSettings.setNumber("pianoId", result.pianoId);
 */
 const application = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
+const httpModule = require("tns-core-modules/http");
 
 global.url = "http://museonavale.uniparthenope.it:8080/api/uniparthenope/";
 global.localurl = "http://192.168.1.198:5000/api/uniparthenope/";
@@ -120,6 +121,46 @@ global.getAllBadge = function(page)
 
 
 };
+
+
+application.on(application.exitEvent, (args) => {
+    if (args.android) {
+        if(global.encodedStr !== " "){
+            let url = global.url + "logout/" + global.encodedStr + "/" + global.authToken;
+            httpModule.request({
+                url: url,
+                method: "GET"
+            }).then((response) => {
+                const result = response.content.toJSON();
+
+                if(result.status_code == 200){
+                    console.log("Logout");
+                }
+
+            },(e) => {
+                console.log("Error", e.retErrMsg);
+                dialogs.alert({
+                    title: "Errore Server!",
+                    message: e.retErrMsg,
+                    okButtonText: "OK"
+                });
+            });
+
+        }
+        console.log("Exit: " + args.android);
+    } else if (args.ios) {
+        console.log("Exit: " + args.ios);
+    }
+});
+
+
+application.on(application.suspendEvent, (args) => {
+    if (args.android) {
+        console.log("Suspend: " + args.android);
+    } else if (args.ios) {
+        console.log("Suspend: " + args.ios);
+    }
+});
 
 application.run({ moduleName: "app-root" });
 
