@@ -55,7 +55,7 @@
                 </accordion:Accordion>
             </ScrollView>
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#107dd0" height="10%" verticalAlignment="bottom" width="100%">
+            <GridLayout visibility="visible" id="bottom_bar" row="2" backgroundColor="#107dd0" height="10%" verticalAlignment="bottom" width="100%">
                 <GridLayout columns="*, *, *, *,*" height="60">
                     <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
                     <GridLayout col="0" tap="tapCalendar">

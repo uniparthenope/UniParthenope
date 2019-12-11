@@ -84,7 +84,6 @@ function getTotExams(matId)
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
-        //console.log(result);
 
         if (result.statusCode === 401 || result.statusCode === 500)
         {
@@ -97,7 +96,7 @@ function getTotExams(matId)
         }
         else
         {
-            //console.log(result.numAdSuperate);
+            console.log(result.numAdSuperate);
             page.getViewById("doneExams").text = result.numAdSuperate;
             page.getViewById("totExams").text = "/"+ result.totAdSuperate;
 

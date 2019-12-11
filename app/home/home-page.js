@@ -21,8 +21,10 @@ function onNavigatingTo(args) {
 
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
-
+    global.tempPos = false;
+    //TODO Aggiustare la posizione!!
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
+        console.log("Setto la posizione!");
         getPosition();
         global.tempPos = true;
     }
@@ -219,6 +221,7 @@ exports.ontap_insta = function(){
 };
 
 function getPosition(){
+    console.log("GetPosition ");
     geolocation.enableLocationRequest().then(function () {
         geolocation.isEnabled().then(function (isEnabled) {
             geolocation.getCurrentLocation({desiredAccuracy: 3, updateDistance: 10, maximumAge: 20000, timeout: 20000}).
@@ -226,9 +229,11 @@ function getPosition(){
                 if (loc) {
                     let position = calculateDistance(loc);
                     appSettings.setString("position", position);
-                    console.log("MY_POSITION = "+ position);
+                    console.log("MY_POSITION = "+loc.latitude+ " "+loc.longitude);
                 }
+                else { console.log("MY_POSITION = ERROR ");}
             }, function(e){
+
                 console.log("Position Error: " + e.message);
             });
         })
@@ -246,6 +251,9 @@ function calculateDistance(position) {
     let image = page.getViewById("main_image");
 
     let main_bg = page.getViewById("main_bg");
+    let main_icon = page.getViewById("icon_main");
+    main_icon.backgroundImage = '~/images/icon_home/' + array_locations[4].id + ".png";
+    main_bg.background = array_locations[4].background;
 
 
 let x = 0;
@@ -260,11 +268,15 @@ let x = 0;
             bottom_bar.background = array_locations[i].color;
             image.backgroundImage = '~/images/image_' + array_locations[i].id + ".jpg";
             main_bg.background = array_locations[i].background;
+            main_icon.backgroundImage = '~/images/icon_home/' + array_locations[i].id + ".png";
         }
         else{
             let bg = page.getViewById("bg_" + x.toString());
+            let icon = page.getViewById("icon_" + x.toString());
             bg.background = array_locations[i].background;
+            icon.backgroundImage = '~/images/icon_home/' + array_locations[i].id + ".png";
             x++;
+
         }
     }
     return closer;

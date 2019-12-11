@@ -405,6 +405,14 @@ exports.tapFood = function(){
             clearHistory: true
         };
     frame.topmost().navigate(nav);
+};exports.tapFood = function(){
+    const nav =
+        {
+            moduleName: "menu/menu",
+
+            clearHistory: true
+        };
+    frame.topmost().navigate(nav);
 };
 exports.tapBus = function(){
     const nav =

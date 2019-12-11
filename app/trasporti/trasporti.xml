@@ -29,12 +29,12 @@
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
             <Label class="textPrimary" text="Trasporti" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
-        <GridLayout height="100%">
-            <ContentView class="map" height="100%">
+        <GridLayout height="100%" rows="*,auto">
+            <ContentView row="0" class="map" height="100%" width="100%">
                 <web-view id="webView"></web-view>
             </ContentView>
 
-            <GridLayout rows="*,*,*" verticalAlignment="bottom" height="10%" width="100%" backgroundColor="rgba(0,0,0,0.3)">
+            <GridLayout row="0" rows="*,*,*" verticalAlignment="bottom" height="11%" width="100%" backgroundColor="rgba(0,0,0,0.3)">
                 <Label row="0" id="sede"  text="Sede:" horizontalAlignment="center" class="textPrimary" fontSize="14"/>
                 <GridLayout row="1" columns="*,*">
                     <Label col="0" id="sede_1" text="Via Acton" horizontalAlignment="center" class="textPrimary" fontSize="14" color="red"/>
@@ -45,9 +45,53 @@
                     <Label col="1" id="sede_4" text="Via Parisi" horizontalAlignment="center" class="textPrimary" fontSize="14" color="green"/>
                 </GridLayout>
             </GridLayout>
+            <GridLayout visibility="visible" row="1" id="bottom_bar" backgroundColor="#107dd0" height="10%" verticalAlignment="bottom" width="100%">
+                <GridLayout columns="*, *, *, *,*" height="60">
+                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout col="0" tap="tapCalendar">
+                        <Image src="~/images/icon/calendar.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Calendar">
+                                <Label id=" text_badgeCalendar" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="1" tap="tapCourses">
+                        <Image src="~/images/icon/courses.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Courses">
+                                <Label id="text_badgeCourses" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="2" tap="tapAppello">
+                        <Image src="~/images/icon/appelli.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_appello">
+                                <Label id="text_badgeAppello" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="3" tap="tapFood">
+                        <Image src="~/images/icon/food.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Food">
+                                <Label id="text_badgeFood" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="4" tap="tapBus">
+                        <Image src="~/images/icon/front-bus.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Bus">
+                                <Label id="text_badgeBus" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+
         </GridLayout>
-
-
 
     </StackLayout>
 </Page>

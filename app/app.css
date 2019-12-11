@@ -214,6 +214,9 @@ refer to http://docs.nativescript.org/ui/theme.
     background-size: cover;
 }
 .circle{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70% 70%;
     border-radius: 100%;
     height: 180px;
     width: 180px;

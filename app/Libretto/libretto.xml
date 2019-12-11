@@ -25,10 +25,10 @@
     <GridLayout>
         <GridLayout class="two-color-gradient" width="100%" height="35%" verticalAlignment="top">
             <StackLayout verticalAlignment="top" height="100%" marginTop="5">
-                <Label class="textPrimary" id="cdsDes" horizontalAlignment="center"/>
-                <GridLayout height="70%" marginBottom="5">
+                <Label class="textPrimary" id="cdsDes" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                <GridLayout height="65%" marginBottom="5">
 
-                    <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="20" verticalAlignment="bottom">
+                    <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="20" verticalAlignment="center">
                         <Label class="textMontserratRegular" text="Medie" horizontalAlignment="left" color="white" marginBottom="5"/>
                         <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
                             <Label class="textMontserratRegular" id="medExam" fontSize="18" color="white" text="" verticalAlignment="center"/>
@@ -40,14 +40,14 @@
                         </StackLayout>
                     </StackLayout>
 
-                    <GridLayout class="roundedBtn" backgroundColor="Transparent" horizontalAlignment="center" width="100" height="100" marginTop="20" >
+                    <GridLayout class="roundedBtn" backgroundColor="Transparent" horizontalAlignment="center" width="100" height="100" marginTop="15" >
                         <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
                             <Label  id="doneExams" class="textPrimary" text="" fontSize="30" verticalAlignment="center"/>
                             <Label  id="totExams" class="textPrimary" text=""  fontSize="16" verticalAlignment="center"/>
                         </StackLayout>
                     </GridLayout>
 
-                    <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="20" verticalAlignment="bottom">
+                    <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="20" verticalAlignment="center">
                         <Label class="textMontserratRegular" text="Tot. CFU" horizontalAlignment="left" color="white" marginBottom="5"/>
                         <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
                             <Label class="textMontserratRegular" id="cfuPar" fontSize="18" color="white" text="" verticalAlignment="center"/>

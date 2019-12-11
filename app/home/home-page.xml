@@ -29,37 +29,41 @@
                 <StackLayout  class="two-color-gradient" width="100%" height="20%" verticalAlignment="center"/>
                 <StackLayout id="bottom_bar" height="5" width="100%" backgroundColor="#107dd0"/>
 
-                <GridLayout columns="*,*,auto,*,*" class="main_image" id="main_image" backgroundImage="~/images/image1.png" marginBottom="30" height="34%">
+                <GridLayout columns="*,*,auto,*,*" class="main_image" id="main_image" backgroundImage="~/images/image1.jpg" marginBottom="30" height="34%">
                     <GridLayout col="0" id="bg_0" height="100" verticalAlignment="bottom">
-                        <StackLayout backgroundColor="white" class="circle" verticalAlignment="center"/>
+                        <StackLayout id="icon_0" backgroundImage="~/images/icon_home/CDN.png" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
                     <GridLayout col="1" id="bg_1" height="100" verticalAlignment="bottom">
-                        <StackLayout backgroundColor="white" class="circle" verticalAlignment="center"/>
+                        <StackLayout id="icon_1" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
                     <GridLayout col="2" id="main_bg" height="100" verticalAlignment="bottom">
-                        <StackLayout backgroundColor="white" height="256px" width="256px" class="circle" verticalAlignment="center"/>
+                        <StackLayout id="icon_main" backgroundColor="white" height="256px" width="256px" class="circle" verticalAlignment="center"/>
                     </GridLayout>
                     <GridLayout col="3" id="bg_2" height="100" verticalAlignment="bottom">
-                        <StackLayout backgroundColor="white" class="circle" verticalAlignment="center"/>
+                        <StackLayout id="icon_2" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
                     <GridLayout col="4" id="bg_3" height="100" verticalAlignment="bottom">
-                        <StackLayout backgroundColor="white" class="circle" verticalAlignment="center"/>
+                        <StackLayout id="icon_3" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
                 </GridLayout>
-
                 <!--    Buttons    -->
-                <GridLayout rows="*,*,*" height="25%" marginRight="10" marginLeft="10" verticalAlignment="center" >
-                    <StackLayout orientation="horizontal" row="0" horizontalAlignment="stretch">
+                <GridLayout rows="*,*,*" height="25%" marginRight="10" marginLeft="10" verticalAlignment="top" >
+                    <StackLayout orientation="horizontal" row="0" horizontalAlignment="stretch" verticalAlignment="top">
                         <Button  class="btn" text="Ateneo" horizontalAlignment="center" width="50%" marginRight="5" ontap="onTapAteneo" />
                         <Button  class="btn" text="Eventi" horizontalAlignment="center" width="50%" ontap="onTapEventi" />
                     </StackLayout>
-                    <StackLayout orientation="horizontal" row="1" horizontalAlignment="stretch">
-                        <Button  class="btn" text="Trasporti" horizontalAlignment="center" width="50%" marginRight="5" tap="onTapTrasporti"/>
+                    <StackLayout orientation="horizontal" row="1" horizontalAlignment="stretch" verticalAlignment="top">
+                        <Button  class="btn" text="" horizontalAlignment="center" width="50%" marginRight="5" tap=""/>
                         <Button  class="btn" text="Notizie" horizontalAlignment="center" width="50%" tap="onTapNotizie"/>
                     </StackLayout>
-                    <StackLayout orientation="horizontal" row="2" horizontalAlignment="stretch">
-                        <Button  class="btn" text="Mensa" horizontalAlignment="center" width="50%" tap="onTapFood"/>
-                    </StackLayout>
+                    <GridLayout row="2" columns="*,*" verticalAlignment="top" horizontalAlignment="stretch">
+                        <StackLayout col="0" height="100%" horizontalAlignment="right" marginRight="10">
+                            <Button class="circle" backgroundColor="#22384f" tap="onTapFood" backgroundImage="~/images/icon/food.png" height="30" width="30"/>
+                        </StackLayout>
+                        <StackLayout col="1" horizontalAlignment="left" marginLeft="10">
+                            <Button class="circle" backgroundColor="#22384f" tap="onTapTrasporti" backgroundImage="~/images/icon/front-bus.png" height="30" width="30"/>
+                        </StackLayout>
+                    </GridLayout>
                 </GridLayout>
 
             </StackLayout>

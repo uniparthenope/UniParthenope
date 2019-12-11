@@ -19,8 +19,17 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
-    global.getAllBadge(page);
-    page.getViewById("selected_col").col = "3";
+    let bottom_bar = page.getViewById("bottom_bar");
+
+    if (global.isConnected === false){
+        bottom_bar.visibility = "collapsed";
+    }
+    else{
+        global.getAllBadge(page);
+        page.getViewById("selected_col").col = "3";
+        bottom_bar.visibility = "visible";
+    }
+
 
     items = new ObservableArray();
     viewModel = Observable.fromObject({

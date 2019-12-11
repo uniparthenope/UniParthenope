@@ -8,6 +8,7 @@ const httpModule = require("tns-core-modules/http");
 let timer = require("tns-core-modules/timer");
 let timer_id;
 let myposition_id;
+let bus_timer;
 
 let page;
 let viewModel;
@@ -31,6 +32,16 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
+    let bottom_bar = page.getViewById("bottom_bar");
+
+    if (global.isConnected === false){
+        bottom_bar.visibility = "collapsed";
+    }
+    else {
+        global.getAllBadge(page);
+        page.getViewById("selected_col").col = "4";
+        bottom_bar.visibility = "visible";
+    }
     setupWebViewInterface(page);
     //Imposto la posizione attuale e la legenda in basso
     let name_pos = appSettings.getString("position");
@@ -116,7 +127,7 @@ function getBusPosition() {
         }
         else
         {
-            setTimeout(function () {
+            bus_timer = setTimeout(function () {
                 oLangWebViewInterface.emit('bus', {bus: result});
             }, 800);
         }
@@ -134,9 +145,46 @@ function getBusPosition() {
 function onNavigatingFrom(args) {
     console.log("Interrompo servizi GPS...");
     timer.clearInterval(timer_id);
+    clearTimeout(bus_timer);
+
     oLangWebViewInterface.destroy();
     geolocation.clearWatch(myposition_id);
 }
+
+exports.tapCourses = function(){
+    const nav =
+        {
+            moduleName: "corsi/corsi",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
+};
+
+exports.tapFood = function(){
+    const nav =
+        {
+            moduleName: "menu/menu",
+
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
+};
+exports.tapCalendar = function(){
+    const nav =
+        {
+            moduleName: "userCalendar/userCalendar",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
+};
+exports.tapAppello = function(){
+    const nav =
+        {
+            moduleName: "userAppelli/appelli",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
+};
 
 exports.onNavigatingFrom = onNavigatingFrom;
 exports.onGeneralMenu = onGeneralMenu;
