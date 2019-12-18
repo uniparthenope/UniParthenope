@@ -5,8 +5,8 @@ const httpModule = require("tns-core-modules/http");
 const appSettings = require("tns-core-modules/application-settings");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const modalViewModule = "modal-login/modal-login";
-var base64= require('base-64');
-var utf8 = require('utf8');
+let base64= require('base-64');
+let utf8 = require('utf8');
 
 let viewModel;
 
@@ -45,16 +45,16 @@ exports.goto_settings = function () {
         {
             moduleName: "settings/settings",
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 
 };
 
 exports.goto_about = function () {
-    /*const nav =
+    const nav =
         {
-            moduleName: "userAppelli/appelli",
+            moduleName: "about/about-page",
         };
-    frame.topmost().navigate(nav);*/
+    frame.Frame.topmost().navigate(nav);
 
 };
 
@@ -64,7 +64,7 @@ exports.goto_home = function () {
             moduleName: "userCalendar/userCalendar",
             clearHistory: true
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 
 };
 
@@ -74,7 +74,7 @@ exports.goto_libretto = function () {
             moduleName: "Libretto/libretto",
             clearHistory: true
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 
 };
 exports.goto_corsi = function () {
@@ -83,7 +83,7 @@ exports.goto_corsi = function () {
             moduleName: "tutticorsi/tutticorsi",
             clearHistory: true
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 
 };
 exports.goto_segreteria = function () {
@@ -92,7 +92,7 @@ exports.goto_segreteria = function () {
             moduleName: "segreteria/segreteria",
             clearHistory: true
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 
 };
 
@@ -102,7 +102,7 @@ exports.goto_menuList = function () {
             moduleName: "usertecnico-all/usertecnico-all",
             clearHistory: true
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.goto_menuNew = function () {
@@ -111,7 +111,7 @@ exports.goto_menuNew = function () {
             moduleName: "usertecnico/usertecnico",
             clearHistory: true
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.goto_adminHome = function () {
@@ -120,7 +120,7 @@ exports.goto_adminHome = function () {
             moduleName: "admin/admin-home/admin-home",
             clearHistory: true
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 exports.goto_adminAccount = function () {
     const nav =
@@ -128,7 +128,7 @@ exports.goto_adminAccount = function () {
             moduleName: "admin/allUser/allUser",
             clearHistory: true
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 exports.goto_adminNew = function () {
     const nav =
@@ -136,7 +136,7 @@ exports.goto_adminNew = function () {
             moduleName: "admin/addUser/addUser",
             clearHistory: true
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 function logout()

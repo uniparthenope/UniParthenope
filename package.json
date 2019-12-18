@@ -17,6 +17,7 @@
     "install": "^0.13.0",
     "nativescript": "^6.2.2",
     "nativescript-accordion": "^6.0.0-beta.2",
+    "nativescript-appversion": "^1.4.4",
     "nativescript-camera": "^4.5.0",
     "nativescript-checkbox": "^3.0.3",
     "nativescript-geolocation": "^5.1.0",

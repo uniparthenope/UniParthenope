@@ -21,7 +21,8 @@ function onNavigatingTo(args) {
 
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
-    global.tempPos = false;
+    //global.tempPos = false;
+
     //TODO Aggiustare la posizione!!
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
         console.log("Setto la posizione!");

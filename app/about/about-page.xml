@@ -1,0 +1,47 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <StackLayout>
+        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <Label class="textPrimary" text="Info" horizontalAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label textAlignment="center" textWrap="true" text="UniParthenope App" marginTop="10"/>
+                <Image src="~/images/logo_parth.png" horizontalAlignment="center" margin="20 20 20 20"/>
+                <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" marginTop="5">
+                    <Label id="version" text="Versione "/>
+                </StackLayout>
+                <Label textAlignment="center" textWrap="true" text="Team leader: Raffaele Montella" marginTop="10"/>
+                <Label textAlignment="center" textWrap="true" text="Developer: Gennaro Mellone, Ciro Giuseppe De Vita" marginTop="10"/>
+
+                <Button textWrap="true" text="Copyright ©" ontap="onTapCopy" class="blue_background_opac" margin="10 5 0 5"/>
+                <Button textWrap="true" text="Disclaimer" ontap="onTapDisclaimer" class="blue_background_opac" margin="10 5 10 5"/>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+
+</Page>
