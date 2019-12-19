@@ -218,12 +218,14 @@ exports.ontap_twi = function(){
 exports.ontap_insta = function(){
     utilsModule.openUrl("https://www.instagram.com/uniparthenope");
 };
-
+exports.onTapStudia = function(){
+    utilsModule.openUrl("http://orientamento.uniparthenope.it/index.php/corsi-di-studio-a-a-2019-2020");
+};
 function getPosition(){
     console.log("GetPosition ");
     geolocation.enableLocationRequest().then(function () {
         geolocation.isEnabled().then(function (isEnabled) {
-            geolocation.getCurrentLocation({desiredAccuracy: 3, updateDistance: 10, maximumAge: 20000, timeout: 20000}).
+            geolocation.getCurrentLocation({desiredAccuracy: 3, updateDistance: 10, maximumAge: 10000, timeout: 10000}).
             then(function(loc) {
                 if (loc) {
                     let position = calculateDistance(loc);
@@ -250,34 +252,24 @@ function calculateDistance(position) {
     let bottom_bar = page.getViewById("bottom_bar");
     let image = page.getViewById("main_image");
 
-    let main_bg = page.getViewById("main_bg");
-    let main_icon = page.getViewById("icon_main");
-    main_icon.backgroundImage = '~/images/icon_home/' + array_locations[4].id + ".png";
-    main_bg.background = array_locations[4].background;
-
-
-let x = 0;
 
     for (let i = 0; i < array_locations.length; i++) {
         let loc = new geolocation.Location();
         loc.latitude = array_locations[i].lat;
         loc.longitude = array_locations[i].long;
 
+        let bg = page.getViewById("bg_" + x.toString());
+        let icon = page.getViewById("icon_" + x.toString());
+
         if (geolocation.distance(position, loc) < 200) {
             closer = array_locations[i].id;
             bottom_bar.background = array_locations[i].color;
             image.backgroundImage = '~/images/image_' + array_locations[i].id + ".jpg";
-            main_bg.background = array_locations[i].background;
-            main_icon.backgroundImage = '~/images/icon_home/' + array_locations[i].id + ".png";
-        }
-        else{
-            let bg = page.getViewById("bg_" + x.toString());
-            let icon = page.getViewById("icon_" + x.toString());
-            bg.background = array_locations[i].background;
-            icon.backgroundImage = '~/images/icon_home/' + array_locations[i].id + ".png";
-            x++;
 
         }
+
+        bg.background = array_locations[i].background;
+        icon.backgroundImage = '~/images/icon_home/' + array_locations[i].id + ".png";
     }
     return closer;
 }
