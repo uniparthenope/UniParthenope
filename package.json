@@ -15,7 +15,7 @@
     "@nstudio/nativescript-checkbox": "^1.0.0",
     "base-64": "^0.1.0",
     "install": "^0.13.0",
-    "nativescript": "^6.2.2",
+    "nativescript": "^6.3.0",
     "nativescript-accordion": "^6.0.0-beta.2",
     "nativescript-appversion": "^1.4.4",
     "nativescript-camera": "^4.5.0",

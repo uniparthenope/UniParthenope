@@ -22,7 +22,7 @@
                     tap="onDrawerButtonTap"
                     ios.position="right">
         </ActionItem>
-        <Label class="action-bar-title" text="UniParthenope"></Label>
+        <Label class="action-bar-title" text="UniParthenope"/>
     </ActionBar>
     <StackLayout>
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">

@@ -125,6 +125,7 @@ global.getAllBadge = function(page)
 
 application.on(application.exitEvent, (args) => {
     if (args.android) {
+        global.tempPos = false;
         if(global.encodedStr !== " "){
             let url = global.url + "logout/" + global.encodedStr + "/" + global.authToken;
             httpModule.request({
@@ -157,6 +158,7 @@ application.on(application.exitEvent, (args) => {
 application.on(application.suspendEvent, (args) => {
     if (args.android) {
         console.log("Suspend: " + args.android);
+        global.tempPos = false;
     } else if (args.ios) {
         console.log("Suspend: " + args.ios);
     }

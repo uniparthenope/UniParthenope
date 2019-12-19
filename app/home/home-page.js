@@ -21,9 +21,7 @@ function onNavigatingTo(args) {
 
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
-    //global.tempPos = false;
 
-    //TODO Aggiustare la posizione!!
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
         console.log("Setto la posizione!");
         getPosition();
@@ -239,6 +237,7 @@ function getPosition(){
             });
         })
     });
+    console.log("QUI");
 }
 function calculateDistance(position) {
     let closer = "None";
