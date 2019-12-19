@@ -14,6 +14,13 @@ let sideDrawer;
 let remember;
 let user;
 
+let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553, color: 'linear-gradient(135deg, #5CC77A, #009432)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(0, 167, 84))'},
+    {id: 'Medina', lat: 40.840447, long: 14.251863, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(221, 108, 166))'},
+    {id: 'Acton', lat: 40.837372, long: 14.253502, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(11, 114, 181))'},
+    {id: 'Parisi', lat: 40.832308, long: 14.245027, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(119, 72, 150))'},
+    {id: 'Villa', lat: 40.823872, long: 14.216225, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(36, 36, 36))'}];
+
+
 function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
@@ -21,6 +28,8 @@ function onNavigatingTo(args) {
 
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
+
+    initializeGraph();
 
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
         console.log("Setto la posizione!");
@@ -223,10 +232,13 @@ exports.onTapStudia = function(){
 };
 function getPosition(){
     console.log("GetPosition ");
+
     geolocation.enableLocationRequest().then(function () {
         geolocation.isEnabled().then(function (isEnabled) {
+
             geolocation.getCurrentLocation({desiredAccuracy: 3, updateDistance: 10, maximumAge: 10000, timeout: 10000}).
             then(function(loc) {
+                console.log("Finding "+loc);
                 if (loc) {
                     let position = calculateDistance(loc);
                     appSettings.setString("position", position);
@@ -243,11 +255,6 @@ function getPosition(){
 }
 function calculateDistance(position) {
     let closer = "None";
-    let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553, color: 'linear-gradient(135deg, #5CC77A, #009432)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(0, 167, 84))'},
-        {id: 'Acton', lat: 40.837372, long: 14.253502, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(11, 114, 181))'},
-        {id: 'Medina', lat: 40.840447, long: 14.251863, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(221, 108, 166))'},
-        {id: 'Parisi', lat: 40.832308, long: 14.245027, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(119, 72, 150))'},
-        {id: 'Villa', lat: 40.823872, long: 14.216225, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(36, 36, 36))'}];
 
     let bottom_bar = page.getViewById("bottom_bar");
     let image = page.getViewById("main_image");
@@ -257,21 +264,27 @@ function calculateDistance(position) {
         let loc = new geolocation.Location();
         loc.latitude = array_locations[i].lat;
         loc.longitude = array_locations[i].long;
-
-        let bg = page.getViewById("bg_" + x.toString());
-        let icon = page.getViewById("icon_" + x.toString());
-
-        if (geolocation.distance(position, loc) < 200) {
+        //console.log("Distanza= "+geolocation.distance(position,loc));
+        if (geolocation.distance(position, loc) < 300) {
+            //console.log("Trovata!");
             closer = array_locations[i].id;
             bottom_bar.background = array_locations[i].color;
             image.backgroundImage = '~/images/image_' + array_locations[i].id + ".jpg";
 
         }
 
+    }
+    return closer;
+}
+function initializeGraph(){
+    for (let i = 0; i < array_locations.length; i++) {
+        let bg = page.getViewById("bg_" + i.toString());
+        let icon = page.getViewById("icon_" + i.toString());
+
+
         bg.background = array_locations[i].background;
         icon.backgroundImage = '~/images/icon_home/' + array_locations[i].id + ".png";
     }
-    return closer;
 }
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

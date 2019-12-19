@@ -37,7 +37,7 @@
                         <StackLayout id="icon_1" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
                     <GridLayout col="2" id="bg_2" height="100" verticalAlignment="bottom">
-                        <StackLayout id="icon_2" backgroundColor="white" height="256px" width="256px" class="circle" verticalAlignment="center"/>
+                        <StackLayout id="icon_2" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
                     <GridLayout col="3" id="bg_3" height="100" verticalAlignment="bottom">
                         <StackLayout id="icon_3" backgroundColor="white" class="circle" verticalAlignment="center"/>
