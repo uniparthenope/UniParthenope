@@ -27,7 +27,7 @@ function onNavigatingTo(args) {
     });
 
     getCourses();
-    appSettings.setNumber("examsBadge",global.freqExams.length);
+
     global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
@@ -37,10 +37,11 @@ function onDrawerButtonTap() {
     sideDrawer.showDrawer();
 }
 
-function getCourses()
-{
+function getCourses() {
     let courses = global.freqExams;
     const act_sem = appSettings.getString("semestre");
+
+    let x = 0;
 
     for (let i=0; i<courses.length; i++)
     {
@@ -56,6 +57,7 @@ function getCourses()
                 "adLogId": courses[i].adLogId
             });
             esamiList.refresh();
+            x++;
         }
         else if (act_sem === "Primo Semestre" && (courses[i].semestre === "S1" || courses[i].semestre === "A1" || courses[i].semestre === "N/A"))
         {
@@ -69,6 +71,7 @@ function getCourses()
                 "adLogId": courses[i].adLogId
             });
             esamiList.refresh();
+            x++;
         }
         else if (act_sem === undefined){
             items.push({
@@ -81,6 +84,7 @@ function getCourses()
                 "adLogId": courses[i].adLogId
             });
             esamiList.refresh();
+            x++;
         }
         else
         {
@@ -88,9 +92,10 @@ function getCourses()
         }
     }
 
+    appSettings.setNumber("examsBadge",x);
 }
-function drawYear(year)
-{
+
+function drawYear(year) {
     if (year === 1)
         return "I";
     else if (year === 2)
@@ -100,10 +105,14 @@ function drawYear(year)
     else
         return "SCE";
 }
-function onGeneralMenu()
-{
-    page.frame.goBack();
 
+function onGeneralMenu() {
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
 }
 
 function onItemTap(args) {
@@ -114,7 +123,6 @@ function onItemTap(args) {
 
     mainView.showModal(modalViewModule, adLogId, false);
 }
-exports.onItemTap = onItemTap;
 
 function drawTitle() {
     if (appSettings.getString("aa_accad") !== undefined)
@@ -133,41 +141,45 @@ function drawTitle() {
         page.getViewById("semestre").text = "Semestre Non Disponibile";
     }
 }
+
 exports.tapBus = function(){
     const nav =
         {
             moduleName: "trasporti/trasporti",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.tapFood = function(){
     const nav =
 
         {
             moduleName: "menu/menu",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.tapAppello = function(){
     const nav =
         {
             moduleName: "userAppelli/appelli",
-
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.tapCalendar = function(){
     const nav =
         {
             moduleName: "userCalendar/userCalendar",
-
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
+exports.onItemTap = onItemTap;
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

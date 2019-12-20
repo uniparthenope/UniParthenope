@@ -1,13 +1,3 @@
-/*
-In NativeScript, the app.js file is the entry point to your application.
-You can use this file to perform app-level initialization, but the primary
-purpose of the file is to pass control to the app’s first module.
-
-appSettings.setString("aa_accad", result.aa_accad);
-appSettings.setString("sessione", result.curr_sem);
-appSettings.setString("semestre", result.semestre);
-appSettings.setNumber("pianoId", result.pianoId);
-*/
 const application = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
@@ -24,23 +14,10 @@ global.username = "";
 global.data_today;
 global.events = [];
 global.tempPos = false;
-
 global.freqExams = [];
-/*
-"nome" : result[i].nome,
-"codice" : result[i].codice,
-"annoId" : result[i].annoId,
-"adsceId" : result[i].adsceId,
-"adId" : result[i].adId,
-"CFU" : result[i].CFU,
-semstre
-prof
-orario aula []
-*/
 global.myExams = [];
 
-global.saveInfo = function(result)
-{
+global.saveInfo = function(result) {
     appSettings.setString("codFis",result.user.codFis);
     appSettings.setString("nome",result.user.firstName);
     appSettings.setString("cognome",result.user.lastName);
@@ -53,8 +30,7 @@ global.saveInfo = function(result)
     console.log("SAVE_INFO AuthToken= "+global.authToken);
 };
 
-global.saveCarr = function(result)
-{
+global.saveCarr = function(result) {
     console.log("SAVE_CARR cdsDes= "+result.cdsDes);
     console.log("SAVE_CARR cdsId= "+result.cdsId);
     console.log("SAVE_CARR matId= "+result.matId);
@@ -70,62 +46,66 @@ global.saveCarr = function(result)
     return true;
 };
 
-global.getAllBadge = function(page)
-{
+global.getAllBadge = function(page) {
     let calendar = appSettings.getNumber("calendarBadge",0);
     let exams = appSettings.getNumber("examsBadge",0);
     let food = appSettings.getNumber("foodBadge",0);
     let trasport = appSettings.getNumber("trasportBadge",0);
     let appello = appSettings.getNumber("appelloBadge",0);
 
-    if (calendar === 0)
-        {
+    if (calendar === 0) {
             page.getViewById("badge_Calendar").visibility = "collapsed";
 
-        }
-    else
-        {
+    }
+    else {
             page.getViewById("badge_Calendar").visibility = "visible";
             page.getViewById("text_badgeCalendar").text = calendar;
-        }
-    if (appello === 0)
-    {
+    }
+    if (appello === 0) {
         page.getViewById("badge_appello").visibility = "collapsed";
 
     }
-    else
-    {
+    else {
         page.getViewById("badge_appello").visibility = "visible";
         page.getViewById("text_badgeAppello").text = appello;
     }
 
-    if (exams === 0)
-    {
+    if (exams === 0) {
         page.getViewById("badge_Courses").visibility = "collapsed";
     }
-    else
-    {
+    else {
         page.getViewById("badge_Courses").visibility = "visible";
         page.getViewById("text_badgeCourses").text = exams;
     }
 
-    if (food === 0)
-    {
+    if (food === 0) {
         page.getViewById("badge_Food").visibility = "collapsed";
     }
-    else
-    {
+    else {
         page.getViewById("badge_Food").visibility = "visible";
         page.getViewById("text_badgeFood").text = food;
     }
-
-
 };
-
 
 application.on(application.exitEvent, (args) => {
     if (args.android) {
         global.tempPos = false;
+        global.isConnected = false;
+        global.updatedExam = false;
+        global.encodedStr = "";
+        global.authToken="";
+        global.tempNum = 0;
+        global.myform = "";
+        global.username = "";
+        global.data_today;
+        global.events = [];
+        global.tempPos = false;
+        global.freqExams = [];
+        global.myExams = [];
+
+        appSettings.setNumber("examsBadge", 0);
+        appSettings.setNumber("appelloBadge", 0);
+
         if(global.encodedStr !== " "){
             let url = global.url + "logout/" + global.encodedStr + "/" + global.authToken;
             httpModule.request({
@@ -154,7 +134,6 @@ application.on(application.exitEvent, (args) => {
     }
 });
 
-
 application.on(application.suspendEvent, (args) => {
     if (args.android) {
         console.log("Suspend: " + args.android);
@@ -165,8 +144,3 @@ application.on(application.suspendEvent, (args) => {
 });
 
 application.run({ moduleName: "app-root" });
-
-/*
-Do not place any code after the application has been started as it will not
-be executed on iOS.
-*/

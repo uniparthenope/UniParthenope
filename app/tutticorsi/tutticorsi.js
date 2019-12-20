@@ -18,12 +18,13 @@ function onNavigatingTo(args) {
     sideDrawer.closeDrawer();
     items = new ObservableArray();
 
-
     viewModel = Observable.fromObject({
         items:items
     });
+
     let exams = global.myExams;
-   console.log(global.myExams);
+    console.log(global.myExams);
+
     let anno = "";
 
     for (let i=0; i<exams.length; i++)
@@ -31,7 +32,8 @@ function onNavigatingTo(args) {
         if(exams[i].annoCorso === 0)
             anno = "X";
         else
-            anno = exams[i].annoCorso
+            anno = exams[i].annoCorso;
+
         items.push({
             esame: exams[i].nome,
             cfu: exams[i].CFU,
@@ -55,9 +57,13 @@ function onDrawerButtonTap() {
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu()
-{
-    page.frame.goBack();
+function onGeneralMenu() {
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
 }
 
 exports.onGeneralMenu = onGeneralMenu;

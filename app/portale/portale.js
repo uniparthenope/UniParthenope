@@ -1,8 +1,12 @@
 const Observable = require("tns-core-modules/data/observable").Observable;
 const dialogs = require("tns-core-modules/ui/dialogs");
 const webViewModule = require("tns-core-modules/ui/web-view");
+const app = require("tns-core-modules/application");
+
+let page;
+
 function onNavigatingTo(args) {
-    const page = args.object;
+    page = args.object;
     let link = page.navigationContext.link;
     const vm = new Observable();
     vm.set("webViewSrc", link);
@@ -10,7 +14,7 @@ function onNavigatingTo(args) {
     vm.set("tftext", link);
     page.bindingContext = vm;
 }
-// handling WebView load finish event
+
 function onWebViewLoaded(webargs) {
     const page = webargs.object.page;
     const vm = page.bindingContext;
@@ -30,7 +34,7 @@ function onWebViewLoaded(webargs) {
         //console.log(`WebView message - ${message}`);
     });
 }
-// going to the previous page if such is available
+
 function goBack(args) {
     const page = args.object.page;
     const vm = page.bindingContext;
@@ -40,7 +44,7 @@ function goBack(args) {
         vm.set("enabled", true);
     }
 }
-// going forward if a page is available
+
 function goForward(args) {
     const page = args.object.page;
     const vm = page.bindingContext;
@@ -51,7 +55,7 @@ function goForward(args) {
         vm.set("enabled", false);
     }
 }
-// changing WebView source
+
 function submit(args) {
     const page = args.object.page;
     const vm = page.bindingContext;
@@ -68,6 +72,18 @@ function submit(args) {
             });
     }
 }
+
+function onDrawerButtonTap() {
+    const sideDrawer = app.getRootView();
+    sideDrawer.showDrawer();
+}
+
+function onGeneralMenu() {
+    page.frame.goBack();
+}
+
+exports.onDrawerButtonTap = onDrawerButtonTap;
+exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onWebViewLoaded = onWebViewLoaded;
 exports.submit = submit;

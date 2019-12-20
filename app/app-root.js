@@ -62,7 +62,7 @@ exports.goto_home = function () {
     const nav =
         {
             moduleName: "userCalendar/userCalendar",
-            clearHistory: true
+            clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 
@@ -72,25 +72,27 @@ exports.goto_libretto = function () {
     const nav =
         {
             moduleName: "Libretto/libretto",
-            clearHistory: true
+            clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 
 };
+
 exports.goto_corsi = function () {
     const nav =
         {
             moduleName: "tutticorsi/tutticorsi",
-            clearHistory: true
+            clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 
 };
+
 exports.goto_segreteria = function () {
     const nav =
         {
             moduleName: "segreteria/segreteria",
-            clearHistory: true
+            clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 
@@ -100,7 +102,7 @@ exports.goto_menuList = function () {
     const nav =
         {
             moduleName: "usertecnico-all/usertecnico-all",
-            clearHistory: true
+            clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 };
@@ -109,7 +111,7 @@ exports.goto_menuNew = function () {
     const nav =
         {
             moduleName: "usertecnico/usertecnico",
-            clearHistory: true
+            clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 };
@@ -118,46 +120,27 @@ exports.goto_adminHome = function () {
     const nav =
         {
             moduleName: "admin/admin-home/admin-home",
-            clearHistory: true
+            clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 };
+
 exports.goto_adminAccount = function () {
     const nav =
         {
             moduleName: "admin/allUser/allUser",
-            clearHistory: true
+            clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 };
+
 exports.goto_adminNew = function () {
     const nav =
         {
             moduleName: "admin/addUser/addUser",
-            clearHistory: true
+            clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 };
-
-function logout()
-{
-    let url = "https://uniparthenope.esse3.cineca.it/e3rest/api/logout";
-
-    httpModule.request({
-        url: url,
-        method: "GET",
-        headers: {"Content-Type": "application/json",
-            "Authorization":"Basic "+ global.encodedStr}
-    }).then((response) => {
-        const result = response.content.toJSON();
-
-        console.log(result);
-
-    },(e) => {
-        console.log("Error", e.retErrMsg);
-    });
-}
-
-
 
 exports.pageLoaded = pageLoaded;

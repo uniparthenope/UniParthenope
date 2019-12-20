@@ -7,6 +7,7 @@ const base64= require('base-64');
 const utilsModule = require("tns-core-modules/utils/utils");
 const utf8 = require('utf8');
 const dialogs = require("tns-core-modules/ui/dialogs");
+let appversion = require("nativescript-appversion");
 
 let page;
 let viewModel;
@@ -20,7 +21,6 @@ let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553, color: 'line
     {id: 'Parisi', lat: 40.832308, long: 14.245027, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(119, 72, 150))'},
     {id: 'Villa', lat: 40.823872, long: 14.216225, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(36, 36, 36))'}];
 
-
 function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
@@ -28,6 +28,10 @@ function onNavigatingTo(args) {
 
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
+
+    appversion.getVersionName().then(function(v) {
+        page.getViewById("version").text = "Versione: " + v;
+    });
 
     initializeGraph();
 
@@ -46,9 +50,7 @@ function onNavigatingTo(args) {
        );
        autoconnect();
    }
-
-   else if (remember)
-   {
+   else if (remember) {
       setSideMenu(global.myform,global.username);
    }
 
@@ -59,8 +61,8 @@ function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
-function autoconnect()
-{
+
+function autoconnect() {
     console.log("REMEMBER= "+remember);
     if (remember){
 
@@ -203,8 +205,8 @@ exports.onTapFood = function(){
     page.frame.navigate(nav);
 
 };
- function setSideMenu(type,username)
- {
+
+function setSideMenu(type,username) {
      let actualForm = sideDrawer.getViewById(type);
      let loginForm = sideDrawer.getViewById("loginForm");
      loginForm.visibility = "collapsed";
@@ -218,18 +220,23 @@ exports.onTapFood = function(){
 exports.ontap_fb = function(){
     utilsModule.openUrl("https://www.facebook.com/Parthenope");
 };
+
 exports.ontap_you = function(){
     utilsModule.openUrl("https://www.youtube.com/channel/UCNBZALzU97MuIKSMS_gnO6A");
 };
+
 exports.ontap_twi = function(){
     utilsModule.openUrl("https://twitter.com/uniparthenope");
 };
+
 exports.ontap_insta = function(){
     utilsModule.openUrl("https://www.instagram.com/uniparthenope");
 };
+
 exports.onTapStudia = function(){
     utilsModule.openUrl("http://orientamento.uniparthenope.it/index.php/corsi-di-studio-a-a-2019-2020");
 };
+
 function getPosition(){
     console.log("GetPosition ");
 
@@ -253,6 +260,7 @@ function getPosition(){
     });
     console.log("QUI");
 }
+
 function calculateDistance(position) {
     let closer = "None";
 
@@ -276,6 +284,7 @@ function calculateDistance(position) {
     }
     return closer;
 }
+
 function initializeGraph(){
     for (let i = 0; i < array_locations.length; i++) {
         let bg = page.getViewById("bg_" + i.toString());
@@ -286,5 +295,6 @@ function initializeGraph(){
         icon.backgroundImage = '~/images/icon_home/' + array_locations[i].id + ".png";
     }
 }
+
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

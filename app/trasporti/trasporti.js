@@ -85,9 +85,13 @@ function onGeneralMenu() {
     timer.clearInterval(timer_id);
     oLangWebViewInterface.destroy();
     geolocation.clearWatch(myposition_id);
-    page.frame.goBack();
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
 }
-
 
 function loadGraphic(id){
     page.getViewById("sede").text = "Nessuna sede Parthenope a meno di 200m";
@@ -155,7 +159,7 @@ exports.tapCourses = function(){
     const nav =
         {
             moduleName: "corsi/corsi",
-            clearHistory: true
+            clearHistory: false
         };
     page.frame.navigate(nav);
 };
@@ -165,23 +169,25 @@ exports.tapFood = function(){
         {
             moduleName: "menu/menu",
 
-            clearHistory: true
+            clearHistory: false
         };
     page.frame.navigate(nav);
 };
+
 exports.tapCalendar = function(){
     const nav =
         {
             moduleName: "userCalendar/userCalendar",
-            clearHistory: true
+            clearHistory: false
         };
     page.frame.navigate(nav);
 };
+
 exports.tapAppello = function(){
     const nav =
         {
             moduleName: "userAppelli/appelli",
-            clearHistory: true
+            clearHistory: false
         };
     page.frame.navigate(nav);
 };

@@ -24,21 +24,20 @@ function onNavigatingTo(args) {
 const Button = require("tns-core-modules/ui/button").Button;
 const Page = require("tns-core-modules/ui/page").Page;
 
-function onTapCopy(args)
-{
+function onTapCopy(args) {
     var button = args.object;
     const page = button.page;
 
-    page.frame.navigate("copyrights/copyrights-page");
+    //page.frame.navigate("copyrights/copyrights-page");
 }
+
 exports.onTapCopy = onTapCopy;
 
-function onTapDisclaimer(args)
-{
+function onTapDisclaimer(args) {
     var button = args.object;
     const page = button.page;
 
-    page.frame.navigate("disclaimer/disclaimer-page");
+    //page.frame.navigate("disclaimer/disclaimer-page");
 }
 
 function onDrawerButtonTap() {
@@ -46,10 +45,10 @@ function onDrawerButtonTap() {
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu()
-{
+function onGeneralMenu() {
     page.frame.goBack();
 }
+
 exports.onDrawerButtonTap = onDrawerButtonTap;
 exports.onGeneralMenu = onGeneralMenu;
 exports.onTapDisclaimer = onTapDisclaimer;

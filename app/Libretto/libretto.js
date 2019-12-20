@@ -35,9 +35,7 @@ function onNavigatingTo(args) {
     page.bindingContext = viewModel;
 }
 
-function getMedie(matId)
-{
-
+function getMedie(matId) {
     let media = appSettings.getString("tipoMedia","P");
     console.log("Media: " + media);
     httpModule.request({
@@ -75,8 +73,7 @@ function getMedie(matId)
     });
 }
 
-function getTotExams(matId)
-{
+function getTotExams(matId) {
 
     httpModule.request({
         url: global.url + "totalexams/"+ global.encodedStr +"/" + matId,
@@ -114,8 +111,7 @@ function getTotExams(matId)
     });
 }
 
-function getExams()
-{
+function getExams() {
     let exams = global.myExams;
     //console.log(exams);
 
@@ -189,9 +185,13 @@ function onDrawerButtonTap() {
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu()
-{
-    page.frame.navigate("home/home-page")
+function onGeneralMenu() {
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
 }
 
 exports.onGeneralMenu = onGeneralMenu;

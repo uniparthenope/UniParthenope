@@ -16,9 +16,9 @@ function onNavigatingTo(args) {
 
     getOrari();
 
-
     page.bindingContext = viewModel;
 }
+
 function getOrari() {
 
     httpModule.request({
@@ -93,21 +93,24 @@ function getOrari() {
         });
     });
 }
+
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu()
-{
-    page.frame.navigate("home/home-page")
+function onGeneralMenu() {
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
 }
-function openClose(time)
-{
+
+function openClose(time) {
     const giorni = ["LUN","MAR","MER","GIO","VEN"];
     const today = new Date();
-
-
 }
 
 exports.onGeneralMenu = onGeneralMenu;

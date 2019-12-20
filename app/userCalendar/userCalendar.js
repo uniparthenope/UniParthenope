@@ -39,6 +39,7 @@ function onNavigatingTo(args) {
 
     page.bindingContext = viewModel;
 }
+
 function calendarCourses() {
     //console.log(global.freqExams.length);
     global.events = [];
@@ -99,7 +100,6 @@ function calendarCourses() {
         });
     }
 }
-
 
 function insert_event() {
     console.log("EVENT INSERT");
@@ -276,7 +276,6 @@ function getMainInfo() {
     });
 }
 
-
 function getCourses() {
     const stuId = appSettings.getNumber("stuId");
     const matId = appSettings.getNumber("matId");
@@ -377,51 +376,51 @@ function onDrawerButtonTap() {
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu()
-{
-    page.frame.navigate("home/home-page")
+function onGeneralMenu() {
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
 }
+
 exports.tapAppello = function(){
     const nav =
         {
             moduleName: "userAppelli/appelli",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.tapCourses = function(){
     const nav =
         {
             moduleName: "corsi/corsi",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.tapFood = function(){
     const nav =
         {
             moduleName: "menu/menu",
-
-            clearHistory: true
-        };
-    frame.topmost().navigate(nav);
-};exports.tapFood = function(){
-    const nav =
-        {
-            moduleName: "menu/menu",
-
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.tapBus = function(){
     const nav =
         {
             moduleName: "trasporti/trasporti",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.onDaySelected = function(args){
     console.log(args.eventData);
     const mainView = args.object;
@@ -430,6 +429,7 @@ exports.onDaySelected = function(args){
 
     mainView.showModal(modalViewModule, context, false);
 };
+
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

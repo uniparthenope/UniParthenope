@@ -17,7 +17,6 @@ let viewModel;
 let user;
 let pass;
 
-
 function onShownModally(args) {
     closeCallback = args.closeCallback;
     page = args.object;
@@ -176,8 +175,7 @@ function onTap(args)
         selectedCarrer(index);
 }
 
-function selectedCarrer(index)
-{
+function selectedCarrer(index) {
     const sideDrawer = app.getRootView();
     global.saveInfo(account);
     appSettings.setNumber("carriera",index);
@@ -206,7 +204,7 @@ function selectedCarrer(index)
         const nav =
             {
                 moduleName: "userCalendar/userCalendar",
-                clearHistory: true
+                clearHistory: false
             };
         frame.topmost().navigate(nav);
     }

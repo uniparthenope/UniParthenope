@@ -150,15 +150,20 @@ function onDrawerButtonTap() {
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu()
-{
-    page.frame.goBack();
+function onGeneralMenu() {
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
 }
+
 exports.tapCourses = function(){
     const nav =
         {
             moduleName: "corsi/corsi",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
@@ -166,7 +171,7 @@ exports.tapBus = function(){
     const nav =
         {
             moduleName: "trasporti/trasporti",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
@@ -174,7 +179,7 @@ exports.tapCalendar = function(){
     const nav =
         {
             moduleName: "userCalendar/userCalendar",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
@@ -182,7 +187,7 @@ exports.tapAppello = function(){
     const nav =
         {
             moduleName: "userAppelli/appelli",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };

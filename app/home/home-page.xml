@@ -93,7 +93,7 @@
         </StackLayout>
         <StackLayout orientation="vertical" verticalAlignment="bottom">
             <Label text="Universitá degli Studi di Napoli ''Parthenope''" horizontalAlignment="center" color="white"  marginBottom="5" fontSize="10"/>
-            <Label text="Versione 1.0" horizontalAlignment="center" color="white" verticalAlignment="bottom" marginBottom="5" fontSize="10"/>
+            <Label id="version" horizontalAlignment="center" color="white" verticalAlignment="bottom" marginBottom="5" fontSize="10"/>
         </StackLayout>
 
 

@@ -8,8 +8,6 @@ const ObservableArray = require("tns-core-modules/data/observable-array").Observ
 const Observable = require("tns-core-modules/data/observable");
 const modalViewModule = "modal-esame/modal-esame";
 
-
-
 let page;
 let viewModel;
 let sideDrawer;
@@ -49,20 +47,26 @@ function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
+
 function drawTitle() {
     page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
     page.getViewById("sessione").text = appSettings.getString("sessione");
 }
-function onGeneralMenu()
-{
-    page.frame.goBack();
+
+function onGeneralMenu(){
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
 }
 
 exports.tapCalendar = function(){
     const nav =
         {
             moduleName: "userCalendar/userCalendar",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
@@ -90,16 +94,6 @@ function getAppelli(adId) {
         {
             for (let i=0; i<result.length; i++)
             {
-                let classe;
-                if (result[i].stato === "P")
-                {
-                    ++num;
-                    classe = "examPass";
-                }
-                else
-                    classe = "examFreq";
-
-
                 let day,year,month;
                 let final_data ="" + dayOfWeek(result[i].dataEsame) + " " + result[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result[i].dataEsame) + " " + result[i].dataEsame.substring(6, 10);
                 day = result[i].dataEsame.substring(0, 2);
@@ -107,27 +101,38 @@ function getAppelli(adId) {
                 year = result[i].dataEsame.substring(6, 10);
                 let date = new Date(year,month-1,day);
 
-                items_appelli.push({
-                    "esame": result[i].esame,
-                    "docente": result[i].docente_completo,
-                    "descrizione": result[i].descrizione,
-                    "note": result[i].note,
-                    "dataEsame": final_data,
-                    "dataInizio": result[i].dataInizio,
-                    "dataFine": result[i].dataFine,
-                    "iscritti": result[i].numIscritti,
-                    "classe" : classe,
-                    "date" : date,
-                    "adId": adId,
-                    "appId": result[i].appId
+                let classe;
+                if (result[i].stato === "P")
+                {
+                    ++num;
+                    classe = "examPass";
 
-                });
-                items_appelli.sort(function (orderA, orderB) {
-                    var nameA = orderA.date;
-                    var nameB = orderB.date;
-                    return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-                });
-                appelli_listview.refresh();
+                    items_appelli.push({
+                        "esame": result[i].esame,
+                        "docente": result[i].docente_completo,
+                        "descrizione": result[i].descrizione,
+                        "note": result[i].note,
+                        "dataEsame": final_data,
+                        "dataInizio": result[i].dataInizio,
+                        "dataFine": result[i].dataFine,
+                        "iscritti": result[i].numIscritti,
+                        "classe" : classe,
+                        "date" : date,
+                        "adId": adId,
+                        "appId": result[i].appId
+
+                    });
+                    items_appelli.sort(function (orderA, orderB) {
+                        var nameA = orderA.date;
+                        var nameB = orderB.date;
+                        return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+                    });
+                    appelli_listview.refresh();
+                }
+                else{
+                    //TODO: gestire esami non ancora in piattaforma
+                    classe = "examFreq";
+                }
             }
             global.tempNum = num;
         }
@@ -161,41 +166,44 @@ function monthOfYear(date) {
         return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
 
 };
+
 exports.tapFood = function(){
     const nav =
         {
             moduleName: "menu/menu",
 
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.tapCourses = function(){
     const nav =
         {
             moduleName: "corsi/corsi",
-
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.tapAppello = function(){
     const nav =
         {
             moduleName: "userAppelli/appelli",
-
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 exports.tapBus = function(){
     const nav =
         {
             moduleName: "trasporti/trasporti",
-            clearHistory: true
+            clearHistory: false
         };
     frame.topmost().navigate(nav);
 };
+
 function onItemTap(args) {
     const mainView = args.object;
     const index = args.index;
@@ -205,6 +213,7 @@ function onItemTap(args) {
     mainView.showModal(modalViewModule, adLogId, false);
 
 }
+
 exports.onItemTap = onItemTap;
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
