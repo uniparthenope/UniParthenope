@@ -221,6 +221,14 @@ refer to http://docs.nativescript.org/ui/theme.
     height: 180px;
     width: 180px;
 }
+.pic_rounded{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 100%;
+    border-color: #22384f;
+    border-width: 5;
+}
 ActionBar {
     background-color: #22384f;
     color: white;

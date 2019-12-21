@@ -78,6 +78,16 @@ exports.goto_libretto = function () {
 
 };
 
+exports.goto_docenti = function () {
+    const nav =
+        {
+            moduleName: "userDocenti/userDocenti",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+
+};
+
 exports.goto_corsi = function () {
     const nav =
         {

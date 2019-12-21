@@ -9,7 +9,7 @@ const modalViewModule = "modal-corsi/modal-corsi";
 let page;
 let viewModel;
 let sideDrawer;
-let items
+let items;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -23,7 +23,7 @@ function onNavigatingTo(args) {
     });
 
     let exams = global.myExams;
-    console.log(global.myExams);
+    //console.log(global.myExams);
 
     let anno = "";
 

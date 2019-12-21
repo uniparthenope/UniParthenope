@@ -68,7 +68,7 @@ exports.tapCalendar = function(){
             moduleName: "userCalendar/userCalendar",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 function getAppelli(adId) {
@@ -183,7 +183,7 @@ exports.tapCourses = function(){
             moduleName: "corsi/corsi",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.tapAppello = function(){
@@ -192,7 +192,7 @@ exports.tapAppello = function(){
             moduleName: "userAppelli/appelli",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.tapBus = function(){
@@ -201,7 +201,7 @@ exports.tapBus = function(){
             moduleName: "trasporti/trasporti",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 function onItemTap(args) {

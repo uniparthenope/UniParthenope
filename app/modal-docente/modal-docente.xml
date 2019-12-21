@@ -1,0 +1,26 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+      shownModally="onShownModally"
+      xmlns:accordion="nativescript-accordion">
+
+    <StackLayout height="55%">
+        <StackLayout backgroundColor="#22384f" marginBottom="10" height="20%" verticalAlignment="center">
+            <Label class="textPrimary" id="nome" textWrap="true" textAlignment="center" verticalAlignment="center"/>
+        </StackLayout>
+        <GridLayout>
+            <StackLayout verticalAlignment="top" marginLeft="10" marginRight="10">
+                <Label class="textPrimary" color="#22384f" id="" text="Ufficio:" textWrap="true" textAlignment="left" marginBottom="10"/>
+                <Label class="textPrimary" color="#22384f" id="" text="Telefono" textWrap="true" textAlignment="left" />
+                <Label class="textPrimary" color="#107dd0" horizontalAlignment="center" id="telefono" ontap="ontap_phone" textWrap="true" textAlignment="left" marginBottom="10"/>
+                <Label class="textPrimary" color="#22384f" id="" text="Email" textWrap="true" textAlignment="left" />
+                <Label class="textPrimary" color="#107dd0" horizontalAlignment="center" fontSize="12" ontap="ontap_email" id="email" textWrap="true" textAlignment="left"/>
+            </StackLayout>
+            <StackLayout verticalAlignment="bottom">
+                <Button class="btn" marginLeft="10" marginRight="10" text="Ricevimento" ontap="ontap_ricevimento" backgroundColor="#22384f" color="white" borderColor="white" verticalAlignment="bottom" marginBottom="10"/>
+                <Button class="btn" marginLeft="10" marginRight="10" text="Scheda" ontap="ontap_scheda" backgroundColor="#22384f" color="white" borderColor="white" verticalAlignment="bottom" marginBottom="15"/>
+
+            </StackLayout>
+
+        </GridLayout>
+
+    </StackLayout>
+</Page>

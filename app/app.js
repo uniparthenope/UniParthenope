@@ -4,6 +4,7 @@ const httpModule = require("tns-core-modules/http");
 
 global.url = "http://museonavale.uniparthenope.it:8080/api/uniparthenope/";
 global.localurl = "http://192.168.1.198:5000/api/uniparthenope/";
+
 global.isConnected = false;
 global.updatedExam = false;
 global.encodedStr = "";
@@ -16,6 +17,13 @@ global.events = [];
 global.tempPos = false;
 global.freqExams = [];
 global.myExams = [];
+global.myDocenti = [];
+
+/*
+appSettings.setString("aa_accad", result.aa_accad);
+appSettings.setString("sessione", result.curr_sem);
+appSettings.setString("semestre", result.semestre);
+*/
 
 global.saveInfo = function(result) {
     appSettings.setString("codFis",result.user.codFis);

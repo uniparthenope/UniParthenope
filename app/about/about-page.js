@@ -46,7 +46,7 @@ function onDrawerButtonTap() {
 }
 
 function onGeneralMenu() {
-    page.frame.goBack();
+    page.frame.navigate("home/home-page");
 }
 
 exports.onDrawerButtonTap = onDrawerButtonTap;
