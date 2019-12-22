@@ -148,7 +148,7 @@ exports.tapBus = function(){
             moduleName: "trasporti/trasporti",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.tapFood = function(){
@@ -158,7 +158,7 @@ exports.tapFood = function(){
             moduleName: "menu/menu",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.tapAppello = function(){
@@ -167,7 +167,7 @@ exports.tapAppello = function(){
             moduleName: "userAppelli/appelli",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.tapCalendar = function(){
@@ -176,7 +176,7 @@ exports.tapCalendar = function(){
             moduleName: "userCalendar/userCalendar",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.onItemTap = onItemTap;

@@ -25,10 +25,22 @@
         <Label class="action-bar-title" text="UniParthenope"></Label>
     </ActionBar>
     <GridLayout>
+        <StackLayout horizontalAlignment="center" verticalAlignment="top">
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
             <Label class="textPrimary" text="Settings" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
+            <ScrollView height="80%">
+                <StackLayout verticalAlignment="top">
+                    <GridLayout margin="5 5 5 5" columns="*,50" height="50" >
+                        <Label class="textPrimary" id="text_appello" color="#22384f" col="0" text="Mostra altri appelli" horizontalAlignment="left" verticalAlignment="center"/>
+                        <Switch col="1" id="switch_appello" checked="false" loaded="onSwitchLoaded_appello" horizontalAlignment="right" verticalAlignment="center"/>
+                    </GridLayout>
 
+                    <!-- Insert here other settings (Duplicate GridLayout above!) -->
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
         <Button id="deleteBtn" visibility="collapsed" tap="onTapDelete" class="btn" text="Dimentica Account" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
     </GridLayout>
 </Page>

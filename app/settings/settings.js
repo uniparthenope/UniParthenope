@@ -53,6 +53,19 @@ function onTapDelete(){
     });
 }
 exports.onTapDelete = onTapDelete;
+
+// Check per mostrare nella pagina APPELLI.JS anche gli appelli non ancora prenotabili, ma disponibili.
+function onSwitchLoaded_appello(args) {
+    page.getViewById("switch_appello").checked = appSettings.getBoolean("esami_futuri");
+    const mySwitch = args.object;
+
+    mySwitch.on("checkedChange", (args) => {
+        const sw = args.object;
+        const isChecked = sw.checked;
+        appSettings.setBoolean("esami_futuri",isChecked);
+    });
+}
+exports.onSwitchLoaded_appello = onSwitchLoaded_appello;
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

@@ -190,8 +190,8 @@ refer to http://docs.nativescript.org/ui/theme.
 {
     font-family: Montserrat-Regular;
     font-size: 18;
-    color: sandybrown;
-    border-color: sandybrown;
+    color: lightgray;
+    border-color: lightgray;
     border-width: 5;
     border-radius: 100%;
 }

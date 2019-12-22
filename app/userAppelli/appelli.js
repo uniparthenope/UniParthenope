@@ -14,10 +14,12 @@ let sideDrawer;
 let appelli_listview;
 let items_appelli;
 let loading;
+let num;
 
 function onNavigatingTo(args) {
     page = args.object;
     page.getViewById("selected_col").col = "2";
+    //appSettings.setBoolean("esami_futuri",false);
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
@@ -33,12 +35,10 @@ function onNavigatingTo(args) {
 
     loading.visibility = "visible";
     let exams = global.freqExams;
+    num = 0;
     for (let i=0; i<exams.length; i++){
-        console.log("EXAMS "+exams[i].adId);
         getAppelli(exams[i].adId);
     }
-
-    appSettings.setNumber("appelloBadge",global.tempNum);
     global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
@@ -72,14 +72,13 @@ exports.tapCalendar = function(){
 };
 
 function getAppelli(adId) {
-    let num = 0;
     httpModule.request({
         url: global.url + "checkAppello/"+ global.encodedStr +"/" + appSettings.getNumber("cdsId") +"/" + adId,
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
-
+        loading.visibility = "visible";
         if (result.statusCode === 401 || result.statusCode === 500)
         {
             dialogs.alert({
@@ -101,11 +100,32 @@ function getAppelli(adId) {
                 year = result[i].dataEsame.substring(6, 10);
                 let date = new Date(year,month-1,day);
 
-                let classe;
                 if (result[i].stato === "P")
                 {
-                    ++num;
-                    classe = "examPass";
+                    items_appelli.push({
+                        "esame": result[i].esame,
+                        "docente": result[i].docente_completo,
+                        "descrizione": result[i].descrizione,
+                        "note": result[i].note,
+                        "dataEsame": final_data,
+                        "dataInizio": result[i].dataInizio,
+                        "dataFine": result[i].dataFine,
+                        "iscritti": result[i].numIscritti,
+                        "classe" : "examPass",
+                        "date" : date,
+                        "adId": adId,
+                        "appId": result[i].appId
+                    });
+                    items_appelli.sort(function (orderA, orderB) {
+                        let nameA = orderA.date;
+                        let nameB = orderB.date;
+                        return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+                    });
+                    num++;
+                    appSettings.setNumber("appelloBadge",num);
+                    appelli_listview.refresh();
+                }
+                if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
 
                     items_appelli.push({
                         "esame": result[i].esame,
@@ -116,28 +136,22 @@ function getAppelli(adId) {
                         "dataInizio": result[i].dataInizio,
                         "dataFine": result[i].dataFine,
                         "iscritti": result[i].numIscritti,
-                        "classe" : classe,
+                        "classe" : "examFreq",
                         "date" : date,
                         "adId": adId,
                         "appId": result[i].appId
 
                     });
                     items_appelli.sort(function (orderA, orderB) {
-                        var nameA = orderA.date;
-                        var nameB = orderB.date;
-                        return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+                        let nameA = orderA.classe;
+                        let nameB = orderB.classe;
+                        return (nameA > nameB) ? -1 : (nameA > nameB) ? 1 : 0;
                     });
                     appelli_listview.refresh();
                 }
-                else{
-                    //TODO: gestire esami non ancora in piattaforma
-                    classe = "examFreq";
-                }
+                loading.visibility = "collapsed";
             }
-            global.tempNum = num;
         }
-
-        loading.visibility = "collapsed";
 
     },(e) => {
         console.log("Error", e.retErrMsg);
@@ -148,7 +162,6 @@ function getAppelli(adId) {
         });
     });
 
- console.log(global.tempNum);
 }
 
 function dayOfWeek(date) {
@@ -159,13 +172,13 @@ function dayOfWeek(date) {
     let dayOfWeek = new Date(year,month-1,day).getDay();
     return isNaN(dayOfWeek) ? null : ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'][dayOfWeek];
 
-};
+}
 
 function monthOfYear(date) {
     let month = parseInt(date.substring(3, 5)) - 1;
         return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
 
-};
+}
 
 exports.tapFood = function(){
     const nav =
@@ -174,7 +187,7 @@ exports.tapFood = function(){
 
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.tapCourses = function(){

@@ -93,6 +93,14 @@ global.getAllBadge = function(page) {
         page.getViewById("badge_Food").visibility = "visible";
         page.getViewById("text_badgeFood").text = food;
     }
+
+    if (trasport === 0) {
+        page.getViewById("badge_Bus").visibility = "collapsed";
+    }
+    else {
+        page.getViewById("badge_Bus").visibility = "visible";
+        page.getViewById("text_badgeBus").text = trasport;
+    }
 };
 
 application.on(application.exitEvent, (args) => {
