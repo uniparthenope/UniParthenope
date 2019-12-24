@@ -11,6 +11,7 @@ let myposition_id;
 let bus_timer;
 
 let page;
+let grpDes = appSettings.getString("grpDes");
 let viewModel;
 let sideDrawer;
 let oLangWebViewInterface;
@@ -156,12 +157,24 @@ function onNavigatingFrom(args) {
 }
 
 exports.tapCourses = function(){
-    const nav =
-        {
-            moduleName: "corsi/corsi",
-            clearHistory: false
-        };
-    page.frame.navigate(nav);
+    //TODO da inserire path docenti
+    if (grpDes === "Studenti"){
+        const nav =
+            {
+                moduleName: "corsi/corsi",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
+    else if (grpDes === "Docenti")
+    {
+        const nav =
+            {
+                moduleName: "docenti/docenti-home/docenti-home",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
 };
 
 exports.tapFood = function(){
@@ -175,21 +188,45 @@ exports.tapFood = function(){
 };
 
 exports.tapCalendar = function(){
-    const nav =
-        {
-            moduleName: "userCalendar/userCalendar",
-            clearHistory: false
-        };
-    page.frame.navigate(nav);
+    //TODO da inserire path docenti
+    if (grpDes === "Studenti"){
+        const nav =
+            {
+                moduleName: "userCalendar/userCalendar",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
+    else if (grpDes === "Docenti")
+    {
+        const nav =
+            {
+                moduleName: "docenti/docenti-home/docenti-home",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
 };
 
 exports.tapAppello = function(){
-    const nav =
-        {
-            moduleName: "userAppelli/appelli",
-            clearHistory: false
-        };
-    page.frame.navigate(nav);
+    //TODO da inserire path docenti
+    if (grpDes === "Studenti"){
+        const nav =
+            {
+                moduleName: "userAppelli/appelli",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
+    else if (grpDes === "Docenti")
+    {
+        const nav =
+            {
+                moduleName: "docenti/docenti-home/docenti-home",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
 };
 
 exports.onNavigatingFrom = onNavigatingFrom;

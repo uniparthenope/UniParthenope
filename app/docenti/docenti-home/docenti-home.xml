@@ -1,0 +1,136 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:rc="nativescript-ui-calendar"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <GridLayout>
+        <StackLayout orientation="vertical" height="100%">
+            <GridLayout rows="60,*,50">
+                <GridLayout row="0" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+                    <Label class="textPrimary" text="La Mia Giornata" horizontalAlignment="center" verticalAlignment="center"/>
+                </GridLayout>
+
+                <rc:RadCalendar row="1" id="myCalendar" dayViewEventSelected="onDaySelected" selectionMode="Single" viewMode="Day" eventsViewMode="Popover" eventSource="{{ events }}" verticalAlignment="top">
+                    <rc:RadCalendar.dayViewStyle>
+                        <rc:CalendarDayViewStyle showTitle="true" showDayNames="true" >
+                            <rc:CalendarDayViewStyle.todayCellStyle>
+                                <rc:DayCellStyle cellBorderColor="#940400" cellTextColor="#940400" cellTextFontName="Montserrat-Bold" cellTextSize="14" />
+                            </rc:CalendarDayViewStyle.todayCellStyle>
+
+                            <rc:CalendarDayViewStyle.dayCellStyle>
+                                <rc:DayCellStyle showEventsText="true" eventTextColor="White" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
+                                                 cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#107dd0"
+                                                 cellTextColor="#ffffff" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" ios:cellTextSize="12" android:cellTextSize="10"/>
+                            </rc:CalendarDayViewStyle.dayCellStyle>
+
+                            <rc:CalendarDayViewStyle.weekendCellStyle>
+                                <rc:DayCellStyle eventTextColor="BlueViolet" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
+                                                 cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#940400"
+                                                 cellTextColor="#ffffff" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="12" />
+                            </rc:CalendarDayViewStyle.weekendCellStyle>
+
+                            <rc:CalendarDayViewStyle.selectedDayCellStyle>
+                                <rc:DayCellStyle eventTextColor="Blue" eventFontName="Times New Roman" eventFontStyle="Bold" eventTextSize="8"
+                                                 cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="White"
+                                                 cellBorderWidth="2" cellBorderColor="White" cellTextColor="#22384f" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="22" />
+                            </rc:CalendarDayViewStyle.selectedDayCellStyle>
+
+
+
+                            <rc:CalendarDayViewStyle.dayNameCellStyle>
+                                <rc:CellStyle  cellBackgroundColor="#ffffff" cellBorderWidth="1" cellBorderColor="#22384f" cellTextColor="#22384f" cellTextFontName="Montserrat-Regular" cellTextSize="10" />
+                            </rc:CalendarDayViewStyle.dayNameCellStyle>
+
+                            <rc:CalendarDayViewStyle.titleCellStyle>
+                                <rc:CellStyle cellTextColor="#22384f" cellTextFontName="Montserrat-Regular" cellTextSize="18" />
+                            </rc:CalendarDayViewStyle.titleCellStyle>
+
+                            <rc:CalendarDayViewStyle.dayEventsViewStyle>
+                                <rc:DayEventsViewStyle
+                                        timeLabelFormat="HH:mm" timeLabelTextColor="#22384f"
+                                        timeLabelTextSize="12"/>
+                            </rc:CalendarDayViewStyle.dayEventsViewStyle>
+
+
+                        </rc:CalendarDayViewStyle>
+
+                    </rc:RadCalendar.dayViewStyle>
+                </rc:RadCalendar>
+                <!--        Bottom bar  -->
+                <GridLayout row="2" backgroundColor="#107dd0" height="50" width="100%" verticalAlignment="bottom">
+                    <GridLayout columns="*, *, *, *,*" height="60">
+                        <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                        <GridLayout col="0" tap="tapCalendar">
+                            <Image src="~/images/icon/calendar.png" height="23" width="23" />
+                            <StackLayout>
+                                <StackLayout class="badge" id="badge_Calendar">
+                                    <Label id=" text_badgeCalendar" class="badge-text" />
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+                        <GridLayout col="1" tap="tapCourses">
+                            <Image src="~/images/icon/courses.png" height="23" width="23" />
+                            <StackLayout>
+                                <StackLayout class="badge" id="badge_Courses">
+                                    <Label id="text_badgeCourses" class="badge-text" />
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+                        <GridLayout col="2" tap="tapAppello">
+                            <Image src="~/images/icon/appelli.png" height="23" width="23" />
+                            <StackLayout>
+                                <StackLayout class="badge" id="badge_appello">
+                                    <Label id="text_badgeAppello" class="badge-text" />
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+                        <GridLayout col="3" tap="tapFood">
+                            <Image src="~/images/icon/food.png" height="23" width="23" />
+                            <StackLayout>
+                                <StackLayout class="badge" id="badge_Food">
+                                    <Label id="text_badgeFood" class="badge-text" />
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+                        <GridLayout col="4" tap="tapBus">
+                            <Image src="~/images/icon/front-bus.png" height="23" width="23" />
+                            <StackLayout>
+                                <StackLayout class="badge" id="badge_Bus">
+                                    <Label id="text_badgeBus" class="badge-text" />
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+        </StackLayout>
+
+        <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Recupero informazioni..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
+    </GridLayout>
+
+</Page>

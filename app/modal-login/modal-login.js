@@ -76,7 +76,7 @@ function onShownModally(args) {
                     moduleName: "usertecnico-all/usertecnico-all",
                     clearHistory: true
                 };
-            frame.topmost().navigate(nav);
+            frame.Frame.topmost().navigate(nav);
         }
         /* Se un utente è di tipo ADMIN (ristorante) */
         else if (_result.statusCode === 666)
@@ -104,7 +104,7 @@ function onShownModally(args) {
                     moduleName: "admin/admin-home/admin-home",
                     clearHistory: true
                 };
-            frame.topmost().navigate(nav);
+            frame.Frame.topmost().navigate(nav);
         }
         else
         {
@@ -132,12 +132,33 @@ function onShownModally(args) {
             else
             {
                 if(result.user.grpDes === "Docenti"){
-                    dialogs.alert({
-                        title: "Attenzione!",
-                        message: "Il docente non è ancora supportato!! Lavori in corso.....",
-                        okButtonText: "OK"
-                    });
-                    args.object.closeModal();
+                    const sideDrawer = app.getRootView();
+                    global.saveInfo(account);
+                    let remember = sideDrawer.getViewById("rememberMe").checked;
+
+                    if (remember){
+                        appSettings.setString("username",user);
+                        appSettings.setString("password",pass);
+                        appSettings.setBoolean("rememberMe",true);
+                    }
+                    console.log("Docente:" + result.user.userId);
+                    global.isConnected = true;
+                    let nome = appSettings.getString("nome");
+                    let cognome = appSettings.getString("cognome");
+
+                    sideDrawer.getViewById("topName").text = nome + " " + cognome;
+                    let userForm = sideDrawer.getViewById("userDocente");
+                    let loginForm = sideDrawer.getViewById("loginForm");
+                    loginForm.visibility = "collapsed";
+                    userForm.visibility = "visible";
+
+                    closeCallback();
+                    const nav =
+                        {
+                            moduleName: "docenti/docenti-home/docenti-home",
+                            clearHistory: true
+                        };
+                    frame.Frame.topmost().navigate(nav);
                 }
                 else{
                     dialogs.alert({
@@ -206,9 +227,9 @@ function selectedCarrer(index) {
                 moduleName: "userCalendar/userCalendar",
                 clearHistory: false
             };
-        frame.topmost().navigate(nav);
+        frame.Frame.topmost().navigate(nav);
     }
-    //TODO: Account docente
+
     else {
         dialogs.alert({
             title: "Utente non supportato!",
@@ -217,6 +238,7 @@ function selectedCarrer(index) {
         });
         args.object.closeModal();
         //logout();
+
     }
 }
 

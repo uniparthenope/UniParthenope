@@ -13,6 +13,7 @@ let page;
 let viewModel;
 let sideDrawer;
 let items;
+let grpDes = appSettings.getString("grpDes");
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -159,38 +160,76 @@ function onGeneralMenu() {
     page.frame.navigate(nav);
 }
 
-exports.tapCourses = function(){
-    const nav =
-        {
-            moduleName: "corsi/corsi",
-            clearHistory: false
-        };
-    frame.topmost().navigate(nav);
-};
 exports.tapBus = function(){
     const nav =
         {
             moduleName: "trasporti/trasporti",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);
+    frame.Frame.topmost().navigate(nav);
+};
+
+
+exports.tapCourses = function(){
+//TODO da inserire path docenti
+    if (grpDes === "Studenti"){
+        const nav =
+            {
+                moduleName: "corsi/corsi",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
+    else if (grpDes === "Docenti")
+    {
+        const nav =
+            {
+                moduleName: "docenti/docenti-home/docenti-home",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
 };
 exports.tapCalendar = function(){
-    const nav =
-        {
-            moduleName: "userCalendar/userCalendar",
-            clearHistory: false
-        };
-    frame.topmost().navigate(nav);
+    if (grpDes === "Studenti"){
+        const nav =
+            {
+                moduleName: "userCalendar/userCalendar",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
+    else if (grpDes === "Docenti")
+    {
+        const nav =
+            {
+                moduleName: "docenti/docenti-home/docenti-home",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
 };
+
 exports.tapAppello = function(){
-    const nav =
-        {
-            moduleName: "userAppelli/appelli",
-            clearHistory: false
-        };
-    frame.topmost().navigate(nav);
-};
+    //TODO da inserire path docenti
+    if (grpDes === "Studenti"){
+        const nav =
+            {
+                moduleName: "userAppelli/userAppelli",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
+    else if (grpDes === "Docenti")
+    {
+        const nav =
+            {
+                moduleName: "docenti/docenti-home/docenti-home",
+                clearHistory: false
+            };
+        page.frame.navigate(nav);
+    }
+ };
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
