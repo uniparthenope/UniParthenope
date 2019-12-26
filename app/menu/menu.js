@@ -212,10 +212,11 @@ exports.tapCalendar = function(){
 
 exports.tapAppello = function(){
     //TODO da inserire path docenti
+    console.log(grpDes);
     if (grpDes === "Studenti"){
         const nav =
             {
-                moduleName: "userAppelli/userAppelli",
+                moduleName: "userAppelli/appelli",
                 clearHistory: false
             };
         page.frame.navigate(nav);
