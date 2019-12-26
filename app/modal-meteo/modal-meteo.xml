@@ -1,0 +1,31 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+      shownModally="onShownModally"
+      xmlns:accordion="nativescript-accordion">
+
+    <GridLayout height="55%" backgroundColor="#22384f">
+        <GridLayout  backgroundColor="#22384f" marginBottom="10" verticalAlignment="top" height="20%">
+            <Label class="textPrimary" text="Meteo@Uniparthenope" textWrap="true" textAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+        <GridLayout rows="auto,*" verticalAlignment="center" backgroundColor="rgba(0, 0, 0, 0.3)" height="60%">
+
+            <Label row="0" class="textPrimary" fontSize="16" text="Comune di Poggibonsi" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
+            <GridLayout row="1" verticalAlignment="top">
+                <GridLayout columns="*,*" margin="5 5 5 5">
+                    <StackLayout col="0" backgroundImage="~/images/logo_parth.png" width="100" height="100" horizontalAlignment="left" marginLeft="5"/>
+                    <GridLayout col="1" horizontalAlignment="left" rows="*,*">
+                        <Label row="0" fontSize="32" class="textPrimary" text="45 C" verticalAlignment="bottom"/>
+                        <GridLayout row="1" verticalAlignment="top">
+                            <Label class="textPrimary" text="NNE" horizontalAlignment="left"/>
+                            <Label class="textPrimary" text="19 kn" horizontalAlignment="right" marginRight="10"/>
+                        </GridLayout>
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+
+        </GridLayout>
+        <StackLayout orientation="horizontal" backgroundColor="#22384f" verticalAlignment="bottom" height="20%" horizontalAlignment="center" ontap="ontap_download">
+            <Image src="~/images/meteo.png" height="60" width="60" horizontalAlignment="center" marginRight="5" marginLeft="10"/>
+            <Label class="textPrimary" text="Scarica gratuitamente la nostra app" textWrap="true" marginRight="10" textAlignment="center" verticalAlignment="center" horizontalAlignment="left"/>
+        </StackLayout>
+    </GridLayout>
+</Page>

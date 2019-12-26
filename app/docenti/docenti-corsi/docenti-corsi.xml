@@ -1,0 +1,112 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <GridLayout>
+        <GridLayout rows="100,*,50">
+            <StackLayout row="0" class="two-color-gradient" width="100%" height="15%" verticalAlignment="top">
+                <Label class="textPrimary" text="Miei Corsi" horizontalAlignment="center" verticalAlignment="center" marginBottom="5" marginTop="5"/>
+                <Label class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="center" fontSize="12" marginBottom="15"/>
+                <GridLayout>
+                    <Label class="textPrimary" text="Semestre" horizontalAlignment="left" verticalAlignment="center" fontSize="12" marginBottom="5" marginLeft="10"/>
+                    <Label class="textPrimary" text="Insegnamento" horizontalAlignment="center" verticalAlignment="center" fontSize="12" marginBottom="5" marginLeft="10"/>
+                </GridLayout>
+
+            </StackLayout>
+
+            <ScrollView row="1" verticalAlignment="top" height="100%">
+                <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                    <ListView.itemTemplate >
+                        <FlexboxLayout flexDirection="row">
+                            <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
+                                <GridLayout class="examPass" width="70" height="70">
+                                    <Label  class="examPass" borderWidth="0" text="{{ semestre }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
+                                </GridLayout>
+                                <GridLayout rows="auto,auto,auto,auto">
+                                    <Label row="0" class="examPass" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" horizontalAlignment="left"/>
+                                    <Label row="1" class="examPass" borderWidth="0"  text="{{ settCod }}" fontSize="14" horizontalAlignment="center"/>
+                                    <StackLayout  row="2" orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="examPass" borderWidth="0"  text="{{ data_inizio }}" fontSize="14" horizontalAlignment="center"/>
+                                        <Label class="examPass" borderWidth="0"  text="{{ data_fine }}" fontSize="14" horizontalAlignment="center"/>
+                                    </StackLayout>
+                                    <StackLayout row="3" orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="examPass" borderWidth="0"  text="Ult.Mod. :" fontSize="11" horizontalAlignment="center" color="#8b0000"/>
+                                        <Label class="examPass" borderWidth="0"  text="{{ ult_mod }}" fontSize="11" horizontalAlignment="center" color="#8b0000"/>
+                                    </StackLayout>
+                                </GridLayout>
+                            </StackLayout>
+                        </FlexboxLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </ScrollView>
+            <!--        Bottom bar  -->
+            <GridLayout row="2" backgroundColor="#107dd0" height="10%" verticalAlignment="bottom" width="100%">
+                <GridLayout columns="*, *, *, *,*" height="60">
+                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout col="0" tap="tapCalendar">
+                        <Image src="~/images/icon/calendar.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Calendar">
+                                <Label id=" text_badgeCalendar" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="1" tap="tapCourses">
+                        <Image src="~/images/icon/courses.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Courses">
+                                <Label id="text_badgeCourses" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="2" tap="tapAppello">
+                        <Image src="~/images/icon/appelli.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_appello">
+                                <Label id="text_badgeAppello" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="3" tap="tapFood">
+                        <Image src="~/images/icon/food.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Food">
+                                <Label id="text_badgeFood" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="4" tap="tapBus">
+                        <Image src="~/images/icon/front-bus.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Bus">
+                                <Label id="text_badgeBus" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+        </GridLayout>
+    </GridLayout>
+</Page>

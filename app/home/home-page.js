@@ -8,6 +8,7 @@ const utilsModule = require("tns-core-modules/utils/utils");
 const utf8 = require('utf8');
 const dialogs = require("tns-core-modules/ui/dialogs");
 let appversion = require("nativescript-appversion");
+const modalViewModule = "modal-meteo/modal-meteo";
 
 let page;
 let viewModel;
@@ -172,6 +173,11 @@ function autoconnect() {
 
 exports.onTapNotizie = function(){
   page.frame.navigate("notizie/notizie");
+};
+
+exports.onTapMeteo = function(){
+    const adLogId = { nome: "test"};
+    page.showModal(modalViewModule, adLogId);
 };
 
 exports.onTapTrasporti = function(){

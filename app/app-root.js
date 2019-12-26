@@ -1,8 +1,7 @@
 const app = require("tns-core-modules/application");
 const frame = require("tns-core-modules/ui/frame");
 const observableModule = require("tns-core-modules/data/observable");
-const httpModule = require("tns-core-modules/http");
-const appSettings = require("tns-core-modules/application-settings");
+const utilsModule = require("tns-core-modules/utils/utils");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const modalViewModule = "modal-login/modal-login";
 let base64= require('base-64');
@@ -153,4 +152,7 @@ exports.goto_adminNew = function () {
     frame.Frame.topmost().navigate(nav);
 };
 
+exports.ontap_account = function(){
+    utilsModule.openUrl("https://uniparthenope.esse3.cineca.it/Anagrafica/PasswordDimenticata.do");
+};
 exports.pageLoaded = pageLoaded;

@@ -24,7 +24,7 @@
                         <TextField class="form-input" hint="Password" secure="true" id="password"/>
                         <cb:CheckBox checked="true" text="Remember me" id="rememberMe" color="white" fillColor="white" marginTop="5" marginLeft="5"/>
                         <Button class="btn-menu" text="Login" marginBottom="5" marginTop="20" tap="onTapLogin"/>
-                        <Label text="Dimenticato account?" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10"/>
+                        <Label text="Dimenticato account?" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10" ontap="ontap_account"/>
 
                     </StackLayout>
 
@@ -43,8 +43,8 @@
                     <StackLayout id="userDocente" visibility="collapsed">
 
                             <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap=""/>
-                            <Button class="btn-menu" text="Libretto" marginBottom="5" marginTop="5" tap=""/>
-                            <Button class="btn-menu" text="Corsi" marginBottom="5" marginTop="5" tap=""/>
+                            <Button class="btn-menu" text="Anagrafe" marginBottom="5" marginTop="5" tap=""/>
+                            <Button class="btn-menu" text="Ricevimento" marginBottom="5" marginTop="5" tap=""/>
                             <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap=""/>
                             <Button class="btn-menu" text="Segreteria" marginBottom="5" marginTop="5" tap=""/>
 

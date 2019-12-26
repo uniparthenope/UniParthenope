@@ -29,7 +29,7 @@
                 <StackLayout  class="two-color-gradient" width="100%" height="20%" verticalAlignment="center"/>
                 <StackLayout id="bottom_bar" height="5" width="100%" backgroundColor="#107dd0"/>
 
-                <GridLayout columns="*,*,auto,*,*" class="main_image" id="main_image" backgroundImage="~/images/image1.jpg" marginBottom="30" height="34%">
+                <GridLayout columns="*,*,*,*,*" class="main_image" id="main_image" backgroundImage="~/images/image1.jpg" marginBottom="30" height="34%">
                     <GridLayout col="0" id="bg_0" height="100" verticalAlignment="bottom">
                         <StackLayout id="icon_0" backgroundImage="~/images/icon_home/CDN.png" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
@@ -53,14 +53,17 @@
                         <Button  class="btn" text="Eventi" horizontalAlignment="center" width="50%" ontap="onTapEventi" />
                     </StackLayout>
                     <StackLayout orientation="horizontal" row="1" horizontalAlignment="stretch" verticalAlignment="top">
-                        <Button  class="btn" text="Studia Con Noi" horizontalAlignment="center" width="50%" marginRight="5" tap="onTapStudia"/>
+                        <Button  class="btn" text="Studia Con Noi" backgroundColor="#22384f" color="white" horizontalAlignment="center" width="50%" marginRight="5" tap="onTapStudia"/>
                         <Button  class="btn" text="Notizie" horizontalAlignment="center" width="50%" tap="onTapNotizie"/>
                     </StackLayout>
-                    <GridLayout row="2" columns="*,*" verticalAlignment="top" horizontalAlignment="stretch">
-                        <StackLayout col="0" height="100%" horizontalAlignment="right" marginRight="10">
+                    <GridLayout row="2" columns="auto,auto,auto" verticalAlignment="top" horizontalAlignment="center">
+                        <StackLayout col="0" horizontalAlignment="right" marginRight="5">
                             <Button class="circle" backgroundColor="#22384f" tap="onTapFood" backgroundImage="~/images/icon/food.png" height="30" width="30"/>
                         </StackLayout>
-                        <StackLayout col="1" horizontalAlignment="left" marginLeft="10">
+                        <StackLayout col="1" horizontalAlignment="left" marginLeft="5" marginRight="5">
+                            <Button class="circle" backgroundColor="#22384f" tap="onTapMeteo" backgroundImage="~/images/icon/storm.png" height="30" width="30"/>
+                        </StackLayout>
+                        <StackLayout col="2" horizontalAlignment="left" marginLeft="5">
                             <Button class="circle" backgroundColor="#22384f" tap="onTapTrasporti" backgroundImage="~/images/icon/front-bus.png" height="30" width="30"/>
                         </StackLayout>
                     </GridLayout>
