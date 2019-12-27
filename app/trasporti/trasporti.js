@@ -211,6 +211,7 @@ exports.tapCalendar = function(){
 exports.tapAppello = function(){
     //TODO da inserire path docenti
     if (grpDes === "Studenti"){
+
         const nav =
             {
                 moduleName: "userAppelli/appelli",
