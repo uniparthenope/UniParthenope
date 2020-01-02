@@ -206,6 +206,7 @@ exports.onTapEventi = function(){
 exports.onTapFood = function(){
     const nav =
         {
+           // moduleName:"docenti/docenti-appelli/docenti-appelli"
             moduleName: "menu/menu"
         };
     page.frame.navigate(nav);

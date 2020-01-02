@@ -1,0 +1,157 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar"
+      xmlns:accordion="nativescript-accordion">
+
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <GridLayout>
+        <GridLayout rows="100,*,50">
+
+            <GridLayout row="0" class="two-color-gradient" width="100%" height="15%" verticalAlignment="top" rows="auto,auto,auto">
+                <StackLayout class="main_image" backgroundImage="~/images/icon/add.png" height="25" width="25" horizontalAlignment="right" ontap="ontap_addExam" marginRight="10"/>
+                <Label row="0" class="textPrimary" text="Appelli Pubblicati" horizontalAlignment="center" verticalAlignment="top" marginTop="10" marginBottom="10"/>
+                <Label row="1" class="textPrimary" id="sessione" horizontalAlignment="center" verticalAlignment="bottom" fontSize="14"/>
+                <Label row="2" class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="10" fontSize="12"/>
+            </GridLayout>
+            <ScrollView row="1" verticalAlignment="top"  height="100%">
+                <!--        Old Listview
+               <ListView id="appelli_listview" class="list-group" items="{{ items_appelli }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                    <ListView.itemTemplate >
+                        <FlexboxLayout flexDirection="row">
+                            <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
+                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                    <Label class="{{ classe }}" borderWidth="0" fontSize="16" text="{{ dataEsame }}"/>
+                                </StackLayout>
+                                <Label class="{{ classe }}" borderWidth="0" text="{{ esame }}" horizontalAlignment="center"/>
+                                <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ descrizione }}" horizontalAlignment="center"/>
+                                <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ note }}" horizontalAlignment="center"/>
+
+                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Prenotazioni: da " />
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataInizio }}"/>
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text=" a " />
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataFine }}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Iscritti: "/>
+                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </FlexboxLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+                -->
+                <accordion:Accordion id="accordion" itemHeaderTap="tapped" items="{{items_appello}}" allowMultiple="false" heigth="100%">
+                    <accordion:Accordion.itemHeaderTemplate>
+                        <GridLayout height="75" backgroundColor="#22384f">
+                            <Label class="textPrimary" text="{{ titolo }}" textWrap="true" textAlignment="center" verticalAlignment="center"/>
+                        </GridLayout>
+                    </accordion:Accordion.itemHeaderTemplate>
+                    <accordion:Accordion.itemContentTemplate>
+                        <StackLayout>
+                            <GridLayout>
+                                <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="{{ classe }}" borderWidth="0" text="{{ dataEsame }}"/>
+                                    </StackLayout>
+                                    <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ descrizione }}" horizontalAlignment="center"/>
+                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ note }}" horizontalAlignment="center"/>
+
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Prenotazioni: da " />
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataInizio }}"/>
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text=" a " />
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataFine }}"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Iscritti: "/>
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </GridLayout>
+                        </StackLayout>
+                    </accordion:Accordion.itemContentTemplate>
+                </accordion:Accordion>
+            </ScrollView>
+
+            <!--        Bottom bar  -->
+            <GridLayout row="2" backgroundColor="#107dd0"  verticalAlignment="bottom" width="100%">
+                <GridLayout columns="*, *, *, *,*" height="60">
+                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout col="0" tap="tapCalendar">
+                        <Image src="~/images/icon/calendar.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Calendar">
+                                <Label id=" text_badgeCalendar" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="1" tap="tapCourses">
+                        <Image src="~/images/icon/courses.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Courses">
+                                <Label id="text_badgeCourses" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="2" tap="tapAppello">
+                        <Image src="~/images/icon/appelli.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_appello">
+                                <Label id="text_badgeAppello" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="3" tap="tapFood">
+                        <Image src="~/images/icon/food.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Food">
+                                <Label id="text_badgeFood" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="4" tap="tapBus">
+                        <Image src="~/images/icon/front-bus.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Bus">
+                                <Label id="text_badgeBus" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+
+        </GridLayout>
+
+        <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Recupero Esami..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
+
+    </GridLayout>
+</Page>

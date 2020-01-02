@@ -12,7 +12,7 @@ let page;
 let viewModel;
 let sideDrawer;
 let appelli_listview;
-let items_appelli;
+let items_appello;
 let loading;
 let num;
 
@@ -20,25 +20,35 @@ function onNavigatingTo(args) {
     page = args.object;
     page.getViewById("selected_col").col = "2";
     //appSettings.setBoolean("esami_futuri",false);
-    viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     drawTitle();
 
-    items_appelli = new ObservableArray();
-    appelli_listview = page.getViewById("appelli_listview");
+    items_appello = new ObservableArray();
+    appelli_listview = page.getViewById("accordion");
     loading = page.getViewById("activityIndicator");
 
-    viewModel = Observable.fromObject({
-        items_appelli: items_appelli
+    viewModel = observableModule.fromObject({
+        items_appello: items_appello
     });
 
     loading.visibility = "visible";
-    let exams = global.freqExams;
+    let exams = global.myExams;
     num = 0;
+
+    items_appello.splice(0);
     for (let i=0; i<exams.length; i++){
-        getAppelli(exams[i].adId);
+        items_appello.push(
+            {
+                titolo: exams[i].nome,
+                items: getAppelli(exams[i].adId,exams[i].cdsId)
+            }
+        );
+
+        appelli_listview.refresh();
+
     }
+    //page.set("items_appello",items_appello);
     global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
@@ -52,28 +62,11 @@ function drawTitle() {
     page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
     page.getViewById("sessione").text = appSettings.getString("sessione");
 }
+function getAppelli(adId,cdsId) {
+    let myarray = [];
 
-function onGeneralMenu(){
-    const nav =
-        {
-            moduleName: "home/home-page",
-            clearHistory: true
-        };
-    page.frame.navigate(nav);
-}
-
-exports.tapCalendar = function(){
-    const nav =
-        {
-            moduleName: "userCalendar/userCalendar",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-function getAppelli(adId) {
     httpModule.request({
-        url: global.url + "checkAppello/"+ global.encodedStr +"/" + appSettings.getNumber("cdsId") +"/" + adId,
+        url: global.url + "checkAppello/"+ global.encodedStr +"/" + cdsId +"/" + adId,
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
@@ -91,6 +84,7 @@ function getAppelli(adId) {
         }
         else
         {
+
             for (let i=0; i<result.length; i++)
             {
                 let day,year,month;
@@ -102,9 +96,8 @@ function getAppelli(adId) {
 
                 if (result[i].stato === "P")
                 {
-                    items_appelli.push({
+                   let items = {
                         "esame": result[i].esame,
-                        "docente": result[i].docente_completo,
                         "descrizione": result[i].descrizione,
                         "note": result[i].note,
                         "dataEsame": final_data,
@@ -115,21 +108,16 @@ function getAppelli(adId) {
                         "date" : date,
                         "adId": adId,
                         "appId": result[i].appId
-                    });
-                    items_appelli.sort(function (orderA, orderB) {
-                        let nameA = orderA.date;
-                        let nameB = orderB.date;
-                        return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-                    });
+                    };
                     num++;
                     appSettings.setNumber("appelloBadge",num);
-                    appelli_listview.refresh();
+                    myarray.push(items);
+                    //appelli_listview.refresh();
                 }
                 if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
 
-                    items_appelli.push({
+                    let items = {
                         "esame": result[i].esame,
-                        "docente": result[i].docente_completo,
                         "descrizione": result[i].descrizione,
                         "note": result[i].note,
                         "dataEsame": final_data,
@@ -141,17 +129,12 @@ function getAppelli(adId) {
                         "adId": adId,
                         "appId": result[i].appId
 
-                    });
-                    items_appelli.sort(function (orderA, orderB) {
-                        let nameA = orderA.classe;
-                        let nameB = orderB.classe;
-                        return (nameA > nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-                    });
-                    appelli_listview.refresh();
+                    };
+                    myarray.push(items);
+                    //appelli_listview.refresh();
                 }
                 loading.visibility = "collapsed";
             }
-            loading.visibility = "collapsed";
         }
 
     },(e) => {
@@ -162,7 +145,7 @@ function getAppelli(adId) {
             okButtonText: "OK"
         });
     });
-
+    return myarray;
 }
 
 function dayOfWeek(date) {
@@ -177,10 +160,27 @@ function dayOfWeek(date) {
 
 function monthOfYear(date) {
     let month = parseInt(date.substring(3, 5)) - 1;
-        return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
+    return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
 
 }
 
+function onGeneralMenu(){
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
+}
+
+exports.tapCalendar = function(){
+    const nav =
+        {
+            moduleName: "docenti/docenti-home/docenti-home",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
 exports.tapFood = function(){
     const nav =
         {
@@ -194,16 +194,7 @@ exports.tapFood = function(){
 exports.tapCourses = function(){
     const nav =
         {
-            moduleName: "corsi/corsi",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.tapAppello = function(){
-    const nav =
-        {
-            moduleName: "userAppelli/appelli",
+            moduleName: "docenti/docenti-corsi/docenti-corsi",
             clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
@@ -217,7 +208,7 @@ exports.tapBus = function(){
         };
     frame.Frame.topmost().navigate(nav);
 };
-
+/*
 function onItemTap(args) {
     const mainView = args.object;
     const index = args.index;
@@ -229,6 +220,8 @@ function onItemTap(args) {
 }
 
 exports.onItemTap = onItemTap;
+ */
+
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

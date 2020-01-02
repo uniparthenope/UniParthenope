@@ -172,13 +172,13 @@ exports.tapFood = function(){
 };
 
 exports.tapAppello = function(){
-    /*const nav =
+    const nav =
         {
-            moduleName: "userAppelli/appelli",
+            moduleName: "docenti/docenti-appelli/docenti-appelli",
             clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
-*/
+
 };
 
 

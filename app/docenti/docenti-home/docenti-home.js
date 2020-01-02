@@ -230,13 +230,12 @@ function onGeneralMenu() {
 }
 
 exports.tapAppello = function(){
-    /*
     const nav =
         {
-            moduleName: "userAppelli/appelli",
+            moduleName: "docenti/docenti-appelli/docenti-appelli",
             clearHistory: false
         };
-    frame.topmost().navigate(nav);*/
+    frame.topmost().navigate(nav);
 };
 
 exports.tapCourses = function(){
