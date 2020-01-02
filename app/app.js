@@ -25,6 +25,22 @@ appSettings.setString("sessione", result.curr_sem);
 appSettings.setString("semestre", result.semestre);
 */
 
+global.clearAll = function(){
+    appSettings.clear();
+    global.isConnected = false;
+    global.updatedExam = false;
+    global.tempPos = false;
+    global.tempNum = 0;
+    global.encodedStr = "";
+    global.authToken="";
+    global.myform = "";
+    global.username = "";
+    global.events = [];
+    global.freqExams = [];
+    global.myExams = [];
+    global.myDocenti = [];
+
+};
 global.saveInfo = function(result) {
     appSettings.setString("codFis",result.user.codFis);
     appSettings.setString("nome",result.user.firstName);
@@ -113,14 +129,11 @@ application.on(application.exitEvent, (args) => {
         global.tempNum = 0;
         global.myform = "";
         global.username = "";
-        global.data_today;
         global.events = [];
         global.tempPos = false;
         global.freqExams = [];
         global.myExams = [];
 
-        appSettings.setNumber("examsBadge", 0);
-        appSettings.setNumber("appelloBadge", 0);
 
         if(global.encodedStr !== " "){
             let url = global.url + "logout/" + global.encodedStr + "/" + global.authToken;
@@ -130,7 +143,7 @@ application.on(application.exitEvent, (args) => {
             }).then((response) => {
                 const result = response.content.toJSON();
 
-                if(result.status_code == 200){
+                if(result.status_code === 200){
                     console.log("Logout");
                 }
 

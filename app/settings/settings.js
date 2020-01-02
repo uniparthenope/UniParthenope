@@ -13,7 +13,13 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
-    let remember = appSettings.getBoolean("rememberMe");
+    let remember = appSettings.getBoolean("rememberMe",false);
+
+    if (global.isConnected) //If im logged in, show user settings
+    {
+        page.getViewById("appello_futuro").visibility = "visible";
+    }
+
     if (remember)
         page.getViewById("deleteBtn").visibility = "visible";
     else
@@ -40,14 +46,16 @@ function onTapDelete(){
         cancelButtonText: "No"
     }).then(function (result) {
         if (result){
-            appSettings.clear();
-            let loginForm = sideDrawer.getViewById("loginForm");
-            let userForm = sideDrawer.getViewById("userForm");
+            global.clearAll();
+            sideDrawer.getViewById("userForm").visibility="collapsed";
+            sideDrawer.getViewById("userDocente").visibility="collapsed";
+            sideDrawer.getViewById("userTecnico").visibility="collapsed";
+            sideDrawer.getViewById("userAdmin").visibility="collapsed";
             sideDrawer.getViewById("topName").text = "Benvenuto!";
+            sideDrawer.getViewById("loginForm").visibility="visible";
             //Default foto (se aggiunta)
-            userForm.visibility = "collapsed";
-            loginForm.visibility = "visible";
             page.getViewById("deleteBtn").visibility = "collapsed";
+
             page.frame.navigate("home/home-page");
         }
     });
@@ -56,7 +64,7 @@ exports.onTapDelete = onTapDelete;
 
 // Check per mostrare nella pagina APPELLI.JS anche gli appelli non ancora prenotabili, ma disponibili.
 function onSwitchLoaded_appello(args) {
-    page.getViewById("switch_appello").checked = appSettings.getBoolean("esami_futuri");
+    page.getViewById("switch_appello").checked = appSettings.getBoolean("esami_futuri",false);
     const mySwitch = args.object;
 
     mySwitch.on("checkedChange", (args) => {
