@@ -2,7 +2,7 @@
       navigatingTo="onNavigatingTo"
       actionBarHidden="false"
       xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:cb="nativescript-checkbox">
+      xmlns:cb="@nstudio/nativescript-checkbox">
 
 
     <ActionBar class="action-bar">

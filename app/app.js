@@ -26,7 +26,6 @@ appSettings.setString("semestre", result.semestre);
 */
 
 global.clearAll = function(){
-    appSettings.clear();
     global.isConnected = false;
     global.updatedExam = false;
     global.tempPos = false;
@@ -39,6 +38,7 @@ global.clearAll = function(){
     global.freqExams = [];
     global.myExams = [];
     global.myDocenti = [];
+    appSettings.clear();
 
 };
 global.saveInfo = function(result) {

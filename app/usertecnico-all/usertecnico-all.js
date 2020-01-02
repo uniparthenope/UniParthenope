@@ -71,7 +71,7 @@ function onNavigatingTo(args) {
                     img = "~/images/no_food.png";
 
                 else
-                    img = base64.fromBase64(result[i].image);
+                    img = base64.ImageSource.fromBase64Sync(result[i].image);
 
                 items.push({
                     nome: result[i].nome,

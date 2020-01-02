@@ -42,10 +42,10 @@ function onNavigatingTo(args) {
         global.tempPos = true;
     }
 
-   if (!global.isConnected && user !== undefined){
+   if (user !== undefined && !global.isConnected){
        dialogs.alert({
            title: "Bentornato!",
-           message: "Bentornato "+ user,
+           message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome"),
            okButtonText: "OK"
        }).then(
        );
@@ -134,29 +134,41 @@ function autoconnect() {
                     };
                 page.frame.navigate(nav);
             }
-            else
+            else if(result.user.grpDes === "Docenti")
+            {
+                global.saveInfo(result);
+                global.isConnected = true;
+                let nome = appSettings.getString("nome");
+                let cognome = appSettings.getString("cognome");
+                let username = nome + " " + cognome;
+                setSideMenu("userDocente",username);
+                indicator.visibility = "collapsed";
+                const nav =
+                    {
+                        moduleName: "docenti/docenti-home/docenti-home",
+                        clearHistory: true
+                    };
+                page.frame.navigate(nav);
+            }
+            else if (result.user.grpDes === "Studenti")
             {
                 let carriere = result.user.trattiCarriera;
                 global.saveInfo(result);
-
                 let index = appSettings.getNumber("carriera");
                 global.saveCarr(carriere[index]);
                 global.isConnected = true;
                 let nome = appSettings.getString("nome");
                 let cognome = appSettings.getString("cognome");
-                let user = nome + " " + cognome;
-                let grpDes = appSettings.getString("grpDes");
-                if (grpDes === "Studenti")
-                {
-                    setSideMenu("userForm",user);
-                    indicator.visibility = "collapsed";
-                    const nav =
+                let username = nome + " " + cognome;
+                setSideMenu("userForm",username);
+                indicator.visibility = "collapsed";
+                const nav =
                         {
                             moduleName: "userCalendar/userCalendar",
                             clearHistory: true
                         };
-                    page.frame.navigate(nav);
-                }
+                page.frame.navigate(nav);
+
             }
 
         },(e) => {
