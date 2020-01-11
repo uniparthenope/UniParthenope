@@ -17,6 +17,7 @@ let grpDes = appSettings.getString("grpDes");
 
 function onNavigatingTo(args) {
     page = args.object;
+
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
