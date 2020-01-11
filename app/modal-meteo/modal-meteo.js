@@ -88,7 +88,6 @@ function getWeather(lat, long) {
                     okButtonText: "OK"
                 });
             });
-
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
