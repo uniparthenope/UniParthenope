@@ -79,24 +79,7 @@ function getWeather(lat, long) {
                        }
 
                    }
-                   //today.setDate(today.getDate()+day);
                }
-                /*
-                console.log("ZZZ "+today);
-                if (data1.result === "ok") {
-                    page.getViewById("date_" + x).text = dateToDDMM(today);
-                    page.getViewById("image_" + x).backgroundImage = "https://meteo.uniparthenope.it/sites/all/themes/zircon_custom/js/images/" + data1.forecast.icon;
-                    page.getViewById("temperature_" + x).text = data1.forecast.t2c + " °C";
-                    page.getViewById("wind_speed_" + x).text = (data1.forecast.ws10n * 0.514444).toFixed(2) + " m/s";
-                    page.getViewById("wind_" + x).text = data1.forecast.winds;
-                    page.getViewById("weather_" + x).text = data1.forecast.text.it;
-
-                } else if (data1.result === "error") {
-
-                }
-                today.setDate(today.getDate()+x);
-
-                 */
             },(e) => {
                 console.log("Error", e);
                 dialogs.alert({
