@@ -229,6 +229,10 @@ refer to http://docs.nativescript.org/ui/theme.
     border-color: #22384f;
     border-width: 5;
 }
+.font-bol{
+    color: white;
+    font-family: Montserrat-Bold;
+}
 ActionBar {
     background-color: #22384f;
     color: white;
