@@ -33,7 +33,7 @@ function onNavigatingTo(args) {
         items_appelli: items_appelli
     });
 
-    loading.visibility = "visible";
+
     let exams = global.freqExams;
     num = 0;
     for (let i=0; i<exams.length; i++){
@@ -72,6 +72,7 @@ exports.tapCalendar = function(){
 };
 
 function getAppelli(adId) {
+    loading.visibility = "visible";
     httpModule.request({
         url: global.url + "checkAppello/"+ global.encodedStr +"/" + appSettings.getNumber("cdsId") +"/" + adId,
         method: "GET",
@@ -225,7 +226,6 @@ function onItemTap(args) {
         esame: items_appelli.getItem(index).esame};
 
     mainView.showModal(modalViewModule, adLogId, false);
-
 }
 
 exports.onItemTap = onItemTap;

@@ -15,6 +15,7 @@ let viewModel;
 let sideDrawer;
 let remember;
 let user;
+let pos;
 
 let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553, color: 'linear-gradient(135deg, #5CC77A, #009432)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(0, 167, 84))'},
     {id: 'Medina', lat: 40.840447, long: 14.251863, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(221, 108, 166))'},
@@ -188,8 +189,8 @@ exports.onTapNotizie = function(){
 };
 
 exports.onTapMeteo = function(){
-    const adLogId = { nome: "test"};
-    page.showModal(modalViewModule, adLogId);
+    const loc = { lat: pos.latitude, long: pos.longitude };
+    page.showModal(modalViewModule, loc, false);
 };
 
 exports.onTapTrasporti = function(){
@@ -266,6 +267,7 @@ function getPosition(){
             then(function(loc) {
                 console.log("Finding "+loc);
                 if (loc) {
+                    pos = loc;
                     let position = calculateDistance(loc);
                     appSettings.setString("position", position);
                     console.log("MY_POSITION = "+loc.latitude+ " "+loc.longitude);

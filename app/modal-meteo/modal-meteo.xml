@@ -8,7 +8,7 @@
         </GridLayout>
         <GridLayout rows="auto,*" verticalAlignment="center" backgroundColor="rgba(0, 0, 0, 0.3)" height="60%">
 
-            <Label row="0" class="textPrimary" fontSize="16" text="Comune di Poggibonsi" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
+            <Label row="0" class="textPrimary" fontSize="16" text="Comune di Poggibonsi" id="position" textWrap="true" horizontalAlignment="center" verticalAlignment="center"/>
             <GridLayout row="1" verticalAlignment="top">
                 <GridLayout columns="*,*" margin="5 5 5 5">
                     <StackLayout col="0" backgroundImage="~/images/logo_parth.png" width="100" height="100" horizontalAlignment="left" marginLeft="5"/>
