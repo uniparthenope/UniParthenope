@@ -96,60 +96,8 @@ function getWeather(lat, long) {
             okButtonText: "OK"
         });
     });
-    /*
-    fetch( "https://api.meteo.uniparthenope.it/places/search/bycoords/" + lat + "/" + long + "?filter=com").then((response) => response.json()).then((data) => {
-        let place = data[0].long_name.it;
-        if (place.includes("Municipalit")) {
-            let tmp = place.split("-");
-            let tmp1 = tmp.pop();
-            page.getViewById("position").text = tmp1;
-            //console.log("POSTO : " + place_selected);
-        } else {
-            page.getViewById("position").text = place;
-
-           // console.log("POSTO : " + place_selected);
-        }
-
-        let id = data[0].id;
-        for (let x = 0; x<4; x++){
-            httpModule.request({
-                url: "https://api.meteo.uniparthenope.it/products/wrf5/forecast/" + id + "?date=" + dateToString(today),
-                method: "GET",
-                headers: {"Content-Type": "application/json"}
-            }).then((response) => {
-                const result = response.content.toJSON();
-                //console.log(result);
-
-            },(e) => {
-                console.log("Error", e);
-                dialogs.alert({
-                    title: "Errore Meteo!",
-                    message: e,
-                    okButtonText: "OK"
-                });
-            });
-            fetch(  "https://api.meteo.uniparthenope.it/products/wrf5/forecast/" + id + "?date=" + dateToString(today)).then((response) => response.json()).then((data1) => {
-                today.setDate(today.getDate()+x);
-                console.log("ZZZ "+today);
-                if (data1.result === "ok") {
-                    page.getViewById("date_" + x).text = dateToDDMM(today);
-                    page.getViewById("image_" + x).backgroundImage = "https://meteo.uniparthenope.it/sites/all/themes/zircon_custom/js/images/" + data1.forecast.icon;
-                    page.getViewById("temperature_" + x).text = data1.forecast.t2c + " °C";
-                    page.getViewById("wind_speed_" + x).text = (data1.forecast.ws10n * 0.514444).toFixed(2) + " m/s";
-                    page.getViewById("wind_" + x).text = data1.forecast.winds;
-                    page.getViewById("weather_" + x).text = data1.forecast.text.it;
-
-                } else if (data1.result === "error") {
-
-                }
-            }).catch(error => console.error("[SEARCH] ERROR DATA ", error));
-
-        }
-
-    });
-
-     */
 }
+
 function dateToString(today){
     const year = today.getFullYear();
     let month = today.getMonth() + 1;
