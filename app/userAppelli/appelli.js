@@ -72,7 +72,6 @@ exports.tapCalendar = function(){
 };
 
 function getAppelli(adId) {
-    loading.visibility = "visible";
     httpModule.request({
         url: global.url + "checkAppello/"+ global.encodedStr +"/" + appSettings.getNumber("cdsId") +"/" + adId,
         method: "GET",
@@ -152,9 +151,7 @@ function getAppelli(adId) {
                 }
                 loading.visibility = "collapsed";
             }
-            loading.visibility = "collapsed";
         }
-
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({
