@@ -64,52 +64,6 @@
                 </ScrollView>
 
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#107dd0"  verticalAlignment="bottom" width="100%">
-                    <GridLayout columns="*, *, *, *,*" height="60">
-                        <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
-                        <GridLayout col="0" tap="tapCalendar">
-                            <Image src="~/images/icon/calendar.png" height="23" width="23" />
-                            <StackLayout>
-                                <StackLayout class="badge" id="badge_Calendar">
-                                    <Label id=" text_badgeCalendar" class="badge-text" />
-                                </StackLayout>
-                            </StackLayout>
-                        </GridLayout>
-                        <GridLayout col="1" tap="tapCourses">
-                            <Image src="~/images/icon/courses.png" height="23" width="23" />
-                            <StackLayout>
-                                <StackLayout class="badge" id="badge_Courses">
-                                    <Label id="text_badgeCourses" class="badge-text" />
-                                </StackLayout>
-                            </StackLayout>
-                        </GridLayout>
-                        <GridLayout col="2" tap="tapAppello">
-                            <Image src="~/images/icon/appelli.png" height="23" width="23" />
-                            <StackLayout>
-                                <StackLayout class="badge" id="badge_appello">
-                                    <Label id="text_badgeAppello" class="badge-text" />
-                                </StackLayout>
-                            </StackLayout>
-                        </GridLayout>
-                        <GridLayout col="3" tap="tapFood">
-                            <Image src="~/images/icon/food.png" height="23" width="23" />
-                            <StackLayout>
-                                <StackLayout class="badge" id="badge_Food">
-                                    <Label id="text_badgeFood" class="badge-text" />
-                                </StackLayout>
-                            </StackLayout>
-                        </GridLayout>
-                        <GridLayout col="4" tap="tapBus">
-                            <Image src="~/images/icon/front-bus.png" height="23" width="23" />
-                            <StackLayout>
-                                <StackLayout class="badge" id="badge_Bus">
-                                    <Label id="text_badgeBus" class="badge-text" />
-                                </StackLayout>
-                            </StackLayout>
-                        </GridLayout>
-                    </GridLayout>
-                </GridLayout>
-
         </GridLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">

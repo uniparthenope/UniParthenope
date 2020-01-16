@@ -152,6 +152,14 @@ exports.goto_adminNew = function () {
     frame.Frame.topmost().navigate(nav);
 };
 
+exports.goto_appelli = function () {
+    const nav =
+        {
+            moduleName: "userAppelli/appelli",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
 exports.ontap_account = function(){
     utilsModule.openUrl("https://uniparthenope.esse3.cineca.it/Anagrafica/PasswordDimenticata.do");
 };

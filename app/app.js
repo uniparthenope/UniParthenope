@@ -18,6 +18,7 @@ global.tempPos = false;
 global.freqExams = [];
 global.myExams = [];
 global.myDocenti = [];
+global.myPrenotazioni = [];
 
 /*
 appSettings.setString("aa_accad", result.aa_accad);

@@ -18,7 +18,6 @@ let num;
 
 function onNavigatingTo(args) {
     page = args.object;
-    page.getViewById("selected_col").col = "2";
     //appSettings.setBoolean("esami_futuri",false);
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
@@ -39,7 +38,6 @@ function onNavigatingTo(args) {
     for (let i=0; i<exams.length; i++){
         getAppelli(exams[i].adId);
     }
-    global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
 
@@ -121,8 +119,7 @@ function getAppelli(adId) {
                         let nameB = orderB.date;
                         return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
                     });
-                    num++;
-                    appSettings.setNumber("appelloBadge",num);
+
                     appelli_listview.refresh();
                 }
                 if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
@@ -179,42 +176,7 @@ function monthOfYear(date) {
 
 }
 
-exports.tapFood = function(){
-    const nav =
-        {
-            moduleName: "menu/menu",
 
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.tapCourses = function(){
-    const nav =
-        {
-            moduleName: "corsi/corsi",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.tapAppello = function(){
-    const nav =
-        {
-            moduleName: "userAppelli/appelli",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.tapBus = function(){
-    const nav =
-        {
-            moduleName: "trasporti/trasporti",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
 
 function onItemTap(args) {
     const mainView = args.object;

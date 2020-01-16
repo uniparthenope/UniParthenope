@@ -157,7 +157,6 @@ function onNavigatingFrom(args) {
 }
 
 exports.tapCourses = function(){
-    //TODO da inserire path docenti
     if (grpDes === "Studenti"){
         const nav =
             {
@@ -188,7 +187,6 @@ exports.tapFood = function(){
 };
 
 exports.tapCalendar = function(){
-    //TODO da inserire path docenti
     if (grpDes === "Studenti"){
         const nav =
             {
@@ -209,12 +207,11 @@ exports.tapCalendar = function(){
 };
 
 exports.tapAppello = function(){
-    //TODO da inserire path docenti
     if (grpDes === "Studenti"){
 
         const nav =
             {
-                moduleName: "userAppelli/appelli",
+                moduleName: "prenotazioni/prenotazioni",
                 clearHistory: false
             };
         page.frame.navigate(nav);

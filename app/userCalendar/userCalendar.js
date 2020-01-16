@@ -15,6 +15,7 @@ let viewModel;
 let sideDrawer;
 let calendar;
 
+
 function onNavigatingTo(args) {
     page = args.object;
     page.getViewById("selected_col").col = "0";
@@ -30,20 +31,23 @@ function onNavigatingTo(args) {
         getMainInfo();
         myExams();
         getCourses();
+        getPrenotazioni();
     }
     else {
         calendarCourses();
+        console.log(global.events);
+        update_event(args);
+        //TODO DA AGGIUSTARE !!!!!!!!!
+
     }
 
     global.getAllBadge(page);
-
     page.bindingContext = viewModel;
 }
 
 function calendarCourses() {
     //console.log(global.freqExams.length);
     global.events = [];
-
     let esami = global.freqExams;
 
     for (let i = 0; i<esami.length; i++)
@@ -54,8 +58,8 @@ function calendarCourses() {
         const corso = "AC"; //TODO modificare da server IDCORSO!
         const color = new Color.Color(colors[i]);
 
-        console.log("Esame: " + esame.toUpperCase());
-        console.log("Docente: " + docente[0].toUpperCase());
+        //console.log("Esame: " + esame.toUpperCase());
+        //console.log("Docente: " + docente[0].toUpperCase());
 
         httpModule.request({
             url: global.url + "orari/cercaCorso/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
@@ -87,8 +91,6 @@ function calendarCourses() {
                         color: color
                     });
                 }
-                insert_event();
-
             }
         },(e) => {
             console.log("Error", e);
@@ -99,9 +101,24 @@ function calendarCourses() {
             });
         });
     }
+    let prenotazioni = global.myPrenotazioni;
+    for (let x=0; x < prenotazioni.length ; x++){
+        let data_inizio = convertData(prenotazioni[x].dataEsa);
+        console.log(data_inizio);
+        //let data_fine = new Date(data_inizio.getFullYear(),data_inizio.getMonth(),data_inizio.getDate(),19);
+
+        global.events.push({
+            title : "[ESAME] "+ prenotazioni[x].desApp,
+            data_inizio: data_inizio,
+            data_fine: data_inizio,
+            color: new Color.Color("#0F9851")
+        });
+    }
+
 }
 
-function insert_event() {
+function update_event(args) {
+    page = args.object;
     console.log("EVENT INSERT");
     let temp_array = [];
     let temp = global.events;
@@ -109,8 +126,10 @@ function insert_event() {
     for (let x=0; x<temp.length; x++){
         let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
         temp_array.push(event);
+        console.log(calendar.eventSource);
     }
     calendar.eventSource = temp_array;
+    page.set("events",temp_array);
 }
 
 function myExams() {
@@ -142,7 +161,7 @@ function myExams() {
 
         let pianoId = appSettings.getNumber("pianoId");
 
-        console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId +"/" + global.authToken);
+        //console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId +"/" + global.authToken);
 
         httpModule.request({
             url: global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId + "/" + global.authToken,
@@ -165,10 +184,10 @@ function myExams() {
             {
                 let array = [];
 
-                console.log(result.length);
+                //console.log(result.length);
                 for (let i=0; i<result.length; i++)
                 {
-                    console.log("ADSCEID = "+ result[i].adsceId);
+                    //console.log("ADSCEID = "+ result[i].adsceId);
                     if(result[i].adsceId !== null) {
                         httpModule.request({
                             url: global.url + "checkExam/" + global.encodedStr + "/" + matId + "/" + result[i].adsceId + "/" + global.authToken,
@@ -212,7 +231,7 @@ function myExams() {
                         });
                     }
                     else {
-                        console.log("ADSCE NULL!");
+                        //console.log("ADSCE NULL!");
                     }
                 }
             }
@@ -236,8 +255,57 @@ function myExams() {
     });
 }
 
+function getPrenotazioni(){
+    let matId = appSettings.getNumber("matId").toString();
+
+    httpModule.request({
+        url: global.url + "getPrenotazioni/" + global.encodedStr + "/" + matId + "/" + global.authToken,
+        method: "GET",
+        headers: {"Content-Type": "application/json"}
+    }).then((response) => {
+        const result = response.content.toJSON();
+        appSettings.setNumber("appelloBadge", result.length);
+
+        //console.log("RISULTATO ="+global.url + "getPrenotazioni/" + global.encodedStr + "/" + matId + "/" + global.authToken);
+        for (let i = 0; i< result.length; i++){
+            let data_inizio = convertData(result[i].dataEsa);
+
+            //let data_fine = new Date(data_inizio.getFullYear(),data_inizio.getMonth(),data_inizio.getDate(),19);
+            global.myPrenotazioni.push(result[i]);
+
+        }
+        /*
+        RESULT =
+            'nome_pres' : _response2['presidenteNome'],
+            'cognome_pres': _response2['presidenteCognome'],
+            'numIscritti': _response2['numIscritti'],
+            'note': _response2['note'],
+            'statoDes': _response2['statoDes'],
+            'statoEsito': _response2['statoInsEsiti']['value'],
+            'statoVerb': _response2['statoVerb']['value'],
+            'statoPubbl': _response2['statoPubblEsiti']['value'],
+            'tipoApp': _response2['tipoGestAppDes'],
+            'aulaId' : _response2['turni'][x]['aulaId'],
+            'edificioId': _response2['turni'][x]['edificioCod'],
+            'edificioDes': _response2['turni'][x]['edificioDes'],
+            'aulaDes': _response2['turni'][x]['aulaDes'],
+            'desApp': _response2['turni'][x]['des'],
+            'dataEsa': _response2['turni'][x]['dataOraEsa']
+
+         */
+        global.getAllBadge(page);
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore Server!",
+            message: e,
+            okButtonText: "OK"
+        });
+    });
+}
+
 function getMainInfo() {
-    console.log("Sono in GETMAININFO");
+    //console.log("Sono in GETMAININFO");
     let cdsId = appSettings.getNumber("cdsId");
 
     httpModule.request({
@@ -247,7 +315,7 @@ function getMainInfo() {
 
     }).then((response) => {
         const result = response.content.toJSON();
-        console.log("GetMainInfo() ="+ result);
+        //console.log("GetMainInfo() ="+ result);
         if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
         {
             dialogs.alert({
@@ -311,8 +379,8 @@ function getCourses() {
         }).then((response) => {
             const result = response.content.toJSON();
 
-            console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken)
-            console.log(result);
+            //console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken)
+            //console.log(result);
             page.getViewById("activityIndicator").visibility = "visible";
 
 
@@ -375,7 +443,17 @@ function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
+function convertData(data){
+    let day = data[0]+data[1];
+    let month = data[3]+data[4];
+    let year = data[6]+data[7]+data[8]+data[9];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
 
+    let d = new Date(year,month-1,day,hour,min);
+
+    return d;
+}
 function onGeneralMenu() {
     const nav =
         {
@@ -388,7 +466,7 @@ function onGeneralMenu() {
 exports.tapAppello = function(){
     const nav =
         {
-            moduleName: "userAppelli/appelli",
+            moduleName: "prenotazioni/prenotazioni",
             clearHistory: false
         };
     frame.topmost().navigate(nav);

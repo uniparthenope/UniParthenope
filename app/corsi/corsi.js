@@ -164,7 +164,7 @@ exports.tapFood = function(){
 exports.tapAppello = function(){
     const nav =
         {
-            moduleName: "userAppelli/appelli",
+            moduleName: "prenotazioni/prenotazioni",
             clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
