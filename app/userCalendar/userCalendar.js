@@ -22,7 +22,10 @@ function onNavigatingTo(args) {
     viewModel = new Observable();
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-    calendar = page.getViewById("myCalendar");
+
+    calendar = page.getViewById("cal");
+    //global.updatedExam = false;
+
     console.log("UPDATED= "+global.updatedExam);
 
     if (!global.updatedExam)
@@ -35,10 +38,6 @@ function onNavigatingTo(args) {
     }
     else {
         calendarCourses();
-        console.log(global.events);
-        update_event(args);
-        //TODO DA AGGIUSTARE !!!!!!!!!
-
     }
 
     global.getAllBadge(page);
@@ -91,6 +90,7 @@ function calendarCourses() {
                         color: color
                     });
                 }
+                insert_event();
             }
         },(e) => {
             console.log("Error", e);
@@ -104,8 +104,7 @@ function calendarCourses() {
     let prenotazioni = global.myPrenotazioni;
     for (let x=0; x < prenotazioni.length ; x++){
         let data_inizio = convertData(prenotazioni[x].dataEsa);
-        console.log(data_inizio);
-        //let data_fine = new Date(data_inizio.getFullYear(),data_inizio.getMonth(),data_inizio.getDate(),19);
+        //console.log(data_inizio);
 
         global.events.push({
             title : "[ESAME] "+ prenotazioni[x].desApp,
@@ -114,11 +113,11 @@ function calendarCourses() {
             color: new Color.Color("#0F9851")
         });
     }
+    insert_event();
 
 }
 
-function update_event(args) {
-    page = args.object;
+function insert_event() {
     console.log("EVENT INSERT");
     let temp_array = [];
     let temp = global.events;
@@ -126,12 +125,9 @@ function update_event(args) {
     for (let x=0; x<temp.length; x++){
         let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
         temp_array.push(event);
-        console.log(calendar.eventSource);
     }
     calendar.eventSource = temp_array;
-    page.set("events",temp_array);
 }
-
 function myExams() {
     let exams = {};
     const matId = appSettings.getNumber("matId");
@@ -266,16 +262,12 @@ function getPrenotazioni(){
         const result = response.content.toJSON();
         appSettings.setNumber("appelloBadge", result.length);
 
-        //console.log("RISULTATO ="+global.url + "getPrenotazioni/" + global.encodedStr + "/" + matId + "/" + global.authToken);
         for (let i = 0; i< result.length; i++){
-            let data_inizio = convertData(result[i].dataEsa);
-
-            //let data_fine = new Date(data_inizio.getFullYear(),data_inizio.getMonth(),data_inizio.getDate(),19);
             global.myPrenotazioni.push(result[i]);
 
         }
         /*
-        RESULT =
+        memo) RESULT =
             'nome_pres' : _response2['presidenteNome'],
             'cognome_pres': _response2['presidenteCognome'],
             'numIscritti': _response2['numIscritti'],

@@ -32,7 +32,7 @@
                 <Label class="textPrimary" text="La Mia Giornata" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
-            <rc:RadCalendar row="1" id="myCalendar" dayViewEventSelected="onDaySelected" selectionMode="Single" viewMode="Day" eventsViewMode="Popover" eventSource="{{ events }}" verticalAlignment="top">
+            <rc:RadCalendar row="1" id="cal" dayViewEventSelected="onDaySelected" selectionMode="Single" viewMode="Day" eventsViewMode="Inline" verticalAlignment="top">
                 <rc:RadCalendar.dayViewStyle>
                     <rc:CalendarDayViewStyle showTitle="true" showDayNames="true" >
                         <rc:CalendarDayViewStyle.todayCellStyle>
