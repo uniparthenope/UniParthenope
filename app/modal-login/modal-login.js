@@ -198,9 +198,8 @@ function onTap(args)
 
 function selectedCarrer(index) {
     const sideDrawer = app.getRootView();
-    global.saveInfo(account);
     appSettings.setNumber("carriera",index);
-
+    global.saveInfo(account);
     let remember = sideDrawer.getViewById("rememberMe").checked;
     if (remember){
         appSettings.setString("username",user);

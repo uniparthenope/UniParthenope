@@ -49,26 +49,33 @@ function calendarCourses() {
     global.events = [];
     let esami = global.freqExams;
 
+    /*
+     TODO Cambiare ciclo for ed API.
+      Effettuare prima chiamata API e scaricare .ical o json e poi cercare il docente
+      (Passo da N chiamate API ad 1!!)
+     */
     for (let i = 0; i<esami.length; i++)
     {
         let esame = esami[i].nome;
         let docente = esami[i].docente.split(" ");
         const periodo = appSettings.getNumber("periodo",3);
-        const corso = "AC"; //TODO modificare da server IDCORSO!
+        const luogo = appSettings.getString("strutturaDes");
+        const corso = appSettings.getString("corsoGaId");
+        if (corso === ""){
+            //TODO Corso non inserito nel database!
+        }
         const color = new Color.Color(colors[i]);
 
         //console.log("Esame: " + esame.toUpperCase());
         //console.log("Docente: " + docente[0].toUpperCase());
 
         httpModule.request({
-            url: global.url + "orari/cercaCorso/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
+            url: global.url + "orari/cercaCorso/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
             method: "GET",
             headers: {"Content-Type": "application/json"}
         }).then((response) => {
             const result = response.content.toJSON();
             //console.log("Calendario: " + result);
-
-
             if (result.statusCode === 401 || result.statusCode === 500)
             {
                 dialogs.alert({
