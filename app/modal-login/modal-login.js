@@ -34,13 +34,19 @@ function onShownModally(args) {
     });
 
     httpModule.request({
-        url: global.url + "login/" + global.encodedStr,
-        method: "GET"
+        url: global.url + "login" ,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         let _result = response.content.toJSON();
-        let result = _result.response;
+        //let result = _result.response;
 
-        if(_result.statusCode === 401)
+        console.log(response.statusCode);
+
+        if(response.statusCode === 401)
         {
             dialogs.alert({
                 title: "Autenticazione Fallita!",
@@ -51,7 +57,7 @@ function onShownModally(args) {
             );
         }
         /* Se un utente è di tipo USER TECNICO (ristorante) */
-        else if (_result.statusCode === 600)
+        else if (response.statusCode === 600)
         {
             const sideDrawer = app.getRootView();
             let remember = sideDrawer.getViewById("rememberMe").checked;
@@ -79,7 +85,7 @@ function onShownModally(args) {
             frame.Frame.topmost().navigate(nav);
         }
         /* Se un utente è di tipo ADMIN (ristorante) */
-        else if (_result.statusCode === 666)
+        else if (response.statusCode === 666)
         {
             const sideDrawer = app.getRootView();
             let remember = sideDrawer.getViewById("rememberMe").checked;
@@ -108,8 +114,8 @@ function onShownModally(args) {
         }
         else
         {
-            account = result;
-            carriere = result.user.trattiCarriera;
+            account = _result;
+            carriere = _result.user.trattiCarriera;
 
             if (carriere.length > 0)
             {
@@ -131,7 +137,7 @@ function onShownModally(args) {
             }
             else
             {
-                if(result.user.grpDes === "Docenti"){
+                if(_result.user.grpDes === "Docenti"){
                     const sideDrawer = app.getRootView();
                     global.saveInfo(account);
                     let remember = sideDrawer.getViewById("rememberMe").checked;
@@ -141,7 +147,7 @@ function onShownModally(args) {
                         appSettings.setString("password",pass);
                         appSettings.setBoolean("rememberMe",true);
                     }
-                    console.log("Docente:" + result.user.userId);
+                    console.log("Docente:" + _result.user.userId);
                     global.isConnected = true;
                     let nome = appSettings.getString("nome");
                     let cognome = appSettings.getString("cognome");

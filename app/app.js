@@ -2,7 +2,7 @@ const application = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 
-global.url = "http://museonavale.uniparthenope.it:8080/api/uniparthenope/";
+global.url = "https://api.uniparthenope.it/UniparthenopeApp/v1/";
 global.localurl = "http://192.168.1.198:5000/api/uniparthenope/";
 
 global.isConnected = false;
@@ -49,17 +49,19 @@ global.saveInfo = function(result) {
     appSettings.setString("grpDes",result.user.grpDes);
     if  (result.user.grpDes === "Studenti"){
         let index = appSettings.getNumber("carriera");
-        console.log(result.user.trattiCarriera[index].strutturaDes);
-        appSettings.setString("strutturaDes",result.user.trattiCarriera[index].strutturaDes);
+        /*
+                console.log(result.user.trattiCarriera[index].strutturaDes);
 
-        appSettings.setString("strutturaId",result.user.trattiCarriera[index].strutturaId.toString());
-        appSettings.setString("strutturaGaId",result.user.trattiCarriera[index].strutturaGaId.toString());
-        appSettings.setString("corsoGaId",result.user.trattiCarriera[index].corsoGaId.toString());
+                appSettings.setString("strutturaDes",result.user.trattiCarriera[index].strutturaDes);
+                appSettings.setString("strutturaId",result.user.trattiCarriera[index].strutturaId.toString());
+                appSettings.setString("strutturaGaId",result.user.trattiCarriera[index].strutturaGaId.toString());
+                appSettings.setString("corsoGaId",result.user.trattiCarriera[index].corsoGaId.toString());
 
-        console.log("SAVE_INFO Dipartimento= "+result.user.trattiCarriera[index].strutturaDes);
-        console.log("SAVE_INFO Dipartimento ID= "+result.user.trattiCarriera[index].strutturaId);
-        console.log("SAVE_INFO GA Id= "+result.user.trattiCarriera[index].strutturaGaId);
-        console.log("SAVE_INFO GA Corso= "+result.user.trattiCarriera[index].corsoGaId);
+                console.log("SAVE_INFO Dipartimento= "+result.user.trattiCarriera[index].strutturaDes);
+                console.log("SAVE_INFO Dipartimento ID= "+result.user.trattiCarriera[index].strutturaId);
+                console.log("SAVE_INFO GA Id= "+result.user.trattiCarriera[index].strutturaGaId);
+                console.log("SAVE_INFO GA Corso= "+result.user.trattiCarriera[index].corsoGaId);
+                 */
     }
 
     global.authToken= result.authToken;

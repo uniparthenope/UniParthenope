@@ -79,11 +79,14 @@ function autoconnect() {
         global.encodedStr = base64.encode(bytes);
 
         httpModule.request({
-            url:  global.url + "login/" + global.encodedStr,
-            method: "GET"
+            url:  global.url + "login",
+            method: "GET",
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic "+ global.encodedStr
+            }
         }).then((response) => {
             let _result = response.content.toJSON();
-            let result = _result.response;
 
             if(_result.statusCode === 401)
             {
@@ -135,9 +138,9 @@ function autoconnect() {
                     };
                 page.frame.navigate(nav);
             }
-            else if(result.user.grpDes === "Docenti")
+            else if(_result.user.grpDes === "Docenti")
             {
-                global.saveInfo(result);
+                global.saveInfo(_result);
                 global.isConnected = true;
                 let nome = appSettings.getString("nome");
                 let cognome = appSettings.getString("cognome");
@@ -151,10 +154,10 @@ function autoconnect() {
                     };
                 page.frame.navigate(nav);
             }
-            else if (result.user.grpDes === "Studenti")
+            else if (_result.user.grpDes === "Studenti")
             {
-                let carriere = result.user.trattiCarriera;
-                global.saveInfo(result);
+                let carriere = _result.user.trattiCarriera;
+                global.saveInfo(_result);
                 let index = appSettings.getNumber("carriera");
                 global.saveCarr(carriere[index]);
                 global.isConnected = true;
