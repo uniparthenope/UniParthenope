@@ -70,9 +70,12 @@ function calendarCourses() {
         //console.log("Docente: " + docente[0].toUpperCase());
 
         httpModule.request({
-            url: global.url + "orari/cercaCorso/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
+            url: "https://api.uniparthenope.it/GAUniparthenope/v1/searchCourse/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
             method: "GET",
-            headers: {"Content-Type": "application/json"}
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic "+ global.encodedStr
+            }
         }).then((response) => {
             const result = response.content.toJSON();
             //console.log("Calendario: " + result);
@@ -141,9 +144,12 @@ function myExams() {
     const stuId = appSettings.getNumber("stuId");
 
     httpModule.request({
-        url: global.url + "pianoId/" + global.encodedStr + "/" + stuId + "/" + global.authToken,
+        url: global.url + "students/pianoId/" + stuId ,
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
@@ -167,9 +173,12 @@ function myExams() {
         //console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId +"/" + global.authToken);
 
         httpModule.request({
-            url: global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId + "/" + global.authToken,
+            url: global.url + "students/exams/" + stuId + "/" + pianoId,
             method: "GET",
-            headers: {"Content-Type": "application/json"}
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic " + global.encodedStr
+            }
         }).then((response) => {
             const result = response.content.toJSON();
             //console.log(result);
@@ -193,9 +202,12 @@ function myExams() {
                     //console.log("ADSCEID = "+ result[i].adsceId);
                     if(result[i].adsceId !== null) {
                         httpModule.request({
-                            url: global.url + "checkExam/" + global.encodedStr + "/" + matId + "/" + result[i].adsceId + "/" + global.authToken,
+                            url: global.url + "checkExam/" + matId + "/" + result[i].adsceId,
                             method: "GET",
-                            headers: {"Content-Type": "application/json"}
+                            headers: {
+                                "Content-Type" : "application/json",
+                                "Authorization" : "Basic "+ global.encodedStr
+                            }
                         }).then((response) => {
                             const result_n = response.content.toJSON();
                             //console.log(result_n);
@@ -308,10 +320,12 @@ function getMainInfo() {
     let cdsId = appSettings.getNumber("cdsId");
 
     httpModule.request({
-        url: global.url + "current_aa/" + cdsId,
+        url: global.url + "general/current_aa/" + cdsId,
         method: "GET",
-        headers: {"Content-Type": "application/json"}
-
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log("GetMainInfo() ="+ result);
@@ -348,9 +362,12 @@ function getCourses() {
     const matId = appSettings.getNumber("matId");
 
     httpModule.request({
-        url: global.url + "pianoId/" + global.encodedStr + "/" + stuId + "/" + global.authToken,
+        url: global.url + "students/pianoId/" + stuId ,
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
@@ -372,9 +389,12 @@ function getCourses() {
         let pianoId = appSettings.getNumber("pianoId");
 
         httpModule.request({
-            url: global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken,
+            url: global.url + "students/examsToFreq/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId,
             method: "GET",
-            headers: {"Content-Type": "application/json"}
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic "+ global.encodedStr
+            }
         }).then((response) => {
             const result = response.content.toJSON();
 
