@@ -78,9 +78,12 @@ function getDocenti(){
 
 
                     httpModule.request({
-                        url: global.url + "info/persone/"+ result[i].docenteCognome + " " + result[i].docenteNome,
+                        url: global.url + "general/persone/"+ result[i].docenteCognome + " " + result[i].docenteNome,
                         method: "GET",
-                        headers: {"Content-Type": "application/json"}
+                        headers: {
+                            "Content-Type" : "application/json",
+                            "Authorization" : "Basic "+ global.encodedStr
+                        }
                     }).then((response2) => {
                         const result2 = response2.content.toJSON();
                         //console.log(result2);

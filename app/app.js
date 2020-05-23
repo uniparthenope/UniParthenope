@@ -3,6 +3,7 @@ const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 
 global.url = "https://api.uniparthenope.it/UniparthenopeApp/v1/";
+global.url_general = "https://api.uniparthenope.it/";
 global.localurl = "http://192.168.1.198:5000/api/uniparthenope/";
 
 global.isConnected = false;

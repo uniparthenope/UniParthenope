@@ -197,7 +197,19 @@ exports.onTapMeteo = function(){
 };
 
 exports.onTapTrasporti = function(){
-   page.frame.navigate("trasporti/trasporti");
+    if(global.encodedStr === ""){
+        dialogs.alert({
+            title: "Non Autorizzato!",
+            message: "Effettuare Login!",
+            okButtonText: "OK"
+
+        });
+    }
+    else
+        {
+            page.frame.navigate("trasporti/trasporti");
+        }
+
 };
 
 exports.onTapAteneo = function(){

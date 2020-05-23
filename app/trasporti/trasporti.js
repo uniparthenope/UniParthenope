@@ -115,36 +115,38 @@ function loadGraphic(id){
 }
 
 function getBusPosition() {
-    httpModule.request({
-        url: global.url + "anm/bus/CDN",
-        method: "GET"
-    }).then((response) => {
-        const result = response.content.toJSON();
 
-        if (result.statusCode === 500)
-        {
+        httpModule.request({
+            url: global.url_general + "Bus/v1/bus/CDN",
+            method: "GET",
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic "+ global.encodedStr
+            }
+        }).then((response) => {
+            const result = response.content.toJSON();
+
+            if (result.statusCode === 500) {
+                dialogs.alert({
+                    title: "Errore Server!",
+                    message: result.retErrMsg,
+                    okButtonText: "OK"
+
+                });
+            } else {
+                bus_timer = setTimeout(function () {
+                    oLangWebViewInterface.emit('bus', {bus: result});
+                }, 800);
+            }
+
+        }, (e) => {
+            console.log("Error", e.retErrMsg);
             dialogs.alert({
                 title: "Errore Server!",
-                message: result.retErrMsg,
+                message: e.retErrMsg,
                 okButtonText: "OK"
-
             });
-        }
-        else
-        {
-            bus_timer = setTimeout(function () {
-                oLangWebViewInterface.emit('bus', {bus: result});
-            }, 800);
-        }
-
-    },(e) => {
-        console.log("Error", e.retErrMsg);
-        dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
-            okButtonText: "OK"
         });
-    });
 }
 
 function onNavigatingFrom(args) {

@@ -275,9 +275,12 @@ function getPrenotazioni(){
     let matId = appSettings.getNumber("matId").toString();
 
     httpModule.request({
-        url: global.url + "getPrenotazioni/" + global.encodedStr + "/" + matId + "/" + global.authToken,
+        url: global.url + "students/getReservations/" + matId,
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         appSettings.setNumber("appelloBadge", result.length);
