@@ -201,8 +201,9 @@ function myExams() {
                 {
                     //console.log("ADSCEID = "+ result[i].adsceId);
                     if(result[i].adsceId !== null) {
+                        //console.log(global.url + "students/checkExams/" + matId + "/" + result[i].adsceId);
                         httpModule.request({
-                            url: global.url + "checkExam/" + matId + "/" + result[i].adsceId,
+                            url: global.url + "students/checkExams/" + matId + "/" + result[i].adsceId,
                             method: "GET",
                             headers: {
                                 "Content-Type" : "application/json",

@@ -39,9 +39,12 @@ function getMedie(matId) {
     let media = appSettings.getString("tipoMedia","P");
     console.log("Media: " + media);
     httpModule.request({
-        url: global.url + "average/"+ global.encodedStr +"/" + matId +"/" + media,
+        url: global.url + "students/average/" + matId +"/" + media,
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
@@ -76,9 +79,12 @@ function getMedie(matId) {
 function getTotExams(matId) {
 
     httpModule.request({
-        url: global.url + "totalexams/"+ global.encodedStr +"/" + matId,
+        url: global.url + "students/totalExams/" + matId,
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
 
@@ -93,7 +99,6 @@ function getTotExams(matId) {
         }
         else
         {
-            console.log(result.numAdSuperate);
             page.getViewById("doneExams").text = result.numAdSuperate;
             page.getViewById("totExams").text = "/"+ result.totAdSuperate;
 
@@ -113,16 +118,16 @@ function getTotExams(matId) {
 
 function getExams() {
     let exams = global.myExams;
-    //console.log(exams);
+    console.log(exams);
 
     let dim = exams.length;
     console.log(dim);
 
     for (let i = 0; i<dim; i++)
     {
-        //console.log(exams[i].nome);
-        //console.log(exams[i].superata);
-        //console.log(exams[i].superata_voto);
+        console.log(exams[i].nome);
+        console.log(exams[i].superata);
+        console.log(exams[i].superata_voto);
         //console.log(exams[i].superata_lode);
 
         let lode = "collapsed";

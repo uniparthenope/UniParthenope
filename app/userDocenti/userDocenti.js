@@ -43,9 +43,12 @@ function getDocenti(){
     let cdsId = appSettings.getNumber("cdsId");
 
     httpModule.request({
-        url: global.url + "getDocenti/"+ aaId_split[0] +"/" + cdsId.toString(),
+        url: global.url + "students/getProfessors/"+ aaId_split[0] +"/" + cdsId.toString(),
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);

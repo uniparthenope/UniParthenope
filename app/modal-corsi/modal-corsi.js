@@ -19,12 +19,14 @@ function onShownModally(args) {
     let viewModel = Observable.fromObject({
         items:items
     });
-    console.log("adLOGID= "+ adLogId);
+    //console.log("adLOGID= "+ adLogId);
     httpModule.request({
-        url: global.url + "infoCourse/" + adLogId ,
+        url: global.url + "general/infoCourse/" + adLogId ,
         method: "GET",
-        headers: {"Content-Type": "application/json"}
-    }).then((response) => {
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }    }).then((response) => {
         const result = response.content.toJSON();
 
         if (result.statusCode === 401 || result.statusCode === 500)
@@ -40,7 +42,7 @@ function onShownModally(args) {
             page.getViewById("esame").text = context.esame;
             page.getViewById("docente").text = context.docente;
 
-            console.log(result.metodi);
+            //console.log(result.metodi);
             let array = ["Contenuti","Obiettivi","Prerequisiti","Verifica","Testi","Metodi","Altro"];
             let array_1 = ["contenuti","obiettivi","prerequisiti","verifica","testi","metodi","altro"];
 

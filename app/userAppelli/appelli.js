@@ -20,22 +20,24 @@ function onNavigatingTo(args) {
     page = args.object;
     //appSettings.setBoolean("esami_futuri",false);
     viewModel = observableModule.fromObject({});
+    loading = page.getViewById("activityIndicator");
+
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     drawTitle();
-
     items_appelli = new ObservableArray();
     appelli_listview = page.getViewById("appelli_listview");
-    loading = page.getViewById("activityIndicator");
+
 
     viewModel = Observable.fromObject({
         items_appelli: items_appelli
     });
 
-
     let exams = global.freqExams;
     num = 0;
-    for (let i=0; i<exams.length; i++){
+
+
+    for (let i=0; i < exams.length; i++){
         getAppelli(exams[i].adId);
     }
     page.bindingContext = viewModel;
@@ -70,13 +72,17 @@ exports.tapCalendar = function(){
 };
 
 function getAppelli(adId) {
+    loading.visibility = "visible";
     httpModule.request({
-        url: global.url + "checkAppello/"+ global.encodedStr +"/" + appSettings.getNumber("cdsId") +"/" + adId,
+        url: global.url + "students/checkAppello/" + appSettings.getNumber("cdsId") +"/" + adId,
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
-        loading.visibility = "visible";
+
         if (result.statusCode === 401 || result.statusCode === 500)
         {
             dialogs.alert({
@@ -121,6 +127,7 @@ function getAppelli(adId) {
                     });
 
                     appelli_listview.refresh();
+
                 }
                 if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
 
@@ -147,6 +154,7 @@ function getAppelli(adId) {
                     appelli_listview.refresh();
                 }
                 loading.visibility = "collapsed";
+
             }
         }
     },(e) => {
