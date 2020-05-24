@@ -59,18 +59,15 @@ function calendarCourses() {
         let esame = esami[i].nome;
         let docente = esami[i].docente.split(" ");
         const periodo = appSettings.getNumber("periodo",3);
-        const luogo = appSettings.getString("strutturaDes");
+        const luogo = appSettings.getString("strutturaDes", "CDN");
         const corso = appSettings.getString("corsoGaId");
         if (corso === ""){
             //TODO Corso non inserito nel database!
         }
         const color = new Color.Color(colors[i]);
-
-        //console.log("Esame: " + esame.toUpperCase());
-        //console.log("Docente: " + docente[0].toUpperCase());
-
+        
         httpModule.request({
-            url: "https://api.uniparthenope.it/GAUniparthenope/v1/searchCourse/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
+            url: global.url_general + "GAUniparthenope/v1/searchCourse/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
             method: "GET",
             headers: {
                 "Content-Type" : "application/json",
@@ -78,7 +75,8 @@ function calendarCourses() {
             }
         }).then((response) => {
             const result = response.content.toJSON();
-            //console.log("Calendario: " + result);
+            console.log(result);
+
             if (result.statusCode === 401 || result.statusCode === 500)
             {
                 dialogs.alert({

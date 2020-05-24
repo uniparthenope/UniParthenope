@@ -66,9 +66,12 @@ function getAppelli(adId,cdsId) {
     let myarray = [];
 
     httpModule.request({
-        url: global.url + "checkAppello/"+ global.encodedStr +"/" + cdsId +"/" + adId,
+        url: global.url + "students/checkAppello/" + cdsId +"/" + adId,
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         loading.visibility = "visible";
@@ -133,8 +136,8 @@ function getAppelli(adId,cdsId) {
                     myarray.push(items);
                     //appelli_listview.refresh();
                 }
-                loading.visibility = "collapsed";
             }
+            loading.visibility = "collapsed";
         }
 
     },(e) => {

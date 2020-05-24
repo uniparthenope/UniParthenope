@@ -54,13 +54,16 @@ function calendarCourses() {
         const corso = "AC"; //TODO modificare da server IDCORSO!
         const color = new Color.Color(colors[i]);
 
-        console.log("Esame: " + esame.toUpperCase());
-        console.log("Docente: " + docente[0].toUpperCase());
+        //console.log("Esame: " + esame.toUpperCase());
+        //console.log("Docente: " + docente[0].toUpperCase());
 
         httpModule.request({
-            url: global.url + "orari/cercaCorso/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
+            url: global.url_general + "GAUniparthenope/v1/searchCourse/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
             method: "GET",
-            headers: {"Content-Type": "application/json"}
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic "+ global.encodedStr
+            }
         }).then((response) => {
             const result = response.content.toJSON();
             //console.log("Calendario: " + result);
@@ -115,9 +118,12 @@ function insert_event() {
 function getCourses() {
     //console.log(global.url + "docenti/getAA/" + global.encodedStr + "/" + global.authToken);
     httpModule.request({
-        url: global.url + "getSession",
+        url: global.url + "professor/getSession",
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
@@ -149,9 +155,12 @@ function getCourses() {
             //console.log("Semestre= "+ appSettings.getString("semestre"));
 
             httpModule.request({
-                url: global.url + "docenti/getCourses/" + global.encodedStr + "/" + global.authToken +"/"+ result.aaId.toString(),
+                url: global.url + "professor/getCourses/" + result.aaId.toString(),
                 method: "GET",
-                headers: {"Content-Type": "application/json"}
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                }
             }).then((response2) => {
                 const result2 = response2.content.toJSON();
                 //console.log(result2);
