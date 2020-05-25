@@ -37,6 +37,7 @@
                         <Button class="btn-menu" text="Appelli" marginBottom="5" marginTop="5" tap="goto_appelli"/>
                         <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap="goto_docenti"/>
                         <Button class="btn-menu" text="Segreteria" marginBottom="5" marginTop="5" tap="goto_segreteria"/>
+                        <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
                     </StackLayout>
                     <!--     Docente       -->
@@ -48,8 +49,10 @@
                             <Button class="btn-menu" text="Ricevimento" marginBottom="5" marginTop="5" tap=""/>
                             <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap=""/>
                             <Button class="btn-menu" text="Segreteria" marginBottom="5" marginTop="5" tap=""/>
+                            <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
-                        </StackLayout>
+
+                    </StackLayout>
                     <!--     UserTecnico       -->
                     <StackLayout id="userTecnico" visibility="collapsed">
 

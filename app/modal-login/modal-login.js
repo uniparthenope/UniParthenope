@@ -148,6 +148,7 @@ function onShownModally(args) {
                         appSettings.setBoolean("rememberMe",true);
                     }
                     console.log("Docente:" + _result.user.userId);
+                    appSettings.setNumber("idAb",_result.user.idAb);
                     global.isConnected = true;
                     let nome = appSettings.getString("nome");
                     let cognome = appSettings.getString("cognome");

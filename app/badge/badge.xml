@@ -1,0 +1,55 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="Badge"></Label>
+    </ActionBar>
+    <GridLayout margin="5 5 5 5">
+        <Image verticalAlignment="center" horizontalAlignment="center" src="~/images/logo_parth.png" height="350" width="350"
+               marginBottom="20" opacity="0.2"/>
+        <StackLayout orientation="vertical" verticalAlignment="top">
+            <StackLayout class="pic_rounded" id="my_img" verticalAlignment="top" horizontalAlignment="center" backgroundImage="~/images/logo_parth.png" height="150" width="150"
+            marginBottom="20"/>
+
+            <StackLayout orientation="vertical" horizontalAlignment="center" marginBottom="10">
+                <Label id="surname" text="SURNAME" horizontalAlignment="center" fontSize="28" color="black"/>
+                <Label id="name" text="NAME" horizontalAlignment="center" fontSize="18" color="black"/>
+            </StackLayout>
+            <GridLayout horizontalAlignment="center" width="100%">
+                <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="15">
+                    <Label text="MATR." horizontalAlignment="center" fontSize="18" color="#22384f"/>
+                    <Label id="matricola" text="--" horizontalAlignment="center" fontSize="18" color="black"/>
+                </StackLayout>
+                <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="15">
+                    <Label text="ROLE" horizontalAlignment="center" fontSize="18" color="#22384f"/>
+                    <Label id="role"  text="???" horizontalAlignment="center" fontSize="18" color="green"/>
+                </StackLayout>
+            </GridLayout>
+
+
+
+        </StackLayout>
+
+        <Image id="my_qr" verticalAlignment="bottom" horizontalAlignment="center" src="~/images/qr_test.png" height="250" width="250"/>
+    </GridLayout>
+</Page>

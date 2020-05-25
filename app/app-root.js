@@ -160,6 +160,15 @@ exports.goto_appelli = function () {
         };
     frame.Frame.topmost().navigate(nav);
 };
+
+exports.goto_badge = function () {
+    const nav =
+        {
+            moduleName: "badge/badge",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
 exports.ontap_account = function(){
     utilsModule.openUrl("https://uniparthenope.esse3.cineca.it/Anagrafica/PasswordDimenticata.do");
 };

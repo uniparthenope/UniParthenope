@@ -48,6 +48,9 @@ global.saveInfo = function(result) {
     appSettings.setString("nome",result.user.firstName);
     appSettings.setString("cognome",result.user.lastName);
     appSettings.setString("grpDes",result.user.grpDes);
+   // appSettings.setNumber("persId", result.user.persId);
+   appSettings.setString("userId", result.user.userId);
+
     if  (result.user.grpDes === "Studenti"){
         let index = appSettings.getNumber("carriera");
         /*
@@ -70,7 +73,9 @@ global.saveInfo = function(result) {
     console.log("SAVE_INFO Name= "+result.user.firstName);
     console.log("SAVE_INFO Surname= "+result.user.lastName);
     console.log("SAVE_INFO grpDes= "+result.user.grpDes);
-    console.log("SAVE_INFO AuthToken= "+global.authToken);
+    //console.log("SAVE_INFO persId= "+result.user.persId);
+    console.log("SAVE_INFO userId= " + result.user.userId);
+    console.log("SAVE_INFO AuthToken= " + global.authToken);
 };
 
 global.saveCarr = function(result) {
