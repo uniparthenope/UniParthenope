@@ -5,8 +5,6 @@ const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 const imageSourceModule = require("tns-core-modules/image-source");
 
-
-
 let page;
 let viewModel;
 let sideDrawer;
@@ -19,22 +17,17 @@ function onNavigatingTo(args) {
     choseBackground(page);
 
 
-
-
     if (appSettings.getString("grpDes") === "Studenti"){
 
-        //page.getViewById("my_img").backgroundImage = getPIC(appSettings.getNumber("persId"));
+        getPIC(appSettings.getNumber("persId"));
+        getQr();
         page.getViewById("name").text = appSettings.getString("nome");
         page.getViewById("surname").text = appSettings.getString("cognome");
         page.getViewById("matricola").text = appSettings.getString("matricola");
         page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
         page.getViewById("depart").text = appSettings.getString("facDes").toUpperCase();
-
-
-
     }
     else if (appSettings.getString("grpDes") === "Docenti"){
-
         let url = "https://www.uniparthenope.it/sites/default/files/styles/fototessera__175x200_/public/ugov_wsfiles/foto/ugov_fotopersona_0000000000"+
             appSettings.getNumber("idAb") +".jpg";
 
@@ -45,7 +38,6 @@ function onNavigatingTo(args) {
         page.getViewById("matricola").text = appSettings.getString("matricola");
         page.getViewById("roleID").text = appSettings.getString("settCod");
         page.getViewById("depart").text = appSettings.getString("facDes").toUpperCase();
-
     }
 
 
@@ -78,25 +70,19 @@ function choseBackground(page){
     }
 }
 
-function getPIC(personId){
-
-    httpModule.getImage({
-        url: global.url + "general/image/"+ personId,
-        method: "GET",
+function getQr(){
+    httpModule.getFile({
+        "url": global.url + "general/qrCode",
+        "method": "GET",
         headers: {
-            "Content-Type" : "image/jpg",
+            "Content-Type" : "image/png",
             "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-
-        //let _result = response.content.toJSON();
-        console.log("HERE");
-        //let image = imageSourceModule.ImageSource.fromBase64(response.toBase64String("jpg");
-
-        //console.log(response.toBase64String("jpg"));
-
-
-    },(e) => {
+        },
+        "dontFollowRedirects": true
+    }).then((source) => {
+        console.log(source);
+        page.getViewById("my_qr").src = source["path"];
+    }, (e) => {
         console.log("Error", e);
         dialogs.alert({
             title: "Autenticazione Fallita!",
@@ -104,7 +90,28 @@ function getPIC(personId){
             okButtonText: "OK"
         });
     });
+}
 
+function getPIC(personId){
+    httpModule.getFile({
+        "url": global.url + "general/image/"+ personId,
+        "method": "GET",
+        headers: {
+            "Content-Type" : "image/jpg",
+            "Authorization" : "Basic "+ global.encodedStr
+        },
+        "dontFollowRedirects": true
+    }).then((source) => {
+        console.log(source);
+        page.getViewById("my_img").backgroundImage = source["path"];
+    }, (e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Autenticazione Fallita!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
 }
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;

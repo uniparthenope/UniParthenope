@@ -40,7 +40,7 @@
                 <StackLayout orientation="vertical" borderRadius="20" backgroundColor="green" width="100%" horizontalAlignment="center" marginBottom="10">
                     <Label id="depart" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white"/>
                 </StackLayout>
-                <StackLayout class="pic_rounded" id="my_img" verticalAlignment="top" horizontalAlignment="center" backgroundImage="~/images/logo_parth.png" height="150" width="150"
+                <Image class="pic_rounded" id="my_img" verticalAlignment="top" horizontalAlignment="center" backgroundImage="~/images/logo_parth.png" height="150" width="150"
                 marginBottom="20"/>
                 <StackLayout backgroundColor="rgba(0, 167, 84,0.9)" borderRadius="10">
                     <StackLayout orientation="vertical" horizontalAlignment="center" marginBottom="10" width="100%">
@@ -60,14 +60,7 @@
                     </GridLayout>
                 </StackLayout>
 
-
-
-                    <Image id="my_qr" verticalAlignment="bottom" horizontalAlignment="center" src="~/images/qr_test.png" height="250" width="250"/>
-
-
-
-
-
+                <Image id="my_qr" verticalAlignment="bottom" horizontalAlignment="center" src="~/images/qr_test.png" height="250" width="250"/>
             </StackLayout>
 
         </StackLayout>
