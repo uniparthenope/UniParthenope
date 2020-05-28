@@ -15,12 +15,11 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     choseBackground(page);
-
+    getQr();
 
     if (appSettings.getString("grpDes") === "Studenti"){
 
         getPIC(appSettings.getNumber("persId"));
-        getQr();
         page.getViewById("name").text = appSettings.getString("nome");
         page.getViewById("surname").text = appSettings.getString("cognome");
         page.getViewById("matricola").text = appSettings.getString("matricola");
@@ -61,12 +60,27 @@ function choseBackground(page){
 
     if (code === "D1" || code === "D6"){
         page.getViewById("back_image").backgroundImage = "~/images/image_PARISI.jpg";
+        page.getViewById("info_panel").backgroundColor = "rgba(11, 114, 181,0.9)";
     }
-    else if (code === "D2"){
-
+    else if (code === "D2" || code === "D7"){
+        page.getViewById("back_image").backgroundImage = "~/images/image_PARISI.jpg";
+        page.getViewById("info_panel").backgroundColor = "rgba(119, 72, 150,0.9)";
+    }
+    else if (code === "D3"){
+        page.getViewById("back_image").backgroundImage = "~/images/image_CDN.jpg";
+        page.getViewById("info_panel").backgroundColor = "rgba(36, 36, 36,0.9)";
     }
     else if (code === "D4"){
         page.getViewById("back_image").backgroundImage = "~/images/image_CDN.jpg";
+        page.getViewById("info_panel").backgroundColor = "rgba(0, 167, 84,0.9)";
+    }
+    else if (code === "D4"){
+        page.getViewById("back_image").backgroundImage = "~/images/image_ACTON.jpg";
+        page.getViewById("info_panel").backgroundColor = "rgba(221, 108, 166,0.9)";
+    }
+    else{
+        page.getViewById("back_image").backgroundImage = "~/images/image1.jpg";
+        page.getViewById("info_panel").backgroundColor = "rgba(34, 56, 79,0.9)";
     }
 }
 
@@ -80,8 +94,7 @@ function getQr(){
         },
         "dontFollowRedirects": true
     }).then((source) => {
-        console.log(source);
-        page.getViewById("my_qr").src = source["path"];
+        page.getViewById("my_qr").backgroundImage = source["path"];
     }, (e) => {
         console.log("Error", e);
         dialogs.alert({
@@ -102,7 +115,6 @@ function getPIC(personId){
         },
         "dontFollowRedirects": true
     }).then((source) => {
-        console.log(source);
         page.getViewById("my_img").backgroundImage = source["path"];
     }, (e) => {
         console.log("Error", e);
