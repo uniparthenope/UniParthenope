@@ -208,6 +208,8 @@ function selectedCarrer(index) {
     const sideDrawer = app.getRootView();
     appSettings.setNumber("carriera",index);
     getDepartment(items.getItem(index).stuId);
+    appSettings.setNumber("persId", account.user.persId);
+
     global.saveInfo(account);
     let remember = sideDrawer.getViewById("rememberMe").checked;
     if (remember){
