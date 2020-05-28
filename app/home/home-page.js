@@ -140,6 +140,7 @@ function autoconnect() {
             }
             else if(_result.user.grpDes === "Docenti")
             {
+                detailedProf(_result.user.docenteId); // Get detailed info of a professor
                 global.saveInfo(_result);
                 global.isConnected = true;
                 let nome = appSettings.getString("nome");
@@ -160,6 +161,7 @@ function autoconnect() {
                 global.saveInfo(_result);
                 let index = appSettings.getNumber("carriera");
                 global.saveCarr(carriere[index]);
+                getDepartment(carriere[index].stuId);
                 global.isConnected = true;
                 let nome = appSettings.getString("nome");
                 let cognome = appSettings.getString("cognome");
@@ -331,6 +333,50 @@ function initializeGraph(){
         icon.backgroundImage = '~/images/icon_home/' + array_locations[i].id + ".png";
     }
 }
+function detailedProf(docenteId) {
+    httpModule.request({
+        url: global.url + "professor/detailedInfo/"+ docenteId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let _result = response.content.toJSON();
 
+        //console.log(_result);
+        global.saveProf(_result);
+
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Autenticazione Fallita!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
+}
+function getDepartment(studId) {
+    console.log(studId);
+    httpModule.request({
+        url: global.url + "students/departmentInfo/"+ studId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let _result = response.content.toJSON();
+        global.saveDepartment(_result);
+
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Autenticazione Fallita!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
+}
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

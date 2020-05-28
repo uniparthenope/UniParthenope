@@ -138,6 +138,7 @@ function onShownModally(args) {
             else
             {
                 if(_result.user.grpDes === "Docenti"){
+                    detailedProf(_result.user.docenteId); // Get detailed info of a professor
                     const sideDrawer = app.getRootView();
                     global.saveInfo(account);
                     let remember = sideDrawer.getViewById("rememberMe").checked;
@@ -206,6 +207,7 @@ function onTap(args)
 function selectedCarrer(index) {
     const sideDrawer = app.getRootView();
     appSettings.setNumber("carriera",index);
+    getDepartment(items.getItem(index).stuId);
     global.saveInfo(account);
     let remember = sideDrawer.getViewById("rememberMe").checked;
     if (remember){
@@ -247,7 +249,52 @@ function selectedCarrer(index) {
 
     }
 }
+function detailedProf(docenteId) {
+    httpModule.request({
+        url: global.url + "professor/detailedInfo/"+ docenteId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let _result = response.content.toJSON();
 
+        //console.log(_result);
+        global.saveProf(_result);
+
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Autenticazione Fallita!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
+}
+
+function getDepartment(studId) {
+    console.log(studId);
+    httpModule.request({
+        url: global.url + "students/departmentInfo/"+ studId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let _result = response.content.toJSON();
+        global.saveDepartment(_result);
+
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Autenticazione Fallita!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
+}
 exports.onTap = onTap;
 exports.onShownModally = onShownModally;
 

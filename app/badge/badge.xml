@@ -24,32 +24,53 @@
         </ActionItem>
         <Label class="action-bar-title" text="Badge"></Label>
     </ActionBar>
-    <GridLayout margin="5 5 5 5">
+    <GridLayout>
+        <!---
         <Image verticalAlignment="center" horizontalAlignment="center" src="~/images/logo_parth.png" height="350" width="350"
-               marginBottom="20" opacity="0.2"/>
-        <StackLayout orientation="vertical" verticalAlignment="top">
-            <StackLayout class="pic_rounded" id="my_img" verticalAlignment="top" horizontalAlignment="center" backgroundImage="~/images/logo_parth.png" height="150" width="150"
-            marginBottom="20"/>
+               marginBottom="20" opacity="0.2"/> -->
+        <StackLayout id="back_image" class="main_image" verticalAlignment="center" horizontalAlignment="center" backgroundImage="" height="100%" width="100%"
+                opacity="0.5"/>
+        <Image verticalAlignment="center" horizontalAlignment="center" src="~/images/logo_parth.png" height="350" width="350"
+        marginBottom="20" opacity="0.2"/>
 
-            <StackLayout orientation="vertical" horizontalAlignment="center" marginBottom="10">
-                <Label id="surname" text="SURNAME" horizontalAlignment="center" fontSize="28" color="black"/>
-                <Label id="name" text="NAME" horizontalAlignment="center" fontSize="18" color="black"/>
+        <StackLayout margin="5,5,5,5" orientation="vertical" verticalAlignment="top">
+
+
+            <StackLayout  orientation="vertical" height="100%"  borderColor="green" borderWidth="3" borderRadius="20">
+                <StackLayout orientation="vertical" borderRadius="20" backgroundColor="green" width="100%" horizontalAlignment="center" marginBottom="10">
+                    <Label id="depart" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white"/>
+                </StackLayout>
+                <StackLayout class="pic_rounded" id="my_img" verticalAlignment="top" horizontalAlignment="center" backgroundImage="~/images/logo_parth.png" height="150" width="150"
+                marginBottom="20"/>
+                <StackLayout backgroundColor="rgba(0, 167, 84,0.9)" borderRadius="10">
+                    <StackLayout orientation="vertical" horizontalAlignment="center" marginBottom="10" width="100%">
+                        <Label id="surname" text="SURNAME" horizontalAlignment="center" fontSize="28" color="white"/>
+                        <Label id="name" text="NAME" horizontalAlignment="center" fontSize="18" color="white"/>
+                    </StackLayout>
+                    <GridLayout horizontalAlignment="center" width="100%" height="15%">
+                    <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="15">
+                        <Label text="MATRICOLA" horizontalAlignment="center" fontSize="18" color="white"/>
+                        <Label id="matricola" text="--" horizontalAlignment="center" fontSize="18" color="white"/>
+                    </StackLayout>
+                    <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="15">
+                        <Label text="RUOLO" horizontalAlignment="center" fontSize="18" color="white"/>
+                        <Label id="role"  text="--" horizontalAlignment="center" fontSize="18" color="white"/>
+                        <Label id="roleID"  text="" horizontalAlignment="center" fontSize="18" color="white"/>
+                    </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+
+
+
+                    <Image id="my_qr" verticalAlignment="bottom" horizontalAlignment="center" src="~/images/qr_test.png" height="250" width="250"/>
+
+
+
+
+
             </StackLayout>
-            <GridLayout horizontalAlignment="center" width="100%">
-                <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="15">
-                    <Label text="MATR." horizontalAlignment="center" fontSize="18" color="#22384f"/>
-                    <Label id="matricola" text="--" horizontalAlignment="center" fontSize="18" color="black"/>
-                </StackLayout>
-                <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="15">
-                    <Label text="ROLE" horizontalAlignment="center" fontSize="18" color="#22384f"/>
-                    <Label id="role"  text="???" horizontalAlignment="center" fontSize="18" color="green"/>
-                </StackLayout>
-            </GridLayout>
-
-
 
         </StackLayout>
 
-        <Image id="my_qr" verticalAlignment="bottom" horizontalAlignment="center" src="~/images/qr_test.png" height="250" width="250"/>
     </GridLayout>
 </Page>

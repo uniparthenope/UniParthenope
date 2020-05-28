@@ -48,7 +48,7 @@ global.saveInfo = function(result) {
     appSettings.setString("nome",result.user.firstName);
     appSettings.setString("cognome",result.user.lastName);
     appSettings.setString("grpDes",result.user.grpDes);
-   // appSettings.setNumber("persId", result.user.persId);
+    appSettings.setNumber("persId", result.user.persId);
    appSettings.setString("userId", result.user.userId);
 
     if  (result.user.grpDes === "Studenti"){
@@ -73,7 +73,7 @@ global.saveInfo = function(result) {
     console.log("SAVE_INFO Name= "+result.user.firstName);
     console.log("SAVE_INFO Surname= "+result.user.lastName);
     console.log("SAVE_INFO grpDes= "+result.user.grpDes);
-    //console.log("SAVE_INFO persId= "+result.user.persId);
+    console.log("SAVE_INFO persId= "+result.user.persId);
     console.log("SAVE_INFO userId= " + result.user.userId);
     console.log("SAVE_INFO AuthToken= " + global.authToken);
 };
@@ -92,6 +92,43 @@ global.saveCarr = function(result) {
     appSettings.setString("matricola",result.matricola);
 
     return true;
+};
+global.saveDepartment = function(result) {
+    console.log("SAVE_CARR dataIscr= "+result.dataIscr);
+    console.log("SAVE_CARR facCod= "+result.facCod);
+    console.log("SAVE_CARR facCsaCod= "+result.facCsaCod);
+    console.log("SAVE_CARR facDes= "+result.facDes);
+    console.log("SAVE_CARR sedeId.= "+result.sedeId);
+    console.log("SAVE_CARR sediDes.= "+result.sediDes);
+
+    appSettings.setString("dataIscr",result.dataIscr);
+    appSettings.setString("facCod",result.facCod);
+    appSettings.setString("facCsaCod",result.facCsaCod);
+    appSettings.setString("facDes",result.facDes);
+    appSettings.setNumber("sedeId",result.sedeId);
+    appSettings.setString("sediDes",result.sediDes);
+
+
+};
+global.saveProf = function(result) {
+    console.log("SAVE_CARR settCod= " + result.settCod);
+    appSettings.setString("settCod",result.settCod);
+
+    console.log("SAVE_CARR ruoloDocCod= "+result.ruoloDocCod);
+    appSettings.setString("ruoloDocCod",result.ruoloDocCod);
+
+    console.log("SAVE_CARR Mat.= "+result.docenteMatricola);
+    appSettings.setString("matricola",result.docenteMatricola);
+
+    console.log("SAVE_CARR facCod= " + result.facCod);
+    appSettings.setString("facCod",result.facCod);
+
+    console.log("SAVE_CARR facDes= "+result.facDes);
+    appSettings.setString("facDes",result.facDes);
+
+    console.log("SAVE_CARR facId.= "+result.facId);
+    appSettings.setNumber("facId",result.facId);
+
 };
 
 global.getAllBadge = function(page) {
