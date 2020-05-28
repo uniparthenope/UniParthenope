@@ -19,7 +19,7 @@ function onNavigatingTo(args) {
     console.log("PERSID= "+appSettings.getNumber("persId"))
     if (appSettings.getString("grpDes") === "Studenti"){
 
-        getPIC(appSettings.getNumber("persId"));
+        getPIC(appSettings.getNumber("persId"), 0);
         page.getViewById("name").text = appSettings.getString("nome");
         page.getViewById("surname").text = appSettings.getString("cognome");
         page.getViewById("matricola").text = appSettings.getString("matricola");
@@ -27,9 +27,8 @@ function onNavigatingTo(args) {
         page.getViewById("depart").text = appSettings.getString("facDes").toUpperCase();
     }
     else if (appSettings.getString("grpDes") === "Docenti"){
-        let url = "https://www.uniparthenope.it/sites/default/files/styles/fototessera__175x200_/public/ugov_wsfiles/foto/ugov_fotopersona_0000000000"+
-            appSettings.getNumber("idAb") +".jpg";
 
+        getPIC(appSettings.getNumber("idAb"), 1);
         page.getViewById("name").text = appSettings.getString("nome");
         page.getViewById("surname").text = appSettings.getString("cognome");
         page.getViewById("my_img").backgroundImage = url;
@@ -105,9 +104,20 @@ function getQr(){
     });
 }
 
-function getPIC(personId){
+function getPIC(personId, value){
+    let url;
+    switch (value) {
+        case 0:
+            url = global.url + "general/image/"+ personId;
+            break;
+
+        case 1:
+            url = global.url + "general/image_prof/"+ personId;
+            break;
+    }
+
     httpModule.getFile({
-        "url": global.url + "general/image/"+ personId,
+        "url": url,
         "method": "GET",
         headers: {
             "Content-Type" : "image/jpg",
@@ -117,9 +127,9 @@ function getPIC(personId){
     }).then((source) => {
         page.getViewById("my_img").backgroundImage = source["path"];
     }, (e) => {
-        console.log("Error", e);
+        console.log("[Photo] Error", e);
         dialogs.alert({
-            title: "Autenticazione Fallita!",
+            title: "Error",
             message: e.retErrMsg,
             okButtonText: "OK"
         });
