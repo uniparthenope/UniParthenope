@@ -3,7 +3,8 @@ const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
-const imageSourceModule = require("tns-core-modules/image-source");
+var BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
+var barcodescanner = new BarcodeScanner();
 
 let page;
 let viewModel;
@@ -135,6 +136,50 @@ function getPIC(personId, value){
         });
     });
 }
+exports.tap_scanQR = function(){
+   /* const nav =
+        {
+            // moduleName:"docenti/docenti-appelli/docenti-appelli"
+            moduleName: "badge/scanqr"
+        };
+    page.frame.navigate(nav);*/
+    barcodescanner.scan({
+        formats: "QR_CODE, EAN_13, CODE_128",
+        cancelLabel: "EXIT. Also, try the volume buttons!", // iOS only, default 'Close'
+        cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
+        message: "Use the volume buttons for extra light", // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
+        preferFrontCamera: false,     // Android only, default false
+        showFlipCameraButton: false,   // default false
+        showTorchButton: false,       // iOS only, default false
+        torchOn: false,               // launch with the flashlight on (default false)
+        resultDisplayDuration: 500,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text// Android only, default undefined (sensor-driven orientation), other options: portrait|landscape
+        beepOnScan: true,             // Play or Suppress beep on scan (default true)
+        openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
+        closeCallback: () => {
+            //console.log("Scanner closed @ " + new Date().getTime());
+        }
+    }).then(
+        function (result) {
+            console.log("--- scanned: " + result.text);
+            // Estrarre dal JSON le info
+            // Inviare richiesta API con codice scansionato
+            //
+            setTimeout(function () {
+                // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
+                alert({
+                    title: "Scan result",
+                    message: "Format: " + result.format + ",\nValue: " + result.text,
+                    okButtonText: "OK"
+                });
+
+            }, 500);
+        },
+        function (errorMessage) {
+            console.log("No scan. " + errorMessage);
+        }
+    );
+
+};
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

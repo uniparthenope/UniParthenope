@@ -73,5 +73,8 @@
 
         </GridLayout>
 
+        <Image src="~/images/logo_parth.png" width="50" height="50" verticalAlignment="top" horizontalAlignment="right"
+               marginTop="20" marginRight="20" ontap="tap_scanQR"/>
+
     </GridLayout>
 </Page>
