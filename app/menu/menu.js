@@ -48,7 +48,7 @@ function onNavigatingTo(args) {
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
-        if (result.statusCode === 401 || result.statusCode === 500)
+        if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
                 title: "Errore Server!",
@@ -70,7 +70,7 @@ function onNavigatingTo(args) {
                     headers: {"Content-Type": "application/json"}
                 }).then((response) => {
                     const result_2 = response.content.toJSON();
-                    if (result_2.statusCode === 401 || result_2.statusCode === 500)
+                    if (response.statusCode === 401 || response.statusCode === 500)
                     {
                         dialogs.alert({
                             title: "Errore Server!",

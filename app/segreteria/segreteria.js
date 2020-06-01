@@ -20,16 +20,15 @@ function onNavigatingTo(args) {
 }
 
 function getOrari() {
-
     httpModule.request({
         url: global.url + "segreteria",
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const result = response.content.toJSON();
-        //console.log(result);
+        console.log(result);
 
-        if (result.statusCode === 401 || result.statusCode === 500)
+        if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
                 title: "Errore Server!",
@@ -84,11 +83,11 @@ function getOrari() {
 
         }
 
-    },(e) => {
-        console.log("Error", e.retErrMsg);
+    },error => {
+        console.log("Error");
         dialogs.alert({
             title: "Errore Server!",
-            message: e.retErrMsg,
+            message: error,
             okButtonText: "OK"
         });
     });

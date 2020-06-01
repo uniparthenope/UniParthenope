@@ -42,7 +42,6 @@ function onShownModally(args) {
         }
     }).then((response) => {
         let _result = response.content.toJSON();
-        //let result = _result.response;
 
         console.log(response.statusCode);
 

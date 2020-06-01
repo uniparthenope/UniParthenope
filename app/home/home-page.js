@@ -88,7 +88,7 @@ function autoconnect() {
         }).then((response) => {
             let _result = response.content.toJSON();
 
-            if(_result.statusCode === 401)
+            if(response.statusCode === 401)
             {
                 dialogs.alert({
                     title: "Autenticazione Fallita!",
@@ -99,7 +99,7 @@ function autoconnect() {
                 );
             }
             /* Se un utente è di tipo USER TECNICO (ristorante) */
-            else if (_result.statusCode === 600)
+            else if (response.statusCode === 600)
             {
                 let remember = sideDrawer.getViewById("rememberMe").checked;
                 console.log("UserTecnico:" + _result.username);
@@ -119,7 +119,7 @@ function autoconnect() {
                 page.frame.navigate(nav);
             }
             /* Se un utente è di tipoADMIN */
-            else if (_result.statusCode === 666)
+            else if (response.statusCode === 666)
             {
                 let remember = sideDrawer.getViewById("rememberMe").checked;
                 console.log("Admin:" + _result.username);
@@ -207,10 +207,9 @@ exports.onTapTrasporti = function(){
 
         });
     }
-    else
-        {
-            page.frame.navigate("trasporti/trasporti");
-        }
+    else{
+        page.frame.navigate("trasporti/trasporti");
+    }
 
 };
 

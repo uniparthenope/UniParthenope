@@ -37,7 +37,7 @@ function onNavigatingTo(args) {
         const result = response.content.toJSON();
         //console.log(result);
 
-        if (result.statusCode === 401 || result.statusCode === 500)
+        if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
                 title: "Errore Server!",

@@ -83,7 +83,7 @@ function getAppelli(adId) {
     }).then((response) => {
         const result = response.content.toJSON();
 
-        if (result.statusCode === 401 || result.statusCode === 500)
+        if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
                 title: "Errore Server!",

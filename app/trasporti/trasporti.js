@@ -126,7 +126,7 @@ function getBusPosition() {
         }).then((response) => {
             const result = response.content.toJSON();
 
-            if (result.statusCode === 500) {
+            if (response.statusCode === 500) {
                 dialogs.alert({
                     title: "Errore Server!",
                     message: result.retErrMsg,

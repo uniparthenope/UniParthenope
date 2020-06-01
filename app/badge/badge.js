@@ -86,7 +86,7 @@ function choseBackground(page){
 
 function getQr(){
     httpModule.getFile({
-        "url": global.url + "general/qrCode",
+        "url": "https://api.uniparthenope.it/Badges/v1/generateQrCode",
         "method": "GET",
         headers: {
             "Content-Type" : "image/png",
@@ -164,15 +164,37 @@ exports.tap_scanQR = function(){
             // Estrarre dal JSON le info
             // Inviare richiesta API con codice scansionato
             //
-            setTimeout(function () {
-                // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
-                alert({
-                    title: "Scan result",
-                    message: "Format: " + result.format + ",\nValue: " + result.text,
-                    okButtonText: "OK"
-                });
+            httpModule.request({
+                url : "https://api.uniparthenope.it/Badges/v1/checkQrCode",
+                method : "POST",
+                headers : {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                },
+                content : JSON.stringify({
+                    token : result.text
+                })
+            }).then((response) => {
+                const result = response.content.toJSON();
+                console.log(result["status"]);
 
-            }, 500);
+                let message;
+                if (response.statusCode === 500)
+                    message = "Error: " + result["errMsg"];
+                else
+                    message = result["status"];
+
+                setTimeout(function () {
+                    // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
+                    alert({
+                        title: "Scan result",
+                        message: message,
+                        okButtonText: "OK"
+                    });
+                }, 500);
+            }, error => {
+                console.error(error);
+            })
         },
         function (errorMessage) {
             console.log("No scan. " + errorMessage);

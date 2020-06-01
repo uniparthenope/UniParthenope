@@ -38,6 +38,7 @@
                         <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap="goto_docenti"/>
                         <Button class="btn-menu" text="Segreteria" marginBottom="5" marginTop="5" tap="goto_segreteria"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
+                        <Button class="btn-menu" text="Scan Qr-Code" marginBottom="5" marginTop="5" tap=""/>
 
                     </StackLayout>
                     <!--     Docente       -->
@@ -50,7 +51,7 @@
                             <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap=""/>
                             <Button class="btn-menu" text="Segreteria" marginBottom="5" marginTop="5" tap=""/>
                             <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
-
+                            <Button class="btn-menu" text="Scan Qr-Code" marginBottom="5" marginTop="5" tap=""/>
 
                     </StackLayout>
                     <!--     UserTecnico       -->

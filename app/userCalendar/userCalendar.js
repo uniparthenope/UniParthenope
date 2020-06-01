@@ -77,7 +77,7 @@ function calendarCourses() {
             const result = response.content.toJSON();
             console.log(result);
 
-            if (result.statusCode === 401 || result.statusCode === 500)
+            if (response.statusCode === 401 || response.statusCode === 500)
             {
                 dialogs.alert({
                     title: "Errore Server!",
@@ -152,7 +152,7 @@ function myExams() {
         const result = response.content.toJSON();
         //console.log(result);
 
-        if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
                 title: "Errore Server!",
@@ -181,7 +181,7 @@ function myExams() {
             const result = response.content.toJSON();
             //console.log(result);
 
-            if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
+            if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
             {
                 dialogs.alert({
                     title: "Errore Server!",
@@ -211,7 +211,7 @@ function myExams() {
                             const result_n = response.content.toJSON();
                             //console.log(result_n);
 
-                            if (result_n.statusCode === 401 || result_n.statusCode === 500 || result_n.statusCode === 403) {
+                            if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
                                 dialogs.alert({
                                     title: "Errore Server!",
                                     message: result_n.retErrMsg,
@@ -331,7 +331,7 @@ function getMainInfo() {
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log("GetMainInfo() ="+ result);
-        if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
                 title: "Errore Server!",
@@ -374,7 +374,7 @@ function getCourses() {
         const result = response.content.toJSON();
         //console.log(result);
 
-        if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
                 title: "Errore Server!",
@@ -405,7 +405,7 @@ function getCourses() {
             page.getViewById("activityIndicator").visibility = "visible";
 
 
-            if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
+            if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
             {
                 dialogs.alert({
                     title: "Errore Server!",

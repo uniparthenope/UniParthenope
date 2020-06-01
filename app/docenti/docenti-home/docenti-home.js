@@ -69,7 +69,7 @@ function calendarCourses() {
             //console.log("Calendario: " + result);
 
 
-            if (result.statusCode === 401 || result.statusCode === 500)
+            if (response.statusCode === 401 || response.statusCode === 500)
             {
                 dialogs.alert({
                     title: "Errore Server!",
@@ -126,7 +126,7 @@ function getCourses() {
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        if (result.statusCode === 401 || result.statusCode === 500 || result.statusCode === 403)
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
                 title: "Errore Server!",
@@ -164,7 +164,7 @@ function getCourses() {
             }).then((response2) => {
                 const result2 = response2.content.toJSON();
                 //console.log(result2);
-                if (result2.statusCode === 401 || result2.statusCode === 500 || result2.statusCode === 403)
+                if (response2.statusCode === 401 || response2.statusCode === 500 || response2.statusCode === 403)
                 {
                     dialogs.alert({
                         title: "Errore Server!",
