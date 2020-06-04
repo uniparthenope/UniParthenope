@@ -234,6 +234,14 @@ refer to http://docs.nativescript.org/ui/theme.
     color: white;
     font-family: Montserrat-Bold;
 }
+.scanner-round {
+    width: 260;
+    height: 260;
+    margin-top: 16;
+    border-radius: 130;
+    border-width: 8;
+    border-color: #ddd;
+}
 ActionBar {
     background-color: #22384f;
     color: white;

@@ -5,6 +5,8 @@ const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 var BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
 var barcodescanner = new BarcodeScanner();
+const modalViewModule = "modal-meteo/modal-meteo";
+
 
 let page;
 let viewModel;
@@ -137,6 +139,7 @@ function getPIC(personId, value){
     });
 }
 exports.tap_scanQR = function(){
+    let count = 0;
    /* const nav =
         {
             // moduleName:"docenti/docenti-appelli/docenti-appelli"
@@ -157,13 +160,12 @@ exports.tap_scanQR = function(){
         openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
         closeCallback: () => {
             //console.log("Scanner closed @ " + new Date().getTime());
-        }
-    }).then(
-        function (result) {
-            console.log("--- scanned: " + result.text);
-            // Estrarre dal JSON le info
-            // Inviare richiesta API con codice scansionato
-            //
+        },
+        continuousScanCallback: function (result) {
+            //count++;
+            console.log(result.format + ": " + result.text + " (count: " + count + ")");
+            barcodescanner.message = "SCANNED";
+
             httpModule.request({
                 url : "https://api.uniparthenope.it/Badges/v1/checkQrCode",
                 method : "POST",
@@ -176,7 +178,7 @@ exports.tap_scanQR = function(){
                 })
             }).then((response) => {
                 const result = response.content.toJSON();
-                console.log(result["status"]);
+                console.log(result);
 
                 let message;
                 if (response.statusCode === 500)
@@ -184,17 +186,28 @@ exports.tap_scanQR = function(){
                 else
                     message = result["status"];
 
-                setTimeout(function () {
+
                     // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
-                    alert({
-                        title: "Scan result",
+                    dialogs.alert({
+                        title: "Result:",
                         message: message,
                         okButtonText: "OK"
                     });
-                }, 500);
+
+
             }, error => {
                 console.error(error);
-            })
+            });
+
+
+            if (count === 3) {
+                barcodescanner.stop();
+            }
+        },
+    }).then(
+        function (result) {
+            console.log("--- scanned: " + result.text);
+            
         },
         function (errorMessage) {
             console.log("No scan. " + errorMessage);

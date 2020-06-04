@@ -53,7 +53,7 @@ global.saveInfo = function(result) {
 
     if  (result.user.grpDes === "Studenti"){
         let index = appSettings.getNumber("carriera");
-        /*
+
                 console.log(result.user.trattiCarriera[index].strutturaDes);
 
                 appSettings.setString("strutturaDes",result.user.trattiCarriera[index].strutturaDes);
@@ -65,7 +65,6 @@ global.saveInfo = function(result) {
                 console.log("SAVE_INFO Dipartimento ID= "+result.user.trattiCarriera[index].strutturaId);
                 console.log("SAVE_INFO GA Id= "+result.user.trattiCarriera[index].strutturaGaId);
                 console.log("SAVE_INFO GA Corso= "+result.user.trattiCarriera[index].corsoGaId);
-                 */
     }
 
     global.authToken= result.authToken;

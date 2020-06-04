@@ -73,6 +73,7 @@ exports.tapCalendar = function(){
 
 function getAppelli(adId) {
     loading.visibility = "visible";
+    console.log(adId);
     httpModule.request({
         url: global.url + "students/checkAppello/" + appSettings.getNumber("cdsId") +"/" + adId,
         method: "GET",

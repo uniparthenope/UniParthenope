@@ -2,7 +2,8 @@
       navigatingTo="onNavigatingTo"
       actionBarHidden="false"
       xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:x="nativescript-statusbar">
+      xmlns:x="nativescript-statusbar"
+      xmlns:Barcode="nativescript-barcodescanner">
 
     <x:StatusBar ios:barStyle="light" barColor="#22384f" />
     <ActionBar class="action-bar">
