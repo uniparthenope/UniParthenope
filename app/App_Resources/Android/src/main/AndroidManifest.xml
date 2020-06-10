@@ -37,7 +37,10 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+
+		<!-- Non spaventiamo le persone...
 		<activity android:name="com.tns.ErrorReportActivity"/>
+		-->
 
 	</application>
 </manifest>

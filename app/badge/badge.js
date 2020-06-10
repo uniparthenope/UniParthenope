@@ -88,7 +88,7 @@ function choseBackground(page){
 
 function getQr(){
     httpModule.getFile({
-        "url": "https://api.uniparthenope.it/Badges/v1/generateQrCode",
+        "url": global.url_general + "Badges/v1/generateQrCode",
         "method": "GET",
         headers: {
             "Content-Type" : "image/png",
@@ -167,7 +167,7 @@ exports.tap_scanQR = function(){
             barcodescanner.message = "SCANNED";
 
             httpModule.request({
-                url : "https://api.uniparthenope.it/Badges/v1/checkQrCode",
+                url : global.url_general + "Badges/v1/checkQrCode",
                 method : "POST",
                 headers : {
                     "Content-Type": "application/json",

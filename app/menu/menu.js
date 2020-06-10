@@ -42,9 +42,12 @@ function onNavigatingTo(args) {
     //console.log("CURR DATA = " + data);
 
     httpModule.request({
-        url: global.url + "foods/getAllNames",
+        url: global.url_general + "Eating/v1/getUsers",
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
@@ -65,9 +68,12 @@ function onNavigatingTo(args) {
                 count++;
 
                 httpModule.request({
-                    url: global.url + "foods/getAllToday",
+                    url: global.url_general + "Eating/v1/getToday",
                     method: "GET",
-                    headers: {"Content-Type": "application/json"}
+                    headers: {
+                        "Content-Type" : "application/json",
+                        "Authorization" : "Basic "+ global.encodedStr
+                    }
                 }).then((response) => {
                     const result_2 = response.content.toJSON();
                     if (response.statusCode === 401 || response.statusCode === 500)

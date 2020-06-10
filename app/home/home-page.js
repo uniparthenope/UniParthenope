@@ -199,17 +199,9 @@ exports.onTapMeteo = function(){
 };
 
 exports.onTapTrasporti = function(){
-    if(global.encodedStr === ""){
-        dialogs.alert({
-            title: "Non Autorizzato!",
-            message: "Effettuare Login!",
-            okButtonText: "OK"
 
-        });
-    }
-    else{
-        page.frame.navigate("trasporti/trasporti");
-    }
+    page.frame.navigate("trasporti/trasporti");
+
 
 };
 

@@ -120,9 +120,7 @@ function getBusPosition() {
             url: global.url_general + "Bus/v1/bus/CDN",
             method: "GET",
             headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic "+ global.encodedStr
-            }
+                "Content-Type" : "application/json"}
         }).then((response) => {
             const result = response.content.toJSON();
 
