@@ -30,6 +30,9 @@
                 <Label row="0" class="textPrimary" text="Miei Corsi" horizontalAlignment="center" verticalAlignment="center" marginBottom="15" marginTop="5"/>
                 <Label row="1" class="textPrimary" id="semestre" horizontalAlignment="center" verticalAlignment="center" fontSize="13" marginBottom="5"/>
                 <Label row="2" class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="center" fontSize="12" marginBottom="5"/>
+                <GridLayout row="2" width="70" verticalAlignment="bottom" horizontalAlignment="left">
+                    <Label  class="textPrimary" text="Anno" fontSize="12" marginBottom="5" horizontalAlignment="center" />
+                </GridLayout>
             </GridLayout>
 
             <ScrollView row="1" verticalAlignment="top" height="100%">
@@ -52,9 +55,7 @@
                                         <Label class="examPass" borderWidth="0"  text="{{ ult_mod }}" fontSize="11" horizontalAlignment="center" color="#8b0000"/>
                                     </StackLayout>
                                 </StackLayout>
-                                <GridLayout  width="70">
-                                    <Label  class="examPass" borderWidth="0" text="MAR" horizontalAlignment="center" fontSize="14" verticalAlignment="center"/>
-                                </GridLayout>
+
                             </StackLayout>
                         </FlexboxLayout>
                     </ListView.itemTemplate>
