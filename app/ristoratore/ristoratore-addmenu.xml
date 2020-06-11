@@ -1,0 +1,57 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:cb="@nstudio/nativescript-checkbox">
+
+
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <StackLayout>
+        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <Label class="textPrimary" text="Nuovo Pasto" horizontalAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+
+    <ScrollView height="100%">
+
+        <StackLayout marginRight="5" marginLeft="5">
+            <StackLayout marginTop="10">
+                <Image id="image"  width="100%"/>
+                <Button class="btn" text="Aggiungi Foto" ontap="onTapAdd" marginTop="10"/>
+            </StackLayout>
+            <TextField id="nome" hint="Nome" class="input input-border" marginBottom="5"/>
+            <TextField id="desc" hint="Descrizione" class="input input-border" marginBottom="5"/>
+            <StackLayout orientation="horizontal">
+                <TextField id="prezzo" keyboardType="number" hint="Prezzo" class="input input-border" width="30%" marginBottom="10" horizontalAlignment="left"/>
+                <Label text="€" verticalAlignment="center" textAlignment="center"/>
+            </StackLayout>
+            <cb:CheckBox checked="false" text="Mostra pasto ogni giorno" id="alwaysActive" color="black" fillColor="#22384f" marginTop="5"/>
+            <StackLayout orientation="horizontal" width="100%">
+                <Label text="Tipologia:" verticalAlignment="center" textAlignment="center" marginRight="10"/>
+                <ListPicker id="lp" items="{{ items_picker }}" selectedIndex="{{ sel }}" width="40%"/>
+            </StackLayout>
+
+            <Button class="btn" text="Pubblica" ontap="onTapSave" marginBottom="10"/>
+
+        </StackLayout>
+    </ScrollView>
+
+    </StackLayout>
+</Page>

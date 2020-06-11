@@ -99,10 +99,10 @@ function autoconnect() {
                 );
             }
             /* Se un utente è di tipo USER TECNICO (ristorante) */
-            else if (response.statusCode === 600)
+            else if (_result.user.grpDes === "Ristoranti")
             {
                 let remember = sideDrawer.getViewById("rememberMe").checked;
-                console.log("UserTecnico:" + _result.username);
+                console.log("Ristoratore:" + _result.username);
                 if (remember){
                     appSettings.setString("username",user);
                     appSettings.setString("password",pass);
@@ -110,10 +110,10 @@ function autoconnect() {
                 }
 
                 sideDrawer.getViewById("topName").text = _result.username;
-                setSideMenu("userTecnico",_result.username);
+                setSideMenu("userRistoratore",_result.username);
                 const nav =
                     {
-                        moduleName: "usertecnico-all/usertecnico-all",
+                        moduleName: "ristoratore/ristoratore-home",
                         clearHistory: true
                     };
                 page.frame.navigate(nav);

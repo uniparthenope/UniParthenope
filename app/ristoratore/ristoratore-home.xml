@@ -1,0 +1,58 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <GridLayout>
+        <StackLayout>
+        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <Label class="textPrimary" text="I Miei Menu" horizontalAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+
+        <ScrollView height="80%" marginLeft="5" marginRight="5" marginTop="10">
+            <ListView id="listview" items="{{ items }}" itemTap="tapped">
+                <ListView.itemTemplate>
+
+                    <GridLayout >
+                        <Image src="{{ image }}" height="150" width="100%" stretch="aspectFill" marginBottom="10"/>
+                        <StackLayout orientation="vertical" >
+                            <Label class="textPrimary textPrimary-bold" fontSize="16" color="#107dd0" text="{{ nome }}" textWrap="true" horizontalAlignment="center"/>
+                                <StackLayout  orientation="vertical" horizontalAlignment="left" verticalAlignment="center" marginLeft="5" backgroundColor="rgba(0,0,0,0.5)" width="70%">
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ descrizione }}" textWrap="true"/>
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ full_data }}" textWrap="true"/>
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ tipologia }}" textWrap="true"/>
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ prezzo }}" textWrap="true"/>
+                                    <Label class="textPrimary" fontSize="14" color="white" text="{{ sempre_att }}" textWrap="true"/>
+                                </StackLayout>
+
+                            </StackLayout>
+                    </GridLayout>
+
+                </ListView.itemTemplate>
+
+            </ListView>
+
+
+        </ScrollView>
+        </StackLayout>
+    </GridLayout>
+</Page>

@@ -59,7 +59,7 @@
                             -->
                     </StackLayout>
                     <!--     UserTecnico       -->
-                    <StackLayout id="userTecnico" visibility="collapsed">
+                    <StackLayout id="userRistoratore" visibility="collapsed">
 
                         <Button class="btn-menu" text="Miei Menu" marginBottom="5" marginTop="20" tap="goto_menuList"/>
                         <Button class="btn-menu" text="Nuovo Pasto" marginBottom="5" marginTop="20" tap="goto_menuNew"/>

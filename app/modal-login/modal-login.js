@@ -45,7 +45,7 @@ function onShownModally(args) {
 
         console.log(response.statusCode);
 
-        if(response.statusCode === 401)
+        if(response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
                 title: "Autenticazione Fallita!",
@@ -83,100 +83,126 @@ function onShownModally(args) {
                 };
             frame.Frame.topmost().navigate(nav);
         }
-        /* Se un utente è di tipo ADMIN (ristorante) */
-        else if (response.statusCode === 666)
-        {
-            const sideDrawer = app.getRootView();
-            let remember = sideDrawer.getViewById("rememberMe").checked;
-
-            if (remember){
-                appSettings.setString("username",user);
-                appSettings.setString("password",pass);
-                appSettings.setBoolean("rememberMe",true);
-            }
-            console.log("Admin:" + _result.username);
-
-            sideDrawer.getViewById("topName").text = _result.username;
-            global.username = _result.username;
-            let userForm = sideDrawer.getViewById("userAdmin");
-            let loginForm = sideDrawer.getViewById("loginForm");
-            loginForm.visibility = "collapsed";
-            userForm.visibility = "visible";
-
-            closeCallback();
-            const nav =
-                {
-                    moduleName: "admin/admin-home/admin-home",
-                    clearHistory: true
-                };
-            frame.Frame.topmost().navigate(nav);
-        }
         else
         {
             account = _result;
-            carriere = _result.user.trattiCarriera;
+            if(_result.user.grpDes === "Studenti"){
+                carriere = _result.user.trattiCarriera;
 
-            if (carriere.length > 0)
-            {
-                indicator.visibility = "collapsed";
-                //Mostro le carriere
-                for (let i=0; i<carriere.length; i++)
+                if (carriere.length > 0)
                 {
-                    console.log(carriere[i].cdsDes);
-                    items.push({
-                        "cdsDes": carriere[i].cdsDes,
-                        "cdsId": carriere[i].cdsId,
-                        "matricola" : carriere[i].matricola,
-                        "matId" : carriere[i].matId,
-                        "stuId" : carriere[i].stuId,
-                        "status" :carriere[i].staStuDes
-                    });
-                    userList.refresh();
-                }
-            }
-            else
-            {
-                if(_result.user.grpDes === "Docenti"){
-                    detailedProf(_result.user.docenteId); // Get detailed info of a professor
-                    const sideDrawer = app.getRootView();
-                    global.saveInfo(account);
-                    let remember = sideDrawer.getViewById("rememberMe").checked;
-
-                    if (remember){
-                        appSettings.setString("username",user);
-                        appSettings.setString("password",pass);
-                        appSettings.setBoolean("rememberMe",true);
+                    indicator.visibility = "collapsed";
+                    //Mostro le carriere
+                    for (let i=0; i<carriere.length; i++)
+                    {
+                        console.log(carriere[i].cdsDes);
+                        items.push({
+                            "cdsDes": carriere[i].cdsDes,
+                            "cdsId": carriere[i].cdsId,
+                            "matricola" : carriere[i].matricola,
+                            "matId" : carriere[i].matId,
+                            "stuId" : carriere[i].stuId,
+                            "status" :carriere[i].staStuDes
+                        });
+                        userList.refresh();
                     }
-                    console.log("Docente:" + _result.user.userId);
-                    appSettings.setNumber("idAb",_result.user.idAb);
-                    global.isConnected = true;
-                    let nome = appSettings.getString("nome");
-                    let cognome = appSettings.getString("cognome");
-
-                    sideDrawer.getViewById("topName").text = nome + " " + cognome;
-                    let userForm = sideDrawer.getViewById("userDocente");
-                    let loginForm = sideDrawer.getViewById("loginForm");
-                    loginForm.visibility = "collapsed";
-                    userForm.visibility = "visible";
-
-                    closeCallback();
-                    const nav =
-                        {
-                            moduleName: "docenti/docenti-home/docenti-home",
-                            clearHistory: true
-                        };
-                    frame.Frame.topmost().navigate(nav);
-                }
-                else{
-                    dialogs.alert({
-                        title: "Attenzione!",
-                        message: "Lavori in corso.....",
-                        okButtonText: "OK"
-                    });
-                    args.object.closeModal();
                 }
             }
+           else if(_result.user.grpDes === "Docenti"){
+                detailedProf(_result.user.docenteId); // Get detailed info of a professor
+                const sideDrawer = app.getRootView();
+                global.saveInfo(account);
+                let remember = sideDrawer.getViewById("rememberMe").checked;
 
+                if (remember){
+                    appSettings.setString("username",user);
+                    appSettings.setString("password",pass);
+                    appSettings.setBoolean("rememberMe",true);
+                }
+                console.log("Docente:" + _result.user.userId);
+                appSettings.setNumber("idAb",_result.user.idAb);
+                global.isConnected = true;
+                let nome = appSettings.getString("nome");
+                let cognome = appSettings.getString("cognome");
+
+                sideDrawer.getViewById("topName").text = nome + " " + cognome;
+                let userForm = sideDrawer.getViewById("userDocente");
+                let loginForm = sideDrawer.getViewById("loginForm");
+                loginForm.visibility = "collapsed";
+                userForm.visibility = "visible";
+
+                closeCallback();
+                const nav =
+                    {
+                        moduleName: "docenti/docenti-home/docenti-home",
+                        clearHistory: true
+                    };
+                frame.Frame.topmost().navigate(nav);
+            }
+
+            else if(_result.user.grpDes === "Ristoranti"){
+                const sideDrawer = app.getRootView();
+                let remember = sideDrawer.getViewById("rememberMe").checked;
+
+                if (remember){
+                    appSettings.setString("username",user);
+                    appSettings.setString("password",pass);
+                    appSettings.setBoolean("rememberMe",true);
+                }
+                console.log("Ristorante: " + _result.user.nomeBar);
+
+                sideDrawer.getViewById("topName").text = _result.user.nomeBar;
+                global.username = _result.user.nomeBar;
+                let userForm = sideDrawer.getViewById("userRistoratore");
+                let loginForm = sideDrawer.getViewById("loginForm");
+                loginForm.visibility = "collapsed";
+                userForm.visibility = "visible";
+
+                closeCallback();
+                const nav =
+                    {
+                        moduleName: "ristoratore/ristoratore-home",
+                        clearHistory: true
+                    };
+                frame.Frame.topmost().navigate(nav);
+            }
+
+            else if(_result.user.grpDes === "Tecnico"){/*
+                const sideDrawer = app.getRootView();
+                let remember = sideDrawer.getViewById("rememberMe").checked;
+
+                if (remember){
+                    appSettings.setString("username",user);
+                    appSettings.setString("password",pass);
+                    appSettings.setBoolean("rememberMe",true);
+                }
+                console.log("Ristorante:" + _result.username);
+
+                sideDrawer.getViewById("topName").text = _result.username;
+                global.username = _result.username;
+                let userForm = sideDrawer.getViewById("userAdmin");
+                let loginForm = sideDrawer.getViewById("loginForm");
+                loginForm.visibility = "collapsed";
+                userForm.visibility = "visible";
+
+                closeCallback();
+                const nav =
+                    {
+                        moduleName: "admin/admin-home/admin-home",
+                        clearHistory: true
+                    };
+                frame.Frame.topmost().navigate(nav);
+                */
+            }
+
+            else{
+                dialogs.alert({
+                    title: "Attenzione!",
+                    message: "Utente non supportato!",
+                    okButtonText: "OK"
+                });
+                args.object.closeModal();
+            }
         }
 
     },(e) => {

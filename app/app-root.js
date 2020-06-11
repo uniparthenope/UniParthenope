@@ -110,7 +110,7 @@ exports.goto_segreteria = function () {
 exports.goto_menuList = function () {
     const nav =
         {
-            moduleName: "usertecnico-all/usertecnico-all",
+            moduleName: "ristoratore/ristoratore-home",
             clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
@@ -119,7 +119,7 @@ exports.goto_menuList = function () {
 exports.goto_menuNew = function () {
     const nav =
         {
-            moduleName: "usertecnico/usertecnico",
+            moduleName: "ristoratore/ristoratore-add",
             clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
