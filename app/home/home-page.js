@@ -194,7 +194,11 @@ exports.onTapNotizie = function(){
 };
 
 exports.onTapMeteo = function(){
-    const loc = { lat: pos.latitude, long: pos.longitude };
+    let loc;
+    if (pos != undefined)
+        loc = { lat: pos.latitude, long: pos.longitude };
+    else
+        loc = {lat: 40.7, long: 14.17};
     page.showModal(modalViewModule, loc, false);
 };
 

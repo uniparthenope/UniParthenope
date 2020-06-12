@@ -26,7 +26,7 @@ function onShownModally(args) {
         getWeather(context.lat, context.long);
     }
     else
-        getWeather(40.8379399, 14.2520741);
+        getWeather(40.7, 14.17);
 }
 
 exports.ontap_download = function(){
@@ -38,12 +38,13 @@ exports.onShownModally = onShownModally;
 
 function getWeather(lat, long) {
     httpModule.request({
-        url: "https://api.meteo.uniparthenope.it/places/search/bycoords/" + lat + "/" + long + "?filter=com",
+        url: "https://api.meteo.uniparthenope.it/places/search/bycoords/" + lat + "/" + long,
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {
         const data = response.content.toJSON();
         let place = data[0].long_name.it;
+
         if (place.includes("Municipalit")) {
             let tmp = place.split("-");
             let tmp1 = tmp.pop();
