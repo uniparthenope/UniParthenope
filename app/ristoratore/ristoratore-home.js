@@ -118,12 +118,15 @@ exports.tapped = function (args) {
         // result argument is boolean
         if (result)
         {
-            fetch(global.url + "foods/removeMenu/" + global.encodedStr + "/" + header_index, {
+            httpModule.request({
+                url: global.url_general + "Eating/v1/removeMenu/" + header_index,
                 method: "GET",
-                headers: {"Content-Type": "application/json"}
-            }).then((r) => r.json())
-                .then((response) => {
-                    if (response.code === 200)
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                }
+            }).then((response) => {
+                    if (response.statusCode === 200)
                     {
                         dialogs.alert({
                             title: "Menu Cancellato!",
@@ -136,20 +139,18 @@ exports.tapped = function (args) {
                                     clearHistory: true
                                     };
                                 frame.topmost().navigate(nav);
-                            });
-                        }
-                        else {
-                            dialogs.alert({
-                                title: "Errore!",
-                                message: "Il menu non è stato cancellato con successo!",
-                                okButtonText: "OK"
-                            }).then(function () {
-
-                            });
-                        }
-                    }).catch((e) => {
+                        });
+                    }
+                    else {
+                        dialogs.alert({
+                            title: "Errore!",
+                            message: "Il menu non è stato cancellato con successo!",
+                            okButtonText: "OK"
+                        });
+                    }
+            }).catch((e) => {
                     console.log(e);
-                });
+            });
         }
     });
 };
