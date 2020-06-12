@@ -51,15 +51,15 @@ function onTapSave() {
         // result argument is boolean
         console.log("Image: " + img);
 
-        if (result)
-        {
-            fetch(global.url_general + "Eating/v1/addMenu", {
+        if (result) {
+            httpModule.request({
+                url: "http://api.uniparthenope.it:5000/Eating/v1/addMenu",
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization" : "Basic "+ global.encodedStr
                 },
-                body: JSON.stringify({
+                content: JSON.stringify({
                     nome: nome,
                     descrizione: desc,
                     tipologia: tipo,
@@ -68,38 +68,52 @@ function onTapSave() {
                     img:img
                 })
             }).then((response) => {
-                    console.log(response);
+                console.log(response.statusCode);
 
-                    if (response.status == 200) {
-                        dialogs.alert({
-                            title: "Menu Caricato!",
-                            message: "Il nuovo menu è stato caricato con successo!",
-                            okButtonText: "OK"
-                        }).then(function(){
-                            const nav =
-                                {
-                                    moduleName: "ristoratore/ristoratore-home",
-                                    clearHistory: true
-                                };
-                            frame.topmost().navigate(nav);
-                        });
-                    }
-                    else{
-                        dialogs.alert({
-                            title: "Errore",
-                            message: "Errore server",
-                            okButtonText: "OK"
-                        }).then(function(){
-                            const nav =
-                                {
-                                    moduleName: "ristoratore/ristoratore-home",
-                                    clearHistory: true
-                                };
-                            frame.topmost().navigate(nav);
-                        });
-                    }
-                }).catch((e) => {
-                    console.log(e);
+                if (response.statusCode == 200) {
+                    dialogs.alert({
+                        title: "Menu Caricato!",
+                        message: "Il nuovo menu è stato caricato con successo!",
+                        okButtonText: "OK"
+                    }).then(function(){
+                        const nav =
+                            {
+                                moduleName: "ristoratore/ristoratore-home",
+                                clearHistory: true
+                            };
+                        frame.topmost().navigate(nav);
+                    });
+                }
+                else if (response.statusCode == 500){
+                    dialogs.alert({
+                        title: "Errore",
+                        message: response.content.toJSON()['errMsg'],
+                        okButtonText: "OK"
+                    }).then(function(){
+                        const nav =
+                            {
+                                moduleName: "ristoratore/ristoratore-home",
+                                clearHistory: true
+                            };
+                        frame.topmost().navigate(nav);
+                    });
+                }
+                else{
+                    dialogs.alert({
+                        title: "Errore",
+                        message: response.content.toJSON()['message'],
+                        okButtonText: "OK"
+                    }).then(function(){
+                        const nav =
+                            {
+                                moduleName: "ristoratore/ristoratore-home",
+                                clearHistory: true
+                            };
+                        frame.topmost().navigate(nav);
+                    });
+                }
+            }).catch((e) => {
+                console.log(e);
             });
         }
     });
