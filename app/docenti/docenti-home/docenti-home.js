@@ -58,7 +58,7 @@ function calendarCourses() {
         //console.log("Docente: " + docente[0].toUpperCase());
 
         httpModule.request({
-            url: global.url_general + "GAUniparthenope/v1/searchCourse/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
+            url: global.url_general + "GAUniparthenope/v1/searchCourse/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo,
             method: "GET",
             headers: {
                 "Content-Type" : "application/json",
@@ -116,7 +116,8 @@ function insert_event() {
     calendar.eventSource = temp_array;
 }
 function getCourses() {
-    //console.log(global.url + "docenti/getAA/" + global.encodedStr + "/" + global.authToken);
+    console.log(global.url + "professor/getSession");
+
     httpModule.request({
         url: global.url + "professor/getSession",
         method: "GET",
@@ -126,6 +127,9 @@ function getCourses() {
         }
     }).then((response) => {
         const result = response.content.toJSON();
+
+        console.log(response.statusCode);
+
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({

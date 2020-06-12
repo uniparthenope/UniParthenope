@@ -16,7 +16,7 @@ const imageSourceModule = require("tns-core-modules/image-source");
 let page;
 let viewModel;
 let sideDrawer;
-let img;
+let img = "";
 let values = ["Offerta","Primo","Secondo","Contorno","Bibita","Altro"];
 
 function onNavigatingTo(args) {
@@ -49,11 +49,16 @@ function onTapSave() {
         cancelButtonText: "No"
     }).then(function (result) {
         // result argument is boolean
+        console.log("Image: " + img);
+
         if (result)
         {
-            fetch(global.url + "foods/addMenu/" + global.encodedStr, {
+            fetch(global.url_general + "Eating/v1/addMenu", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                },
                 body: JSON.stringify({
                     nome: nome,
                     descrizione: desc,
@@ -61,25 +66,40 @@ function onTapSave() {
                     prezzo:prezzo,
                     attivo: active,
                     img:img
-
                 })
-            }).then((r) => r.json())
-                .then((response) => {
-                    const result = response.json;
-                    console.log(result);
-                    dialogs.alert({
-                        title: "Menu Caricato!",
-                        message: "Il nuovo menu è stato caricato con successo!",
-                        okButtonText: "OK"
-                    }).then(function(){
-                        const nav =
-                            {
-                                moduleName: "ristoratore/ristoratore-home",
-                                clearHistory: true
-                            };
-                        frame.topmost().navigate(nav);
-                    });
+            }).then((response) => {
+                    console.log(response);
+
+                    if (response.status == 200) {
+                        dialogs.alert({
+                            title: "Menu Caricato!",
+                            message: "Il nuovo menu è stato caricato con successo!",
+                            okButtonText: "OK"
+                        }).then(function(){
+                            const nav =
+                                {
+                                    moduleName: "ristoratore/ristoratore-home",
+                                    clearHistory: true
+                                };
+                            frame.topmost().navigate(nav);
+                        });
+                    }
+                    else{
+                        dialogs.alert({
+                            title: "Errore",
+                            message: "Errore server",
+                            okButtonText: "OK"
+                        }).then(function(){
+                            const nav =
+                                {
+                                    moduleName: "ristoratore/ristoratore-home",
+                                    clearHistory: true
+                                };
+                            frame.topmost().navigate(nav);
+                        });
+                    }
                 }).catch((e) => {
+                    console.log(e);
             });
         }
     });

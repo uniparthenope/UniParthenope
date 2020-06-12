@@ -29,10 +29,12 @@ function onNavigatingTo(args) {
     page.bindingContext = viewModel;
     console.log(global.username);
     httpModule.request({
-
-        url: global.url + "foods/menuSearchUser/" + global.username,
+        url: global.url_general + "Eating/v1/getMenuBar",
         method: "GET",
-        headers: {"Content-Type": "application/json"}
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
     }).then((response) => {
         const result = response.content.toJSON();
         //console.log(result);
@@ -43,8 +45,7 @@ function onNavigatingTo(args) {
                 title: "Errore Server!",
                 message: result.retErrMsg,
                 okButtonText: "OK"
-            }).then(
-            );
+            }).then();
         }
         else {
             console.log(result.length);

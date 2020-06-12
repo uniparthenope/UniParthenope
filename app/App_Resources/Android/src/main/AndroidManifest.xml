@@ -38,7 +38,7 @@
 			</intent-filter>
 		</activity>
 
-		<!-- Non spaventiamo le persone...
+		<!--
 		<activity android:name="com.tns.ErrorReportActivity"/>
 		-->
 

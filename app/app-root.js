@@ -119,7 +119,7 @@ exports.goto_menuList = function () {
 exports.goto_menuNew = function () {
     const nav =
         {
-            moduleName: "ristoratore/ristoratore-add",
+            moduleName: "ristoratore/ristoratore-addmenu",
             clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
