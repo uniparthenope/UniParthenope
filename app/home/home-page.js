@@ -48,8 +48,7 @@ function onNavigatingTo(args) {
            title: "Bentornato!",
            message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome"),
            okButtonText: "OK"
-       }).then(
-       );
+       }).then();
        autoconnect();
    }
    else if (remember) {

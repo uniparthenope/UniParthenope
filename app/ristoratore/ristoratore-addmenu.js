@@ -53,7 +53,7 @@ function onTapSave() {
 
         if (result) {
             httpModule.request({
-                url: "http://api.uniparthenope.it:5000/Eating/v1/addMenu",
+                url: global.url_general + "Eating/v1/addMenu",
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
