@@ -208,6 +208,10 @@ refer to http://docs.nativescript.org/ui/theme.
     color:gray;
     border-color: gray;
 }
+.color-yellow{
+    color:orange;
+
+}
 .main_image{
     background-repeat: no-repeat;
     background-position: center;

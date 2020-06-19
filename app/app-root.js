@@ -169,6 +169,14 @@ exports.goto_badge = function () {
         };
     frame.Frame.topmost().navigate(nav);
 };
+exports.goto_taxes = function () {
+    const nav =
+        {
+            moduleName: "tasse/tasse",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
 exports.goto_professor_home = function () {
     const nav =
         {

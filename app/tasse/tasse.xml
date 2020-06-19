@@ -1,0 +1,67 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
+    <ActionBar class="action-bar">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios.position="right"/>
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+        <Label class="action-bar-title" text="UniParthenope"></Label>
+    </ActionBar>
+    <GridLayout>
+        <StackLayout horizontalAlignment="center" verticalAlignment="top">
+            <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+                <Label class="textPrimary" text="Tasse" horizontalAlignment="center" verticalAlignment="center"/>
+            </GridLayout>
+            <StackLayout>
+
+                <StackLayout id="background_title" verticalAlignment="top" class="rounded" height="30" backgroundColor="#808080" marginTop="10">
+                    <Label id="title" class="textPrimary" text="Regolare" horizontalAlignment="center" verticalAlignment="top"/>
+                </StackLayout>
+
+                <StackLayout height="90%" class="border" borderWidth="2" margin="10 10 10 10" verticalAlignment="top">
+                    <Label class="textPrimary" height="10%" text="Storico" textAlignment="center" backgroundColor="#22384f" width="100%" />
+
+                    <ScrollView height="100%">
+                        <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                            <ListView.itemTemplate >
+                                <FlexboxLayout flexDirection="row">
+                                    <StackLayout  width="100%" marginBottom="5" marginTop="5">
+                                        <Label class="{{ col }}" horizontalAlignment="center" text="{{ desc }}" fontSize="18" textWrap="true" marginBottom="5" marginLeft="15"/>
+                                        <Label class="{{ col }}" borderWidth="0" text="{{ data }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
+                                        <Label class="{{ col }}" borderWidth="0"  text="{{ importo }}" fontSize="14" horizontalAlignment="center"/>
+                                        <Label class="{{ col }}" borderWidth="0"  text="{{ fatt_id }}" fontSize="14" horizontalAlignment="center"/>
+                                        <Label class="{{ col }}" borderWidth="0"  text="{{ iur_iuv }}" fontSize="14" horizontalAlignment="center"/>
+
+                                    </StackLayout>
+                                </FlexboxLayout>
+                            </ListView.itemTemplate>
+                        </ListView>
+                    </ScrollView>
+                </StackLayout>
+            </StackLayout>
+
+
+        </StackLayout>
+        <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Recupero Tasse..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
+    </GridLayout>
+</Page>
