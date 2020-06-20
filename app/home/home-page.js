@@ -55,6 +55,10 @@ function onNavigatingTo(args) {
       setSideMenu(global.myform,global.username);
    }
 
+   if (appSettings.getBoolean("sondaggio",true)){
+       showAD();
+   }
+
     page.bindingContext = viewModel;
 }
 
@@ -247,7 +251,24 @@ function setSideMenu(type,username) {
      sideDrawer.getViewById("topName").text = username;
      global.username = username;
  }
+function showAD(){
+    dialogs.confirm({
+        title: "Sondaggio App@Uniparthenope",
+        message: "Il tuo contributo è importante! \nDedicaci 3 minuti del tuo tempo per compilare un sondaggio anonimo.",
+        okButtonText: "Certo",
+        cancelButtonText: "Non Visualizzare Più",
+        neutralButtonText: "Ricorda Dopo"
+    }).then(function (result) {
+        // result argument is boolean
+        if(result){
+            utilsModule.openUrl("https://forms.gle/NHt34NRw7uwMk9rEA");
+            appSettings.setBoolean("sondaggio", false);
+        }
+        else if (!result)
+            appSettings.setBoolean("sondaggio", false);
 
+    });
+}
 exports.ontap_fb = function(){
     utilsModule.openUrl("https://www.facebook.com/Parthenope");
 };
