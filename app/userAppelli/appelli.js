@@ -25,6 +25,7 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     drawTitle();
+
     items_appelli = new ObservableArray();
     appelli_listview = page.getViewById("appelli_listview");
 
@@ -155,7 +156,6 @@ function getAppelli(adId) {
                     appelli_listview.refresh();
                 }
                 loading.visibility = "collapsed";
-
             }
         }
     },(e) => {
@@ -190,6 +190,10 @@ function monthOfYear(date) {
 function onItemTap(args) {
     const mainView = args.object;
     const index = args.index;
+
+    console.log("AppId: " + items_appelli.getItem(index).appId);
+    console.log("AdId: " + items_appelli.getItem(index).adId);
+
     const adLogId = { adId: items_appelli.getItem(index).adId, appId: items_appelli.getItem(index).appId, docente: items_appelli.getItem(index).docente,
         esame: items_appelli.getItem(index).esame};
 

@@ -19,7 +19,7 @@ function onNavigatingTo(args) {
     sideDrawer.closeDrawer();
     choseBackground(page);
     getQr();
-    console.log("PERSID= "+appSettings.getNumber("persId"))
+    console.log("PERSID= "+appSettings.getNumber("persId"));
     if (appSettings.getString("grpDes") === "Studenti"){
 
         getPIC(appSettings.getNumber("persId"), 0);

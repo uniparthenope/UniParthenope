@@ -38,6 +38,16 @@ exports.onTapLogin = function() {
 
 };
 
+//Go to taxes page
+exports.goto_tasse = function () {
+    const nav =
+        {
+            moduleName: "tasse/tasse",
+        };
+    frame.Frame.topmost().navigate(nav);
+
+};
+
 //Go to Settings page
 exports.goto_settings = function () {
     const nav =

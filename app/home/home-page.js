@@ -55,6 +55,8 @@ function onNavigatingTo(args) {
       setSideMenu(global.myform,global.username);
    }
 
+   console.log("Sondaggio: " + appSettings.getBoolean("sondaggio"));
+
    if (appSettings.getBoolean("sondaggio",true)){
        showAD();
    }
@@ -260,12 +262,16 @@ function showAD(){
         neutralButtonText: "Ricorda Dopo"
     }).then(function (result) {
         // result argument is boolean
+        console.log(result);
+
         if(result){
             utilsModule.openUrl("https://forms.gle/NHt34NRw7uwMk9rEA");
-            appSettings.setBoolean("sondaggio", false);
+            //appSettings.setBoolean("sondaggio", false);
         }
-        else if (!result)
+        else if (result === false)
             appSettings.setBoolean("sondaggio", false);
+        else
+            appSettings.setBoolean("sondaggio", true);
 
     });
 }
