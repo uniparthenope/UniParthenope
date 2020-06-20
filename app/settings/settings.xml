@@ -35,12 +35,17 @@
                         <Label class="textPrimary" id="text_appello" color="#22384f" col="0" text="Mostra altri appelli" horizontalAlignment="left" verticalAlignment="center"/>
                         <Switch col="1" id="switch_appello"  checked="false" loaded="onSwitchLoaded_appello" horizontalAlignment="right" verticalAlignment="center"/>
                     </GridLayout>
+                    <GridLayout margin="5 5 5 5" columns="*,50" height="50" >
+                        <Label class="textPrimary" id="text_appello" color="#22384f" col="0" text="Mostra PopUp Sondaggio" horizontalAlignment="left" verticalAlignment="center"/>
+                        <Switch col="1" id="switch_sondaggio"  checked="false" loaded="onSwitchLoaded_sondaggio" horizontalAlignment="right" verticalAlignment="center"/>
+                    </GridLayout>
 
                     <!-- Insert here other settings (Duplicate GridLayout above!) -->
 
                 </StackLayout>
             </ScrollView>
         </StackLayout>
+        <Button   tap="onTapSurvey" class="btn" text="Partecipa al Sondaggio" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
         <Button id="deleteBtn" visibility="collapsed" tap="onTapDelete" class="btn" text="Dimentica Account" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
     </GridLayout>
 </Page>

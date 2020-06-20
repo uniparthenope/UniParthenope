@@ -2,6 +2,8 @@ const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
+const utilsModule = require("tns-core-modules/utils/utils");
+
 
 let page;
 let viewModel;
@@ -62,6 +64,11 @@ function onTapDelete(){
 }
 exports.onTapDelete = onTapDelete;
 
+function onTapSurvey() {
+    utilsModule.openUrl("https://forms.gle/NHt34NRw7uwMk9rEA");
+}
+exports.onTapSurvey = onTapSurvey;
+
 // Check per mostrare nella pagina APPELLI.JS anche gli appelli non ancora prenotabili, ma disponibili.
 function onSwitchLoaded_appello(args) {
     page.getViewById("switch_appello").checked = appSettings.getBoolean("esami_futuri",false);
@@ -74,6 +81,19 @@ function onSwitchLoaded_appello(args) {
     });
 }
 exports.onSwitchLoaded_appello = onSwitchLoaded_appello;
+
+function onSwitchLoaded_sondaggio(args) {
+    page.getViewById("switch_sondaggio").checked = appSettings.getBoolean("sondaggio",false);
+    const mySwitch = args.object;
+
+    mySwitch.on("checkedChange", (args) => {
+        const sw = args.object;
+        const isChecked = sw.checked;
+        appSettings.setBoolean("sondaggio",isChecked);
+    });
+}
+exports.onSwitchLoaded_sondaggio = onSwitchLoaded_sondaggio;
+
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
