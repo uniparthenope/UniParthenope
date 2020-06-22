@@ -38,7 +38,8 @@ function onNavigatingTo(args) {
         items_appelli.push({
             "dataEsame": prenotazione[i].dataEsa,
             "classe": "examPass",
-            "esame": prenotazione[i].desApp,
+            "mese_app": prenotazione[i].desApp,
+            "esame": prenotazione[i].nomeAppello,
             "docente": prenotazione[i].nome_pres + " "+ prenotazione[i].cognome_pres,
             "descrizione": prenotazione[i].tipoApp,
             "edificio": prenotazione[i].edificioDes,

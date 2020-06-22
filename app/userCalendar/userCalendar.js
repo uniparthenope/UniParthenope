@@ -115,7 +115,7 @@ function calendarCourses() {
         //console.log(data_inizio);
 
         global.events.push({
-            title : "[ESAME] "+ prenotazioni[x].desApp,
+            title : "[ESAME] "+ prenotazioni[x].nomeAppello,
             data_inizio: data_inizio,
             data_fine: data_inizio,
             color: new Color.Color("#0F9851")

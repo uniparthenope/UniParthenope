@@ -40,7 +40,7 @@
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">
                                         <Label class="{{ classe }}" borderWidth="0" fontSize="16" text="{{ dataEsame }}"/>
                                     </StackLayout>
-                                    <Label class="{{ classe }}" borderWidth="0" text="{{ esame }}" horizontalAlignment="center"/>
+                                    <Label class="{{ classe }}" borderWidth="0" text="{{ esame }}" horizontalAlignment="center" textAlignment="center" textWrap="true"/>
                                     <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ docente }}" horizontalAlignment="center" marginBottom="10"/>
                                     <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ descrizione }}" horizontalAlignment="center"/>
                                     <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ note }}" horizontalAlignment="center"/>

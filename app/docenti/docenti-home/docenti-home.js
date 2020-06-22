@@ -27,11 +27,11 @@ function onNavigatingTo(args) {
     if (!global.updatedExam)
     {
         page.getViewById("activityIndicator").visibility = "visible";
-        //getMainInfo();
-        //myExams();
+
         getCourses();
     }
     else {
+        updateSession();
         //calendarCourses();
     }
 
@@ -143,12 +143,7 @@ function getCourses() {
         {
             //console.log(result.aaId);
             //console.log(global.url + "docenti/getCourses/" + global.encodedStr + "/" + global.authToken +"/"+ result);
-            page.getViewById("aa").text = "A.A " + result.aa_curr;
-            if (result.semId === 1)
-                page.getViewById("semestre").text = "Primo Semestre";
-            else
-                page.getViewById("semestre").text = "Secondo Semestre";
-            page.getViewById("sessione").text = result.semDes;
+            updateSession();
 
             appSettings.setString("aaId", result.aaId.toString());
             appSettings.setString("aa_accad", result.aa_curr);
@@ -227,7 +222,14 @@ function getCourses() {
         });
     });
 }
-
+function updateSession(){
+    page.getViewById("aa").text = "A.A " + result.aa_curr;
+    if (result.semId === 1)
+        page.getViewById("semestre").text = "Primo Semestre";
+    else
+        page.getViewById("semestre").text = "Secondo Semestre";
+    page.getViewById("sessione").text = result.semDes;
+}
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
