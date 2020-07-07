@@ -65,7 +65,6 @@ function onNavigatingTo(args) {
 }
 
 function onDrawerButtonTap() {
-    console.log("TAPPED");
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }

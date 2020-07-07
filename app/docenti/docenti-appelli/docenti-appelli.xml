@@ -6,11 +6,12 @@
       xmlns:accordion="nativescript-accordion">
 
     <x:StatusBar ios:barStyle="light" barColor="#22384f" />
-    <ActionBar class="action-bar">
+    <ActionBar class="action-bar" title="UniParthenope">
         <ActionItem icon="~/images/logo_parth.png"
                     tap="onGeneralMenu"
                     android.position="right"
-                    ios.position="right"/>
+                    ios:visibility="collapsed"
+        />
 
         <ActionItem icon="res://menu"
                     ios:visibility="collapsed"
@@ -18,12 +19,17 @@
                     android.position="right">
         </ActionItem>
 
+        <ActionItem icon="res://navigation/logo_parth"
+                    android:visibility="collapsed"
+                    tap="onGeneralMenu"
+                    ios.position="right">
+        </ActionItem>
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"
                     tap="onDrawerButtonTap"
                     ios.position="right">
         </ActionItem>
-        <Label class="action-bar-title" text="UniParthenope"></Label>
+
     </ActionBar>
     <GridLayout>
         <GridLayout rows="100,*,50">

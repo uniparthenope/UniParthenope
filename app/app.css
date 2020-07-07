@@ -101,9 +101,13 @@ refer to http://docs.nativescript.org/ui/theme.
     vertical-align:center
 }
 
+
 .two-color-gradient {
     background: linear-gradient(135deg, #107dd0, #22384f);
 }
+.reversed-two-color-gradient {
+     background: linear-gradient(135deg, #22384f, #107dd0);
+ }
 .topTitle
 {
     font-family: Rasa-Medium;
@@ -116,6 +120,15 @@ refer to http://docs.nativescript.org/ui/theme.
     color: white;
     placeholder-color: #107dd0;
     width: 90%;
+}
+.ios-form-input {
+    border-bottom-color: white;
+    border-bottom-width: 1;
+    color: white;
+    placeholder-color: white;
+    font-family: Montserrat-Regular;
+    font-size: 18;
+    margin: 10 10 10 10;
 }
 .textPrimary
 {

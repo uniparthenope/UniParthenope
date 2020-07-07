@@ -29,7 +29,6 @@
                     ios.position="right">
         </ActionItem>
 
-        <Label class="action-bar-title" text="UniParthenope"></Label>
     </ActionBar>
     <GridLayout>
         <GridLayout rows="60,*,50">

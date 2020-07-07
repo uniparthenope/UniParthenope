@@ -8,7 +8,7 @@
 
     <nsDrawer:RadSideDrawer.drawerContent>
 
-        <GridLayout backgroundColor="rgba(0,0,0,0.4)">
+        <GridLayout android:backgroundColor="rgba(0,0,0,0.4)" ios:class="reversed-two-color-gradient">
         <!--     Top Menu, foto e nome       -->
             <StackLayout orientation="vertical" verticalAlignment="top" height="80%" >
                 <StackLayout height="30%" orientation="vertical" verticalAlignment="top" marginTop="10">
@@ -21,9 +21,9 @@
 
                     <!--     Login       -->
                     <StackLayout id="loginForm" visibility="visible">
-                        <TextField class="form-input" hint="Username" id="username"/>
-                        <TextField class="form-input" hint="Password" secure="true" id="password"/>
-                        <cb:CheckBox checked="true" text="Remember me" id="rememberMe" color="white" fillColor="white" marginTop="5" marginLeft="5"/>
+                        <TextField android:class="form-input" ios:class="ios-form-input" hint="Username" id="username"/>
+                        <TextField android:class="form-input" ios:class="ios-form-input" hint="Password" secure="true" id="password"/>
+                        <cb:CheckBox checked="true" backgroundColor="#000000ff" text="Remember me" id="rememberMe" color="white" fillColor="white" marginTop="5" marginLeft="10"/>
                         <Button class="btn-menu" text="Login" marginBottom="5" marginTop="20" tap="onTapLogin"/>
                         <Label text="Dimenticato account?" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10" ontap="ontap_account"/>
 

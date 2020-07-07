@@ -4,24 +4,31 @@
       xmlns="http://schemas.nativescript.org/tns.xsd"
      >
 
-    <ActionBar class="action-bar">
-        <ActionItem icon="~/images/logo_parth.png"
-                    tap="onGeneralMenu"
-                    android.position="right"
-                    ios.position="right"/>
-        <ActionItem icon="res://menu"
-                    ios:visibility="collapsed"
-                    tap="onDrawerButtonTap"
-                    android.position="right">
-        </ActionItem>
+        <ActionBar class="action-bar" title="UniParthenope">
+            <ActionItem icon="~/images/logo_parth.png"
+                        tap="onGeneralMenu"
+                        android.position="right"
+                        ios:visibility="collapsed"
+            />
 
-        <ActionItem icon="res://navigation/menu"
-                    android:visibility="collapsed"
-                    tap="onDrawerButtonTap"
-                    ios.position="right">
-        </ActionItem>
-        <Label class="action-bar-title" text="UniParthenope"></Label>
-    </ActionBar>
+            <ActionItem icon="res://menu"
+                        ios:visibility="collapsed"
+                        tap="onDrawerButtonTap"
+                        android.position="right">
+            </ActionItem>
+
+            <ActionItem icon="res://navigation/logo_parth"
+                        android:visibility="collapsed"
+                        tap="onGeneralMenu"
+                        ios.position="right">
+            </ActionItem>
+            <ActionItem icon="res://navigation/menu"
+                        android:visibility="collapsed"
+                        tap="onDrawerButtonTap"
+                        ios.position="right">
+            </ActionItem>
+
+        </ActionBar>
     <StackLayout>
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
             <Label class="textPrimary" text="Admin Page" horizontalAlignment="center" verticalAlignment="center"/>
