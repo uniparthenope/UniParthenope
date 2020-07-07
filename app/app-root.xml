@@ -7,9 +7,10 @@
     </nsDrawer:RadSideDrawer.drawerTransition>
 
     <nsDrawer:RadSideDrawer.drawerContent>
+
         <GridLayout backgroundColor="rgba(0,0,0,0.4)">
         <!--     Top Menu, foto e nome       -->
-            <StackLayout orientation="vertical" verticalAlignment="top" height="80%">
+            <StackLayout orientation="vertical" verticalAlignment="top" height="80%" >
                 <StackLayout height="30%" orientation="vertical" verticalAlignment="top" marginTop="10">
                     <StackLayout class="imageTop" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="110" height="110"/>
                     <Label id="topName" text="Benvenuto!" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>

@@ -17,7 +17,6 @@
                     tap="onDrawerButtonTap"
                     ios.position="right">
         </ActionItem>
-        <Label class="action-bar-title" text="Home"></Label>
     </ActionBar>
 
 
@@ -71,9 +70,7 @@
 
             </StackLayout>
             <!--    Testo sovrapposto    -->
-            <StackLayout orientation="vertical" verticalAlignment="top">
-                <Button backgroundImage="res://menu" ontap="onDrawerButtonTap" horizontalAlignment="right" height="20" width="20" marginRight="15" marginTop="15"/>
-            </StackLayout>
+
             <StackLayout orientation="vertical" verticalAlignment="top">
                 <Label class="topTitle" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="15"/>
                 <Image src="~/images/logo_parth.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>
@@ -98,6 +95,13 @@
             <Label text="Universitá degli Studi di Napoli ''Parthenope''" horizontalAlignment="center" color="white"  marginBottom="5" fontSize="10"/>
             <Label id="version" horizontalAlignment="center" color="white" verticalAlignment="bottom" marginBottom="5" fontSize="10"/>
         </StackLayout>
+
+        <ios>
+            <Button backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="right" height="20" width="20" marginRight="15" marginTop="15"/>
+        </ios>
+        <android>
+            <Button backgroundImage="res://menu" ontap="onDrawerButtonTap" horizontalAlignment="right" height="20" width="20" marginRight="15" marginTop="15"/>
+        </android>
 
 
     </GridLayout>
