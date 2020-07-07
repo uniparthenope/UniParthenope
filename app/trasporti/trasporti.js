@@ -161,7 +161,8 @@ exports.tapCourses = function(){
         const nav =
             {
                 moduleName: "corsi/corsi",
-                clearHistory: false
+                clearHistory: false,
+                animated: false
             };
         page.frame.navigate(nav);
     }
@@ -170,7 +171,8 @@ exports.tapCourses = function(){
         const nav =
             {
                 moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: false
+                clearHistory: false,
+                animated: false
             };
         page.frame.navigate(nav);
     }
@@ -181,7 +183,8 @@ exports.tapFood = function(){
         {
             moduleName: "menu/menu",
 
-            clearHistory: false
+            clearHistory: false,
+            animated: false
         };
     page.frame.navigate(nav);
 };
@@ -191,7 +194,8 @@ exports.tapCalendar = function(){
         const nav =
             {
                 moduleName: "userCalendar/userCalendar",
-                clearHistory: false
+                clearHistory: false,
+                animated: false
             };
         page.frame.navigate(nav);
     }
@@ -200,7 +204,8 @@ exports.tapCalendar = function(){
         const nav =
             {
                 moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: false
+                clearHistory: false,
+                animated: false
             };
         page.frame.navigate(nav);
     }
@@ -212,7 +217,8 @@ exports.tapAppello = function(){
         const nav =
             {
                 moduleName: "prenotazioni/prenotazioni",
-                clearHistory: false
+                clearHistory: false,
+                animated: false
             };
         page.frame.navigate(nav);
     }
@@ -221,7 +227,8 @@ exports.tapAppello = function(){
         const nav =
             {
                 moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: false
+                clearHistory: false,
+                animated: false
             };
         page.frame.navigate(nav);
     }

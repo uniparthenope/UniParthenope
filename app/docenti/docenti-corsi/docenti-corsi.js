@@ -156,7 +156,8 @@ exports.tapBus = function(){
     const nav =
         {
             moduleName: "trasporti/trasporti",
-            clearHistory: false
+            clearHistory: false,
+            animated: false
         };
     frame.Frame.topmost().navigate(nav);
 };
@@ -166,7 +167,8 @@ exports.tapFood = function(){
 
         {
             moduleName: "menu/menu",
-            clearHistory: false
+            clearHistory: false,
+            animated: false
         };
     frame.Frame.topmost().navigate(nav);
 };
@@ -175,7 +177,8 @@ exports.tapAppello = function(){
     const nav =
         {
             moduleName: "docenti/docenti-appelli/docenti-appelli",
-            clearHistory: false
+            clearHistory: false,
+            animated: false
         };
     frame.Frame.topmost().navigate(nav);
 
@@ -186,7 +189,8 @@ exports.tapCalendar = function(){
     const nav =
         {
             moduleName: "docenti/docenti-home/docenti-home",
-            clearHistory: false
+            clearHistory: false,
+            animated: false
         };
     frame.Frame.topmost().navigate(nav);
 };
