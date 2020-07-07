@@ -32,6 +32,8 @@ function onShownModally(args) {
 exports.ontap_download = function(){
     if (platformModule.isAndroid){
         utilsModule.openUrl("market://details?id=it.meteo.uniparthenope");
+    }else{
+        utilsModule.openUrl("https://app.meteo.uniparthenope.it");
     }
 };
 exports.onShownModally = onShownModally;

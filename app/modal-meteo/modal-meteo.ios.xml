@@ -2,10 +2,12 @@
       shownModally="onShownModally"
       xmlns:accordion="nativescript-accordion">
 
-    <GridLayout height="55%" backgroundColor="#22384f">
-        <GridLayout  backgroundColor="#22384f" marginBottom="10" verticalAlignment="top" height="20%">
+    <GridLayout height="100%" backgroundColor="#22384f">
+        <GridLayout  backgroundColor="#22384f" marginBottom="10" verticalAlignment="top" height="10%">
             <Label class="textPrimary" text="Meteo@Uniparthenope" textWrap="true" textAlignment="center" verticalAlignment="center"/>
         </GridLayout>
+    <GridLayout height="55%" backgroundColor="#22384f">
+
         <GridLayout rows="auto,auto" verticalAlignment="center" backgroundColor="rgba(0, 0, 0, 0.3)" height="55%">
 
             <Label row="0" class="textPrimary" fontSize="16" text="Comune" id="position" textWrap="true" horizontalAlignment="center" verticalAlignment="center" marginBottom="10"/>
@@ -50,6 +52,8 @@
             </GridLayout>
 
         </GridLayout>
+
+</GridLayout>
         <StackLayout orientation="horizontal" backgroundColor="#22384f" verticalAlignment="bottom" height="20%" horizontalAlignment="center" ontap="ontap_download">
             <Image src="~/images/meteo.png" height="60" width="60" horizontalAlignment="center" marginRight="5" marginLeft="10"/>
             <Label class="textPrimary" text="Scarica gratuitamente la nostra app" textWrap="true" marginRight="10" textAlignment="center" verticalAlignment="center" horizontalAlignment="left"/>

@@ -14,6 +14,7 @@ let page;
 let viewModel;
 let sideDrawer;
 let calendar;
+let result;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -65,7 +66,7 @@ function calendarCourses() {
                 "Authorization" : "Basic "+ global.encodedStr
             }
         }).then((response) => {
-            const result = response.content.toJSON();
+            result = response.content.toJSON();
             //console.log("Calendario: " + result);
 
 
@@ -143,7 +144,13 @@ function getCourses() {
         {
             //console.log(result.aaId);
             //console.log(global.url + "docenti/getCourses/" + global.encodedStr + "/" + global.authToken +"/"+ result);
-            updateSession();
+            page.getViewById("aa").text = "A.A " + result.aa_curr;
+            if (result.semId === 1)
+                page.getViewById("semestre").text = "Primo Semestre";
+            else
+                page.getViewById("semestre").text = "Secondo Semestre";
+            page.getViewById("sessione").text = result.semDes;
+            //updateSession();
 
             appSettings.setString("aaId", result.aaId.toString());
             appSettings.setString("aa_accad", result.aa_curr);
@@ -230,6 +237,7 @@ function updateSession(){
         page.getViewById("semestre").text = "Secondo Semestre";
     page.getViewById("sessione").text = result.semDes;
 }
+
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
