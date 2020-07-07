@@ -50,7 +50,7 @@ function onNavigatingTo(args) {
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        //console.log(result);
+        console.log(result);
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
@@ -120,7 +120,7 @@ function onNavigatingTo(args) {
                 },(e) => {
                     console.log("Error", e);
                     dialogs.alert({
-                        title: "Errore Sincronizzazione Esami!",
+                        title: "Errore Server Mensa!",
                         message: e,
                         okButtonText: "OK"
                     });
@@ -138,7 +138,7 @@ function onNavigatingTo(args) {
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Errore Sincronizzazione Esami!",
+            title: "Errore Server Mensa!",
             message: e,
             okButtonText: "OK"
         });
