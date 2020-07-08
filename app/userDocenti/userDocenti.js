@@ -76,61 +76,60 @@ function getDocenti(){
                     adId: result[i].adId
                 });
 
+                let url = global.url + "general/persone/"+ result[i].docenteCognome + " " + result[i].docenteNome;
+                url = url.replace(/ /g, "%20");
 
-                    httpModule.request({
-                        url: global.url + "general/persone/"+ result[i].docenteCognome + " " + result[i].docenteNome,
-                        method: "GET",
-                        headers: {
+                httpModule.request({
+                    url: url,
+                    method: "GET",
+                    headers: {
                             "Content-Type" : "application/json",
                             "Authorization" : "Basic "+ global.encodedStr
-                        }
-                    }).then((response2) => {
-                        const result2 = response2.content.toJSON();
+                    }
+                }).then((response2) => {
+                    const result2 = response2.content.toJSON();
                         //console.log(result2);
-                        if (response2.statusCode === 401 || response2.statusCode === 500)
-                        {
-                            dialogs.alert({
-                                title: "Errore Server!",
-                                message: result2.retErrMsg,
-                                okButtonText: "OK"
-
-                            }).then();
+                    if (response2.statusCode === 401 || response2.statusCode === 500)
+                    {
+                        dialogs.alert({
+                            title: "Errore Server!",
+                            message: result2.retErrMsg,
+                            okButtonText: "OK"
+                        }).then();
+                    }
+                    else {
+                        let flag = false;
+                        for (let x=0;x<items.length; x++){
+                            if(items.getItem(x).docenteCognome === result[i].docenteCognome){
+                                items.getItem(x).corso.push(result[i].corso);
+                                flag = true;
+                            }
                         }
-                        else
-                        {
-                            let flag = false;
+                        if (!flag){
+                            page.getViewById("activityIndicator").visibility = "visible";
+                            let corsi = [];
+                            corsi.push(result[i].corso);
+                        items.push({
+                            docenteNome: result[i].docenteNome + " "+ result[i].docenteCognome,
+                            docenteCognome: result[i].docenteCognome,
+                            corso: corsi,
+                            telefono: result2.telefono,
+                            mail: result2.email,
+                            pic: result2.url_pic,
+                            url: result2.link
+                        });
 
-                            for (let x=0;x<items.length; x++){
-                                if(items.getItem(x).docenteCognome === result[i].docenteCognome){
-                                    items.getItem(x).corso.push(result[i].corso);
-                                    flag = true;
-                                }
-                            }
-                            if (!flag){
-                                page.getViewById("activityIndicator").visibility = "visible";
-                                let corsi = [];
-                                corsi.push(result[i].corso);
-                            items.push({
-                                docenteNome: result[i].docenteNome + " "+ result[i].docenteCognome,
-                                docenteCognome: result[i].docenteCognome,
-                                corso: corsi,
-                                telefono: result2.telefono,
-                                mail: result2.email,
-                                pic: result2.url_pic,
-                                url: result2.link
-                            });
-
-                            items.sort(function (orderA, orderB) {
-                                let nameA = orderA.docenteCognome;
-                                let nameB = orderB.docenteCognome;
-                                return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-                            });
-                            }
-                            page.getViewById("activityIndicator").visibility = "collapsed";
+                        items.sort(function (orderA, orderB) {
+                            let nameA = orderA.docenteCognome;
+                            let nameB = orderB.docenteCognome;
+                            return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+                        });
                         }
 
+                        page.getViewById("activityIndicator").visibility = "collapsed";
+                    }
                     },(e) => {
-                        console.log("Error", e.retErrMsg);
+                        console.log("Error", e);
                         dialogs.alert({
                             title: "Errore Server!",
                             message: e.retErrMsg,
@@ -138,7 +137,6 @@ function getDocenti(){
                         });
                     });
                 }
-
             }
 
     },(e) => {
