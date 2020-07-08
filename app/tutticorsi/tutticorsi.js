@@ -23,7 +23,6 @@ function onNavigatingTo(args) {
     });
 
     let exams = global.myExams;
-    //console.log(global.myExams);
 
     let anno = "";
 

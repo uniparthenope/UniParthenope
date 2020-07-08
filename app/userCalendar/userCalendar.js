@@ -286,9 +286,10 @@ function getPrenotazioni(){
         const result = response.content.toJSON();
         appSettings.setNumber("appelloBadge", result.length);
 
+        console.log(result);
+
         for (let i = 0; i< result.length; i++){
             global.myPrenotazioni.push(result[i]);
-
         }
         /*
         memo) RESULT =
@@ -425,7 +426,7 @@ function getCourses() {
                         "nome" : result[i].nome,
                         "codice" : result[i].codice,
                         "annoId" : result[i].annoId,
-                        "adsceId" : result[i].adsceId,
+                        "adsceID" : result[i].adsceID,
                         "adLogId" : result[i].adLogId,
                         "adId" : result[i].adId,
                         "CFU" : result[i].CFU,

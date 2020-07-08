@@ -33,9 +33,12 @@ function onNavigatingTo(args) {
         items_appelli: items_appelli
     });
     let prenotazione = global.myPrenotazioni;
+    console.log(prenotazione);
 
     for (let i=0 ; i < prenotazione.length; i++){
         items_appelli.push({
+            "adId": prenotazione[i].adId,
+            "appId": prenotazione[i].appId,
             "dataEsame": prenotazione[i].dataEsa,
             "classe": "examPass",
             "mese_app": prenotazione[i].desApp,
@@ -48,7 +51,6 @@ function onNavigatingTo(args) {
             "note": prenotazione[i].note
         })
     }
-
 
     global.getAllBadge(page);
     page.bindingContext = viewModel;
@@ -127,10 +129,58 @@ exports.tapBus = function(){
 function onItemTap(args) {
     const mainView = args.object;
     const index = args.index;
+
+    console.log(items_appelli.getItem(index));
+
+    /*
     const adLogId = { adId: items_appelli.getItem(index).adId, appId: items_appelli.getItem(index).appId, docente: items_appelli.getItem(index).docente,
         esame: items_appelli.getItem(index).esame};
 
     mainView.showModal(modalViewModule, adLogId, false);
+     */
+
+    let adId = items_appelli.getItem(index).adId;
+    let appId = items_appelli.getItem(index).appId;
+
+    console.log("AppId: " + items_appelli.getItem(index).appId);
+    console.log("AdId: " + items_appelli.getItem(index).adId);
+
+    dialogs.confirm({
+        title: "Prenotazione appello",
+        message: "Sicuro di voler cancellare la prenotazione?",
+        okButtonText: "Sì",
+        cancelButtonText: "No",
+    }).then(function (result) {
+        console.log(result);
+
+        if(result){
+            httpModule.request({
+                url : global.url_general + "/UniparthenopeApp/v1/students/deleteExam/" + appSettings.getNumber("cdsId") + "/" + adId + "/" + appId + "/" + appSettings.getNumber("stuId"),
+                method : "DELETE",
+                headers : {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                }
+            }).then((response) => {
+                const result = response.content.toJSON();
+                console.log(result);
+
+                let message;
+                if (response.statusCode === 200)
+                    message = "Cancellazione effettuata";
+                else
+                    message = "Error: " + result["errMsg"];
+
+                dialogs.alert({
+                    title: "Result:",
+                    message: message,
+                    okButtonText: "OK"
+                });
+            }, error => {
+                console.error(error);
+            });
+        }
+    });
 }
 
 exports.onItemTap = onItemTap;

@@ -36,10 +36,11 @@ function onNavigatingTo(args) {
 
     let exams = global.freqExams;
     num = 0;
+    console.log(exams);
 
 
     for (let i=0; i < exams.length; i++){
-        getAppelli(exams[i].adId);
+        getAppelli(exams[i].adId, exams[i].adsceID);
     }
     page.bindingContext = viewModel;
 }
@@ -72,9 +73,10 @@ exports.tapCalendar = function(){
     frame.Frame.topmost().navigate(nav);
 };
 
-function getAppelli(adId) {
+function getAppelli(adId, adsceId) {
     loading.visibility = "visible";
     console.log(adId);
+    console.log(adsceId);
     httpModule.request({
         url: global.url + "students/checkAppello/" + appSettings.getNumber("cdsId") +"/" + adId,
         method: "GET",
@@ -89,7 +91,7 @@ function getAppelli(adId) {
         {
             dialogs.alert({
                 title: "Errore Server!",
-                message: result.retErrMsg,
+                message: result,
                 okButtonText: "OK"
 
             }).then(
@@ -120,7 +122,8 @@ function getAppelli(adId) {
                         "classe" : "examPass",
                         "date" : date,
                         "adId": adId,
-                        "appId": result[i].appId
+                        "appId": result[i].appId,
+                        "adsceId": adsceId
                     });
                     items_appelli.sort(function (orderA, orderB) {
                         let nameA = orderA.date;
@@ -145,8 +148,8 @@ function getAppelli(adId) {
                         "classe" : "examFreq",
                         "date" : date,
                         "adId": adId,
-                        "appId": result[i].appId
-
+                        "appId": result[i].appId,
+                        "adsceId": adsceId
                     });
                     items_appelli.sort(function (orderA, orderB) {
                         let nameA = orderA.classe;
@@ -166,7 +169,6 @@ function getAppelli(adId) {
             okButtonText: "OK"
         });
     });
-
 }
 
 function dayOfWeek(date) {
@@ -185,19 +187,66 @@ function monthOfYear(date) {
 
 }
 
-
-
 function onItemTap(args) {
     const mainView = args.object;
     const index = args.index;
 
+    let adsceId = items_appelli.getItem(index).adsceId;
+    let adId = items_appelli.getItem(index).adId;
+    let appId = items_appelli.getItem(index).appId;
+
+
     console.log("AppId: " + items_appelli.getItem(index).appId);
     console.log("AdId: " + items_appelli.getItem(index).adId);
+    console.log("AdsceId: " + items_appelli.getItem(index).adsceId);
 
+    dialogs.confirm({
+        title: "Prenotazione appello",
+        message: "Sicuro di volerti prenotare a questo appello?",
+        okButtonText: "Sì",
+        cancelButtonText: "No",
+    }).then(function (result) {
+        console.log(result);
+
+        if(result){
+            httpModule.request({
+                url : global.url_general + "/UniparthenopeApp/v1/students/bookExam/" + appSettings.getNumber("cdsId") + "/" + adId + "/" + appId,
+                method : "POST",
+                headers : {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                },
+                content : JSON.stringify({
+                    adsceId : adsceId,
+                    notaStu: ""
+                })
+            }).then((response) => {
+                const result = response.content.toJSON();
+                console.log(result);
+
+                let message;
+                if (response.statusCode === 201)
+                    message = "Prenotazione effettuata";
+                else
+                    message = "Error: " + result["errMsg"];
+
+                dialogs.alert({
+                    title: "Result:",
+                    message: message,
+                    okButtonText: "OK"
+                });
+            }, error => {
+                console.error(error);
+            });
+        }
+    });
+
+    /*
     const adLogId = { adId: items_appelli.getItem(index).adId, appId: items_appelli.getItem(index).appId, docente: items_appelli.getItem(index).docente,
         esame: items_appelli.getItem(index).esame};
 
     mainView.showModal(modalViewModule, adLogId, false);
+     */
 }
 
 exports.onItemTap = onItemTap;
