@@ -1,4 +1,5 @@
 <Page class="page"
+      loaded="pageLoaded"
       navigatingTo="onNavigatingTo"
       navigatingFrom="onNavigatingFrom"
       actionBarHidden="false"

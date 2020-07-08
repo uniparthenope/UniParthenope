@@ -24,10 +24,9 @@ let array_locations = [{id:'CDN', name: 'Centro Direzionale', lat: 40.856831, lo
 function setupWebViewInterface(page){
     let webView = page.getViewById('webView');
     oLangWebViewInterface = new nativescript_webview_interface_1.WebViewInterface(webView, '~/www/index.html');
-    console.log(oLangWebViewInterface);
 }
 
-function onNavigatingTo(args) {
+function pageLoaded(args) {
     page = args.object;
     viewModel = observableModule.fromObject({ });
     sideDrawer = app.getRootView();
@@ -44,6 +43,7 @@ function onNavigatingTo(args) {
         bottom_bar.visibility = "visible";
     }
     setupWebViewInterface(page);
+
     //Imposto la posizione attuale e la legenda in basso
     let name_pos = appSettings.getString("position");
     loadGraphic(name_pos);
@@ -72,6 +72,7 @@ function onNavigatingTo(args) {
         console.log("Timer....");
         getBusPosition();
     }, 10000);
+
 
     page.bindingContext = viewModel;
 }
@@ -236,5 +237,5 @@ exports.tapAppello = function(){
 
 exports.onNavigatingFrom = onNavigatingFrom;
 exports.onGeneralMenu = onGeneralMenu;
-exports.onNavigatingTo = onNavigatingTo;
+exports.pageLoaded = pageLoaded;
 exports.onDrawerButtonTap = onDrawerButtonTap;

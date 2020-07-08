@@ -32,7 +32,6 @@
     "nativescript-xml2js": "^0.5.2",
     "npm": "^6.14.5",
     "tns-core-modules": "^6.5.1",
-    "tns-core-modules-widgets": "^6.5.2",
     "utf8": "^3.0.0"
   },
   "devDependencies": {
