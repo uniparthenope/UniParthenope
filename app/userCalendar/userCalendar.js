@@ -65,9 +65,12 @@ function calendarCourses() {
             //TODO Corso non inserito nel database!
         }
         const color = new Color.Color(colors[i]);
+
+        let url = global.url_general + "GAUniparthenope/v1/searchCourse/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo;
+        url = url.replace(/ /g, "%20");
         
         httpModule.request({
-            url: global.url_general + "GAUniparthenope/v1/searchCourse/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo ,
+            url: url,
             method: "GET",
             headers: {
                 "Content-Type" : "application/json",
