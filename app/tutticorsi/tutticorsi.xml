@@ -49,7 +49,7 @@
                                 <Label  class="examPass" borderWidth="0" text="{{ anno }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
                             </GridLayout>
                             <StackLayout orientation="vertical" width="70%">
-                                <Label class="examPass" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15"/>
+                                <Label class="examPass" borderRadius="0" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15"/>
                             </StackLayout>
                             <GridLayout  width="70">
                                 <Label  class="examPass" borderWidth="0" text="{{ cfu }}" horizontalAlignment="center" fontSize="14" verticalAlignment="center"/>

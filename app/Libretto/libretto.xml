@@ -80,11 +80,11 @@
                                 <Label  class="{{ classe }}" borderWidth="0" text="{{ voto }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
                             </GridLayout>
                             <StackLayout orientation="vertical" width="70%">
-                                <Label class="{{ classe }}" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15"/>
-                                <Label class="{{ classe }}" borderWidth="0"  text="{{ data }}" fontSize="11" horizontalAlignment="center"/>
+                                <Label class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15"/>
+                                <Label class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ data }}" fontSize="11" horizontalAlignment="center"/>
                             </StackLayout>
                             <GridLayout  width="70">
-                                <Label  class="{{ classe }}" borderWidth="0" text="{{ cfu }}" horizontalAlignment="center" fontSize="14" verticalAlignment="center"/>
+                                <Label  class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ cfu }}" horizontalAlignment="center" fontSize="14" verticalAlignment="center"/>
                             </GridLayout>
                         </StackLayout>
                     </FlexboxLayout>

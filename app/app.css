@@ -188,7 +188,13 @@ refer to http://docs.nativescript.org/ui/theme.
     border-width: 5;
     border-radius: 100%;
 }
+.textMont_noborder
+{
+    font-family: Montserrat-Regular;
+    font-size: 18;
+    color: #22384f;
 
+}
 .examNA
 {
     font-family: Montserrat-Regular;
