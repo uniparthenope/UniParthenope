@@ -220,15 +220,20 @@ refer to http://docs.nativescript.org/ui/theme.
     margin: 6;
 }
 .color-green{
+    font-family: Montserrat-Regular;
     color: #22384f;
     border-color: #22384f;
+
 }
 .color-gray{
+    font-family: Montserrat-Regular;
     color:gray;
     border-color: gray;
 }
 .color-yellow{
+    font-family: Montserrat-Regular;
     color:orange;
+
 
 }
 .main_image{
@@ -269,7 +274,14 @@ ActionBar {
     background-color: #22384f;
     color: white;
 }
-Button
+
+.ios Button
+{
+    color:rgba(34, 56, 79, 0.9);
+    background-color: rgba(34, 56, 79, 0.7);
+    font-family: Montserrat-Regular;
+}
+.android Button
 {
     color:#fff;
     background-color: rgba(34, 56, 79, 0.7);
