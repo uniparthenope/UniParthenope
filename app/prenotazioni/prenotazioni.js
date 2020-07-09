@@ -130,7 +130,7 @@ exports.tapCalendar = function(){
     const nav =
         {
             moduleName: "userCalendar/userCalendar",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     frame.Frame.topmost().navigate(nav);
@@ -141,7 +141,7 @@ exports.tapFood = function(){
         {
             moduleName: "menu/menu",
 
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     frame.Frame.topmost().navigate(nav);
@@ -151,7 +151,7 @@ exports.tapCourses = function(){
     const nav =
         {
             moduleName: "corsi/corsi",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     frame.Frame.topmost().navigate(nav);
@@ -161,7 +161,7 @@ exports.tapAppello = function(){
     const nav =
         {
             moduleName: "userAppelli/appelli",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     frame.Frame.topmost().navigate(nav);
@@ -171,7 +171,7 @@ exports.tapBus = function(){
     const nav =
         {
             moduleName: "trasporti/trasporti",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     frame.Frame.topmost().navigate(nav);

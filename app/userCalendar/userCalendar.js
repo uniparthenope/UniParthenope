@@ -492,7 +492,7 @@ exports.tapAppello = function(){
     const nav =
         {
             moduleName: "prenotazioni/prenotazioni",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     page.frame.navigate(nav);
@@ -502,7 +502,7 @@ exports.tapCourses = function(){
     const nav =
         {
             moduleName: "corsi/corsi",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     page.frame.navigate(nav);
@@ -512,7 +512,7 @@ exports.tapFood = function(){
     const nav =
         {
             moduleName: "menu/menu",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     page.frame.navigate(nav);
@@ -522,7 +522,7 @@ exports.tapBus = function(){
     const nav =
         {
             moduleName: "trasporti/trasporti",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     page.frame.navigate(nav);

@@ -183,7 +183,7 @@ exports.tapCalendar = function(){
     const nav =
         {
             moduleName: "docenti/docenti-home/docenti-home",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     frame.Frame.topmost().navigate(nav);
@@ -193,7 +193,7 @@ exports.tapFood = function(){
         {
             moduleName: "menu/menu",
 
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     frame.Frame.topmost().navigate(nav);
@@ -203,7 +203,7 @@ exports.tapCourses = function(){
     const nav =
         {
             moduleName: "docenti/docenti-corsi/docenti-corsi",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     frame.Frame.topmost().navigate(nav);
@@ -213,7 +213,7 @@ exports.tapBus = function(){
     const nav =
         {
             moduleName: "trasporti/trasporti",
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     frame.Frame.topmost().navigate(nav);

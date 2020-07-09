@@ -33,9 +33,12 @@ function pageLoaded(args) {
     sideDrawer.closeDrawer();
 
     let bottom_bar = page.getViewById("bottom_bar");
+    let legend = page.getViewById("legend");
 
     if (global.isConnected === false){
         bottom_bar.visibility = "collapsed";
+       legend.row = 2;
+       legend.backgroundColor="rgba(34, 56, 79, 0.8)"
     }
     else {
         global.getAllBadge(page);
@@ -162,7 +165,7 @@ exports.tapCourses = function(){
         const nav =
             {
                 moduleName: "corsi/corsi",
-                clearHistory: false,
+                clearHistory: true,
                 animated: false
             };
         page.frame.navigate(nav);
@@ -172,7 +175,7 @@ exports.tapCourses = function(){
         const nav =
             {
                 moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: false,
+                clearHistory: true,
                 animated: false
             };
         page.frame.navigate(nav);
@@ -184,7 +187,7 @@ exports.tapFood = function(){
         {
             moduleName: "menu/menu",
 
-            clearHistory: false,
+            clearHistory: true,
             animated: false
         };
     page.frame.navigate(nav);
@@ -195,7 +198,7 @@ exports.tapCalendar = function(){
         const nav =
             {
                 moduleName: "userCalendar/userCalendar",
-                clearHistory: false,
+                clearHistory: true,
                 animated: false
             };
         page.frame.navigate(nav);
@@ -205,7 +208,7 @@ exports.tapCalendar = function(){
         const nav =
             {
                 moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: false,
+                clearHistory: true,
                 animated: false
             };
         page.frame.navigate(nav);
@@ -218,7 +221,7 @@ exports.tapAppello = function(){
         const nav =
             {
                 moduleName: "prenotazioni/prenotazioni",
-                clearHistory: false,
+                clearHistory: true,
                 animated: false
             };
         page.frame.navigate(nav);
@@ -228,7 +231,7 @@ exports.tapAppello = function(){
         const nav =
             {
                 moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: false,
+                clearHistory: true,
                 animated: false
             };
         page.frame.navigate(nav);
