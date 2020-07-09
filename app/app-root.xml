@@ -21,7 +21,7 @@
 
                     <!--     Login       -->
                     <StackLayout id="loginForm" visibility="visible">
-                        <TextField android:class="form-input" ios:class="ios-form-input" hint="Username" id="username"/>
+                        <TextField android:class="form-input" ios:class="ios-form-input" autocapitalizationType="none" hint="Username" id="username"/>
                         <TextField android:class="form-input" ios:class="ios-form-input" hint="Password" secure="true" id="password"/>
                         <cb:CheckBox checked="true" backgroundColor="#000000ff" text="Remember me" id="rememberMe" color="white" fillColor="white" marginTop="5" marginLeft="10"/>
                         <Button class="btn-menu" text="Login" marginBottom="5" marginTop="20" tap="onTapLogin"/>

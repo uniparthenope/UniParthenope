@@ -1,23 +1,23 @@
 {
   "images" : [
     {
-      "filename" : "logoApp.png",
       "idiom" : "universal",
+      "filename" : "LaunchScreen-AspectFill.png",
       "scale" : "1x"
     },
     {
-      "filename" : "logoApp-1.png",
       "idiom" : "universal",
+      "filename" : "LaunchScreen-AspectFill@2x.png",
       "scale" : "2x"
     },
     {
-      "filename" : "logoApp-2.png",
       "idiom" : "universal",
+      "filename" : "LaunchScreen.AspectFill@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "author" : "xcode",
-    "version" : 1
+    "version" : 1,
+    "author" : "xcode"
   }
 }
