@@ -10,6 +10,7 @@ require("nativescript-accordion");
 let closeCallback;
 let today = new Date();
 let page;
+let loading;
 
 function onShownModally(args) {
     const context = args.context;
@@ -21,6 +22,7 @@ function onShownModally(args) {
     page = args.object;
 
     page.bindingContext = observableModule.fromObject(context);
+    loading = page.getViewById("activityIndicator");
 
     if (context.lat !== undefined || context.long !== undefined){
         getWeather(context.lat, context.long);
@@ -39,6 +41,7 @@ exports.ontap_download = function(){
 exports.onShownModally = onShownModally;
 
 function getWeather(lat, long) {
+    loading.visibility = "visible";
     httpModule.request({
         url: "https://api.meteo.uniparthenope.it/places/search/bycoords/" + lat + "/" + long,
         method: "GET",
@@ -83,6 +86,7 @@ function getWeather(lat, long) {
 
                    }
                }
+                loading.visibility = "collapsed";
             },(e) => {
                 console.log("Error", e);
                 dialogs.alert({
