@@ -33,7 +33,7 @@ exports.ontap_download = function(){
     if (platformModule.isAndroid){
         utilsModule.openUrl("market://details?id=it.meteo.uniparthenope");
     }else{
-        utilsModule.openUrl("https://app.meteo.uniparthenope.it");
+        utilsModule.openUrl("https://apps.apple.com/us/app/id1518001997");
     }
 };
 exports.onShownModally = onShownModally;

@@ -32,6 +32,8 @@ function onNavigatingTo(args) {
     viewModel = Observable.fromObject({
         items_appelli: items_appelli
     });
+
+    /*
     let prenotazione = global.myPrenotazioni;
     console.log(prenotazione);
 
@@ -51,9 +53,58 @@ function onNavigatingTo(args) {
             "note": prenotazione[i].note
         })
     }
+     */
+
+    getPrenotazioni();
 
     global.getAllBadge(page);
     page.bindingContext = viewModel;
+}
+
+function getPrenotazioni(){
+    loading.visibility = "visible";
+    let matId = appSettings.getNumber("matId").toString();
+
+    httpModule.request({
+        url: global.url + "students/getReservations/" + matId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        const result = response.content.toJSON();
+        appSettings.setNumber("appelloBadge", result.length);
+
+        console.log(result);
+
+        for (let i = 0; i<result.length; i++)
+            items_appelli.push({
+                "adId": result[i].adId,
+                "appId": result[i].appId,
+                "dataEsame": result[i].dataEsa,
+                "classe": "examPass",
+                "mese_app": result[i].desApp,
+                "esame": result[i].nomeAppello,
+                "docente": result[i].nome_pres + " "+ result[i].cognome_pres,
+                "descrizione": result[i].tipoApp,
+                "edificio": result[i].edificioDes,
+                "aula": result[i].aulaDes,
+                "iscritti": result[i].numIscritti,
+                "note": result[i].note
+            });
+
+        global.getAllBadge(page);
+        loading.visibility = "collapsed";
+    },(e) => {
+        loading.visibility = "collapsed";
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore Server!",
+            message: e,
+            okButtonText: "OK"
+        });
+    });
 }
 
 function onDrawerButtonTap() {
@@ -166,8 +217,16 @@ function onItemTap(args) {
                 console.log(result);
 
                 let message;
-                if (response.statusCode === 200)
+                if (response.statusCode === 200){
                     message = "Cancellazione effettuata";
+                    const nav =
+                        {
+                            moduleName: "prenotazioni/prenotazioni",
+                            clearHistory: true
+                        };
+                    frame.topmost().navigate(nav);
+                }
+
                 else
                     message = "Error: " + result["errMsg"];
 

@@ -34,7 +34,7 @@ function onNavigatingTo(args) {
         getMainInfo();
         myExams();
         getCourses();
-        getPrenotazioni();
+        //getPrenotazioni();
     }
     else {
         calendarCourses();

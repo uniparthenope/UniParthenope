@@ -119,7 +119,7 @@
         </GridLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero Esami..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="Recupero Prenotazioni..." horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
 
