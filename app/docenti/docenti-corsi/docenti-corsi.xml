@@ -51,11 +51,11 @@
                                     <Label  class="examPass" borderWidth="0" text="{{ semestre }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
                                 </GridLayout>
                                 <GridLayout rows="auto,auto,auto,auto">
-                                    <Label row="0" class="examPass" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" horizontalAlignment="left"/>
-                                    <Label row="1" class="examPass" borderWidth="0"  text="{{ settCod }}" fontSize="14" horizontalAlignment="center"/>
+                                    <Label row="0" class="examPass" borderRadius="0" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" horizontalAlignment="left"/>
+                                    <Label row="1" class="examPass" borderRadius="0" borderWidth="0"  text="{{ settCod }}" fontSize="14" horizontalAlignment="center"/>
                                     <StackLayout  row="2" orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="examPass" borderWidth="0"  text="{{ data_inizio }}" fontSize="14" horizontalAlignment="center"/>
-                                        <Label class="examPass" borderWidth="0"  text="{{ data_fine }}" fontSize="14" horizontalAlignment="center"/>
+                                        <Label class="examPass" borderWidth="0" borderRadius="0" text="{{ data_inizio }}" fontSize="14" horizontalAlignment="center"/>
+                                        <Label class="examPass" borderWidth="0" borderRadius="0" text="{{ data_fine }}" fontSize="14" horizontalAlignment="center"/>
                                     </StackLayout>
                                     <StackLayout row="3" orientation="horizontal" horizontalAlignment="center">
                                         <Label class="examPass" borderWidth="0"  text="Ult.Mod. :" fontSize="11" horizontalAlignment="center" color="#8b0000"/>

@@ -230,12 +230,12 @@ function getCourses() {
     });
 }
 function updateSession(){
-    page.getViewById("aa").text = "A.A " + result.aa_curr;
-    if (result.semId === 1)
+    page.getViewById("aa").text = "A.A " + appSettings.getString("aa_accad","2020");
+    if (appSettings.getString("semestre","1") === "1")
         page.getViewById("semestre").text = "Primo Semestre";
     else
         page.getViewById("semestre").text = "Secondo Semestre";
-    page.getViewById("sessione").text = result.semDes;
+    page.getViewById("sessione").text = appSettings.getString("sessione","???");
 }
 
 function onDrawerButtonTap() {
