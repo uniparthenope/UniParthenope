@@ -116,6 +116,7 @@ function insert_event() {
     }
     calendar.eventSource = temp_array;
 }
+
 function getCourses() {
     console.log(global.url + "professor/getSession");
 
@@ -229,6 +230,7 @@ function getCourses() {
         });
     });
 }
+
 function updateSession(){
     page.getViewById("aa").text = "A.A " + appSettings.getString("aa_accad","2020");
     if (appSettings.getString("semestre","1") === "1")

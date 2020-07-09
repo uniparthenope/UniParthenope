@@ -7,6 +7,7 @@ const httpModule = require("tns-core-modules/http");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const Observable = require("tns-core-modules/data/observable");
 const modalViewModule = "modal-esame/modal-esame";
+const platformModule = require("tns-core-modules/platform");
 
 let page;
 let viewModel;
@@ -15,6 +16,7 @@ let appelli_listview;
 let items_appello;
 let loading;
 let num;
+let exams;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -32,23 +34,12 @@ function onNavigatingTo(args) {
         items_appello: items_appello
     });
 
-    loading.visibility = "visible";
-    let exams = global.myExams;
+    //loading.visibility = "visible";
+    exams = global.myExams;
     num = 0;
 
-    items_appello.splice(0);
-    for (let i=0; i<exams.length; i++){
-        items_appello.push(
-            {
-                titolo: exams[i].nome,
-                items: getAppelli(exams[i].adId,exams[i].cdsId)
-            }
-        );
+    getAppelli();
 
-        appelli_listview.refresh();
-
-    }
-    //page.set("items_appello",items_appello);
     global.getAllBadge(page);
     page.bindingContext = viewModel;
 }
@@ -62,93 +53,105 @@ function drawTitle() {
     page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
     page.getViewById("sessione").text = appSettings.getString("sessione");
 }
-function getAppelli(adId,cdsId) {
-    let myarray = [];
 
-    httpModule.request({
-        url: global.url + "students/checkAppello/" + cdsId +"/" + adId,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        const result = response.content.toJSON();
-        loading.visibility = "visible";
-        if (response.statusCode === 401 || response.statusCode === 500)
-        {
+function getAppelli() {
+    items_appello.slice(0);
+    for (let i=0; i<exams.length; i++){
+        let myarray = [];
+
+        httpModule.request({
+            url: global.url + "students/checkAppello/" + exams[i].cdsId +"/" + exams[i].adId,
+            method: "GET",
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic "+ global.encodedStr
+            }
+        }).then((response) => {
+            const result = response.content.toJSON();
+            loading.visibility = "visible";
+            if (response.statusCode === 401 || response.statusCode === 500)
+            {
+                dialogs.alert({
+                    title: "Errore Server!",
+                    message: result,
+                    okButtonText: "OK"
+
+                }).then();
+            }
+            else {
+                for (let i=0; i<result.length; i++) {
+                    let day,year,month;
+                    let final_data ="" + dayOfWeek(result[i].dataEsame) + " " + result[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result[i].dataEsame) + " " + result[i].dataEsame.substring(6, 10);
+                    day = result[i].dataEsame.substring(0, 2);
+                    month = result[i].dataEsame.substring(3, 5);
+                    year = result[i].dataEsame.substring(6, 10);
+                    let date = new Date(year,month-1,day);
+
+                    if (result[i].stato === "P") {
+                        let items = {
+                            "esame": result[i].esame,
+                            "descrizione": result[i].descrizione,
+                            "note": result[i].note,
+                            "dataEsame": final_data,
+                            "dataInizio": result[i].dataInizio,
+                            "dataFine": result[i].dataFine,
+                            "iscritti": result[i].numIscritti,
+                            "classe" : "examPass",
+                            "date" : date,
+                            "adId": exams[i].adId,
+                            "appId": result[i].appId,
+                            "prenotazione_da": "Prenotazioni: da ",
+                            "prenotazione_a": " a ",
+                            "text_iscritti": "Iscritti: "
+                        };
+                        num++;
+                        appSettings.setNumber("appelloBadge",num);
+                        myarray.push(items);
+                        //appelli_listview.refresh();
+                    }
+                    if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
+                        let items = {
+                            "esame": result[i].esame,
+                            "descrizione": result[i].descrizione,
+                            "note": result[i].note,
+                            "dataEsame": final_data,
+                            "dataInizio": result[i].dataInizio,
+                            "dataFine": result[i].dataFine,
+                            "iscritti": result[i].numIscritti,
+                            "classe" : "examFreq",
+                            "date" : date,
+                            "adId": exams[i].adId,
+                            "appId": result[i].appId,
+                            "prenotazione_da": "Prenotazioni: da ",
+                            "prenotazione_a": " a ",
+                            "text_iscritti": "Iscritti: "
+                        };
+                        myarray.push(items);
+                        //appelli_listview.refresh();
+                    }
+                }
+
+            }
+
+            if (platformModule.isIOS){
+                myarray.splice(0, 0, {});
+            }
+
+            items_appello.push({
+                titolo: exams[i].nome,
+                items: myarray
+            });
+
+            loading.visibility = "collapsed";
+        },(e) => {
+            console.log("Error", e);
             dialogs.alert({
                 title: "Errore Server!",
-                message: result.retErrMsg,
+                message: e,
                 okButtonText: "OK"
-
-            }).then(
-            );
-        }
-        else
-        {
-
-            for (let i=0; i<result.length; i++)
-            {
-                let day,year,month;
-                let final_data ="" + dayOfWeek(result[i].dataEsame) + " " + result[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result[i].dataEsame) + " " + result[i].dataEsame.substring(6, 10);
-                day = result[i].dataEsame.substring(0, 2);
-                month = result[i].dataEsame.substring(3, 5);
-                year = result[i].dataEsame.substring(6, 10);
-                let date = new Date(year,month-1,day);
-
-                if (result[i].stato === "P")
-                {
-                   let items = {
-                        "esame": result[i].esame,
-                        "descrizione": result[i].descrizione,
-                        "note": result[i].note,
-                        "dataEsame": final_data,
-                        "dataInizio": result[i].dataInizio,
-                        "dataFine": result[i].dataFine,
-                        "iscritti": result[i].numIscritti,
-                        "classe" : "examPass",
-                        "date" : date,
-                        "adId": adId,
-                        "appId": result[i].appId
-                    };
-                    num++;
-                    appSettings.setNumber("appelloBadge",num);
-                    myarray.push(items);
-                    //appelli_listview.refresh();
-                }
-                if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
-
-                    let items = {
-                        "esame": result[i].esame,
-                        "descrizione": result[i].descrizione,
-                        "note": result[i].note,
-                        "dataEsame": final_data,
-                        "dataInizio": result[i].dataInizio,
-                        "dataFine": result[i].dataFine,
-                        "iscritti": result[i].numIscritti,
-                        "classe" : "examFreq",
-                        "date" : date,
-                        "adId": adId,
-                        "appId": result[i].appId
-
-                    };
-                    myarray.push(items);
-                    //appelli_listview.refresh();
-                }
-            }
-            loading.visibility = "collapsed";
-        }
-
-    },(e) => {
-        console.log("Error", e.retErrMsg);
-        dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
-            okButtonText: "OK"
+            });
         });
-    });
-    return myarray;
+    }
 }
 
 function dayOfWeek(date) {

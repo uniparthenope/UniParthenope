@@ -8,6 +8,7 @@ require("nativescript-accordion");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const Observable = require("tns-core-modules/data/observable");
 const appSettings = require("tns-core-modules/application-settings");
+const platformModule = require("tns-core-modules/platform");
 
 let page;
 let viewModel;
@@ -126,9 +127,12 @@ function onNavigatingTo(args) {
                     });
                 });
 
+                if (platformModule.isIOS){
+                    temp_items.splice(0, 0, {});
+                }
+
                 items.push({
                     nome_bar: result[i],
-
                     items: temp_items
                 });
 

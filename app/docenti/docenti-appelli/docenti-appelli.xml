@@ -88,14 +88,14 @@
 
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">
                                         <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Prenotazioni: da " />
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ prenotazione_da }}" />
                                             <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataInizio }}"/>
-                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text=" a " />
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text=" {{ prenotazione_a }} " />
                                             <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataFine }}"/>
                                         </StackLayout>
                                     </StackLayout>
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Iscritti: "/>
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ text_iscritti }} "/>
                                         <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
                                     </StackLayout>
                                 </StackLayout>
