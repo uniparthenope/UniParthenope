@@ -38,7 +38,7 @@
             </GridLayout>
 
             <ScrollView row="1" height="100%" marginLeft="5" marginRight="5" verticalAlignment="top" marginTop="10">
-                <accordion:Accordion  items="{{ items }}" allowMultiple="false" height="100%" >
+                <accordion:Accordion  items="{{ items }}" allowMultiple="false" height="95%" verticalAlignment="top">
                     <accordion:Accordion.itemHeaderTemplate>
                         <StackLayout class="border" marginBottom="10" height="50">
                             <Label class="textPrimary" color="#22384f" text="{{ nome_bar }}" horizontalAlignment="center" textAlignment="center"/>

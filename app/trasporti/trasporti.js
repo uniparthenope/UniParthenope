@@ -5,6 +5,8 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const nativescript_webview_interface_1 = require("nativescript-webview-interface");
 const httpModule = require("tns-core-modules/http");
+let device = require("tns-core-modules/platform");
+let application = require("tns-core-modules/application");
 let timer = require("tns-core-modules/timer");
 let timer_id;
 let myposition_id;
@@ -149,6 +151,17 @@ function getBusPosition() {
                 okButtonText: "OK"
             });
         });
+}
+
+if(device.isAndroid){
+    application.android.on(application.AndroidApplication.activityBackPressedEvent, (args) => {
+        console.log("Interrompo servizi GPS...");
+        timer.clearInterval(timer_id);
+        clearTimeout(bus_timer);
+
+        oLangWebViewInterface.destroy();
+        geolocation.clearWatch(myposition_id);
+    });
 }
 
 function onNavigatingFrom(args) {

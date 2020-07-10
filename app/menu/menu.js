@@ -56,7 +56,7 @@ function onNavigatingTo(args) {
         {
             dialogs.alert({
                 title: "Errore Server!",
-                message: result.retErrMsg,
+                message: result,
                 okButtonText: "OK"
             }).then(
             );
@@ -81,7 +81,7 @@ function onNavigatingTo(args) {
                     {
                         dialogs.alert({
                             title: "Errore Server!",
-                            message: result_2.retErrMsg,
+                            message: result_2,
                             okButtonText: "OK"
                         }).then(
                         );
