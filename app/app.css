@@ -270,6 +270,11 @@ refer to http://docs.nativescript.org/ui/theme.
     border-width: 8;
     border-color: #ddd;
 }
+.myMenu{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
 ActionBar {
     background-color: #22384f;
     color: white;
