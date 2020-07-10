@@ -72,7 +72,7 @@
             <!--    Testo sovrapposto    -->
 
             <StackLayout orientation="vertical" verticalAlignment="top">
-                <Label class="topTitle" horizontalAlignment="right" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="15"/>
+                <Label class="topTitle" horizontalAlignment="right" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="20" marginLeft="5" marginTop="15" textAlignment="right"/>
                 <Image src="~/images/logo_parth.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>
             </StackLayout>
 
