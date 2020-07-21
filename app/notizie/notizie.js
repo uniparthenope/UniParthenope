@@ -110,11 +110,16 @@ function onNavigatingTo(args) {
         }
         else {
             for (let i=0; i<result.length; i++) {
+                let img = "~/images/image1.jpg";
+
+                if (result[i].image !== "")
+                    img = result[i].image;
+
                 items.push({
                     title: result[i].titolo,
                     date:result[i].link,
                     date_text: result[i].link,
-                    image: result[i].image,
+                    image: img,
                     items: [
                         {
                             desc: result[i].TEXT
