@@ -12,6 +12,7 @@ let viewModel;
 let sideDrawer;
 let image;
 let items;
+let loading;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -22,75 +23,127 @@ function onNavigatingTo(args) {
     });
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-    page.getViewById("loading").busy= true;
+    loading = page.getViewById("activityIndicator");
 
-    let dest = fs.path.join(fs.knownFolders.currentApp().path, "/assets/rss.xml");
-    let url = "https://www.uniparthenope.it/rss.xml";
-    httpModule.getFile(url, dest).then(function (r) {
-        let parser = new xml2js.Parser();
 
-        r.readText().then(function  (data){
-            parser.parseString(data, function (err, result) {
-                console.log(result.rss.channel[0].item.length);
-                let count = 0;
-                for(let i=0; i<result.rss.channel[0].item.length; i++)
-                {
-                    const myHtmlString = result.rss.channel[0].item[i].description.toString();
-                    const title = result.rss.channel[0].item[i].title.toString();
-                    const date = result.rss.channel[0].item[i].pubDate.toString();
-                    console.log(title);
-                    let data = extractData(date);
+    /*
+        let dest = fs.path.join(fs.knownFolders.currentApp().path, "/assets/rss.xml");
+        let url = "https://www.uniparthenope.it/rss.xml";
+        httpModule.getFile(url, dest).then(function (r) {
+            let parser = new xml2js.Parser();
 
-                    let inizio = myHtmlString.search("Testo:");
-                    let fine = myHtmlString.search("Foto/Video:");
+            r.readText().then(function  (data){
+                parser.parseString(data, function (err, result) {
+                    console.log(result.rss.channel[0].item.length);
+                    let count = 0;
+                    for(let i=0; i<result.rss.channel[0].item.length; i++)
+                    {
+                        const myHtmlString = result.rss.channel[0].item[i].description.toString();
+                        const title = result.rss.channel[0].item[i].title.toString();
+                        const date = result.rss.channel[0].item[i].pubDate.toString();
+                        console.log(title);
+                        let data = extractData(date);
 
-                    let final_string = myHtmlString.slice(inizio+6, fine);
+                        let inizio = myHtmlString.search("Testo:");
+                        let fine = myHtmlString.search("Foto/Video:");
 
-                    let inizio_link = myHtmlString.search("https://www.uniparthenope.it/sites/default/files/");
-                    let new_string = myHtmlString.slice(inizio_link);
-                    let fine_link;
-                    console.log("Inizio: " + inizio_link);
-                    fine_link = new_string.search(".jpg");
+                        let final_string = myHtmlString.slice(inizio+6, fine);
 
-                    console.log("Fine: " + fine_link);
-                    if(fine_link === -1){
-                        fine_link = new_string.search(".png");
+                        let inizio_link = myHtmlString.search("https://www.uniparthenope.it/sites/default/files/");
+                        let new_string = myHtmlString.slice(inizio_link);
+                        let fine_link;
+                        console.log("Inizio: " + inizio_link);
+                        fine_link = new_string.search(".jpg");
+
+                        console.log("Fine: " + fine_link);
+                        if(fine_link === -1){
+                            fine_link = new_string.search(".png");
+                        }
+                        let final_string_link = new_string.slice(0, fine_link+4);
+                        console.log(final_string_link);
+
+                        imageSource.fromUrl(final_string_link)
+                            .then(function () {
+                                if (++count == result.rss.channel[0].item.length)
+                                    page.getViewById("loading").busy= false;
+                                items.push({
+                                    title: title,
+                                    date:data,
+                                    date_text: data.getDate() + "/" +(data.getMonth()+1) + "/" +data.getFullYear() + " " + data.getHours() + ":" +data.getMinutes(),
+                                    image: final_string_link,
+                                    items: [
+                                        {
+                                            desc: final_string
+                                        }
+                                    ]
+                                });
+                                items.sort(function (orderA, orderB) {
+                                    let nameA = orderA.date;
+                                    let nameB = orderB.date;
+                                    return (nameA > nameB) ? -1 : (nameA < nameB) ? 1 : 0;
+                                });
+                            }).catch(err => {
+                                console.log("Somthing went wrong!");
+
+                            });
                     }
-                    let final_string_link = new_string.slice(0, fine_link+4);
-                    console.log(final_string_link);
-
-                    imageSource.fromUrl(final_string_link)
-                        .then(function () {
-                            if (++count == result.rss.channel[0].item.length)
-                                page.getViewById("loading").busy= false;
-                            items.push({
-                                title: title,
-                                date:data,
-                                date_text: data.getDate() + "/" +(data.getMonth()+1) + "/" +data.getFullYear() + " " + data.getHours() + ":" +data.getMinutes(),
-                                image: final_string_link,
-                                items: [
-                                    {
-                                        desc: final_string
-                                    }
-                                ]
-                            });
-                            items.sort(function (orderA, orderB) {
-                                let nameA = orderA.date;
-                                let nameB = orderB.date;
-                                return (nameA > nameB) ? -1 : (nameA < nameB) ? 1 : 0;
-                            });
-                        }).catch(err => {
-                            console.log("Somthing went wrong!");
-                        if (++count == result.rss.channel[0].item.length)
-                            page.getViewById("loading").busy= false;
-                        });
-                }
+                });
             });
+        },function (e) {
+            console.log(e);
         });
-    },function (e) {
-        console.log(e);
-    });
+    */
+    httpModule.request({
+        url: global.url + "general/news",
+        method: "GET"
+    }).then((response) => {
+        const result = response.content.toJSON();
+        loading.visibility = "visible";
+        if (response.statusCode === 401 || response.statusCode === 500)
+        {
+            dialogs.alert({
+                title: "Errore Server!",
+                message: result,
+                okButtonText: "OK"
 
+            }).then();
+        }
+        else {
+            for (let i=0; i<result.length; i++) {
+                items.push({
+                    title: result[i].titolo,
+                    date:result[i].link,
+                    date_text: result[i].link,
+                    image: result[i].image,
+                    items: [
+                        {
+                            desc: result[i].TEXT
+                        }
+                    ]
+                });
+                items.sort(function (orderA, orderB) {
+                    let nameA = orderA.date;
+                    let nameB = orderB.date;
+                    return (nameA > nameB) ? -1 : (nameA < nameB) ? 1 : 0;
+                });
+            }
+            loading.visibility = "collapsed";
+
+        }
+
+        if (platformModule.isIOS){
+            items.splice(0, 0, {});
+        }
+
+        loading.visibility = "collapsed";
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore Server!",
+            message: e,
+            okButtonText: "OK"
+        });
+    });
 
     page.bindingContext = viewModel;
 }

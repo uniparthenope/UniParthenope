@@ -30,10 +30,10 @@
 
     </ActionBar>
 
-    <StackLayout>
+    <GridLayout>
+        <StackLayout orientation="vertical" height="100%">
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
             <Label class="textPrimary" text="Notizie" horizontalAlignment="center" verticalAlignment="center"/>
-            <ActivityIndicator id="loading" horizontalAlignment="right" marginRight="10"/>
         </GridLayout>
 
         <ScrollView height="100%" marginLeft="5" marginRight="5">
@@ -56,5 +56,12 @@
             </accordion:Accordion>
         </ScrollView>
 
-    </StackLayout>
+        </StackLayout>
+
+        <StackLayout id="activityIndicator" visibility="visible" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Recupero Notizie..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
+
+    </GridLayout>
 </Page>
