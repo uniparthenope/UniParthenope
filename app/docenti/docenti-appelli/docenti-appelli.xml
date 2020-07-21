@@ -78,13 +78,19 @@
                     </accordion:Accordion.itemHeaderTemplate>
                     <accordion:Accordion.itemContentTemplate>
                         <StackLayout>
-                            <GridLayout>
-                                <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
+                            <GridLayout margin="5 5 5 5">
+                                <StackLayout orientation="vertical"  width="100%" >
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">
                                         <Label class="{{ classe }}" borderWidth="0" text="{{ dataEsame }}"/>
                                     </StackLayout>
-                                    <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ descrizione }}" horizontalAlignment="center"/>
-                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ note }}" horizontalAlignment="center"/>
+                                    <Label class="{{ classe }}" borderWidth="0" borderRadius="0" textAlignment="center" fontSize="12" text="{{ stato }}" color="orange" textWrap="true" horizontalAlignment="center"/>
+
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ text_iscritti }} "/>
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
+                                    </StackLayout>
+
+                                    <Label class="{{ classe }}" textAlignment="center" borderRadius="0" borderWidth="0" fontSize="12" text="{{ note }}" textWrap="true" horizontalAlignment="center"/>
 
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">
                                         <StackLayout orientation="horizontal" horizontalAlignment="center">
@@ -94,10 +100,7 @@
                                             <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataFine }}"/>
                                         </StackLayout>
                                     </StackLayout>
-                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ text_iscritti }} "/>
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
-                                    </StackLayout>
+
                                 </StackLayout>
                             </GridLayout>
                         </StackLayout>

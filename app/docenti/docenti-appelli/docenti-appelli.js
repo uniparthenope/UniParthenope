@@ -102,7 +102,8 @@ function getAppelli() {
                             "appId": result[i].appId,
                             "prenotazione_da": "Prenotazioni: da ",
                             "prenotazione_a": " a ",
-                            "text_iscritti": "Iscritti: "
+                            "text_iscritti": "Iscritti: ",
+                            "stato" : result[i].statoDes
                         };
                         num++;
                         appSettings.setNumber("appelloBadge",num);
@@ -124,7 +125,8 @@ function getAppelli() {
                             "appId": result[i].appId,
                             "prenotazione_da": "Prenotazioni: da ",
                             "prenotazione_a": " a ",
-                            "text_iscritti": "Iscritti: "
+                            "text_iscritti": "Iscritti: ",
+                            "stato" : result[i].statoDes
                         };
                         myarray.push(items);
                         //appelli_listview.refresh();
