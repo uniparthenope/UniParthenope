@@ -43,7 +43,7 @@ function onNavigatingTo(args) {
         {
             dialogs.alert({
                 title: "Errore Server!",
-                message: result.retErrMsg,
+                message: result,
                 okButtonText: "OK"
             }).then();
         }
@@ -59,6 +59,7 @@ function onNavigatingTo(args) {
                 else
                     insert += "NO";
 
+                /*
                 let prezzo = result[i].prezzo.toString();
                 if(prezzo.includes(","))
                 {
@@ -66,6 +67,8 @@ function onNavigatingTo(args) {
                     if (pr[1].length < 2)
                         prezzo = prezzo + "0";
                 }
+
+                 */
 
                 let img;
                 if (result[i].image === "")
@@ -77,7 +80,7 @@ function onNavigatingTo(args) {
                 items.push({
                     nome: result[i].nome,
                     descrizione: "Descrizione: "+ result[i].descrizione,
-                    prezzo: "Prezzo: "+prezzo + " €",
+                    prezzo: "Prezzo: "+ result[i].prezzo + " €",
                     tipologia: "Tipo: "+result[i].tipologia,
                     sempre_att: insert,
                     full_data:"Inserito il: "+result[i].data,

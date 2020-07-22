@@ -43,7 +43,7 @@ function onNavigatingTo(args) {
     //console.log("CURR DATA = " + data);
 
     httpModule.request({
-        url: global.url_general + "Eating/v1/getUsers",
+        url: global.url_general + "Eating/v1/getToday",
         method: "GET",
         headers: {
             "Content-Type" : "application/json",
@@ -51,7 +51,7 @@ function onNavigatingTo(args) {
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        console.log(result);
+
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
@@ -62,82 +62,39 @@ function onNavigatingTo(args) {
             );
         }
         else {
-            let count =0;
-            for (let i=0; i<result.length; i++)
-            {
-                let temp_items =[];
-                count++;
+            for (let i=0; i<result.length; i++){
+                console.log(result[i]["bar"]);
+                let menu = result[i]["menu"];
 
-                httpModule.request({
-                    url: global.url_general + "Eating/v1/getToday",
-                    method: "GET",
-                    headers: {
-                        "Content-Type" : "application/json",
-                        "Authorization" : "Basic "+ global.encodedStr
-                    }
-                }).then((response) => {
-                    const result_2 = response.content.toJSON();
-                    if (response.statusCode === 401 || response.statusCode === 500)
-                    {
-                        dialogs.alert({
-                            title: "Errore Server!",
-                            message: result_2,
-                            okButtonText: "OK"
-                        }).then(
-                        );
-                    }
-                    else {
-                        console.log("Size: "+ result_2.length);
-                        for (let x=0; x<result_2.length; x++)
-                        {
-                            if(result[i] === result_2[x].nome_bar)
-                            {
+                let temp_items = [];
 
-                                let prezzo = result_2[x].prezzo.toString();
-                                if(prezzo.includes(","))
-                                {
-                                    let pr = prezzo.split("."||",");
-                                    if (pr[1].length < 2)
-                                        prezzo = prezzo + "0";
-                                }
+                for (let j=0; j<menu.length; j++){
 
-                                let img;
-                                if (result_2[x].image === "")
-                                    img = "~/images/no_food.png";
-                                else
-                                    img = base64.fromBase64(result_2[x].image);
 
-                                temp_items.push({
-                                    nome: result_2[x].nome,
-                                    descrizione: result_2[x].descrizione,
-                                    prezzo: prezzo + " €",
-                                    tipologia: result_2[x].tipologia,
-                                    image: img
-                                })
+                    let img;
+                    if (menu[j].image === "")
+                        img = "~/images/no_food.png";
+                    else
+                        img = base64.fromBase64(menu[j].image);
 
-                            }
-                        }
-                    }
-                },(e) => {
-                    console.log("Error", e);
-                    dialogs.alert({
-                        title: "Errore Server Mensa!",
-                        message: e,
-                        okButtonText: "OK"
-                    });
-                });
+                    temp_items.push({
+                        nome: menu[j].nome,
+                        descrizione: menu[j].descrizione,
+                        prezzo: menu[j]["prezzo"] + " €",
+                        tipologia: menu[j].tipologia,
+                        image: img
+                    })
+                }
 
                 if (platformModule.isIOS){
                     temp_items.splice(0, 0, {});
                 }
 
                 items.push({
-                    nome_bar: result[i],
+                    nome_bar: result[i]["bar"],
                     items: temp_items
                 });
-
             }
-            appSettings.setNumber("foodBadge",count);
         }
     },(e) => {
         console.log("Error", e);
