@@ -394,7 +394,7 @@ function getDepartment(studId) {
         console.log("Error", e);
         dialogs.alert({
             title: "Autenticazione Fallita!",
-            message: e.retErrMsg,
+            message: e,
             okButtonText: "OK"
         });
     });
