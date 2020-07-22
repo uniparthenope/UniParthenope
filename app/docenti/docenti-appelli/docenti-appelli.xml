@@ -41,35 +41,7 @@
                 <Label row="2" class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="10" fontSize="12"/>
             </GridLayout>
             <ScrollView row="1" verticalAlignment="top"  height="100%">
-                <!--        Old Listview
-               <ListView id="appelli_listview" class="list-group" items="{{ items_appelli }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
-                    <ListView.itemTemplate >
-                        <FlexboxLayout flexDirection="row">
-                            <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
-                                <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                    <Label class="{{ classe }}" borderWidth="0" fontSize="16" text="{{ dataEsame }}"/>
-                                </StackLayout>
-                                <Label class="{{ classe }}" borderWidth="0" text="{{ esame }}" horizontalAlignment="center"/>
-                                <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ descrizione }}" horizontalAlignment="center"/>
-                                <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ note }}" horizontalAlignment="center"/>
 
-                                <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Prenotazioni: da " />
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataInizio }}"/>
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text=" a " />
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataFine }}"/>
-                                    </StackLayout>
-                                </StackLayout>
-                                <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Iscritti: "/>
-                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
-                                </StackLayout>
-                            </StackLayout>
-                        </FlexboxLayout>
-                    </ListView.itemTemplate>
-                </ListView>
-                -->
                 <accordion:Accordion id="accordion" itemHeaderTap="tapped" items="{{items_appello}}" allowMultiple="false" heigth="100%">
                     <accordion:Accordion.itemHeaderTemplate>
                         <GridLayout height="75" backgroundColor="#22384f">

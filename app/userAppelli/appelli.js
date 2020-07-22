@@ -16,6 +16,8 @@ let items_appelli;
 let loading;
 let num;
 
+let bad_status = ["I","EP"];
+
 function onNavigatingTo(args) {
     page = args.object;
     //appSettings.setBoolean("esami_futuri",false);
@@ -121,7 +123,8 @@ function getAppelli(adId, adsceId) {
                         "date" : date,
                         "adId": adId,
                         "appId": result[i].appId,
-                        "adsceId": adsceId
+                        "adsceId": adsceId,
+                        "stato" : result[i].statoDes
                     });
                     items_appelli.sort(function (orderA, orderB) {
                         let nameA = orderA.date;
@@ -132,7 +135,7 @@ function getAppelli(adId, adsceId) {
                     appelli_listview.refresh();
 
                 }
-                if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
+                else if (appSettings.getBoolean("esami_futuri")){
 
                     items_appelli.push({
                         "esame": result[i].esame,
@@ -147,7 +150,8 @@ function getAppelli(adId, adsceId) {
                         "date" : date,
                         "adId": adId,
                         "appId": result[i].appId,
-                        "adsceId": adsceId
+                        "adsceId": adsceId,
+                        "stato" : result[i].statoDes
                     });
                     items_appelli.sort(function (orderA, orderB) {
                         let nameA = orderA.classe;

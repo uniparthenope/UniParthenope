@@ -87,29 +87,7 @@ function getAppelli() {
                     year = result[i].dataEsame.substring(6, 10);
                     let date = new Date(year,month-1,day);
 
-                    if (result[i].stato === "P") {
-                        let items = {
-                            "esame": result[i].esame,
-                            "descrizione": result[i].descrizione,
-                            "note": result[i].note,
-                            "dataEsame": final_data,
-                            "dataInizio": result[i].dataInizio,
-                            "dataFine": result[i].dataFine,
-                            "iscritti": result[i].numIscritti,
-                            "classe" : "examPass",
-                            "date" : date,
-                            "adId": exams[i].adId,
-                            "appId": result[i].appId,
-                            "prenotazione_da": "Prenotazioni: da ",
-                            "prenotazione_a": " a ",
-                            "text_iscritti": "Iscritti: ",
-                            "stato" : result[i].statoDes
-                        };
-                        num++;
-                        appSettings.setNumber("appelloBadge",num);
-                        myarray.push(items);
-                        //appelli_listview.refresh();
-                    }
+
                     if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
                         let items = {
                             "esame": result[i].esame,
@@ -130,6 +108,31 @@ function getAppelli() {
                         };
                         myarray.push(items);
                         //appelli_listview.refresh();
+                    }
+                    else{
+
+                            let items = {
+                                "esame": result[i].esame,
+                                "descrizione": result[i].descrizione,
+                                "note": result[i].note,
+                                "dataEsame": final_data,
+                                "dataInizio": result[i].dataInizio,
+                                "dataFine": result[i].dataFine,
+                                "iscritti": result[i].numIscritti,
+                                "classe" : "examPass",
+                                "date" : date,
+                                "adId": exams[i].adId,
+                                "appId": result[i].appId,
+                                "prenotazione_da": "Prenotazioni: da ",
+                                "prenotazione_a": " a ",
+                                "text_iscritti": "Iscritti: ",
+                                "stato" : result[i].statoDes
+                            };
+                            num++;
+                            appSettings.setNumber("appelloBadge",num);
+                            myarray.push(items);
+                            //appelli_listview.refresh();
+
                     }
                 }
 
