@@ -63,15 +63,24 @@ function onNavigatingTo(args) {
 
                 article.push({
                     title: result[i].titolo,
-                    date:result[i].link,
-                    date_text: result[i].link,
+                    date:result[i].data,
+                    date_text: result[i].data,
                     image: img,
                     items: arr_desc
                 });
+
+                article.sort(function (orderA, orderB) {
+                    let dataA = Date.parse(orderA.date);
+                    let dataB = Date.parse(orderB.date);
+
+                    return (dataA > dataB) ? -1 : (dataA < dataB) ? 1 : 0;
+                });
             }
 
+            for (let i=0; i<article.length; i++){
+                console.log(article.getItem(i).date);
+            }
         }
-
 
         loading.visibility = "collapsed";
     },(e) => {
