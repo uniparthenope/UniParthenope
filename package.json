@@ -1,6 +1,9 @@
 {
   "nativescript": {
-    "id": "it.uniparthenope.app",
+    "id": {
+      "ios": "it.uniparthenope.application",
+      "android": "it.uniparthenope.app"
+    },
     "tns-ios": {
       "version": "6.3.0"
     },
