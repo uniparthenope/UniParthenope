@@ -40,6 +40,14 @@ function onNavigatingTo(args) {
         calendarCourses();
     }
 
+    if(!appSettings.getBoolean("accessType")){
+        dialogs.alert({
+            title: "Attenzione",
+            message: 'Bisogna scegliere la modalità con cui si intende frequentare i corsi del nuovo A.A!\n Accedere alla pagina "ACCESSO" dal menu laterale!',
+            okButtonText: "OK"
+        });
+    }
+
     global.getAllBadge(page);
     page.bindingContext = viewModel;
 }

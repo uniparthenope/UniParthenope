@@ -43,7 +43,7 @@
                 </StackLayout>
                 <Label textAlignment="center" textWrap="true" text="Team leader: Raffaele Montella" marginTop="10"/>
                 <Label textAlignment="center" textWrap="true" text="Developers: Gennaro Mellone, Ciro Giuseppe De Vita" marginTop="5"/>
-                <Label textAlignment="center" textWrap="true" text="Responsabile Mobile Store: Nunzio Romano" marginTop="5"/>
+                <Label textAlignment="center" textWrap="true" text="Responsabile Mobile Store: Nunzio Napolitano" marginTop="5"/>
                 <Label textAlignment="center" visibility="collapsed" textWrap="true" text="Prorettore alle Tecnologie Informatiche: Prof. Luigi Romano" marginTop="5"/>
 
                 <Button textWrap="true" text="Copyright ©" ontap="onTapCopy" class="blue_background_opac" margin="10 5 0 5"/>

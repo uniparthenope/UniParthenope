@@ -39,6 +39,7 @@
                         <Button class="btn-menu" text="Appelli" marginBottom="5" marginTop="5" tap="goto_appelli"/>
                         <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap="goto_docenti"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
+                        <Button class="btn-menu" text="Access" marginBottom="5" marginTop="5" tap="goto_access"/>
 
                         <!-- Disabled Buttons
                          <Button class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>

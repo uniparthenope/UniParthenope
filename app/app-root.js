@@ -179,6 +179,14 @@ exports.goto_badge = function () {
         };
     frame.Frame.topmost().navigate(nav);
 };
+exports.goto_access = function () {
+    const nav =
+        {
+            moduleName: "access/access",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
 exports.goto_taxes = function () {
     const nav =
         {
