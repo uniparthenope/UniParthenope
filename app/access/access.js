@@ -10,7 +10,9 @@ let page;
 let viewModel;
 let sideDrawer;
 let loading;
-let status = ["In Distanza","In Presenza"];
+let index;
+let my_status = "";
+let status = ["Non Definito","In Distanza","In Presenza"];
 
 
 function onNavigatingTo(args) {
@@ -32,64 +34,13 @@ function onListPickerLoaded(fargs) {
     const listPickerComponent = fargs.object;
     listPickerComponent.on("selectedIndexChange", (args) => {
         const picker = args.object;
-        setStatus(picker.selectedIndex);
+        index = picker.selectedIndex;
 
-        console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
+        //console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
     });
 }
 exports.onListPickerLoaded = onListPickerLoaded;
 
-function setStatus(i) {
-    loading.visibility = "visible";
-    let at = "";
-
-    if (i === 0)
-        at = "distance";
-    else if (i === 1)
-        at = "presence";
-
-    httpModule.request({
-        url: global.url_general + "Access/v1/classroom",
-        method: "POST",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic " + global.encodedStr
-        },
-        content: JSON.stringify({
-            accessType: at
-        })
-    }).then((response) => {
-        const result = response.content.toJSON();
-        dialogs.alert({
-            title: "Accesso Modificato!",
-            message: "",
-            okButtonText: "OK"
-        });
-        appSettings.setBoolean("accessType", true);
-
-
-        if (response.statusCode === 401 || response.statusCode === 500) {
-            dialogs.alert({
-                title: "Errore Server!",
-                message: result,
-                okButtonText: "OK"
-
-            }).then();
-        }
-        else
-        {
-
-            loading.visibility = "collapsed";
-        }
-    },(e) => {
-        console.log("Error", e.retErrMsg);
-        dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
-            okButtonText: "OK"
-        });
-    });
-}
 function getStatus(){
     loading.visibility = "visible";
 
@@ -115,15 +66,18 @@ function getStatus(){
         else
         {
             let lp = page.getViewById("listpicker");
+            my_status = result.accessType;
 
             if (result.accessType === "presence")
-                lp.selectedIndex = 1;
+                lp.selectedIndex = 2;
 
             else if(result.accessType === "distance")
-                lp.selectedIndex = 0;
+                lp.selectedIndex = 1;
 
-            else
+            else {
                 page.getViewById("alert1").visibility = "visible";
+                lp.selectedIndex = 0;
+            }
 
 
             loading.visibility = "collapsed";
@@ -152,6 +106,71 @@ function onGeneralMenu()
     page.frame.navigate(nav);
 }
 
+exports.ontap_save = function(){
+
+
+    let at = "";
+
+    if (index === 0)
+        at = "undefined";
+    else if (index === 1)
+        at = "distance";
+    else if (index === 2)
+        at = "presence";
+    console.log(at);
+    console.log(my_status);
+
+    if (my_status !== at){
+        loading.visibility = "visible";
+
+        httpModule.request({
+            url: global.url_general + "Access/v1/classroom",
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic " + global.encodedStr
+            },
+            content: JSON.stringify({
+                accessType: at
+            })
+        }).then((response) => {
+            const result = response.content.toJSON();
+
+            if (response.statusCode === 401 || response.statusCode === 500) {
+                dialogs.alert({
+                    title: "Errore Server!",
+                    message: result,
+                    okButtonText: "OK"
+
+                }).then();
+            }
+            else
+            {
+                dialogs.alert({
+                    title: "Accesso Modificato!",
+                    message: "",
+                    okButtonText: "OK"
+                });
+                if(at === "undefined")
+                    appSettings.setBoolean("accessType", false);
+                else
+                    appSettings.setBoolean("accessType", true);
+
+                loading.visibility = "collapsed";
+                my_status = at;
+
+            }
+        },(e) => {
+            console.log("Error", e.retErrMsg);
+            dialogs.alert({
+                title: "Errore Server!",
+                message: e.retErrMsg,
+                okButtonText: "OK"
+            });
+        });
+    }
+
+};
 
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;

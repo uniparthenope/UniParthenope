@@ -33,13 +33,14 @@
                     <StackLayout id="userForm" visibility="collapsed">
 
                         <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_home"/>
+                        <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
+                        <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
+
                         <Button class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>
                         <Button class="btn-menu" text="Libretto" marginBottom="5" marginTop="5" tap="goto_libretto"/>
                         <Button class="btn-menu" text="Corsi" marginBottom="5" marginTop="5" tap="goto_corsi"/>
                         <Button class="btn-menu" text="Appelli" marginBottom="5" marginTop="5" tap="goto_appelli"/>
                         <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap="goto_docenti"/>
-                        <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
-                        <Button class="btn-menu" text="Access" marginBottom="5" marginTop="5" tap="goto_access"/>
 
                         <!-- Disabled Buttons
                          <Button class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>
