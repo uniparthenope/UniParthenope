@@ -38,6 +38,9 @@ function onItemTap(args) {
 exports.onItemTap = onItemTap;
 
 function getDocenti(){
+    let flag_server = false;
+    page.getViewById("activityIndicator").visibility = "visible";
+
     let aaId = appSettings.getString("aa_accad");
     let aaId_split = aaId.split(" ");
     let cdsId = appSettings.getNumber("cdsId");
@@ -64,9 +67,14 @@ function getDocenti(){
         }
         else
         {
-            page.getViewById("activityIndicator").visibility = "visible";
+            let url_prof = "";
+            let mail = "";
+            let pic = "";
+            let telefono = "";
+
             for (let i=0; i<result.length; i++)
             {
+
                 global.myDocenti.push({
                     docenteNome: result[i].docenteNome,
                     docenteCognome: result[i].docenteCognome,
@@ -91,32 +99,39 @@ function getDocenti(){
                         //console.log(result2);
                     if (response2.statusCode === 401 || response2.statusCode === 500)
                     {
-                        dialogs.alert({
-                            title: "Errore Server!",
-                            message: result2.retErrMsg,
-                            okButtonText: "OK"
-                        }).then();
+                        flag_server = true;
                     }
                     else {
-                        let flag = false;
-                        for (let x=0;x<items.length; x++){
-                            if(items.getItem(x).docenteCognome === result[i].docenteCognome){
-                                items.getItem(x).corso.push(result[i].corso);
-                                flag = true;
-                            }
+
+                        telefono= result2.telefono;
+                        mail= result2.email;
+                        pic= result2.url_pic;
+                        url_prof= result2.link;
+
+
+
+                        //page.getViewById("activityIndicator").visibility = "collapsed";
+                    }
+
+                    let flag = false;
+                    for (let x=0;x<items.length; x++){
+                        if(items.getItem(x).docenteCognome === result[i].docenteCognome){
+                            items.getItem(x).corso.push(result[i].corso);
+                            flag = true;
                         }
-                        if (!flag){
-                            page.getViewById("activityIndicator").visibility = "visible";
-                            let corsi = [];
-                            corsi.push(result[i].corso);
+                    }
+                    if (!flag){
+                        //page.getViewById("activityIndicator").visibility = "visible";
+                        let corsi = [];
+                        corsi.push(result[i].corso);
                         items.push({
                             docenteNome: result[i].docenteNome + " "+ result[i].docenteCognome,
                             docenteCognome: result[i].docenteCognome,
                             corso: corsi,
-                            telefono: result2.telefono,
-                            mail: result2.email,
-                            pic: result2.url_pic,
-                            url: result2.link
+                            telefono: telefono,
+                            mail: mail,
+                            pic: pic,
+                            url: url_prof
                         });
 
                         items.sort(function (orderA, orderB) {
@@ -124,11 +139,8 @@ function getDocenti(){
                             let nameB = orderB.docenteCognome;
                             return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
                         });
-                        }
-
-                        page.getViewById("activityIndicator").visibility = "collapsed";
                     }
-                    },(e) => {
+                },(e) => {
                         console.log("Error", e);
                         dialogs.alert({
                             title: "Errore Server!",
@@ -136,8 +148,17 @@ function getDocenti(){
                             okButtonText: "OK"
                         });
                     });
-                }
             }
+        }
+        if (flag_server){
+            dialogs.alert({
+                title: "Errore Server!",
+                message: "Problema recupero informazioni!",
+                okButtonText: "OK"
+            }).then();
+        }
+        page.getViewById("activityIndicator").visibility = "collapsed";
+
 
     },(e) => {
         console.log("Error", e.retErrMsg);

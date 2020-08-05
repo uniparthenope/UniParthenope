@@ -239,7 +239,7 @@ refer to http://docs.nativescript.org/ui/theme.
 .main_image{
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: contain;
 }
 .circle{
     background-repeat: no-repeat;

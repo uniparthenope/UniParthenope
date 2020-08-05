@@ -68,13 +68,18 @@ function getStatus(){
             let lp = page.getViewById("listpicker");
             my_status = result.accessType;
 
-            if (result.accessType === "presence")
+            if (result.accessType === "presence"){
+                appSettings.setBoolean("accessType", true);
                 lp.selectedIndex = 2;
+            }
 
-            else if(result.accessType === "distance")
+            else if(result.accessType === "distance"){
+                appSettings.setBoolean("accessType", true);
                 lp.selectedIndex = 1;
+            }
 
             else {
+                appSettings.setBoolean("accessType", false);
                 page.getViewById("alert1").visibility = "visible";
                 lp.selectedIndex = 0;
             }
