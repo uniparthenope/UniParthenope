@@ -5,6 +5,7 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 const modalViewModule = "modal-docente/modal-docente";
+const imageSourceModule = require("tns-core-modules/image-source");
 
 let page;
 let viewModel;
@@ -38,7 +39,6 @@ function onItemTap(args) {
 exports.onItemTap = onItemTap;
 
 function getDocenti(){
-    let flag_server = false;
     page.getViewById("activityIndicator").visibility = "visible";
 
     let aaId = appSettings.getString("aa_accad");
@@ -54,112 +54,46 @@ function getDocenti(){
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        //console.log(result);
-        if (response.statusCode === 401 || response.statusCode === 500)
-        {
-            dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
-                okButtonText: "OK"
 
-            }).then(
-            );
-        }
-        else
-        {
-            let url_prof = "";
-            let mail = "";
-            let pic = "";
-            let telefono = "";
-
-            for (let i=0; i<result.length; i++)
-            {
-
-                global.myDocenti.push({
-                    docenteNome: result[i].docenteNome,
-                    docenteCognome: result[i].docenteCognome,
-                    docenteId: result[i].docenteId,
-                    docenteMat: result[i].docenteMat,
-                    corso: result[i].corso,
-                    adId: result[i].adId
-                });
-
-                let url = global.url + "general/persone/"+ result[i].docenteCognome + " " + result[i].docenteNome;
-                url = url.replace(/ /g, "%20");
-
-                httpModule.request({
-                    url: url,
-                    method: "GET",
-                    headers: {
-                            "Content-Type" : "application/json",
-                            "Authorization" : "Basic "+ global.encodedStr
+        if(response.statusCode === 200){
+            for (let i=0; i<result.length; i++){
+                let flag = false;
+                for (let x=0;x<items.length; x++){
+                    if(items.getItem(x).docenteCognome === result[i].docenteCognome){
+                        items.getItem(x).corso.push(result[i].corso);
+                        flag = true;
                     }
-                }).then((response2) => {
-                    const result2 = response2.content.toJSON();
-                        //console.log(result2);
-                    if (response2.statusCode === 401 || response2.statusCode === 500)
-                    {
-                        flag_server = true;
-                    }
-                    else {
-
-                        telefono= result2.telefono;
-                        mail= result2.email;
-                        pic= result2.url_pic;
-                        url_prof= result2.link;
-
-
-
-                        //page.getViewById("activityIndicator").visibility = "collapsed";
-                    }
-
-                    let flag = false;
-                    for (let x=0;x<items.length; x++){
-                        if(items.getItem(x).docenteCognome === result[i].docenteCognome){
-                            items.getItem(x).corso.push(result[i].corso);
-                            flag = true;
-                        }
-                    }
-                    if (!flag){
-                        //page.getViewById("activityIndicator").visibility = "visible";
-                        let corsi = [];
-                        corsi.push(result[i].corso);
-                        items.push({
-                            docenteNome: result[i].docenteNome + " "+ result[i].docenteCognome,
-                            docenteCognome: result[i].docenteCognome,
-                            corso: corsi,
-                            telefono: telefono,
-                            mail: mail,
-                            pic: pic,
-                            url: url_prof
-                        });
-
-                        items.sort(function (orderA, orderB) {
-                            let nameA = orderA.docenteCognome;
-                            let nameB = orderB.docenteCognome;
-                            return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-                        });
-                    }
-                },(e) => {
-                        console.log("Error", e);
-                        dialogs.alert({
-                            title: "Errore Server!",
-                            message: e.retErrMsg,
-                            okButtonText: "OK"
-                        });
+                }
+                if (!flag){
+                    let corsi = [];
+                    corsi.push(result[i].corso);
+                    items.push({
+                        docenteNome: result[i].docenteNome + " "+ result[i].docenteCognome,
+                        docenteCognome: result[i].docenteCognome,
+                        corso: corsi,
+                        telefono: result[i].telefono,
+                        mail: result[i].email,
+                        pic: imageSourceModule.fromBase64(result[i].url_pic),
+                        url: result[i].link
                     });
+
+                    items.sort(function (orderA, orderB) {
+                        let nameA = orderA.docenteCognome;
+                        let nameB = orderB.docenteCognome;
+                        return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+                    });
+                }
             }
+
+            page.getViewById("activityIndicator").visibility = "collapsed";
         }
-        if (flag_server){
+        else{
             dialogs.alert({
                 title: "Errore Server!",
-                message: "Problema recupero informazioni!",
+                message: result.errMsg,
                 okButtonText: "OK"
-            }).then();
+            });
         }
-        page.getViewById("activityIndicator").visibility = "collapsed";
-
-
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({

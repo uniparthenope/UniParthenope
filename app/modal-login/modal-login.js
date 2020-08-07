@@ -83,8 +83,10 @@ function onShownModally(args) {
                 };
             frame.Frame.topmost().navigate(nav);
         }
-        else
+        else if(response.statusCode === 200)
         {
+            console.log(_result.user.grpDes);
+
             account = _result;
             if(_result.user.grpDes === "Studenti"){
                 carriere = _result.user.trattiCarriera;
