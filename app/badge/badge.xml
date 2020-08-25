@@ -70,7 +70,7 @@
                         <Label id="roleID"  text="" horizontalAlignment="center" fontSize="18" color="white"/>
                     </StackLayout>
                     </GridLayout>
-                    <StackLayout class="main_image" marginBottom="5" borderRadius="20" id="my_qr" verticalAlignment="bottom" horizontalAlignment="center" backgroundImage="~/images/qr_test.jpg" height="225" width="225"/>
+                    <StackLayout class="main_image_contain" marginBottom="5" borderRadius="20" id="my_qr" verticalAlignment="bottom" horizontalAlignment="center" backgroundImage="~/images/qr_test.jpg" height="225" width="225"/>
 
                 </StackLayout>
 

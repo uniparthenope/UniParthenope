@@ -1,5 +1,6 @@
 const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
+const platform = require("tns-core-modules/platform");
 const httpModule = require("tns-core-modules/http");
 
 let sideDrawer;
@@ -38,6 +39,9 @@ function onNavigatingTo(args) {
             console.log(result["privacy"]);
             loading.visibility = "collapsed";
             page.getViewById("privacy").html = result["privacy"];
+
+            if(platform.isIOS)
+                page.getViewById("privacy").requestLayout();
         }
 
     },(e) => {
