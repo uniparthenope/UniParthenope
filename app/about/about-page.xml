@@ -46,8 +46,7 @@
                 <Label textAlignment="center" textWrap="true" text="Responsabile Mobile Store: Nunzio Napolitano" marginTop="5"/>
                 <Label textAlignment="center" visibility="collapsed" textWrap="true" text="Prorettore alle Tecnologie Informatiche: Prof. Luigi Romano" marginTop="5"/>
 
-                <Button textWrap="true" text="Copyright ©" ontap="onTapCopy" class="blue_background_opac" margin="10 5 0 5"/>
-                <Button textWrap="true" text="Disclaimer" ontap="onTapDisclaimer" class="blue_background_opac" margin="10 5 10 5"/>
+                <Button textWrap="true" text="Privacy" ontap="onTapPrivacy" class="blue_background_opac" margin="10 5 0 5"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

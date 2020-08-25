@@ -1,0 +1,65 @@
+<!--
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="page">
+    <ScrollView id="scroll" orientation="vertical" isEnabled="true" width="100%" height="100%">
+        <AbsoluteLayout width="100%">
+            <StackLayout height="1200" width="100%">
+                <HtmlView id="privacy" html="" color="#22384f"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ScrollView>
+</Page>
+-->
+
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
+    <ActionBar class="action-bar" title="UniParthenope">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios:visibility="collapsed"
+        />
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/logo_parth"
+                    android:visibility="collapsed"
+                    tap="onGeneralMenu"
+                    ios.position="right">
+        </ActionItem>
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+
+    </ActionBar>
+
+    <GridLayout>
+        <StackLayout orientation="vertical" height="100%">
+            <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+                <Label class="textPrimary" text="Privacy" horizontalAlignment="center" verticalAlignment="center"/>
+            </GridLayout>
+
+            <StackLayout height="90%">
+                <ScrollView height="100%" marginLeft="5" marginRight="5">
+                    <HtmlView id="privacy" html="" color="#22384f"/>
+                </ScrollView>
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout id="activityIndicator" visibility="visible" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Recupero Privacy Policy..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
+
+    </GridLayout>
+</Page>

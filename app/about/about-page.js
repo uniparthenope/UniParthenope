@@ -6,7 +6,6 @@ const app = require("tns-core-modules/application");
 let sideDrawer;
 let page;
 let viewModel;
-let info;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -15,30 +14,19 @@ function onNavigatingTo(args) {
     sideDrawer.closeDrawer();
 
     appversion.getVersionName().then(function(v) {
-        page.getViewById("version").text = "Versione "+v;
+        page.getViewById("version").text = "Versione " + v;
     });
 
     page.bindingContext = viewModel;
 }
 
-const Button = require("tns-core-modules/ui/button").Button;
-const Page = require("tns-core-modules/ui/page").Page;
-
-function onTapCopy(args) {
+function onTapPrivacy(args) {
     var button = args.object;
     const page = button.page;
 
-    //page.frame.navigate("copyrights/copyrights-page");
+    page.frame.navigate("privacy/privacy-page");
 }
-
-exports.onTapCopy = onTapCopy;
-
-function onTapDisclaimer(args) {
-    var button = args.object;
-    const page = button.page;
-
-    //page.frame.navigate("disclaimer/disclaimer-page");
-}
+exports.onTapPrivacy = onTapPrivacy;
 
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
@@ -51,5 +39,4 @@ function onGeneralMenu() {
 
 exports.onDrawerButtonTap = onDrawerButtonTap;
 exports.onGeneralMenu = onGeneralMenu;
-exports.onTapDisclaimer = onTapDisclaimer;
 exports.onNavigatingTo = onNavigatingTo;
