@@ -9,6 +9,7 @@ const utf8 = require('utf8');
 const dialogs = require("tns-core-modules/ui/dialogs");
 let appversion = require("nativescript-appversion");
 const modalViewModule = "modal-meteo/modal-meteo";
+const platform = require("tns-core-modules/platform");
 
 let page;
 let viewModel;
@@ -215,13 +216,16 @@ exports.onTapTrasporti = function(){
 };
 
 exports.onTapAteneo = function(){
-    const nav =
-        {
-            moduleName: "portale/portale",
-            context: {link:"https://www.uniparthenope.it/"}
-        };
+    if(platform.isIOS)
+        utilsModule.openUrl("https://www.uniparthenope.it/");
+    else{
+        const nav =
+            {
+                moduleName: "portale/portale",
+                context: {link:"https://www.uniparthenope.it/"}
+            };
         page.frame.navigate(nav);
-
+    }
 };
 
 exports.onTapEventi = function(){
@@ -292,7 +296,7 @@ exports.ontap_insta = function(){
 };
 
 exports.onTapStudia = function(){
-    utilsModule.openUrl("http://orientamento.uniparthenope.it/index.php/corsi-di-studio-a-a-2019-2020");
+    utilsModule.openUrl("https://orienta.uniparthenope.it/");
 };
 
 function getPosition(){
