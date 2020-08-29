@@ -135,7 +135,7 @@ function getCourses() {
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
-                title: "Errore Server!",
+                title: "Errore Get Session!",
                 message: result.retErrMsg,
                 okButtonText: "OK"
             }).then(
@@ -174,7 +174,7 @@ function getCourses() {
                 if (response2.statusCode === 401 || response2.statusCode === 500 || response2.statusCode === 403)
                 {
                     dialogs.alert({
-                        title: "Errore Server!",
+                        title: "Errore Get Courses!",
                         message: result2.retErrMsg,
                         okButtonText: "OK"
                     }).then(
@@ -213,7 +213,7 @@ function getCourses() {
             },(e) => {
                 console.log("Error", e.retErrMsg);
                 dialogs.alert({
-                    title: "Errore Server!",
+                    title: "Errore Response2!",
                     message: e.retErrMsg,
                     okButtonText: "OK"
                 });
