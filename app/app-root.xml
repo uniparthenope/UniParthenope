@@ -12,8 +12,11 @@
         <!--     Top Menu, foto e nome       -->
             <StackLayout orientation="vertical" verticalAlignment="top" height="80%" >
                 <StackLayout height="30%" orientation="vertical" verticalAlignment="top" marginTop="10">
-                    <StackLayout class="imageTop" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="110" height="110"/>
+                    <StackLayout class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="110" height="110"/>
                     <Label id="topName" text="Benvenuto!" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>
+                    <Label id="topEmail" text="EMAIL!" visibility="collapsed" textWrap="true" color="white" marginBottom="5" fontSize="12" horizontalAlignment="center" textAlignment="center"/>
+                    <Label id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" marginBottom="5" fontSize="14" horizontalAlignment="center"/>
+
                 </StackLayout>
                 <!--     Centrale       -->
                 <ScrollView height="70%" >
@@ -34,6 +37,7 @@
 
                         <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_home"/>
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
+                        <Button class="btn-menu" text="Anagrafe" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
                         <Button class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>
@@ -53,6 +57,8 @@
 
                         <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_professor_home"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
+                        <Button class="btn-menu" text="Anagrafe" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
+
 
                         <!--Disabled Buttons
                         <Button class="btn-menu" text="Segreteria" marginBottom="5" marginTop="5" tap=""/>

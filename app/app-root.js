@@ -203,6 +203,15 @@ exports.goto_professor_home = function () {
         };
     frame.Frame.topmost().navigate(nav);
 };
+
+exports.goto_anagrafica = function () {
+    const nav =
+        {
+            moduleName: "anagrafica/anagrafica",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
 exports.ontap_account = function(){
     utilsModule.openUrl("https://uniparthenope.esse3.cineca.it/Anagrafica/PasswordDimenticata.do");
 };

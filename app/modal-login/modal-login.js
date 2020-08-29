@@ -16,6 +16,7 @@ let carriere;
 let viewModel;
 let user;
 let pass;
+let sideDrawer;
 
 function onShownModally(args) {
     closeCallback = args.closeCallback;
@@ -58,7 +59,7 @@ function onShownModally(args) {
         /* Se un utente è di tipo USER TECNICO (ristorante) */
         else if (response.statusCode === 600)
         {
-            const sideDrawer = app.getRootView();
+            sideDrawer = app.getRootView();
             let remember = sideDrawer.getViewById("rememberMe").checked;
 
             if (remember){
@@ -89,7 +90,9 @@ function onShownModally(args) {
 
             account = _result;
             if(_result.user.grpDes === "Studenti"){
+
                 carriere = _result.user.trattiCarriera;
+                setAnagrafe(_result.user.persId,_result.user.grpDes);
 
                 if (carriere.length > 0)
                 {
@@ -112,7 +115,8 @@ function onShownModally(args) {
             }
            else if(_result.user.grpDes === "Docenti"){
                 detailedProf(_result.user.docenteId); // Get detailed info of a professor
-                const sideDrawer = app.getRootView();
+                setAnagrafe(_result.user.docenteId,_result.user.grpDes);
+                sideDrawer = app.getRootView();
                 global.saveInfo(account);
                 let remember = sideDrawer.getViewById("rememberMe").checked;
 
@@ -128,6 +132,11 @@ function onShownModally(args) {
                 let cognome = appSettings.getString("cognome");
 
                 sideDrawer.getViewById("topName").text = nome + " " + cognome;
+                sideDrawer.getViewById("topMatr").text = appSettings.getString("ruolo")+ " " +appSettings.getString("settore");
+                sideDrawer.getViewById("topEmail").text = appSettings.getString("emailAte");
+                sideDrawer.getViewById("topMatr").visibility = "visible";
+                sideDrawer.getViewById("topEmail").visibility = "visible";
+                getPIC(_result.user.idAb,1);
                 let userForm = sideDrawer.getViewById("userDocente");
                 let loginForm = sideDrawer.getViewById("loginForm");
                 loginForm.visibility = "collapsed";
@@ -143,7 +152,7 @@ function onShownModally(args) {
             }
 
             else if(_result.user.grpDes === "Ristoranti"){
-                const sideDrawer = app.getRootView();
+                sideDrawer = app.getRootView();
                 let remember = sideDrawer.getViewById("rememberMe").checked;
 
                 if (remember){
@@ -170,7 +179,7 @@ function onShownModally(args) {
             }
 
             else if(_result.user.grpDes === "Tecnico"){/*
-                const sideDrawer = app.getRootView();
+                sideDrawer = app.getRootView();
                 let remember = sideDrawer.getViewById("rememberMe").checked;
 
                 if (remember){
@@ -230,7 +239,39 @@ function onTap(args)
     if(global.saveCarr(items.getItem(index)))
         selectedCarrer(index);
 }
+function getPIC(personId, value) {
+    let url;
+    switch (value) {
+        case 0:
+            url = global.url + "general/image/" + personId;
+            break;
 
+        case 1:
+            url = global.url + "general/image_prof/" + personId;
+            break;
+    }
+
+    httpModule.getFile({
+        "url": url,
+        "method": "GET",
+        headers: {
+            "Content-Type": "image/jpg",
+            "Authorization": "Basic " + global.encodedStr
+        },
+        "dontFollowRedirects": true
+    }).then((source) => {
+        console.log(personId); //TODO Non stampa IMMAGINE!!!
+        sideDrawer.getViewById("topImg").backgroundImage = source["path"];
+
+    }, (e) => {
+        console.log("[Photo] Error", e);
+        dialogs.alert({
+            title: "Error",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
+}
 function selectedCarrer(index) {
     const sideDrawer = app.getRootView();
     appSettings.setNumber("carriera",index);
@@ -256,6 +297,13 @@ function selectedCarrer(index) {
     {
         let userForm = sideDrawer.getViewById("userForm");
         let loginForm = sideDrawer.getViewById("loginForm");
+        sideDrawer.getViewById("topMatr").text = appSettings.getString("matricola");
+        sideDrawer.getViewById("topEmail").text = appSettings.getString("emailAte");
+        sideDrawer.getViewById("topMatr").visibility = "visible";
+        sideDrawer.getViewById("topEmail").visibility = "visible";
+        getPIC(appSettings.getNumber("persId"),0);
+
+
         loginForm.visibility = "collapsed";
         userForm.visibility = "visible";
         closeCallback();
@@ -288,8 +336,6 @@ function detailedProf(docenteId) {
         }
     }).then((response) => {
         let _result = response.content.toJSON();
-
-        //console.log(_result);
         global.saveProf(_result);
 
     },(e) => {
@@ -300,8 +346,31 @@ function detailedProf(docenteId) {
             okButtonText: "OK"
         });
     });
-}
 
+}
+function setAnagrafe(id, type){
+    httpModule.request({
+        url: global.url + "general/anagrafica/"+ id,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let _result = response.content.toJSON();
+
+        //console.log(_result);
+        global.saveAnagrafe(type,_result);
+
+    },(e) => {
+        console.log("Errore Anagrafe", e);
+        dialogs.alert({
+            title: "Anagrafe Fallita!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
+}
 function getDepartment(studId) {
     console.log(studId);
     httpModule.request({

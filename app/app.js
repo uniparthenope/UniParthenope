@@ -2,9 +2,11 @@ const application = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 
-global.url = "https://api.uniparthenope.it/UniparthenopeApp/v1/";
-global.url_general = "https://api.uniparthenope.it/";
-global.localurl = "http://192.168.1.198:5000/api/uniparthenope/";
+//let domain = "https://api.uniparthenope.it";
+let domain = "http://127.0.0.1:5000";
+
+global.url = domain + "/UniparthenopeApp/v1/";
+global.url_general = domain + "/";
 
 global.isConnected = false;
 global.updatedExam = false;
@@ -76,7 +78,32 @@ global.saveInfo = function(result) {
     console.log("SAVE_INFO userId= " + result.user.userId);
     console.log("SAVE_INFO AuthToken= " + global.authToken);
 };
+global.saveAnagrafe = function(type,result){
+    console.log("SAVE_ANAGR dataNascita= "+result.dataNascita);
+    console.log("SAVE_ANAGR emailAte= "+result.emailAte);
+    console.log("SAVE_ANAGR sesso= "+result.sesso);
+    console.log("SAVE_ANAGR telRes= "+result.telRes);
 
+    appSettings.setString("dataNascita",result.dataNascita);
+    appSettings.setString("emailAte",result.emailAte);
+    appSettings.setString("sesso",result.sesso);
+    appSettings.setString("telRes",result.telRes);
+
+    if (type === "Studenti"){
+        console.log("SAVE_ANAGR desCittadinanza= "+result.desCittadinanza);
+        console.log("SAVE_ANAGR email= "+result.email);
+
+        appSettings.setString("desCittadinanza",result.desCittadinanza);
+        appSettings.setString("email",result.email);
+  }
+  else if (type === "Docenti"){
+        console.log("SAVE_ANAGR ruolo= "+result.ruolo);
+        console.log("SAVE_ANAGR settore= "+result.settore);
+
+        appSettings.setString("ruolo",result.ruolo);
+        appSettings.setString("settore",result.settore);
+  }
+};
 global.saveCarr = function(result) {
     console.log("SAVE_CARR cdsDes= "+result.cdsDes);
     console.log("SAVE_CARR cdsId= "+result.cdsId);

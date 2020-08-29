@@ -1,0 +1,87 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar"
+      xmlns:Barcode="nativescript-barcodescanner">
+
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
+    <ActionBar class="action-bar" title="UniParthenope">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios:visibility="collapsed"
+        />
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/logo_parth"
+                    android:visibility="collapsed"
+                    tap="onGeneralMenu"
+                    ios.position="right">
+        </ActionItem>
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+
+    </ActionBar>
+    <GridLayout>
+
+        <GridLayout width="100%" verticalAlignment="top">
+            <StackLayout id="back_image" class="main_image" verticalAlignment="center" horizontalAlignment="center" backgroundImage="" width="100%" height="50%"
+                         opacity="0.5"/>
+
+        </GridLayout>
+
+
+        <GridLayout margin="5,5,5,5" verticalAlignment="bottom"   >
+
+            <Image  verticalAlignment="bottom" horizontalAlignment="center" src="~/images/logo_parth.png" height="350" width="350"
+                    opacity="0.8"/>
+            <StackLayout>
+
+                <Image class="pic_rounded" id="my_img" verticalAlignment="top" horizontalAlignment="center" backgroundImage="~/images/logo_parth.png" height="175" width="175"
+                       marginBottom="10" marginTop="10"/>
+
+            <StackLayout id="info_panel" orientation="vertical"  height="75%" backgroundColor="rgba(34, 56, 79,0.9)" borderRadius="20">
+
+                <StackLayout margin="5,5,5,5">
+                    <StackLayout orientation="vertical"  width="100%" horizontalAlignment="center" marginBottom="10">
+                        <Label id="depart" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white"/>
+                    </StackLayout>
+                    <StackLayout orientation="vertical" horizontalAlignment="center" marginBottom="5" width="100%">
+                        <Label id="surname" text="SURNAME" horizontalAlignment="center" fontSize="28" color="white"/>
+                        <Label id="name" text="NAME" horizontalAlignment="center" fontSize="18" color="white"/>
+                    </StackLayout>
+                    <GridLayout horizontalAlignment="center" width="100%" height="20%">
+                    <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="15">
+                        <Label text="MATRICOLA" horizontalAlignment="center" fontSize="18" color="white"/>
+                        <Label id="matricola" text="--" horizontalAlignment="center" fontSize="18" color="white"/>
+                    </StackLayout>
+                    <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="15" >
+                        <Label text="RUOLO" horizontalAlignment="center" fontSize="18" color="white"/>
+                        <Label id="role"  text="--" horizontalAlignment="center" fontSize="18" color="white"/>
+                        <Label id="roleID"  text="" horizontalAlignment="center" fontSize="18" color="white"/>
+                    </StackLayout>
+                    </GridLayout>
+                    <StackLayout class="main_image_contain" marginBottom="5" borderRadius="20" id="my_qr" verticalAlignment="bottom" horizontalAlignment="center" backgroundImage="~/images/qr_test.jpg" height="225" width="225"/>
+
+                </StackLayout>
+
+            </StackLayout>
+            </StackLayout>
+
+
+        </GridLayout>
+
+        <Image src="~/images/icon/qr-code_icon.png" width="35" height="35" verticalAlignment="top" horizontalAlignment="right"
+               marginTop="20" marginRight="20" ontap="tap_scanQR"/>
+
+    </GridLayout>
+</Page>
