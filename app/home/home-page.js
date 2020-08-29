@@ -36,6 +36,7 @@ function onNavigatingTo(args) {
         page.getViewById("version").text = "Versione: " + v;
     });
 
+    checkServer();
     initializeGraph();
 
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
@@ -393,6 +394,32 @@ function getDepartment(studId) {
     }).then((response) => {
         let _result = response.content.toJSON();
         global.saveDepartment(_result);
+
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Autenticazione Fallita!",
+            message: e,
+            okButtonText: "OK"
+        });
+    });
+}
+
+function checkServer(){
+    httpModule.request({
+        url: global.url_general,
+        method: "GET"
+    }).then((response) => {
+        if (response.statusCode !== 200){
+            console.log("SERVER DOWN");
+            dialogs.alert({
+                title: "Errore Server!",
+                message: "Il server è attualmente in manutenzione e le principali operazioni potrebbero non essere disponibili.\nCi scusiamo per il disagio!",
+                okButtonText: "OK"
+            });
+        }
+        else
+            console.log("SERVER OK");
 
     },(e) => {
         console.log("Error", e);
