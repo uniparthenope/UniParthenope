@@ -83,6 +83,7 @@
                             <accordion2:Accordion  items="{{items2}}" allowMultiple="false" height="100%">
                                 <accordion2:Accordion.itemHeaderTemplate>
                                     <GridLayout marginBottom="10" height="250">
+                                        <Image src="{{ image_not }}" marginTop="5" horizontalAlignment="center" stretch="aspectFill"/>
                                         <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.6)" width="100%">
                                             <Label class="textPrimary" text="{{title_not}}" horizontalAlignment="center" textWrap="true" margin="5 5 5 5"/>
                                             <Label class="textPrimary" text="{{date_text_not}}" fontSize="11" margin="5 5 5 5"/>
@@ -101,7 +102,7 @@
                     </StackLayout>
 
                     <StackLayout id="activityIndicator2" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-                        <Label text="Recupero Notizie..." horizontalAlignment="center" class="textPrimary"/>
+                        <Label text="Recupero Avvisi..." horizontalAlignment="center" class="textPrimary"/>
                         <ActivityIndicator horizontalAlignment="center" busy="true"/>
                     </StackLayout>
 

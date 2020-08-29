@@ -102,6 +102,7 @@ function getNews(){
         });
     });
 }
+
 function getNotifications(){
     httpModule.request({
         url: global.url + "general/avvisi",
@@ -135,7 +136,8 @@ function getNotifications(){
                     title_not: result[i].titolo,
                     date_not:result[i].data,
                     date_text_not: result[i].data,
-                    items: arr_desc_not
+                    items: arr_desc_not,
+                    image_not: "~/images/image1.jpg"
                 });
                 notifications.sort(function (orderA, orderB) {
                     let dataA = Date.parse(orderA.date_not);
