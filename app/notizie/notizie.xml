@@ -30,7 +30,7 @@
         </ActionItem>
 
     </ActionBar>
-    <Tabs selectedIndex="0">
+    <Tabs selectedIndex="0" swipeEnabled="true" offscreenTabLimit="4">
         <TabStrip >
             <TabStripItem>
                 <Label text="Notizie"/>
@@ -73,6 +73,7 @@
 
             </GridLayout>
         </TabContentItem>
+
         <!-- AVVISI -->
         <TabContentItem>
             <GridLayout>
