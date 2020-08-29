@@ -300,3 +300,10 @@ ActionBar {
 ListView{
     separator-color: #22384f;
 }
+
+TabStrip {
+    selected-item-color: white;
+    un-selected-item-color: gray;
+    highlight-color: #107dd0;
+    background-color: rgb(34, 56, 79);
+}

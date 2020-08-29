@@ -2,7 +2,8 @@
       navigatingTo="onNavigatingTo"
       actionBarHidden="false"
       xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:accordion="nativescript-accordion">
+      xmlns:accordion="nativescript-accordion"
+      xmlns:accordion2="nativescript-accordion">
 
     <ActionBar class="action-bar" title="UniParthenope">
         <ActionItem icon="~/images/logo_parth.png"
@@ -29,39 +30,83 @@
         </ActionItem>
 
     </ActionBar>
+    <Tabs selectedIndex="0">
+        <TabStrip >
+            <TabStripItem>
+                <Label text="Notizie"/>
+            </TabStripItem>
+            <TabStripItem>
+                <Label text="Avvisi"/>
+            </TabStripItem>
+        </TabStrip>
+        <!-- NEWS -->
+        <TabContentItem>
+            <GridLayout>
+            <StackLayout orientation="vertical" height="100%">
 
-    <GridLayout>
-        <StackLayout orientation="vertical" height="100%">
-        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-            <Label class="textPrimary" text="Notizie" horizontalAlignment="center" verticalAlignment="center"/>
-        </GridLayout>
+            <ScrollView height="100%" marginLeft="5" marginRight="5">
+                <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%">
+                    <accordion:Accordion.itemHeaderTemplate>
+                        <GridLayout marginBottom="10" height="250">
+                            <Image src="{{ image }}" marginTop="5" horizontalAlignment="center" stretch="aspectFill"/>
+                            <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.6)" width="100%">
+                                <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textWrap="true" margin="5 5 5 5"/>
+                                <Label class="textPrimary" text="{{date_text}}" fontSize="11" margin="5 5 5 5"/>
+                            </StackLayout>
+                        </GridLayout>
+                    </accordion:Accordion.itemHeaderTemplate>
 
-        <ScrollView height="100%" marginLeft="5" marginRight="5">
-            <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%">
-                <accordion:Accordion.itemHeaderTemplate>
-                    <GridLayout marginBottom="10" height="250">
-                        <Image src="{{ image }}" marginTop="5" horizontalAlignment="center" stretch="aspectFill"/>
-                        <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.6)" width="100%">
-                            <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textWrap="true" margin="5 5 5 5"/>
-                            <Label class="textPrimary" text="{{date_text}}" fontSize="11" margin="5 5 5 5"/>
+                    <accordion:Accordion.itemContentTemplate>
+                        <StackLayout>
+                            <HtmlView html="{{desc}}" color="#22384f"/>
                         </StackLayout>
-                    </GridLayout>
-                </accordion:Accordion.itemHeaderTemplate>
+                    </accordion:Accordion.itemContentTemplate>
+                </accordion:Accordion>
+            </ScrollView>
 
-                <accordion:Accordion.itemContentTemplate>
-                    <StackLayout>
-                        <HtmlView html="{{desc}}" color="#22384f"/>
+            </StackLayout>
+
+            <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+                <Label text="Recupero Notizie..." horizontalAlignment="center" class="textPrimary"/>
+                <ActivityIndicator horizontalAlignment="center" busy="true"/>
+            </StackLayout>
+
+            </GridLayout>
+        </TabContentItem>
+        <!-- AVVISI -->
+        <TabContentItem>
+            <GridLayout>
+                <GridLayout>
+                    <StackLayout orientation="vertical" height="100%">
+
+                        <ScrollView height="100%" marginLeft="5" marginRight="5">
+                            <accordion2:Accordion  items="{{items2}}" allowMultiple="false" height="100%">
+                                <accordion2:Accordion.itemHeaderTemplate>
+                                    <GridLayout marginBottom="10" height="250">
+                                        <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.6)" width="100%">
+                                            <Label class="textPrimary" text="{{title_not}}" horizontalAlignment="center" textWrap="true" margin="5 5 5 5"/>
+                                            <Label class="textPrimary" text="{{date_text_not}}" fontSize="11" margin="5 5 5 5"/>
+                                        </StackLayout>
+                                    </GridLayout>
+                                </accordion2:Accordion.itemHeaderTemplate>
+
+                                <accordion2:Accordion.itemContentTemplate>
+                                    <StackLayout>
+                                        <HtmlView html="{{desc_not}}" color="#22384f"/>
+                                    </StackLayout>
+                                </accordion2:Accordion.itemContentTemplate>
+                            </accordion2:Accordion>
+                        </ScrollView>
+
                     </StackLayout>
-                </accordion:Accordion.itemContentTemplate>
-            </accordion:Accordion>
-        </ScrollView>
 
-        </StackLayout>
+                    <StackLayout id="activityIndicator2" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+                        <Label text="Recupero Notizie..." horizontalAlignment="center" class="textPrimary"/>
+                        <ActivityIndicator horizontalAlignment="center" busy="true"/>
+                    </StackLayout>
 
-        <StackLayout id="activityIndicator" visibility="visible" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero Notizie..." horizontalAlignment="center" class="textPrimary"/>
-            <ActivityIndicator horizontalAlignment="center" busy="true"/>
-        </StackLayout>
-
-    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+        </TabContentItem>
+    </Tabs>
 </Page>

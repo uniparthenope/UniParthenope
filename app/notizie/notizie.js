@@ -14,25 +14,38 @@ let viewModel;
 let sideDrawer;
 let image;
 let article;
-let loading;
+let notifications;
+let loading_news;
+let loading_not;
 
 function onNavigatingTo(args) {
     page = args.object;
     article = new ObservableArray();
+    notifications = new ObservableArray();
     viewModel = observableModule.fromObject({
+        items2:notifications,
         image:image,
         items:article
+
     });
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-    loading = page.getViewById("activityIndicator");
+    loading_not = page.getViewById("activityIndicator2");
+    loading_news = page.getViewById("activityIndicator");
 
+    getNews();
+    getNotifications();
+
+    page.bindingContext = viewModel;
+}
+
+function getNews(){
     httpModule.request({
         url: global.url + "general/news",
         method: "GET"
     }).then((response) => {
         const result = response.content.toJSON();
-        loading.visibility = "visible";
+        loading_news.visibility = "visible";
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
@@ -77,12 +90,9 @@ function onNavigatingTo(args) {
                 });
             }
 
-            for (let i=0; i<article.length; i++){
-                console.log(article.getItem(i).date);
-            }
         }
 
-        loading.visibility = "collapsed";
+        loading_news.visibility = "collapsed";
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
@@ -91,8 +101,61 @@ function onNavigatingTo(args) {
             okButtonText: "OK"
         });
     });
+}
+function getNotifications(){
+    httpModule.request({
+        url: global.url + "general/avvisi",
+        method: "GET"
+    }).then((response) => {
+        const result = response.content.toJSON();
+        loading_not.visibility = "visible";
+        if (response.statusCode === 401 || response.statusCode === 500)
+        {
+            dialogs.alert({
+                title: "Errore Server!",
+                message: result,
+                okButtonText: "OK"
 
-    page.bindingContext = viewModel;
+            }).then();
+        }
+        else {
+            for (let i=0; i<result.length; i++) {
+                console.log(result[i].titolo);
+                let arr_desc_not = [];
+                let items = {
+                    desc_not: result[i].HTML
+                };
+
+                arr_desc_not.push(items);
+
+                if (platformModule.isIOS){
+                    arr_desc_not.splice(0, 0, {});
+                }
+                notifications.push({
+                    title_not: result[i].titolo,
+                    date_not:result[i].data,
+                    date_text_not: result[i].data,
+                    items: arr_desc_not
+                });
+                notifications.sort(function (orderA, orderB) {
+                    let dataA = Date.parse(orderA.date_not);
+                    let dataB = Date.parse(orderB.date_not);
+
+                    return (dataA > dataB) ? -1 : (dataA < dataB) ? 1 : 0;
+                });
+            }
+
+        }
+
+        loading_not.visibility = "collapsed";
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore Server!",
+            message: e,
+            okButtonText: "OK"
+        });
+    });
 }
 function extractData(data) {
     const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",];
