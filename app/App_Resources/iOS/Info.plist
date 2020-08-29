@@ -18,11 +18,20 @@
 	<string>APPL</string>
 
 	<key>CFBundleShortVersionString</key>
-	<string>1.3</string>
+	<string>1.5</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.3</string>
+	<string>1.5</string>
+
+	<key>NSCameraUsageDescription</key>
+    <string>Your camera is needed to scan Qr-Code in order to get students info.</string>
+
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Your location is used to get your nearest university and to show local weather.</string>
+
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Your location is used to get your position in order to get bus info.</string>
 
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
