@@ -239,6 +239,7 @@ function onTap(args)
     if(global.saveCarr(items.getItem(index)))
         selectedCarrer(index);
 }
+
 function getPIC(personId, value) {
     let url;
     switch (value) {
@@ -260,9 +261,7 @@ function getPIC(personId, value) {
         },
         "dontFollowRedirects": true
     }).then((source) => {
-        console.log(personId); //TODO Non stampa IMMAGINE!!!
         sideDrawer.getViewById("topImg").backgroundImage = source["path"];
-
     }, (e) => {
         console.log("[Photo] Error", e);
         dialogs.alert({
@@ -272,8 +271,9 @@ function getPIC(personId, value) {
         });
     });
 }
+
 function selectedCarrer(index) {
-    const sideDrawer = app.getRootView();
+    sideDrawer = app.getRootView();
     appSettings.setNumber("carriera",index);
     getDepartment(items.getItem(index).stuId);
     appSettings.setNumber("persId", account.user.persId);
@@ -303,7 +303,6 @@ function selectedCarrer(index) {
         sideDrawer.getViewById("topEmail").visibility = "visible";
         getPIC(appSettings.getNumber("persId"),0);
 
-
         loginForm.visibility = "collapsed";
         userForm.visibility = "visible";
         closeCallback();
@@ -326,6 +325,7 @@ function selectedCarrer(index) {
 
     }
 }
+
 function detailedProf(docenteId) {
     httpModule.request({
         url: global.url + "professor/detailedInfo/"+ docenteId,
@@ -348,6 +348,7 @@ function detailedProf(docenteId) {
     });
 
 }
+
 function setAnagrafe(id, type){
     httpModule.request({
         url: global.url + "general/anagrafica/"+ id,
@@ -371,6 +372,7 @@ function setAnagrafe(id, type){
         });
     });
 }
+
 function getDepartment(studId) {
     console.log(studId);
     httpModule.request({

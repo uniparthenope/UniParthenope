@@ -2,8 +2,8 @@ const application = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 
-//let domain = "https://api.uniparthenope.it";
-let domain = "http://127.0.0.1:5000";
+let domain = "https://api.uniparthenope.it";
+//let domain = "http://192.168.1.24:5000";
 
 global.url = domain + "/UniparthenopeApp/v1/";
 global.url_general = domain + "/";
