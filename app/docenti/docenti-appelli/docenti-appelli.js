@@ -56,11 +56,14 @@ function drawTitle() {
 
 function getAppelli() {
     items_appello.slice(0);
-    for (let i=0; i<exams.length; i++){
+    console.log(exams.length);
+    for (let x=0; x<exams.length; x++){
         let myarray = [];
 
+        console.log(exams[x].adId);
+        console.log(exams[x].cdsId);
         httpModule.request({
-            url: global.url + "students/checkAppello/" + exams[i].cdsId +"/" + exams[i].adId,
+            url: global.url + "students/checkAppello/" + exams[x].cdsId +"/" + exams[x].adId,
             method: "GET",
             headers: {
                 "Content-Type" : "application/json",
@@ -79,6 +82,7 @@ function getAppelli() {
                 }).then();
             }
             else {
+
                 for (let i=0; i<result.length; i++) {
                     let day,year,month;
                     let final_data ="" + dayOfWeek(result[i].dataEsame) + " " + result[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result[i].dataEsame) + " " + result[i].dataEsame.substring(6, 10);
@@ -88,6 +92,7 @@ function getAppelli() {
                     let date = new Date(year,month-1,day);
 
                     if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
+                        //Removed adId and cdsId
                         let items = {
                             "esame": result[i].esame,
                             "descrizione": result[i].descrizione,
@@ -138,7 +143,7 @@ function getAppelli() {
             }
 
             items_appello.push({
-                titolo: exams[i].nome,
+                titolo: exams[x].nome,
                 items: myarray
             });
 
@@ -186,7 +191,7 @@ exports.tapCalendar = function(){
             clearHistory: true,
             animated: false
         };
-    frame.Frame.topmost().navigate(nav);
+    page.frame.navigate(nav);
 };
 exports.tapFood = function(){
     const nav =
@@ -196,7 +201,7 @@ exports.tapFood = function(){
             clearHistory: true,
             animated: false
         };
-    frame.Frame.topmost().navigate(nav);
+    page.frame.navigate(nav);
 };
 
 exports.tapCourses = function(){
@@ -206,7 +211,7 @@ exports.tapCourses = function(){
             clearHistory: true,
             animated: false
         };
-    frame.Frame.topmost().navigate(nav);
+    page.frame.navigate(nav);
 };
 
 exports.tapBus = function(){
@@ -216,7 +221,7 @@ exports.tapBus = function(){
             clearHistory: true,
             animated: false
         };
-    frame.Frame.topmost().navigate(nav);
+    page.frame.navigate(nav);
 };
 /*
 function onItemTap(args) {
