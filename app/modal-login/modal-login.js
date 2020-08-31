@@ -60,7 +60,7 @@ function onShownModally(args) {
         {
             dialogs.confirm({
                 title: "Errore Server ESSE3",
-                message: "Il server Esse3 è momentaneamente non raggiungibile!",
+                message: "Il server ESSE3 è momentaneamente non raggiungibile!\n\nPer maggiori info:\nhttps://uniparthenope.esse3.cineca.it/",
                 okButtonText: "OK"
             }).then(function (result) {
                 args.object.closeModal();
