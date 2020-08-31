@@ -21,7 +21,7 @@ function onShownModally(args) {
     });
     //console.log("adLOGID= "+ adLogId);
     httpModule.request({
-        url: global.url + "general/infoCourse/" + adLogId ,
+        url: global.url + "general/infoCourse/" + adLogId,
         method: "GET",
         headers: {
             "Content-Type" : "application/json",
@@ -29,6 +29,7 @@ function onShownModally(args) {
         }
     }).then((response) => {
         const result = response.content.toJSON();
+        console.log(result);
 
         if (response.statusCode === 401 || response.statusCode === 500)
         {

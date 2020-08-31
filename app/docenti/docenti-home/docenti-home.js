@@ -201,7 +201,8 @@ function getCourses() {
                             "inizio": result2[i].inizio,
                             "fine": result2[i].fine,
                             "ultMod": result2[i].ultMod,
-                            "sede": result2[i].sede
+                            "sede": result2[i].sede,
+                            "adLogId": result2[i].adLogId
                         });
                     }
                     console.log("Courses Sync...");

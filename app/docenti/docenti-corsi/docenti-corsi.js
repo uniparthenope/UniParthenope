@@ -51,7 +51,8 @@ function getCourses() {
             "data_inizio": "Dal " + courses[i].inizio,
             "data_fine": " al " + courses[i].fine,
             "ult_mod": courses[i].ultMod,
-            "settCod": courses[i].settCod
+            "settCod": courses[i].settCod,
+            "adLogId": courses[i].adLogId
         });
         items.sort(function (orderA, orderB) {
             let nameA = orderA.semestre;
@@ -137,6 +138,7 @@ function onItemTap(args) {
     const index = args.index;
 
     const adLogId = { adLogId: items.getItem(index).adLogId, esame: items.getItem(index).esame, docente: items.getItem(index).prof};
+    console.log(adLogId);
 
     mainView.showModal(modalViewModule, adLogId, false);
 }
