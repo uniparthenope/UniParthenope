@@ -4,8 +4,9 @@ const httpModule = require("tns-core-modules/http");
 require("nativescript-accordion");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const Observable = require("tns-core-modules/data/observable");
-let closeCallback;
+const platformModule = require("tns-core-modules/platform");
 
+let closeCallback;
 let items;
 
 function onShownModally(args) {
@@ -50,13 +51,20 @@ function onShownModally(args) {
 
             for (let i=0; i<array.length; i++)
             {
+                let arr_desc = [];
+                let _items = {
+                    desc: result[array_1[i]]
+                };
+
+                arr_desc.push(_items);
+
+                if (platformModule.isIOS){
+                    arr_desc.splice(0, 0, {});
+                }
+
                 items.push({
                     obiettivi: array[i],
-                    items: [
-                        {
-                            desc: result[array_1[i]]
-                        }
-                    ]
+                    items: arr_desc
                 });
 
             }
