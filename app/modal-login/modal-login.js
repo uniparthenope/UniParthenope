@@ -56,6 +56,17 @@ function onShownModally(args) {
                 args.object.closeModal()
             );
         }
+        if(response.statusCode === 503)
+        {
+            dialogs.alert({
+                title: "Errore Server ESSE3",
+                message: "Il server Esse3 è momentaneamente non raggiungibile!",
+                okButtonText: "OK"
+            }).then(
+                args.object.closeModal()
+            );
+
+        }
         /* Se un utente è di tipo USER TECNICO (ristorante) */
         else if (response.statusCode === 600)
         {
