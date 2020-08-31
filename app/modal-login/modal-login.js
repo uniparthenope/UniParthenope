@@ -48,7 +48,7 @@ function onShownModally(args) {
 
         if(response.statusCode === 401 || response.statusCode === 500)
         {
-            dialogs.alert({
+            dialogs.confirm({
                 title: "Autenticazione Fallita!",
                 message: _result.errMsg,
                 okButtonText: "OK"
@@ -58,14 +58,13 @@ function onShownModally(args) {
         }
         if(response.statusCode === 503)
         {
-            dialogs.alert({
+            dialogs.confirm({
                 title: "Errore Server ESSE3",
                 message: "Il server Esse3 è momentaneamente non raggiungibile!",
                 okButtonText: "OK"
-            }).then(
-                args.object.closeModal()
-            );
-
+            }).then(function (result) {
+                args.object.closeModal();
+            });
         }
         /* Se un utente è di tipo USER TECNICO (ristorante) */
         else if (response.statusCode === 600)
