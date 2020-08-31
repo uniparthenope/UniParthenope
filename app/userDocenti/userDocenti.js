@@ -41,7 +41,7 @@ exports.onItemTap = onItemTap;
 function getDocenti(){
     page.getViewById("activityIndicator").visibility = "visible";
 
-    let aaId = appSettings.getString("aa_accad");
+    let aaId = appSettings.getString("aa_accad", "2019");
     let aaId_split = aaId.split(" ");
     let cdsId = appSettings.getNumber("cdsId");
 

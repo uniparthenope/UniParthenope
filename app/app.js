@@ -208,19 +208,7 @@ global.getAllBadge = function(page) {
 
 application.on(application.exitEvent, (args) => {
     if (args.android) {
-        global.tempPos = false;
-        global.isConnected = false;
-        global.updatedExam = false;
-        global.encodedStr = "";
-        global.authToken="";
-        global.tempNum = 0;
-        global.myform = "";
-        global.username = "";
-        global.events = [];
-        global.tempPos = false;
-        global.freqExams = [];
-        global.myExams = [];
-
+        clearAll();
 
         if(global.encodedStr !== " "){
             let url = global.url + "logout/" + global.encodedStr + "/" + global.authToken;

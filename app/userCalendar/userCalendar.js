@@ -32,8 +32,8 @@ function onNavigatingTo(args) {
     {
         page.getViewById("activityIndicator").visibility = "visible";
         getMainInfo();
-        myExams();
-        getCourses();
+        getPiano();
+        //getCourses();
         //getPrenotazioni();
     }
     else {
@@ -147,7 +147,8 @@ function insert_event() {
     }
     calendar.eventSource = temp_array;
 }
-function myExams() {
+
+function getPiano() {
     let exams = {};
     const matId = appSettings.getNumber("matId");
     const stuId = appSettings.getNumber("stuId");
@@ -161,7 +162,7 @@ function myExams() {
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        //console.log(result);
+        console.log(result);
 
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
@@ -174,156 +175,179 @@ function myExams() {
         }
         else
         {
-            appSettings.setNumber("pianoId", result.pianoId);
-        }
-
-        let pianoId = appSettings.getNumber("pianoId");
-
-        //console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId +"/" + global.authToken);
-
-        httpModule.request({
-            url: global.url + "students/exams/" + stuId + "/" + pianoId,
-            method: "GET",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic " + global.encodedStr
-            }
-        }).then((response) => {
-            const result = response.content.toJSON();
-            //console.log(result);
-
-            if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-            {
+            if(result.pianoId === null){
                 dialogs.alert({
-                    title: "Errore Server!",
-                    message: result.retErrMsg,
+                    title: "Attenzione!",
+                    message: "Il piano di studi non è ancora disponibile, pertanto le funzionalità dell'app sono limitate. \n Ci scusiamo per il disagio!",
                     okButtonText: "OK"
                 }).then(
+                    page.getViewById("activityIndicator").visibility = "collapsed",
+                    appSettings.setNumber("pianoId", result.pianoId)
                 );
             }
-            else
-            {
-                let array = [];
+            else {
+                appSettings.setNumber("pianoId", result.pianoId);
 
-                //console.log(result.length);
-                for (let i=0; i<result.length; i++)
-                {
-                    //console.log("ADSCEID = "+ result[i].adsceId);
-                    if(result[i].adsceId !== null) {
-                        //console.log(global.url + "students/checkExams/" + matId + "/" + result[i].adsceId);
-                        httpModule.request({
-                            url: global.url + "students/checkExams/" + matId + "/" + result[i].adsceId,
-                            method: "GET",
-                            headers: {
-                                "Content-Type" : "application/json",
-                                "Authorization" : "Basic "+ global.encodedStr
-                            }
-                        }).then((response) => {
-                            const result_n = response.content.toJSON();
-                            //console.log(result_n);
+                let pianoId = appSettings.getNumber("pianoId");
 
-                            if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
-                                dialogs.alert({
-                                    title: "Errore Server!",
-                                    message: result_n.retErrMsg,
-                                    okButtonText: "OK"
-                                }).then(
-                                );
-                            } else {
-                                exams.superata = result_n.stato;
+                //console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId +"/" + global.authToken);
 
-                                global.myExams.push({
-                                    "nome": result[i].nome,
-                                    "codice": result[i].codice,
-                                    "annoId": result[i].annoId,
-                                    "adsceId": result[i].adsceId,
-                                    "adId": result[i].adId,
-                                    "CFU": result[i].CFU,
-                                    "superata": result_n.stato,
-                                    "superata_data": result_n.data,
-                                    "superata_voto": result_n.voto,
-                                    "superata_lode": result_n.lode,
-                                    "annoCorso": result_n.anno
+                httpModule.request({
+                    url: global.url + "students/exams/" + stuId + "/" + pianoId,
+                    method: "GET",
+                    headers: {
+                        "Content-Type" : "application/json",
+                        "Authorization" : "Basic " + global.encodedStr
+                    }
+                }).then((response) => {
+                    const result = response.content.toJSON();
+                    //console.log(result);
+
+                    if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
+                    {
+                        dialogs.alert({
+                            title: "Errore Server!",
+                            message: result.retErrMsg,
+                            okButtonText: "OK"
+                        }).then(
+                        );
+                    }
+                    else
+                    {
+                        let array = [];
+
+                        //console.log(result.length);
+                        for (let i=0; i<result.length; i++)
+                        {
+                            //console.log("ADSCEID = "+ result[i].adsceId);
+                            if(result[i].adsceId !== null) {
+                                //console.log(global.url + "students/checkExams/" + matId + "/" + result[i].adsceId);
+                                httpModule.request({
+                                    url: global.url + "students/checkExams/" + matId + "/" + result[i].adsceId,
+                                    method: "GET",
+                                    headers: {
+                                        "Content-Type" : "application/json",
+                                        "Authorization" : "Basic "+ global.encodedStr
+                                    }
+                                }).then((response) => {
+                                    const result_n = response.content.toJSON();
+                                    //console.log(result_n);
+
+                                    if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
+                                        dialogs.alert({
+                                            title: "Errore Server!",
+                                            message: result_n.retErrMsg,
+                                            okButtonText: "OK"
+                                        }).then(
+                                        );
+                                    } else {
+                                        exams.superata = result_n.stato;
+
+                                        global.myExams.push({
+                                            "nome": result[i].nome,
+                                            "codice": result[i].codice,
+                                            "annoId": result[i].annoId,
+                                            "adsceId": result[i].adsceId,
+                                            "adId": result[i].adId,
+                                            "CFU": result[i].CFU,
+                                            "superata": result_n.stato,
+                                            "superata_data": result_n.data,
+                                            "superata_voto": result_n.voto,
+                                            "superata_lode": result_n.lode,
+                                            "annoCorso": result_n.anno
+                                        });
+                                    }
+                                }, (e) => {
+                                    console.log("Error", e);
+                                    dialogs.alert({
+                                        title: "Errore Sincronizzazione Esami!",
+                                        message: e,
+                                        okButtonText: "OK"
+                                    });
                                 });
                             }
-                        }, (e) => {
-                            console.log("Error", e);
-                            dialogs.alert({
-                                title: "Errore Sincronizzazione Esami!",
-                                message: e,
-                                okButtonText: "OK"
-                            });
-                        });
+                            else {
+                                //console.log("ADSCE NULL!");
+                            }
+                        }
+                    }
+
+                },(e) => {
+                    console.log("Error", e);
+                    dialogs.alert({
+                        title: "Errore Server!",
+                        message: e,
+                        okButtonText: "OK"
+                    });
+                });
+
+                httpModule.request({
+                    url: global.url + "students/examsToFreq/" + stuId + "/" + pianoId +"/" + matId,
+                    method: "GET",
+                    headers: {
+                        "Content-Type" : "application/json",
+                        "Authorization" : "Basic "+ global.encodedStr
+                    }
+                }).then((response) => {
+                    const result = response.content.toJSON();
+
+                    //console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken)
+                    //console.log(result);
+                    page.getViewById("activityIndicator").visibility = "visible";
+
+
+                    if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
+                    {
+                        dialogs.alert({
+                            title: "Errore Server!",
+                            message: result_n.retErrMsg,
+                            okButtonText: "OK"
+                        }).then(
+                        );
+                        page.getViewById("activityIndicator").visibility = "collapsed";
                     }
                     else {
-                        //console.log("ADSCE NULL!");
-                    }
-                }
-            }
+                        for (let i=0; i<result.length; i++)
+                        {
+                            global.freqExams.push({
+                                "nome" : result[i].nome,
+                                "codice" : result[i].codice,
+                                "annoId" : result[i].annoId,
+                                "adsceID" : result[i].adsceID,
+                                "adLogId" : result[i].adLogId,
+                                "adId" : result[i].adId,
+                                "CFU" : result[i].CFU,
+                                "docente" : result[i].docente,
+                                "docenteID" : result[i].docenteID,
+                                "semestre" : result[i].semestre,
+                                "inizio" : result[i].inizio,
+                                "fine" : result[i].fine,
+                                "modifica" : result[i].ultMod,
+                                "orario" : []
+                            });
+                        }
+                        page.getViewById("activityIndicator").visibility = "collapsed";
+                        calendarCourses();
+                        global.updatedExam = true;
 
-        },(e) => {
-            console.log("Error", e);
-            dialogs.alert({
-                title: "Errore Server!",
-                message: e,
-                okButtonText: "OK"
-            });
-        });
+                    }
+                },(e) => {
+                    console.log("Error", e);
+                    dialogs.alert({
+                        title: "Errore Sincronizzazione Esami!",
+                        message: e,
+                        okButtonText: "OK"
+                    });
+                    page.getViewById("activityIndicator").visibility = "collapsed";
+                });
+            }
+        }
 
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({
             title: "Errore Server!",
             message: e.retErrMsg,
-            okButtonText: "OK"
-        });
-    });
-}
-
-function getPrenotazioni(){
-    let matId = appSettings.getNumber("matId").toString();
-
-    httpModule.request({
-        url: global.url + "students/getReservations/" + matId,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        const result = response.content.toJSON();
-        appSettings.setNumber("appelloBadge", result.length);
-
-        console.log(result);
-
-        for (let i = 0; i< result.length; i++){
-            global.myPrenotazioni.push(result[i]);
-        }
-        /*
-        memo) RESULT =
-            'nome_pres' : _response2['presidenteNome'],
-            'cognome_pres': _response2['presidenteCognome'],
-            'numIscritti': _response2['numIscritti'],
-            'note': _response2['note'],
-            'statoDes': _response2['statoDes'],
-            'statoEsito': _response2['statoInsEsiti']['value'],
-            'statoVerb': _response2['statoVerb']['value'],
-            'statoPubbl': _response2['statoPubblEsiti']['value'],
-            'tipoApp': _response2['tipoGestAppDes'],
-            'aulaId' : _response2['turni'][x]['aulaId'],
-            'edificioId': _response2['turni'][x]['edificioCod'],
-            'edificioDes': _response2['turni'][x]['edificioDes'],
-            'aulaDes': _response2['turni'][x]['aulaDes'],
-            'desApp': _response2['turni'][x]['des'],
-            'dataEsa': _response2['turni'][x]['dataOraEsa']
-
-         */
-        global.getAllBadge(page);
-    },(e) => {
-        console.log("Error", e);
-        dialogs.alert({
-            title: "Errore Server!",
-            message: e,
             okButtonText: "OK"
         });
     });
@@ -346,8 +370,8 @@ function getMainInfo() {
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
+                title: "Errore Server",
+                message: "UserCalendar MainInfo",
                 okButtonText: "OK"
             }).then(
             );
@@ -364,109 +388,8 @@ function getMainInfo() {
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
-            okButtonText: "OK"
-        });
-    });
-}
-
-function getCourses() {
-    const stuId = appSettings.getNumber("stuId");
-    const matId = appSettings.getNumber("matId");
-
-    httpModule.request({
-        url: global.url + "students/pianoId/" + stuId ,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        const result = response.content.toJSON();
-        //console.log(result);
-
-        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-        {
-            dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
-                okButtonText: "OK"
-            }).then(
-            );
-        }
-        else
-        {
-            appSettings.setNumber("pianoId", result.pianoId);
-        }
-
-        let pianoId = appSettings.getNumber("pianoId");
-
-        httpModule.request({
-            url: global.url + "students/examsToFreq/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId,
-            method: "GET",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic "+ global.encodedStr
-            }
-        }).then((response) => {
-            const result = response.content.toJSON();
-
-            //console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken)
-            //console.log(result);
-            page.getViewById("activityIndicator").visibility = "visible";
-
-
-            if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-            {
-                dialogs.alert({
-                    title: "Errore Server!",
-                    message: result_n.retErrMsg,
-                    okButtonText: "OK"
-                }).then(
-                );
-                page.getViewById("activityIndicator").visibility = "collapsed";
-            }
-            else {
-                for (let i=0; i<result.length; i++)
-                {
-                    global.freqExams.push({
-                        "nome" : result[i].nome,
-                        "codice" : result[i].codice,
-                        "annoId" : result[i].annoId,
-                        "adsceID" : result[i].adsceID,
-                        "adLogId" : result[i].adLogId,
-                        "adId" : result[i].adId,
-                        "CFU" : result[i].CFU,
-                        "docente" : result[i].docente,
-                        "docenteID" : result[i].docenteID,
-                        "semestre" : result[i].semestre,
-                        "inizio" : result[i].inizio,
-                        "fine" : result[i].fine,
-                        "modifica" : result[i].ultMod,
-                        "orario" : []
-                    });
-                }
-                page.getViewById("activityIndicator").visibility = "collapsed";
-                calendarCourses();
-                global.updatedExam = true;
-
-            }
-        },(e) => {
-            console.log("Error", e);
-            dialogs.alert({
-                title: "Errore Sincronizzazione Esami!",
-                message: e,
-                okButtonText: "OK"
-            });
-            page.getViewById("activityIndicator").visibility = "collapsed";
-        });
-
-    },(e) => {
-        console.log("Error", e.retErrMsg);
-        dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
+            title: "Errore Server",
+            message: "UserCalendar MainInfo",
             okButtonText: "OK"
         });
     });
@@ -548,3 +471,153 @@ exports.onDaySelected = function(args){
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
+
+
+// Funzioni non utilizzate ma che possono essere utili
+function getPrenotazioni(){
+    let matId = appSettings.getNumber("matId").toString();
+
+    httpModule.request({
+        url: global.url + "students/getReservations/" + matId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        const result = response.content.toJSON();
+        appSettings.setNumber("appelloBadge", result.length);
+
+        console.log(result);
+
+        for (let i = 0; i< result.length; i++){
+            global.myPrenotazioni.push(result[i]);
+        }
+        /*
+        memo) RESULT =
+            'nome_pres' : _response2['presidenteNome'],
+            'cognome_pres': _response2['presidenteCognome'],
+            'numIscritti': _response2['numIscritti'],
+            'note': _response2['note'],
+            'statoDes': _response2['statoDes'],
+            'statoEsito': _response2['statoInsEsiti']['value'],
+            'statoVerb': _response2['statoVerb']['value'],
+            'statoPubbl': _response2['statoPubblEsiti']['value'],
+            'tipoApp': _response2['tipoGestAppDes'],
+            'aulaId' : _response2['turni'][x]['aulaId'],
+            'edificioId': _response2['turni'][x]['edificioCod'],
+            'edificioDes': _response2['turni'][x]['edificioDes'],
+            'aulaDes': _response2['turni'][x]['aulaDes'],
+            'desApp': _response2['turni'][x]['des'],
+            'dataEsa': _response2['turni'][x]['dataOraEsa']
+
+         */
+        global.getAllBadge(page);
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore Server!",
+            message: e,
+            okButtonText: "OK"
+        });
+    });
+}
+function getCourses() {
+    const stuId = appSettings.getNumber("stuId");
+    const matId = appSettings.getNumber("matId");
+
+    httpModule.request({
+        url: global.url + "students/pianoId/" + stuId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        const result = response.content.toJSON();
+        //console.log(result);
+
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
+        {
+            dialogs.alert({
+                title: "Errore Server!",
+                message: result.retErrMsg,
+                okButtonText: "OK"
+            }).then();
+        }
+        else
+        {
+            appSettings.setNumber("pianoId", result.pianoId);
+        }
+
+        let pianoId = appSettings.getNumber("pianoId");
+
+        httpModule.request({
+            url: global.url + "students/examsToFreq/" + stuId + "/" + pianoId +"/" + matId,
+            method: "GET",
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic "+ global.encodedStr
+            }
+        }).then((response) => {
+            const result = response.content.toJSON();
+
+            //console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken)
+            //console.log(result);
+            page.getViewById("activityIndicator").visibility = "visible";
+
+
+            if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
+            {
+                dialogs.alert({
+                    title: "Errore Server!",
+                    message: result_n.retErrMsg,
+                    okButtonText: "OK"
+                }).then(
+                );
+                page.getViewById("activityIndicator").visibility = "collapsed";
+            }
+            else {
+                for (let i=0; i<result.length; i++)
+                {
+                    global.freqExams.push({
+                        "nome" : result[i].nome,
+                        "codice" : result[i].codice,
+                        "annoId" : result[i].annoId,
+                        "adsceID" : result[i].adsceID,
+                        "adLogId" : result[i].adLogId,
+                        "adId" : result[i].adId,
+                        "CFU" : result[i].CFU,
+                        "docente" : result[i].docente,
+                        "docenteID" : result[i].docenteID,
+                        "semestre" : result[i].semestre,
+                        "inizio" : result[i].inizio,
+                        "fine" : result[i].fine,
+                        "modifica" : result[i].ultMod,
+                        "orario" : []
+                    });
+                }
+                page.getViewById("activityIndicator").visibility = "collapsed";
+                calendarCourses();
+                global.updatedExam = true;
+
+            }
+        },(e) => {
+            console.log("Error", e);
+            dialogs.alert({
+                title: "Errore Sincronizzazione Esami!",
+                message: e,
+                okButtonText: "OK"
+            });
+            page.getViewById("activityIndicator").visibility = "collapsed";
+        });
+
+    },(e) => {
+        console.log("Error", e.retErrMsg);
+        dialogs.alert({
+            title: "Errore Server!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
+}
