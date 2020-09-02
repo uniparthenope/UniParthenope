@@ -183,7 +183,8 @@ function onShownModally(args) {
                 sideDrawer.getViewById("topEmail").text = appSettings.getString("emailAte");
                 sideDrawer.getViewById("topMatr").visibility = "visible";
                 sideDrawer.getViewById("topEmail").visibility = "visible";
-                getPIC(_result.user.idAb,1);
+                //getPIC(_result.user.idAb,1);
+                getPIC(appSettings.getNumber("idAb",1));
                 let userForm = sideDrawer.getViewById("userDocente");
                 let loginForm = sideDrawer.getViewById("loginForm");
                 sideDrawer.getViewById("contatti").visibility = "visible";
@@ -287,8 +288,8 @@ function getPIC(personId, value) {
     }, (e) => {
         console.log("[Photo] Error", e);
         dialogs.alert({
-            title: "Error",
-            message: e.retErrMsg,
+            title: "Errore: getPic",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

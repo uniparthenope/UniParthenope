@@ -11,18 +11,20 @@ const appSettings = require("tns-core-modules/application-settings");
 
 
 let viewModel;
+let page;
 
 function pageLoaded(args) {
-    const page = args.object;
+    page = args.object;
     viewModel = observableModule.fromObject({});
     page.bindingContext = viewModel;
 
 }
 
-exports.onTapLogin = function() {
+exports.onTapLogin = function(args) {
     let sideDrawer = app.getRootView();
     let user = sideDrawer.getViewById("username").text;
     let pass = sideDrawer.getViewById("password").text;
+    sideDrawer.getViewById("password").dismissSoftInput(); //Close keyboard in IOS
 
     if (user !== "" && pass!== "")
     {
@@ -45,6 +47,7 @@ exports.onTapLogin = function() {
 exports.goto_tasse = function () {
     const nav =
         {
+
             moduleName: "tasse/tasse",
         };
     frame.Frame.topmost().navigate(nav);

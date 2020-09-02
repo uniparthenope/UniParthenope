@@ -8,6 +8,7 @@ const appSettings = require("tns-core-modules/application-settings");
 const calendarModule = require("nativescript-ui-calendar");
 const Color = require("tns-core-modules/color");
 const modalViewModule = "modal-event/modal-event";
+const utilsModule = require("tns-core-modules/utils/utils");
 
 let colors = ["#c47340","#4566c1","#824bc1","#a32d13","#382603","#fff766"];
 let page;
@@ -25,7 +26,6 @@ function onNavigatingTo(args) {
 
     calendar = page.getViewById("cal");
     //global.updatedExam = false;
-
     console.log("UPDATED= "+global.updatedExam);
 
     if (!global.updatedExam)
