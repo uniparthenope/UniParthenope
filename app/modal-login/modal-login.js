@@ -81,6 +81,7 @@ function onShownModally(args) {
 
             sideDrawer.getViewById("topName").text = _result.username;
             global.username = _result.username;
+            sideDrawer.getViewById("contatti").visibility = "visible";
             let userForm = sideDrawer.getViewById("userTecnico");
             let loginForm = sideDrawer.getViewById("loginForm");
             loginForm.visibility = "collapsed";
@@ -149,6 +150,7 @@ function onShownModally(args) {
                 getPIC(_result.user.idAb,1);
                 let userForm = sideDrawer.getViewById("userDocente");
                 let loginForm = sideDrawer.getViewById("loginForm");
+                sideDrawer.getViewById("contatti").visibility = "visible";
                 loginForm.visibility = "collapsed";
                 userForm.visibility = "visible";
 
@@ -176,6 +178,7 @@ function onShownModally(args) {
                 global.username = _result.user.nomeBar;
                 let userForm = sideDrawer.getViewById("userRistoratore");
                 let loginForm = sideDrawer.getViewById("loginForm");
+                sideDrawer.getViewById("contatti").visibility = "visible";
                 loginForm.visibility = "collapsed";
                 userForm.visibility = "visible";
 
@@ -312,7 +315,7 @@ function selectedCarrer(index) {
         sideDrawer.getViewById("topMatr").visibility = "visible";
         sideDrawer.getViewById("topEmail").visibility = "visible";
         getPIC(appSettings.getNumber("persId"),0);
-
+        sideDrawer.getViewById("contatti").visibility = "visible";
         loginForm.visibility = "collapsed";
         userForm.visibility = "visible";
         closeCallback();

@@ -51,7 +51,10 @@
                 </StackLayout>
             </ScrollView>
         </StackLayout>
-        <Button   tap="onTapSurvey" class="btn" text="Partecipa al Sondaggio" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
-        <Button id="deleteBtn" visibility="collapsed" tap="onTapDelete" class="btn" text="Dimentica Account" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
+        <StackLayout verticalAlignment="bottom">
+            <Button   tap="onTapSurvey" class="btn" text="Partecipa al Sondaggio" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
+            <Button   tap="goto_about" class="btn" text="About" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
+            <Button id="deleteBtn" visibility="collapsed" tap="onTapDelete" class="btn" text="Dimentica Account" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
+        </StackLayout>
     </GridLayout>
 </Page>

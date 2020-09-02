@@ -76,7 +76,7 @@
                     <Label class="topTitle" horizontalAlignment="left" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="15"/>
                 </ios>
                 <android>
-                    <Label class="topTitle" horizontalAlignment="right" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="20" marginLeft="5" marginTop="15" textAlignment="right"/>
+                    <Label class="topTitle" horizontalAlignment="right" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="10" marginTop="15" textAlignment="right"/>
                 </android>
 
                 <Image src="~/images/logo_parth.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>
@@ -106,7 +106,7 @@
             <Button backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="right" height="20" width="20" marginRight="15" marginTop="15"/>
         </ios>
         <android>
-            <Button class="myMenu" backgroundImage="res://menu"  ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" height="25" width="25" margin="20 5 10 5"/>
+            <Button class="myMenu" backgroundImage="res://menu" ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" height="25" width="25" margin="20 5 10 5"/>
         </android>
 
 

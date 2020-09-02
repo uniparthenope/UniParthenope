@@ -4,8 +4,11 @@ const observableModule = require("tns-core-modules/data/observable");
 const utilsModule = require("tns-core-modules/utils/utils");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const modalViewModule = "modal-login/modal-login";
+const email = require("nativescript-email");
 let base64= require('base-64');
 let utf8 = require('utf8');
+const appSettings = require("tns-core-modules/application-settings");
+
 
 let viewModel;
 
@@ -21,7 +24,7 @@ exports.onTapLogin = function() {
     let user = sideDrawer.getViewById("username").text;
     let pass = sideDrawer.getViewById("password").text;
 
-    if (user != "" && pass!= "")
+    if (user !== "" && pass!== "")
     {
         let token = user + ":" + pass;
         var bytes = utf8.encode(token);
@@ -58,12 +61,18 @@ exports.goto_settings = function () {
 
 };
 
-exports.goto_about = function () {
-    const nav =
-        {
-            moduleName: "about/about-page",
-        };
-    frame.Frame.topmost().navigate(nav);
+exports.contact_us = function () {
+    email.compose({
+        subject: "[APP]" +" [Mat= "+ appSettings.getString("matricola") +" GrpDes= "+ appSettings.getString("grpDes") + "]",
+        body: " Scrivi il tuo messaggio!",
+        to: ['developer.uniparthenope@gmail.com']
+    }).then(
+        function() {
+            console.log("Email composer closed");
+
+        }, function(err) {
+            console.log("Error: " + err);
+        });
 
 };
 

@@ -3,6 +3,8 @@ const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const utilsModule = require("tns-core-modules/utils/utils");
+const frame = require("tns-core-modules/ui/frame");
+
 
 
 let page;
@@ -99,6 +101,14 @@ function onSwitchLoaded_sondaggio(args) {
 }
 exports.onSwitchLoaded_sondaggio = onSwitchLoaded_sondaggio;
 
+exports.goto_about = function () {
+    const nav =
+        {
+            moduleName: "about/about-page",
+        };
+    frame.Frame.topmost().navigate(nav);
+
+};
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
