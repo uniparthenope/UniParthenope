@@ -42,8 +42,8 @@ function onNavigatingTo(args) {
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result,
+                title: "Errore: Ristoratore-Home getMenuBar",
+                message: result.errMsg,
                 okButtonText: "OK"
             }).then();
         }
@@ -100,8 +100,8 @@ function onNavigatingTo(args) {
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Errore Sincronizzazione",
-            message: e,
+            title: "Errore: Ristoratore-Home",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

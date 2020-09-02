@@ -143,8 +143,8 @@ exports.ontap_save = function(){
 
             if (response.statusCode === 401 || response.statusCode === 500) {
                 dialogs.alert({
-                    title: "Errore Server!",
-                    message: result,
+                    title: "Errore: Access ontapSave",
+                    message: result.errMsg,
                     okButtonText: "OK"
 
                 }).then();
@@ -166,10 +166,9 @@ exports.ontap_save = function(){
 
             }
         },(e) => {
-            console.log("Error", e.retErrMsg);
             dialogs.alert({
-                title: "Errore Server!",
-                message: e.retErrMsg,
+                title: "Errore: Access",
+                message: e.toString(),
                 okButtonText: "OK"
             });
         });

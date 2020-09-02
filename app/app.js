@@ -225,10 +225,9 @@ application.on(application.exitEvent, (args) => {
                 }
 
             },(e) => {
-                console.log("Error", e.retErrMsg);
                 dialogs.alert({
-                    title: "Errore Server!",
-                    message: e.retErrMsg,
+                    title: "Errore: Logout",
+                    message: e.toString(),
                     okButtonText: "OK"
                 });
             });

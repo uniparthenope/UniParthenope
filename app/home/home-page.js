@@ -189,10 +189,9 @@ function autoconnect() {
             }
 
         },(e) => {
-            console.log("Error", e);
             dialogs.alert({
-                title: "Autenticazione Fallita!",
-                message: e.retErrMsg,
+                title: "Errore: Home autoconnect",
+                message: e.toString(),
                 okButtonText: "OK"
             });
         });
@@ -395,15 +394,14 @@ function detailedProf(docenteId) {
         }
     }).then((response) => {
         let _result = response.content.toJSON();
-
+        //TODO Gestire errori result
         //console.log(_result);
         global.saveProf(_result);
 
     },(e) => {
-        console.log("Error", e);
         dialogs.alert({
-            title: "Autenticazione Fallita!",
-            message: e.retErrMsg,
+            title: "Errore: Home detailedProf",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -419,13 +417,14 @@ function getDepartment(studId) {
         }
     }).then((response) => {
         let _result = response.content.toJSON();
+        //TODO gestire errori result
         global.saveDepartment(_result);
 
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Autenticazione Fallita!",
-            message: e,
+            title: "Errore: Home getDepartment",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -448,10 +447,10 @@ function checkServer(){
             console.log("SERVER OK");
 
     },(e) => {
-        console.log("Error", e);
+
         dialogs.alert({
-            title: "Autenticazione Fallita!",
-            message: e,
+            title: "Errore: Home CheckServer",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -467,14 +466,14 @@ function setAnagrafe(id, type){
         }
     }).then((response) => {
         let _result = response.content.toJSON();
-
+    //TODO gestire errori result
         //console.log(_result);
         global.saveAnagrafe(type,_result);
 
     },(e) => {
         console.log("Errore Anagrafe", e);
         dialogs.alert({
-            title: "Anagrafe Fallita!",
+            title: "Errore: Home getAnagrafe",
             message: e.toString(),
             okButtonText: "OK"
         });
@@ -507,7 +506,7 @@ function getPIC(personId, value) {
     }, (e) => {
         console.log("[Photo] Error", e);
         dialogs.alert({
-            title: "Errore caricamento foto!",
+            title: "Errore: Home getPic",
             message: e.toString(),
             okButtonText: "OK"
         });

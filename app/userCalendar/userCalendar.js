@@ -91,8 +91,8 @@ function calendarCourses() {
             if (response.statusCode === 401 || response.statusCode === 500)
             {
                 dialogs.alert({
-                    title: "Errore Server!",
-                    message: result_n.retErrMsg,
+                    title: "Errore: UserCalendar calendarCourses",
+                    message: result.errMsg,
                     okButtonText: "OK"
                 }).then(
                 );
@@ -114,8 +114,8 @@ function calendarCourses() {
         },(e) => {
             console.log("Error", e);
             dialogs.alert({
-                title: "Errore Sincronizzazione Esami!",
-                message: e,
+                title: "Errore: UserCalendar",
+                message: e.toString(),
                 okButtonText: "OK"
             });
         });
@@ -167,8 +167,8 @@ function getPiano() {
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
+                title: "Errore: UserCalendar getPiano pianoId",
+                message: result.errMsg,
                 okButtonText: "OK"
             }).then(
             );
@@ -206,8 +206,8 @@ function getPiano() {
                     if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
                     {
                         dialogs.alert({
-                            title: "Errore Server!",
-                            message: result.retErrMsg,
+                            title: "Errore: UserCalendar exams",
+                            message: result.errMsg,
                             okButtonText: "OK"
                         }).then(
                         );
@@ -235,8 +235,8 @@ function getPiano() {
 
                                     if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
                                         dialogs.alert({
-                                            title: "Errore Server!",
-                                            message: result_n.retErrMsg,
+                                            title: "Errore: UserCalendar checkExams",
+                                            message: result_n.errMsg,
                                             okButtonText: "OK"
                                         }).then(
                                         );
@@ -258,10 +258,9 @@ function getPiano() {
                                         });
                                     }
                                 }, (e) => {
-                                    console.log("Error", e);
                                     dialogs.alert({
-                                        title: "Errore Sincronizzazione Esami!",
-                                        message: e,
+                                        title: "Errore: UserCalendar",
+                                        message: e.toString(),
                                         okButtonText: "OK"
                                     });
                                 });
@@ -273,10 +272,9 @@ function getPiano() {
                     }
 
                 },(e) => {
-                    console.log("Error", e);
                     dialogs.alert({
-                        title: "Errore Server!",
-                        message: e,
+                        title: "Errore: UserCalendar",
+                        message: e.toString(),
                         okButtonText: "OK"
                     });
                 });
@@ -299,8 +297,8 @@ function getPiano() {
                     if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
                     {
                         dialogs.alert({
-                            title: "Errore Server!",
-                            message: result_n.retErrMsg,
+                            title: "Errore: UserCalendar examsToFreq",
+                            message: result.errMsg,
                             okButtonText: "OK"
                         }).then(
                         );
@@ -332,10 +330,9 @@ function getPiano() {
 
                     }
                 },(e) => {
-                    console.log("Error", e);
                     dialogs.alert({
-                        title: "Errore Sincronizzazione Esami!",
-                        message: e,
+                        title: "Errore: UserCalendar",
+                        message: e.toString(),
                         okButtonText: "OK"
                     });
                     page.getViewById("activityIndicator").visibility = "collapsed";
@@ -344,10 +341,9 @@ function getPiano() {
         }
 
     },(e) => {
-        console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
+            title: "Errore: UserCalendar",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -370,8 +366,8 @@ function getMainInfo() {
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
-                title: "Errore Server",
-                message: "UserCalendar MainInfo",
+                title: "Errore: UserCalendar getMainInfo",
+                message: result.errMsg,
                 okButtonText: "OK"
             }).then(
             );
@@ -386,10 +382,9 @@ function getMainInfo() {
         }
 
     },(e) => {
-        console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore Server",
-            message: "UserCalendar MainInfo",
+            title: "Errore: UserCalendar",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -514,10 +509,9 @@ function getPrenotazioni(){
          */
         global.getAllBadge(page);
     },(e) => {
-        console.log("Error", e);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e,
+            title: "Errore: UserCalendar getPrenotazioni",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -540,7 +534,7 @@ function getCourses() {
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
-                title: "Errore Server!",
+                title: "Errore: UserCalendar",
                 message: result.retErrMsg,
                 okButtonText: "OK"
             }).then();

@@ -73,8 +73,8 @@ function calendarCourses() {
             if (response.statusCode === 401 || response.statusCode === 500)
             {
                 dialogs.alert({
-                    title: "Errore Server!",
-                    message: result_n.retErrMsg,
+                    title: "Errore: DocentiHome calendarCourses",
+                    message: result.errMsg,
                     okButtonText: "OK"
                 }).then(
                 );
@@ -97,8 +97,8 @@ function calendarCourses() {
         },(e) => {
             console.log("Error", e);
             dialogs.alert({
-                title: "Errore Sincronizzazione Esami!",
-                message: e,
+                title: "Errore: DocentiHome",
+                message: e.toString(),
                 okButtonText: "OK"
             });
         });
@@ -135,8 +135,8 @@ function getCourses() {
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {
             dialogs.alert({
-                title: "Errore Get Session!",
-                message: result.retErrMsg,
+                title: "Errore: DocentiHome GetCourses getSession",
+                message: result.errMsg,
                 okButtonText: "OK"
             }).then(
             );
@@ -174,8 +174,8 @@ function getCourses() {
                 if (response2.statusCode === 401 || response2.statusCode === 500 || response2.statusCode === 403)
                 {
                     dialogs.alert({
-                        title: "Errore Get Courses!",
-                        message: result2.retErrMsg,
+                        title: "Errore: DocentiHome GetCourses getCourses",
+                        message: result2.errMsg,
                         okButtonText: "OK"
                     }).then(
                     );
@@ -212,10 +212,9 @@ function getCourses() {
                 page.getViewById("activityIndicator").visibility = "collapsed";
 
             },(e) => {
-                console.log("Error", e.retErrMsg);
                 dialogs.alert({
-                    title: "Errore Response2!",
-                    message: e.retErrMsg,
+                    title: "Errore: DocentiHome",
+                    message: e.toString(),
                     okButtonText: "OK"
                 });
             });
@@ -223,10 +222,9 @@ function getCourses() {
 
 
     },(e) => {
-        console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
+            title: "Errore: DocentiHome",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

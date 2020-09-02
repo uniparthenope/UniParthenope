@@ -37,6 +37,12 @@ function pageLoaded(args) {
     let bottom_bar = page.getViewById("bottom_bar");
     let legend = page.getViewById("legend");
 
+    dialogs.alert({
+        title: "Attenzione",
+        message: "La sezione trasporti è ancora in fase di sviluppo!\nPertanto alcune funzionalità potrebbero essere limitate.",
+        okButtonText: "OK"
+    });
+
     if (global.isConnected === false){
         bottom_bar.visibility = "collapsed";
        legend.row = 2;
@@ -68,6 +74,11 @@ function pageLoaded(args) {
                 },
                 function (e) {
                     console.log("Error: " + e.message);
+                    dialogs.alert({
+                        title: "Errore: Trasporti watchLocation",
+                        message: e.message,
+                        okButtonText: "OK"
+                    });
                 },
                 {desiredAccuracy: 3, updateDistance: 10, minimumUpdateTime: 1000 * 2});
         })
@@ -132,8 +143,8 @@ function getBusPosition() {
 
             if (response.statusCode === 500) {
                 dialogs.alert({
-                    title: "Errore Server!",
-                    message: result.retErrMsg,
+                    title: "Errore: Trasporti getBusPosition",
+                    message: result.errMsg,
                     okButtonText: "OK"
 
                 });
@@ -146,8 +157,8 @@ function getBusPosition() {
         }, (e) => {
             console.log("Error", e.retErrMsg);
             dialogs.alert({
-                title: "Errore Server!",
-                message: e.retErrMsg,
+                title: "Errore: Trasporti",
+                message: e.toString(),
                 okButtonText: "OK"
             });
         });

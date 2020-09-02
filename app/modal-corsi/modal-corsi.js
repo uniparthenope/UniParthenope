@@ -35,8 +35,8 @@ function onShownModally(args) {
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
+                title: "Errore: Modal-Corsi infoCourse",
+                message: result.errMsg,
                 okButtonText: "OK"
             }).then(
             );
@@ -73,8 +73,8 @@ function onShownModally(args) {
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Errore Sincronizzazione Esami!",
-            message: e,
+            title: "Errore: Modal-Corsi",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

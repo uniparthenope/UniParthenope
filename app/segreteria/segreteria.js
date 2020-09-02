@@ -31,8 +31,8 @@ function getOrari() {
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
+                title: "Errore: Segreteria getOrari",
+                message: result.errMsg,
                 okButtonText: "OK"
             }).then(
             );
@@ -83,11 +83,11 @@ function getOrari() {
 
         }
 
-    },error => {
+    },e => {
         console.log("Error");
         dialogs.alert({
-            title: "Errore Server!",
-            message: error,
+            title: "Errore: Segreteria",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

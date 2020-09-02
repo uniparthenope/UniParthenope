@@ -55,8 +55,8 @@ function onNavigatingTo(args) {
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result,
+                title: "Errore: Menu getToday!",
+                message: result.errMsg,
                 okButtonText: "OK"
             }).then(
             );
@@ -97,10 +97,9 @@ function onNavigatingTo(args) {
             }
         }
     },(e) => {
-        console.log("Error", e);
         dialogs.alert({
-            title: "Errore Server Mensa!",
-            message: e,
+            title: "Errore: Menu",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

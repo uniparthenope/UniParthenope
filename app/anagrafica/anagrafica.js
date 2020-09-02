@@ -112,8 +112,8 @@ function getPIC(personId, value){
     }, (e) => {
         console.log("[Photo] Error", e);
         dialogs.alert({
-            title: "Error",
-            message: e.retErrMsg,
+            title: "Errore: Anagrafe getPic",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

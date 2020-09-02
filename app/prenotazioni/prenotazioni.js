@@ -98,10 +98,9 @@ function getPrenotazioni(){
         loading.visibility = "collapsed";
     },(e) => {
         loading.visibility = "collapsed";
-        console.log("Error", e);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e,
+            title: "Errore: Prenotazioni getPrenotazioni",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -224,19 +223,24 @@ function onItemTap(args) {
                             moduleName: "prenotazioni/prenotazioni",
                             clearHistory: true
                         };
-                    frame.topmost().navigate(nav);
+                    page.frame.navigate(nav);
                 }
 
                 else
-                    message = "Error: " + result["errMsg"];
+                    message = result["errMsg"];
 
                 dialogs.alert({
-                    title: "Result:",
+                    title: "Errore: Prenotazioni",
                     message: message,
                     okButtonText: "OK"
                 });
             }, error => {
                 console.error(error);
+                dialogs.alert({
+                    title: "Errore: Prenotazioni",
+                    message: error.toString(),
+                    okButtonText: "OK"
+                });
             });
         }
     });

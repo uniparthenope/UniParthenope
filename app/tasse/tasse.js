@@ -91,7 +91,7 @@ function getTaxes() {
             loading.visibility = "collapsed";
         } else {
             dialogs.alert({
-                title: "Errore Server!",
+                title: "Errore: Tasse getTaxes",
                 message: _response['errMsg'],
                 okButtonText: "OK"
             });
@@ -99,10 +99,9 @@ function getTaxes() {
         }
 
     }, (e) => {
-        console.log("Error", e);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e,
+            title: "Errore: Tasse",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

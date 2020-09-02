@@ -42,8 +42,8 @@ function getTime() {
             if (response.statusCode === 401 || response.statusCode === 500)
             {
                 dialogs.alert({
-                    title: "Errore Server!",
-                    message: result_n.retErrMsg,
+                    title: "Errore: Orari getTime",
+                    message: result.errMsg,
                     okButtonText: "OK"
                 }).then(
                 );
@@ -71,8 +71,8 @@ function getTime() {
             },(e) => {
             console.log("Error", e);
             dialogs.alert({
-                title: "Errore Sincronizzazione Esami!",
-                message: e,
+                title: "Errore: Orari",
+                message: e.toString(),
                 okButtonText: "OK"
             });
         });

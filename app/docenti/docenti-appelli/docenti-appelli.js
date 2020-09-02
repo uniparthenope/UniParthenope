@@ -75,8 +75,8 @@ function getAppelli() {
             if (response.statusCode === 401 || response.statusCode === 500)
             {
                 dialogs.alert({
-                    title: "Errore Server!",
-                    message: result,
+                    title: "Errore: DocentiAppelli getAppelli",
+                    message: response.errMsg,
                     okButtonText: "OK"
 
                 }).then();
@@ -151,8 +151,8 @@ function getAppelli() {
         },(e) => {
             console.log("Error", e);
             dialogs.alert({
-                title: "Errore Server!",
-                message: e,
+                title: "Errore: DocentiAppelli",
+                message: e.toString(),
                 okButtonText: "OK"
             });
         });

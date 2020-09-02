@@ -81,12 +81,12 @@ function onTapSave() {
                                 moduleName: "ristoratore/ristoratore-home",
                                 clearHistory: true
                             };
-                        frame.topmost().navigate(nav);
+                        page.frame.navigate(nav);
                     });
                 }
-                else if (response.statusCode == 500){
+                else if (response.statusCode === 500){
                     dialogs.alert({
-                        title: "Errore",
+                        title: "Errore: Ristoratore-AddMenu onTapSave",
                         message: response.content.toJSON()['errMsg'],
                         okButtonText: "OK"
                     }).then(function(){
@@ -95,12 +95,12 @@ function onTapSave() {
                                 moduleName: "ristoratore/ristoratore-home",
                                 clearHistory: true
                             };
-                        frame.topmost().navigate(nav);
+                        page.frame.navigate(nav);
                     });
                 }
                 else{
                     dialogs.alert({
-                        title: "Errore",
+                        title: "Errore: Ristoratore-AddMenu",
                         message: response.content.toJSON()['message'],
                         okButtonText: "OK"
                     }).then(function(){
@@ -109,11 +109,15 @@ function onTapSave() {
                                 moduleName: "ristoratore/ristoratore-home",
                                 clearHistory: true
                             };
-                        frame.topmost().navigate(nav);
+                        page.frame.navigate(nav);
                     });
                 }
             }).catch((e) => {
-                console.log(e);
+                dialogs.alert({
+                    title: "Errore: Ristoratore-AddMenu",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
             });
         }
     });
@@ -144,7 +148,11 @@ exports.onTapAdd = function(){
                         //console.log(img);
                     })
                 }).catch(function (err) {
-                console.log("Error -> " + err.message);
+                dialogs.alert({
+                    title: "Errore: Ristoratore-AddMenu onTapAdd",
+                    message: err.toString(),
+                    okButtonText: "OK"
+                });
             });
         },
         function failure() {

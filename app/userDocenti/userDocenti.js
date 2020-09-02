@@ -102,7 +102,7 @@ function getDocenti(){
         }
         else{
             dialogs.alert({
-                title: "Errore Server!",
+                title: "Errore: UserDocenti getDocenti",
                 message: result.errMsg,
                 okButtonText: "OK"
             });
@@ -110,8 +110,8 @@ function getDocenti(){
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
+            title: "Errore: UserDocenti",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

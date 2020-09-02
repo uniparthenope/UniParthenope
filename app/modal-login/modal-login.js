@@ -183,8 +183,8 @@ function onShownModally(args) {
                 sideDrawer.getViewById("topEmail").text = appSettings.getString("emailAte");
                 sideDrawer.getViewById("topMatr").visibility = "visible";
                 sideDrawer.getViewById("topEmail").visibility = "visible";
-                //getPIC(_result.user.idAb,1);
-                getPIC(appSettings.getNumber("idAb",1));
+                getPIC(_result.user.idAb,1);
+                //getPIC(appSettings.getNumber("idAb",1));
                 let userForm = sideDrawer.getViewById("userDocente");
                 let loginForm = sideDrawer.getViewById("loginForm");
                 sideDrawer.getViewById("contatti").visibility = "visible";
@@ -242,8 +242,8 @@ function onShownModally(args) {
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Autenticazione Fallita!",
-            message: e.retErrMsg,
+            title: "Errore: Login",
+            message: e.toString(),
             okButtonText: "OK"
         });
         args.object.closeModal();
@@ -370,8 +370,8 @@ function detailedProf(docenteId) {
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Autenticazione Fallita!",
-            message: e.retErrMsg,
+            title: "Errore: Modal-Login detailedProf",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -395,8 +395,8 @@ function setAnagrafe(id, type){
     },(e) => {
         console.log("Errore Anagrafe", e);
         dialogs.alert({
-            title: "Anagrafe Fallita!",
-            message: e.retErrMsg,
+            title: "Errore: Modal-Login setAnagrafe",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -418,8 +418,8 @@ function getDepartment(studId) {
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Autenticazione Fallita!",
-            message: e.retErrMsg,
+            title: "Errore: Modal-Login getDepartment",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

@@ -33,7 +33,7 @@ function onShownModally(args) {
 
 exports.ontap_download = function(){
     if (platformModule.isAndroid){
-        utilsModule.openUrl("market://details?id=it.meteo.uniparthenope");
+        utilsModule.openUrl("market://details?id=it.uniparthenope.meteo");
     }else{
         utilsModule.openUrl("https://apps.apple.com/us/app/id1518001997");
     }
@@ -90,16 +90,16 @@ function getWeather(lat, long) {
             },(e) => {
                 console.log("Error", e);
                 dialogs.alert({
-                    title: "Errore Meteo!",
-                    message: e,
+                    title: "Errore: Modal-Meteo",
+                    message: e.toString(),
                     okButtonText: "OK"
                 });
             });
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Errore Meteo!",
-            message: e,
+            title: "Errore: Modal-Meteo",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

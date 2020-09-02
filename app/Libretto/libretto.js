@@ -51,8 +51,8 @@ function getMedie(matId) {
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
+                title: "Errore: Libretto getMedie",
+                message: result.errMsg,
                 okButtonText: "OK"
 
             }).then(
@@ -69,8 +69,8 @@ function getMedie(matId) {
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
+            title: "Errore: Libretto",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -91,8 +91,8 @@ function getTotExams(matId) {
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result.retErrMsg,
+                title: "Errore: Libretto getTotExams",
+                message: result.errMsg,
                 okButtonText: "OK"
             }).then(
             );
@@ -109,8 +109,8 @@ function getTotExams(matId) {
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
+            title: "Errore: Libretto",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

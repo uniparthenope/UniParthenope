@@ -2,6 +2,7 @@ const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const platform = require("tns-core-modules/platform");
 const httpModule = require("tns-core-modules/http");
+const dialogs = require("tns-core-modules/ui/dialogs");
 
 let sideDrawer;
 let page;
@@ -28,8 +29,8 @@ function onNavigatingTo(args) {
 
         if (response.statusCode === 401 || response.statusCode === 500) {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result,
+                title: "Errore: Privacy-Page",
+                message: result.errMsg,
                 okButtonText: "OK"
             }).then(
                 loading.visibility = "collapsed"
@@ -47,8 +48,8 @@ function onNavigatingTo(args) {
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e,
+            title: "Errore: Privacy-Page",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

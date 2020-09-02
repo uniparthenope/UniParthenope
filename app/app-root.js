@@ -50,7 +50,7 @@ exports.goto_tasse = function () {
 
             moduleName: "tasse/tasse",
         };
-    frame.Frame.topmost().navigate(nav);
+        page.frame.navigate(nav);
 
 };
 
@@ -60,7 +60,7 @@ exports.goto_settings = function () {
         {
             moduleName: "settings/settings",
         };
-    frame.Frame.topmost().navigate(nav);
+        page.frame.navigate(nav);
 
 };
 
@@ -73,11 +73,14 @@ exports.contact_us = function () {
         to: ['developer.uniparthenope@gmail.com']
     }).then(
         function() {
-            console.log("Email composer closed");
+            console.log("Email closed");
 
         }, function(err) {
-            console.log("Error: " + err);
-        });
+            dialogs.alert({
+                title: "Errore: Email",
+                message: err.toString(),
+                okButtonText: "OK"
+            });        });
 
 };
 

@@ -91,8 +91,8 @@ function getAppelli(adId, adsceId) {
 
         if (response.statusCode === 401 || response.statusCode === 500) {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result,
+                title: "Errore: Appelli getAppelli",
+                message: result.errMsg,
                 okButtonText: "OK"
 
             }).then();
@@ -164,10 +164,9 @@ function getAppelli(adId, adsceId) {
             }
         }
     },(e) => {
-        console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
+            title: "Errore: Appelli",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -233,12 +232,16 @@ function onItemTap(args) {
                     message = "Error: " + result["errMsg"];
 
                 dialogs.alert({
-                    title: "Result:",
+                    title: "Error:",
                     message: message,
                     okButtonText: "OK"
                 });
             }, error => {
-                console.error(error);
+                dialogs.alert({
+                    title: "Errore: Appelli bookExam",
+                    message: error.toString(),
+                    okButtonText: "OK"
+                });
             });
         }
     });

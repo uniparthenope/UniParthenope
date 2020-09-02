@@ -49,8 +49,8 @@ function getNews(){
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result,
+                title: "Errore: Notizie getNews",
+                message: result.errMsg,
                 okButtonText: "OK"
 
             }).then();
@@ -94,10 +94,9 @@ function getNews(){
 
         loading_news.visibility = "collapsed";
     },(e) => {
-        console.log("Error", e);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e,
+            title: "Errore: Notizie",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
@@ -113,8 +112,8 @@ function getNotifications(){
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore Server!",
-                message: result,
+                title: "Errore: Notizie getNotifications",
+                message: result.errMsg,
                 okButtonText: "OK"
 
             }).then();
@@ -153,8 +152,8 @@ function getNotifications(){
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Errore Server!",
-            message: e,
+            title: "Errore: Notizie",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });
