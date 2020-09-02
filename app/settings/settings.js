@@ -58,12 +58,14 @@ function onTapDelete(){
             global.clearAll();
             sideDrawer.getViewById("userForm").visibility="collapsed";
             sideDrawer.getViewById("userDocente").visibility="collapsed";
-            sideDrawer.getViewById("userTecnico").visibility="collapsed";
+            sideDrawer.getViewById("userRistoratore").visibility="collapsed";
             sideDrawer.getViewById("userAdmin").visibility="collapsed";
             sideDrawer.getViewById("topName").text = "Benvenuto!";
             sideDrawer.getViewById("loginForm").visibility="visible";
-            //Default foto (se aggiunta)
+            sideDrawer.getViewById("topImg").backgroundImage = "~/images/logo_parth.png";
             page.getViewById("deleteBtn").visibility = "collapsed";
+            sideDrawer.getViewById("topMatr").visibility = "collapsed";
+            sideDrawer.getViewById("topEmail").visibility = "collapsed";
 
             page.frame.navigate("home/home-page");
         }

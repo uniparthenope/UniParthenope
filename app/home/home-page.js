@@ -79,11 +79,9 @@ function autoconnect() {
         let indicator = page.getViewById("activityIndicator");
         indicator.visibility = "visible";
         let user = appSettings.getString("username");
-        let pass = appSettings.getString("password");
         console.log("USERNAME (old)= "+user);
-        let token = user + ":" + pass;
-        var bytes = utf8.encode(token);
-        global.encodedStr = base64.encode(bytes);
+
+        global.encodedStr = appSettings.getString("token");
 
         httpModule.request({
             url:  global.url + "login",
@@ -105,16 +103,17 @@ function autoconnect() {
                     args.object.closeModal()
                 );
             }
-            /* Se un utente è di tipo USER TECNICO (ristorante) */
+            /* Se un utente è di tipo USER TECNICO (ristorante) 202 */
             else if (_result.user.grpDes === "Ristoranti")
             {
                 let remember = sideDrawer.getViewById("rememberMe").checked;
                 console.log("Ristoratore:" + _result.username);
+                /*
                 if (remember){
                     appSettings.setString("username",user);
                     appSettings.setString("password",pass);
                     appSettings.setBoolean("rememberMe",true);
-                }
+                }*/
 
                 sideDrawer.getViewById("topName").text = _result.username;
                 setSideMenu("userRistoratore",_result.username);
@@ -126,15 +125,12 @@ function autoconnect() {
                 page.frame.navigate(nav);
             }
             /* Se un utente è di tipoADMIN */
+                //NON PIù SUPPORTATO!
+            /*
             else if (response.statusCode === 666)
             {
                 let remember = sideDrawer.getViewById("rememberMe").checked;
                 console.log("Admin:" + _result.username);
-                if (remember){
-                    appSettings.setString("username",user);
-                    appSettings.setString("password",pass);
-                    appSettings.setBoolean("rememberMe",true);
-                }
 
                 sideDrawer.getViewById("topName").text = _result.username;
                 setSideMenu("userAdmin",_result.username);
@@ -144,10 +140,13 @@ function autoconnect() {
                         clearHistory: true
                     };
                 page.frame.navigate(nav);
-            }
+            }*/
             else if(_result.user.grpDes === "Docenti")
             {
                 detailedProf(_result.user.docenteId); // Get detailed info of a professor
+                setAnagrafe(_result.user.docenteId,_result.user.grpDes);
+                appSettings.setNumber("idAb",_result.user.idAb);
+
                 global.saveInfo(_result);
                 global.isConnected = true;
                 let nome = appSettings.getString("nome");
@@ -166,8 +165,13 @@ function autoconnect() {
             {
                 let carriere = _result.user.trattiCarriera;
                 global.saveInfo(_result);
-                let index = appSettings.getNumber("carriera");
+                setAnagrafe(_result.user.persId,_result.user.grpDes);
+                console.log("FINE ANAGRAFE!");
+                let index = appSettings.getNumber("carriera",0);
+                console.log(_result.user.persId);
                 global.saveCarr(carriere[index]);
+                appSettings.setNumber("persId", _result.user.persId);
+
                 getDepartment(carriere[index].stuId);
                 global.isConnected = true;
                 let nome = appSettings.getString("nome");
@@ -202,7 +206,7 @@ exports.onTapNotizie = function(){
 
 exports.onTapMeteo = function(){
     let loc;
-    if (pos != undefined)
+    if (pos !== undefined)
         loc = { lat: pos.latitude, long: pos.longitude };
     else
         loc = {lat: 40.7, long: 14.17};
@@ -257,6 +261,28 @@ function setSideMenu(type,username) {
 
      sideDrawer.getViewById("topName").text = username;
      global.username = username;
+
+     if(type === "userForm"){
+         sideDrawer.getViewById("topMatr").text = appSettings.getString("matricola");
+         sideDrawer.getViewById("topEmail").text = appSettings.getString("emailAte");
+         sideDrawer.getViewById("topMatr").visibility = "visible";
+         sideDrawer.getViewById("topEmail").visibility = "visible";
+         getPIC(appSettings.getNumber("persId"),0);
+         sideDrawer.getViewById("contatti").visibility = "visible";
+     }
+    else if(type === "userDocente"){
+         sideDrawer.getViewById("topMatr").text = appSettings.getString("ruolo")+ " " +appSettings.getString("settore");
+         sideDrawer.getViewById("topEmail").text = appSettings.getString("emailAte");
+         sideDrawer.getViewById("topMatr").visibility = "visible";
+         sideDrawer.getViewById("topEmail").visibility = "visible";
+         console.log(appSettings.getNumber("idAb"));
+         getPIC(appSettings.getNumber("idAb"),1);
+         sideDrawer.getViewById("contatti").visibility = "visible";
+
+     }
+    else if(type === "userRistoratore"){
+
+    }
  }
 function showAD(){
     dialogs.confirm({
@@ -426,6 +452,63 @@ function checkServer(){
         dialogs.alert({
             title: "Autenticazione Fallita!",
             message: e,
+            okButtonText: "OK"
+        });
+    });
+}
+
+function setAnagrafe(id, type){
+    httpModule.request({
+        url: global.url + "general/anagrafica/"+ id,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let _result = response.content.toJSON();
+
+        //console.log(_result);
+        global.saveAnagrafe(type,_result);
+
+    },(e) => {
+        console.log("Errore Anagrafe", e);
+        dialogs.alert({
+            title: "Anagrafe Fallita!",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
+
+function getPIC(personId, value) {
+    let url;
+    switch (value) {
+        case 0:
+            url = global.url + "general/image/" + personId;
+            break;
+
+        case 1:
+            url = global.url + "general/image_prof/" + personId;
+            break;
+    }
+    console.log(value);
+    console.log(url);
+    httpModule.getFile({
+        "url": url,
+        "method": "GET",
+        headers: {
+            "Content-Type": "image/jpg",
+            "Authorization": "Basic " + global.encodedStr
+        },
+        "dontFollowRedirects": true
+    }).then((source) => {
+        sideDrawer.getViewById("topImg").backgroundImage = source["path"];
+    }, (e) => {
+        console.log("[Photo] Error", e);
+        dialogs.alert({
+            title: "Errore caricamento foto!",
+            message: e.toString(),
             okButtonText: "OK"
         });
     });

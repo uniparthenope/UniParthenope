@@ -63,8 +63,10 @@ exports.goto_settings = function () {
 
 exports.contact_us = function () {
     email.compose({
-        subject: "[APP]" +" [Mat= "+ appSettings.getString("matricola") +" GrpDes= "+ appSettings.getString("grpDes") + "]",
-        body: " Scrivi il tuo messaggio!",
+        subject: "[APP]" +" [ "+ appSettings.getString("userId") + " "
+            + appSettings.getString("matricola") + " "
+            + appSettings.getString("grpDes") + " ]",
+        body: "Scrivi messaggio ...",
         to: ['developer.uniparthenope@gmail.com']
     }).then(
         function() {

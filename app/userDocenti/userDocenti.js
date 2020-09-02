@@ -20,7 +20,20 @@ function onNavigatingTo(args) {
     });
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-    getDocenti();
+    dialogs.confirm({
+        title: "Attenzione",
+        message: "Questa funzione è in fase sperimentale pertanto richiedere diverso tempo per il completamento!\nContinuare comunque?",
+        okButtonText: "Si",
+        cancelButtonText: "No"
+    }).then(function (result) {
+        if (result){
+            getDocenti();
+        }
+        else{
+            page.frame.goBack();
+        }
+    });
+
 
     page.bindingContext = viewModel;
 }

@@ -7,6 +7,8 @@ const httpModule = require("tns-core-modules/http");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const Observable = require("tns-core-modules/data/observable");
 const appSettings = require("tns-core-modules/application-settings");
+let base64= require('base-64');
+let utf8 = require('utf8');
 
 
 let page;
@@ -28,7 +30,7 @@ function onShownModally(args) {
     const contex = args.context;
     user = contex.user;
     pass = contex.pass;
-    console.log("Token: " + global.encodedStr);
+    console.log("Temp_Token: " + global.encodedStr);
 
     viewModel = Observable.fromObject({
         items:items
@@ -95,12 +97,44 @@ function onShownModally(args) {
                 };
             frame.Frame.topmost().navigate(nav);
         }
+        else if(response.statusCode === 202){
+            //console.log("Ristoratore");
+            sideDrawer = app.getRootView();
+            let remember = sideDrawer.getViewById("rememberMe").checked;
+
+            if (remember){
+                appSettings.setString("username",user);
+                appSettings.setString("token",global.encodedStr);
+                appSettings.setBoolean("rememberMe",true);
+            }
+            console.log("Ristorante: " + _result.user.nomeBar);
+
+            sideDrawer.getViewById("topName").text = _result.user.nomeBar;
+            global.username = _result.user.nomeBar;
+            let userForm = sideDrawer.getViewById("userRistoratore");
+            let loginForm = sideDrawer.getViewById("loginForm");
+            sideDrawer.getViewById("contatti").visibility = "visible";
+            loginForm.visibility = "collapsed";
+            userForm.visibility = "visible";
+
+            closeCallback();
+            const nav =
+                {
+                    moduleName: "ristoratore/ristoratore-home",
+                    clearHistory: true
+                };
+            frame.Frame.topmost().navigate(nav);
+        }
         else if(response.statusCode === 200)
         {
             console.log(_result.user.grpDes);
 
             account = _result;
+            // STUDENTE
             if(_result.user.grpDes === "Studenti"){
+                console.log(_result.user.userId);
+
+                normalizeToken(_result.user.userId);
 
                 carriere = _result.user.trattiCarriera;
                 setAnagrafe(_result.user.persId,_result.user.grpDes);
@@ -125,6 +159,8 @@ function onShownModally(args) {
                 }
             }
            else if(_result.user.grpDes === "Docenti"){
+
+                normalizeToken(_result.user.userId);
                 detailedProf(_result.user.docenteId); // Get detailed info of a professor
                 setAnagrafe(_result.user.docenteId,_result.user.grpDes);
                 sideDrawer = app.getRootView();
@@ -132,8 +168,8 @@ function onShownModally(args) {
                 let remember = sideDrawer.getViewById("rememberMe").checked;
 
                 if (remember){
-                    appSettings.setString("username",user);
-                    appSettings.setString("password",pass);
+                    appSettings.setString("username",_result.user.userId);
+                    appSettings.setString("token",global.encodedStr);
                     appSettings.setBoolean("rememberMe",true);
                 }
                 console.log("Docente:" + _result.user.userId);
@@ -158,34 +194,6 @@ function onShownModally(args) {
                 const nav =
                     {
                         moduleName: "docenti/docenti-home/docenti-home",
-                        clearHistory: true
-                    };
-                frame.Frame.topmost().navigate(nav);
-            }
-
-            else if(_result.user.grpDes === "Ristoranti"){
-                sideDrawer = app.getRootView();
-                let remember = sideDrawer.getViewById("rememberMe").checked;
-
-                if (remember){
-                    appSettings.setString("username",user);
-                    appSettings.setString("password",pass);
-                    appSettings.setBoolean("rememberMe",true);
-                }
-                console.log("Ristorante: " + _result.user.nomeBar);
-
-                sideDrawer.getViewById("topName").text = _result.user.nomeBar;
-                global.username = _result.user.nomeBar;
-                let userForm = sideDrawer.getViewById("userRistoratore");
-                let loginForm = sideDrawer.getViewById("loginForm");
-                sideDrawer.getViewById("contatti").visibility = "visible";
-                loginForm.visibility = "collapsed";
-                userForm.visibility = "visible";
-
-                closeCallback();
-                const nav =
-                    {
-                        moduleName: "ristoratore/ristoratore-home",
                         clearHistory: true
                     };
                 frame.Frame.topmost().navigate(nav);
@@ -228,6 +236,7 @@ function onShownModally(args) {
                 args.object.closeModal();
             }
         }
+
 
     },(e) => {
         console.log("Error", e);
@@ -295,7 +304,7 @@ function selectedCarrer(index) {
     let remember = sideDrawer.getViewById("rememberMe").checked;
     if (remember){
         appSettings.setString("username",user);
-        appSettings.setString("password",pass);
+        appSettings.setString("token",global.encodedStr);
         appSettings.setBoolean("rememberMe",true);
     }
     global.isConnected = true;
@@ -329,8 +338,8 @@ function selectedCarrer(index) {
 
     else {
         dialogs.alert({
-            title: "Utente non supportato!",
-            message: "Siamo spiacenti, ma il tipo di utente che ha effettuato l'accesso non e' ancora supportato dalla app!",
+            title: "Lavori in corso!",
+            message: "L'applicazione è in fase di sviluppo",
             okButtonText: "OK"
         });
         args.object.closeModal();
@@ -338,7 +347,13 @@ function selectedCarrer(index) {
 
     }
 }
+function normalizeToken(userId){
+    let token = userId + ":" + pass;
+    let bytes = utf8.encode(token);
+    global.encodedStr = base64.encode(bytes);
+    console.log("Normalized_Token: " + global.encodedStr);
 
+}
 function detailedProf(docenteId) {
     httpModule.request({
         url: global.url + "professor/detailedInfo/"+ docenteId,

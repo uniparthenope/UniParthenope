@@ -207,8 +207,10 @@ global.getAllBadge = function(page) {
 };
 
 application.on(application.exitEvent, (args) => {
-    if (args.android) {
+    if (!appSettings.getBoolean("rememberMe"))
         clearAll();
+
+    if (args.android) {
 
         if(global.encodedStr !== " "){
             let url = global.url + "logout/" + global.encodedStr + "/" + global.authToken;
