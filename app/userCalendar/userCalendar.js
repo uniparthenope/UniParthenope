@@ -305,24 +305,66 @@ function getPiano() {
                         page.getViewById("activityIndicator").visibility = "collapsed";
                     }
                     else {
-                        for (let i=0; i<result.length; i++)
-                        {
-                            global.freqExams.push({
-                                "nome" : result[i].nome,
-                                "codice" : result[i].codice,
-                                "annoId" : result[i].annoId,
-                                "adsceID" : result[i].adsceID,
-                                "adLogId" : result[i].adLogId,
-                                "adId" : result[i].adId,
-                                "CFU" : result[i].CFU,
-                                "docente" : result[i].docente,
-                                "docenteID" : result[i].docenteID,
-                                "semestre" : result[i].semestre,
-                                "inizio" : result[i].inizio,
-                                "fine" : result[i].fine,
-                                "modifica" : result[i].ultMod,
-                                "orario" : []
-                            });
+                        let alphabets26 = 'abcdefghijklmnopqrstuvwxyz';
+                        for (let i=0; i<result.length; i++){
+                            if(result[i].domPartCod == "A-L"){
+                                if((alphabets26.substr(0,12)).includes((appSettings.getString("cognome").charAt(0)).toLowerCase())){
+                                    global.freqExams.push({
+                                        "nome" : result[i].nome,
+                                        "codice" : result[i].codice,
+                                        "annoId" : result[i].annoId,
+                                        "adsceID" : result[i].adsceID,
+                                        "adLogId" : result[i].adLogId,
+                                        "adId" : result[i].adId,
+                                        "CFU" : result[i].CFU,
+                                        "docente" : result[i].docente,
+                                        "docenteID" : result[i].docenteID,
+                                        "semestre" : result[i].semestre,
+                                        "inizio" : result[i].inizio,
+                                        "fine" : result[i].fine,
+                                        "modifica" : result[i].ultMod,
+                                        "orario" : []
+                                    });
+                                }
+                            }
+                            else if(result[i].domPartCod == "M-Z"){
+                                if((alphabets26.substr(12,26)).includes((appSettings.getString("cognome").charAt(0)).toLowerCase())){
+                                    global.freqExams.push({
+                                        "nome" : result[i].nome,
+                                        "codice" : result[i].codice,
+                                        "annoId" : result[i].annoId,
+                                        "adsceID" : result[i].adsceID,
+                                        "adLogId" : result[i].adLogId,
+                                        "adId" : result[i].adId,
+                                        "CFU" : result[i].CFU,
+                                        "docente" : result[i].docente,
+                                        "docenteID" : result[i].docenteID,
+                                        "semestre" : result[i].semestre,
+                                        "inizio" : result[i].inizio,
+                                        "fine" : result[i].fine,
+                                        "modifica" : result[i].ultMod,
+                                        "orario" : []
+                                    });
+                                }
+                            }
+                            else {
+                                global.freqExams.push({
+                                    "nome": result[i].nome,
+                                    "codice": result[i].codice,
+                                    "annoId": result[i].annoId,
+                                    "adsceID": result[i].adsceID,
+                                    "adLogId": result[i].adLogId,
+                                    "adId": result[i].adId,
+                                    "CFU": result[i].CFU,
+                                    "docente": result[i].docente,
+                                    "docenteID": result[i].docenteID,
+                                    "semestre": result[i].semestre,
+                                    "inizio": result[i].inizio,
+                                    "fine": result[i].fine,
+                                    "modifica": result[i].ultMod,
+                                    "orario": []
+                                });
+                            }
                         }
                         page.getViewById("activityIndicator").visibility = "collapsed";
                         calendarCourses();

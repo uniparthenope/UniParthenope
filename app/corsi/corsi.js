@@ -45,6 +45,18 @@ function getCourses() {
 
     for (let i=0; i<courses.length; i++)
     {
+        items.push({
+            "anno": drawYear(courses[i].annoId),
+            "esame": courses[i].nome,
+            "prof": courses[i].docente,
+            "data_inizio": "Dal " + courses[i].inizio,
+            "data_fine": " al " + courses[i].fine,
+            "ult_mod": courses[i].modifica,
+            "adLogId": courses[i].adLogId
+        });
+        esamiList.refresh();
+        x++;
+        /*
         if (act_sem === "Secondo Semestre" && (courses[i].semestre === "S2" ||courses[i].semestre === "A2" || courses[i].semestre === "N/A"))
         {
             items.push({
@@ -90,6 +102,9 @@ function getCourses() {
         {
             console.log(courses[i].nome + " :Esame non aggiunto al semestre attuale!!");
         }
+
+
+         */
     }
 
     appSettings.setNumber("examsBadge",x);

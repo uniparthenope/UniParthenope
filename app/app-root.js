@@ -40,7 +40,6 @@ exports.onTapLogin = function(args) {
             okButtonText: "OK"
         });
     }
-
 };
 
 //Go to taxes page
