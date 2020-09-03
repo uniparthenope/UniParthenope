@@ -307,8 +307,9 @@ function getPiano() {
                     else {
                         let alphabets26 = 'abcdefghijklmnopqrstuvwxyz';
                         for (let i=0; i<result.length; i++){
-                            if(result[i].domPartCod == "A-L"){
+                            if(result[i].domPartCod === "A-L"){
                                 if((alphabets26.substr(0,12)).includes((appSettings.getString("cognome").charAt(0)).toLowerCase())){
+                                    console.log(result[i].domPartCod);
                                     global.freqExams.push({
                                         "nome" : result[i].nome,
                                         "codice" : result[i].codice,
@@ -323,11 +324,12 @@ function getPiano() {
                                         "inizio" : result[i].inizio,
                                         "fine" : result[i].fine,
                                         "modifica" : result[i].ultMod,
-                                        "orario" : []
+                                        "orario" : [],
+                                        "domPartCod" : result[i].domPartCod
                                     });
                                 }
                             }
-                            else if(result[i].domPartCod == "M-Z"){
+                            else if(result[i].domPartCod === "M-Z"){
                                 if((alphabets26.substr(12,26)).includes((appSettings.getString("cognome").charAt(0)).toLowerCase())){
                                     global.freqExams.push({
                                         "nome" : result[i].nome,
@@ -343,7 +345,8 @@ function getPiano() {
                                         "inizio" : result[i].inizio,
                                         "fine" : result[i].fine,
                                         "modifica" : result[i].ultMod,
-                                        "orario" : []
+                                        "orario" : [],
+                                        "domPartCod": result[i].domPartCod
                                     });
                                 }
                             }
@@ -362,7 +365,8 @@ function getPiano() {
                                     "inizio": result[i].inizio,
                                     "fine": result[i].fine,
                                     "modifica": result[i].ultMod,
-                                    "orario": []
+                                    "orario": [],
+                                    "domPartCod": result[i].domPartCod
                                 });
                             }
                         }

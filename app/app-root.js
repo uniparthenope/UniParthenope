@@ -49,8 +49,8 @@ exports.goto_tasse = function () {
 
             moduleName: "tasse/tasse",
         };
-        page.frame.navigate(nav);
 
+    frame.Frame.topmost().navigate(nav);
 };
 
 //Go to Settings page
@@ -59,8 +59,7 @@ exports.goto_settings = function () {
         {
             moduleName: "settings/settings",
         };
-        page.frame.navigate(nav);
-
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.contact_us = function () {

@@ -44,8 +44,8 @@ global.clearAll = function(){
     global.myExams = [];
     global.myDocenti = [];
     appSettings.clear();
-
 };
+
 global.saveInfo = function(result) {
     appSettings.setString("codFis",result.user.codFis);
     appSettings.setString("nome",result.user.firstName);

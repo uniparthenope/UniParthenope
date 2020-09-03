@@ -229,10 +229,10 @@ function onItemTap(args) {
                 if (response.statusCode === 201)
                     message = "Prenotazione effettuata";
                 else
-                    message = "Error: " + result["errMsg"];
+                    message = result["errMsg"];
 
                 dialogs.alert({
-                    title: "Error:",
+                    title: "Attenzione!",
                     message: message,
                     okButtonText: "OK"
                 });

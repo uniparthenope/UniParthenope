@@ -45,6 +45,7 @@ function getCourses() {
 
     for (let i=0; i<courses.length; i++)
     {
+        console.log(courses[i].domPartCod);
         items.push({
             "anno": drawYear(courses[i].annoId),
             "esame": courses[i].nome,
@@ -52,7 +53,8 @@ function getCourses() {
             "data_inizio": "Dal " + courses[i].inizio,
             "data_fine": " al " + courses[i].fine,
             "ult_mod": courses[i].modifica,
-            "adLogId": courses[i].adLogId
+            "adLogId": courses[i].adLogId,
+            "partizione": "Partizione: " + courses[i].domPartCod
         });
         esamiList.refresh();
         x++;
