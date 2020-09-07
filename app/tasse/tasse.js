@@ -65,7 +65,7 @@ function getTaxes() {
                 items.push({
                     "data": _response["to_pay"][i].scadFattura,
                     "desc": _response["to_pay"][i].desc,
-                    "importo":  _response["to_pay"][i].importo + ",00 €",
+                    "importo":  _response["to_pay"][i].importo,
                     "fatt_id": "Cod.Fattura " + _response["to_pay"][i].fattId,
                     "iur_iuv": "IUV " + _response["to_pay"][i].iuv,
                     "col": "color-yellow"
@@ -81,7 +81,7 @@ function getTaxes() {
                 items.push({
                     "data": _response["payed"][i].dataPagamento,
                     "desc": _response["payed"][i].desc,
-                    "importo": _response["payed"][i].importo + ",00 €",
+                    "importo": _response["payed"][i].importo,
                     "fatt_id": "Cod.Fattura " + _response["payed"][i].fattId,
                     "iur_iuv": cod,
                     "col": "color-grey"
