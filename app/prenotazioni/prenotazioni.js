@@ -63,8 +63,24 @@ function onNavigatingTo(args) {
 
 function getPrenotazioni(){
     loading.visibility = "visible";
-    let matId = appSettings.getNumber("matId").toString();
-
+    let result = global.myPrenotazioni;
+    for (let i = 0; i<result.length; i++)
+        items_appelli.push({
+            "adId": result[i].adId,
+            "appId": result[i].appId,
+            "dataEsame": result[i].dataEsa,
+            "classe": "examPass",
+            "mese_app": result[i].desApp,
+            "esame": result[i].nomeAppello,
+            "docente": result[i].nome_pres + " "+ result[i].cognome_pres,
+            "descrizione": result[i].tipoApp,
+            "edificio": result[i].edificioDes,
+            "aula": result[i].aulaDes,
+            "iscritti": result[i].numIscritti,
+            "note": result[i].note
+        });
+        loading.visibility = "collapsed";
+/*
     httpModule.request({
         url: global.url + "students/getReservations/" + matId,
         method: "GET",
@@ -104,6 +120,7 @@ function getPrenotazioni(){
             okButtonText: "OK"
         });
     });
+ */
 }
 
 function onDrawerButtonTap() {
@@ -217,6 +234,10 @@ function onItemTap(args) {
 
                 let message;
                 if (response.statusCode === 200){
+                    const x = global.myPrenotazioni.indexOf(index);
+                    global.myPrenotazioni.splice(x,1);
+                    appSettings.setNumber("appelloBadge", global.myPrenotazioni.length);
+
                     message = "Cancellazione effettuata";
                     const nav =
                         {

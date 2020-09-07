@@ -226,16 +226,24 @@ function onItemTap(args) {
                 console.log(result);
 
                 let message;
-                if (response.statusCode === 201)
-                    message = "Prenotazione effettuata";
-                else
-                    message = result["errMsg"];
+                if (response.statusCode === 201){
+                    dialogs.alert({
+                        title: "Successo!",
+                        message: "Prenotazione Effettuata",
+                        okButtonText: "OK"
+                    });
+                    global.updatedExam = false;
+                }
 
-                dialogs.alert({
-                    title: "Attenzione!",
-                    message: message,
-                    okButtonText: "OK"
-                });
+                else{
+                    dialogs.alert({
+                        title: "Errore!",
+                        message: result["errMsg"],
+                        okButtonText: "OK"
+                    });
+                }
+
+
             }, error => {
                 dialogs.alert({
                     title: "Errore: Appelli bookExam",

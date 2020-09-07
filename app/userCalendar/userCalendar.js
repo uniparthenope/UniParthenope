@@ -36,12 +36,10 @@ function onNavigatingTo(args) {
         getPiano();
         getAccesso();
         //getCourses();
-        //getPrenotazioni();
+        getPrenotazioni();
     }
     else {
-
-        console.log(global.freqExams.length);
-       // calendarCourses();
+        calendarCourses();
     }
 
     global.getAllBadge(page);
@@ -64,8 +62,10 @@ function calendarCourses() {
         let esame = esami[i].nome;
         let docente = esami[i].docente.split(" ");
         const periodo = appSettings.getNumber("periodo",3);
-        const luogo = appSettings.getString("strutturaDes", "CDN");
+        const luogo = appSettings.getString("strutturaId", "CDN");
         const corso = appSettings.getString("corsoGaId");
+
+        console.log(luogo);
         if (corso === ""){
             //TODO Corso non inserito nel database!
         }
@@ -84,7 +84,6 @@ function calendarCourses() {
             }
         }).then((response) => {
             const result = response.content.toJSON();
-            console.log(result);
 
             if (response.statusCode === 401 || response.statusCode === 500)
             {
@@ -119,6 +118,7 @@ function calendarCourses() {
         });
     }
     let prenotazioni = global.myPrenotazioni;
+    console.log(prenotazioni.length);
     for (let x=0; x < prenotazioni.length ; x++){
         let data_inizio = convertData(prenotazioni[x].dataEsa);
         //console.log(data_inizio);
@@ -553,7 +553,6 @@ exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
 
 
-// Funzioni non utilizzate ma che possono essere utili
 function getPrenotazioni(){
     let matId = appSettings.getNumber("matId").toString();
 
@@ -575,21 +574,18 @@ function getPrenotazioni(){
         }
         /*
         memo) RESULT =
-            'nome_pres' : _response2['presidenteNome'],
-            'cognome_pres': _response2['presidenteCognome'],
-            'numIscritti': _response2['numIscritti'],
-            'note': _response2['note'],
-            'statoDes': _response2['statoDes'],
-            'statoEsito': _response2['statoInsEsiti']['value'],
-            'statoVerb': _response2['statoVerb']['value'],
-            'statoPubbl': _response2['statoPubblEsiti']['value'],
-            'tipoApp': _response2['tipoGestAppDes'],
-            'aulaId' : _response2['turni'][x]['aulaId'],
-            'edificioId': _response2['turni'][x]['edificioCod'],
-            'edificioDes': _response2['turni'][x]['edificioDes'],
-            'aulaDes': _response2['turni'][x]['aulaDes'],
-            'desApp': _response2['turni'][x]['des'],
-            'dataEsa': _response2['turni'][x]['dataOraEsa']
+                "adId": result[i].adId,
+                "appId": result[i].appId,
+                "dataEsame": result[i].dataEsa,
+                "classe": "examPass",
+                "mese_app": result[i].desApp,
+                "esame": result[i].nomeAppello,
+                "docente": result[i].nome_pres + " "+ result[i].cognome_pres,
+                "descrizione": result[i].tipoApp,
+                "edificio": result[i].edificioDes,
+                "aula": result[i].aulaDes,
+                "iscritti": result[i].numIscritti,
+                "note": result[i].note
 
          */
         global.getAllBadge(page);
@@ -601,6 +597,7 @@ function getPrenotazioni(){
         });
     });
 }
+//Cimitero
 function getCourses() {
     const stuId = appSettings.getNumber("stuId");
     const matId = appSettings.getNumber("matId");
