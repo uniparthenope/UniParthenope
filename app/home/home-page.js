@@ -433,7 +433,8 @@ function getDepartment(studId) {
 function checkServer(){
     httpModule.request({
         url: global.url_general,
-        method: "GET"
+        method: "GET",
+        timeout: 2000
     }).then((response) => {
         if (response.statusCode !== 200){
             console.log("SERVER DOWN");
@@ -449,8 +450,8 @@ function checkServer(){
     },(e) => {
 
         dialogs.alert({
-            title: "Errore: Home CheckServer",
-            message: e.toString(),
+            title: "Errore Server!",
+            message: "TIMEOUT\nIl server è attualmente in manutenzione e le principali operazioni potrebbero non essere disponibili.\nCi scusiamo per il disagio!",
             okButtonText: "OK"
         });
     });

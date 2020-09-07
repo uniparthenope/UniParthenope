@@ -45,7 +45,7 @@
                     </StackLayout>
                 </GridLayout>
 
-                <rc:RadCalendar row="1" id="myCalendar" dayViewEventSelected="onDaySelected" selectionMode="Single" viewMode="Day" eventsViewMode="Popover" eventSource="{{ events }}" verticalAlignment="top">
+                <rc:RadCalendar row="1" id="myCalendar" dayViewEventSelected="onDaySelected" selectionMode="Single" viewMode="Day" eventsViewMode="Inline" verticalAlignment="top">
                     <rc:RadCalendar.dayViewStyle>
                         <rc:CalendarDayViewStyle showTitle="true" showDayNames="true" >
                             <rc:CalendarDayViewStyle.todayCellStyle>
@@ -55,7 +55,7 @@
                             <rc:CalendarDayViewStyle.dayCellStyle>
                                 <rc:DayCellStyle showEventsText="true" eventTextColor="White" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
                                                  cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#107dd0"
-                                                 cellTextColor="#ffffff" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" ios:cellTextSize="12" android:cellTextSize="10"/>
+                                                 cellTextColor="#ffffff" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" ios:cellTextSize="12" android:cellTextSize="10" />
                             </rc:CalendarDayViewStyle.dayCellStyle>
 
                             <rc:CalendarDayViewStyle.weekendCellStyle>

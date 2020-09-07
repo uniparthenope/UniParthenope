@@ -8,6 +8,8 @@ const appSettings = require("tns-core-modules/application-settings");
 const calendarModule = require("nativescript-ui-calendar");
 const Color = require("tns-core-modules/color");
 const modalViewModule = "modal-event/modal-event";
+const platformModule = require("tns-core-modules/platform");
+
 
 let colors = ["#c47340","#4566c1","#824bc1","#a32d13","#382603","#fff766"];
 let page;
@@ -15,6 +17,7 @@ let viewModel;
 let sideDrawer;
 let calendar;
 let result;
+let loading;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -23,16 +26,20 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     calendar = page.getViewById("myCalendar");
+    loading = page.getViewById("activityIndicator");
     console.log("UPDATED= "+global.updatedExam);
 
     if (!global.updatedExam)
     {
-        page.getViewById("activityIndicator").visibility = "visible";
+        loading.visibility = "visible";
 
         getCourses();
+
     }
     else {
         updateSession();
+        insert_event();
+
         //calendarCourses();
     }
 
@@ -204,10 +211,13 @@ function getCourses() {
                             "sede": result2[i].sede,
                             "adLogId": result2[i].adLogId
                         });
+
                     }
                     console.log("Courses Sync...");
                     global.updatedExam = true;
                     //appSettings.setNumber("aaId", result);
+                    //getAppelli();
+
                 }
                 page.getViewById("activityIndicator").visibility = "collapsed";
 
@@ -228,6 +238,121 @@ function getCourses() {
             okButtonText: "OK"
         });
     });
+}
+
+function getAppelli() {
+    global.myAppelli.slice(0);
+    let exams = global.myExams;
+    global.events = [];
+    for (let x=0; x<exams.length; x++){
+        let myarray = [];
+
+        console.log(exams[x].adId);
+        console.log(exams[x].cdsId);
+        httpModule.request({
+            url: global.url + "students/checkAppello/" + exams[x].cdsId +"/" + exams[x].adId,
+            method: "GET",
+            headers: {
+                "Content-Type" : "application/json",
+                "Authorization" : "Basic "+ global.encodedStr
+            }
+        }).then((response) => {
+            const result = response.content.toJSON();
+            loading.visibility = "visible";
+            if (response.statusCode === 401 || response.statusCode === 500)
+            {
+                dialogs.alert({
+                    title: "Errore: DocentiAppelli getAppelli",
+                    message: response.errMsg,
+                    okButtonText: "OK"
+
+                }).then();
+            }
+            else {
+
+                for (let i=0; i<result.length; i++) {
+                    let day,year,month;
+                    let final_data ="" + dayOfWeek(result[i].dataEsame) + " " + result[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result[i].dataEsame) + " " + result[i].dataEsame.substring(6, 10);
+                    day = result[i].dataEsame.substring(0, 2);
+                    month = result[i].dataEsame.substring(3, 5);
+                    year = result[i].dataEsame.substring(6, 10);
+                    let date = new Date(year,month-1,day);
+
+                    if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
+                        //Removed adId and cdsId
+                        let items = {
+                            "esame": result[i].esame,
+                            "descrizione": result[i].descrizione,
+                            "note": result[i].note,
+                            "dataEsame": final_data,
+                            "dataInizio": result[i].dataInizio,
+                            "dataFine": result[i].dataFine,
+                            "iscritti": result[i].numIscritti,
+                            "classe" : "examPass",
+                            "date" : date,
+                            "appId": result[i].appId,
+                            "prenotazione_da": "Prenotazioni: da ",
+                            "prenotazione_a": " a ",
+                            "text_iscritti": "Iscritti: ",
+                            "stato" : result[i].statoDes
+                        };
+                        myarray.push(items);
+                        //appelli_listview.refresh();
+                        console.log(myarray);
+                    }
+                    else{
+                        let items = {
+                            "esame": result[i].esame,
+                            "descrizione": result[i].descrizione,
+                            "note": result[i].note,
+                            "dataEsame": final_data,
+                            "dataInizio": result[i].dataInizio,
+                            "dataFine": result[i].dataFine,
+                            "iscritti": result[i].numIscritti,
+                            "classe" : "examPass",
+                            "date" : date,
+                            "appId": result[i].appId,
+                            "prenotazione_da": "Prenotazioni: da ",
+                            "prenotazione_a": " a ",
+                            "text_iscritti": "Iscritti: ",
+                            "stato" : result[i].statoDes
+                        };
+                        num++;
+                        appSettings.setNumber("appelloBadge",num);
+                        myarray.push(items);
+                        //appelli_listview.refresh();
+                    }
+
+                    console.log(date);
+                    let title = "[ESAME] \n" + result[i].esame;
+                    global.events.push({
+                        title : title,
+                        data_inizio: date,
+                        data_fine:date,
+                        color: new Color.Color("#0F9851")
+                    });
+                }
+            }
+
+            if (platformModule.isIOS){
+                myarray.splice(0, 0, {});
+            }
+
+            global.myAppelli.push({
+                titolo: exams[x].nome,
+                items: myarray
+            });
+
+            loading.visibility = "collapsed";
+        },(e) => {
+            console.log("Error", e);
+            dialogs.alert({
+                title: "Errore: DocentiAppelli",
+                message: e.toString(),
+                okButtonText: "OK"
+            });
+        });
+    }
 }
 
 function updateSession(){
@@ -260,8 +385,7 @@ exports.tapAppello = function(){
             clearHistory: true,
             animated: false
         };
-    frame.topmost().navigate(nav);
-};
+    page.frame.navigate(nav);};
 
 exports.tapCourses = function(){
    const nav =
@@ -270,8 +394,7 @@ exports.tapCourses = function(){
             clearHistory: true,
             animated: false
         };
-    frame.Frame.topmost().navigate(nav);
-
+    page.frame.navigate(nav);
 };
 
 exports.tapFood = function(){
@@ -281,8 +404,7 @@ exports.tapFood = function(){
             clearHistory: true,
             animated: false
         };
-    frame.Frame.topmost().navigate(nav);
-};
+    page.frame.navigate(nav);};
 
 exports.tapBus = function(){
     const nav =
@@ -291,17 +413,18 @@ exports.tapBus = function(){
             clearHistory: true,
             animated: false
         };
-    frame.Frame.topmost().navigate(nav);
-};
+    page.frame.navigate(nav);};
 
 exports.onDaySelected = function(args){
     console.log(args.eventData);
+
     const mainView = args.object;
 
     const context = { title: args.eventData.title, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
 
     mainView.showModal(modalViewModule, context, false);
 };
+
 
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;

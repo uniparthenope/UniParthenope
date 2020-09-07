@@ -8,6 +8,8 @@ const ObservableArray = require("tns-core-modules/data/observable-array").Observ
 const Observable = require("tns-core-modules/data/observable");
 const modalViewModule = "modal-esame/modal-esame";
 const platformModule = require("tns-core-modules/platform");
+const Color = require("tns-core-modules/color");
+
 
 let page;
 let viewModel;
@@ -53,10 +55,19 @@ function drawTitle() {
     page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
     page.getViewById("sessione").text = appSettings.getString("sessione");
 }
+/*
+function getAppelli() {
+    items_appello.slice(0);
+    console.log(global.myAppelli.length);
+    items_appello = global.myAppelli;
+}
+
+ */
 
 function getAppelli() {
     items_appello.slice(0);
     console.log(exams.length);
+    global.events = [];
     for (let x=0; x<exams.length; x++){
         let myarray = [];
 
@@ -135,6 +146,15 @@ function getAppelli() {
                         myarray.push(items);
                             //appelli_listview.refresh();
                     }
+
+                    console.log(date);
+                    let title = "[ESAME] \n" + result[i].esame;
+                    global.events.push({
+                        title : title,
+                        data_inizio: date,
+                        data_fine:date,
+                        color: new Color.Color("#0F9851")
+                    });
                 }
             }
 
@@ -236,6 +256,17 @@ function onItemTap(args) {
 
 exports.onItemTap = onItemTap;
  */
+function convertData(data){
+    let day = data[0]+data[1];
+    let month = data[3]+data[4];
+    let year = data[6]+data[7]+data[8]+data[9];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
+
+    let d = new Date(year,month-1,day,hour,min);
+
+    return d;
+}
 
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;

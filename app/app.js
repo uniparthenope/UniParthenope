@@ -1,9 +1,11 @@
 const application = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
+const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
+
 
 let domain = "https://api.uniparthenope.it";
-//let domain = "http://192.168.1.28:5000";
+//let domain = "http://127.0.0.1:5000";
 
 
 global.url = domain + "/UniparthenopeApp/v1/";
@@ -23,6 +25,7 @@ global.freqExams = [];
 global.myExams = [];
 global.myDocenti = [];
 global.myPrenotazioni = [];
+global.myAppelli = new ObservableArray();
 
 /*
 appSettings.setString("aa_accad", result.aa_accad);
@@ -45,6 +48,7 @@ global.clearAll = function(){
     global.myExams = [];
     global.myDocenti = [];
     global.myPrenotazioni = [];
+    global.myAppelli = new ObservableArray();
 
     appSettings.clear();
 };
