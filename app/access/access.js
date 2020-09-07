@@ -69,17 +69,14 @@ function getStatus(){
             my_status = result.accessType;
 
             if (result.accessType === "presence"){
-                appSettings.setBoolean("accessType", true);
                 lp.selectedIndex = 2;
             }
 
             else if(result.accessType === "distance"){
-                appSettings.setBoolean("accessType", true);
                 lp.selectedIndex = 1;
             }
 
             else {
-                appSettings.setBoolean("accessType", false);
                 page.getViewById("alert1").visibility = "visible";
                 lp.selectedIndex = 0;
             }
@@ -151,18 +148,22 @@ exports.ontap_save = function(){
             }
             else
             {
-                dialogs.alert({
+                dialogs.confirm({
                     title: "Accesso Modificato!",
                     message: "",
                     okButtonText: "OK"
-                });
-                if(at === "undefined")
-                    appSettings.setBoolean("accessType", false);
-                else
-                    appSettings.setBoolean("accessType", true);
+                }).then(function (result) {
+                    loading.visibility = "collapsed";
+                    my_status = at;
+                    const nav =
+                        {
+                            moduleName: "access/access",
+                            clearHistory: true
+                        };
+                    page.frame.navigate(nav);
+            });
 
-                loading.visibility = "collapsed";
-                my_status = at;
+
 
             }
         },(e) => {

@@ -31,6 +31,7 @@ appSettings.setString("semestre", result.semestre);
 */
 
 global.clearAll = function(){
+
     global.isConnected = false;
     global.updatedExam = false;
     global.tempPos = false;
@@ -43,6 +44,8 @@ global.clearAll = function(){
     global.freqExams = [];
     global.myExams = [];
     global.myDocenti = [];
+    global.myPrenotazioni = [];
+
     appSettings.clear();
 };
 
@@ -208,8 +211,14 @@ global.getAllBadge = function(page) {
 };
 
 application.on(application.exitEvent, (args) => {
-    if (!appSettings.getBoolean("rememberMe"))
+    if (!appSettings.getBoolean("rememberMe")){
+        let temp_scelta = appSettings.getBoolean("sondaggio");
+
         clearAll();
+
+        appSettings.setBoolean("sondaggio", temp_scelta);
+    }
+
 
     if (args.android) {
 

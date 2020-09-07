@@ -37,7 +37,7 @@ exports.onTapLogin = function(args) {
         dialogs.alert({
             title: "Errore!",
             message: "I campi Username e Password non possono essere vuoti!",
-            okButtonText: "OK"
+            okButtonTexext: "OK"
         });
     }
 };
@@ -68,7 +68,7 @@ exports.contact_us = function () {
             + appSettings.getString("matricola") + " "
             + appSettings.getString("grpDes") + " ]",
         body: "Scrivi messaggio ...",
-        to: ['developer.uniparthenope@gmail.com']
+        to: ['developer@uniparthenope.it']
     }).then(
         function() {
             console.log("Email closed");

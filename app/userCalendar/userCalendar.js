@@ -33,19 +33,12 @@ function onNavigatingTo(args) {
         page.getViewById("activityIndicator").visibility = "visible";
         getMainInfo();
         getPiano();
+        getAccesso();
         //getCourses();
         //getPrenotazioni();
     }
     else {
         calendarCourses();
-    }
-
-    if(!appSettings.getBoolean("accessType")){
-        dialogs.alert({
-            title: "Attenzione",
-            message: 'Bisogna scegliere la modalità con cui si intende frequentare i corsi del nuovo A.A!\n Accedere alla pagina "ACCESSO" dal menu laterale!',
-            okButtonText: "OK"
-        });
     }
 
     global.getAllBadge(page);
@@ -459,7 +452,47 @@ function onGeneralMenu() {
         };
     page.frame.navigate(nav);
 }
+function getAccesso(){
 
+    httpModule.request({
+        url: global.url_general + "Access/v1/classroom",
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic " + global.encodedStr
+        }
+    }).then((response) => {
+        const result = response.content.toJSON();
+        console.log(result);
+
+        if (response.statusCode === 401 || response.statusCode === 500) {
+            dialogs.alert({
+                title: "Errore: UserCalendar access",
+                message: result.errMsg,
+                okButtonText: "OK"
+
+            }).then();
+        }
+        else
+        {
+
+            if (result.accessType === "undefined"){
+                dialogs.alert({
+                    title: "Attenzione",
+                    message: 'Bisogna scegliere la modalità con cui si intende frequentare i corsi del nuovo A.A!\n Accedere alla pagina "ACCESSO" dal menu laterale!',
+                    okButtonText: "OK"
+                });
+            }
+
+        }
+    },(e) => {
+        dialogs.alert({
+            title: "Errore: UserCalendar getAccesso",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
 exports.tapAppello = function(){
     const nav =
         {

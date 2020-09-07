@@ -67,8 +67,12 @@ function onTapDelete(){
             sideDrawer.getViewById("topMatr").visibility = "collapsed";
             sideDrawer.getViewById("topEmail").visibility = "collapsed";
 
-            page.frame.navigate("home/home-page");
-        }
+            const nav =
+                {
+                    moduleName: "home/home-page",
+                    clearHistory: true
+                };
+            page.frame.navigate(nav);        }
     });
 }
 exports.onTapDelete = onTapDelete;

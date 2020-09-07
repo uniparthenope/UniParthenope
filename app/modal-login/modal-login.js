@@ -51,7 +51,7 @@ function onShownModally(args) {
         if(response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.confirm({
-                title: "Autenticazione Fallitaaa!",
+                title: "Autenticazione Fallita!",
                 message: _result.errMsg,
                 okButtonText: "OK"
             }).then(function (result) {
@@ -134,7 +134,7 @@ function onShownModally(args) {
             if(_result.user.grpDes === "Studenti"){
                 console.log(_result.user.userId);
 
-                normalizeToken(_result.user.userId);
+                //normalizeToken(_result.user.userId);
 
                 carriere = _result.user.trattiCarriera;
                 setAnagrafe(_result.user.persId,_result.user.grpDes);
@@ -160,7 +160,7 @@ function onShownModally(args) {
             }
            else if(_result.user.grpDes === "Docenti"){
 
-                normalizeToken(_result.user.userId);
+                //normalizeToken(_result.user.userId);
                 detailedProf(_result.user.docenteId); // Get detailed info of a professor
                 setAnagrafe(_result.user.docenteId,_result.user.grpDes);
                 sideDrawer = app.getRootView();
