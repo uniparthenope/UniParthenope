@@ -65,7 +65,8 @@ function calendarCourses() {
         if (corso === ""){
             //TODO Corso non inserito nel database!
         }
-        const color = new Color.Color(colors[i]);
+        const color = new Color.Color(colors[i%colors.length]);
+        //const color = "#c47340";
 
         let url = global.url_general + "GAUniparthenope/v1/searchCourse/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo;
         url = url.replace(/ /g, "%20");
@@ -364,9 +365,8 @@ function getPiano() {
                             }
                         }
                         page.getViewById("activityIndicator").visibility = "collapsed";
-                        calendarCourses();
                         global.updatedExam = true;
-
+                        calendarCourses();
                     }
                 },(e) => {
                     dialogs.alert({
