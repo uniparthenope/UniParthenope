@@ -10,6 +10,7 @@ const Color = require("tns-core-modules/color");
 const modalViewModule = "modal-event/modal-event";
 const utilsModule = require("tns-core-modules/utils/utils");
 
+//TODO Aggiungere altri colori
 let colors = ["#c47340","#4566c1","#824bc1","#a32d13","#382603","#fff766"];
 let page;
 let viewModel;
@@ -38,7 +39,9 @@ function onNavigatingTo(args) {
         //getPrenotazioni();
     }
     else {
-        calendarCourses();
+
+        console.log(global.freqExams.length);
+       // calendarCourses();
     }
 
     global.getAllBadge(page);
@@ -55,6 +58,7 @@ function calendarCourses() {
       Effettuare prima chiamata API e scaricare .ical o json e poi cercare il docente
       (Passo da N chiamate API ad 1!!)
      */
+
     for (let i = 0; i<esami.length; i++)
     {
         let esame = esami[i].nome;
@@ -263,6 +267,7 @@ function getPiano() {
                                 //console.log("ADSCE NULL!");
                             }
                         }
+                        //global.updatedExam = true;
                     }
 
                 },(e) => {
@@ -272,6 +277,7 @@ function getPiano() {
                         okButtonText: "OK"
                     });
                 });
+                global.updatedExam = true;
 
                 httpModule.request({
                     url: global.url + "students/examsToFreq/" + stuId + "/" + pianoId +"/" + matId,
