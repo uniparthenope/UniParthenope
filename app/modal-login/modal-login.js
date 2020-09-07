@@ -51,12 +51,12 @@ function onShownModally(args) {
         if(response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.confirm({
-                title: "Autenticazione Fallita!",
+                title: "Autenticazione Fallitaaa!",
                 message: _result.errMsg,
                 okButtonText: "OK"
-            }).then(
-                args.object.closeModal()
-            );
+            }).then(function (result) {
+                args.object.closeModal();
+            });
         }
         if(response.statusCode === 503)
         {
