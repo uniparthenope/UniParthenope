@@ -232,29 +232,34 @@ function onItemTap(args) {
                 const result = response.content.toJSON();
                 console.log(result);
 
-                let message;
                 if (response.statusCode === 200){
                     const x = global.myPrenotazioni.indexOf(index);
                     global.myPrenotazioni.splice(x,1);
                     appSettings.setNumber("appelloBadge", global.myPrenotazioni.length);
 
-                    message = "Cancellazione effettuata";
-                    const nav =
-                        {
-                            moduleName: "prenotazioni/prenotazioni",
-                            clearHistory: true
-                        };
-                    page.frame.navigate(nav);
+                    dialogs.confirm({
+                        title: "Successo!",
+                        message: "Prenotazione Cancellata!",
+                        okButtonText: "OK"
+                    }).then(function (result) {
+                        const nav =
+                            {
+                                moduleName: "prenotazioni/prenotazioni",
+                                clearHistory: true
+                            };
+                        page.frame.navigate(nav);
+                    });
+
                 }
 
-                else
-                    message = result["errMsg"];
+                else{
+                    dialogs.alert({
+                        title: "Errore: Prenotazioni",
+                        message: result["errMsg"],
+                        okButtonText: "OK"
+                    });
+                }
 
-                dialogs.alert({
-                    title: "Errore: Prenotazioni",
-                    message: message,
-                    okButtonText: "OK"
-                });
             }, error => {
                 console.error(error);
                 dialogs.alert({

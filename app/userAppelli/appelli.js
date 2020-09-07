@@ -227,12 +227,20 @@ function onItemTap(args) {
 
                 let message;
                 if (response.statusCode === 201){
-                    dialogs.alert({
+                    dialogs.confirm({
                         title: "Successo!",
                         message: "Prenotazione Effettuata",
                         okButtonText: "OK"
+                    }).then(function (result) {
+                        global.updatedExam = false;
+                        const nav =
+                            {
+                                moduleName: "userCalendar/userCalendar",
+                                clearHistory: true
+                            };
+                        page.frame.navigate(nav);
                     });
-                    global.updatedExam = false;
+
                 }
 
                 else{

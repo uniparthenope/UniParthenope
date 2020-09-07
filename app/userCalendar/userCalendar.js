@@ -241,7 +241,7 @@ function getPiano() {
                                     } else {
                                         exams.superata = result_n.stato;
 
-                                        global.myExams.push({
+                                        array.push({
                                             "nome": result[i].nome,
                                             "codice": result[i].codice,
                                             "annoId": result[i].annoId,
@@ -267,6 +267,8 @@ function getPiano() {
                                 //console.log("ADSCE NULL!");
                             }
                         }
+                        global.myExams = array;
+
                         //global.updatedExam = true;
                     }
 
@@ -306,11 +308,12 @@ function getPiano() {
                     }
                     else {
                         let alphabets26 = 'abcdefghijklmnopqrstuvwxyz';
+                        let temp_array = [];
                         for (let i=0; i<result.length; i++){
                             if(result[i].domPartCod === "A-L"){
                                 if((alphabets26.substr(0,12)).includes((appSettings.getString("cognome").charAt(0)).toLowerCase())){
                                     console.log(result[i].domPartCod);
-                                    global.freqExams.push({
+                                    temp_array.push({
                                         "nome" : result[i].nome,
                                         "codice" : result[i].codice,
                                         "annoId" : result[i].annoId,
@@ -331,7 +334,7 @@ function getPiano() {
                             }
                             else if(result[i].domPartCod === "M-Z"){
                                 if((alphabets26.substr(12,26)).includes((appSettings.getString("cognome").charAt(0)).toLowerCase())){
-                                    global.freqExams.push({
+                                    temp_array.push({
                                         "nome" : result[i].nome,
                                         "codice" : result[i].codice,
                                         "annoId" : result[i].annoId,
@@ -351,7 +354,7 @@ function getPiano() {
                                 }
                             }
                             else {
-                                global.freqExams.push({
+                                temp_array.push({
                                     "nome": result[i].nome,
                                     "codice": result[i].codice,
                                     "annoId": result[i].annoId,
@@ -370,7 +373,9 @@ function getPiano() {
                                 });
                             }
                         }
+                        global.freqExams = temp_array;
                         page.getViewById("activityIndicator").visibility = "collapsed";
+                        appSettings.setNumber("examsBadge",global.freqExams.length);
                         global.updatedExam = true;
                         calendarCourses();
                     }

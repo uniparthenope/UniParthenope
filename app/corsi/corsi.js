@@ -41,8 +41,6 @@ function getCourses() {
     let courses = global.freqExams;
     const act_sem = appSettings.getString("semestre");
 
-    let x = 0;
-
     for (let i=0; i<courses.length; i++)
     {
         console.log(courses[i].domPartCod);
@@ -57,7 +55,6 @@ function getCourses() {
             "partizione": "Partizione: " + courses[i].domPartCod
         });
         esamiList.refresh();
-        x++;
         /*
         if (act_sem === "Secondo Semestre" && (courses[i].semestre === "S2" ||courses[i].semestre === "A2" || courses[i].semestre === "N/A"))
         {
@@ -109,7 +106,7 @@ function getCourses() {
          */
     }
 
-    appSettings.setNumber("examsBadge",x);
+    appSettings.setNumber("examsBadge",global.freqExams.length);
 }
 
 function drawYear(year) {
