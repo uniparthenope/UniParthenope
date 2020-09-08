@@ -18,6 +18,7 @@ let sideDrawer;
 let calendar;
 let result;
 let loading;
+let num;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -49,7 +50,6 @@ function onNavigatingTo(args) {
 }
 
 function calendarCourses() {
-    //console.log(global.freqExams.length);
     global.events = [];
 
     let esami = global.freqExams;
@@ -215,18 +215,16 @@ function getCourses() {
                     }
                     console.log("Courses Sync...");
                     global.updatedExam = true;
-                    //appSettings.setNumber("aaId", result);
-                    //getAppelli();
-
                 }
                 page.getViewById("activityIndicator").visibility = "collapsed";
-
             },(e) => {
                 dialogs.alert({
                     title: "Errore: DocentiHome",
                     message: e.toString(),
                     okButtonText: "OK"
                 });
+            }).then(function () {
+                getAppelli();
             });
         }
 
@@ -240,15 +238,32 @@ function getCourses() {
     });
 }
 
+function dayOfWeek(date) {
+    let day = date.substring(0, 2);
+    let month = date.substring(3, 5);
+    let year = date.substring(6, 10);
+
+    let dayOfWeek = new Date(year,month-1,day).getDay();
+    return isNaN(dayOfWeek) ? null : ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'][dayOfWeek];
+
+}
+
+function monthOfYear(date) {
+    let month = parseInt(date.substring(3, 5)) - 1;
+    return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
+
+}
+
 function getAppelli() {
     global.myAppelli.slice(0);
+    num = 0;
     let exams = global.myExams;
     global.events = [];
     for (let x=0; x<exams.length; x++){
         let myarray = [];
 
-        console.log(exams[x].adId);
-        console.log(exams[x].cdsId);
+        //console.log("adId: " + exams[x].adId);
+        //console.log("cdsId: " + exams[x].cdsId);
         httpModule.request({
             url: global.url + "students/checkAppello/" + exams[x].cdsId +"/" + exams[x].adId,
             method: "GET",
@@ -268,8 +283,7 @@ function getAppelli() {
 
                 }).then();
             }
-            else {
-
+            else{
                 for (let i=0; i<result.length; i++) {
                     let day,year,month;
                     let final_data ="" + dayOfWeek(result[i].dataEsame) + " " + result[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result[i].dataEsame) + " " + result[i].dataEsame.substring(6, 10);
@@ -297,8 +311,6 @@ function getAppelli() {
                             "stato" : result[i].statoDes
                         };
                         myarray.push(items);
-                        //appelli_listview.refresh();
-                        console.log(myarray);
                     }
                     else{
                         let items = {
@@ -318,13 +330,10 @@ function getAppelli() {
                             "stato" : result[i].statoDes
                         };
                         num++;
-                        appSettings.setNumber("appelloBadge",num);
                         myarray.push(items);
-                        //appelli_listview.refresh();
                     }
 
-                    console.log(date);
-                    let title = "[ESAME] \n" + result[i].esame;
+                    let title = "[ESAME] " + result[i].esame;
                     global.events.push({
                         title : title,
                         data_inizio: date,
@@ -351,6 +360,9 @@ function getAppelli() {
                 message: e.toString(),
                 okButtonText: "OK"
             });
+        }).then(function () {
+            appSettings.setNumber("appelloBadge", num);
+            insert_event();
         });
     }
 }

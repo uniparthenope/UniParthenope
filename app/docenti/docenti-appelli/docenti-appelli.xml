@@ -35,7 +35,7 @@
         <GridLayout rows="100,*,50">
 
             <GridLayout row="0" class="two-color-gradient" width="100%" height="15%" verticalAlignment="top" rows="auto,auto,auto">
-                <StackLayout class="main_image" backgroundImage="~/images/icon/add.png" height="25" width="25" horizontalAlignment="right" ontap="ontap_addExam" marginRight="10"/>
+                <!--<StackLayout class="main_image" backgroundImage="~/images/icon/add.png" height="25" width="25" horizontalAlignment="right" ontap="ontap_addExam" marginRight="10"/>-->
                 <Label row="0" class="textPrimary" text="Appelli Pubblicati" horizontalAlignment="center" verticalAlignment="top" marginTop="10" marginBottom="10"/>
                 <Label row="1" class="textPrimary" id="sessione" horizontalAlignment="center" verticalAlignment="bottom" fontSize="14"/>
                 <Label row="2" class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="10" fontSize="12"/>
