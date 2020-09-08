@@ -52,14 +52,14 @@
             <StackLayout id="info_panel" orientation="vertical"  height="75%" backgroundColor="rgba(34, 56, 79,0.9)" borderRadius="20">
 
                 <StackLayout margin="5,5,5,5">
-                    <StackLayout orientation="vertical"  width="100%" horizontalAlignment="center" marginBottom="10">
+                    <StackLayout id="stack_1" visibility="visible" orientation="vertical"  width="100%" horizontalAlignment="center" marginBottom="10">
                         <Label id="depart" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white"/>
                     </StackLayout>
-                    <StackLayout orientation="vertical" horizontalAlignment="center" marginBottom="5" width="100%">
+                    <StackLayout id="stack_2" visibility="visible" orientation="vertical" horizontalAlignment="center" marginBottom="5" width="100%">
                         <Label id="surname" text="SURNAME" horizontalAlignment="center" fontSize="28" color="white"/>
                         <Label id="name" text="NAME" horizontalAlignment="center" fontSize="18" color="white"/>
                     </StackLayout>
-                    <GridLayout horizontalAlignment="center" width="100%" height="20%">
+                    <GridLayout id="stack_3" visibility="visible" horizontalAlignment="center" width="100%" height="20%">
                     <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="15">
                         <Label text="MATRICOLA" horizontalAlignment="center" fontSize="18" color="white"/>
                         <Label id="matricola" text="--" horizontalAlignment="center" fontSize="18" color="white"/>
@@ -70,7 +70,7 @@
                         <Label id="roleID"  text="" horizontalAlignment="center" fontSize="18" color="white"/>
                     </StackLayout>
                     </GridLayout>
-                    <StackLayout class="main_image_contain" marginBottom="5" borderRadius="20" id="my_qr" verticalAlignment="bottom" horizontalAlignment="center" backgroundImage="~/images/qr_test.jpg" height="225" width="225"/>
+                    <StackLayout ondoubletap="tap_zoom" class="main_image_contain" marginBottom="15" borderRadius="20%" id="my_qr" verticalAlignment="center" horizontalAlignment="center" backgroundImage="~/images/qr_test.jpg" height="100%" width="100%"/>
 
                 </StackLayout>
 

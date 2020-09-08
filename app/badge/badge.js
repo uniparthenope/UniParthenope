@@ -11,6 +11,7 @@ const modalViewModule = "modal-meteo/modal-meteo";
 let page;
 let viewModel;
 let sideDrawer;
+let zoom = false;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -137,6 +138,21 @@ function getPIC(personId, value){
         });
     });
 }
+exports.tap_zoom = function(){
+
+    zoom = !zoom;
+
+    if (zoom){
+        page.getViewById("stack_1").visibility = "collapsed";
+        page.getViewById("stack_2").visibility = "collapsed";
+        page.getViewById("stack_3").visibility = "collapsed";
+    }
+    else{
+        page.getViewById("stack_1").visibility = "visible";
+        page.getViewById("stack_2").visibility = "visible";
+        page.getViewById("stack_3").visibility = "visible";
+    }
+};
 exports.tap_scanQR = function(){
     let count = 0;
    /* const nav =
