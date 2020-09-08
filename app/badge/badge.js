@@ -93,8 +93,7 @@ function getQr(){
         headers: {
             "Content-Type" : "image/png",
             "Authorization" : "Basic "+ global.encodedStr
-        },
-        "dontFollowRedirects": true
+        }
     }).then((source) => {
         page.getViewById("my_qr").backgroundImage = source["path"];
     }, (e) => {
