@@ -38,12 +38,16 @@ function onNavigatingTo(args) {
 
     checkServer();
     initializeGraph();
+    console.log(global.tempPos);
 
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
         console.log("Setto la posizione!");
         getPosition();
         global.tempPos = true;
     }
+
+
+
 
    if (user !== undefined && !global.isConnected){
        dialogs.alert({

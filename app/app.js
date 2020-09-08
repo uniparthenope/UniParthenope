@@ -254,12 +254,14 @@ application.on(application.exitEvent, (args) => {
 });
 
 application.on(application.suspendEvent, (args) => {
+    global.tempPos = false;
+
     if (args.android) {
         console.log("Suspend: " + args.android);
-        global.tempPos = false;
     } else if (args.ios) {
         console.log("Suspend: " + args.ios);
     }
 });
+
 
 application.run({ moduleName: "app-root" });

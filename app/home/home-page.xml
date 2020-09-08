@@ -79,7 +79,7 @@
                     <Label class="topTitle" horizontalAlignment="right" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="10" marginTop="15" textAlignment="right"/>
                 </android>
 
-                <Image src="~/images/logo_parth.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>
+                <Image src="~/images/logo_new.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>
             </StackLayout>
 
             <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
