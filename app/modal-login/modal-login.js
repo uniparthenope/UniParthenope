@@ -392,6 +392,17 @@ function setAnagrafe(id, type){
         //console.log(_result);
         global.saveAnagrafe(type,_result);
 
+        if (type === "Docenti"){
+            let nome = appSettings.getString("nome");
+            let cognome = appSettings.getString("cognome");
+
+            sideDrawer.getViewById("topName").text = nome + " " + cognome;
+            sideDrawer.getViewById("topMatr").text = _result.ruolo+ " " + _result.settore;
+            sideDrawer.getViewById("topEmail").text = _result.emailAte;
+            sideDrawer.getViewById("topMatr").visibility = "visible";
+            sideDrawer.getViewById("topEmail").visibility = "visible";
+        }
+
     },(e) => {
         console.log("Errore Anagrafe", e);
         dialogs.alert({

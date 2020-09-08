@@ -43,9 +43,7 @@ function onNavigatingTo(args) {
 
         //calendarCourses();
     }
-
     global.getAllBadge(page);
-
     page.bindingContext = viewModel;
 }
 
