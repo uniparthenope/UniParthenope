@@ -3,10 +3,8 @@ const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
-var BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
-var barcodescanner = new BarcodeScanner();
-const modalViewModule = "modal-meteo/modal-meteo";
-
+let BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
+let barcodescanner = new BarcodeScanner();
 
 let page;
 let viewModel;
@@ -88,13 +86,15 @@ function choseBackground(page){
 }
 
 function getQr(){
+    page.getViewById("my_qr").backgroundImage = "~/images/qr_test.jpg";
     httpModule.getFile({
         "url": global.url_general + "Badges/v1/generateQrCode",
         "method": "GET",
         headers: {
             "Content-Type" : "image/png",
             "Authorization" : "Basic "+ global.encodedStr
-        }
+        },
+        "dontFollowRedirects": false
     }).then((source) => {
         page.getViewById("my_qr").backgroundImage = source["path"];
     }, (e) => {
@@ -153,6 +153,11 @@ exports.tap_zoom = function(){
         page.getViewById("stack_3").visibility = "visible";
     }
 };
+
+exports.tap_reloadQR = function(){
+    getQr();
+};
+
 exports.tap_scanQR = function(){
     let count = 0;
    /* const nav =
