@@ -80,7 +80,7 @@ function onNavigatingTo(args) {
                     temp_items.push({
                         nome: menu[j].nome,
                         descrizione: menu[j].descrizione,
-                        prezzo: menu[j]["prezzo"] + " €",
+                        prezzo: menu[j]["prezzo"],
                         tipologia: menu[j].tipologia,
                         image: img
                     })

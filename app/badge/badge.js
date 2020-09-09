@@ -185,7 +185,7 @@ exports.tap_scanQR = function(){
             //count++;
             console.log(result.format + ": " + result.text + " (count: " + count + ")");
             barcodescanner.message = "SCANNED";
-
+            
             httpModule.request({
                 url : global.url_general + "Badges/v1/checkQrCode",
                 method : "POST",

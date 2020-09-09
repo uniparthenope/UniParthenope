@@ -12,6 +12,7 @@ let sideDrawer;
 let loading;
 let index;
 let my_status = "";
+let autocert_old = true;
 let status = ["Non Definito","In Distanza","In Presenza"];
 
 
@@ -81,6 +82,8 @@ function getStatus(){
                 lp.selectedIndex = 0;
             }
 
+            page.getViewById("switch_sondaggio").checked = autocert_old;
+
 
             loading.visibility = "collapsed";
         }
@@ -109,74 +112,175 @@ function onGeneralMenu()
 }
 
 exports.ontap_save = function(){
+    let lp = page.getViewById("listpicker");
 
+    if (index === 0){
+        lp.selectedIndex = index;
+        sendRequest("undefined");
+    }
 
-    let at = "";
+    else if (index === 1){
+        lp.selectedIndex = index;
+        sendRequest("distance");
+    }
 
-    if (index === 0)
-        at = "undefined";
-    else if (index === 1)
-        at = "distance";
-    else if (index === 2)
-        at = "presence";
-    console.log(at);
-    console.log(my_status);
-
-    if (my_status !== at){
-        loading.visibility = "visible";
-
-        httpModule.request({
-            url: global.url_general + "Access/v1/classroom",
-            method: "POST",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic " + global.encodedStr
-            },
-            content: JSON.stringify({
-                accessType: at
-            })
-        }).then((response) => {
-            const result = response.content.toJSON();
-
-            if (response.statusCode === 401 || response.statusCode === 500) {
-                dialogs.alert({
-                    title: "Errore: Access ontapSave",
-                    message: result.errMsg,
-                    okButtonText: "OK"
-
-                }).then();
-            }
-            else
-            {
-                dialogs.confirm({
-                    title: "Accesso Modificato!",
-                    message: "",
-                    okButtonText: "OK"
-                }).then(function (result) {
-                    loading.visibility = "collapsed";
-                    my_status = at;
-                    const nav =
-                        {
-                            moduleName: "access/access",
-                            clearHistory: true
-                        };
-                    page.frame.navigate(nav);
-            });
-
-
-
-            }
-        },(e) => {
-            dialogs.alert({
-                title: "Errore: Access",
-                message: e.toString(),
+    else if (index === 2){
+        if (appSettings.getBoolean("autocertificazione",false)){
+            sendRequest("presence");
+        }
+        else{
+            dialogs.confirm({
+                title: "Attenzione!",
+                message: "Per poter selezionare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
                 okButtonText: "OK"
+            }).then(function (result) {
+                if(my_status === "distance")
+                    lp.selectedIndex = 1;
+                else
+                    lp.selectedIndex = 0;
             });
-        });
+        }
+
     }
 
 };
 
+function sendRequest(scelta){
+    loading.visibility = "visible";
+    httpModule.request({
+        url: global.url_general + "Access/v1/classroom",
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic " + global.encodedStr
+        },
+        content: JSON.stringify({
+            accessType: scelta
+        })
+    }).then((response) => {
+        const result = response.content.toJSON();
+
+        if (response.statusCode === 401 || response.statusCode === 500) {
+            loading.visibility = "collapsed";
+            dialogs.alert({
+                title: "Errore: Access ontapSave",
+                message: result.errMsg,
+                okButtonText: "OK"
+
+            }).then();
+        }
+        else
+        {
+            loading.visibility = "collapsed";
+            dialogs.confirm({
+                title: "Accesso Modificato!",
+                message: "",
+                okButtonText: "OK"
+            }).then(function (result) {
+                loading.visibility = "collapsed";
+                const nav =
+                    {
+                        moduleName: "access/access",
+                        clearHistory: true
+                    };
+                page.frame.navigate(nav);
+            });
+
+
+
+        }
+    },(e) => {
+        dialogs.alert({
+            title: "Errore: Access",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+
+}
+
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
+
+function onSwitchLoaded_autocert(args) {
+    const mySwitch = args.object;
+
+    mySwitch.on("checkedChange", (args) => {
+        const sw = args.object;
+        const isChecked = sw.checked;
+
+        if(isChecked && !autocert_old){
+
+            httpModule.request({
+                url: global.url + "general/covidAlert",
+                method: "GET",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization" : "Basic " + global.encodedStr
+                }
+            }).then((response) => {
+                const result = response.content.toJSON();
+
+                if (response.statusCode === 401 || response.statusCode === 500) {
+                    dialogs.alert({
+                        title: "Errore Server!",
+                        message: result,
+                        okButtonText: "OK"
+
+                    }).then();
+                }
+                else{
+
+                    dialogs.confirm({
+                        title: result.titolo,
+                        message: result.body,
+                        okButtonText: "Si",
+                        cancelButtonText: "No"
+                    }).then(function (result) {
+                        if(result){
+                            appSettings.setBoolean("autocertificazione",true);
+                            autocert_old = true;
+                        }
+
+
+                        else{
+                            page.getViewById("switch_sondaggio").checked = false;
+                        }
+
+                    });
+
+                }
+
+            },(e) => {
+                dialogs.alert({
+                    title: "Errore: COVID Message",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
+            });
+
+        }
+        else if (!isChecked && my_status === "presence" && index === 2){
+
+                dialogs.alert({
+                    title: "Attenzione!",
+                    message: "Il tipo di accesso in PRESENZA non consente di modificare l'autocertificazione!",
+                    okButtonText: "OK"
+                });
+                page.getViewById("switch_sondaggio").checked = true;
+                autocert_old = true;
+
+
+
+
+        }
+        else{
+            console.log("FALSO");
+            appSettings.setBoolean("autocertificazione",false);
+            autocert_old = false;
+        }
+
+    });
+}
+exports.onSwitchLoaded_autocert = onSwitchLoaded_autocert;

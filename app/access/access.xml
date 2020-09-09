@@ -43,6 +43,11 @@
                 <ListPicker id="listpicker" items="{{ status }}" selectedIndex="0" loaded="onListPickerLoaded"/>
             </StackLayout>
 
+            <GridLayout margin="5 5 5 5" columns="*,50" height="50" >
+                <Label class="textPrimary" id="text_appello" color="#22384f" col="0" text="Autocertificazione Obbligatoria" horizontalAlignment="left" verticalAlignment="center"/>
+                <Switch col="1" id="switch_sondaggio" checked="false" loaded="onSwitchLoaded_autocert" horizontalAlignment="right" verticalAlignment="center"/>
+            </GridLayout>
+
 
         </StackLayout>
         <Button margin="5 5 5 5" class="btn" text="Salva" ontap="ontap_save" verticalAlignment="bottom"/>
