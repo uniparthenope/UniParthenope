@@ -12,8 +12,11 @@ let sideDrawer;
 let loading;
 let index;
 let my_status = "";
-let autocert_old = true;
+let my_selfcert = false;
 let status = ["Non Definito","A Distanza","In Presenza"];
+let isStudent = false;
+let setSelfBool = false;
+let setAccBool = false;
 
 
 function onNavigatingTo(args) {
@@ -25,7 +28,20 @@ function onNavigatingTo(args) {
     sideDrawer.closeDrawer();
     loading = page.getViewById("activityIndicator");
 
-    getStatus();
+    getSelfCert();
+
+    if (appSettings.getString("grpDes") === "Studenti"){
+        isStudent = true;
+        getAccess();
+        page.getViewById("scelta_accesso").visibility = "visible";
+
+    }
+    else{
+        isStudent = false;
+        page.getViewById("scelta_accesso").visibility = "collapsed";
+
+    }
+
 
 
     page.bindingContext = viewModel;
@@ -42,7 +58,7 @@ function onListPickerLoaded(fargs) {
 }
 exports.onListPickerLoaded = onListPickerLoaded;
 
-function getStatus(){
+function getAccess(){
     loading.visibility = "visible";
 
     httpModule.request({
@@ -62,7 +78,7 @@ function getStatus(){
                 message: result,
                 okButtonText: "OK"
 
-            }).then();
+            })
         }
         else
         {
@@ -82,8 +98,6 @@ function getStatus(){
                 lp.selectedIndex = 0;
             }
 
-            page.getViewById("switch_sondaggio").checked = autocert_old;
-
 
             loading.visibility = "collapsed";
         }
@@ -96,6 +110,58 @@ function getStatus(){
         });
     });
 }
+
+function getSelfCert(){
+    loading.visibility = "visible";
+
+    httpModule.request({
+        url: global.url_general + "Access/v1/covidStatement",
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic " + global.encodedStr
+        }
+    }).then((response) => {
+        const result = response.content.toJSON();
+        console.log(result);
+
+        if (response.statusCode === 401 || response.statusCode === 500) {
+            dialogs.alert({
+                title: "Errore Server!",
+                message: result,
+                okButtonText: "OK"
+
+            })
+        }
+        else
+        {
+            let sw = page.getViewById("switch_sondaggio");
+            if(result.covidStatement){
+
+                my_selfcert = true;
+                appSettings.setBoolean("selfcert", true);
+                sw.checked = "true";
+                console.log("TRUE");
+
+            }
+            else{
+                my_selfcert = false;
+                appSettings.setBoolean("selfcert", false);
+                sw.checked = "false";
+            }
+
+            loading.visibility = "collapsed";
+        }
+    },(e) => {
+        console.log("Error", e.retErrMsg);
+        dialogs.alert({
+            title: "Errore Server!",
+            message: e.retErrMsg,
+            okButtonText: "OK"
+        });
+    });
+}
+
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
@@ -112,40 +178,100 @@ function onGeneralMenu()
 }
 
 exports.ontap_save = function(){
-    let lp = page.getViewById("listpicker");
 
-    if (index === 0){
-        lp.selectedIndex = index;
-        sendRequest("undefined");
-    }
+    if(isStudent){
+        let lp = page.getViewById("listpicker");
 
-    else if (index === 1){
-        lp.selectedIndex = index;
-        sendRequest("distance");
-    }
+        if (index === 0){
+            lp.selectedIndex = index;
+            setAccess("undefined");
+            setSelfCert();
 
-    else if (index === 2){
-        if (appSettings.getBoolean("autocertificazione",false)){
-            sendRequest("presence");
         }
-        else{
-            dialogs.confirm({
-                title: "Attenzione!",
-                message: "Per poter selezionare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
-                okButtonText: "OK"
-            }).then(function (result) {
-                if(my_status === "distance")
-                    lp.selectedIndex = 1;
-                else
-                    lp.selectedIndex = 0;
+
+        else if (index === 1){
+            lp.selectedIndex = index;
+            setAccess("distance");
+            setSelfCert();
+
+        }
+        else if (index === 2){
+            if (appSettings.getBoolean("selfcert",false)){
+                setAccess("presence");
+                setSelfCert();
+
+            }
+            else{
+                dialogs.confirm({
+                    title: "Attenzione!",
+                    message: "Per poter selezionare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
+                    okButtonText: "OK"
+                }).then(function (result) {
+                    if(my_status === "distance")
+                        lp.selectedIndex = 1;
+                    else
+                        lp.selectedIndex = 0;
+                });
+            }
+
+        }
+    }
+    else
+        setSelfCert();
+
+
+    if(setSelfBool && setAccBool){
+        dialogs.confirm({
+            title: "Successo",
+            message:"Modifica effettuata!",
+            okButtonText: "OK"
+        }).then(function (result) {
             });
-        }
 
     }
+
 
 };
+function setSelfCert(){
+    loading.visibility = "visible";
+    httpModule.request({
+        url: global.url_general + "Access/v1/covidStatement",
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic " + global.encodedStr
+        },
+        content: JSON.stringify({
+            covidStatement: appSettings.getBoolean("selfcert",false)
+        })
+    }).then((response) => {
+        const result = response.content.toJSON();
 
-function sendRequest(scelta){
+        if (response.statusCode === 401 || response.statusCode === 500) {
+            loading.visibility = "collapsed";
+            setSelfBool = false;
+            dialogs.alert({
+                title: "Errore: Access ontapSave",
+                message: result.errMsg,
+                okButtonText: "OK"
+
+            })
+        }
+        else
+        {
+            loading.visibility = "collapsed";
+            setSelfBool = true;
+
+        }
+    },(e) => {
+        dialogs.alert({
+            title: "Errore: Access",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
+function setAccess(scelta){
     loading.visibility = "visible";
     httpModule.request({
         url: global.url_general + "Access/v1/classroom",
@@ -162,6 +288,7 @@ function sendRequest(scelta){
 
         if (response.statusCode === 401 || response.statusCode === 500) {
             loading.visibility = "collapsed";
+            setAccBool = false;
             dialogs.alert({
                 title: "Errore: Access ontapSave",
                 message: result.errMsg,
@@ -172,21 +299,7 @@ function sendRequest(scelta){
         else
         {
             loading.visibility = "collapsed";
-            dialogs.confirm({
-                title: "Accesso Modificato!",
-                message: "",
-                okButtonText: "OK"
-            }).then(function (result) {
-                loading.visibility = "collapsed";
-                const nav =
-                    {
-                        moduleName: "access/access",
-                        clearHistory: true
-                    };
-                page.frame.navigate(nav);
-            });
-
-
+            setAccBool = true;
 
         }
     },(e) => {
@@ -210,15 +323,11 @@ function onSwitchLoaded_autocert(args) {
         const sw = args.object;
         const isChecked = sw.checked;
 
-        if(isChecked && !autocert_old){
+        if(isChecked && !my_selfcert){
 
             httpModule.request({
-                url: global.url + "general/covidAlert",
+                url: global.url_general + "Access/v1/covidStatementMessage",
                 method: "GET",
-                headers: {
-                    "Content-Type" : "application/json",
-                    "Authorization" : "Basic " + global.encodedStr
-                }
             }).then((response) => {
                 const result = response.content.toJSON();
 
@@ -239,13 +348,15 @@ function onSwitchLoaded_autocert(args) {
                         cancelButtonText: "No"
                     }).then(function (result) {
                         if(result){
-                            appSettings.setBoolean("autocertificazione",true);
+                            appSettings.setBoolean("selfcert",true);
                             autocert_old = true;
                         }
 
 
                         else{
                             page.getViewById("switch_sondaggio").checked = false;
+                            appSettings.setBoolean("selfcert" , false);
+                            autocert_old = false;
                         }
 
                     });
@@ -261,7 +372,8 @@ function onSwitchLoaded_autocert(args) {
             });
 
         }
-        else if (!isChecked && my_status === "presence" && index === 2){
+        /*
+        else if (!isChecked && my_status === "presence" && isStudent){
 
                 dialogs.alert({
                     title: "Attenzione!",
@@ -277,8 +389,14 @@ function onSwitchLoaded_autocert(args) {
         }
         else{
             console.log("FALSO");
-            appSettings.setBoolean("autocertificazione",false);
+            appSettings.setBoolean("selfcert",false);
             autocert_old = false;
+        }
+
+         */
+        else{
+            console.log("FALSO");
+            appSettings.setBoolean("selfcert",false);
         }
 
     });
