@@ -25,7 +25,7 @@ function onNavigatingTo(args) {
     let bottom_bar = page.getViewById("bottom_bar");
     let grpDes = appSettings.getString("grpDes","");
 
-    if (global.isConnected === false || grpDes === "PTA" || grpDes === "Ristoratori"){
+    if (global.isConnected === false || grpDes === "PTA" || grpDes === "Ristorante" || grpDes === "StudentiNonImm"){
         bottom_bar.visibility = "collapsed";
     }
     else{
@@ -39,40 +39,32 @@ function onNavigatingTo(args) {
     viewModel = Observable.fromObject({
         items:items
     });
-    let curr = new Date();
-    let data = ""+ ("0" + curr.getDate()).slice(-2)+ ("0" + (curr.getMonth() + 1)).slice(-2) + curr.getFullYear();
-    //console.log("CURR DATA = " + data);
 
     httpModule.request({
-        url: global.url_general + "Eating/v1/getToday",
+        url: global.url_general + "Eating/v1/getAllToday",
         method: "GET",
         headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
+            "Content-Type" : "application/json"
         }
     }).then((response) => {
         const result = response.content.toJSON();
 
-        if (response.statusCode === 401 || response.statusCode === 500)
-        {
+        if (response.statusCode === 401 || response.statusCode === 500) {
             dialogs.alert({
                 title: "Errore: Menu getToday!",
                 message: result.errMsg,
                 okButtonText: "OK"
-            }).then(
-            );
+            });
         }
-        else {
+        else{
             for (let i=0; i<result.length; i++){
-                console.log(result[i]["bar"]);
                 let menu = result[i]["menu"];
 
                 let temp_items = [];
 
                 for (let j=0; j<menu.length; j++){
-
-
                     let img;
+
                     if (menu[j].image === "")
                         img = "~/images/no_food.png";
                     else
@@ -92,7 +84,7 @@ function onNavigatingTo(args) {
                 }
 
                 items.push({
-                    nome_bar: result[i]["bar"],
+                    nome_bar: result[i]["info"]["nome"],
                     items: temp_items
                 });
             }
@@ -108,11 +100,6 @@ function onNavigatingTo(args) {
     page.bindingContext = viewModel;
 }
 
-function getCurrentData() {
-    let data = new Date();
-
-    return "" + ("0" + data.getUTCDate()).slice(-2) + ("0" + (data.getUTCMonth() + 1)).slice(-2) + data.getUTCFullYear()
-}
 
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
