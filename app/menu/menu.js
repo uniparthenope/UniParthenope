@@ -23,8 +23,9 @@ function onNavigatingTo(args) {
     sideDrawer.closeDrawer();
 
     let bottom_bar = page.getViewById("bottom_bar");
+    let grpDes = appSettings.getString("grpDes","");
 
-    if (global.isConnected === false){
+    if (global.isConnected === false || grpDes === "PTA" || grpDes === "Ristoratori"){
         bottom_bar.visibility = "collapsed";
     }
     else{

@@ -13,7 +13,7 @@ let loading;
 let index;
 let my_status = "";
 let autocert_old = true;
-let status = ["Non Definito","In Distanza","In Presenza"];
+let status = ["Non Definito","A Distanza","In Presenza"];
 
 
 function onNavigatingTo(args) {

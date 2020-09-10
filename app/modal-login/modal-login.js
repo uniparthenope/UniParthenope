@@ -10,6 +10,13 @@ const appSettings = require("tns-core-modules/application-settings");
 let base64= require('base-64');
 let utf8 = require('utf8');
 
+/*
+            7	Docenti
+            4	Ipot. Immatricolati
+            8	Preiscritti
+            9	Registrati
+            6	Studenti
+             */
 
 let page;
 let account;
@@ -227,14 +234,41 @@ function onShownModally(args) {
                 frame.Frame.topmost().navigate(nav);
                 */
             }
-
+        //ALTRI UTENTI
             else{
-                dialogs.alert({
-                    title: "Attenzione!",
-                    message: "Utente non supportato!",
-                    okButtonText: "OK"
-                });
-                args.object.closeModal();
+                //console.log(_result.user.grpId);
+                sideDrawer = app.getRootView();
+                appSettings.setString("grpDes",_result.user.grpDes);
+                appSettings.setString("matricola","--");
+
+                let remember = sideDrawer.getViewById("rememberMe").checked;
+
+
+                if (remember){
+                    appSettings.setString("username",user);
+                    appSettings.setString("token",global.encodedStr);
+                    appSettings.setBoolean("rememberMe",true);
+                }
+                global.isConnected = true;
+                let nc = user.split(".");
+
+                appSettings.setString("nome", nc[0].toUpperCase());
+                appSettings.setString("cognome", nc[1].toUpperCase());
+
+
+                sideDrawer.getViewById("topName").text = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
+                let userForm = sideDrawer.getViewById("userOther");
+                let loginForm = sideDrawer.getViewById("loginForm");
+                loginForm.visibility = "collapsed";
+                userForm.visibility = "visible";
+
+                closeCallback();
+                const nav =
+                    {
+                        moduleName: "home/home-page",
+                        clearHistory: true
+                    };
+                frame.Frame.topmost().navigate(nav);
             }
         }
 

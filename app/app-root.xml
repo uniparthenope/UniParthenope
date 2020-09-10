@@ -85,11 +85,19 @@
                         <Button class="btn-menu" text="Miei Menu" marginBottom="5" marginTop="20" tap="goto_menuList"/>
                         <Button class="btn-menu" text="Nuovo Pasto" marginBottom="5" marginTop="20" tap="goto_menuNew"/>
                     </StackLayout>
-                        <!--     Admin       -->
-                        <StackLayout id="userAdmin" visibility="collapsed">
-                            <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_adminHome"/>
-                            <Button class="btn-menu" text="Accounts" marginBottom="5" marginTop="20" tap="goto_adminAccount"/>
-                            <Button class="btn-menu" text="Nuovo Utente" marginBottom="5" marginTop="20" tap="goto_adminNew"/>
+
+                    <!--     Admin       -->
+                    <StackLayout id="userAdmin" visibility="collapsed">
+                        <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_adminHome"/>
+                        <Button class="btn-menu" text="Accounts" marginBottom="5" marginTop="20" tap="goto_adminAccount"/>
+                        <Button class="btn-menu" text="Nuovo Utente" marginBottom="5" marginTop="20" tap="goto_adminNew"/>
+                    </StackLayout>
+
+                        <!--     Altri User       -->
+                        <StackLayout id="userOther" visibility="collapsed">
+                            <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_home_public"/>
+                            <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
+                            <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
                         </StackLayout>
                     </GridLayout>
 

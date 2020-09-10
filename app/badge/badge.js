@@ -39,6 +39,14 @@ function onNavigatingTo(args) {
         page.getViewById("roleID").text = appSettings.getString("settCod");
         page.getViewById("depart").text = appSettings.getString("facDes").toUpperCase();
     }
+    else if (appSettings.getString("grpDes") === "PTA"){
+
+        getPIC(appSettings.getNumber("persId"), 0);
+        page.getViewById("name").text = appSettings.getString("nome");
+        page.getViewById("surname").text = appSettings.getString("cognome");
+        page.getViewById("matricola").text = appSettings.getString("matricola");
+        page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
+    }
 
 
 

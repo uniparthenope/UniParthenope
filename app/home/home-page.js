@@ -47,8 +47,6 @@ function onNavigatingTo(args) {
     }
 
 
-
-
    if (user !== undefined && !global.isConnected){
        dialogs.alert({
            title: "Bentornato!",
@@ -58,6 +56,7 @@ function onNavigatingTo(args) {
        autoconnect();
    }
    else if (remember) {
+       console.log("HEREREM");
       setSideMenu(global.myform,global.username);
    }
 
@@ -128,23 +127,38 @@ function autoconnect() {
                     };
                 page.frame.navigate(nav);
             }
-            /* Se un utente è di tipoADMIN */
-                //NON PIù SUPPORTATO!
-            /*
-            else if (response.statusCode === 666)
+            /* Se un utente è di tipo USER TECNICO (ristorante) 202 */
+            else if (_result.user.grpDes === "PTA")
             {
-                let remember = sideDrawer.getViewById("rememberMe").checked;
-                console.log("Admin:" + _result.username);
+                console.log("PTA");
+                appSettings.setString("grpDes",_result.user.grpDes);
+                appSettings.setString("matricola","--");
 
-                sideDrawer.getViewById("topName").text = _result.username;
-                setSideMenu("userAdmin",_result.username);
+                let user = appSettings.getString("username",".");
+                let nc = user.split(".");
+                global.isConnected = true;
+
+                appSettings.setString("nome", nc[0].toUpperCase());
+                appSettings.setString("cognome", nc[1].toUpperCase());
+                let username  = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
+
+                //sideDrawer.getViewById("topName").text = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
+                //let userForm = sideDrawer.getViewById("userOther");
+                //let loginForm = sideDrawer.getViewById("loginForm");
+                //loginForm.visibility = "collapsed";
+                //userForm.visibility = "visible";
+
+                indicator.visibility = "collapsed";
+                setSideMenu("userOther",username);
+
                 const nav =
                     {
-                        moduleName: "admin/admin-home/admin-home",
+                        moduleName: "home/home-page",
                         clearHistory: true
                     };
                 page.frame.navigate(nav);
-            }*/
+
+            }
             else if(_result.user.grpDes === "Docenti")
             {
                 detailedProf(_result.user.docenteId); // Get detailed info of a professor
@@ -286,6 +300,10 @@ function setSideMenu(type,username) {
     else if(type === "userRistoratore"){
 
     }
+     else if(type === "userOther"){
+
+     }
+
  }
 function showAD(){
     dialogs.confirm({

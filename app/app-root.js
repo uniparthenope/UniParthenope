@@ -91,6 +91,15 @@ exports.goto_home = function () {
     frame.Frame.topmost().navigate(nav);
 
 };
+exports.goto_home_public = function () {
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+
+};
 
 exports.goto_libretto = function () {
     const nav =

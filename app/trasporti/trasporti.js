@@ -42,8 +42,9 @@ function pageLoaded(args) {
         message: "La sezione trasporti è ancora in fase di sviluppo!\nPertanto alcune funzionalità potrebbero essere limitate.",
         okButtonText: "OK"
     });
+    let grpDes = appSettings.getString("grpDes","");
 
-    if (global.isConnected === false){
+    if (global.isConnected === false || grpDes === "PTA" || grpDes === "Ristoratori"){
         bottom_bar.visibility = "collapsed";
        legend.row = 2;
        legend.backgroundColor="rgba(34, 56, 79, 0.8)"
