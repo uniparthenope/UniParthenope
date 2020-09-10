@@ -5,7 +5,6 @@ const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 const utilsModule = require("tns-core-modules/utils/utils");
 
-
 let page;
 let viewModel;
 let sideDrawer;
@@ -15,9 +14,6 @@ let my_status = "";
 let my_selfcert = false;
 let status = ["Non Definito","A Distanza","In Presenza"];
 let isStudent = false;
-let setSelfBool = false;
-let setAccBool = false;
-
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -41,8 +37,6 @@ function onNavigatingTo(args) {
         page.getViewById("scelta_accesso").visibility = "collapsed";
 
     }
-
-
 
     page.bindingContext = viewModel;
 }
@@ -141,8 +135,6 @@ function getSelfCert(){
                 my_selfcert = true;
                 appSettings.setBoolean("selfcert", true);
                 sw.checked = "true";
-                console.log("TRUE");
-
             }
             else{
                 my_selfcert = false;
@@ -178,61 +170,32 @@ function onGeneralMenu()
 }
 
 exports.ontap_save = function(){
-
     if(isStudent){
-        let lp = page.getViewById("listpicker");
-
-        if (index === 0){
-            lp.selectedIndex = index;
+        if(index === 0){
             setAccess("undefined");
-            setSelfCert();
-
         }
-
-        else if (index === 1){
-            lp.selectedIndex = index;
+        else if(index === 1){
             setAccess("distance");
-            setSelfCert();
-
         }
-        else if (index === 2){
-            if (appSettings.getBoolean("selfcert",false)){
+        else if(index === 2){
+            if (my_selfcert){
                 setAccess("presence");
-                setSelfCert();
-
             }
             else{
                 dialogs.confirm({
                     title: "Attenzione!",
                     message: "Per poter selezionare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
                     okButtonText: "OK"
-                }).then(function (result) {
-                    if(my_status === "distance")
-                        lp.selectedIndex = 1;
-                    else
-                        lp.selectedIndex = 0;
                 });
             }
-
         }
     }
-    else
-        setSelfCert();
-
-
-    if(setSelfBool && setAccBool){
-        dialogs.confirm({
-            title: "Successo",
-            message:"Modifica effettuata!",
-            okButtonText: "OK"
-        }).then(function (result) {
-            });
-
+    else{
+        setSelfCert(my_selfcert);
     }
-
-
 };
-function setSelfCert(){
+
+function setSelfCert(flag){
     loading.visibility = "visible";
     httpModule.request({
         url: global.url_general + "Access/v1/covidStatement",
@@ -242,26 +205,33 @@ function setSelfCert(){
             "Authorization" : "Basic " + global.encodedStr
         },
         content: JSON.stringify({
-            covidStatement: appSettings.getBoolean("selfcert",false)
+            covidStatement: flag
         })
     }).then((response) => {
         const result = response.content.toJSON();
 
         if (response.statusCode === 401 || response.statusCode === 500) {
             loading.visibility = "collapsed";
-            setSelfBool = false;
             dialogs.alert({
                 title: "Errore: Access ontapSave",
                 message: result.errMsg,
                 okButtonText: "OK"
-
-            })
+            });
         }
-        else
-        {
+        else {
             loading.visibility = "collapsed";
-            setSelfBool = true;
-
+            dialogs.confirm({
+                title: "Success",
+                message: "Modifica effettuata!",
+                okButtonText: "OK"
+            }).then(function () {
+                const nav =
+                    {
+                        moduleName: "access/access",
+                        clearHistory: true
+                    };
+                page.frame.navigate(nav);
+            });
         }
     },(e) => {
         dialogs.alert({
@@ -271,6 +241,7 @@ function setSelfCert(){
         });
     });
 }
+
 function setAccess(scelta){
     loading.visibility = "visible";
     httpModule.request({
@@ -288,19 +259,16 @@ function setAccess(scelta){
 
         if (response.statusCode === 401 || response.statusCode === 500) {
             loading.visibility = "collapsed";
-            setAccBool = false;
             dialogs.alert({
                 title: "Errore: Access ontapSave",
                 message: result.errMsg,
                 okButtonText: "OK"
 
-            }).then();
+            });
         }
         else
         {
-            loading.visibility = "collapsed";
-            setAccBool = true;
-
+            setSelfCert(my_selfcert);
         }
     },(e) => {
         dialogs.alert({
@@ -323,8 +291,7 @@ function onSwitchLoaded_autocert(args) {
         const sw = args.object;
         const isChecked = sw.checked;
 
-        if(isChecked && !my_selfcert){
-
+        if(isChecked){
             httpModule.request({
                 url: global.url_general + "Access/v1/covidStatementMessage",
                 method: "GET",
@@ -348,21 +315,18 @@ function onSwitchLoaded_autocert(args) {
                         cancelButtonText: "No"
                     }).then(function (result) {
                         if(result){
+                            my_selfcert = true;
                             appSettings.setBoolean("selfcert",true);
-                            autocert_old = true;
                         }
 
 
                         else{
+                            my_selfcert = false;
                             page.getViewById("switch_sondaggio").checked = false;
                             appSettings.setBoolean("selfcert" , false);
-                            autocert_old = false;
                         }
-
                     });
-
                 }
-
             },(e) => {
                 dialogs.alert({
                     title: "Errore: COVID Message",
@@ -372,29 +336,8 @@ function onSwitchLoaded_autocert(args) {
             });
 
         }
-        /*
-        else if (!isChecked && my_status === "presence" && isStudent){
-
-                dialogs.alert({
-                    title: "Attenzione!",
-                    message: "Il tipo di accesso in PRESENZA non consente di modificare l'autocertificazione!",
-                    okButtonText: "OK"
-                });
-                page.getViewById("switch_sondaggio").checked = true;
-                autocert_old = true;
-
-
-
-
-        }
         else{
-            console.log("FALSO");
-            appSettings.setBoolean("selfcert",false);
-            autocert_old = false;
-        }
-
-         */
-        else{
+            my_selfcert = false;
             console.log("FALSO");
             appSettings.setBoolean("selfcert",false);
         }
