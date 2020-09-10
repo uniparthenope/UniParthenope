@@ -56,6 +56,14 @@ function onNavigatingTo(args) {
         page.getViewById("mat_label").text = "NOME RISTORANTE";
         page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
     }
+    else {
+
+        getPIC(appSettings.getNumber("persId"), 0);
+        page.getViewById("name").text = appSettings.getString("nome");
+        page.getViewById("surname").text = appSettings.getString("cognome");
+        page.getViewById("matricola").text = appSettings.getString("matricola");
+        page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
+    }
 
 
 
