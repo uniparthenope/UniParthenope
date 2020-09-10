@@ -83,8 +83,18 @@ function onNavigatingTo(args) {
                     temp_items.splice(0, 0, {});
                 }
 
+                let img_bar;
+                if (result[i]["info"]["image"] === "")
+                    img_bar = "~/images/logo_new.png";
+                else
+                    img_bar = base64.fromBase64(result[i]["info"]["image"]);
+
                 items.push({
                     nome_bar: result[i]["info"]["nome"],
+                    email_bar: result[i]["info"]["email"],
+                    luogo_bar: result[i]["info"]["luogo"],
+                    tel_bar: result[i]["info"]["tel"],
+                    image_bar: img_bar,
                     items: temp_items
                 });
             }

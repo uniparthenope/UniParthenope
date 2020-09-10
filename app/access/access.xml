@@ -36,7 +36,7 @@
                 <Label class="textPrimary" text="Accesso" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
-            <StackLayout margin="5 5 5 5">
+            <StackLayout margin="5 5 5 5" id="scelta_accesso">
 
                 <Label class="textMont_noborder" textWrap="true" text="Intendo frequentare i corsi del primo semestre dell'Anno Accademico 2020/2021:"/>
                 <Label id="alert1" visibility="collapsed" textAlignment="center" textWrap="true" text="Attenzione: Non è stato ancora scelto un metodo!" color="red" marginTop="5"/>

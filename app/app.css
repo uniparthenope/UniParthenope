@@ -281,6 +281,13 @@ refer to http://docs.nativescript.org/ui/theme.
     background-size: auto;
     background-color: transparent;
 }
+.ristorante-menu{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: #22384f;
+    border-radius: 15%;
+}
 ActionBar {
     background-color: #22384f;
     color: white;

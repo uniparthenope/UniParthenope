@@ -127,7 +127,7 @@ function autoconnect() {
                     };
                 page.frame.navigate(nav);
             }
-            /* Se un utente è di tipo USER TECNICO (ristorante) 202 */
+            /* Se un utente è di tipo USER TECNICO */
             else if (_result.user.grpDes === "PTA")
             {
                 console.log("PTA");

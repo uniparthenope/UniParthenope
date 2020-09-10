@@ -40,8 +40,15 @@
             <ScrollView row="1" height="100%" marginLeft="5" marginRight="5" verticalAlignment="top" marginTop="10">
                 <accordion:Accordion  items="{{ items }}" allowMultiple="false" height="95%" verticalAlignment="top">
                     <accordion:Accordion.itemHeaderTemplate>
-                        <StackLayout class="border" marginBottom="10" height="50">
-                            <Label class="textPrimary" color="#22384f" text="{{ nome_bar }}" horizontalAlignment="center" textAlignment="center"/>
+                        <StackLayout class="ristorante-menu" marginBottom="10" height="25%" backgroundImage="{{ image_bar }}">
+                            <StackLayout orientation="vertical" backgroundColor="rgba(0,0,0,0.6)" width="100%">
+                                <Label class="textPrimary-bold"  fontSize="26" text="{{ nome_bar }}" horizontalAlignment="center" textWrap="true" textAlignment="center" />
+                                <Label class="textPrimary" fontSize="14" text="{{ luogo_bar }}" horizontalAlignment="center" textAlignment="center"/>
+                                <Label class="textPrimary" fontSize="14" text="{{ email_bar }}" horizontalAlignment="center" textAlignment="center"/>
+                                <Label class="textPrimary" fontSize="14" text="{{ tel_bar }}" horizontalAlignment="center" textAlignment="center"/>
+
+                            </StackLayout>
+
                         </StackLayout>
                     </accordion:Accordion.itemHeaderTemplate>
 
