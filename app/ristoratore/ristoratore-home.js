@@ -80,7 +80,7 @@ function onNavigatingTo(args) {
                 items.push({
                     nome: result[i].nome,
                     descrizione: "Descrizione: "+ result[i].descrizione,
-                    prezzo: "Prezzo: "+ result[i].prezzo + " €",
+                    prezzo: "Prezzo: "+ result[i].prezzo,
                     tipologia: "Tipo: "+result[i].tipologia,
                     sempre_att: insert,
                     full_data:"Inserito il: "+result[i].data,

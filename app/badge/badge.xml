@@ -61,7 +61,7 @@
                         </StackLayout>
                         <GridLayout id="stack_3" visibility="visible" horizontalAlignment="center" width="100%" height="20%">
                         <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="15">
-                            <Label text="MATRICOLA" horizontalAlignment="center" fontSize="18" color="white"/>
+                            <Label id="mat_label" text="MATRICOLA" horizontalAlignment="center" fontSize="18" color="white"/>
                             <Label id="matricola" text="--" horizontalAlignment="center" fontSize="18" color="white"/>
                         </StackLayout>
                         <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="15" >

@@ -104,9 +104,12 @@ function onShownModally(args) {
                 };
             frame.Frame.topmost().navigate(nav);
         }
+        // RISTORANTI
         else if(response.statusCode === 202){
-            //console.log("Ristoratore");
+            //console.log(_result);
             sideDrawer = app.getRootView();
+            appSettings.setString("grpDes",_result.user.grpDes);
+            appSettings.setString("matricola","--");
             let remember = sideDrawer.getViewById("rememberMe").checked;
 
             if (remember){
@@ -114,10 +117,29 @@ function onShownModally(args) {
                 appSettings.setString("token",global.encodedStr);
                 appSettings.setBoolean("rememberMe",true);
             }
-            console.log("Ristorante: " + _result.user.nomeBar);
 
-            sideDrawer.getViewById("topName").text = _result.user.nomeBar;
-            global.username = _result.user.nomeBar;
+            appSettings.setString("nome", _result.user.nome);
+            appSettings.setString("cognome", _result.user.cognome);
+            appSettings.setString("userId", _result.userId);
+            appSettings.setString("emailAte",_result.user.email);
+            appSettings.setString("ristorante",_result.user.nomeBar);
+            appSettings.setString("matricola",_result.user.nomeBar);
+            appSettings.setString("sesso",_result.user.sesso);
+            appSettings.setString("telRes",_result.user.telefono);
+            appSettings.setString("facDes","--");
+            appSettings.setString("dataNascita","--");
+
+            //getPIC();
+            //console.log("Ristorante: " + _result.user.nomeBar);
+
+            sideDrawer.getViewById("topName").text = _result.user.nome + " "+_result.user.cognome;
+            global.username = _result.userId;
+
+            sideDrawer.getViewById("topMatr").text = _result.user.nomeBar;
+            sideDrawer.getViewById("topEmail").text = _result.user.email;
+            sideDrawer.getViewById("topMatr").visibility = "visible";
+            sideDrawer.getViewById("topEmail").visibility = "visible";
+
             let userForm = sideDrawer.getViewById("userRistoratore");
             let loginForm = sideDrawer.getViewById("loginForm");
             sideDrawer.getViewById("contatti").visibility = "visible";
@@ -206,35 +228,35 @@ function onShownModally(args) {
                     };
                 frame.Frame.topmost().navigate(nav);
             }
+            /*
+                        else if(_result.user.grpDes === "Tecnico"){
+                            sideDrawer = app.getRootView();
+                            let remember = sideDrawer.getViewById("rememberMe").checked;
 
-            else if(_result.user.grpDes === "Tecnico"){/*
-                sideDrawer = app.getRootView();
-                let remember = sideDrawer.getViewById("rememberMe").checked;
+                            if (remember){
+                                appSettings.setString("username",user);
+                                appSettings.setString("password",pass);
+                                appSettings.setBoolean("rememberMe",true);
+                            }
+                            console.log("Ristorante:" + _result.username);
 
-                if (remember){
-                    appSettings.setString("username",user);
-                    appSettings.setString("password",pass);
-                    appSettings.setBoolean("rememberMe",true);
-                }
-                console.log("Ristorante:" + _result.username);
+                            sideDrawer.getViewById("topName").text = _result.username;
+                            global.username = _result.username;
+                            let userForm = sideDrawer.getViewById("userAdmin");
+                            let loginForm = sideDrawer.getViewById("loginForm");
+                            loginForm.visibility = "collapsed";
+                            userForm.visibility = "visible";
 
-                sideDrawer.getViewById("topName").text = _result.username;
-                global.username = _result.username;
-                let userForm = sideDrawer.getViewById("userAdmin");
-                let loginForm = sideDrawer.getViewById("loginForm");
-                loginForm.visibility = "collapsed";
-                userForm.visibility = "visible";
+                            closeCallback();
+                            const nav =
+                                {
+                                    moduleName: "admin/admin-home/admin-home",
+                                    clearHistory: true
+                                };
+                            frame.Frame.topmost().navigate(nav);
 
-                closeCallback();
-                const nav =
-                    {
-                        moduleName: "admin/admin-home/admin-home",
-                        clearHistory: true
-                    };
-                frame.Frame.topmost().navigate(nav);
-                */
-            }
-        //ALTRI UTENTI
+            }*/
+                // PTA, ALTRI UTENTI
             else{
                 //console.log(_result.user.grpId);
                 sideDrawer = app.getRootView();

@@ -43,6 +43,13 @@ function onNavigatingTo(args) {
         page.getViewById("my_img").backgroundImage = url;
         page.getViewById("roleID").text = appSettings.getString("settCod");
     }
+    else if (appSettings.getString("grpDes") === "Ristorante"){
+
+        //getPIC(appSettings.getNumber("idAb"), 1);
+
+        //page.getViewById("my_img").backgroundImage = url;
+        page.getViewById("mat_label").text = "NOME RISTORANTE";
+    }
 
     page.bindingContext = viewModel;
 }

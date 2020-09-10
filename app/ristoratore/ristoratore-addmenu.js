@@ -51,6 +51,8 @@ function onTapSave() {
         // result argument is boolean
         console.log("Image: " + img);
 
+        prezzo = parseFloat(prezzo.replace(",","."));
+
         if (result) {
             httpModule.request({
                 url: global.url_general + "Eating/v1/addMenu",
@@ -63,14 +65,14 @@ function onTapSave() {
                     nome: nome,
                     descrizione: desc,
                     tipologia: tipo,
-                    prezzo:prezzo,
+                    prezzo: prezzo,
                     attivo: active,
                     img:img
                 })
             }).then((response) => {
                 console.log(response.statusCode);
 
-                if (response.statusCode == 200) {
+                if (response.statusCode === 200) {
                     dialogs.alert({
                         title: "Menu Caricato!",
                         message: "Il nuovo menu è stato caricato con successo!",

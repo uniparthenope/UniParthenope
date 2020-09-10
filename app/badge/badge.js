@@ -18,7 +18,7 @@ function onNavigatingTo(args) {
     sideDrawer.closeDrawer();
     choseBackground(page);
     getQr();
-    console.log("PERSID= "+appSettings.getNumber("persId"));
+    console.log(appSettings.getString("grpDes"));
     if (appSettings.getString("grpDes") === "Studenti"){
 
         getPIC(appSettings.getNumber("persId"), 0);
@@ -45,6 +45,15 @@ function onNavigatingTo(args) {
         page.getViewById("name").text = appSettings.getString("nome");
         page.getViewById("surname").text = appSettings.getString("cognome");
         page.getViewById("matricola").text = appSettings.getString("matricola");
+        page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
+    }
+    else if (appSettings.getString("grpDes") === "Ristorante"){
+        console.log("BADGE RISTORATORE");
+        //getPIC(appSettings.getNumber("persId"), 0);
+        page.getViewById("name").text = appSettings.getString("nome");
+        page.getViewById("surname").text = appSettings.getString("cognome");
+        page.getViewById("matricola").text = appSettings.getString("matricola");
+        page.getViewById("mat_label").text = "NOME RISTORANTE";
         page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
     }
 

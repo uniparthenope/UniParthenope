@@ -59,7 +59,7 @@ function onTapDelete(){
             sideDrawer.getViewById("userForm").visibility="collapsed";
             sideDrawer.getViewById("userDocente").visibility="collapsed";
             sideDrawer.getViewById("userRistoratore").visibility="collapsed";
-            sideDrawer.getViewById("userAdmin").visibility="collapsed";
+            sideDrawer.getViewById("userOther").visibility="collapsed";
             sideDrawer.getViewById("topName").text = "Benvenuto!";
             sideDrawer.getViewById("loginForm").visibility="visible";
             sideDrawer.getViewById("topImg").backgroundImage = "~/images/logo_parth.png";
