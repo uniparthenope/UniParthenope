@@ -34,21 +34,58 @@
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
             <Label class="textPrimary" text="Info" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
-        <ScrollView>
-            <StackLayout>
-                <Label textAlignment="center" textWrap="true" text="UniParthenope App" marginTop="10"/>
-                <Image src="~/images/logo_parth.png" horizontalAlignment="center" margin="20 20 20 20"/>
-                <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" marginTop="5">
-                    <Label id="version" text="Versione "/>
-                </StackLayout>
-                <Label textAlignment="center" textWrap="true" text="Team leader: Raffaele Montella" marginTop="10"/>
-                <Label textAlignment="center" textWrap="true" text="Developers: Gennaro Mellone, Ciro Giuseppe De Vita" marginTop="5"/>
-                <Label textAlignment="center" textWrap="true" text="Responsabile Mobile Store: Nunzio Napolitano" marginTop="5"/>
-                <Label textAlignment="center" visibility="collapsed" textWrap="true" text="Prorettore alle Tecnologie Informatiche: Prof. Luigi Romano" marginTop="5"/>
 
-                <Button textWrap="true" text="Privacy" ontap="onTapPrivacy" class="blue_background_opac" margin="10 5 0 5"/>
+
+        <GridLayout>
+            <Image src="~/images/logo_new.png" horizontalAlignment="center" verticalAlignment="center" margin="20 20 20 20" opacity="0.3"/>
+
+            <StackLayout>
+                <Label textAlignment="center" textWrap="true" text="app@uniparthenope" marginTop="10"/>
+                <Image src="~/images/logoApp.png" width="125" height="125"/>
+
+                <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" marginTop="5">
+                    <Label fontSize="14" id="version" text="Versione "/>
+                </StackLayout>
+
+                <StackLayout backgroundColor="#22384f" height="1" margin="20 30 20 30"/>
+
+                <StackLayout marginBottom="20" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
+                    <Image class="pic_rounded" src="~/images/team/team_leader.jpg" width="75" height="75" />
+
+                    <StackLayout verticalAlignment="center" marginLeft="30">
+                        <Label class="font-italic" fontSize="16" textAlignment="left" textWrap="true" text="Raffaele Montella"/>
+                        <Label textAlignment="left" fontSize="12" textWrap="true" text="Team leader" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
+                    <Image class="pic_rounded" src="~/images/team/gm.jpg" width="75" height="75" />
+
+                    <StackLayout verticalAlignment="center" marginLeft="30">
+                        <Label class="font-italic" fontSize="16" textAlignment="left" textWrap="true" text="Gennaro Mellone"/>
+                        <Label textAlignment="left" fontSize="12" textWrap="true" text="Developer" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
+                    <Image class="pic_rounded" src="~/images/team/cgdv.png" width="75" height="75" />
+
+                    <StackLayout verticalAlignment="center" marginLeft="30">
+                        <Label class="font-italic" fontSize="16" textAlignment="left" textWrap="true" text="Ciro Giuseppe De Vita"/>
+                        <Label textAlignment="left" fontSize="12" textWrap="true" text="Developer" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
+                    <Image class="pic_rounded" src="~/images/team/nn.jpg" width="75" height="75" />
+
+                    <StackLayout verticalAlignment="center" marginLeft="30">
+                        <Label class="font-italic" fontSize="16" textAlignment="left" textWrap="true" text="Nunzio Napolitano"/>
+                        <Label textAlignment="left" fontSize="12" textWrap="true" text="Responsabile Mobile Store" />
+                    </StackLayout>
+                </StackLayout>
+
             </StackLayout>
-        </ScrollView>
+            <Button textWrap="true" text="Privacy" verticalAlignment="bottom" ontap="onTapPrivacy" class="btn" margin="10 5 0 5"/>
+
+        </GridLayout>
     </StackLayout>
 
 </Page>

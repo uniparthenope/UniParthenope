@@ -1,0 +1,20 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+      shownModally="onShownModally">
+
+    <GridLayout rows="auto,*,auto">
+        <GridLayout row="0" backgroundColor="#22384f" height="20%" verticalAlignment="top">
+            <Label class="textPrimary" id="title" text="title" textWrap="true" textAlignment="center" verticalAlignment="center" margin="5 5 5 5"/>
+        </GridLayout>
+        <GridLayout row="1" verticalAlignment="center" margin="15 5 5 5" height="100%">
+            <HtmlView width="100%" id="body" html="" verticalAlignment="center" height="100%"/>
+
+        </GridLayout>
+
+        <GridLayout row="2" verticalAlignment="bottom" margin="10 10 10 10">
+            <Button class="btn" width="30%" text="SI" ontap="tap_yes" horizontalAlignment="left"/>
+            <Button class="btn" width="30%" text="NO" ontap="tap_no" horizontalAlignment="right"/>
+        </GridLayout>
+
+
+    </GridLayout>
+</Page>

@@ -26,6 +26,7 @@ global.myExams = [];
 global.myDocenti = [];
 global.myPrenotazioni = [];
 global.myAppelli = new ObservableArray();
+global.my_selfcert;
 
 /*
 appSettings.setString("aa_accad", result.aa_accad);

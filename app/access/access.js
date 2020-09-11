@@ -4,6 +4,8 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 const utilsModule = require("tns-core-modules/utils/utils");
+const modalViewModule = "modal-covidalert/modal-covidalert";
+
 
 let page;
 let viewModel;
@@ -11,7 +13,6 @@ let sideDrawer;
 let loading;
 let index;
 let my_status = "";
-let my_selfcert = false;
 let status = ["Non Definito","A Distanza","In Presenza"];
 let isStudent = false;
 
@@ -132,12 +133,12 @@ function getSelfCert(){
             let sw = page.getViewById("switch_sondaggio");
             if(result.covidStatement){
 
-                my_selfcert = true;
+                global.my_selfcert = true;
                 appSettings.setBoolean("selfcert", true);
                 sw.checked = "true";
             }
             else{
-                my_selfcert = false;
+                global.my_selfcert = false;
                 appSettings.setBoolean("selfcert", false);
                 sw.checked = "false";
             }
@@ -178,7 +179,7 @@ exports.ontap_save = function(){
             setAccess("distance");
         }
         else if(index === 2){
-            if (my_selfcert){
+            if (global.my_selfcert){
                 setAccess("presence");
             }
             else{
@@ -191,7 +192,7 @@ exports.ontap_save = function(){
         }
     }
     else{
-        setSelfCert(my_selfcert);
+        setSelfCert(global.my_selfcert);
     }
 };
 
@@ -268,7 +269,7 @@ function setAccess(scelta){
         }
         else
         {
-            setSelfCert(my_selfcert);
+            setSelfCert(global.my_selfcert);
         }
     },(e) => {
         dialogs.alert({
@@ -292,52 +293,20 @@ function onSwitchLoaded_autocert(args) {
         const isChecked = sw.checked;
 
         if(isChecked){
-            httpModule.request({
-                url: global.url_general + "Access/v1/covidStatementMessage",
-                method: "GET",
-            }).then((response) => {
-                const result = response.content.toJSON();
+            const options = {
+                context: "some context",
+                closeCallback: () => {
+                    if(!global.my_selfcert)
+                        page.getViewById("switch_sondaggio").checked = "false";
+                },
+                fullscreen: false
+            };
+            page.showModal(modalViewModule, options);
 
-                if (response.statusCode === 401 || response.statusCode === 500) {
-                    dialogs.alert({
-                        title: "Errore Server!",
-                        message: result,
-                        okButtonText: "OK"
-
-                    }).then();
-                }
-                else{
-
-                    dialogs.confirm({
-                        title: result.titolo,
-                        message: result.body,
-                        okButtonText: "Si",
-                        cancelButtonText: "No"
-                    }).then(function (result) {
-                        if(result){
-                            my_selfcert = true;
-                            appSettings.setBoolean("selfcert",true);
-                        }
-
-
-                        else{
-                            my_selfcert = false;
-                            page.getViewById("switch_sondaggio").checked = false;
-                            appSettings.setBoolean("selfcert" , false);
-                        }
-                    });
-                }
-            },(e) => {
-                dialogs.alert({
-                    title: "Errore: COVID Message",
-                    message: e.toString(),
-                    okButtonText: "OK"
-                });
-            });
 
         }
         else{
-            my_selfcert = false;
+            global.my_selfcert = false;
             console.log("FALSO");
             appSettings.setBoolean("selfcert",false);
         }
