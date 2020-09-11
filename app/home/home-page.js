@@ -107,25 +107,43 @@ function autoconnect() {
                 );
             }
             /* Se un utente è di tipo USER TECNICO (ristorante) 202 */
-            else if (_result.user.grpDes === "Ristoranti")
+            else if (_result.user.grpDes === "Ristorante")
             {
                 let remember = sideDrawer.getViewById("rememberMe").checked;
-                console.log("Ristoratore:" + _result.username);
+                console.log(_result);
+
+                appSettings.setString("nome", _result.user.nome);
+                appSettings.setString("cognome", _result.user.cognome);
+                appSettings.setString("userId", _result.userId);
+                appSettings.setString("emailAte",_result.user.email);
+                appSettings.setString("ristorante",_result.user.nomeBar);
+                appSettings.setString("matricola",_result.user.nomeBar);
+                appSettings.setString("sesso",_result.user.sesso);
+                appSettings.setString("telRes",_result.user.telefono);
+                appSettings.setString("facDes","--");
+                appSettings.setString("dataNascita","--");
                 /*
                 if (remember){
                     appSettings.setString("username",user);
                     appSettings.setString("password",pass);
                     appSettings.setBoolean("rememberMe",true);
                 }*/
-
-                sideDrawer.getViewById("topName").text = _result.username;
-                setSideMenu("userRistoratore",_result.username);
+                global.isConnected = true;
+                sideDrawer.getViewById("topName").text = _result.user.nome + " "+_result.user.cognome;
+                setSideMenu("userRistoratore",_result.user.nome + " "+_result.user.cognome);
+                sideDrawer.getViewById("topMatr").text = _result.user.nomeBar;
+                sideDrawer.getViewById("topEmail").text = _result.user.email;
+                sideDrawer.getViewById("topMatr").visibility = "visible";
+                sideDrawer.getViewById("topEmail").visibility = "visible";
+/*
                 const nav =
                     {
                         moduleName: "ristoratore/ristoratore-home",
                         clearHistory: true
                     };
                 page.frame.navigate(nav);
+
+ */
             }
             /* Se un utente è di tipo USER TECNICO */
             else if (_result.user.grpDes === "PTA")
@@ -150,13 +168,15 @@ function autoconnect() {
 
                 indicator.visibility = "collapsed";
                 setSideMenu("userOther",username);
-
+/*
                 const nav =
                     {
                         moduleName: "home/home-page",
                         clearHistory: true
                     };
                 page.frame.navigate(nav);
+
+ */
 
             }
             else if(_result.user.grpDes === "Docenti")
@@ -184,7 +204,6 @@ function autoconnect() {
                 let carriere = _result.user.trattiCarriera;
                 global.saveInfo(_result);
                 setAnagrafe(_result.user.persId,_result.user.grpDes);
-                console.log("FINE ANAGRAFE!");
                 let index = appSettings.getNumber("carriera",0);
                 console.log(_result.user.persId);
                 global.saveCarr(carriere[index]);
@@ -204,6 +223,24 @@ function autoconnect() {
                         };
                 page.frame.navigate(nav);
 
+            }
+            else{
+                global.isConnected = true;
+                let nome = appSettings.getString("nome","");
+                let cognome = appSettings.getString("cognome","");
+                let username = nome + " " + cognome;
+                setSideMenu("userOther",username);
+                indicator.visibility = "collapsed";
+                /*
+                const nav =
+                    {
+                        moduleName: "home/home-page",
+                        clearHistory: true
+                    };
+                page.frame.navigate(nav);
+
+                 */
+                console.log("ALTRO USER");
             }
 
         },(e) => {
@@ -298,9 +335,17 @@ function setSideMenu(type,username) {
 
      }
     else if(type === "userRistoratore"){
+         //getPIC(appSettings.getNumber("idAb"),1);
 
-    }
+         sideDrawer.getViewById("contatti").visibility = "visible";
+
+     }
      else if(type === "userOther"){
+         getPIC(appSettings.getNumber("idAb"),1);
+         sideDrawer.getViewById("topMatr").text = appSettings.getString("grpDes","");
+         sideDrawer.getViewById("topMatr").visibility = "visible";
+         sideDrawer.getViewById("contatti").visibility = "visible";
+
 
      }
 
