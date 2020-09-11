@@ -62,6 +62,16 @@ exports.goto_settings = function () {
     frame.Frame.topmost().navigate(nav);
 };
 
+
+exports.goto_about = function () {
+    const nav =
+        {
+            moduleName: "about/about-page",
+        };
+    frame.Frame.topmost().navigate(nav);
+
+};
+
 exports.contact_us = function () {
     email.compose({
         subject: "[APP]" +" [ "+ appSettings.getString("userId") + " "

@@ -322,7 +322,6 @@ function setSideMenu(type,username) {
          sideDrawer.getViewById("topMatr").visibility = "visible";
          sideDrawer.getViewById("topEmail").visibility = "visible";
          getPIC(appSettings.getNumber("persId"),0);
-         sideDrawer.getViewById("contatti").visibility = "visible";
      }
     else if(type === "userDocente"){
          sideDrawer.getViewById("topMatr").text = appSettings.getString("ruolo")+ " " +appSettings.getString("settore");
@@ -331,21 +330,16 @@ function setSideMenu(type,username) {
          sideDrawer.getViewById("topEmail").visibility = "visible";
          console.log(appSettings.getNumber("idAb"));
          getPIC(appSettings.getNumber("idAb"),1);
-         sideDrawer.getViewById("contatti").visibility = "visible";
 
      }
     else if(type === "userRistoratore"){
          //getPIC(appSettings.getNumber("idAb"),1);
-
-         sideDrawer.getViewById("contatti").visibility = "visible";
 
      }
      else if(type === "userOther"){
          getPIC(appSettings.getNumber("idAb"),1);
          sideDrawer.getViewById("topMatr").text = appSettings.getString("grpDes","");
          sideDrawer.getViewById("topMatr").visibility = "visible";
-         sideDrawer.getViewById("contatti").visibility = "visible";
-
 
      }
 

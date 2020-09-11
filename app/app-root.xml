@@ -55,6 +55,8 @@
                         <Button class="btn-menu" text="Corsi" marginBottom="5" marginTop="5" tap="goto_corsi"/>
                         <Button class="btn-menu" text="Appelli" marginBottom="5" marginTop="5" tap="goto_appelli"/>
                         <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap="goto_docenti"/>
+                        <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us" />
+
 
                         <!-- Disabled Buttons
                          <Button class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>
@@ -69,6 +71,8 @@
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
                         <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
+                        <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us"/>
+
 
 
                         <!--Disabled Buttons
@@ -79,7 +83,7 @@
                         <Button class="btn-menu" text="Scan Qr-Code" marginBottom="5" marginTop="5" tap=""/>
                             -->
                     </StackLayout>
-                    <!--     UserTecnico       -->
+                    <!--     Ristoratore       -->
                     <StackLayout id="userRistoratore" visibility="collapsed">
 
                         <Button class="btn-menu" text="Miei Menu" marginBottom="5" marginTop="20" tap="goto_menuList"/>
@@ -87,20 +91,19 @@
                         <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
+                        <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us" />
+
                     </StackLayout>
 
-                    <!--     Admin       -->
-                    <StackLayout id="userAdmin" visibility="collapsed">
-                        <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_adminHome"/>
-                        <Button class="btn-menu" text="Accounts" marginBottom="5" marginTop="20" tap="goto_adminAccount"/>
-                        <Button class="btn-menu" text="Nuovo Utente" marginBottom="5" marginTop="20" tap="goto_adminNew"/>
-                    </StackLayout>
+
 
                         <!--     Altri User       -->
                         <StackLayout id="userOther" visibility="collapsed">
                             <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_home_public"/>
                             <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
                             <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
+                            <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us"/>
+
                         </StackLayout>
                     </GridLayout>
 
@@ -110,8 +113,9 @@
 
             <!--     Bottom Menu, about e settings       -->
             <StackLayout verticalAlignment="bottom" width="100%" height="20%" marginBottom="10" >
+                <Button class="btn-menu" text="About" marginBottom="5" tap="goto_about"/>
+
                 <Button class="btn-menu" text="Settings" marginBottom="5" tap="goto_settings"/>
-                <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us" visibility="collapsed"/>
 
             </StackLayout>
 

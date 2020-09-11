@@ -107,14 +107,6 @@ function onSwitchLoaded_sondaggio(args) {
 }
 exports.onSwitchLoaded_sondaggio = onSwitchLoaded_sondaggio;
 
-exports.goto_about = function () {
-    const nav =
-        {
-            moduleName: "about/about-page",
-        };
-    frame.Frame.topmost().navigate(nav);
-
-};
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
