@@ -114,27 +114,48 @@ function choseBackground(page){
 
 function getQr(){
     page.getViewById("my_qr").backgroundImage = "~/images/qr_test.jpg";
+    if(app.android){
+        let data = new Date();
+        const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "qrCode-" + data.getTime() + ".png");
 
-    let data = new Date();
-    const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "qrCode-" + data.getTime() + ".png");
-
-    httpModule.getFile({
-        "url": global.url_general + "Badges/v1/generateQrCode",
-        "method": "GET",
-        headers: {
-            "Content-Type" : "image/png",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }, filePath).then((source) => {
-        page.getViewById("my_qr").backgroundImage = source["path"];
-    }, (e) => {
-        console.log("Error", e);
-        dialogs.alert({
-            title: "QR-Code Error!",
-            message: e.toString(),
-            okButtonText: "OK"
+        httpModule.getFile({
+            "url": global.url_general + "Badges/v1/generateQrCode",
+            "method": "GET",
+            headers: {
+                "Content-Type" : "image/png",
+                "Authorization" : "Basic "+ global.encodedStr
+            }
+        }, filePath).then((source) => {
+            page.getViewById("my_qr").backgroundImage = source.path;
+        }, (e) => {
+            console.log("Error", e);
+            dialogs.alert({
+                title: "QR-Code Error!",
+                message: e.toString(),
+                okButtonText: "OK"
+            });
         });
-    });
+    }
+    if(app.ios){
+        httpModule.getFile({
+            "url": global.url_general + "Badges/v1/generateQrCode",
+            "method": "GET",
+            headers: {
+                "Content-Type" : "image/png",
+                "Authorization" : "Basic "+ global.encodedStr
+            },
+            "dontFollowRedirects": false
+        }).then((source) => {
+            page.getViewById("my_qr").backgroundImage = source.path;
+        }, (e) => {
+            console.log("Error", e);
+            dialogs.alert({
+                title: "QR-Code Error!",
+                message: e.toString(),
+                okButtonText: "OK"
+            });
+        });
+    }
 }
 
 function getPIC(personId, value){
