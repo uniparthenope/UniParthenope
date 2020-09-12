@@ -116,7 +116,8 @@ function getQr(){
     page.getViewById("my_qr").backgroundImage = "~/images/qr_test.jpg";
 
     let data = new Date();
-    const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "test-" + data + ".png");
+    const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "qrCode-" + data.getTime() + ".png");
+
     httpModule.getFile({
         "url": global.url_general + "Badges/v1/generateQrCode",
         "method": "GET",
@@ -125,20 +126,7 @@ function getQr(){
             "Authorization" : "Basic "+ global.encodedStr
         }
     }, filePath).then((source) => {
-        console.log(source);
         page.getViewById("my_qr").backgroundImage = source["path"];
-        if (app.android){
-            let documents = fileSystemModule.knownFolders.documents();
-            let file = documents.getFile("generateQrCode");
-            if (fileSystemModule.File.exists("/data/user/0/it.uniparthenope.app/files/generateQrCode")){
-                file.remove().then((result) => {
-                    console.log("file cancellato");
-                }).catch((err) => {
-                    console.log(err);
-                });
-            }
-            console.log(fileSystemModule.File.exists("/data/user/0/it.uniparthenope.app/files/generateQrCode"));
-        }
     }, (e) => {
         console.log("Error", e);
         dialogs.alert({
