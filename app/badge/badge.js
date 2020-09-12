@@ -114,6 +114,9 @@ function choseBackground(page){
 
 function getQr(){
     page.getViewById("my_qr").backgroundImage = "~/images/qr_test.jpg";
+
+    let data = new Date();
+    const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "test-" + data + ".png");
     httpModule.getFile({
         "url": global.url_general + "Badges/v1/generateQrCode",
         "method": "GET",
@@ -121,7 +124,7 @@ function getQr(){
             "Content-Type" : "image/png",
             "Authorization" : "Basic "+ global.encodedStr
         }
-    }).then((source) => {
+    }, filePath).then((source) => {
         console.log(source);
         page.getViewById("my_qr").backgroundImage = source["path"];
         if (app.android){
