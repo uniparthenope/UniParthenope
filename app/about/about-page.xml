@@ -36,7 +36,7 @@
         </GridLayout>
 
 
-        <GridLayout>
+        <GridLayout height="80%">
             <Image src="~/images/logo_new.png" horizontalAlignment="center" verticalAlignment="center" margin="20 20 20 20" opacity="0.3"/>
 
             <StackLayout>
@@ -49,43 +49,49 @@
 
                 <StackLayout backgroundColor="#22384f" height="1" margin="20 30 20 30"/>
 
-                <StackLayout marginBottom="20" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
-                    <Image class="pic_rounded" src="~/images/team/team_leader.jpg" width="75" height="75" />
+                <ScrollView verticalAlignment="center" horizontalAlignment="center" width="100%">
+                    <StackLayout>
+                        <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
+                            <Image class="pic_rounded" src="~/images/team/team_leader.jpg" width="75" height="75" />
 
-                    <StackLayout verticalAlignment="center" marginLeft="30">
-                        <Label class="font-italic" fontSize="16" textAlignment="left" textWrap="true" text="Raffaele Montella"/>
-                        <Label textAlignment="left" fontSize="12" textWrap="true" text="Team leader" />
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
-                    <Image class="pic_rounded" src="~/images/team/gm.jpg" width="75" height="75" />
+                            <StackLayout verticalAlignment="center" marginLeft="30">
+                                <Label class="font-weight-bold" fontSize="18" textAlignment="left" textWrap="true" text="Raffaele Montella"/>
+                                <Label textAlignment="left" fontSize="14" textWrap="true" text="Team leader" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
+                            <Image class="pic_rounded" src="~/images/team/gm.jpg" width="75" height="75" />
 
-                    <StackLayout verticalAlignment="center" marginLeft="30">
-                        <Label class="font-italic" fontSize="16" textAlignment="left" textWrap="true" text="Gennaro Mellone"/>
-                        <Label textAlignment="left" fontSize="12" textWrap="true" text="Developer" />
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
-                    <Image class="pic_rounded" src="~/images/team/cgdv.png" width="75" height="75" />
+                            <StackLayout verticalAlignment="center" marginLeft="30">
+                                <Label class="font-italic" fontSize="18" textAlignment="left" textWrap="true" text="Gennaro Mellone"/>
+                                <Label textAlignment="left" fontSize="14" textWrap="true" text="Developer" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
+                            <Image class="pic_rounded" src="~/images/team/cgdv.png" width="75" height="75" />
 
-                    <StackLayout verticalAlignment="center" marginLeft="30">
-                        <Label class="font-italic" fontSize="16" textAlignment="left" textWrap="true" text="Ciro Giuseppe De Vita"/>
-                        <Label textAlignment="left" fontSize="12" textWrap="true" text="Developer" />
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
-                    <Image class="pic_rounded" src="~/images/team/nn.jpg" width="75" height="75" />
+                            <StackLayout verticalAlignment="center" marginLeft="30">
+                                <Label class="font-italic" fontSize="18" textAlignment="left" textWrap="true" text="Ciro Giuseppe De Vita"/>
+                                <Label textAlignment="left" fontSize="14" textWrap="true" text="Developer" />
+                            </StackLayout>
+                        </StackLayout>
+                        <StackLayout marginBottom="10" orientation="horizontal" horizontalAlignment="left" marginLeft="35">
+                            <Image class="pic_rounded" src="~/images/team/nn.jpg" width="75" height="75" />
 
-                    <StackLayout verticalAlignment="center" marginLeft="30">
-                        <Label class="font-italic" fontSize="16" textAlignment="left" textWrap="true" text="Nunzio Napolitano"/>
-                        <Label textAlignment="left" fontSize="12" textWrap="true" text="Responsabile Mobile Store" />
+                            <StackLayout verticalAlignment="center" marginLeft="30">
+                                <Label class="font-italic" fontSize="18" textAlignment="left" textWrap="true" text="Nunzio Napolitano"/>
+                                <Label textAlignment="left" fontSize="14" textWrap="true" text="Responsabile Mobile Store" />
+                            </StackLayout>
+                        </StackLayout>
+
                     </StackLayout>
-                </StackLayout>
+                </ScrollView>
 
             </StackLayout>
-            <Button textWrap="true" text="Privacy" verticalAlignment="bottom" ontap="onTapPrivacy" class="btn" margin="10 5 0 5"/>
 
         </GridLayout>
+        <Button textWrap="true" text="Privacy" verticalAlignment="bottom" ontap="onTapPrivacy" class="btn" margin="10 5 0 5"/>
+
     </StackLayout>
 
 </Page>

@@ -28,7 +28,7 @@ function onShownModally(args) {
                     }).then();
                 }
                 else{
-                    console.log(result.title);
+                    //console.log(result.title);
                     page.getViewById("title").text = result.title;
                     page.getViewById("body").html = result.body;
 
