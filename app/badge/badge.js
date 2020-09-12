@@ -122,6 +122,7 @@ function getQr(){
             "Authorization" : "Basic "+ global.encodedStr
         }
     }).then((source) => {
+        console.log(source);
         page.getViewById("my_qr").backgroundImage = source["path"];
         if (app.android){
             let documents = fileSystemModule.knownFolders.documents();
@@ -133,6 +134,7 @@ function getQr(){
                     console.log(err);
                 });
             }
+            console.log(fileSystemModule.File.exists("/data/user/0/it.uniparthenope.app/files/generateQrCode"));
         }
     }, (e) => {
         console.log("Error", e);
