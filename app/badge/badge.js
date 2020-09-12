@@ -5,6 +5,8 @@ const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 let BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
 let barcodescanner = new BarcodeScanner();
+const fileSystemModule = require("tns-core-modules/file-system");
+const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "test.png");
 
 let page;
 let viewModel;
@@ -118,14 +120,24 @@ function getQr(){
         headers: {
             "Content-Type" : "image/png",
             "Authorization" : "Basic "+ global.encodedStr
-        },
-        "dontFollowRedirects": false
+        }
     }).then((source) => {
         page.getViewById("my_qr").backgroundImage = source["path"];
+        if (app.android){
+            let documents = fileSystemModule.knownFolders.documents();
+            let file = documents.getFile("generateQrCode");
+            if (fileSystemModule.File.exists("/data/user/0/it.uniparthenope.app/files/generateQrCode")){
+                file.remove().then((result) => {
+                    console.log("file cancellato");
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+        }
     }, (e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Autenticazione Fallita!",
+            title: "QR-Code Error!",
             message: e.toString(),
             okButtonText: "OK"
         });
@@ -150,8 +162,7 @@ function getPIC(personId, value){
         headers: {
             "Content-Type" : "image/jpg",
             "Authorization" : "Basic "+ global.encodedStr
-        },
-        "dontFollowRedirects": true
+        }
     }).then((source) => {
         page.getViewById("my_img").backgroundImage = source["path"];
     }, (e) => {
