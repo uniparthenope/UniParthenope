@@ -3,7 +3,7 @@
     <GridLayout ios:height="100%" android:height="50%" ios:class="two-color-gradient">
         <StackLayout orientation="vertical" ios:height="100%">
             <StackLayout class="two-color-gradient" height="20%" verticalAlignment="top">
-                <Label ios:verticalAlignment="bottom" ios:horizontalAlignment="center" text="Carriere:"  color="white" fontSize="20"/>
+                <Label ios:verticalAlignment="bottom" ios:horizontalAlignment="center" text="Selezionare una carriera:"  color="white" fontSize="20"/>
             </StackLayout>
             <ScrollView height="70%" ios:backgroundColor="#22384f">
             <ListView id="listview" class="list-group" ios:backgroundColor="#22384f" ios:separatorColor="#22384fff" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5">

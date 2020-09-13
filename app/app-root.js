@@ -1,4 +1,5 @@
 const app = require("tns-core-modules/application");
+const platformModule = require("tns-core-modules/platform");
 const frame = require("tns-core-modules/ui/frame");
 const observableModule = require("tns-core-modules/data/observable");
 const utilsModule = require("tns-core-modules/utils/utils");
@@ -6,6 +7,7 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const modalViewModule = "modal-login/modal-login";
 const email = require("nativescript-email");
 let base64= require('base-64');
+let appversion = require("nativescript-appversion");
 let utf8 = require('utf8');
 const appSettings = require("tns-core-modules/application-settings");
 
@@ -73,22 +75,38 @@ exports.goto_about = function () {
 };
 
 exports.contact_us = function () {
-    email.compose({
-        subject: "[APP]" +" [ "+ appSettings.getString("userId") + " "
-            + appSettings.getString("matricola") + " "
-            + appSettings.getString("grpDes") + " ]",
-        body: "Scrivi messaggio ...",
-        to: ['developer@uniparthenope.it']
-    }).then(
-        function() {
-            console.log("Email closed");
 
-        }, function(err) {
-            dialogs.alert({
-                title: "Errore: Email",
-                message: err.toString(),
-                okButtonText: "OK"
-            });        });
+    appversion.getVersionName().then(function(v) {
+        let ver = v;
+        let my_device = "DISPOSITIVO UTILIZZATO: \n"+
+            platformModule.device.manufacturer + " "+ platformModule.device.os + " "+ platformModule.device.osVersion + "\n"+ platformModule.device.sdkVersion +" \n" +
+            platformModule.device.model + " "+ platformModule.device.deviceType + "\n" + platformModule.device.region + " "+ platformModule.device.language;
+
+        let title = "[APP v." + ver +" "+platformModule.device.os+"]" +" [ "+ appSettings.getString("userId") + " "
+            + appSettings.getString("matricola") + " "
+            + appSettings.getString("grpDes") + " ]";
+        console.log(title);
+
+        console.log(my_device);
+
+
+        email.compose({
+            subject: title,
+            body: "Scrivi messaggio ...\n\n\n (Non eliminare le seguenti informazioni)\n" +  my_device,
+            to: ['developer@uniparthenope.it']
+        }).then(
+            function() {
+                console.log("Email closed");
+
+            }, function(err) {
+                dialogs.alert({
+                    title: "Errore: Email",
+                    message: err.toString(),
+                    okButtonText: "OK"
+                });        });
+
+
+    });
 
 };
 
