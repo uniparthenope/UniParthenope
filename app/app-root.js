@@ -25,6 +25,7 @@ function pageLoaded(args) {
 exports.onTapLogin = function(args) {
     let sideDrawer = app.getRootView();
     let user = sideDrawer.getViewById("username").text;
+    user = user.trim();
     let pass = sideDrawer.getViewById("password").text;
     sideDrawer.getViewById("password").dismissSoftInput(); //Close keyboard in IOS
 

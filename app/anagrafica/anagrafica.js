@@ -19,6 +19,8 @@ function onNavigatingTo(args) {
     page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
     page.getViewById("matricola").text = appSettings.getString("matricola");
     page.getViewById("depart").text = appSettings.getString("facDes").toUpperCase();
+    page.getViewById("uid").text = appSettings.getString("userId").toLowerCase();
+
 
     page.getViewById("sex").text = appSettings.getString("sesso");
     page.getViewById("nascita").text = appSettings.getString("dataNascita").substring(0,10);

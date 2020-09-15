@@ -34,11 +34,12 @@ function onNavigatingTo(args) {
 
     appversion.getVersionName().then(function(v) {
         page.getViewById("version").text = "Versione: " + v;
+        sideDrawer.getViewById("version").text = "v. "+ v;
     });
 
-    checkServer();
+    checkServer(10000);
     initializeGraph();
-    console.log(global.tempPos);
+    //console.log(global.tempPos);
 
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
         console.log("Setto la posizione!");
@@ -369,7 +370,9 @@ function showAD(){
 exports.ontap_fb = function(){
     utilsModule.openUrl("https://www.facebook.com/Parthenope");
 };
-
+exports.ontap_linkedin = function(){
+    utilsModule.openUrl("https://www.linkedin.com/school/universit%C3%A0-degli-studi-di-napoli-'parthenope'");
+};
 exports.ontap_you = function(){
     utilsModule.openUrl("https://www.youtube.com/channel/UCNBZALzU97MuIKSMS_gnO6A");
 };
@@ -491,11 +494,11 @@ function getDepartment(studId) {
     });
 }
 
-function checkServer(){
+function checkServer(timeout){
     httpModule.request({
         url: global.url_general,
         method: "GET",
-        timeout: 2000
+        timeout: timeout
     }).then((response) => {
         if (response.statusCode !== 200){
             console.log("SERVER DOWN");

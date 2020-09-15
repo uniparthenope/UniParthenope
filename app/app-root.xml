@@ -116,6 +116,8 @@
                 <Button class="btn-menu" text="Info" marginBottom="5" tap="goto_about"/>
 
                 <Button class="btn-menu" text="Settings" marginBottom="5" tap="goto_settings"/>
+                <Label id="version" fontSize="11" textAlignment="center" horizontalAlignment="center" color="white" text="v.--"/>
+
 
             </StackLayout>
 

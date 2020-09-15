@@ -64,44 +64,49 @@
                         <Label id="surname" text="SURNAME" horizontalAlignment="center" fontSize="28" color="white"/>
                         <Label id="name" text="NAME" horizontalAlignment="center" fontSize="18" color="white"/>
                     </StackLayout>
-                    <GridLayout horizontalAlignment="center" width="100%" height="20%">
-                        <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="15">
+                    <GridLayout columns="*,*,*" horizontalAlignment="center" width="100%" height="20%">
+                        <StackLayout col="0" orientation="vertical" horizontalAlignment="left" marginLeft="15">
                             <Label id="mat_label" text="MATRICOLA" horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="matricola" text="--" horizontalAlignment="center" fontSize="14" color="white"/>
                         </StackLayout>
-                        <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="15" >
+                        <StackLayout col="1" orientation="vertical" horizontalAlignment="center" marginLeft="15">
+                            <Label text="USERNAME" horizontalAlignment="center" fontSize="16" color="white"/>
+                            <Label id="uid" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white"/>
+                        </StackLayout>
+                        <StackLayout col="2" orientation="vertical" horizontalAlignment="right" marginRight="15" >
                             <Label text="RUOLO" horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="role"  text="--" horizontalAlignment="center" fontSize="14" color="white"/>
                             <Label id="roleID"  text="" horizontalAlignment="center" fontSize="14" color="white"/>
                         </StackLayout>
                     </GridLayout>
-                    <GridLayout horizontalAlignment="center" width="100%" height="17%">
-                        <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="15">
+                    <GridLayout columns="*,*" horizontalAlignment="center" width="100%" height="17%">
+                        <StackLayout col="0" orientation="vertical" horizontalAlignment="left" marginLeft="15">
                             <Label text="DATA NASCITA" horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="nascita" text="--" horizontalAlignment="center" fontSize="14" color="white"/>
                         </StackLayout>
-                        <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="15" >
+
+                        <StackLayout col="1" orientation="vertical" horizontalAlignment="right" marginRight="15" >
                             <Label text="SESSO" horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="sex"  text="--" horizontalAlignment="center" fontSize="14" color="white"/>
                         </StackLayout>
                     </GridLayout>
-                    <GridLayout horizontalAlignment="center" width="100%" height="20%">
-                        <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="15" width="50%">
+                    <GridLayout columns="*,*" horizontalAlignment="center" width="100%" height="20%">
+                        <StackLayout col="0" orientation="vertical" horizontalAlignment="left" marginLeft="15" width="50%">
                             <Label text="EMAIL IST." horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="email_ist" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white"/>
                         </StackLayout>
-                        <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="15" width="50%" >
+                        <StackLayout col="1" orientation="vertical" horizontalAlignment="right" marginRight="15" width="50%" >
                             <Label text="TEL." horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="tel"  text="--" horizontalAlignment="center" fontSize="14" color="white"/>
                         </StackLayout>
                     </GridLayout>
-                    <GridLayout horizontalAlignment="center" width="100%" height="20%" id="email_id" visibility="collapsed">
-                        <StackLayout  orientation="vertical" horizontalAlignment="center" marginLeft="15">
+                    <GridLayout columns="*,*" horizontalAlignment="center" width="100%" height="20%" id="email_id" visibility="collapsed">
+                        <StackLayout col="0" orientation="vertical" horizontalAlignment="center" marginLeft="15" width="70%">
                             <Label text="EMAIL PRIV." horizontalAlignment="center" fontSize="16" color="white"/>
-                            <Label id="email" text="--" horizontalAlignment="center" fontSize="14" color="white"/>
+                            <Label id="email" text="--" textWrap="true" horizontalAlignment="center" fontSize="14" color="white"/>
                         </StackLayout>
                     </GridLayout>
-                    <GridLayout horizontalAlignment="center" width="100%" height="17%" id="nation_id" visibility="collapsed">
+                    <GridLayout col="1" horizontalAlignment="center" width="100%" height="17%" id="nation_id" visibility="collapsed">
                         <StackLayout  orientation="vertical" horizontalAlignment="center" marginLeft="15">
                             <Label text="NAZIONE" horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="nazione" text="--" horizontalAlignment="center" fontSize="14" color="white"/>

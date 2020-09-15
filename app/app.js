@@ -10,6 +10,7 @@ let domain = "https://api.uniparthenope.it";
 
 global.url = domain + "/UniparthenopeApp/v1/";
 global.url_general = domain + "/";
+global.version;
 
 global.isConnected = false;
 global.updatedExam = false;

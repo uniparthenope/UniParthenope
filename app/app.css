@@ -63,9 +63,9 @@ refer to http://docs.nativescript.org/ui/theme.
     background-color: #22384f;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 30% 30%;
-    height: 70;
-    width: 70;
+    background-size: 25% 25%;
+    height: 60;
+    width: 60;
 }
 .roundedBtn:active
 {
