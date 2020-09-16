@@ -135,7 +135,6 @@ function getCourses() {
     }).then((response) => {
         const result = response.content.toJSON();
 
-        console.log(response.statusCode);
 
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
         {

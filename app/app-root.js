@@ -83,9 +83,9 @@ exports.contact_us = function () {
             platformModule.device.manufacturer + " "+ platformModule.device.os + " "+ platformModule.device.osVersion + "\n"+ platformModule.device.sdkVersion +" \n" +
             platformModule.device.model + " "+ platformModule.device.deviceType + "\n" + platformModule.device.region + " "+ platformModule.device.language;
 
-        let title = "[APP v." + ver +" "+platformModule.device.os+"]" +" [ "+ appSettings.getString("userId") + " "
-            + appSettings.getString("matricola") + " "
-            + appSettings.getString("grpDes") + " ]";
+        let title = "[APP v." + ver +" "+platformModule.device.os+"]" +" [ "+ appSettings.getString("userId","") + " "
+            + appSettings.getString("matricola","") + " "
+            + appSettings.getString("grpDes","") + " ]";
         console.log(title);
 
         console.log(my_device);

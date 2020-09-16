@@ -80,7 +80,12 @@ function onDrawerButtonTap() {
 
 function onGeneralMenu()
 {
-    page.frame.goBack();
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
 }
 
 function choseBackground(page){
