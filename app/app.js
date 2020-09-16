@@ -2,6 +2,9 @@ const application = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
+const appRater = require("nativescript-rater").appRater;
+const app = require("tns-core-modules/application");
+
 
 
 let domain = "https://api.uniparthenope.it";
@@ -265,5 +268,17 @@ application.on(application.suspendEvent, (args) => {
     }
 });
 
+appRater.init({
+    showNeverButton:true,
+    debugMode:false
+});
+if(app.ios){
+    appRater.ios.setAlertTitle('Valuta app@uniparthenope');
+    appRater.ios.setAlertMessage('Se ti piace quest\'app, trova un momento per lasciare una recensione positiva.\n La tua opinione conta per noi.');
+    appRater.ios.setAlertCancelTitle('No, Grazie!');
+    appRater.ios.setAlertRateTitle('Valuta Adesso');
+    appRater.ios.setAlertRateLaterTitle('Ricorda Dopo');
+    appRater.ios.setAppName('app@uniparthenope');
+}
 
 application.run({ moduleName: "app-root" });

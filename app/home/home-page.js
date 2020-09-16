@@ -10,6 +10,7 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 let appversion = require("nativescript-appversion");
 const modalViewModule = "modal-meteo/modal-meteo";
 const platform = require("tns-core-modules/platform");
+const appRater = require("nativescript-rater").appRater;
 
 let page;
 let viewModel;
@@ -17,6 +18,8 @@ let sideDrawer;
 let remember;
 let user;
 let pos;
+
+let ratings;
 
 let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553, color: 'linear-gradient(135deg, #5CC77A, #009432)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(0, 167, 84))'},
     {id: 'Medina', lat: 40.840447, long: 14.251863, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(221, 108, 166))'},
@@ -28,6 +31,8 @@ function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
+
+    rateApp();
 
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
@@ -586,3 +591,8 @@ function getPIC(personId, value) {
 }
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
+
+function rateApp() {
+
+    appRater.showRateDialog();
+}

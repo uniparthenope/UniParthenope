@@ -27,6 +27,7 @@
     "nativescript-email": "^1.6.0",
     "nativescript-geolocation": "^5.1.0",
     "nativescript-phone": "^2.0.0",
+    "nativescript-rater": "^2.1.2",
     "nativescript-statusbar": "^5.0.0",
     "nativescript-theme-core": "^2.0.24",
     "nativescript-ui-calendar": "^6.1.0",

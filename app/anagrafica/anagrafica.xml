@@ -112,7 +112,6 @@
                         </GridLayout>
                         <GridLayout col="1" horizontalAlignment="center" width="100%" id="nation_id">
                             <StackLayout  orientation="vertical" horizontalAlignment="center" marginLeft="15">
-                                <Label text="NAZIONE" horizontalAlignment="center" fontSize="16" color="white"/>
                                 <Label id="nazione" text="--" horizontalAlignment="center" fontSize="14" color="white"/>
                             </StackLayout>
                         </GridLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rate_dialog_title">Valuta app@uniparthenope</string>
+    <string name="rate_dialog_message">Se ti piace questa app, trova un momento per lasciare una recensione positiva.
+        La tua opinione conta per noi.</string>
+    <string name="rate_dialog_ok">Valuta Adesso</string>
+    <string name="rate_dialog_cancel">Ricorda Dopo</string>
+    <string name="rate_dialog_no">No, Grazie!</string>
+</resources>
