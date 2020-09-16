@@ -61,7 +61,7 @@ global.saveInfo = function(result) {
     appSettings.setString("cognome",result.user.lastName);
     appSettings.setString("grpDes",result.user.grpDes);
     //appSettings.setNumber("persId", result.user.persId);
-   appSettings.setString("userId", result.user.userId);
+    appSettings.setString("userId", result.user.userId);
 
     if  (result.user.grpDes === "Studenti"){
         let index = appSettings.getNumber("carriera");
@@ -105,14 +105,14 @@ global.saveAnagrafe = function(type,result){
 
         appSettings.setString("desCittadinanza",result.desCittadinanza);
         appSettings.setString("email",result.email);
-  }
-  else if (type === "Docenti"){
+    }
+    else if (type === "Docenti"){
         console.log("SAVE_ANAGR ruolo= "+result.ruolo);
         console.log("SAVE_ANAGR settore= "+result.settore);
 
         appSettings.setString("ruolo",result.ruolo);
         appSettings.setString("settore",result.settore);
-  }
+    }
 };
 global.saveCarr = function(result) {
     console.log("SAVE_CARR cdsDes= "+result.cdsDes);

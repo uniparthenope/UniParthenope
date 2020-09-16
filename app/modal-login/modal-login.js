@@ -75,34 +75,6 @@ function onShownModally(args) {
                 args.object.closeModal();
             });
         }
-        /* Se un utente è di tipo USER TECNICO (ristorante) */
-        else if (response.statusCode === 600)
-        {
-            sideDrawer = app.getRootView();
-            let remember = sideDrawer.getViewById("rememberMe").checked;
-
-            if (remember){
-                appSettings.setString("username",user);
-                appSettings.setString("password",pass);
-                appSettings.setBoolean("rememberMe",true);
-            }
-            console.log("UserTecnico:" + _result.username);
-
-            sideDrawer.getViewById("topName").text = _result.username;
-            global.username = _result.username;
-            let userForm = sideDrawer.getViewById("userTecnico");
-            let loginForm = sideDrawer.getViewById("loginForm");
-            loginForm.visibility = "collapsed";
-            userForm.visibility = "visible";
-
-            closeCallback();
-            const nav =
-                {
-                    moduleName: "usertecnico-all/usertecnico-all",
-                    clearHistory: true
-                };
-            frame.Frame.topmost().navigate(nav);
-        }
         // RISTORANTI
         else if(response.statusCode === 202){
             //console.log(_result);
@@ -185,8 +157,8 @@ function onShownModally(args) {
                     }
                 }
             }
-           else if(_result.user.grpDes === "Docenti"){
-
+            // DOCENTI
+            else if(_result.user.grpDes === "Docenti"){
                 normalizeToken(_result.user.userId);
                 detailedProf(_result.user.docenteId); // Get detailed info of a professor
                 setAnagrafe(_result.user.docenteId,_result.user.grpDes);
@@ -225,38 +197,49 @@ function onShownModally(args) {
                     };
                 frame.Frame.topmost().navigate(nav);
             }
-            /*
-                        else if(_result.user.grpDes === "Tecnico"){
-                            sideDrawer = app.getRootView();
-                            let remember = sideDrawer.getViewById("rememberMe").checked;
+            // REGISTRATI/DOTTORANDI
+            else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi"){
+                normalizeToken(_result.user.userId);
+                sideDrawer = app.getRootView();
+                global.saveInfo(account);
+                appSettings.setString("matricola","--");
 
-                            if (remember){
-                                appSettings.setString("username",user);
-                                appSettings.setString("password",pass);
-                                appSettings.setBoolean("rememberMe",true);
-                            }
-                            console.log("Ristorante:" + _result.username);
+                let remember = sideDrawer.getViewById("rememberMe").checked;
 
-                            sideDrawer.getViewById("topName").text = _result.username;
-                            global.username = _result.username;
-                            let userForm = sideDrawer.getViewById("userAdmin");
-                            let loginForm = sideDrawer.getViewById("loginForm");
-                            loginForm.visibility = "collapsed";
-                            userForm.visibility = "visible";
+                if (remember){
+                    appSettings.setString("username",user);
+                    appSettings.setString("token",global.encodedStr);
+                    appSettings.setBoolean("rememberMe",true);
+                }
+                global.isConnected = true;
 
-                            closeCallback();
-                            const nav =
-                                {
-                                    moduleName: "admin/admin-home/admin-home",
-                                    clearHistory: true
-                                };
-                            frame.Frame.topmost().navigate(nav);
+                let nome = appSettings.getString("nome");
+                let cognome = appSettings.getString("cognome");
 
-            }*/
-                // PTA, ALTRI UTENTI
+                sideDrawer.getViewById("topName").text = nome + " " + cognome;
+                sideDrawer.getViewById("topMatr").text = _result.user.grpDes;
+                sideDrawer.getViewById("topMatr").visibility = "visible";
+                getPIC(_result.user.persId,0);
+                let userForm = sideDrawer.getViewById("userOther");
+                let loginForm = sideDrawer.getViewById("loginForm");
+                loginForm.visibility = "collapsed";
+                userForm.visibility = "visible";
+
+                closeCallback();
+                const nav =
+                    {
+                        moduleName: "home/home-page",
+                        clearHistory: true
+                    };
+                frame.Frame.topmost().navigate(nav);
+            }
+            // PTA, ALTRI UTENTI
             else{
                 //console.log(_result.user.grpId);
                 sideDrawer = app.getRootView();
+
+                normalizeToken(_result.user.userId);
+
                 appSettings.setString("grpDes",_result.user.grpDes);
 
                 if  (_result.user.persId !== undefined)
@@ -273,14 +256,24 @@ function onShownModally(args) {
                     appSettings.setBoolean("rememberMe",true);
                 }
                 global.isConnected = true;
-                let nc = user.split(".");
 
                 getPIC(_result.user.persId,0);
 
+                let nc;
+
+                if(user.includes(".")){
+                    nc = user.split(".");
+                    appSettings.setString("nome", nc[0].toUpperCase());
+                    appSettings.setString("cognome", nc[1].toUpperCase());
+                }
+                else{
+                    nc = _result.user.userId.split(".");
+                    appSettings.setString("nome", nc[0].toUpperCase());
+                    appSettings.setString("cognome", nc[1].toUpperCase());
+                }
 
                 appSettings.setString("nome", nc[0].toUpperCase());
                 appSettings.setString("cognome", nc[1].toUpperCase());
-
 
                 sideDrawer.getViewById("topName").text = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
                 sideDrawer.getViewById("topMatr").text = appSettings.getString("grpDes");
