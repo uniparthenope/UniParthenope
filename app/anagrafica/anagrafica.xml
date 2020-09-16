@@ -60,11 +60,11 @@
                     <StackLayout orientation="vertical"  width="100%" horizontalAlignment="center" marginBottom="10">
                         <Label id="depart" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white" textAlignment="center"/>
                     </StackLayout>
-                    <StackLayout orientation="vertical" horizontalAlignment="center" marginBottom="5" width="100%">
+                    <StackLayout orientation="vertical" horizontalAlignment="center" marginBottom="15" width="100%">
                         <Label id="surname" text="SURNAME" horizontalAlignment="center" fontSize="28" color="white"/>
                         <Label id="name" text="NAME" horizontalAlignment="center" fontSize="18" color="white"/>
                     </StackLayout>
-                    <GridLayout columns="*,*,*" horizontalAlignment="center" width="100%" height="20%">
+                    <GridLayout columns="*,*,*" horizontalAlignment="center" width="100%" height="23%">
                         <StackLayout col="0" orientation="vertical" horizontalAlignment="left" marginLeft="15">
                             <Label id="mat_label" text="MATRICOLA" horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="matricola" text="--" horizontalAlignment="center" fontSize="14" color="white"/>
@@ -100,7 +100,7 @@
                             <Label id="tel"  text="--" horizontalAlignment="center" fontSize="14" color="white"/>
                         </StackLayout>
                     </GridLayout>
-                    <GridLayout columns="*,*" horizontalAlignment="center" width="100%" height="20%" id="email_id" visibility="collapsed">
+                    <GridLayout columns="*,*" horizontalAlignment="center" width="100%" height="25%" id="email_id" visibility="collapsed">
                         <StackLayout col="0" orientation="vertical" horizontalAlignment="center" marginLeft="15" width="70%">
                             <Label text="EMAIL PRIV." horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="email" text="--" textWrap="true" horizontalAlignment="center" fontSize="14" color="white"/>
