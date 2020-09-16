@@ -594,5 +594,5 @@ exports.onDrawerButtonTap = onDrawerButtonTap;
 
 function rateApp() {
 
-    appRater.showRateDialog();
+    appRater.showRateDialogIfMeetsConditions();
 }
