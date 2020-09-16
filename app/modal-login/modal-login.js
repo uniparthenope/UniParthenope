@@ -197,8 +197,8 @@ function onShownModally(args) {
                     };
                 frame.Frame.topmost().navigate(nav);
             }
-            // REGISTRATI/DOTTORANDI
-            else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi"){
+            // REGISTRATI/DOTTORANDI/IPOT.IMMATRICOLATI/PREISCRITTI
+            else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti"){
                 normalizeToken(_result.user.userId);
                 sideDrawer = app.getRootView();
                 global.saveInfo(account);
