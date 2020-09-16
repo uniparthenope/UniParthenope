@@ -258,6 +258,10 @@ function onShownModally(args) {
                 //console.log(_result.user.grpId);
                 sideDrawer = app.getRootView();
                 appSettings.setString("grpDes",_result.user.grpDes);
+
+                if  (_result.user.persId !== undefined)
+                    appSettings.setNumber("persId",_result.user.persId);
+
                 appSettings.setString("matricola","--");
 
                 let remember = sideDrawer.getViewById("rememberMe").checked;
@@ -271,11 +275,16 @@ function onShownModally(args) {
                 global.isConnected = true;
                 let nc = user.split(".");
 
+                getPIC(_result.user.persId,0);
+
+
                 appSettings.setString("nome", nc[0].toUpperCase());
                 appSettings.setString("cognome", nc[1].toUpperCase());
 
 
                 sideDrawer.getViewById("topName").text = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
+                sideDrawer.getViewById("topMatr").text = appSettings.getString("grpDes");
+                sideDrawer.getViewById("topMatr").visibility = "visible";
                 let userForm = sideDrawer.getViewById("userOther");
                 let loginForm = sideDrawer.getViewById("loginForm");
                 loginForm.visibility = "collapsed";

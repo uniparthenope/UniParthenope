@@ -61,11 +61,9 @@ function calendarCourses() {
     {
         let esame = esami[i].nome;
         let docente = esami[i].docente.split(" ");
-        const periodo = appSettings.getNumber("periodo",3);
-        const luogo = appSettings.getString("strutturaId", "CDN");
-        const corso = appSettings.getString("corsoGaId");
-
-        console.log(luogo);
+        let periodo = appSettings.getNumber("periodo",3);
+        let luogo = appSettings.getString("StrutturaId", "CDN");
+        let corso = appSettings.getString("corsoGaId");
         if (corso === ""){
             //TODO Corso non inserito nel database!
         }
@@ -74,6 +72,8 @@ function calendarCourses() {
 
         let url = global.url_general + "GAUniparthenope/v1/searchCourse/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo;
         url = url.replace(/ /g, "%20");
+
+        console.log(url);
         
         httpModule.request({
             url: url,
@@ -229,6 +229,8 @@ function getPiano() {
                                     }
                                 }).then((response) => {
                                     const result_n = response.content.toJSON();
+                                    //console.log(result_n.anno);
+
                                     //console.log(result_n);
 
                                     if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {

@@ -230,6 +230,13 @@ function autoconnect() {
                 let nome = appSettings.getString("nome","");
                 let cognome = appSettings.getString("cognome","");
                 let username = nome + " " + cognome;
+
+                appSettings.setString("grpDes",_result.user.grpDes);
+                appSettings.setString("matricola","--");
+
+                if  (_result.user.persId !== undefined)
+                    appSettings.setNumber("persId",_result.user.persId);
+
                 setSideMenu("userOther",username);
                 indicator.visibility = "collapsed";
                 /*
@@ -338,7 +345,7 @@ function setSideMenu(type,username) {
 
      }
      else if(type === "userOther"){
-         getPIC(appSettings.getNumber("idAb"),1);
+         getPIC(appSettings.getNumber("persId"),0);
          sideDrawer.getViewById("topMatr").text = appSettings.getString("grpDes","");
          sideDrawer.getViewById("topMatr").visibility = "visible";
 

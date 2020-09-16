@@ -59,6 +59,7 @@ function onNavigatingTo(args) {
         page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
     }
     else {
+        console.log(appSettings.getNumber("persId"));
 
         getPIC(appSettings.getNumber("persId"), 0);
         page.getViewById("name").text = appSettings.getString("nome");
@@ -87,11 +88,11 @@ function choseBackground(page){
     console.log(code);
 
     if (code === "D1" || code === "D6"){
-        page.getViewById("back_image").backgroundImage = "~/images/image_PARISI.jpg";
+        page.getViewById("back_image").backgroundImage = "~/images/image_Parisi.jpg";
         page.getViewById("info_panel").backgroundColor = "rgba(11, 114, 181,0.9)";
     }
     else if (code === "D2" || code === "D7"){
-        page.getViewById("back_image").backgroundImage = "~/images/image_PARISI.jpg";
+        page.getViewById("back_image").backgroundImage = "~/images/image_Parisi.jpg";
         page.getViewById("info_panel").backgroundColor = "rgba(119, 72, 150,0.9)";
     }
     else if (code === "D3"){
@@ -103,7 +104,7 @@ function choseBackground(page){
         page.getViewById("info_panel").backgroundColor = "rgba(0, 167, 84,0.9)";
     }
     else if (code === "D4"){
-        page.getViewById("back_image").backgroundImage = "~/images/image_ACTON.jpg";
+        page.getViewById("back_image").backgroundImage = "~/images/image_Acton.jpg";
         page.getViewById("info_panel").backgroundColor = "rgba(221, 108, 166,0.9)";
     }
     else{
