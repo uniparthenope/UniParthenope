@@ -95,7 +95,7 @@
                         </StackLayout>
                     </GridLayout>
 
-                    <GridLayout  horizontalAlignment="center" width="100%" height="20%">
+                    <GridLayout  horizontalAlignment="center" width="100%" height="17%">
                         <StackLayout  orientation="vertical" horizontalAlignment="center" marginLeft="15">
                             <Label text="EMAIL IST." horizontalAlignment="center" fontSize="16" color="white"/>
                             <Label id="email_ist" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white"/>
@@ -104,7 +104,7 @@
                     </GridLayout>
                     <GridLayout columns="auto,*" horizontalAlignment="center" width="100%">
 
-                        <GridLayout col="0" horizontalAlignment="center" width="100%"  id="email_id" visibility="collapsed">
+                        <GridLayout col="0" horizontalAlignment="center" width="100%" id="email_id" visibility="collapsed">
                             <StackLayout col="0" orientation="vertical" horizontalAlignment="center" marginLeft="15" width="70%">
                                 <Label text="EMAIL PRIV." horizontalAlignment="center" fontSize="16" color="white"/>
                                 <Label id="email" text="--" textWrap="true" horizontalAlignment="center" fontSize="14" color="white"/>
