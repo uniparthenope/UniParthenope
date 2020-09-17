@@ -12,18 +12,23 @@ const hashSalt = Date.now().toString();
 
 module.exports = env => {
     // Add your custom Activities, Services and other android app components here.
-    const appComponents = [
+    const appComponents = env.appComponents || [];
+    appComponents.push(...[
         "tns-core-modules/ui/frame",
         "tns-core-modules/ui/frame/activity",
-    ];
+    ]);
 
-    const platform = env && (env.android && "android" || env.ios && "ios");
+    const platform = env && (env.android && "android" || env.ios && "ios" || env.platform);
     if (!platform) {
         throw new Error("You need to provide a target platform!");
     }
 
     const platforms = ["ios", "android"];
     const projectRoot = __dirname;
+
+    if (env.platform) {
+        platforms.push(env.platform);
+    }
 
     // Default destination inside platforms/<platform>/...
     const dist = resolve(projectRoot, nsWebpack.getAppPath(platform, projectRoot));
@@ -53,11 +58,22 @@ module.exports = env => {
     const isAnySourceMapEnabled = !!sourceMap || !!hiddenSourceMap;
     const externals = nsWebpack.getConvertedExternals(env.externals);
     const appFullPath = resolve(projectRoot, appPath);
+    const hasRootLevelScopedModules = nsWebpack.hasRootLevelScopedModules({ projectDir: projectRoot });
+    let coreModulesPackageName = "tns-core-modules";
+    const alias = env.alias || {};
+    alias['~'] = appFullPath;
+
+    if (hasRootLevelScopedModules) {
+        coreModulesPackageName = "@nativescript/core";
+        alias["tns-core-modules"] = coreModulesPackageName;
+    }
     const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
 
     const entryModule = nsWebpack.getEntryModule(appFullPath, platform);
     const entryPath = `.${sep}${entryModule}.js`;
-    const entries = { bundle: entryPath };
+    const entries = env.entries || {};
+    entries.bundle = entryPath;
+
     const areCoreModulesExternal = Array.isArray(env.externals) && env.externals.some(e => e.indexOf("tns-core-modules") > -1);
     if (platform === "ios" && !areCoreModulesExternal) {
         entries["tns_modules/tns-core-modules/inspector_modules"] = "inspector_modules";
@@ -99,14 +115,12 @@ module.exports = env => {
             extensions: [".js", ".scss", ".css"],
             // Resolve {N} system modules from tns-core-modules
             modules: [
-                resolve(__dirname, "node_modules/tns-core-modules"),
+                resolve(__dirname, `node_modules/${coreModulesPackageName}`),
                 resolve(__dirname, "node_modules"),
-                "node_modules/tns-core-modules",
+                `node_modules/${coreModulesPackageName}`,
                 "node_modules",
             ],
-            alias: {
-                '~': appFullPath
-            },
+            alias,
             // resolve symlinks to symlinked modules
             symlinks: true
         },
@@ -218,7 +232,6 @@ module.exports = env => {
             // Copy assets to out dir. Add your own globs as needed.
             new CopyWebpackPlugin([
                 { from: { glob: "fonts/**" } },
-                {from: { glob: "www/**" }},
                 { from: { glob: "**/*.jpg" } },
                 { from: { glob: "**/*.png" } },
             ], { ignore: [`${relative(appPath, appResourcesFullPath)}/**`] }),
