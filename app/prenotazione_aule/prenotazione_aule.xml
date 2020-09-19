@@ -1,0 +1,78 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:x="nativescript-statusbar">
+
+    <x:StatusBar ios:barStyle="light" barColor="#22384f" />
+    <ActionBar class="action-bar" title="UniParthenope">
+        <ActionItem icon="~/images/logo_parth.png"
+                    tap="onGeneralMenu"
+                    android.position="right"
+                    ios:visibility="collapsed"
+        />
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <ActionItem icon="res://navigation/logo_parth"
+                    android:visibility="collapsed"
+                    tap="onGeneralMenu"
+                    ios.position="right">
+        </ActionItem>
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+
+    </ActionBar>
+
+    <GridLayout height="100%">
+        <StackLayout height="100%">
+            <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+                <Label class="textPrimary" text="Prenotazioni" horizontalAlignment="center" verticalAlignment="center"/>
+            </GridLayout>
+
+            <StackLayout margin="5 5 5 5" id="scelta_accesso" visibility="visible">
+                <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" />
+
+
+                <ScrollView row="1" verticalAlignment="top"  height="100%">
+                    <ListView id="lezioni_listview" class="list-group" items="{{ lezioni }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                        <ListView.itemTemplate >
+                            <FlexboxLayout flexDirection="row">
+                                <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
+                                    <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
+                                        <Label borderWidth="0" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                    </StackLayout>
+                                    <Label class="{{ classe }}" borderWidth="0" text="{{ prof }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ room }}"/>
+                                    </StackLayout>
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="Capacità: "/>
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ capacity }}"/>
+                                    </StackLayout>
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="Inizio: "/>
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ start }}"/>
+                                    </StackLayout>
+                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="Fine: "/>
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ end }}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </FlexboxLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                </ScrollView>
+            </StackLayout>
+        </StackLayout>
+
+        <Button id="selection_button" margin="5 5 5 5" class="btn" text="Scegli" ontap="ontap_save" verticalAlignment="bottom"/>
+    </GridLayout>
+</Page>

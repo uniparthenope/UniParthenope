@@ -273,6 +273,17 @@ exports.goto_anagrafica = function () {
         okButtonText: "OK"
     });*/
 };
+
+exports.goto_prenotazioni = function () {
+
+    const nav =
+        {
+            moduleName: "prenotazione_aule/prenotazione_aule",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
+
 exports.ontap_account = function(){
     utilsModule.openUrl("https://uniparthenope.esse3.cineca.it/Anagrafica/PasswordDimenticata.do");
 };
