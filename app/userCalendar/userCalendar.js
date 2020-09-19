@@ -51,30 +51,16 @@ function calendarCourses() {
     global.events = [];
     let esami = global.freqExams;
 
-    /*
-     TODO Cambiare ciclo for ed API.
-      Effettuare prima chiamata API e scaricare .ical o json e poi cercare il docente
-      (Passo da N chiamate API ad 1!!)
-     */
-
     for (let i = 0; i<esami.length; i++)
     {
-        let esame = esami[i].nome;
-        let docente = esami[i].docente.split(" ");
-        let periodo = appSettings.getNumber("periodo",3);
-        let luogo = appSettings.getString("StrutturaId", "CDN");
-        let corso = appSettings.getString("corsoGaId");
-        if (corso === ""){
-            //TODO Corso non inserito nel database!
-        }
+        let codice = esami[i].codice;
         const color = new Color.Color(colors[i%colors.length]);
         //const color = "#c47340";
 
-        let url = global.url_general + "GAUniparthenope/v1/searchCourse/"+ luogo + "/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo;
-        url = url.replace(/ /g, "%20");
+        let url = global.url_general + "GAUniparthenope/v1/getLectures/"+ codice;
 
         console.log(url);
-        
+
         httpModule.request({
             url: url,
             method: "GET",
@@ -91,14 +77,13 @@ function calendarCourses() {
                     title: "Errore: UserCalendar calendarCourses",
                     message: result.errMsg,
                     okButtonText: "OK"
-                }).then(
-                );
+                });
             }
             else {
                 for (let x = 0; x < result.length; x++) {
-                    let data_inizio = new Date(result[x].inizio);
-                    let data_fine = new Date(result[x].fine);
-                    let title = esame + "\n" + esami[i].docente + "\n\n" + result[x].aula;
+                    let data_inizio = new Date(result[x].start);
+                    let data_fine = new Date(result[x].end);
+                    let title = result[x].course_name + "\n" + result[x].prof + "\n\n" + result[x].room.name;
                     global.events.push({
                         title : title,
                         data_inizio: data_inizio,
@@ -117,6 +102,7 @@ function calendarCourses() {
             });
         });
     }
+
     let prenotazioni = global.myPrenotazioni;
     console.log(prenotazioni.length);
     for (let x=0; x < prenotazioni.length ; x++){

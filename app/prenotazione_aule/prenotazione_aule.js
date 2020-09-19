@@ -12,15 +12,13 @@ let index = 0;
 let id_corso;
 let courses = global.freqExams;
 let lezioni;
+let lezioniList;
 
 function onNavigatingTo(args) {
     page = args.object;
 
     lezioni = new ObservableArray();
-
-    for (let i=0; i<courses.length; i++){
-        console.log(courses[i].codice);
-    }
+    lezioniList = page.getViewById("lezioni_listview");
 
     viewModel = observableModule.fromObject({
         courses: courses,
@@ -34,10 +32,13 @@ function onNavigatingTo(args) {
 }
 
 exports.ontap_save = function() {
+    while(lezioni.length > 0)
+        lezioni.pop();
+
     id_corso = courses[index].codice;
 
     console.log(courses[index].codice);
-    let url = global.url_general + "GAUniparthenope/v1/getLezioni/" + courses[index].codice;
+    let url = global.url_general + "GAUniparthenope/v1/getTodayLecture/" + courses[index].codice;
 
     console.log(url);
 
@@ -51,7 +52,8 @@ exports.ontap_save = function() {
     }).then((response) => {
         const result = response.content.toJSON();
 
-        console.log(result);
+
+        console.log(lezioni);
         for (let i=0; i<result.length; i++){
             lezioni.push({
                 "id": result[i].id,
@@ -61,9 +63,10 @@ exports.ontap_save = function() {
                 "start": result[i].start,
                 "end": result[i].end,
                 "room": result[i].room.name,
-                "capacity": result[i].room.capacity/2
+                "capacity": result[i].room.capacity
             });
         }
+        lezioniList.refresh();
 
     },(e) => {
         console.log("Error", e);
