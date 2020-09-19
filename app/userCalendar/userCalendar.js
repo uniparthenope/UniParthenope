@@ -59,7 +59,7 @@ function calendarCourses() {
 
         let url = global.url_general + "GAUniparthenope/v1/getLectures/"+ codice;
 
-        console.log(url);
+        console.log(url, esami[i].nome);
 
         httpModule.request({
             url: url,
