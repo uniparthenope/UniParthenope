@@ -13,6 +13,7 @@ let id_corso;
 let courses = global.freqExams;
 let lezioni;
 let lezioniList;
+let loading;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -24,6 +25,8 @@ function onNavigatingTo(args) {
         courses: courses,
         lezioni: lezioni
     });
+    loading = page.getViewById("activityIndicator");
+
 
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
@@ -32,6 +35,7 @@ function onNavigatingTo(args) {
 }
 
 exports.ontap_save = function() {
+    loading.visibility = "visible";
     while(lezioni.length > 0)
         lezioni.pop();
 
@@ -51,6 +55,15 @@ exports.ontap_save = function() {
         }
     }).then((response) => {
         const result = response.content.toJSON();
+
+        let no_less = page.getViewById("no_lession");
+
+        if (result.length === 0)
+            no_less.visibility = "visible";
+        else
+            no_less.visibility = "collapsed";
+
+        loading.visibility = "collapsed";
 
 
         console.log(lezioni);
@@ -76,6 +89,7 @@ exports.ontap_save = function() {
             okButtonText: "OK"
         });
     });
+
 };
 
 function onItemTap(args) {

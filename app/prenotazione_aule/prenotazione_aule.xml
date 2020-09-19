@@ -37,42 +37,56 @@
                 <Label class="textPrimary" text="Prenotazioni" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
-            <StackLayout margin="5 5 5 5" id="scelta_accesso" visibility="visible">
-                <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" />
+            <StackLayout margin="5 15 5 15" id="scelta_accesso" visibility="visible">
+                <Label margin="5 5 5 5" text="Selezionare un corso dall'elenco:"/>
 
+                <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" height="30%" width="100%">
+                    <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" />
+                </StackLayout>
+                <Button backgroundColor="#22384f" color="white" id="selection_button" margin="5 5 5 5" class="btn" text="Cerca" ontap="ontap_save" verticalAlignment="bottom"/>
 
-                <ScrollView row="1" verticalAlignment="top"  height="100%">
-                    <ListView id="lezioni_listview" class="list-group" items="{{ lezioni }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
-                        <ListView.itemTemplate >
-                            <FlexboxLayout flexDirection="row">
-                                <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
+                <Label margin="5 5 5 5" text="Selezionare una lezione dall'elenco:"/>
+
+                <GridLayout  borderRadius="20%" borderWidth="2">
+                    <StackLayout id="activityIndicator" visibility="collapsed" borderRadius="20%" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+                        <Label text="Ricerca Lezioni..." horizontalAlignment="center" class="textPrimary"/>
+                        <ActivityIndicator horizontalAlignment="center" busy="true"/>
+                    </StackLayout>
+                    <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
+
+                    <ScrollView verticalAlignment="top" margin="5 5 5 5" height="95%">
+                        <ListView id="lezioni_listview" class="list-group" items="{{ lezioni }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                            <ListView.itemTemplate >
+                                <FlexboxLayout flexDirection="row">
                                     <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
-                                        <Label borderWidth="0" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                        <StackLayout orientation="vertical"  width="100%" marginBottom="5" marginTop="5">
+                                            <Label borderWidth="0" text="{{ prof }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                        </StackLayout>
+                                        <Label class="{{ classe }}" borderWidth="0" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                        <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ room }}"/>
+                                        </StackLayout>
+                                        <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="Capacità: "/>
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ capacity }}"/>
+                                        </StackLayout>
+                                        <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="Inizio: "/>
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ start }}"/>
+                                        </StackLayout>
+                                        <StackLayout orientation="horizontal" horizontalAlignment="center">
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="Fine: "/>
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ end }}"/>
+                                        </StackLayout>
                                     </StackLayout>
-                                    <Label class="{{ classe }}" borderWidth="0" text="{{ prof }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
-                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ room }}"/>
-                                    </StackLayout>
-                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="Capacità: "/>
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ capacity }}"/>
-                                    </StackLayout>
-                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="Inizio: "/>
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ start }}"/>
-                                    </StackLayout>
-                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="Fine: "/>
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="15" text="{{ end }}"/>
-                                    </StackLayout>
-                                </StackLayout>
-                            </FlexboxLayout>
-                        </ListView.itemTemplate>
-                    </ListView>
-                </ScrollView>
+                                </FlexboxLayout>
+                            </ListView.itemTemplate>
+                        </ListView>
+                    </ScrollView>
+                </GridLayout>
+
             </StackLayout>
         </StackLayout>
 
-        <Button id="selection_button" margin="5 5 5 5" class="btn" text="Scegli" ontap="ontap_save" verticalAlignment="bottom"/>
     </GridLayout>
 </Page>
