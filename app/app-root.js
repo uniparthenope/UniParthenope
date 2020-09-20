@@ -278,7 +278,7 @@ exports.goto_prenotazioni = function () {
 
     const nav =
         {
-            moduleName: "prenotazione_aule/prenotazione_aule",
+            moduleName: "lezioni/lezioni",
             clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
