@@ -81,13 +81,15 @@ function calendarCourses() {
             }
             else {
                 for (let x = 0; x < result.length; x++) {
-                    let data_inizio = new Date(result[x].start);
-                    let data_fine = new Date(result[x].end);
+                    let data_inizio = convertData(result[x].start);
+                    let data_fine = convertData(result[x].end);
+
+
                     let title = result[x].course_name + "\n" + result[x].prof + "\n\n" + result[x].room.name;
                     global.events.push({
                         title : title,
-                        data_inizio: data_inizio,
-                        data_fine:data_fine,
+                        data_inizio:data_inizio ,
+                        data_fine: data_fine,
                         color: color
                     });
                 }
@@ -433,9 +435,10 @@ function onDrawerButtonTap() {
     sideDrawer.showDrawer();
 }
 function convertData(data){
-    let day = data[0]+data[1];
-    let month = data[3]+data[4];
-    let year = data[6]+data[7]+data[8]+data[9];
+
+    let day = data[8]+data[9];
+    let month = data[5]+data[6];
+    let year = data[0]+data[1]+data[2]+data[3];
     let hour = data[11]+data[12];
     let min = data[14]+data[15];
 

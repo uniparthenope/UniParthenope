@@ -13,6 +13,7 @@ let courses = global.freqExams;
 let lezioni;
 let lezioniList;
 let loading;
+let no_less
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -21,13 +22,14 @@ function onNavigatingTo(args) {
 
     viewModel = observableModule.fromObject({
         lezioni: lezioni
-
     });
 
     let title = page.getViewById("title");
     let today = new Date();
-    let final_data ="" + dayOfWeek(today) + " " + today.getDate() + " " + monthOfYear(today.getMonth()) + " " + today.getFullYear();
+    let final_data = "" + dayOfWeek(today) + " " + today.getDate() + " " + monthOfYear(today.getMonth()) + " " + today.getFullYear();
 
+    no_less = page.getViewById("no_lession");
+    loading = page.getViewById("activityIndicator");
     title.text = "Ricerca lezioni di " + final_data;
 
     sideDrawer = app.getRootView();
@@ -39,7 +41,7 @@ function onNavigatingTo(args) {
 }
 
 function getMyLectures() {
-
+    loading.visibility = "visible";
     for (let index =0; index< courses.length; index++){
         while(lezioni.length > 0)
             lezioni.pop();
@@ -58,13 +60,10 @@ function getMyLectures() {
         }).then((response) => {
             const result = response.content.toJSON();
 
-            if(result.length >0)
-                console.log(courses[index].codice);
-
             for (let i=0; i<result.length; i++){
 
-                let start_data = new Date(result[i].start);
-                let end_data = new Date(result[i].end);
+                let start_data = convertData(result[i].start);
+                let end_data = convertData(result[i].end);
                 let max_cap = result[i].room.capacity;
                 let rem_cap = 3;
 
@@ -75,8 +74,8 @@ function getMyLectures() {
                     "pr": "visible",
                     "nome": result[i].course_name,
                     "prof": result[i].prof,
-                    "start": ""+ start_data.getHours() + ":"+ convertMinutes(start_data.getMinutes()),
-                    "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
+                    "start": ""+ start_data.getHours() + ":" + convertMinutes(start_data.getMinutes()),
+                    "end": ""+ end_data.getHours() + ":" + convertMinutes(end_data.getMinutes()),
                     "room": result[i].room.name,
                     "room_place": result[i].room.description,
                     "capacity": max_cap + " Posti",
@@ -89,6 +88,9 @@ function getMyLectures() {
                     let nameB = orderB.date;
                     return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
                 });
+                no_less.visibility = "collapsed";
+                loading.visibility = "collapsed";
+
             }
             lezioniList.refresh();
 
@@ -101,22 +103,13 @@ function getMyLectures() {
             });
         });
     }
-    //TODO TERMINARE!!!
-    let no_less = page.getViewById("no_lession");
-
-    if (lezioni.length === 0)
-        no_less.visibility = "visible";
-    else
-        no_less.visibility = "collapsed";
 
 }
-
 
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
-
 
 function onGeneralMenu(){
     const nav =
@@ -147,7 +140,7 @@ function onItemTap(args) {
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json",
-                    "Authorization" : "Basic "+ global.encodedStr
+                    "Authorization" : "Basic " + global.encodedStr
                 },
                 content : JSON.stringify({
                     id_corso : lez.id_corso.toString(),
@@ -207,4 +200,16 @@ function convertMinutes(data) {
     else
         return data;
 
+}
+function convertData(data){
+
+    let day = data[8]+data[9];
+    let month = data[5]+data[6];
+    let year = data[0]+data[1]+data[2]+data[3];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
+
+    let d = new Date(year,month-1,day,hour,min);
+
+    return d;
 }
