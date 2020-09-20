@@ -26,7 +26,11 @@ function onNavigatingTo(args) {
         lezioni: lezioni
     });
     loading = page.getViewById("activityIndicator");
+    let title = page.getViewById("title");
+    let today = new Date();
+    let final_data ="" + dayOfWeek(today) + " " + today.getDate() + " " + monthOfYear(today.getMonth()) + " " + today.getFullYear();
 
+    title.text = "Ricerca lezioni di " + final_data;
 
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
@@ -68,14 +72,21 @@ exports.ontap_save = function() {
 
         console.log(lezioni);
         for (let i=0; i<result.length; i++){
+            let fulldata = new Date(result[i].start);
+            fulldata = "" + dayOfWeek(fulldata) + " " + fulldata.getDate() + " " + monthOfYear(fulldata.getMonth()) + " " + fulldata.getFullYear();
+            console.log(fulldata);
+
+            let start_data = new Date(result[i].start);
+            let end_data = new Date(result[i].end);
             lezioni.push({
                 "id": result[i].id,
                 "classe": "examPass",
-                "nome": result[i].course_name,
-                "prof": result[i].prof,
-                "start": result[i].start,
-                "end": result[i].end,
+                "nome": fulldata,
+                "prof": "PROF. ACCIDERBOLINETTI DE ACCIDERBOLIS",
+                "start": ""+ start_data.getHours() + ":"+ convertMinutes(start_data.getMinutes()),
+                "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
                 "room": result[i].room.name,
+                "room_place": result[i].room.description,
                 "capacity": result[i].room.capacity
             });
         }
@@ -121,7 +132,7 @@ function onItemTap(args) {
             }).then((response) => {
                 const result = response.content.toJSON();
 
-                if (response.statusCode == 200){
+                if (response.statusCode === 200){
                     dialogs.alert({
                         title: "Successo",
                         message: result["status"],
@@ -177,3 +188,23 @@ exports.onItemTap = onItemTap;
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
+
+function dayOfWeek(date) {
+    date = date.getDay();
+    return isNaN(date) ? null : ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'][date];
+
+}
+
+function monthOfYear(date) {
+
+    return isNaN(date) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][date];
+
+}
+function convertMinutes(data) {
+
+    if(data < 10)
+        return data + "0";
+    else
+        return data;
+
+}
