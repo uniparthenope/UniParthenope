@@ -49,69 +49,59 @@ function onNavigatingTo(args) {
 }
 
 function calendarCourses() {
-    //console.log(global.freqExams.length);
     global.events = [];
-    let esami = global.freqExams;
 
-    for (let i = 0; i<esami.length; i++)
-    {
-        let codice = esami[i].codice;
-        const color = new Color.Color(colors[i%colors.length]);
-        //const color = "#c47340";
+    let url = global.url_general + "GAUniparthenope/v1/getLectures/" + appSettings.getNumber("stuId") + "/" + appSettings.getNumber("pianoId") + "/" + appSettings.getNumber("matId");
 
-        let url = global.url_general + "GAUniparthenope/v1/getLectures/"+ codice;
+    page.getViewById("activityIndicator").visibility = "visible";
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        const result = response.content.toJSON();
 
-        console.log(url, esami[i].nome);
-
-        httpModule.request({
-            url: url,
-            method: "GET",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic "+ global.encodedStr
-            }
-        }).then((response) => {
-            const result = response.content.toJSON();
-
-            if (response.statusCode === 401 || response.statusCode === 500)
-            {
-                dialogs.alert({
-                    title: "Errore: UserCalendar calendarCourses",
-                    message: result.errMsg,
-                    okButtonText: "OK"
-                });
-            }
-            else {
-                for (let x = 0; x < result.length; x++) {
-                    let data_inizio = convertData(result[x].start);
-                    let data_fine = convertData(result[x].end);
-
-
-                    let title = result[x].course_name + "\n" + result[x].prof + "\n\n" + result[x].room.name;
-                    global.events.push({
-                        title : title,
-                        data_inizio:data_inizio ,
-                        data_fine: data_fine,
-                        color: color
-                    });
-                }
-                insert_event();
-            }
-        },(e) => {
-            console.log("Error", e);
+        if (response.statusCode === 401 || response.statusCode === 500)
+        {
             dialogs.alert({
-                title: "Errore: UserCalendar",
-                message: e.toString(),
+                title: "Errore: UserCalendar calendarCourses",
+                message: result.errMsg,
                 okButtonText: "OK"
             });
+        }
+        else {
+            for (let x = 0; x < result.length; x++) {
+                let data_inizio = convertData(result[x].start);
+                let data_fine = convertData(result[x].end);
+                const color = new Color.Color(colors[x%colors.length]);
+                
+                let title = result[x].course_name + "\n" + result[x].prof + "\n\n" + result[x].room.name;
+                global.events.push({
+                    title : title,
+                    data_inizio:data_inizio ,
+                    data_fine: data_fine,
+                    color: color
+                });
+            }
+            insert_event();
+            page.getViewById("activityIndicator").visibility = "collapsed";
+        }
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore: UserCalendar",
+            message: e.toString(),
+            okButtonText: "OK"
         });
-    }
+    });
 
     let prenotazioni = global.myPrenotazioni;
     console.log(prenotazioni.length);
     for (let x=0; x < prenotazioni.length ; x++){
         let data_inizio = convertData(prenotazioni[x].dataEsa);
-        //console.log(data_inizio);
 
         global.events.push({
             title : "[ESAME] "+ prenotazioni[x].nomeAppello,
@@ -121,7 +111,6 @@ function calendarCourses() {
         });
     }
     insert_event();
-
 }
 
 function insert_event() {
