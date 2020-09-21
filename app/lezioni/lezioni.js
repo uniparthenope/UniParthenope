@@ -59,7 +59,6 @@ function getLectures() {
             }
         }).then((response) => {
             const result = response.content.toJSON();
-
             for (let i=0; i<result.length; i++){
 
                 let start_data = convertData(result[i].start);

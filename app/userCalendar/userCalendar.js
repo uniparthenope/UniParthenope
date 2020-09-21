@@ -601,6 +601,7 @@ function getPrenotazioni(){
 }
 function checkSelfcert(){
     console.log("HERE");
+    sideDrawer.getViewById("btn-prenotazioni").visibility = "visible";
     if(appSettings.getString("accessType","undefined") === "presence")
         sideDrawer.getViewById("btn-prenotazioni").visibility = "visible";
 }

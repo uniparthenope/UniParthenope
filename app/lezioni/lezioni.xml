@@ -42,7 +42,7 @@
 
             <GridLayout >
                 <ScrollView verticalAlignment="top" margin="5 5 5 5" height="90%" borderRadius="15%" borderWidth="2">
-                    <ListView id="lezioni_listview" class="list-group" items="{{ docentiLezioni }}" itemTap="onItemTap" margin="5 5 5 5">
+                    <ListView id="lezioni_listview" class="list-group" items="{{ lezioni }}" itemTap="onItemTap" margin="5 5 5 5">
                         <ListView.itemTemplate >
                             <GridLayout rows="*,*,*,*" height="100%">
                                 <GridLayout row="0" rows="auto,*" backgroundColor="#22384f" color="white" borderRadius="5%" padding="5 5 5 5">
