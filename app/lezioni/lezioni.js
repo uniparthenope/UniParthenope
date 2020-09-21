@@ -65,7 +65,7 @@ function getMyLectures() {
                 let start_data = convertData(result[i].start);
                 let end_data = convertData(result[i].end);
                 let max_cap = result[i].room.capacity;
-                let rem_cap = 3;
+                let rem_cap = result[i].room.capacity - result[i].room.availability;
 
                 lezioni.push({
                     "id": result[i].id,
@@ -136,7 +136,7 @@ function onItemTap(args) {
         console.log(result);
         if (result){
             httpModule.request({
-                url : global.url_general + "GAUniparthenope/v1/setPrenotazione",
+                url : global.url_general + "GAUniparthenope/v1/Reservations",
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json",
