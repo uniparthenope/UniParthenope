@@ -72,6 +72,8 @@
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
                         <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
+                        <Button class="btn-menu" text="Lezioni" marginBottom="5" marginTop="5" tap="goto_docenti_lezioni"/>
+
                         <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us"/>
 
 

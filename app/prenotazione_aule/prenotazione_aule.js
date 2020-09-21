@@ -10,7 +10,7 @@ let viewModel;
 let sideDrawer;
 let index = 0;
 let id_corso;
-let courses = global.freqExams;
+let courses = global.myExams;
 let lezioni;
 let lezioniList;
 let loading;

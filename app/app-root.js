@@ -76,37 +76,46 @@ exports.goto_about = function () {
 };
 
 exports.contact_us = function () {
+    dialogs.confirm({
+        title: "Attenzione!",
+        message: "La funzione 'Contattaci' permette di contattare il team di sviluppo di app@uniparthenope al fine di comunicare problemi tecnici relativi ad essa.\nPer comunicazioni differenti si prega di rivolgersi alla propria segreteria di competenza\nGrazie.",
+        okButtonText: "Contattaci",
+        cancelButtonText: "Annulla"
+    }).then(function (result){
+        if(result){
+            appversion.getVersionName().then(function(v) {
+                let ver = v;
+                let my_device = "DISPOSITIVO UTILIZZATO: \n"+
+                    platformModule.device.manufacturer + " "+ platformModule.device.os + " "+ platformModule.device.osVersion + "\n"+ platformModule.device.sdkVersion +" \n" +
+                    platformModule.device.model + " "+ platformModule.device.deviceType + "\n" + platformModule.device.region + " "+ platformModule.device.language;
 
-    appversion.getVersionName().then(function(v) {
-        let ver = v;
-        let my_device = "DISPOSITIVO UTILIZZATO: \n"+
-            platformModule.device.manufacturer + " "+ platformModule.device.os + " "+ platformModule.device.osVersion + "\n"+ platformModule.device.sdkVersion +" \n" +
-            platformModule.device.model + " "+ platformModule.device.deviceType + "\n" + platformModule.device.region + " "+ platformModule.device.language;
+                let title = "[APP v." + ver +" "+platformModule.device.os+"]" +" [ "+ appSettings.getString("userId","") + " "
+                    + appSettings.getString("matricola","") + " "
+                    + appSettings.getString("grpDes","") + " ]";
+                console.log(title);
 
-        let title = "[APP v." + ver +" "+platformModule.device.os+"]" +" [ "+ appSettings.getString("userId","") + " "
-            + appSettings.getString("matricola","") + " "
-            + appSettings.getString("grpDes","") + " ]";
-        console.log(title);
-
-        console.log(my_device);
-
-
-        email.compose({
-            subject: title,
-            body: "Scrivi messaggio ...\n\n\n (Non eliminare le seguenti informazioni)\n" +  my_device,
-            to: ['developer@uniparthenope.it']
-        }).then(
-            function() {
-                console.log("Email closed");
-
-            }, function(err) {
-                dialogs.alert({
-                    title: "Errore: Email",
-                    message: err.toString(),
-                    okButtonText: "OK"
-                });        });
+                console.log(my_device);
 
 
+                email.compose({
+                    subject: title,
+                    body: "Scrivi messaggio ...\n\n\n (Non eliminare le seguenti informazioni)\n" +  my_device,
+                    to: ['developer@uniparthenope.it']
+                }).then(
+                    function() {
+                        console.log("Email closed");
+
+                    }, function(err) {
+                        dialogs.alert({
+                            title: "Errore: Email",
+                            message: err.toString(),
+                            okButtonText: "OK"
+                        });        });
+
+
+            });
+
+        }
     });
 
 };
@@ -279,6 +288,15 @@ exports.goto_prenotazioni = function () {
     const nav =
         {
             moduleName: "lezioni/lezioni",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
+exports.goto_docenti_lezioni = function () {
+
+    const nav =
+        {
+            moduleName: "docenti/docenti-lezioni/docenti-lezioni",
             clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
