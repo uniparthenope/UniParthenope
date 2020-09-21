@@ -118,7 +118,7 @@ function onItemTap(args) {
         console.log(result);
         if (result){
             httpModule.request({
-                url : global.url_general + "GAUniparthenope/v1/setPrenotazione",
+                url : global.url_general + "GAUniparthenope/v1/Reservations",
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json",

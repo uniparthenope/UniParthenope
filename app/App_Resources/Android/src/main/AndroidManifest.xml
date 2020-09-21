@@ -25,6 +25,7 @@
 
 		<activity
 			android:name="com.tns.NativeScriptActivity"
+			android:screenOrientation="portrait"
 			android:label="@string/title_activity_kimera"
 			android:windowSoftInputMode = "adjustPan"
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|locale|uiMode"
