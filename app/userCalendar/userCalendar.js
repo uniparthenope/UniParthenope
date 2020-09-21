@@ -28,6 +28,8 @@ function onNavigatingTo(args) {
     calendar = page.getViewById("cal");
     //global.updatedExam = false;
     console.log("UPDATED= "+global.updatedExam);
+    checkSelfcert();
+
 
     if (!global.updatedExam)
     {
@@ -597,6 +599,13 @@ function getPrenotazioni(){
         });
     });
 }
+function checkSelfcert(){
+    console.log("HERE");
+    if(appSettings.getString("accessType","undefined") === "presence")
+        sideDrawer.getViewById("btn-prenotazioni").visibility = "visible";
+}
+
+
 //Cimitero
 function getCourses() {
     const stuId = appSettings.getNumber("stuId");

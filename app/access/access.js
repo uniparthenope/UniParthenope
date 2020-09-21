@@ -65,7 +65,8 @@ function getAccess(){
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        console.log(result);
+        console.log(result.accessType);
+        appSettings.setString("accessType", result.accessType);
 
         if (response.statusCode === 401 || response.statusCode === 500) {
             dialogs.alert({
@@ -119,6 +120,8 @@ function getSelfCert(){
     }).then((response) => {
         const result = response.content.toJSON();
         console.log(result);
+        appSettings.setBoolean("covidStatement", result.covidStatement);
+
 
         if (response.statusCode === 401 || response.statusCode === 500) {
             dialogs.alert({

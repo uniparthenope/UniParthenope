@@ -91,9 +91,9 @@ function getLectures() {
                     "reserved_id" : result[i].reservation.reserved_id
                 });
                 lezioni.sort(function (orderA, orderB) {
-                    let nameA = orderA.date;
-                    let nameB = orderB.date;
-                    return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+                    let nameA = orderA.start;
+                    let nameB = orderB.start;
+                    return (nameA < nameB) ? 1 : (nameA > nameB) ? -1 : 0;
                 });
                 no_less.visibility = "collapsed";
                 loading.visibility = "collapsed";
