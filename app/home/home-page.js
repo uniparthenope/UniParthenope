@@ -303,7 +303,7 @@ exports.onTapAteneo = function(){
 exports.onTapEventi = function(){
     const nav =
         {
-            moduleName: "orari/orari"
+            moduleName: "eventi/eventi"
         };
     page.frame.navigate(nav);
 

@@ -35,12 +35,12 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
-    getMyLectures();
+    getLectures();
 
     page.bindingContext = viewModel;
 }
 
-function getMyLectures() {
+function getLectures() {
     loading.visibility = "visible";
     for (let index =0; index< courses.length; index++){
         while(lezioni.length > 0)
@@ -66,12 +66,17 @@ function getMyLectures() {
                 let end_data = convertData(result[i].end);
                 let max_cap = result[i].room.capacity;
                 let rem_cap = result[i].room.capacity - result[i].room.availability;
+                let res;
+                if (result[i].reservation.reserved)
+                    res = "visible";
+                else
+                    res = "collapsed";
 
                 lezioni.push({
                     "id": result[i].id,
                     "id_corso":courses[index].codice,
                     "classe": "examPass",
-                    "pr": "visible",
+                    "pr": res,
                     "nome": result[i].course_name,
                     "prof": result[i].prof,
                     "start": ""+ start_data.getHours() + ":" + convertMinutes(start_data.getMinutes()),
@@ -82,6 +87,8 @@ function getMyLectures() {
                     "availability":rem_cap + "/",
                     "max_c" : max_cap,
                     "ava_c" : rem_cap,
+                    "isReserved":result[i].reservation.reserved,
+                    "reserved_id" : result[i].reservation.reserved_id
                 });
                 lezioni.sort(function (orderA, orderB) {
                     let nameA = orderA.date;
@@ -127,54 +134,119 @@ function onItemTap(args) {
     console.log(lez.id);
     console.log(lez.id_corso);
 
-    dialogs.confirm({
-        title: "Prenotazione posto",
-        message: "Sicuro di voler prenotare un posto?",
-        okButtonText: "Sì",
-        cancelButtonText: "No",
-    }).then(function (result) {
-        console.log(result);
-        if (result){
-            httpModule.request({
-                url : global.url_general + "GAUniparthenope/v1/Reservations",
-                method: "POST",
-                headers: {
-                    "Content-Type" : "application/json",
-                    "Authorization" : "Basic " + global.encodedStr
-                },
-                content : JSON.stringify({
-                    id_corso : lez.id_corso.toString(),
-                    id_lezione: lez.id.toString(),
-                    matricola: appSettings.getString("matricola", "")
-                })
-            }).then((response) => {
-                const result = response.content.toJSON();
+    if(lez.isReserved){
+        dialogs.confirm({
+            title: "Cancellazione posto",
+            message: "Sicuro di voler cancellare la prenotazione ad un posto?",
+            okButtonText: "Sì",
+            cancelButtonText: "No",
+        }).then(function (result) {
+            console.log(result);
+            if (result){
+                httpModule.request({
+                    url : global.url_general + "GAUniparthenope/v1/Reservations",
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type" : "application/json",
+                        "Authorization" : "Basic " + global.encodedStr
+                    },
+                    content : JSON.stringify({
+                        id_prenotazione : lez.reserved_id
+                    })
+                }).then((response) => {
+                    const result = response.content.toJSON();
 
-                if (response.statusCode === 200){
+                    if (response.statusCode === 200){
+                        dialogs.alert({
+                            title: "Successo",
+                            message: result["status"],
+                            okButtonText: "OK"
+                        }).then(function (){
+                            const nav =
+                                {
+                                    moduleName: "lezioni/lezioni",
+                                    clearHistory: true
+                                };
+                            page.frame.navigate(nav);
+                        });
+                    }
+                    else{
+                        dialogs.alert({
+                            title: "Errore: Cancellazione Prenotazioni",
+                            message: result["errMsg"],
+                            okButtonText: "OK"
+                        });
+                    }
+
+                },(e) => {
+                    console.log("Error", e);
                     dialogs.alert({
-                        title: "Successo",
-                        message: result["status"],
+                        title: "Errore: Cancellazione prenotazioni",
+                        message: e.toString(),
                         okButtonText: "OK"
                     });
-                }
-                else{
-                    dialogs.alert({
-                        title: "Errore: Prenotazioni",
-                        message: result["errMsg"],
-                        okButtonText: "OK"
-                    });
-                }
-
-            },(e) => {
-                console.log("Error", e);
-                dialogs.alert({
-                    title: "Errore: prenotazioni",
-                    message: e.toString(),
-                    okButtonText: "OK"
                 });
-            });
-        }
-    });
+            }
+        });
+    }
+    else{
+        dialogs.confirm({
+            title: "Prenotazione posto",
+            message: "Sicuro di voler prenotare un posto?",
+            okButtonText: "Sì",
+            cancelButtonText: "No",
+        }).then(function (result) {
+            console.log(result);
+            if (result){
+                httpModule.request({
+                    url : global.url_general + "GAUniparthenope/v1/Reservations",
+                    method: "POST",
+                    headers: {
+                        "Content-Type" : "application/json",
+                        "Authorization" : "Basic " + global.encodedStr
+                    },
+                    content : JSON.stringify({
+                        id_corso : lez.id_corso.toString(),
+                        id_lezione: lez.id.toString(),
+                        matricola: appSettings.getString("matricola", "")
+                    })
+                }).then((response) => {
+                    const result = response.content.toJSON();
+
+                    if (response.statusCode === 200){
+                        dialogs.alert({
+                            title: "Successo",
+                            message: result["status"],
+                            okButtonText: "OK"
+                        }).then(function (){
+                            const nav =
+                                {
+                                    moduleName: "lezioni/lezioni",
+                                    clearHistory: true
+                                };
+                            page.frame.navigate(nav);
+                        });
+                    }
+                    else{
+                        dialogs.alert({
+                            title: "Errore: Prenotazioni",
+                            message: result["errMsg"],
+                            okButtonText: "OK"
+                        });
+                    }
+
+                },(e) => {
+                    console.log("Error", e);
+                    dialogs.alert({
+                        title: "Errore: prenotazioni",
+                        message: e.toString(),
+                        okButtonText: "OK"
+                    });
+                });
+            }
+        });
+    }
+
 }
 exports.onItemTap = onItemTap;
 

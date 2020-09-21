@@ -29,6 +29,7 @@ global.freqExams = [];
 global.myExams = [];
 global.myDocenti = [];
 global.myPrenotazioni = [];
+global.myLezioni = [];
 global.myAppelli = new ObservableArray();
 global.my_selfcert;
 

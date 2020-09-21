@@ -6,9 +6,8 @@ const httpModule = require("tns-core-modules/http");
 const calendarModule = require("nativescript-ui-calendar");
 const Color = require("tns-core-modules/color");
 
-let colors = ["#c47340","#4566c1","#824bc1","#a32d13","#382603","#fff766"];
-let new_id = [{id:"M",color:"#555555"},{id:"Altro",color:"#c47340"},{id:"MQDA",color:"#824bc1"},{id:"Tirocini",color:"#4566c1"},{id:"Seminari",color:"#a7f442"},{id:"EVENTI",color:"#f49b41"},{id:"Master",color:"#f44155"},
-    {id:"Congressi",color:"#41f4b2"}];
+let new_id = [{id:"a",color:"#555555"},{id:"s",color:"#c47340"},{id:"b",color:"#824bc1"},{id:"c",color:"#4566c1"},{id:"t",color:"#a7f442"},{id:"O",color:"#f49b41"},{id:"Y",color:"#f44155"},
+    {id:"z",color:"#41f4b2"}];
 let page;
 let viewModel;
 let sideDrawer;
@@ -28,10 +27,7 @@ function onNavigatingTo(args) {
 
 function getTime() {
     let periodo = appSettings.getNumber("periodo_altri",3);
-    let url = global.url + "orari/altriCorsi/" + periodo ;
-    url = url.replace(/ /g, "%20");
-    console.log(url);
-
+    let url = global.url_general + "GAUniparthenope/v1/getEvents";
     httpModule.request({
             url: url,
             method: "GET",
@@ -49,19 +45,19 @@ function getTime() {
                 );
             }
             else {
-                //console.log(result);
                 let items = [];
                 for (let i=0; i<result.length; i++)
                 {
-                    let title = result[i].titolo + "\n" + result[i].descrizione + "\n\n" + result[i].aula+"\n" + result[i].confermato;
-                    let data_inizio = new Date(result[i].start_time);
-                    let data_fine = new Date(result[i].end_time);
-                    let id = result[i].id;
-                    console.log(id);
+                    let title = result[i].description + "\n" + result[i].course_name + "\n\n" + result[i].room.name+"\n" + result[i].room.description;
+
+                    let data_inizio = convertData(result[i].start);
+                    let data_fine = convertData(result[i].end);
+
+                    let id = result[i].type;
+                    //console.log(id);
                     //setId(id);
                     let color = getColor(id);
-                    console.log(color);
-
+                    //console.log(color);
                     let event = new calendarModule.CalendarEvent(title, data_inizio, data_fine, false, color);
                     items.push(event);
                 }
@@ -96,27 +92,6 @@ function getColor(id) {
     return color;
 }
 
-function setId(id)
-{
-    let flag =false;
-    let randomColor = Math.floor(Math.random()*16777215).toString(16);
-    let color = new Color.Color("#" + randomColor);
-    for (let i=0; i<new_id.length; i++){
-        if(new_id[i].id === id)
-            flag = true;
-
-    }
-    if (id === "M")
-        color = new Color.Color("#555555");
-
-    if (!flag){
-        new_id.push({
-            id : id,
-            color: color
-        });
-    }
-}
-
 exports.onDaySelected = function(args){
     console.log(args.eventData);
     const mainView = args.object;
@@ -129,3 +104,16 @@ exports.onDaySelected = function(args){
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
+
+function convertData(data){
+
+    let day = data[8]+data[9];
+    let month = data[5]+data[6];
+    let year = data[0]+data[1]+data[2]+data[3];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
+
+    let d = new Date(year,month-1,day,hour,min);
+
+    return d;
+}
