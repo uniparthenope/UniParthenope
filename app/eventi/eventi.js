@@ -26,7 +26,6 @@ function onNavigatingTo(args) {
 }
 
 function getTime() {
-    let periodo = appSettings.getNumber("periodo_altri",3);
     let url = global.url_general + "GAUniparthenope/v1/getEvents";
     httpModule.request({
             url: url,

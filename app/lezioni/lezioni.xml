@@ -45,38 +45,42 @@
                     <ListView id="lezioni_listview" class="list-group" items="{{ lezioni }}" itemTap="onItemTap" margin="5 5 5 5">
                         <ListView.itemTemplate >
                             <GridLayout rows="*,*,*,*" height="100%">
-                                <GridLayout row="0" columns="auto,*,auto" backgroundColor="#22384f" color="white" borderRadius="5%" padding="5 5 5 5">
-                                    <StackLayout col="0" orientation="vertical" horizontalAlignment="left">
-                                        <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" horizontalAlignment="center" text="Inizio" marginRight="5"/>
-                                        <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ start }}"/>
-                                    </StackLayout>
-                                    <StackLayout col="1">
-                                        <Label  borderWidth="0" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                <GridLayout row="0" rows="auto,*" backgroundColor="#22384f" color="white" borderRadius="5%" padding="5 5 5 5">
+                                    <GridLayout columns="auto,*,auto">
+                                        <StackLayout col="0" orientation="vertical" horizontalAlignment="left">
+                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" horizontalAlignment="center" text="Inizio" marginRight="5"/>
+                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ start }}"/>
+                                        </StackLayout>
+                                        <StackLayout col="1">
+                                            <Label  borderWidth="0" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
 
-                                        <Label  borderWidth="0" fontSize="12" text="{{ prof }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                            <Label  borderWidth="0" fontSize="12" text="{{ prof }}" horizontalAlignment="center" textWrap="true" textAlignment="center" marginTop="5"/>
 
-                                    </StackLayout>
+                                        </StackLayout>
 
-                                    <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
-                                        <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" horizontalAlignment="center" text="Fine" marginRight="5"/>
-                                        <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ end }}"/>
+                                        <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
+                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" horizontalAlignment="center" text="Fine" marginRight="5"/>
+                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ end }}"/>
+                                        </StackLayout>
+                                    </GridLayout>
+
+                                    <StackLayout row="1" orientation="horizontal" horizontalAlignment="center" height="100%">
+                                        <Label class="{{ classe }}" color="white" marginRight="10" borderWidth="0" fontSize="12" text="{{ room_place }}"/>
+                                        <Label class="{{ classe }}" color="white"  borderWidth="0" fontSize="12" text="{{ room }}"/>
                                     </StackLayout>
                                 </GridLayout>
 
-                                <StackLayout row="2" orientation="horizontal" horizontalAlignment="center">
-                                    <Label class="{{ classe }}" marginRight="10" borderWidth="0" fontSize="12" text="{{ room_place }}"/>
-                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ room }}"/>
-                                </StackLayout>
 
-                                <StackLayout row="3" orientation="vertical"  width="100%" >
+
+                                <StackLayout row="2" orientation="vertical"  width="100%" >
                                     <StackLayout orientation="vertical"  width="100%" >
                                     </StackLayout>
 
-                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Progress maxValue="{{max_c}}" value="{{ava_c}}" width="70%" marginRight="10" verticalAlignment="center"/>
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ availability }}" verticalAlignment="center"/>
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ capacity }}" verticalAlignment="center"/>
-                                    </StackLayout>
+                                    <GridLayout columns="*,auto,auto" horizontalAlignment="center" width="100%" margin="5 5 5 5">
+                                        <Progress col="0" maxValue="{{max_c}}" value="{{ava_c}}" marginRight="10" marginLeft="10" verticalAlignment="center"/>
+                                        <Label col="1" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ availability }}" verticalAlignment="center"/>
+                                        <Label col="2" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ capacity }}" verticalAlignment="center" marginRight="10"/>
+                                    </GridLayout>
 
                                 </StackLayout>
                                 <StackLayout row="1" horizontalAlignment="center" verticalAlignment="center" visibility="{{ pr }}">
