@@ -32,6 +32,7 @@ function onNavigatingTo(args) {
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
 
+
     rateApp();
 
     remember = appSettings.getBoolean("rememberMe");

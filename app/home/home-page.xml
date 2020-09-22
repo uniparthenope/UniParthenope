@@ -4,9 +4,7 @@
       xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:x="nativescript-statusbar">
 
-    <x:StatusBar ios:barStyle="light" barColor="rgb(34, 56, 79)" />
-
-    <ActionBar class="action-bar">
+    <ActionBar >
         <ActionItem icon="res://menu"
                     ios:visibility="collapsed"
                     tap="onDrawerButtonTap"
@@ -18,6 +16,7 @@
                     ios.position="right">
         </ActionItem>
     </ActionBar>
+    <x:StatusBar ios:barStyle="light" barColor="rgba(0, 0, 0,0.0)"/>
 
 
     <GridLayout horizontalAlignment="stretch" verticalAlignment="stretch" height="100%">
@@ -73,10 +72,10 @@
 
             <StackLayout orientation="vertical" verticalAlignment="top">
                 <ios>
-                    <Label class="topTitle" horizontalAlignment="left" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="15"/>
+                    <Label class="topTitle" horizontalAlignment="left" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="40"/>
                 </ios>
                 <android>
-                    <Label class="topTitle" horizontalAlignment="right" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="10" marginTop="15" textAlignment="right"/>
+                    <Label class="topTitle" horizontalAlignment="right" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="10" marginTop="5" textAlignment="right"/>
                 </android>
 
                 <Image src="~/images/logo_new.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>

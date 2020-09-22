@@ -100,6 +100,10 @@ refer to http://docs.nativescript.org/ui/theme.
     font-family: Montserrat-Regular;
     vertical-align:center
 }
+.action-bar-calm {
+    background-color: #00C0F5;
+    color: white;
+}
 
 
 .two-color-gradient {
