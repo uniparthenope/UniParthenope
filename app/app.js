@@ -12,6 +12,7 @@ let domain = "http://api.uniparthenope.it:5000";
 
 
 global.url = domain + "/UniparthenopeApp/v1/";
+global.url2 = domain + "/UniparthenopeApp/v2/";
 global.url_general = domain + "/";
 global.version;
 
@@ -25,6 +26,7 @@ global.username = "";
 global.data_today;
 global.events = [];
 global.tempPos = false;
+global.globalEvents = []
 global.freqExams = [];
 global.myExams = [];
 global.myDocenti = [];

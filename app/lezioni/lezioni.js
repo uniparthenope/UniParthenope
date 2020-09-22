@@ -40,76 +40,67 @@ function onNavigatingTo(args) {
     page.bindingContext = viewModel;
 }
 
-function getLectures() {
+function getLectures(){
     loading.visibility = "visible";
-    for (let index =0; index< courses.length; index++){
-        while(lezioni.length > 0)
-            lezioni.pop();
 
-        id_corso = courses[index].codice;
+    let url = global.url_general + "GAUniparthenope/v1/getTodayLecture/" + appSettings.getNumber("matId");
 
-        let url = global.url_general + "GAUniparthenope/v1/getTodayLecture/" + courses[index].codice;
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        const result = response.content.toJSON();
+        for (let i=0; i<result.length; i++){
+            let start_data = convertData(result[i].start);
+            let end_data = convertData(result[i].end);
+            let max_cap = result[i].room.capacity;
+            let rem_cap = result[i].room.capacity - result[i].room.availability;
+            let res;
+            if (result[i].reservation.reserved)
+                res = "visible";
+            else
+                res = "collapsed";
 
-        httpModule.request({
-            url: url,
-            method: "GET",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic "+ global.encodedStr
-            }
-        }).then((response) => {
-            const result = response.content.toJSON();
-            for (let i=0; i<result.length; i++){
-
-                let start_data = convertData(result[i].start);
-                let end_data = convertData(result[i].end);
-                let max_cap = result[i].room.capacity;
-                let rem_cap = result[i].room.capacity - result[i].room.availability;
-                let res;
-                if (result[i].reservation.reserved)
-                    res = "visible";
-                else
-                    res = "collapsed";
-
-                lezioni.push({
-                    "id": result[i].id,
-                    "id_corso":courses[index].codice,
-                    "classe": "examPass",
-                    "pr": res,
-                    "nome": result[i].course_name,
-                    "prof": result[i].prof,
-                    "start": ""+ start_data.getHours() + ":" + convertMinutes(start_data.getMinutes()),
-                    "end": ""+ end_data.getHours() + ":" + convertMinutes(end_data.getMinutes()),
-                    "room": result[i].room.name,
-                    "room_place": result[i].room.description,
-                    "capacity": max_cap + " Posti",
-                    "availability":rem_cap + "/",
-                    "max_c" : max_cap,
-                    "ava_c" : rem_cap,
-                    "isReserved":result[i].reservation.reserved,
-                    "reserved_id" : result[i].reservation.reserved_id
-                });
-                lezioni.sort(function (orderA, orderB) {
-                    let nameA = orderA.start;
-                    let nameB = orderB.start;
-                    return (nameA < nameB) ? 1 : (nameA > nameB) ? -1 : 0;
-                });
-                no_less.visibility = "collapsed";
-                loading.visibility = "collapsed";
-
-            }
-            lezioniList.refresh();
-
-        },(e) => {
-            console.log("Error", e);
-            dialogs.alert({
-                title: "Errore: prenotazioni",
-                message: e.toString(),
-                okButtonText: "OK"
+            lezioni.push({
+                "id": result[i].id,
+                "id_corso":result[i].id_corso,
+                "classe": "examPass",
+                "pr": res,
+                "nome": result[i].course_name,
+                "prof": result[i].prof,
+                "start": ""+ start_data.getHours() + ":" + convertMinutes(start_data.getMinutes()),
+                "end": ""+ end_data.getHours() + ":" + convertMinutes(end_data.getMinutes()),
+                "room": result[i].room.name,
+                "room_place": result[i].room.description,
+                "capacity": max_cap + " Posti",
+                "availability":rem_cap + "/",
+                "max_c" : max_cap,
+                "ava_c" : rem_cap,
+                "isReserved":result[i].reservation.reserved,
+                "reserved_id" : result[i].reservation.reserved_id
             });
-        });
-    }
 
+            lezioni.sort(function (orderA, orderB) {
+                let nameA = orderA.start;
+                let nameB = orderB.start;
+                return (nameA < nameB) ? 1 : (nameA > nameB) ? -1 : 0;
+            });
+
+            no_less.visibility = "collapsed";
+        }
+        loading.visibility = "collapsed";
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore: prenotazioni",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
 }
 
 function onDrawerButtonTap() {
@@ -130,8 +121,6 @@ function onItemTap(args) {
     const index = args.index;
 
     let lez = lezioni.getItem(index);
-    console.log(lez.id);
-    console.log(lez.id_corso);
 
     if(lez.isReserved){
         dialogs.confirm({
@@ -140,18 +129,14 @@ function onItemTap(args) {
             okButtonText: "Sì",
             cancelButtonText: "No",
         }).then(function (result) {
-            console.log(result);
             if (result){
                 httpModule.request({
-                    url : global.url_general + "GAUniparthenope/v1/Reservations",
+                    url: global.url_general + "GAUniparthenope/v1/Reservations/" + lez.reserved_id,
                     method: "DELETE",
                     headers: {
                         "Content-Type" : "application/json",
                         "Authorization" : "Basic " + global.encodedStr
-                    },
-                    content : JSON.stringify({
-                        id_prenotazione : lez.reserved_id
-                    })
+                    }
                 }).then((response) => {
                     const result = response.content.toJSON();
 
@@ -172,12 +157,13 @@ function onItemTap(args) {
                     else{
                         dialogs.alert({
                             title: "Errore: Cancellazione Prenotazioni",
-                            message: result["errMsg"],
+                            message: result['message'],
                             okButtonText: "OK"
                         });
                     }
 
                 },(e) => {
+                    console.log("QUI");
                     console.log("Error", e);
                     dialogs.alert({
                         title: "Errore: Cancellazione prenotazioni",
@@ -207,7 +193,8 @@ function onItemTap(args) {
                     content : JSON.stringify({
                         id_corso : lez.id_corso.toString(),
                         id_lezione: lez.id.toString(),
-                        matricola: appSettings.getString("matricola", "")
+                        matricola: appSettings.getString("matricola", ""),
+                        matId: appSettings.getNumber("matId", 0).toString(),
                     })
                 }).then((response) => {
                     const result = response.content.toJSON();

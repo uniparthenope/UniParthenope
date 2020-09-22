@@ -17,19 +17,31 @@ let viewModel;
 let sideDrawer;
 let calendar;
 
+function convertData(data){
+
+    let day = data[8]+data[9];
+    let month = data[5]+data[6];
+    let year = data[0]+data[1]+data[2]+data[3];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
+
+    let d = new Date(year,month-1,day,hour,min);
+
+    return d;
+}
 
 function onNavigatingTo(args) {
     page = args.object;
     page.getViewById("selected_col").col = "0";
+
     viewModel = new Observable();
+
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
     calendar = page.getViewById("cal");
-    //global.updatedExam = false;
-    console.log("UPDATED= "+global.updatedExam);
-    checkSelfcert();
 
+    console.log("UPDATED= "+global.updatedExam);
 
     if (!global.updatedExam)
     {
@@ -37,7 +49,6 @@ function onNavigatingTo(args) {
         getMainInfo();
         getPiano();
         getAccesso();
-        //getCourses();
         getPrenotazioni();
     }
     else {
@@ -51,7 +62,7 @@ function onNavigatingTo(args) {
 function calendarCourses() {
     global.events = [];
 
-    let url = global.url_general + "GAUniparthenope/v1/getLectures/" + appSettings.getNumber("stuId") + "/" + appSettings.getNumber("pianoId") + "/" + appSettings.getNumber("matId");
+    let url = global.url_general + "GAUniparthenope/v1/getLectures/" + appSettings.getNumber("matId");
 
     page.getViewById("activityIndicator").visibility = "visible";
     httpModule.request({
@@ -77,7 +88,7 @@ function calendarCourses() {
                 let data_inizio = convertData(result[x].start);
                 let data_fine = convertData(result[x].end);
                 const color = new Color.Color(colors[x%colors.length]);
-                
+
                 let title = result[x].course_name + "\n" + result[x].prof + "\n\n" + result[x].room.name;
                 global.events.push({
                     title : title,
@@ -143,19 +154,15 @@ function getPiano() {
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        console.log(result);
 
-        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-        {
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
             dialogs.alert({
                 title: "Errore: UserCalendar getPiano pianoId",
                 message: result.errMsg,
                 okButtonText: "OK"
-            }).then(
-            );
+            });
         }
-        else
-        {
+        else {
             if(result.pianoId === null){
                 dialogs.alert({
                     title: "Attenzione!",
@@ -170,8 +177,6 @@ function getPiano() {
                 appSettings.setNumber("pianoId", result.pianoId);
 
                 let pianoId = appSettings.getNumber("pianoId");
-
-                //console.log("IN CONNESSIONE A = "+global.url + "exams/" + global.encodedStr + "/" + stuId + "/" + pianoId +"/" + global.authToken);
 
                 httpModule.request({
                     url: global.url + "students/exams/" + stuId + "/" + pianoId,
@@ -190,19 +195,14 @@ function getPiano() {
                             title: "Errore: UserCalendar exams",
                             message: result.errMsg,
                             okButtonText: "OK"
-                        }).then(
-                        );
+                        });
                     }
                     else
                     {
                         let array = [];
-
-                        //console.log(result.length);
                         for (let i=0; i<result.length; i++)
                         {
-                            //console.log("ADSCEID = "+ result[i].adsceId);
                             if(result[i].adsceId !== null) {
-                                //console.log(global.url + "students/checkExams/" + matId + "/" + result[i].adsceId);
                                 httpModule.request({
                                     url: global.url + "students/checkExams/" + matId + "/" + result[i].adsceId,
                                     method: "GET",
@@ -212,9 +212,6 @@ function getPiano() {
                                     }
                                 }).then((response) => {
                                     const result_n = response.content.toJSON();
-                                    //console.log(result_n.anno);
-
-                                    //console.log(result_n);
 
                                     if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
                                         dialogs.alert({
@@ -253,10 +250,7 @@ function getPiano() {
                             }
                         }
                         global.myExams = array;
-
-                        //global.updatedExam = true;
                     }
-
                 },(e) => {
                     dialogs.alert({
                         title: "Errore: UserCalendar",
@@ -267,7 +261,8 @@ function getPiano() {
                 global.updatedExam = true;
 
                 httpModule.request({
-                    url: global.url + "students/examsToFreq/" + stuId + "/" + pianoId +"/" + matId,
+                    //url: global.url + "students/examsToFreq/" + stuId + "/" + pianoId +"/" + matId,
+                    url: global.url2 + "students/myExams/" + matId,
                     method: "GET",
                     headers: {
                         "Content-Type" : "application/json",
@@ -292,6 +287,7 @@ function getPiano() {
                         page.getViewById("activityIndicator").visibility = "collapsed";
                     }
                     else {
+                        /*
                         let alphabets26 = 'abcdefghijklmnopqrstuvwxyz';
                         let temp_array = [];
                         for (let i=0; i<result.length; i++){
@@ -358,7 +354,29 @@ function getPiano() {
                                 });
                             }
                         }
-                        global.freqExams = temp_array;
+                         */
+
+                        for (let i=0; i<result.length; i++){
+                            global.freqExams.push({
+                                "nome" : result[i].nome,
+                                "codice" : result[i].codice,
+                                "annoId" : result[i].annoId,
+                                "adsceID" : result[i].adsceID,
+                                "adLogId" : result[i].adLogId,
+                                "adId" : result[i].adId,
+                                "CFU" : result[i].CFU,
+                                "docente" : result[i].docente,
+                                "docenteID" : result[i].docenteID,
+                                "semestre" : result[i].semestre,
+                                //"inizio" : result[i].inizio,
+                                //"fine" : result[i].fine,
+                                //"modifica" : result[i].ultMod,
+                                //"orario" : [],
+                                "domPartCod": result[i].domPartCod,
+                                "esito": result[i].status.esito
+                            })
+                        }
+
                         page.getViewById("activityIndicator").visibility = "collapsed";
                         appSettings.setNumber("examsBadge",global.freqExams.length);
                         global.updatedExam = true;
@@ -385,7 +403,6 @@ function getPiano() {
 }
 
 function getMainInfo() {
-    //console.log("Sono in GETMAININFO");
     let cdsId = appSettings.getNumber("cdsId");
 
     httpModule.request({
@@ -397,18 +414,14 @@ function getMainInfo() {
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        //console.log("GetMainInfo() ="+ result);
-        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-        {
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
             dialogs.alert({
                 title: "Errore: UserCalendar getMainInfo",
                 message: result.errMsg,
                 okButtonText: "OK"
-            }).then(
-            );
+            });
         }
-        else
-        {
+        else {
             appSettings.setString("aa_accad", result.aa_accad);
             appSettings.setString("sessione", result.curr_sem);
             appSettings.setString("semestre", result.semestre);
@@ -425,30 +438,6 @@ function getMainInfo() {
     });
 }
 
-function onDrawerButtonTap() {
-    const sideDrawer = app.getRootView();
-    sideDrawer.showDrawer();
-}
-function convertData(data){
-
-    let day = data[8]+data[9];
-    let month = data[5]+data[6];
-    let year = data[0]+data[1]+data[2]+data[3];
-    let hour = data[11]+data[12];
-    let min = data[14]+data[15];
-
-    let d = new Date(year,month-1,day,hour,min);
-
-    return d;
-}
-function onGeneralMenu() {
-    const nav =
-        {
-            moduleName: "home/home-page",
-            clearHistory: true
-        };
-    page.frame.navigate(nav);
-}
 function getAccesso(){
 
     httpModule.request({
@@ -490,59 +479,6 @@ function getAccesso(){
         });
     });
 }
-exports.tapAppello = function(){
-    const nav =
-        {
-            moduleName: "prenotazioni/prenotazioni",
-            clearHistory: true,
-            animated: false
-        };
-    page.frame.navigate(nav);
-};
-
-exports.tapCourses = function(){
-    const nav =
-        {
-            moduleName: "corsi/corsi",
-            clearHistory: true,
-            animated: false
-        };
-    page.frame.navigate(nav);
-};
-
-exports.tapFood = function(){
-    const nav =
-        {
-            moduleName: "menu/menu",
-            clearHistory: true,
-            animated: false
-        };
-    page.frame.navigate(nav);
-};
-
-exports.tapBus = function(){
-    const nav =
-        {
-            moduleName: "trasporti/trasporti",
-            clearHistory: true,
-            animated: false
-        };
-    page.frame.navigate(nav);
-};
-
-exports.onDaySelected = function(args){
-    console.log(args.eventData);
-    const mainView = args.object;
-
-    const context = { title: args.eventData.title, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
-
-    mainView.showModal(modalViewModule, context, false);
-};
-
-exports.onGeneralMenu = onGeneralMenu;
-exports.onNavigatingTo = onNavigatingTo;
-exports.onDrawerButtonTap = onDrawerButtonTap;
-
 
 function getPrenotazioni(){
     let matId = appSettings.getNumber("matId").toString();
@@ -588,13 +524,68 @@ function getPrenotazioni(){
         });
     });
 }
-function checkSelfcert(){
-    console.log("HERE");
-    sideDrawer.getViewById("btn-prenotazioni").visibility = "visible";
-    if(appSettings.getString("accessType","undefined") === "presence")
-        sideDrawer.getViewById("btn-prenotazioni").visibility = "visible";
+
+function onDrawerButtonTap() {
+    const sideDrawer = app.getRootView();
+    sideDrawer.showDrawer();
 }
 
+function onGeneralMenu() {
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
+}
+
+exports.tapAppello = function(){
+    const nav =
+        {
+            moduleName: "prenotazioni/prenotazioni",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+exports.tapCourses = function(){
+    const nav =
+        {
+            moduleName: "corsi/corsi",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+exports.tapFood = function(){
+    const nav =
+        {
+            moduleName: "menu/menu",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+exports.tapBus = function(){
+    const nav =
+        {
+            moduleName: "trasporti/trasporti",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+exports.onDaySelected = function(args){
+    console.log(args.eventData);
+    const mainView = args.object;
+
+    const context = { title: args.eventData.title, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
+
+    mainView.showModal(modalViewModule, context, false);
+};
+exports.onGeneralMenu = onGeneralMenu;
+exports.onNavigatingTo = onNavigatingTo;
+exports.onDrawerButtonTap = onDrawerButtonTap;
 
 //Cimitero
 function getCourses() {

@@ -43,18 +43,24 @@ function getCourses() {
 
     for (let i=0; i<courses.length; i++)
     {
-        console.log(courses[i].domPartCod);
-        items.push({
-            "anno": drawYear(courses[i].annoId),
-            "esame": courses[i].nome,
-            "prof": courses[i].docente,
-            "data_inizio": "Dal " + courses[i].inizio,
-            "data_fine": " al " + courses[i].fine,
-            "ult_mod": courses[i].modifica,
-            "adLogId": courses[i].adLogId,
-            "partizione": "Partizione: " + courses[i].domPartCod
+        if (courses[i].esito === 'P')
+            items.push({
+                "anno": drawYear(courses[i].annoId),
+                "esame": courses[i].nome,
+                "prof": courses[i].docente,
+                //"data_inizio": "Dal " + courses[i].inizio,
+                //"data_fine": " al " + courses[i].fine,
+                //"ult_mod": courses[i].modifica,
+                "adLogId": courses[i].adLogId,
+                "partizione": "Partizione: " + courses[i].domPartCod
+            });
+            //esamiList.refresh();
+
+            items.sort(function (orderA, orderB) {
+            let nameA = orderA.anno;
+            let nameB = orderB.anno;
+            return (nameA > nameB) ? 1 : (nameA < nameB) ? -1 : 0;
         });
-        esamiList.refresh();
         /*
         if (act_sem === "Secondo Semestre" && (courses[i].semestre === "S2" ||courses[i].semestre === "A2" || courses[i].semestre === "N/A"))
         {
@@ -106,7 +112,7 @@ function getCourses() {
          */
     }
 
-    appSettings.setNumber("examsBadge",global.freqExams.length);
+    appSettings.setNumber("examsBadge",items.length);
 }
 
 function drawYear(year) {
