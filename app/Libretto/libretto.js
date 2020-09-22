@@ -3,7 +3,6 @@ const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const Observable = require("tns-core-modules/data/observable");
-
 const httpModule = require("tns-core-modules/http");
 const appSettings = require("tns-core-modules/application-settings");
 
@@ -77,7 +76,6 @@ function getMedie(matId) {
 }
 
 function getTotExams(matId) {
-
     httpModule.request({
         url: global.url + "students/totalExams/" + matId,
         method: "GET",
@@ -125,25 +123,20 @@ function getExams() {
 
     for (let i = 0; i<dim; i++)
     {
-        console.log(exams[i].nome);
-        console.log(exams[i].superata);
-        console.log(exams[i].superata_voto);
-        //console.log(exams[i].superata_lode);
-
         let lode = "collapsed";
         let voto = "?";
         let data = "";
 
-        if (exams[i].superata === "Superata" || exams[i].superata === "Indefinito" )
+        if (exams[i].esito === "S")
         {
-            if(exams[i].superata_lode === 1)
+            if(exams[i].lode === 1)
                 lode = "visible";
-            if(exams[i].superata_voto != null)
-                voto = exams[i].superata_voto;
+            if(exams[i].voto != null)
+                voto = exams[i].voto;
             else
                 voto = "OK";
-            if(exams[i].superata_data != null)
-                data = exams[i].superata_data;
+            if(exams[i].data != null)
+                data = exams[i].data;
 
             items.push({ "esame": exams[i].nome,
                 "voto" : voto,
@@ -154,7 +147,7 @@ function getExams() {
             });
             esamiList.refresh();
         }
-        else if (exams[i].superata === "Frequentata"){
+        else if (exams[i].esito === "P"){
             items.push({ "esame": exams[i].nome,
                 "cfu" :exams[i].CFU,
                 "classe" : "examFreq",
@@ -164,7 +157,6 @@ function getExams() {
             });
         }
         else {
-            //TODO Da controllare con account che non ha esami!
             items.push({ "esame": exams[i].nome,
                 "voto" : voto,
                 "cfu" :exams[i].CFU,

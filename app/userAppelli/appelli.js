@@ -36,13 +36,15 @@ function onNavigatingTo(args) {
         items_appelli: items_appelli
     });
 
-    let exams = global.freqExams;
+    let exams = global.myExams;
     num = 0;
     console.log(exams);
 
 
     for (let i=0; i < exams.length; i++){
-        getAppelli(exams[i].adId, exams[i].adsceID);
+        if (exams[i].tipo === 'V')
+            if (exams[i].esito === 'P')
+                getAppelli(exams[i].adId, exams[i].adsceID);
     }
     page.bindingContext = viewModel;
 }

@@ -28,10 +28,10 @@ function onNavigatingTo(args) {
 
     for (let i=0; i<exams.length; i++)
     {
-        if(exams[i].annoCorso === 0)
+        if(exams[i].annoId === 0)
             anno = "X";
         else
-            anno = exams[i].annoCorso;
+            anno = exams[i].annoId;
 
         items.push({
             esame: exams[i].nome,

@@ -18,7 +18,6 @@ let sideDrawer;
 let calendar;
 
 function convertData(data){
-
     let day = data[8]+data[9];
     let month = data[5]+data[6];
     let year = data[0]+data[1]+data[2]+data[3];
@@ -47,7 +46,7 @@ function onNavigatingTo(args) {
     {
         page.getViewById("activityIndicator").visibility = "visible";
         getMainInfo();
-        getPiano();
+        getExams();
         getAccesso();
         getPrenotazioni();
     }
@@ -140,13 +139,9 @@ function insert_event() {
 
 }
 
-function getPiano() {
-    let exams = {};
-    const matId = appSettings.getNumber("matId");
-    const stuId = appSettings.getNumber("stuId");
-
+function getExams(){
     httpModule.request({
-        url: global.url + "students/pianoId/" + stuId ,
+        url: global.url2 + "students/myExams/" + appSettings.getNumber("matId", 0),
         method: "GET",
         headers: {
             "Content-Type" : "application/json",
@@ -155,250 +150,56 @@ function getPiano() {
     }).then((response) => {
         const result = response.content.toJSON();
 
+        page.getViewById("activityIndicator").visibility = "visible";
+
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
             dialogs.alert({
-                title: "Errore: UserCalendar getPiano pianoId",
+                title: "Errore: UserCalendar examsToFreq",
                 message: result.errMsg,
                 okButtonText: "OK"
             });
+
+            page.getViewById("activityIndicator").visibility = "collapsed";
         }
         else {
-            if(result.pianoId === null){
-                dialogs.alert({
-                    title: "Attenzione!",
-                    message: "Il piano di studi non è ancora disponibile, pertanto le funzionalità dell'app sono limitate. \n Ci scusiamo per il disagio!",
-                    okButtonText: "OK"
-                }).then(
-                    page.getViewById("activityIndicator").visibility = "collapsed",
-                    appSettings.setNumber("pianoId", result.pianoId)
-                );
+            for (let i=0; i<result.length; i++){
+                console.log(result[i].tipo);
+                global.myExams.push({
+                    "nome" : result[i].nome,
+                    "codice" : result[i].codice,
+                    "tipo": result[i].tipo,
+                    "annoId" : result[i].annoId,
+                    "adsceID" : result[i].adsceID,
+                    "adLogId" : result[i].adLogId,
+                    "adId" : result[i].adId,
+                    "CFU" : result[i].CFU,
+                    "docente" : result[i].docente,
+                    "docenteID" : result[i].docenteID,
+                    "semestre" : result[i].semestre,
+                    //"inizio" : result[i].inizio,
+                    //"fine" : result[i].fine,
+                    //"modifica" : result[i].ultMod,
+                    //"orario" : [],
+                    "domPartCod": result[i].domPartCod,
+                    "esito": result[i].status.esito,
+                    "lode": result[i].status.lode,
+                    "voto": result[i].status.voto,
+                    "data": result[i].status.data
+                })
             }
-            else {
-                appSettings.setNumber("pianoId", result.pianoId);
 
-                let pianoId = appSettings.getNumber("pianoId");
-
-                httpModule.request({
-                    url: global.url + "students/exams/" + stuId + "/" + pianoId,
-                    method: "GET",
-                    headers: {
-                        "Content-Type" : "application/json",
-                        "Authorization" : "Basic " + global.encodedStr
-                    }
-                }).then((response) => {
-                    const result = response.content.toJSON();
-                    //console.log(result);
-
-                    if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-                    {
-                        dialogs.alert({
-                            title: "Errore: UserCalendar exams",
-                            message: result.errMsg,
-                            okButtonText: "OK"
-                        });
-                    }
-                    else
-                    {
-                        let array = [];
-                        for (let i=0; i<result.length; i++)
-                        {
-                            if(result[i].adsceId !== null) {
-                                httpModule.request({
-                                    url: global.url + "students/checkExams/" + matId + "/" + result[i].adsceId,
-                                    method: "GET",
-                                    headers: {
-                                        "Content-Type" : "application/json",
-                                        "Authorization" : "Basic "+ global.encodedStr
-                                    }
-                                }).then((response) => {
-                                    const result_n = response.content.toJSON();
-
-                                    if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
-                                        dialogs.alert({
-                                            title: "Errore: UserCalendar checkExams",
-                                            message: result_n.errMsg,
-                                            okButtonText: "OK"
-                                        }).then(
-                                        );
-                                    } else {
-                                        exams.superata = result_n.stato;
-
-                                        array.push({
-                                            "nome": result[i].nome,
-                                            "codice": result[i].codice,
-                                            "annoId": result[i].annoId,
-                                            "adsceId": result[i].adsceId,
-                                            "adId": result[i].adId,
-                                            "CFU": result[i].CFU,
-                                            "superata": result_n.stato,
-                                            "superata_data": result_n.data,
-                                            "superata_voto": result_n.voto,
-                                            "superata_lode": result_n.lode,
-                                            "annoCorso": result_n.anno
-                                        });
-                                    }
-                                }, (e) => {
-                                    dialogs.alert({
-                                        title: "Errore: UserCalendar",
-                                        message: e.toString(),
-                                        okButtonText: "OK"
-                                    });
-                                });
-                            }
-                            else {
-                                //console.log("ADSCE NULL!");
-                            }
-                        }
-                        global.myExams = array;
-                    }
-                },(e) => {
-                    dialogs.alert({
-                        title: "Errore: UserCalendar",
-                        message: e.toString(),
-                        okButtonText: "OK"
-                    });
-                });
-                global.updatedExam = true;
-
-                httpModule.request({
-                    //url: global.url + "students/examsToFreq/" + stuId + "/" + pianoId +"/" + matId,
-                    url: global.url2 + "students/myExams/" + matId,
-                    method: "GET",
-                    headers: {
-                        "Content-Type" : "application/json",
-                        "Authorization" : "Basic "+ global.encodedStr
-                    }
-                }).then((response) => {
-                    const result = response.content.toJSON();
-
-                    //console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken)
-                    //console.log(result);
-                    page.getViewById("activityIndicator").visibility = "visible";
-
-
-                    if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-                    {
-                        dialogs.alert({
-                            title: "Errore: UserCalendar examsToFreq",
-                            message: result.errMsg,
-                            okButtonText: "OK"
-                        }).then(
-                        );
-                        page.getViewById("activityIndicator").visibility = "collapsed";
-                    }
-                    else {
-                        /*
-                        let alphabets26 = 'abcdefghijklmnopqrstuvwxyz';
-                        let temp_array = [];
-                        for (let i=0; i<result.length; i++){
-                            if(result[i].domPartCod === "A-L"){
-                                if((alphabets26.substr(0,12)).includes((appSettings.getString("cognome").charAt(0)).toLowerCase())){
-                                    console.log(result[i].domPartCod);
-                                    temp_array.push({
-                                        "nome" : result[i].nome,
-                                        "codice" : result[i].codice,
-                                        "annoId" : result[i].annoId,
-                                        "adsceID" : result[i].adsceID,
-                                        "adLogId" : result[i].adLogId,
-                                        "adId" : result[i].adId,
-                                        "CFU" : result[i].CFU,
-                                        "docente" : result[i].docente,
-                                        "docenteID" : result[i].docenteID,
-                                        "semestre" : result[i].semestre,
-                                        "inizio" : result[i].inizio,
-                                        "fine" : result[i].fine,
-                                        "modifica" : result[i].ultMod,
-                                        "orario" : [],
-                                        "domPartCod" : result[i].domPartCod
-                                    });
-                                }
-                            }
-                            else if(result[i].domPartCod === "M-Z"){
-                                if((alphabets26.substr(12,26)).includes((appSettings.getString("cognome").charAt(0)).toLowerCase())){
-                                    temp_array.push({
-                                        "nome" : result[i].nome,
-                                        "codice" : result[i].codice,
-                                        "annoId" : result[i].annoId,
-                                        "adsceID" : result[i].adsceID,
-                                        "adLogId" : result[i].adLogId,
-                                        "adId" : result[i].adId,
-                                        "CFU" : result[i].CFU,
-                                        "docente" : result[i].docente,
-                                        "docenteID" : result[i].docenteID,
-                                        "semestre" : result[i].semestre,
-                                        "inizio" : result[i].inizio,
-                                        "fine" : result[i].fine,
-                                        "modifica" : result[i].ultMod,
-                                        "orario" : [],
-                                        "domPartCod": result[i].domPartCod
-                                    });
-                                }
-                            }
-                            else {
-                                temp_array.push({
-                                    "nome": result[i].nome,
-                                    "codice": result[i].codice,
-                                    "annoId": result[i].annoId,
-                                    "adsceID": result[i].adsceID,
-                                    "adLogId": result[i].adLogId,
-                                    "adId": result[i].adId,
-                                    "CFU": result[i].CFU,
-                                    "docente": result[i].docente,
-                                    "docenteID": result[i].docenteID,
-                                    "semestre": result[i].semestre,
-                                    "inizio": result[i].inizio,
-                                    "fine": result[i].fine,
-                                    "modifica": result[i].ultMod,
-                                    "orario": [],
-                                    "domPartCod": result[i].domPartCod
-                                });
-                            }
-                        }
-                         */
-
-                        for (let i=0; i<result.length; i++){
-                            global.freqExams.push({
-                                "nome" : result[i].nome,
-                                "codice" : result[i].codice,
-                                "annoId" : result[i].annoId,
-                                "adsceID" : result[i].adsceID,
-                                "adLogId" : result[i].adLogId,
-                                "adId" : result[i].adId,
-                                "CFU" : result[i].CFU,
-                                "docente" : result[i].docente,
-                                "docenteID" : result[i].docenteID,
-                                "semestre" : result[i].semestre,
-                                //"inizio" : result[i].inizio,
-                                //"fine" : result[i].fine,
-                                //"modifica" : result[i].ultMod,
-                                //"orario" : [],
-                                "domPartCod": result[i].domPartCod,
-                                "esito": result[i].status.esito
-                            })
-                        }
-
-                        page.getViewById("activityIndicator").visibility = "collapsed";
-                        appSettings.setNumber("examsBadge",global.freqExams.length);
-                        global.updatedExam = true;
-                        calendarCourses();
-                    }
-                },(e) => {
-                    dialogs.alert({
-                        title: "Errore: UserCalendar",
-                        message: e.toString(),
-                        okButtonText: "OK"
-                    });
-                    page.getViewById("activityIndicator").visibility = "collapsed";
-                });
-            }
+            page.getViewById("activityIndicator").visibility = "collapsed";
+            appSettings.setNumber("examsBadge",global.freqExams.length);
+            global.updatedExam = true;
+            calendarCourses();
         }
-
     },(e) => {
         dialogs.alert({
             title: "Errore: UserCalendar",
             message: e.toString(),
             okButtonText: "OK"
         });
+        page.getViewById("activityIndicator").visibility = "collapsed";
     });
 }
 
@@ -586,104 +387,3 @@ exports.onDaySelected = function(args){
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
-
-//Cimitero
-function getCourses() {
-    const stuId = appSettings.getNumber("stuId");
-    const matId = appSettings.getNumber("matId");
-
-    httpModule.request({
-        url: global.url + "students/pianoId/" + stuId,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        const result = response.content.toJSON();
-        //console.log(result);
-
-        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-        {
-            dialogs.alert({
-                title: "Errore: UserCalendar",
-                message: result.retErrMsg,
-                okButtonText: "OK"
-            }).then();
-        }
-        else
-        {
-            appSettings.setNumber("pianoId", result.pianoId);
-        }
-
-        let pianoId = appSettings.getNumber("pianoId");
-
-        httpModule.request({
-            url: global.url + "students/examsToFreq/" + stuId + "/" + pianoId +"/" + matId,
-            method: "GET",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic "+ global.encodedStr
-            }
-        }).then((response) => {
-            const result = response.content.toJSON();
-
-            //console.log("URL: " + global.url + "examsToFreq/" + global.encodedStr + "/" + stuId + "/" + appSettings.getNumber("pianoId") +"/" + matId + "/" + global.authToken)
-            //console.log(result);
-            page.getViewById("activityIndicator").visibility = "visible";
-
-
-            if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-            {
-                dialogs.alert({
-                    title: "Errore Server!",
-                    message: result_n.retErrMsg,
-                    okButtonText: "OK"
-                }).then(
-                );
-                page.getViewById("activityIndicator").visibility = "collapsed";
-            }
-            else {
-                for (let i=0; i<result.length; i++)
-                {
-                    global.freqExams.push({
-                        "nome" : result[i].nome,
-                        "codice" : result[i].codice,
-                        "annoId" : result[i].annoId,
-                        "adsceID" : result[i].adsceID,
-                        "adLogId" : result[i].adLogId,
-                        "adId" : result[i].adId,
-                        "CFU" : result[i].CFU,
-                        "docente" : result[i].docente,
-                        "docenteID" : result[i].docenteID,
-                        "semestre" : result[i].semestre,
-                        "inizio" : result[i].inizio,
-                        "fine" : result[i].fine,
-                        "modifica" : result[i].ultMod,
-                        "orario" : []
-                    });
-                }
-                page.getViewById("activityIndicator").visibility = "collapsed";
-                calendarCourses();
-                global.updatedExam = true;
-
-            }
-        },(e) => {
-            console.log("Error", e);
-            dialogs.alert({
-                title: "Errore Sincronizzazione Esami!",
-                message: e,
-                okButtonText: "OK"
-            });
-            page.getViewById("activityIndicator").visibility = "collapsed";
-        });
-
-    },(e) => {
-        console.log("Error", e.retErrMsg);
-        dialogs.alert({
-            title: "Errore Server!",
-            message: e.retErrMsg,
-            okButtonText: "OK"
-        });
-    });
-}

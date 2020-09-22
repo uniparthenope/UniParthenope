@@ -38,25 +38,28 @@ function onDrawerButtonTap() {
 }
 
 function getCourses() {
-    let courses = global.freqExams;
+    let courses = global.myExams;
     const act_sem = appSettings.getString("semestre");
 
+    console.log(courses);
     for (let i=0; i<courses.length; i++)
     {
-        if (courses[i].esito === 'P')
-            items.push({
-                "anno": drawYear(courses[i].annoId),
-                "esame": courses[i].nome,
-                "prof": courses[i].docente,
-                //"data_inizio": "Dal " + courses[i].inizio,
-                //"data_fine": " al " + courses[i].fine,
-                //"ult_mod": courses[i].modifica,
-                "adLogId": courses[i].adLogId,
-                "partizione": "Partizione: " + courses[i].domPartCod
-            });
+        console.log(courses[i].tipo);
+        if (courses[i].tipo === 'V')
+            if (courses[i].esito === 'P' || courses[i].esito === 'F')
+                items.push({
+                    "anno": drawYear(courses[i].annoId),
+                    "esame": courses[i].nome,
+                    "prof": courses[i].docente,
+                    //"data_inizio": "Dal " + courses[i].inizio,
+                    //"data_fine": " al " + courses[i].fine,
+                    //"ult_mod": courses[i].modifica,
+                    "adLogId": courses[i].adLogId,
+                    "partizione": "Partizione: " + courses[i].domPartCod
+                });
             //esamiList.refresh();
 
-            items.sort(function (orderA, orderB) {
+        items.sort(function (orderA, orderB) {
             let nameA = orderA.anno;
             let nameB = orderB.anno;
             return (nameA > nameB) ? 1 : (nameA < nameB) ? -1 : 0;
