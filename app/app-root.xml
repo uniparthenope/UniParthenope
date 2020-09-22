@@ -45,7 +45,7 @@
                     <!--     Studente       -->
                     <StackLayout id="userForm" visibility="collapsed">
 
-                        <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_home"/>
+                        <Button class="btn-menu" text="Mia Home" marginBottom="5" marginTop="20" tap="goto_home"/>
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
                         <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
@@ -68,7 +68,7 @@
 
                     <StackLayout id="userDocente" visibility="collapsed">
 
-                        <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_professor_home"/>
+                        <Button class="btn-menu" text="Mia Home" marginBottom="5" marginTop="20" tap="goto_professor_home"/>
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
                         <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>

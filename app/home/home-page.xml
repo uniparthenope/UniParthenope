@@ -2,7 +2,8 @@
       navigatingTo="onNavigatingTo"
       actionBarHidden="true"
       xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:x="nativescript-statusbar">
+      xmlns:x="nativescript-statusbar"
+      backgroundSpanUnderStatusBar="true">
 
     <ActionBar >
         <ActionItem icon="res://menu"
@@ -34,19 +35,19 @@
                 <StackLayout id="bottom_bar" height="5" width="100%" backgroundColor="#107dd0"/>
 
                 <GridLayout columns="*,*,*,*,*" class="main_image" id="main_image" backgroundImage="~/images/image1.jpg" marginBottom="30" height="34%">
-                    <GridLayout col="0" id="bg_0" height="35%" width="35%" verticalAlignment="bottom">
+                    <GridLayout ontap="tap_scienze" col="0" id="bg_0" height="35%" width="35%" verticalAlignment="bottom">
                         <StackLayout id="icon_0" backgroundImage="~/images/icon_home/CDN.png" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
-                    <GridLayout col="1" id="bg_1" height="35%" width="35%" verticalAlignment="bottom">
+                    <GridLayout ontap="tap_motorie" col="1" id="bg_1" height="35%" width="35%" verticalAlignment="bottom">
                         <StackLayout id="icon_1" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
-                    <GridLayout col="2" id="bg_2" height="35%" width="35%" verticalAlignment="bottom">
+                    <GridLayout ontap="tap_aziend"  col="2" id="bg_2" height="35%" width="35%" verticalAlignment="bottom">
                         <StackLayout id="icon_2" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
-                    <GridLayout col="3" id="bg_3" height="35%" width="35%" verticalAlignment="bottom">
+                    <GridLayout ontap="tap_giuris" col="3" id="bg_3" height="35%" width="35%" verticalAlignment="bottom">
                         <StackLayout id="icon_3" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
-                    <GridLayout col="4" id="bg_4" height="35%" width="35%" verticalAlignment="bottom">
+                    <GridLayout ontap="tap_ingegneria" col="4" id="bg_4" height="35%" width="35%" verticalAlignment="bottom">
                         <StackLayout id="icon_4" backgroundColor="white" class="circle" verticalAlignment="center"/>
                     </GridLayout>
                 </GridLayout>

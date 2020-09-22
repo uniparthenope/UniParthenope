@@ -1,7 +1,6 @@
 const observableModule = require("tns-core-modules/data/observable");
 const Observable = require("tns-core-modules/data/observable").Observable;
 const app = require("tns-core-modules/application");
-const frame = require("tns-core-modules/ui/frame");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const httpModule = require("http");
 const appSettings = require("tns-core-modules/application-settings");

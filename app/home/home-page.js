@@ -3,9 +3,7 @@ const app = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
 let geolocation = require("nativescript-geolocation");
 const httpModule = require("http");
-const base64= require('base-64');
 const utilsModule = require("tns-core-modules/utils/utils");
-const utf8 = require('utf8');
 const dialogs = require("tns-core-modules/ui/dialogs");
 let appversion = require("nativescript-appversion");
 const modalViewModule = "modal-meteo/modal-meteo";
@@ -31,7 +29,6 @@ function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
-
 
     rateApp();
 
@@ -63,7 +60,6 @@ function onNavigatingTo(args) {
        autoconnect();
    }
    else if (remember) {
-       console.log("HEREREM");
       setSideMenu(global.myform,global.username);
    }
 
@@ -319,7 +315,96 @@ exports.onTapFood = function(){
     page.frame.navigate(nav);
 
 };
+exports.tap_scienze = function(){
+    const nav =
+        {
+            moduleName: "department/department",
+            context: {
+                title: "DiST Dipartimento di Scienze e Tecnologie",
+                id: "CDN",
+                img: "CDN",
+                color: '#009432',
+                background:'linear-gradient(180deg, #009432, #5CC77A)',
+                website: 'https://www.scienzeetecnologie.uniparthenope.it/',
+                news: ''
 
+            },
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+exports.tap_ingegneria = function(){
+    const nav =
+        {
+            moduleName: "department/department",
+            context: {
+                title: "Dipartimento di Ingegneria",
+                id: "CDN",
+                img: "Villa",
+                color: '#222222',
+                background:'linear-gradient(180deg, #222222, #444444)',
+                website: 'https://www.ingegneria.uniparthenope.it',
+                news: ''
+
+            },
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+exports.tap_motorie = function(){
+    const nav =
+        {
+            moduleName: "department/department",
+            context: {
+                title: "Dipartimento di Scienze Motorie e del Benessere",
+                id: "Medina",
+                img: "Medina",
+                color: '#dd6ca6',
+                background:'linear-gradient(180deg, #dd6ca6, #f294c5)',
+                website: 'https://www.motorie.uniparthenope.it',
+                news: ''
+
+            },
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+exports.tap_giuris = function(){
+    const nav =
+        {
+            moduleName: "department/department",
+            context: {
+                title: "Dipartimento di Giurisprudenza",
+                id: "Parisi",
+                img: "Parisi",
+                color: '#774896',
+                background:'linear-gradient(180deg, #774896, #ab76cf)',
+                website: 'https://www.digiu.uniparthenope.it',
+                news: ''
+
+            },
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+exports.tap_aziend = function(){
+    const nav =
+        {
+            moduleName: "department/department",
+            context: {
+                title: "Dipartimento di Studi Aziendali ed Economici",
+                id: "Parisi",
+                img: "Acton",
+                color: '#0b72b5',
+                background:'linear-gradient(180deg, #0b72b5, #319ade)',
+                website: 'https://www.disae.uniparthenope.it',
+                news: ''
+
+            },
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
 function setSideMenu(type,username) {
      let actualForm = sideDrawer.getViewById(type);
      let loginForm = sideDrawer.getViewById("loginForm");
