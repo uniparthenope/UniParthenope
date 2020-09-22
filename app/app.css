@@ -17,6 +17,7 @@ refer to http://docs.nativescript.org/ui/theme.
     VERDE SCURO = #009432
     VERDE CHIARO = #5CC77A
 */
+
 .btn {
     color:#22384f;
     border-color:#22384f;
@@ -314,6 +315,4 @@ TabStrip {
     highlight-color: #107dd0;
     background-color: rgb(34, 56, 79);
 }
-.ns-dark Page {
-    background-color: white;
-}
+
