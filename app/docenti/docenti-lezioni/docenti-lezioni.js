@@ -6,11 +6,9 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const modalViewModule = "docenti/modal-studentiLezione/modal-studentiLezione";
 
-
 let page;
 let viewModel;
 let sideDrawer;
-let id_corso;
 let index = 0;
 
 let courses = global.myExams;
@@ -33,22 +31,20 @@ function onNavigatingTo(args) {
     no_less = page.getViewById("no_lession");
     loading = page.getViewById("activityIndicator");
 
-
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
+    getLectures();
 
     page.bindingContext = viewModel;
 }
-exports.ontap_save = function() {
+
+function getLectures(){
+    let anno = appSettings.getString("aa_accad").split("-")[0];
+    console.log(anno);
+    let url = global.url_general + "GAUniparthenope/v1/getProfLectures/" + anno;
+
     loading.visibility = "visible";
-
-    while(docentiLezioni.length > 0)
-        docentiLezioni.pop();
-
-    id_corso = courses[index].adDefAppCod;
-    console.log(courses[index].adDefAppCod);
-    let url = global.url_general + "GAUniparthenope/v1/getLectures/" + courses[index].adDefAppCod;
 
     httpModule.request({
         url: url,
@@ -58,130 +54,60 @@ exports.ontap_save = function() {
             "Authorization" : "Basic "+ global.encodedStr
         }
     }).then((response) => {
-        const result = response.content.toJSON();
-
-        let no_less = page.getViewById("no_lession");
-
-        if (result.length === 0)
-            no_less.visibility = "visible";
-        else
-            no_less.visibility = "collapsed";
+        lezioni = response.content.toJSON();
 
         loading.visibility = "collapsed";
-
-        for (let i=0; i<result.length; i++){
-
-            let fulldata = convertData(result[i].start);
-            fulldata = "" + dayOfWeek(fulldata) + " " + fulldata.getDate() + " " + monthOfYear(fulldata.getMonth()) + " " + fulldata.getFullYear();
-            console.log(fulldata);
-            let start_data = convertData(result[i].start);
-            let end_data = convertData(result[i].end);
-            let max_cap = Math.floor(result[i].room.capacity);
-            let rem_cap = max_cap - Math.floor(result[i].room.availability);
-
-            docentiLezioni.push({
-                "id": result[i].id,
-                "classe": "examPass",
-                "nome": fulldata,
-                "start": ""+ start_data.getHours() + ":"+ convertMinutes(start_data.getMinutes()),
-                "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
-                "room": result[i].room.name,
-                "room_place": result[i].room.description,
-                "capacity": max_cap + " Posti",
-                "availability":rem_cap + "/",
-                "max_c" : max_cap,
-                "ava_c" : rem_cap,
-            });
-            docentiLezioni.sort(function (orderA, orderB) {
-                let nameA = orderA.start;
-                let nameB = orderB.start;
-                return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-            });
-        }
-        //docentiLezioni.refresh();
-
     },(e) => {
         console.log("Error", e);
+        loading.visibility = "collapsed";
+
         dialogs.alert({
             title: "Errore: prenotazioni",
             message: e.toString(),
             okButtonText: "OK"
         });
     });
+}
 
-};
-function getLectures() {
+exports.ontap_save = function() {
     loading.visibility = "visible";
-    for (let index =0; index< courses.length; index++){
-        while(docentiLezioni.length > 0)
-            docentiLezioni.pop();
 
-        id_corso = courses[index].codice;
+    while(docentiLezioni.length > 0)
+        docentiLezioni.pop();
 
-        let url = global.url_general + "GAUniparthenope/v1/getTodayLecture/" + courses[index].codice;
+    let result = lezioni[index].courses;
 
-        httpModule.request({
-            url: url,
-            method: "GET",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic "+ global.encodedStr
-            }
-        }).then((response) => {
-            const result = response.content.toJSON();
+    for (let i=0; i<result.length; i++){
+        let fulldata = convertData(result[i].start);
+        fulldata = "" + dayOfWeek(fulldata) + " " + fulldata.getDate() + " " + monthOfYear(fulldata.getMonth()) + " " + fulldata.getFullYear();
+        console.log(fulldata);
+        let start_data = convertData(result[i].start);
+        let end_data = convertData(result[i].end);
+        let max_cap = Math.floor(result[i].room.capacity);
+        let rem_cap = max_cap - Math.floor(result[i].room.availability);
 
-            for (let i=0; i<result.length; i++){
-
-                let start_data = convertData(result[i].start);
-                let end_data = convertData(result[i].end);
-                let max_cap = result[i].room.capacity;
-                let rem_cap = result[i].room.capacity - result[i].room.availability;
-                let res;
-                if (result[i].reservation.reserved)
-                    res = "visible";
-                else
-                    res = "collapsed";
-
-                docentiLezioni.push({
-                    "id": result[i].id,
-                    "id_corso":courses[index].codice,
-                    "classe": "examPass",
-                    "pr": res,
-                    "nome": result[i].course_name,
-                    "prof": result[i].prof,
-                    "start": ""+ start_data.getHours() + ":" + convertMinutes(start_data.getMinutes()),
-                    "end": ""+ end_data.getHours() + ":" + convertMinutes(end_data.getMinutes()),
-                    "room": result[i].room.name,
-                    "room_place": result[i].room.description,
-                    "capacity": max_cap + " Posti",
-                    "availability":rem_cap + "/",
-                    "max_c" : max_cap,
-                    "ava_c" : rem_cap,
-                    "isReserved":result[i].reservation.reserved,
-                    "reserved_id" : result[i].reservation.reserved_id
-                });
-                docentiLezioni.sort(function (orderA, orderB) {
-                    let nameA = orderA.start;
-                    let nameB = orderB.start;
-                    return (nameA < nameB) ? 1 : (nameA > nameB) ? -1 : 0;
-                });
-                no_less.visibility = "collapsed";
-                loading.visibility = "collapsed";
-
-            }
-            lezioniList.refresh();
-
-        },(e) => {
-            console.log("Error", e);
-            dialogs.alert({
-                title: "Errore: prenotazioni",
-                message: e.toString(),
-                okButtonText: "OK"
-            });
+        docentiLezioni.push({
+            "id": result[i].id,
+            "classe": "examPass",
+            "nome": fulldata,
+            "start": ""+ start_data.getHours() + ":"+ convertMinutes(start_data.getMinutes()),
+            "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
+            "room": result[i].room.name,
+            "room_place": result[i].room.description,
+            "capacity": max_cap + " Posti",
+            "availability":rem_cap + "/",
+            "max_c" : max_cap,
+            "ava_c" : rem_cap,
+        });
+        docentiLezioni.sort(function (orderA, orderB) {
+            let nameA = orderA.start;
+            let nameB = orderB.start;
+            return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
         });
     }
+    loading.visibility = "collapsed";
+};
 
-}
 
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();

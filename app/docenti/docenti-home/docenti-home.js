@@ -181,8 +181,7 @@ function getCourses() {
                         title: "Errore: DocentiHome GetCourses getCourses",
                         message: result2.errMsg,
                         okButtonText: "OK"
-                    }).then(
-                    );
+                    });
                 }
                 else
                 {
@@ -224,8 +223,6 @@ function getCourses() {
                 getAppelli();
             });
         }
-
-
     },(e) => {
         dialogs.alert({
             title: "Errore: DocentiHome",
@@ -433,7 +430,6 @@ exports.onDaySelected = function(args){
 
     mainView.showModal(modalViewModule, context, false);
 };
-
 
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
