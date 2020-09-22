@@ -100,11 +100,6 @@ refer to http://docs.nativescript.org/ui/theme.
     font-family: Montserrat-Regular;
     vertical-align:center
 }
-.action-bar-calm {
-    background-color: #00C0F5;
-    color: white;
-}
-
 
 .two-color-gradient {
     background: linear-gradient(135deg, #107dd0, #22384f);
@@ -116,7 +111,7 @@ refer to http://docs.nativescript.org/ui/theme.
 {
     font-family: Rasa-Medium;
     color: white;
-    font-size: 30;
+    font-size: 28;
 }
 .form-input {
     border-bottom-color: #107dd0;
@@ -318,4 +313,7 @@ TabStrip {
     un-selected-item-color: gray;
     highlight-color: #107dd0;
     background-color: rgb(34, 56, 79);
+}
+.ns-dark Page {
+    background-color: white;
 }

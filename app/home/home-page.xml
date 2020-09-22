@@ -16,7 +16,13 @@
                     ios.position="right">
         </ActionItem>
     </ActionBar>
-    <x:StatusBar ios:barStyle="light" barColor="rgba(0, 0, 0,0.0)"/>
+    <ios>
+        <x:StatusBar ios:barStyle="light" barColor="rgba(0, 0, 0,0.0)"/>
+    </ios>
+    <android>
+        <x:StatusBar ios:barStyle="light" barColor="rgb(34, 56, 79)"/>
+    </android>
+
 
 
     <GridLayout horizontalAlignment="stretch" verticalAlignment="stretch" height="100%">
@@ -70,16 +76,17 @@
             </StackLayout>
             <!--    Testo sovrapposto    -->
 
-            <StackLayout orientation="vertical" verticalAlignment="top">
+            <GridLayout verticalAlignment="top">
                 <ios>
-                    <Label class="topTitle" horizontalAlignment="left" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="40"/>
+                    <Label class="topTitle" horizontalAlignment="left" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="30"/>
                 </ios>
                 <android>
                     <Label class="topTitle" horizontalAlignment="right" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="10" marginTop="5" textAlignment="right"/>
                 </android>
 
-                <Image src="~/images/logo_new.png" horizontalAlignment="right" height="170" width="170" marginRight="10"/>
-            </StackLayout>
+            </GridLayout>
+            <Image  src="~/images/logo_new.png" horizontalAlignment="right" verticalAlignment="top" height="170" width="170" marginTop="90" marginRight="10"/>
+
 
             <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
                 <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
