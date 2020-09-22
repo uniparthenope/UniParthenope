@@ -30,9 +30,9 @@
         </ActionItem>
 
     </ActionBar>
-    <GridLayout>
-        <StackLayout orientation="vertical" height="100%">
-            <GridLayout rows="75,*,50">
+    <GridLayout backgroundColor="white">
+        <StackLayout orientation="vertical" height="100%" backgroundColor="white">
+            <GridLayout rows="75,*,50" backgroundColor="white">
                 <GridLayout row="0" class="two-color-gradient" width="100%" height="15%" verticalAlignment="top">
                     <StackLayout orientation="vertical" marginTop="10">
                         <Label class="textPrimary" text="La Mia Giornata" horizontalAlignment="center" verticalAlignment="center"/>
