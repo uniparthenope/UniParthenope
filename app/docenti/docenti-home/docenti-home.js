@@ -10,8 +10,7 @@ const Color = require("tns-core-modules/color");
 const modalViewModule = "modal-event/modal-event";
 const platformModule = require("tns-core-modules/platform");
 
-
-let colors = ["#c47340","#4566c1","#824bc1","#a32d13","#382603","#fff766"];
+let colors = ["#c47340","#c42340","#a37390","#4566c1","#AA45BB","#824bc1","#a32d13","#382603","#fff766"];
 let page;
 let viewModel;
 let sideDrawer;
@@ -84,38 +83,23 @@ function getLectures(){
         let result = response.content.toJSON();
 
         global.myLezioni = result;
-
         for (let i=0; i<result.length; i++) {
-            let nome = result[i].nome;
+
             let courses = result[i].courses;
-
-            console.log(courses);
-
+            const color = new Color.Color(colors[i%colors.length]);
             for (let j=0; j<courses.length; j++){
-                console.log(courses[j].course_name);
-                let data_inizio = convertData(result[j].start);
-                let data_fine = convertData(result[j].end);
+                let data_inizio = convertData(courses[j].start);
+                let data_fine = convertData(courses[j].end);
+
+                let tot_cap = Math.floor(courses[j].room.capacity);
+                let av_cap =  tot_cap - Math.floor(courses[j].room.availability);
 
                 global.events.push({
-                    title : courses[j].course_name,
+                    title : ""+ courses[j].course_name +"\n"+ courses[j].room.description+"\n"+ courses[j].room.name+"\n Capacità Aula: "+ (tot_cap - av_cap) + "/ "+tot_cap,
                     data_inizio: data_inizio,
                     data_fine:data_fine,
-                    //color: color
+                    color: color
                 });
-
-                /*
-                let data_inizio = convertData(result[j].start);
-                let data_fine = convertData(result[j].end);
-                //let title = nome + "\n" + courses[j].prof + "\n\n" + courses[j].room.name;
-
-                global.events.push({
-                    title : "title",
-                    data_inizio: data_inizio,
-                    data_fine:data_fine,
-                    //color: color
-                });
-
-                 */
             }
         }
         insert_event();
@@ -302,9 +286,6 @@ function getCourses() {
                                 items: myarray
                             });
 
-                            getLectures();
-                            insert_event();
-                            global.updatedExam = true;
                         },(e) => {
                             dialogs.alert({
                                 title: "Errore: DocentiAppelli",
@@ -313,6 +294,11 @@ function getCourses() {
                             });
                         });
                     }
+
+                    insert_event();
+                    global.updatedExam = true;
+                    getLectures();
+
                 }
                 page.getViewById("activityIndicator").visibility = "collapsed";
             },(e) => {
