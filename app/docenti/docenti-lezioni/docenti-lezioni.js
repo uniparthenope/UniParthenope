@@ -40,10 +40,9 @@ function onNavigatingTo(args) {
 }
 
 function getLectures(){
-    let anno = appSettings.getString("aa_accad").split("-")[0];
-    console.log(anno);
-    let url = global.url_general + "GAUniparthenope/v1/getProfLectures/" + anno;
+    let anno = appSettings.getString("aa_accad").split(" - ")[0];
 
+    let url = global.url_general + "GAUniparthenope/v1/getProfLectures/"+ anno;
     loading.visibility = "visible";
 
     httpModule.request({

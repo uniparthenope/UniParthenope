@@ -89,10 +89,7 @@
             <Image  src="~/images/logo_new.png" horizontalAlignment="right" verticalAlignment="top" height="170" width="170" marginTop="90" marginRight="10"/>
 
 
-            <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-                <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
-                <ActivityIndicator horizontalAlignment="center" busy="true"/>
-            </StackLayout>
+
         </GridLayout>
 <!--Bottom/Social-->
         <GridLayout verticalAlignment="bottom">
@@ -118,6 +115,9 @@
             <Button class="myMenu" backgroundImage="res://menu" ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" height="25" width="25" margin="20 5 10 5"/>
         </android>
 
-
+        <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
     </GridLayout>
 </Page>

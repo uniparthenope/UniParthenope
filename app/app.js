@@ -61,23 +61,23 @@ global.clearAll = function(){
     appSettings.clear();
 };
 
-global.saveInfo = function(result) {
-    appSettings.setString("codFis",result.user.codFis);
-    appSettings.setString("nome",result.user.firstName);
-    appSettings.setString("cognome",result.user.lastName);
-    appSettings.setString("grpDes",result.user.grpDes);
+global.saveInfo =async function(result) {
+    await appSettings.setString("codFis",result.user.codFis);
+    await appSettings.setString("nome",result.user.firstName);
+    await appSettings.setString("cognome",result.user.lastName);
+    await appSettings.setString("grpDes",result.user.grpDes);
     //appSettings.setNumber("persId", result.user.persId);
-    appSettings.setString("userId", result.user.userId);
+    await appSettings.setString("userId", result.user.userId);
 
     if  (result.user.grpDes === "Studenti"){
-        let index = appSettings.getNumber("carriera");
+        let index = await appSettings.getNumber("carriera");
 
                 console.log(result.user.trattiCarriera[index].strutturaDes);
 
-                appSettings.setString("strutturaDes",result.user.trattiCarriera[index].strutturaDes);
-                appSettings.setString("strutturaId",result.user.trattiCarriera[index].strutturaId.toString());
-                appSettings.setString("strutturaGaId",result.user.trattiCarriera[index].strutturaGaId.toString());
-                appSettings.setString("corsoGaId",result.user.trattiCarriera[index].corsoGaId.toString());
+                await appSettings.setString("strutturaDes",result.user.trattiCarriera[index].strutturaDes);
+                await appSettings.setString("strutturaId",result.user.trattiCarriera[index].strutturaId.toString());
+                await appSettings.setString("strutturaGaId",result.user.trattiCarriera[index].strutturaGaId.toString());
+                await appSettings.setString("corsoGaId",result.user.trattiCarriera[index].corsoGaId.toString());
 
                 console.log("SAVE_INFO Dipartimento= "+result.user.trattiCarriera[index].strutturaDes);
                 console.log("SAVE_INFO Dipartimento ID= "+result.user.trattiCarriera[index].strutturaId);

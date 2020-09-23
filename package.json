@@ -8,7 +8,7 @@
       "version": "6.5.0"
     },
     "tns-ios": {
-      "version": "6.5.1"
+      "version": "6.3.0"
     }
   },
   "description": "NativeScript Application",
@@ -21,6 +21,7 @@
     "nativescript": "^7.0.8",
     "nativescript-accordion": "^6.0.0-beta.2",
     "nativescript-appversion": "^1.4.4",
+    "nativescript-async": "^1.0.2",
     "nativescript-barcodescanner": "^3.4.2",
     "nativescript-camera": "^4.5.0",
     "nativescript-checkbox": "^3.0.3",

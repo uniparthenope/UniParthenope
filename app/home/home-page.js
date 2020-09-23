@@ -16,6 +16,8 @@ let sideDrawer;
 let remember;
 let user;
 let pos;
+let indicator;
+
 
 let ratings;
 
@@ -29,6 +31,8 @@ function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
+    indicator = page.getViewById("activityIndicator");
+
 
     rateApp();
 
@@ -52,12 +56,15 @@ function onNavigatingTo(args) {
 
 
    if (user !== undefined && !global.isConnected){
+       indicator.visibility = "visible";
        dialogs.alert({
            title: "Bentornato!",
-           message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome"),
+           message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome")+"\n Cliccare OK per autoconnettersi.",
            okButtonText: "OK"
-       }).then();
-       autoconnect();
+       }).then(function (){
+           autoconnect();
+
+       });
    }
    else if (remember) {
       setSideMenu(global.myform,global.username);
@@ -82,7 +89,6 @@ function autoconnect() {
     if (remember){
 
         const sideDrawer = app.getRootView();
-        let indicator = page.getViewById("activityIndicator");
         indicator.visibility = "visible";
         let user = appSettings.getString("username");
         console.log("USERNAME (old)= "+user);
@@ -184,23 +190,25 @@ function autoconnect() {
             }
             else if(_result.user.grpDes === "Docenti")
             {
-                detailedProf(_result.user.docenteId); // Get detailed info of a professor
-                setAnagrafe(_result.user.docenteId,_result.user.grpDes);
                 appSettings.setNumber("idAb",_result.user.idAb);
-
-                global.saveInfo(_result);
-                global.isConnected = true;
+                console.log(_result.user.idAb,"Id");
                 let nome = appSettings.getString("nome");
                 let cognome = appSettings.getString("cognome");
                 let username = nome + " " + cognome;
+                console.log(username);
+
                 setSideMenu("userDocente",username);
-                indicator.visibility = "collapsed";
-                const nav =
-                    {
-                        moduleName: "docenti/docenti-home/docenti-home",
-                        clearHistory: true
-                    };
-                page.frame.navigate(nav);
+
+                console.log("DETAILED PROF");
+                detailedProf(_result.user.docenteId); // Get detailed info of a professor
+                console.log("SAVEINFO");
+                global.saveInfo(_result);
+                setAnagrafe(_result.user.docenteId,_result.user.grpDes);
+
+                global.isConnected = true;
+                //indicator.visibility = "collapsed";
+
+
             }
             else if (_result.user.grpDes === "Studenti")
             {
@@ -218,13 +226,6 @@ function autoconnect() {
                 let cognome = appSettings.getString("cognome");
                 let username = nome + " " + cognome;
                 setSideMenu("userForm",username);
-                indicator.visibility = "collapsed";
-                const nav =
-                        {
-                            moduleName: "userCalendar/userCalendar",
-                            clearHistory: true
-                        };
-                page.frame.navigate(nav);
 
             }
             else{
@@ -260,7 +261,7 @@ function autoconnect() {
                 okButtonText: "OK"
             });
         });
-        indicator.visibility = "collapsed";
+        //indicator.visibility = "collapsed";
     }
 }
 
@@ -632,6 +633,23 @@ function setAnagrafe(id, type){
     //TODO gestire errori result
         //console.log(_result);
         global.saveAnagrafe(type,_result);
+        console.log("MI SPOSTO ...");
+        let navigator = "";
+        if(type === "Studenti")
+            navigator = "userCalendar/userCalendar";
+        else if(type === "Docenti")
+            navigator = "docenti/docenti-home/docenti-home";
+        else
+            navigator = "home/home-page";
+
+        indicator.visibility = "collapsed";
+
+        const nav =
+            {
+                moduleName: navigator,
+                clearHistory: true
+            };
+        page.frame.navigate(nav);
 
     },(e) => {
         console.log("Errore Anagrafe", e);
