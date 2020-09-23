@@ -19,7 +19,6 @@ function pageLoaded(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     page.bindingContext = viewModel;
-
 }
 
 exports.onTapLogin = function(args) {
@@ -129,6 +128,7 @@ exports.goto_home = function () {
     frame.Frame.topmost().navigate(nav);
 
 };
+
 exports.goto_home_public = function () {
     const nav =
         {
@@ -241,6 +241,7 @@ exports.goto_badge = function () {
         };
     frame.Frame.topmost().navigate(nav);
 };
+
 exports.goto_access = function () {
     const nav =
         {
@@ -249,6 +250,7 @@ exports.goto_access = function () {
         };
     frame.Frame.topmost().navigate(nav);
 };
+
 exports.goto_taxes = function () {
     const nav =
         {
@@ -257,6 +259,7 @@ exports.goto_taxes = function () {
         };
     frame.Frame.topmost().navigate(nav);
 };
+
 exports.goto_professor_home = function () {
     const nav =
         {
@@ -292,6 +295,7 @@ exports.goto_prenotazioni = function () {
         };
     frame.Frame.topmost().navigate(nav);
 };
+
 exports.goto_docenti_lezioni = function () {
 
     const nav =
@@ -305,4 +309,5 @@ exports.goto_docenti_lezioni = function () {
 exports.ontap_account = function(){
     utilsModule.openUrl("https://uniparthenope.esse3.cineca.it/Anagrafica/PasswordDimenticata.do");
 };
+
 exports.pageLoaded = pageLoaded;

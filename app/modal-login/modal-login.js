@@ -16,7 +16,7 @@ let utf8 = require('utf8');
             8	Preiscritti
             9	Registrati
             6	Studenti
-             */
+*/
 
 let page;
 let account;
@@ -27,7 +27,162 @@ let user;
 let pass;
 let sideDrawer;
 
-function onShownModally(args) {
+function normalizeToken(userId){
+    let token = userId + ":" + pass;
+    let bytes = utf8.encode(token);
+    global.encodedStr = base64.encode(bytes);
+    console.log("Normalized_Token: " + global.encodedStr);
+}
+
+function getPIC(personId, value) {
+    let url;
+    switch (value) {
+        case 0:
+            url = global.url + "general/image/" + personId;
+            break;
+
+        case 1:
+            url = global.url + "general/image_prof/" + personId;
+            break;
+    }
+
+    httpModule.getFile({
+        "url": url,
+        "method": "GET",
+        headers: {
+            "Content-Type": "image/jpg",
+            "Authorization": "Basic " + global.encodedStr
+        },
+        "dontFollowRedirects": true
+    }).then((source) => {
+        sideDrawer.getViewById("topImg").backgroundImage = source["path"];
+    }, (e) => {
+        console.log("[Photo] Error", e);
+        dialogs.alert({
+            title: "Errore: getPic",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
+
+function selectedCarrer(index) {
+    sideDrawer = app.getRootView();
+    appSettings.setNumber("carriera",index);
+    getDepartment(items.getItem(index).stuId);
+    appSettings.setNumber("persId", account.user.persId);
+
+    let remember = sideDrawer.getViewById("rememberMe").checked;
+    if (remember){
+        appSettings.setString("username",user);
+        appSettings.setString("token",global.encodedStr);
+        appSettings.setBoolean("rememberMe",true);
+    }
+    global.isConnected = true;
+    let nome = appSettings.getString("nome");
+    let cognome = appSettings.getString("cognome");
+    sideDrawer.getViewById("topName").text = nome + " " + cognome;
+
+    let userForm = sideDrawer.getViewById("userForm");
+    let loginForm = sideDrawer.getViewById("loginForm");
+    sideDrawer.getViewById("topMatr").text = appSettings.getString("matricola");
+    sideDrawer.getViewById("topEmail").text = appSettings.getString("emailAte");
+    sideDrawer.getViewById("topMatr").visibility = "visible";
+    sideDrawer.getViewById("topEmail").visibility = "visible";
+    getPIC(appSettings.getNumber("persId"),0);
+    loginForm.visibility = "collapsed";
+    userForm.visibility = "visible";
+    closeCallback();
+    const nav =
+        {
+            moduleName: "userCalendar/userCalendar",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+}
+
+function setAnagrafe(id, type){
+    httpModule.request({
+        url: global.url + "general/anagrafica/"+ id,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let _result = response.content.toJSON();
+
+        //console.log(_result);
+        global.saveAnagrafe(type,_result);
+
+        if (type === "Docenti"){
+            let nome = appSettings.getString("nome");
+            let cognome = appSettings.getString("cognome");
+
+            sideDrawer.getViewById("topName").text = nome + " " + cognome;
+            sideDrawer.getViewById("topMatr").text = _result.ruolo+ " " + _result.settore;
+            sideDrawer.getViewById("topEmail").text = _result.emailAte;
+            sideDrawer.getViewById("topMatr").visibility = "visible";
+            sideDrawer.getViewById("topEmail").visibility = "visible";
+        }
+
+    },(e) => {
+        console.log("Errore Anagrafe", e);
+        dialogs.alert({
+            title: "Errore: Modal-Login setAnagrafe",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
+
+function detailedProf(docenteId) {
+    httpModule.request({
+        url: global.url + "professor/detailedInfo/"+ docenteId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let _result = response.content.toJSON();
+        global.saveProf(_result);
+
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore: Modal-Login detailedProf",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+
+}
+
+function getDepartment(studId) {
+    console.log(studId);
+    httpModule.request({
+        url: global.url + "students/departmentInfo/"+ studId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let _result = response.content.toJSON();
+        global.saveDepartment(_result);
+
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore: Modal-Login getDepartment",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
+
+exports.onShownModally = function (args) {
     closeCallback = args.closeCallback;
     page = args.object;
     items = new ObservableArray();
@@ -137,9 +292,9 @@ function onShownModally(args) {
 
                 carriere = _result.user.trattiCarriera;
                 setAnagrafe(_result.user.persId,_result.user.grpDes);
+                global.saveInfo(account);
 
-                if (carriere.length > 0)
-                {
+                if (carriere.length > 0) {
                     indicator.visibility = "collapsed";
                     //Mostro le carriere
                     for (let i=0; i<carriere.length; i++)
@@ -292,8 +447,6 @@ function onShownModally(args) {
                 frame.Frame.topmost().navigate(nav);
             }
         }
-
-
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
@@ -304,191 +457,13 @@ function onShownModally(args) {
         args.object.closeModal();
     });
 
-
     page.bindingContext = viewModel;
-
 }
 
-function onTap(args)
-{
+exports.onTap = function (args) {
     const index = args.index;
-    console.log("MATID= "+items.getItem(index).matId);
+    console.log("MATID= " + items.getItem(index).matId);
 
     if(global.saveCarr(items.getItem(index)))
         selectedCarrer(index);
 }
-
-function getPIC(personId, value) {
-    let url;
-    switch (value) {
-        case 0:
-            url = global.url + "general/image/" + personId;
-            break;
-
-        case 1:
-            url = global.url + "general/image_prof/" + personId;
-            break;
-    }
-
-    httpModule.getFile({
-        "url": url,
-        "method": "GET",
-        headers: {
-            "Content-Type": "image/jpg",
-            "Authorization": "Basic " + global.encodedStr
-        },
-        "dontFollowRedirects": true
-    }).then((source) => {
-        sideDrawer.getViewById("topImg").backgroundImage = source["path"];
-    }, (e) => {
-        console.log("[Photo] Error", e);
-        dialogs.alert({
-            title: "Errore: getPic",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-    });
-}
-
-function selectedCarrer(index) {
-    sideDrawer = app.getRootView();
-    appSettings.setNumber("carriera",index);
-    getDepartment(items.getItem(index).stuId);
-    appSettings.setNumber("persId", account.user.persId);
-
-    global.saveInfo(account);
-    let remember = sideDrawer.getViewById("rememberMe").checked;
-    if (remember){
-        appSettings.setString("username",user);
-        appSettings.setString("token",global.encodedStr);
-        appSettings.setBoolean("rememberMe",true);
-    }
-    global.isConnected = true;
-    let nome = appSettings.getString("nome");
-    let cognome = appSettings.getString("cognome");
-    sideDrawer.getViewById("topName").text = nome + " " + cognome;
-    //global.saveCarr(carriere[index]);
-
-    //Se login è studente
-    let grpDes = appSettings.getString("grpDes");
-    if (grpDes === "Studenti")
-    {
-        let userForm = sideDrawer.getViewById("userForm");
-        let loginForm = sideDrawer.getViewById("loginForm");
-        sideDrawer.getViewById("topMatr").text = appSettings.getString("matricola");
-        sideDrawer.getViewById("topEmail").text = appSettings.getString("emailAte");
-        sideDrawer.getViewById("topMatr").visibility = "visible";
-        sideDrawer.getViewById("topEmail").visibility = "visible";
-        getPIC(appSettings.getNumber("persId"),0);
-        loginForm.visibility = "collapsed";
-        userForm.visibility = "visible";
-        closeCallback();
-        const nav =
-            {
-                moduleName: "userCalendar/userCalendar",
-                clearHistory: false
-            };
-        frame.Frame.topmost().navigate(nav);
-    }
-
-    else {
-        dialogs.alert({
-            title: "Lavori in corso!",
-            message: "L'applicazione è in fase di sviluppo",
-            okButtonText: "OK"
-        });
-        args.object.closeModal();
-        //logout();
-
-    }
-}
-function normalizeToken(userId){
-    let token = userId + ":" + pass;
-    let bytes = utf8.encode(token);
-    global.encodedStr = base64.encode(bytes);
-    console.log("Normalized_Token: " + global.encodedStr);
-
-}
-function detailedProf(docenteId) {
-    httpModule.request({
-        url: global.url + "professor/detailedInfo/"+ docenteId,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        let _result = response.content.toJSON();
-        global.saveProf(_result);
-
-    },(e) => {
-        console.log("Error", e);
-        dialogs.alert({
-            title: "Errore: Modal-Login detailedProf",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-    });
-
-}
-
-function setAnagrafe(id, type){
-    httpModule.request({
-        url: global.url + "general/anagrafica/"+ id,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        let _result = response.content.toJSON();
-
-        //console.log(_result);
-        global.saveAnagrafe(type,_result);
-
-        if (type === "Docenti"){
-            let nome = appSettings.getString("nome");
-            let cognome = appSettings.getString("cognome");
-
-            sideDrawer.getViewById("topName").text = nome + " " + cognome;
-            sideDrawer.getViewById("topMatr").text = _result.ruolo+ " " + _result.settore;
-            sideDrawer.getViewById("topEmail").text = _result.emailAte;
-            sideDrawer.getViewById("topMatr").visibility = "visible";
-            sideDrawer.getViewById("topEmail").visibility = "visible";
-        }
-
-    },(e) => {
-        console.log("Errore Anagrafe", e);
-        dialogs.alert({
-            title: "Errore: Modal-Login setAnagrafe",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-    });
-}
-
-function getDepartment(studId) {
-    console.log(studId);
-    httpModule.request({
-        url: global.url + "students/departmentInfo/"+ studId,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        let _result = response.content.toJSON();
-        global.saveDepartment(_result);
-
-    },(e) => {
-        console.log("Error", e);
-        dialogs.alert({
-            title: "Errore: Modal-Login getDepartment",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-    });
-}
-exports.onTap = onTap;
-exports.onShownModally = onShownModally;
-

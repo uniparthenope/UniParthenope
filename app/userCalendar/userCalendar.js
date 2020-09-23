@@ -28,33 +28,20 @@ function convertData(data){
     return d;
 }
 
-function onNavigatingTo(args) {
-    page = args.object;
-    page.getViewById("selected_col").col = "0";
-
-    viewModel = new Observable();
-
-    sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-
+function insert_event() {
+    //console.log("EVENT INSERT");
     calendar = page.getViewById("cal");
+    if(calendar !== undefined){
+        let temp_array = [];
+        let temp = global.events;
 
-    console.log("UPDATED= "+global.updatedExam);
-
-    if (!global.updatedExam)
-    {
-        page.getViewById("activityIndicator").visibility = "visible";
-        getMainInfo();
-        getExams();
-        getAccesso();
-        getPrenotazioni();
-    }
-    else {
-        calendarCourses();
+        for (let x=0; x<temp.length; x++){
+            let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
+            temp_array.push(event);
+        }
+        calendar.eventSource = temp_array;
     }
 
-    global.getAllBadge(page);
-    page.bindingContext = viewModel;
 }
 
 function calendarCourses() {
@@ -121,86 +108,6 @@ function calendarCourses() {
     insert_event();
 }
 
-function insert_event() {
-    //console.log("EVENT INSERT");
-    calendar = page.getViewById("cal");
-    if(calendar !== undefined){
-        let temp_array = [];
-        let temp = global.events;
-
-        for (let x=0; x<temp.length; x++){
-            let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
-            temp_array.push(event);
-        }
-        calendar.eventSource = temp_array;
-    }
-
-}
-
-function getExams(){
-    httpModule.request({
-        url: global.url2 + "students/myExams/" + appSettings.getNumber("matId", 0),
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        const result = response.content.toJSON();
-
-        page.getViewById("activityIndicator").visibility = "visible";
-
-        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
-            dialogs.alert({
-                title: "Errore: UserCalendar examsToFreq",
-                message: result.errMsg,
-                okButtonText: "OK"
-            });
-
-            page.getViewById("activityIndicator").visibility = "collapsed";
-        }
-        else {
-            for (let i=0; i<result.length; i++){
-                console.log(result[i].tipo);
-                global.myExams.push({
-                    "nome" : result[i].nome,
-                    "codice" : result[i].codice,
-                    "tipo": result[i].tipo,
-                    "annoId" : result[i].annoId,
-                    "adsceID" : result[i].adsceID,
-                    "adLogId" : result[i].adLogId,
-                    "adId" : result[i].adId,
-                    "CFU" : result[i].CFU,
-                    "docente" : result[i].docente,
-                    "docenteID" : result[i].docenteID,
-                    "semestre" : result[i].semestre,
-                    //"inizio" : result[i].inizio,
-                    //"fine" : result[i].fine,
-                    //"modifica" : result[i].ultMod,
-                    //"orario" : [],
-                    "domPartCod": result[i].domPartCod,
-                    "esito": result[i].status.esito,
-                    "lode": result[i].status.lode,
-                    "voto": result[i].status.voto,
-                    "data": result[i].status.data
-                })
-            }
-
-            page.getViewById("activityIndicator").visibility = "collapsed";
-            appSettings.setNumber("examsBadge",global.myExams.length);
-            global.updatedExam = true;
-            calendarCourses();
-        }
-    },(e) => {
-        dialogs.alert({
-            title: "Errore: UserCalendar",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-        page.getViewById("activityIndicator").visibility = "collapsed";
-    });
-}
-
 function getMainInfo() {
     let cdsId = appSettings.getNumber("cdsId");
 
@@ -226,6 +133,70 @@ function getMainInfo() {
             appSettings.setString("semestre", result.semestre);
             console.log("AA= "+ appSettings.getString("aa_accad"));
             console.log("Semestre= "+ appSettings.getString("semestre"));
+
+            httpModule.request({
+                url: global.url2 + "students/myExams/" + appSettings.getNumber("matId", 0),
+                method: "GET",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                }
+            }).then((response) => {
+                const result = response.content.toJSON();
+
+                page.getViewById("activityIndicator").visibility = "visible";
+
+                if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
+                    dialogs.alert({
+                        title: "Errore: UserCalendar examsToFreq",
+                        message: result.errMsg,
+                        okButtonText: "OK"
+                    });
+
+                    page.getViewById("activityIndicator").visibility = "collapsed";
+                }
+                else {
+                    let x = 0;
+                    for (let i=0; i<result.length; i++){
+                        if(result[i].tipo)
+                            if (result[i].esito === 'P' || result[i].esito === 'F')
+                                x++;
+                        global.myExams.push({
+                            "nome" : result[i].nome,
+                            "codice" : result[i].codice,
+                            "tipo": result[i].tipo,
+                            "annoId" : result[i].annoId,
+                            "adsceID" : result[i].adsceID,
+                            "adLogId" : result[i].adLogId,
+                            "adId" : result[i].adId,
+                            "CFU" : result[i].CFU,
+                            "docente" : result[i].docente,
+                            "docenteID" : result[i].docenteID,
+                            "semestre" : result[i].semestre,
+                            //"inizio" : result[i].inizio,
+                            //"fine" : result[i].fine,
+                            //"modifica" : result[i].ultMod,
+                            //"orario" : [],
+                            "domPartCod": result[i].domPartCod,
+                            "esito": result[i].status.esito,
+                            "lode": result[i].status.lode,
+                            "voto": result[i].status.voto,
+                            "data": result[i].status.data
+                        })
+                    }
+
+                    global.updatedExam = true;
+                    page.getViewById("activityIndicator").visibility = "collapsed";
+                    appSettings.setNumber("examsBadge",x);
+                    calendarCourses();
+                }
+            },(e) => {
+                dialogs.alert({
+                    title: "Errore: UserCalendar",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
+            });
         }
 
     },(e) => {
@@ -324,12 +295,39 @@ function getPrenotazioni(){
     });
 }
 
-function onDrawerButtonTap() {
+exports.onNavigatingTo = function (args) {
+    page = args.object;
+    page.getViewById("selected_col").col = "0";
+
+    viewModel = new Observable();
+
+    sideDrawer = app.getRootView();
+    sideDrawer.closeDrawer();
+
+    calendar = page.getViewById("cal");
+
+    console.log("UPDATED= "+global.updatedExam);
+
+    if (!global.updatedExam) {
+        page.getViewById("activityIndicator").visibility = "visible";
+        getMainInfo();
+        getAccesso();
+        getPrenotazioni();
+    }
+    else {
+        insert_event();
+    }
+
+    global.getAllBadge(page);
+    page.bindingContext = viewModel;
+}
+
+exports.onDrawerButtonTap = function () {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu() {
+exports.onGeneralMenu = function () {
     const nav =
         {
             moduleName: "home/home-page",
@@ -347,6 +345,7 @@ exports.tapAppello = function(){
         };
     page.frame.navigate(nav);
 };
+
 exports.tapCourses = function(){
     const nav =
         {
@@ -356,6 +355,7 @@ exports.tapCourses = function(){
         };
     page.frame.navigate(nav);
 };
+
 exports.tapFood = function(){
     const nav =
         {
@@ -365,6 +365,7 @@ exports.tapFood = function(){
         };
     page.frame.navigate(nav);
 };
+
 exports.tapBus = function(){
     const nav =
         {
@@ -374,6 +375,7 @@ exports.tapBus = function(){
         };
     page.frame.navigate(nav);
 };
+
 exports.onDaySelected = function(args){
     console.log(args.eventData);
     const mainView = args.object;
@@ -382,6 +384,3 @@ exports.onDaySelected = function(args){
 
     mainView.showModal(modalViewModule, context, false);
 };
-exports.onGeneralMenu = onGeneralMenu;
-exports.onNavigatingTo = onNavigatingTo;
-exports.onDrawerButtonTap = onDrawerButtonTap;
