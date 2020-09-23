@@ -20,94 +20,30 @@ let result;
 let loading;
 let num;
 
-function onNavigatingTo(args) {
-    page = args.object;
-    page.getViewById("selected_col").col = "0";
-    viewModel = new Observable();
-    sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-    calendar = page.getViewById("myCalendar");
-    loading = page.getViewById("activityIndicator");
-    console.log("UPDATED= "+global.updatedExam);
+function convertData(data){
+    let day = data[8]+data[9];
+    let month = data[5]+data[6];
+    let year = data[0]+data[1]+data[2]+data[3];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
 
-    if (!global.updatedExam)
-    {
-        loading.visibility = "visible";
+    let d = new Date(year,month-1,day,hour,min);
 
-        getCourses();
-
-    }
-    else {
-        updateSession();
-        insert_event();
-
-        //calendarCourses();
-    }
-    global.getAllBadge(page);
-    page.bindingContext = viewModel;
+    return d;
 }
 
-function calendarCourses() {
-    global.events = [];
+function dayOfWeek(date) {
+    let day = date.substring(0, 2);
+    let month = date.substring(3, 5);
+    let year = date.substring(6, 10);
 
-    let esami = global.freqExams;
+    let dayOfWeek = new Date(year,month-1,day).getDay();
+    return isNaN(dayOfWeek) ? null : ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'][dayOfWeek];
+}
 
-    for (let i = 0; i<esami.length; i++)
-    {
-        let esame = esami[i].nome;
-        let docente = esami[i].docente.split(" ");
-        const periodo = appSettings.getNumber("periodo",3);
-        const corso = "AC"; //TODO modificare da server IDCORSO!
-        const color = new Color.Color(colors[i]);
-
-        //console.log("Esame: " + esame.toUpperCase());
-        //console.log("Docente: " + docente[0].toUpperCase());
-
-        httpModule.request({
-            url: global.url_general + "GAUniparthenope/v1/searchCourse/" + esame.toUpperCase() + "/" + docente[0].toUpperCase() + "/" + corso +"/" + periodo,
-            method: "GET",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic "+ global.encodedStr
-            }
-        }).then((response) => {
-            result = response.content.toJSON();
-            //console.log("Calendario: " + result);
-
-
-            if (response.statusCode === 401 || response.statusCode === 500)
-            {
-                dialogs.alert({
-                    title: "Errore: DocentiHome calendarCourses",
-                    message: result.errMsg,
-                    okButtonText: "OK"
-                }).then(
-                );
-            }
-            else {
-                for (let x = 0; x < result.length; x++) {
-                    let data_inizio = new Date(result[x].inizio);
-                    let data_fine = new Date(result[x].fine);
-                    let title = esame + "\n" + esami[i].docente + "\n\n" + result[x].aula;
-                    global.events.push({
-                        title : title,
-                        data_inizio: data_inizio,
-                        data_fine:data_fine,
-                        color: color
-                    });
-                }
-                insert_event();
-
-            }
-        },(e) => {
-            console.log("Error", e);
-            dialogs.alert({
-                title: "Errore: DocentiHome",
-                message: e.toString(),
-                okButtonText: "OK"
-            });
-        });
-    }
+function monthOfYear(date) {
+    let month = parseInt(date.substring(3, 5)) - 1;
+    return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
 }
 
 function insert_event() {
@@ -122,9 +58,82 @@ function insert_event() {
     calendar.eventSource = temp_array;
 }
 
-function getCourses() {
-    console.log(global.url + "professor/getSession");
+function updateSession(){
+    page.getViewById("aa").text = "A.A " + appSettings.getString("aa_accad","2020");
+    if (appSettings.getString("semestre","1") === "1")
+        page.getViewById("semestre").text = "Primo Semestre";
+    else
+        page.getViewById("semestre").text = "Secondo Semestre";
+    page.getViewById("sessione").text = appSettings.getString("sessione","???");
+}
 
+function getLectures(){
+    let anno = appSettings.getString("aa_accad").split(" - ")[0];
+
+    let url = global.url_general + "GAUniparthenope/v1/getProfLectures/"+ anno;
+    loading.visibility = "visible";
+
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        let result = response.content.toJSON();
+
+        global.myLezioni = result;
+
+        for (let i=0; i<result.length; i++) {
+            let nome = result[i].nome;
+            let courses = result[i].courses;
+
+            console.log(courses);
+
+            for (let j=0; j<courses.length; j++){
+                console.log(courses[j].course_name);
+                let data_inizio = convertData(result[j].start);
+                let data_fine = convertData(result[j].end);
+
+                global.events.push({
+                    title : courses[j].course_name,
+                    data_inizio: data_inizio,
+                    data_fine:data_fine,
+                    //color: color
+                });
+
+                /*
+                let data_inizio = convertData(result[j].start);
+                let data_fine = convertData(result[j].end);
+                //let title = nome + "\n" + courses[j].prof + "\n\n" + courses[j].room.name;
+
+                global.events.push({
+                    title : "title",
+                    data_inizio: data_inizio,
+                    data_fine:data_fine,
+                    //color: color
+                });
+
+                 */
+            }
+        }
+        insert_event();
+
+        loading.visibility = "collapsed";
+    },(e) => {
+        console.log("Error", e);
+        loading.visibility = "collapsed";
+
+        dialogs.alert({
+            title: "Errore: prenotazioni",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
+
+function getCourses() {
     httpModule.request({
         url: global.url + "professor/getSession",
         method: "GET",
@@ -135,35 +144,25 @@ function getCourses() {
     }).then((response) => {
         const result = response.content.toJSON();
 
-
-        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
-        {
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
             dialogs.alert({
                 title: "Errore: DocentiHome GetCourses getSession",
                 message: result.errMsg,
                 okButtonText: "OK"
-            }).then(
-            );
+            });
         }
-        else
-        {
-            //console.log(result.aaId);
-            //console.log(global.url + "docenti/getCourses/" + global.encodedStr + "/" + global.authToken +"/"+ result);
+        else {
             page.getViewById("aa").text = "A.A " + result.aa_curr;
             if (result.semId === 1)
                 page.getViewById("semestre").text = "Primo Semestre";
             else
                 page.getViewById("semestre").text = "Secondo Semestre";
             page.getViewById("sessione").text = result.semDes;
-            //updateSession();
 
             appSettings.setString("aaId", result.aaId.toString());
             appSettings.setString("aa_accad", result.aa_curr);
             appSettings.setString("sessione", result.semDes.toString());
             appSettings.setString("semestre", result.semId.toString());
-
-            //console.log("AA= "+ appSettings.getString("aa_accad"));
-            //console.log("Semestre= "+ appSettings.getString("semestre"));
 
             httpModule.request({
                 url: global.url + "professor/getCourses/" + result.aaId.toString(),
@@ -175,42 +174,145 @@ function getCourses() {
             }).then((response2) => {
                 const result2 = response2.content.toJSON();
                 //console.log(result2);
-                if (response2.statusCode === 401 || response2.statusCode === 500 || response2.statusCode === 403)
-                {
+                if (response2.statusCode === 401 || response2.statusCode === 500 || response2.statusCode === 403) {
                     dialogs.alert({
                         title: "Errore: DocentiHome GetCourses getCourses",
                         message: result2.errMsg,
                         okButtonText: "OK"
                     });
                 }
-                else
-                {
-                    for(let i=0; i< result2.length; i++){
+                else {
+                    global.myAppelli.slice(0);
+                    while(global.myExams.length > 0)
+                        global.myExams.pop();
+                    num = 0;
+                    global.events = [];
+
+                    for(let j=0; j<result2.length; j++){
+                        let myarray = [];
 
                         global.myExams.push({
-                            "nome": result2[i].adDes,
-                            "cdsDes": result2[i].cdDes,
-                            "cdsId": result2[i].cdsId,
-                            "adDefAppCod": result2[i].adDefAppCod,
-                            "adId": result2[i].adId,
-                            "cfu": result2[i].cfu,
-                            "durata": result2[i].durata,
-                            "obbligatoria": result2[i].obbligatoria,
-                            "libera": result2[i].libera,
-                            "tipo": result2[i].tipo,
-                            "settCod": result2[i].settCod,
-                            "semCod": result2[i].semCod,
-                            "semDes": result2[i].semDes,
-                            "inizio": result2[i].inizio,
-                            "fine": result2[i].fine,
-                            "ultMod": result2[i].ultMod,
-                            "sede": result2[i].sede,
-                            "adLogId": result2[i].adLogId
+                            "nome": result2[j].adDes,
+                            "cdsDes": result2[j].cdDes,
+                            "cdsId": result2[j].cdsId,
+                            "adDefAppCod": result2[j].adDefAppCod,
+                            "adId": result2[j].adId,
+                            "cfu": result2[j].cfu,
+                            "durata": result2[j].durata,
+                            "obbligatoria": result2[j].obbligatoria,
+                            "libera": result2[j].libera,
+                            "tipo": result2[j].tipo,
+                            "settCod": result2[j].settCod,
+                            "semCod": result2[j].semCod,
+                            "semDes": result2[j].semDes,
+                            "inizio": result2[j].inizio,
+                            "fine": result2[j].fine,
+                            "ultMod": result2[j].ultMod,
+                            "sede": result2[j].sede,
+                            "adLogId": result2[j].adLogId
                         });
 
+                        httpModule.request({
+                            url: global.url + "students/checkAppello/" + result2[j].cdsId +"/" + result2[j].adId,
+                            method: "GET",
+                            headers: {
+                                "Content-Type" : "application/json",
+                                "Authorization" : "Basic "+ global.encodedStr
+                            }
+                        }).then((response3) => {
+                            const result3 = response3.content.toJSON();
+
+                            if (response3.statusCode === 401 || response3.statusCode === 500) {
+                                dialogs.alert({
+                                    title: "Errore: DocentiAppelli getAppelli",
+                                    message: response3.errMsg,
+                                    okButtonText: "OK"
+
+                                });
+                            }
+                            else{
+                                for (let i=0; i<result3.length; i++) {
+                                    let day,year,month;
+                                    let final_data ="" + dayOfWeek(result3[i].dataEsame) + " " + result3[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result3[i].dataEsame) + " " + result3[i].dataEsame.substring(6, 10);
+                                    day = result3[i].dataEsame.substring(0, 2);
+                                    month = result3[i].dataEsame.substring(3, 5);
+                                    year = result3[i].dataEsame.substring(6, 10);
+                                    let date = new Date(year,month-1,day);
+
+                                    console.log(result3[i].esame);
+
+                                    if (appSettings.getBoolean("esami_futuri") && result3[i].stato === "I"){
+
+                                        //Removed adId and cdsId
+                                        let items = {
+                                            "esame": result3[i].esame,
+                                            "descrizione": result3[i].descrizione,
+                                            "note": result3[i].note,
+                                            "dataEsame": final_data,
+                                            "dataInizio": result3[i].dataInizio,
+                                            "dataFine": result3[i].dataFine,
+                                            "iscritti": result3[i].numIscritti,
+                                            "classe" : "examPass",
+                                            "date" : date,
+                                            "appId": result3[i].appId,
+                                            "prenotazione_da": "Prenotazioni: da ",
+                                            "prenotazione_a": " a ",
+                                            "text_iscritti": "Iscritti: ",
+                                            "stato" : result3[i].statoDes
+                                        };
+                                        myarray.push(items);
+                                    }
+                                    else{
+                                        let items = {
+                                            "esame": result3[i].esame,
+                                            "descrizione": result3[i].descrizione,
+                                            "note": result3[i].note,
+                                            "dataEsame": final_data,
+                                            "dataInizio": result3[i].dataInizio,
+                                            "dataFine": result3[i].dataFine,
+                                            "iscritti": result3[i].numIscritti,
+                                            "classe" : "examPass",
+                                            "date" : date,
+                                            "appId": result3[i].appId,
+                                            "prenotazione_da": "Prenotazioni: da ",
+                                            "prenotazione_a": " a ",
+                                            "text_iscritti": "Iscritti: ",
+                                            "stato" : result3[i].statoDes
+                                        };
+                                        num++;
+                                        myarray.push(items);
+                                    }
+
+                                    let title = "[ESAME] " + result3[i].esame;
+                                    global.events.push({
+                                        title : title,
+                                        data_inizio: date,
+                                        data_fine:date,
+                                        color: new Color.Color("#0F9851")
+                                    });
+                                }
+                            }
+
+                            if (platformModule.isIOS){
+                                myarray.splice(0, 0, {});
+                            }
+
+                            global.myAppelli.push({
+                                titolo: result2[j].adDes,
+                                items: myarray
+                            });
+
+                            getLectures();
+                            insert_event();
+                            global.updatedExam = true;
+                        },(e) => {
+                            dialogs.alert({
+                                title: "Errore: DocentiAppelli",
+                                message: e.toString(),
+                                okButtonText: "OK"
+                            });
+                        });
                     }
-                    console.log("Courses Sync...");
-                    global.updatedExam = true;
                 }
                 page.getViewById("activityIndicator").visibility = "collapsed";
             },(e) => {
@@ -219,8 +321,6 @@ function getCourses() {
                     message: e.toString(),
                     okButtonText: "OK"
                 });
-            }).then(function () {
-                getAppelli();
             });
         }
     },(e) => {
@@ -232,150 +332,36 @@ function getCourses() {
     });
 }
 
-function dayOfWeek(date) {
-    let day = date.substring(0, 2);
-    let month = date.substring(3, 5);
-    let year = date.substring(6, 10);
+function onNavigatingTo(args) {
+    page = args.object;
+    page.getViewById("selected_col").col = "0";
+    viewModel = new Observable();
+    sideDrawer = app.getRootView();
+    sideDrawer.closeDrawer();
+    calendar = page.getViewById("myCalendar");
+    loading = page.getViewById("activityIndicator");
+    console.log("UPDATED= "+global.updatedExam);
 
-    let dayOfWeek = new Date(year,month-1,day).getDay();
-    return isNaN(dayOfWeek) ? null : ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'][dayOfWeek];
+    insert_event();
 
-}
+    if (!global.updatedExam) {
+        loading.visibility = "visible";
 
-function monthOfYear(date) {
-    let month = parseInt(date.substring(3, 5)) - 1;
-    return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
-
-}
-
-function getAppelli() {
-    global.myAppelli.slice(0);
-    num = 0;
-    let exams = global.myExams;
-    global.events = [];
-    for (let x=0; x<exams.length; x++){
-        let myarray = [];
-
-        //console.log("adId: " + exams[x].adId);
-        //console.log("cdsId: " + exams[x].cdsId);
-        httpModule.request({
-            url: global.url + "students/checkAppello/" + exams[x].cdsId +"/" + exams[x].adId,
-            method: "GET",
-            headers: {
-                "Content-Type" : "application/json",
-                "Authorization" : "Basic "+ global.encodedStr
-            }
-        }).then((response) => {
-            const result = response.content.toJSON();
-            loading.visibility = "visible";
-            if (response.statusCode === 401 || response.statusCode === 500)
-            {
-                dialogs.alert({
-                    title: "Errore: DocentiAppelli getAppelli",
-                    message: response.errMsg,
-                    okButtonText: "OK"
-
-                }).then();
-            }
-            else{
-                for (let i=0; i<result.length; i++) {
-                    let day,year,month;
-                    let final_data ="" + dayOfWeek(result[i].dataEsame) + " " + result[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result[i].dataEsame) + " " + result[i].dataEsame.substring(6, 10);
-                    day = result[i].dataEsame.substring(0, 2);
-                    month = result[i].dataEsame.substring(3, 5);
-                    year = result[i].dataEsame.substring(6, 10);
-                    let date = new Date(year,month-1,day);
-
-                    if (appSettings.getBoolean("esami_futuri") && result[i].stato === "I"){
-                        //Removed adId and cdsId
-                        let items = {
-                            "esame": result[i].esame,
-                            "descrizione": result[i].descrizione,
-                            "note": result[i].note,
-                            "dataEsame": final_data,
-                            "dataInizio": result[i].dataInizio,
-                            "dataFine": result[i].dataFine,
-                            "iscritti": result[i].numIscritti,
-                            "classe" : "examPass",
-                            "date" : date,
-                            "appId": result[i].appId,
-                            "prenotazione_da": "Prenotazioni: da ",
-                            "prenotazione_a": " a ",
-                            "text_iscritti": "Iscritti: ",
-                            "stato" : result[i].statoDes
-                        };
-                        myarray.push(items);
-                    }
-                    else{
-                        let items = {
-                            "esame": result[i].esame,
-                            "descrizione": result[i].descrizione,
-                            "note": result[i].note,
-                            "dataEsame": final_data,
-                            "dataInizio": result[i].dataInizio,
-                            "dataFine": result[i].dataFine,
-                            "iscritti": result[i].numIscritti,
-                            "classe" : "examPass",
-                            "date" : date,
-                            "appId": result[i].appId,
-                            "prenotazione_da": "Prenotazioni: da ",
-                            "prenotazione_a": " a ",
-                            "text_iscritti": "Iscritti: ",
-                            "stato" : result[i].statoDes
-                        };
-                        num++;
-                        myarray.push(items);
-                    }
-
-                    let title = "[ESAME] " + result[i].esame;
-                    global.events.push({
-                        title : title,
-                        data_inizio: date,
-                        data_fine:date,
-                        color: new Color.Color("#0F9851")
-                    });
-                }
-            }
-
-            if (platformModule.isIOS){
-                myarray.splice(0, 0, {});
-            }
-
-            global.myAppelli.push({
-                titolo: exams[x].nome,
-                items: myarray
-            });
-
-            loading.visibility = "collapsed";
-        },(e) => {
-            console.log("Error", e);
-            dialogs.alert({
-                title: "Errore: DocentiAppelli",
-                message: e.toString(),
-                okButtonText: "OK"
-            });
-        }).then(function () {
-            appSettings.setNumber("appelloBadge", num);
-            insert_event();
-        });
+        getCourses();
     }
+    else {
+        updateSession();
+    }
+    global.getAllBadge(page);
+    page.bindingContext = viewModel;
 }
 
-function updateSession(){
-    page.getViewById("aa").text = "A.A " + appSettings.getString("aa_accad","2020");
-    if (appSettings.getString("semestre","1") === "1")
-        page.getViewById("semestre").text = "Primo Semestre";
-    else
-        page.getViewById("semestre").text = "Secondo Semestre";
-    page.getViewById("sessione").text = appSettings.getString("sessione","???");
-}
-
-function onDrawerButtonTap() {
+exports.onDrawerButtonTap = function () {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu() {
+exports.onGeneralMenu = function () {
     const nav =
         {
             moduleName: "home/home-page",
@@ -431,6 +417,4 @@ exports.onDaySelected = function(args){
     mainView.showModal(modalViewModule, context, false);
 };
 
-exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
-exports.onDrawerButtonTap = onDrawerButtonTap;

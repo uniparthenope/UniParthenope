@@ -73,8 +73,7 @@ function calendarCourses() {
     }).then((response) => {
         const result = response.content.toJSON();
 
-        if (response.statusCode === 401 || response.statusCode === 500)
-        {
+        if (response.statusCode === 401 || response.statusCode === 500) {
             dialogs.alert({
                 title: "Errore: UserCalendar calendarCourses",
                 message: result.errMsg,
@@ -188,7 +187,7 @@ function getExams(){
             }
 
             page.getViewById("activityIndicator").visibility = "collapsed";
-            appSettings.setNumber("examsBadge",global.freqExams.length);
+            appSettings.setNumber("examsBadge",global.myExams.length);
             global.updatedExam = true;
             calendarCourses();
         }

@@ -13,12 +13,39 @@ let index = 0;
 
 let courses = global.myExams;
 let docentiLezioni;
-let lezioniList;
 let loading;
 let no_less;
-let lezioni;
+let lezioni = global.myLezioni;
 
-function onNavigatingTo(args) {
+function dayOfWeek(date) {
+    date = date.getDay();
+    return isNaN(date) ? null : ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'][date];
+}
+
+function monthOfYear(date) {
+    return isNaN(date) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][date];
+}
+
+function convertMinutes(data) {
+    if(data < 10)
+        return data + "0";
+    else
+        return data;
+}
+
+function convertData(data){
+    let day = data[8]+data[9];
+    let month = data[5]+data[6];
+    let year = data[0]+data[1]+data[2]+data[3];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
+
+    let d = new Date(year,month-1,day,hour,min);
+
+    return d;
+}
+
+exports.onNavigatingTo = function (args) {
     page = args.object;
 
     docentiLezioni = new ObservableArray();
@@ -34,38 +61,7 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
-    getLectures();
-
     page.bindingContext = viewModel;
-}
-
-function getLectures(){
-    let anno = appSettings.getString("aa_accad").split(" - ")[0];
-
-    let url = global.url_general + "GAUniparthenope/v1/getProfLectures/"+ anno;
-    loading.visibility = "visible";
-
-    httpModule.request({
-        url: url,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        lezioni = response.content.toJSON();
-
-        loading.visibility = "collapsed";
-    },(e) => {
-        console.log("Error", e);
-        loading.visibility = "collapsed";
-
-        dialogs.alert({
-            title: "Errore: prenotazioni",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-    });
 }
 
 exports.ontap_save = function() {
@@ -107,13 +103,12 @@ exports.ontap_save = function() {
     loading.visibility = "collapsed";
 };
 
-
-function onDrawerButtonTap() {
+exports.onDrawerButtonTap = function () {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu(){
+exports.onGeneralMenu = function (){
     const nav =
         {
             moduleName: "home/home-page",
@@ -122,7 +117,7 @@ function onGeneralMenu(){
     page.frame.navigate(nav);
 }
 
-function onItemTap(args){
+exports.onItemTap = function (args){
     const mainView = args.object;
     const index = args.index;
     console.log(docentiLezioni.getItem(index).id);
@@ -131,48 +126,11 @@ function onItemTap(args){
 
     mainView.showModal(modalViewModule, adLogId, false);
 }
-exports.onItemTap = onItemTap;
 
-exports.onGeneralMenu = onGeneralMenu;
-exports.onNavigatingTo = onNavigatingTo;
-exports.onDrawerButtonTap = onDrawerButtonTap;
-
-function dayOfWeek(date) {
-    date = date.getDay();
-    return isNaN(date) ? null : ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'][date];
-
-}
-
-function monthOfYear(date) {
-
-    return isNaN(date) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][date];
-
-}
-function convertMinutes(data) {
-
-    if(data < 10)
-        return data + "0";
-    else
-        return data;
-
-}
-function convertData(data){
-
-    let day = data[8]+data[9];
-    let month = data[5]+data[6];
-    let year = data[0]+data[1]+data[2]+data[3];
-    let hour = data[11]+data[12];
-    let min = data[14]+data[15];
-
-    let d = new Date(year,month-1,day,hour,min);
-
-    return d;
-}
-function onListPickerLoaded(fargs) {
+exports.onListPickerLoaded = function (fargs) {
     const listPickerComponent = fargs.object;
     listPickerComponent.on("selectedIndexChange", (args) => {
         const picker = args.object;
         index = picker.selectedIndex;
     });
 }
-exports.onListPickerLoaded = onListPickerLoaded;
