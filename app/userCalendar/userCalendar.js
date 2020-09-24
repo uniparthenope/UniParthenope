@@ -1,5 +1,5 @@
 const observableModule = require("tns-core-modules/data/observable");
-const Observable = require("tns-core-modules/data/observable").Observable;
+const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const httpModule = require("http");
@@ -15,6 +15,7 @@ let page;
 let viewModel;
 let sideDrawer;
 let calendar;
+let event_calendar;
 
 function convertData(data){
     let day = data[8]+data[9];
@@ -32,15 +33,16 @@ function insert_event() {
     //console.log("EVENT INSERT");
     calendar = page.getViewById("cal");
     if(calendar !== undefined){
-        let temp_array = [];
-        let temp = global.events;
 
+        let temp = global.events;
+        console.log("TEMP",temp.length);
         for (let x=0; x<temp.length; x++){
             let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
-            temp_array.push(event);
+            event_calendar.push(event);
         }
-        calendar.eventSource = temp_array;
+
     }
+
 
 }
 
@@ -303,8 +305,11 @@ function getPrenotazioni(){
 exports.onNavigatingTo = function (args) {
     page = args.object;
     page.getViewById("selected_col").col = "0";
+    event_calendar = new ObservableArray();
 
-    viewModel = new Observable();
+    viewModel = observableModule.fromObject({
+        events:event_calendar
+    });
 
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
