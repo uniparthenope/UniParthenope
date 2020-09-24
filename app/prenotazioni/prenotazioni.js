@@ -173,16 +173,6 @@ exports.tapCourses = function(){
     frame.Frame.topmost().navigate(nav);
 };
 
-exports.tapAppello = function(){
-    const nav =
-        {
-            moduleName: "userAppelli/appelli",
-            clearHistory: true,
-            animated: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
 exports.tapBus = function(){
     const nav =
         {
