@@ -45,11 +45,12 @@ function insert_event() {
 }
 
 function calendarCourses() {
+    page.getViewById("activityIndicator3").visibility = "visible";
+
     global.events = [];
 
     let url = global.url_general + "GAUniparthenope/v1/getLectures/" + appSettings.getNumber("matId");
 
-    page.getViewById("activityIndicator").visibility = "visible";
     httpModule.request({
         url: url,
         method: "GET",
@@ -82,7 +83,7 @@ function calendarCourses() {
                 });
             }
             insert_event();
-            page.getViewById("activityIndicator").visibility = "collapsed";
+            page.getViewById("activityIndicator3").visibility = "collapsed";
         }
     },(e) => {
         console.log("Error", e);
@@ -111,6 +112,8 @@ function calendarCourses() {
 function getMainInfo() {
     let cdsId = appSettings.getNumber("cdsId");
 
+    page.getViewById("activityIndicator").visibility = "visible";
+
     httpModule.request({
         url: global.url + "general/current_aa/" + cdsId,
         method: "GET",
@@ -120,6 +123,9 @@ function getMainInfo() {
         }
     }).then((response) => {
         const result = response.content.toJSON();
+
+        page.getViewById("activityIndicator").visibility = "collapsed";
+
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
             dialogs.alert({
                 title: "Errore: UserCalendar getMainInfo",
@@ -134,6 +140,8 @@ function getMainInfo() {
             console.log("AA= "+ appSettings.getString("aa_accad"));
             console.log("Semestre= "+ appSettings.getString("semestre"));
 
+            page.getViewById("activityIndicator2").visibility = "visible";
+
             httpModule.request({
                 url: global.url2 + "students/myExams/" + appSettings.getNumber("matId", 0),
                 method: "GET",
@@ -144,16 +152,12 @@ function getMainInfo() {
             }).then((response) => {
                 const result = response.content.toJSON();
 
-                page.getViewById("activityIndicator").visibility = "visible";
-
                 if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
                     dialogs.alert({
                         title: "Errore: UserCalendar examsToFreq",
                         message: result.errMsg,
                         okButtonText: "OK"
                     });
-
-                    page.getViewById("activityIndicator").visibility = "collapsed";
                 }
                 else {
                     let x = 0;
@@ -186,10 +190,10 @@ function getMainInfo() {
                     }
 
                     global.updatedExam = true;
-                    page.getViewById("activityIndicator").visibility = "collapsed";
                     appSettings.setNumber("examsBadge",x);
                     calendarCourses();
                 }
+                page.getViewById("activityIndicator2").visibility = "collapsed";
             },(e) => {
                 dialogs.alert({
                     title: "Errore: UserCalendar",
@@ -209,7 +213,6 @@ function getMainInfo() {
 }
 
 function getAccesso(){
-
     httpModule.request({
         url: global.url_general + "Access/v1/classroom",
         method: "GET",
@@ -229,9 +232,7 @@ function getAccesso(){
 
             }).then();
         }
-        else
-        {
-
+        else {
             if (result.accessType === "undefined"){
                 dialogs.alert({
                     title: "Attenzione",
@@ -251,6 +252,8 @@ function getAccesso(){
 }
 
 function getPrenotazioni(){
+    page.getViewById("activityIndicator4").visibility = "visible";
+
     let matId = appSettings.getNumber("matId").toString();
 
     httpModule.request({
@@ -269,6 +272,8 @@ function getPrenotazioni(){
         for (let i = 0; i< result.length; i++){
             global.myPrenotazioni.push(result[i]);
         }
+
+        page.getViewById("activityIndicator4").visibility = "collapsed";
         /*
         memo) RESULT =
                 "adId": result[i].adId,
@@ -309,7 +314,6 @@ exports.onNavigatingTo = function (args) {
     console.log("UPDATED= "+global.updatedExam);
 
     if (!global.updatedExam) {
-        page.getViewById("activityIndicator").visibility = "visible";
         getMainInfo();
         getAccesso();
         getPrenotazioni();
