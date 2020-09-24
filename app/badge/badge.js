@@ -12,6 +12,7 @@ let page;
 let viewModel;
 let sideDrawer;
 let zoom = false;
+let loading;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -19,6 +20,7 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     choseBackground(page);
+    loading = page.getViewById("activityIndicator");
     getQr();
     console.log(appSettings.getString("grpDes"));
     if (appSettings.getString("grpDes") === "Studenti"){
@@ -119,6 +121,7 @@ function choseBackground(page){
 }
 
 function getQr(){
+    loading.visibility = "visible";
     page.getViewById("my_qr").backgroundImage = "~/images/qr_test.jpg";
     if(app.android){
         let data = new Date();
@@ -133,8 +136,10 @@ function getQr(){
             }
         }, filePath).then((source) => {
             page.getViewById("my_qr").backgroundImage = source.path;
+            loading.visibility = "collapsed";
         }, (e) => {
             console.log("Error", e);
+            loading.visibility = "collapsed";
             dialogs.alert({
                 title: "QR-Code Error!",
                 message: e.toString(),
@@ -153,8 +158,10 @@ function getQr(){
             "dontFollowRedirects": false
         }).then((source) => {
             page.getViewById("my_qr").backgroundImage = source.path;
+            loading.visibility = "collapsed";
         }, (e) => {
             console.log("Error", e);
+            loading.visibility = "collapsed";
             dialogs.alert({
                 title: "QR-Code Error!",
                 message: e.toString(),

@@ -74,7 +74,12 @@
                             <Label id="roleID"  text="" horizontalAlignment="center" fontSize="18" color="white"/>
                         </StackLayout>
                         </GridLayout>
-                        <StackLayout ondoubletap="tap_zoom" class="main_image_contain" marginBottom="15" borderRadius="20%" id="my_qr" verticalAlignment="center" horizontalAlignment="center" backgroundImage="~/images/qr_test.jpg" height="100%" width="100%"/>
+                        <StackLayout ondoubletap="tap_zoom" class="main_image_contain" marginBottom="15" borderRadius="20%" id="my_qr" verticalAlignment="center" horizontalAlignment="center" backgroundImage="~/images/qr_test.jpg" height="100%" width="100%">
+                            <StackLayout id="activityIndicator" visibility="visible" verticalAlignment="center" width="70%" height="100%" backgroundColor="rgba(0,0,0,0.5)">
+                                <Label text="Genero QR-Code..." horizontalAlignment="center" class="textPrimary"/>
+                                <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>
+                            </StackLayout>
+                        </StackLayout>
 
                     </StackLayout>
 
