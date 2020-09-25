@@ -7,10 +7,6 @@ const httpModule = require("tns-core-modules/http");
 const appSettings = require("tns-core-modules/application-settings");
 let base64= require('base-64');
 let utf8 = require('utf8');
-const appSettings = require("tns-core-modules/application-settings");
-
-
-
 require("nativescript-accordion");
 
 let closeCallback;
