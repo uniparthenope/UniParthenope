@@ -4,7 +4,7 @@ let BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
 let barcodescanner = new BarcodeScanner();
 const dialogs = require("tns-core-modules/ui/dialogs");
 const httpModule = require("tns-core-modules/http");
-const utilsModule = require("tns-core-modules/utils/utils");
+const appSettings = require("tns-core-modules/application-settings");
 let base64= require('base-64');
 let utf8 = require('utf8');
 const appSettings = require("tns-core-modules/application-settings");
@@ -58,8 +58,10 @@ function listStudent(){
             loading.visibility = "collapsed";
 
         for (let i=0; i<result.length; i++){
+            console.log(result[i]);
             console.log(result[i].matricola);
             students.push({
+                "id": result[i].id,
                 "username": result[i].username,
                 "matricola": result[i].matricola,
                 "posto": "--"
@@ -83,6 +85,58 @@ function listStudent(){
     });
 }
 exports.onShownModally = onShownModally;
+
+exports.onItemTap = function (args) {
+    const mainView = args.object;
+    const index = args.index;
+    console.log(students.getItem(index));
+
+    dialogs.confirm({
+        title: "Cancellazione posto",
+        message: "Cancellare la prenotazione di" + students.getItem(index).username + "?",
+        okButtonText: "Sì",
+        cancelButtonText: "No",
+    }).then(function (result) {
+        if (result){
+            httpModule.request({
+                url: global.url_general + "GAUniparthenope/v1/Reservations/" + students.getItem(index).id + "?aaId=" + appSettings.getString("aaId"),
+                method: "DELETE",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization" : "Basic " + global.encodedStr
+                }
+            }).then((response) => {
+                const result = response.content.toJSON();
+
+                if (response.statusCode === 200){
+                    dialogs.alert({
+                        title: "Successo",
+                        message: result["status"],
+                        okButtonText: "OK"
+                    }).then(function (){
+                        students.splice(index);
+                    });
+                }
+                else{
+                    dialogs.alert({
+                        title: "Errore: Cancellazione Prenotazioni",
+                        message: result['message'],
+                        okButtonText: "OK"
+                    });
+                }
+
+            },(e) => {
+                console.log("QUI");
+                console.log("Error", e);
+                dialogs.alert({
+                    title: "Errore: Cancellazione prenotazioni",
+                    message: e.toString(),
+                    okButtonText: "OK"
+                });
+            });
+        }
+    });
+}
 
 exports.tap_scan = function(){
     let count = 0;

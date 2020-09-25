@@ -35,15 +35,11 @@ function insert_event() {
     if(calendar !== undefined){
 
         let temp = global.events;
-        console.log("TEMP",temp.length);
         for (let x=0; x<temp.length; x++){
             let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
             event_calendar.push(event);
         }
-
     }
-
-
 }
 
 function calendarCourses() {

@@ -27,7 +27,7 @@ global.username = "";
 global.data_today;
 global.events = [];
 global.tempPos = false;
-global.globalEvents = []
+global.globalEvents = [];
 global.freqExams = [];
 global.myExams = [];
 global.myDocenti = [];

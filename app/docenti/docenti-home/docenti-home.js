@@ -146,6 +146,7 @@ function getCourses() {
                 page.getViewById("semestre").text = "Secondo Semestre";
             page.getViewById("sessione").text = result.semDes;
 
+            //appSettings.setString("aaId", result.aaId.toString());
             appSettings.setString("aaId", result.aaId.toString());
             appSettings.setString("aa_accad", result.aa_curr);
             appSettings.setString("sessione", result.semDes.toString());
