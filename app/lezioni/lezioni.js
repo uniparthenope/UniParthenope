@@ -141,6 +141,7 @@ function onItemTap(args) {
                     const result = response.content.toJSON();
 
                     if (response.statusCode === 200){
+                        global.updatedExam = false;
                         dialogs.alert({
                             title: "Successo",
                             message: result["status"],

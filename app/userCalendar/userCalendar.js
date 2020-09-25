@@ -74,9 +74,23 @@ function calendarCourses() {
             for (let x = 0; x < result.length; x++) {
                 let data_inizio = convertData(result[x].start);
                 let data_fine = convertData(result[x].end);
-                const color = new Color.Color(colors[x%colors.length]);
+                let color;
+                let reserved = "";
+                let reserved_by = "";
+                if(result[x].reservation.reserved){
+                    color = new Color.Color("red");
+                    reserved = "[PRENOTATO] ";
+                    if(result[x].reservation.reserved_by === appSettings.getString("userId"))
+                        reserved_by = "Prenotato da: me";
+                    else
+                        reserved_by = "Prenotato da: "+result[x].reservation.reserved_by;
+                }
 
-                let title = result[x].course_name + "\n" + result[x].prof + "\n\n" + result[x].room.name;
+                else
+                    color = new Color.Color(colors[x%colors.length]);
+
+                let title = reserved + result[x].course_name + "[0101]\n" + result[x].prof + "\n" + result[x].room.name +" Capacità Tot.: " + result[x].room.capacity + "\n"+reserved_by;
+                //let title = reserved + result[x].course_name + "\n" + result[x].prof + "\n" + result[x].room.name;
                 global.events.push({
                     title : title,
                     data_inizio:data_inizio ,
@@ -388,8 +402,11 @@ exports.tapBus = function(){
 exports.onDaySelected = function(args){
     console.log(args.eventData);
     const mainView = args.object;
-
-    const context = { title: args.eventData.title, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
+    let complete = args.eventData.title;
+    let title = complete.split("[0101]")[0];
+    let body = complete.split("[0101]")[1];
+    console.log("BODY",body);
+    const context = { title: title,body:body, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
 
     mainView.showModal(modalViewModule, context, false);
 };

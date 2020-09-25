@@ -1,9 +1,20 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
       shownModally="onShownModally">
 
-    <GridLayout height="45%" id="event">
-        <Label id="event_text" class="textPrimary" textWrap="true" color="black" margin="10 10 10 10" horizontalAlignment="center" verticalAlignment="center" textAlignment="center"/>
-        <Label id="event_date_start" class="textPrimary" color="black" margin="10 10 10 10" fontSize="14" horizontalAlignment="left" verticalAlignment="top"/>
-        <Label id="event_date_end" class="textPrimary" color="black" margin="10 10 10 10" fontSize="14" horizontalAlignment="right" verticalAlignment="top"/>
+    <GridLayout rows="auto,*">
+        <GridLayout row="0" columns="auto,*,auto" backgroundColor="#22384f" height="20%" verticalAlignment="top">
+            <Label col="0" id="event_date_start" fontSize="12" color="white"/>
+            <Label col="1" class="textPrimary" id="event_text" text="title" textWrap="true" textAlignment="center" verticalAlignment="center" margin="5 5 5 5"/>
+            <Label col="2" id="event_date_end" fontSize="12" color="white"/>
+
+        </GridLayout>
+
+        <GridLayout row="1" verticalAlignment="center" margin="10 10 10 10">
+
+            <Label class="textPrimary" color="black" id="event_body" text="title" textWrap="true" textAlignment="center" verticalAlignment="top" margin="5 5 5 5"/>
+
+        </GridLayout>
+
+
     </GridLayout>
 </Page>

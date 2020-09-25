@@ -7,8 +7,8 @@ const app = require("tns-core-modules/application");
 const StoreUpdate = require("nativescript-store-update");
 
 
-//let domain = "http://api.uniparthenope.it:5000";
-let domain = "https://api.uniparthenope.it";
+let domain = "http://api.uniparthenope.it:5000";
+//let domain = "https://api.uniparthenope.it";
 //let domain = "http://127.0.0.1:5000";
 
 

@@ -5,6 +5,11 @@ let barcodescanner = new BarcodeScanner();
 const dialogs = require("tns-core-modules/ui/dialogs");
 const httpModule = require("tns-core-modules/http");
 const utilsModule = require("tns-core-modules/utils/utils");
+let base64= require('base-64');
+let utf8 = require('utf8');
+const appSettings = require("tns-core-modules/application-settings");
+
+
 
 require("nativescript-accordion");
 
@@ -106,17 +111,22 @@ exports.tap_scan = function(){
             //count++;
             console.log(result.format + ": " + result.text + " (count: " + count + ")");
             barcodescanner.message = "SCANNED";
+            let byte = base64.decode(result.text);
+            let qr = utf8.decode(byte,'ascii');
+            qr = qr.split(":");
 
             httpModule.request({
-                url : global.url_general + "Badges/v1/checkQrCode",
+                url : global.url_general + "GAUniparthenope/v1/ReservationByProf",
                 method : "POST",
                 headers : {
                     "Content-Type": "application/json",
                     "Authorization" : "Basic "+ global.encodedStr
                 },
                 content : JSON.stringify({
-                    token : result.text,
-                    id_tablet: "DOC_TEST"
+                    id_lezione : id,
+                    username: qr[0],
+                    matricola: qr[3],
+                    aaId: appSettings.getString("aaId","2019")
                 })
             }).then((response) => {
                 const result = response.content.toJSON();
@@ -125,15 +135,22 @@ exports.tap_scan = function(){
                 let message;
                 if (response.statusCode === 500)
                     message = "Error: " + result["errMsg"];
-                else
+                else{
                     message = result["status"];
-
+                    students.push({
+                        "username": qr[0],
+                        "matricola": qr[3],
+                        "posto": "--"
+                    });
+                }
 
                 // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
                 dialogs.alert({
                     title: "Result:",
                     message: message,
                     okButtonText: "OK"
+                }).then(function (){
+                    barcodescanner.stop();
                 });
 
 
@@ -142,9 +159,7 @@ exports.tap_scan = function(){
             });
 
 
-            if (count === 3) {
-                barcodescanner.stop();
-            }
+
         },
     }).then(
         function (result) {

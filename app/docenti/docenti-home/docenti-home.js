@@ -1,7 +1,7 @@
-const observableModule = require("tns-core-modules/data/observable");
 const Observable = require("tns-core-modules/data/observable").Observable;
+const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
-const frame = require("tns-core-modules/ui/frame");
+const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const dialogs = require("tns-core-modules/ui/dialogs");
 const httpModule = require("http");
 const appSettings = require("tns-core-modules/application-settings");
@@ -18,6 +18,8 @@ let calendar;
 let result;
 let loading;
 let num;
+let event_calendar;
+
 
 function convertData(data){
     let day = data[8]+data[9];
@@ -46,15 +48,16 @@ function monthOfYear(date) {
 }
 
 function insert_event() {
-    console.log("EVENT INSERT");
-    let temp_array = [];
-    let temp = global.events;
+    calendar = page.getViewById("myCalendar");
+    if(calendar !== undefined){
+        let temp = global.events;
 
-    for (let x=0; x<temp.length; x++){
-        let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
-        temp_array.push(event);
+        for (let x=0; x<temp.length; x++){
+            let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
+            event_calendar.push(event);
+        }
+
     }
-    calendar.eventSource = temp_array;
 }
 
 function updateSession(){
@@ -321,14 +324,18 @@ function getCourses() {
 function onNavigatingTo(args) {
     page = args.object;
     page.getViewById("selected_col").col = "0";
-    viewModel = new Observable();
+
     sideDrawer = app.getRootView();
+    event_calendar = new ObservableArray();
+    viewModel = observableModule.fromObject({
+        events:event_calendar
+    });
+
     sideDrawer.closeDrawer();
     calendar = page.getViewById("myCalendar");
     loading = page.getViewById("activityIndicator");
     console.log("UPDATED= "+global.updatedExam);
 
-    insert_event();
 
     if (!global.updatedExam) {
         loading.visibility = "visible";
@@ -336,9 +343,11 @@ function onNavigatingTo(args) {
         getCourses();
     }
     else {
+        insert_event();
         updateSession();
     }
     global.getAllBadge(page);
+
     page.bindingContext = viewModel;
 }
 

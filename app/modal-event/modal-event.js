@@ -15,6 +15,8 @@ function onShownModally(args) {
     let start = ""+ control_data(context.start_date.getHours()) + ":"+  control_data(context.start_date.getMinutes());
     let end = ""+  control_data(context.end_date.getHours()) + ":"+  control_data(context.end_date.getMinutes());
     page.getViewById("event_text").text = context.title;
+    page.getViewById("event_body").text = context.body;
+
     page.getViewById("event_date_start").text = start;
     page.getViewById("event_date_end").text = end;
 
