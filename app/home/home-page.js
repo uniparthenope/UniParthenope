@@ -69,13 +69,16 @@ function onNavigatingTo(args) {
    else if (remember) {
       setSideMenu(global.myform,global.username);
    }
-
+/*
+SONDAGGIO MAIN
    console.log("Sondaggio: " + appSettings.getBoolean("sondaggio"));
 
    if (appSettings.getBoolean("sondaggio",true)){
        showAD();
    }
 
+
+ */
     page.bindingContext = viewModel;
 }
 
@@ -697,6 +700,5 @@ exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
 
 function rateApp() {
-
     appRater.showRateDialogIfMeetsConditions();
 }

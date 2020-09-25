@@ -4,6 +4,7 @@ const httpModule = require("tns-core-modules/http");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const appRater = require("nativescript-rater").appRater;
 const app = require("tns-core-modules/application");
+const StoreUpdate = require("nativescript-store-update");
 
 
 //let domain = "http://api.uniparthenope.it:5000";
@@ -271,10 +272,13 @@ application.on(application.suspendEvent, (args) => {
     }
 });
 
+
+// RATING APP
 appRater.init({
-    showNeverButton:true,
+    showNeverButton:false,
     debugMode:false
 });
+
 if(app.ios){
     appRater.ios.setAlertTitle('Valuta app@uniparthenope');
     appRater.ios.setAlertMessage('Se ti piace quest\'app, trova un momento per lasciare una recensione positiva.\n La tua opinione conta per noi.');
@@ -283,5 +287,20 @@ if(app.ios){
     appRater.ios.setAlertRateLaterTitle('Ricorda Dopo');
     appRater.ios.setAppName('app@uniparthenope');
 }
+
+
+//APPLICATION UPDATES
+let options = {
+    title: "Aggiornamento Disponibile!",
+    message: "È disponibile una nuova versione dell'applicazione, si consiglia di effettuare l'aggiornamento!",
+    updateButton:"Aggiorna",
+    skipButton: "Non Adesso"
+}
+StoreUpdate.StoreUpdate.init({
+    notifyNbDaysAfterRelease: 0,
+    majorUpdateAlertType: StoreUpdate.AlertTypesConstants.FORCE,
+    countryCode: "it",
+    alertOptions: options
+})
 
 application.run({ moduleName: "app-root" });
