@@ -1,5 +1,6 @@
 <Page class="page"
       navigatingTo="onNavigatingTo"
+      navigatedFrom="onNavigatedFrom"
       actionBarHidden="false"
       xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:Barcode="nativescript-barcodescanner">
@@ -56,6 +57,7 @@
                 <StackLayout id="info_panel" orientation="vertical"  height="75%" backgroundColor="rgba(34, 56, 79,0.9)" borderRadius="20">
 
                     <StackLayout margin="5,5,5,5">
+
                         <StackLayout id="stack_1" visibility="visible" orientation="vertical"  width="100%" horizontalAlignment="center" marginBottom="10">
                             <Label id="depart" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white"/>
                         </StackLayout>
@@ -73,17 +75,23 @@
                             <Label id="role"  text="--" horizontalAlignment="center" fontSize="18" color="white"/>
                             <Label id="roleID"  text="" horizontalAlignment="center" fontSize="18" color="white"/>
                         </StackLayout>
+                            <StackLayout verticalAlignment="bottom">
+                                <Label fontSize="14" verticalAlignment="bottom" text="Doppio-click su QR-Code per ingrandire" color="orange" horizontalAlignment="center"/>
+                            </StackLayout>
+
                         </GridLayout>
                         <StackLayout ondoubletap="tap_zoom" class="main_image_contain" marginBottom="15" borderRadius="20%" id="my_qr" verticalAlignment="center" horizontalAlignment="center" backgroundImage="~/images/qr_test.jpg" height="100%" width="100%">
                             <StackLayout id="activityIndicator" visibility="visible" verticalAlignment="center" width="70%" height="100%" backgroundColor="rgba(0,0,0,0.5)">
                                 <Label text="Genero QR-Code..." horizontalAlignment="center" class="textPrimary"/>
                                 <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>
                             </StackLayout>
+
                         </StackLayout>
 
                     </StackLayout>
 
                 </StackLayout>
+
             </StackLayout>
 
 

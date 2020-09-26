@@ -6,8 +6,11 @@ const httpModule = require("tns-core-modules/http");
 let BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
 let barcodescanner = new BarcodeScanner();
 const fileSystemModule = require("tns-core-modules/file-system");
+const timerModule = require("tns-core-modules/timer");
 const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "test.png");
 
+let interval = 3;
+let timer_id = 0;
 let page;
 let viewModel;
 let sideDrawer;
@@ -123,6 +126,7 @@ function choseBackground(page){
 function getQr(){
     loading.visibility = "visible";
     page.getViewById("my_qr").backgroundImage = "~/images/qr_test.jpg";
+    timerModule.clearInterval(timer_id);
     if(app.android){
         let data = new Date();
         const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "qrCode-" + data.getTime() + ".png");
@@ -136,6 +140,8 @@ function getQr(){
             }
         }, filePath).then((source) => {
             page.getViewById("my_qr").backgroundImage = source.path;
+            let actualTime = new Date();
+            getRemainingTime(actualTime);
             loading.visibility = "collapsed";
         }, (e) => {
             console.log("Error", e);
@@ -159,6 +165,8 @@ function getQr(){
         }).then((source) => {
             page.getViewById("my_qr").backgroundImage = source.path;
             loading.visibility = "collapsed";
+            let actualTime = new Date();
+            getRemainingTime(actualTime);
         }, (e) => {
             console.log("Error", e);
             loading.visibility = "collapsed";
@@ -301,3 +309,28 @@ exports.tap_scanQR = function(){
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
+
+function getRemainingTime(actualData) {
+    timer_id = timerModule.setInterval(()=>{
+        let now = new Date();
+        now.setMinutes(now.getMinutes() - interval);
+        let actual_time = new Date(actualData.getFullYear() - now.getFullYear(),
+            actualData.getMonth() - now.getMonth(),
+            actualData.getDate() - now.getDate(),
+            actualData.getHours() - now.getHours(),
+            actualData.getMinutes() - now.getMinutes(),
+            actualData.getSeconds() - now.getSeconds());
+        //page.getViewById("timer").text = actual_time.getMinutes() +":"+ actual_time.getSeconds();
+        //console.log(actual_time.getMinutes() +":"+ actual_time.getSeconds());
+
+        if(actual_time.getMinutes() === 0 && actual_time.getSeconds()===0){
+            console.log("STOP!")
+            getQr();
+        }
+
+    },1000)
+}
+function onNavigatedFrom(args) {
+    timerModule.clearInterval(timer_id);
+}
+exports.onNavigatedFrom = onNavigatedFrom;
