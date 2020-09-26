@@ -210,8 +210,7 @@ exports.onShownModally = function (args) {
 
         console.log(response.statusCode);
 
-        if(response.statusCode === 401 || response.statusCode === 500)
-        {
+        if(response.statusCode === 401 || response.statusCode === 500) {
             dialogs.confirm({
                 title: "Autenticazione Fallita!",
                 message: _result.errMsg,
@@ -220,8 +219,7 @@ exports.onShownModally = function (args) {
                 args.object.closeModal();
             });
         }
-        if(response.statusCode === 503)
-        {
+        if(response.statusCode === 503) {
             dialogs.confirm({
                 title: "Errore Server ESSE3",
                 message: "Il server ESSE3 è momentaneamente non raggiungibile!\n\nPer maggiori info:\nhttps://uniparthenope.esse3.cineca.it/",
@@ -230,57 +228,7 @@ exports.onShownModally = function (args) {
                 args.object.closeModal();
             });
         }
-        // RISTORANTI
-        else if(response.statusCode === 202){
-            //console.log(_result);
-            sideDrawer = app.getRootView();
-            appSettings.setString("grpDes",_result.user.grpDes);
-            appSettings.setString("matricola","--");
-            let remember = sideDrawer.getViewById("rememberMe").checked;
-
-            if (remember){
-                appSettings.setString("username",user);
-                appSettings.setString("token",global.encodedStr);
-                appSettings.setBoolean("rememberMe",true);
-            }
-
-            appSettings.setString("nome", _result.user.nome);
-            appSettings.setString("cognome", _result.user.cognome);
-            appSettings.setString("userId", _result.userId);
-            appSettings.setString("emailAte",_result.user.email);
-            appSettings.setString("ristorante",_result.user.nomeBar);
-            appSettings.setString("matricola",_result.user.nomeBar);
-            appSettings.setString("sesso",_result.user.sesso);
-            appSettings.setString("telRes",_result.user.telefono);
-            appSettings.setString("facDes","--");
-            appSettings.setString("dataNascita","--");
-
-            //getPIC();
-            //console.log("Ristorante: " + _result.user.nomeBar);
-
-            sideDrawer.getViewById("topName").text = _result.user.nome + " "+_result.user.cognome;
-            global.username = _result.userId;
-
-            sideDrawer.getViewById("topMatr").text = _result.user.nomeBar;
-            sideDrawer.getViewById("topEmail").text = _result.user.email;
-            sideDrawer.getViewById("topMatr").visibility = "visible";
-            sideDrawer.getViewById("topEmail").visibility = "visible";
-
-            let userForm = sideDrawer.getViewById("userRistoratore");
-            let loginForm = sideDrawer.getViewById("loginForm");
-            loginForm.visibility = "collapsed";
-            userForm.visibility = "visible";
-
-            closeCallback();
-            const nav =
-                {
-                    moduleName: "ristoratore/ristoratore-home",
-                    clearHistory: true
-                };
-            frame.Frame.topmost().navigate(nav);
-        }
-        else if(response.statusCode === 200)
-        {
+        else if(response.statusCode === 200) {
             console.log(_result.user.grpDes);
 
             account = _result;
@@ -352,8 +300,56 @@ exports.onShownModally = function (args) {
                     };
                 frame.Frame.topmost().navigate(nav);
             }
-            // REGISTRATI/DOTTORANDI/IPOT.IMMATRICOLATI/PREISCRITTI
-            else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti"){
+            // RISTORANTI
+            else if(_result.user.grpDes === "Ristorante"){
+                sideDrawer = app.getRootView();
+                appSettings.setString("grpDes",_result.user.grpDes);
+                appSettings.setString("matricola","--");
+                let remember = sideDrawer.getViewById("rememberMe").checked;
+
+                if (remember){
+                    appSettings.setString("username",user);
+                    appSettings.setString("token",global.encodedStr);
+                    appSettings.setBoolean("rememberMe",true);
+                }
+
+                appSettings.setString("nome", _result.user.nome);
+                appSettings.setString("cognome", _result.user.cognome);
+                appSettings.setString("userId", _result.userId);
+                appSettings.setString("emailAte",_result.user.email);
+                appSettings.setString("ristorante",_result.user.nomeBar);
+                appSettings.setString("matricola",_result.user.nomeBar);
+                appSettings.setString("sesso",_result.user.sesso);
+                appSettings.setString("telRes",_result.user.telefono);
+                appSettings.setString("facDes","--");
+                appSettings.setString("dataNascita","--");
+
+                //getPIC();
+                //console.log("Ristorante: " + _result.user.nomeBar);
+
+                sideDrawer.getViewById("topName").text = _result.user.nome + " "+_result.user.cognome;
+                global.username = _result.userId;
+
+                sideDrawer.getViewById("topMatr").text = _result.user.nomeBar;
+                sideDrawer.getViewById("topEmail").text = _result.user.email;
+                sideDrawer.getViewById("topMatr").visibility = "visible";
+                sideDrawer.getViewById("topEmail").visibility = "visible";
+
+                let userForm = sideDrawer.getViewById("userRistoratore");
+                let loginForm = sideDrawer.getViewById("loginForm");
+                loginForm.visibility = "collapsed";
+                userForm.visibility = "visible";
+
+                closeCallback();
+                const nav =
+                    {
+                        moduleName: "ristoratore/ristoratore-home",
+                        clearHistory: true
+                    };
+                frame.Frame.topmost().navigate(nav);
+            }
+            // REGISTRATI/DOTTORANDI/IPOT.IMMATRICOLATI/PREISCRITTI/ISCRITTI
+            else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti" || _result.user.grpDes=== "Iscritti"){
                 normalizeToken(_result.user.userId);
                 sideDrawer = app.getRootView();
                 global.saveInfo(account);

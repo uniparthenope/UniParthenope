@@ -37,9 +37,9 @@ function onNavigatingTo(args) {
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        //console.log(result);
+        console.log(result);
 
-        if (response.statusCode === 401 || response.statusCode === 500)
+        if (response.statusCode === 403 || response.statusCode === 500)
         {
             dialogs.alert({
                 title: "Errore: Ristoratore-Home getMenuBar",
