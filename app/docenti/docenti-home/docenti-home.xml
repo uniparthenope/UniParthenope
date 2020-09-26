@@ -200,10 +200,18 @@
                 </GridLayout>
             </GridLayout>
         </StackLayout>
+        <StackLayout id="activityIndicator2" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Recupero esami..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
+        <StackLayout id="activityIndicator3" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Recupero calendario..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
             <Label text="Recupero informazioni..." horizontalAlignment="center" class="textPrimary"/>
-            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+            <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>
         </StackLayout>
     </GridLayout>
 

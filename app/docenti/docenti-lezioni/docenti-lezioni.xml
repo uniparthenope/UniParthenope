@@ -44,7 +44,6 @@
             <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" height="20%">
                 <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
             </StackLayout>
-            <Button backgroundColor="#22384f" color="white" id="selection_button" margin="5 5 5 5" class="btn" text="Cerca" ontap="ontap_save" verticalAlignment="bottom"/>
             <Label margin="5 5 5 5" fontSize="12" text="Selezionare una lezione per mostrare gli iscritti"/>
 
             <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
@@ -92,12 +91,13 @@
                         </ListView.itemTemplate>
                     </ListView>
                 </ScrollView>
-                <StackLayout id="activityIndicator" visibility="collapsed" borderRadius="20%" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-                    <Label text="Ricerca Lezioni..." horizontalAlignment="center" class="textPrimary"/>
-                    <ActivityIndicator horizontalAlignment="center" busy="true"/>
-                </StackLayout>
+
             </GridLayout>
             </StackLayout>
+        </StackLayout>
+        <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Ricerca Lezioni..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
 
     </GridLayout>

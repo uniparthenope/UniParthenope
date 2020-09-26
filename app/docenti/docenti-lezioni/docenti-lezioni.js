@@ -13,39 +13,12 @@ let index = 0;
 
 let courses = global.myExams;
 let docentiLezioni;
+let lezioniList;
 let loading;
 let no_less;
-let lezioni = global.myLezioni;
+let lezioni;
 
-function dayOfWeek(date) {
-    date = date.getDay();
-    return isNaN(date) ? null : ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'][date];
-}
-
-function monthOfYear(date) {
-    return isNaN(date) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][date];
-}
-
-function convertMinutes(data) {
-    if(data < 10)
-        return data + "0";
-    else
-        return data;
-}
-
-function convertData(data){
-    let day = data[8]+data[9];
-    let month = data[5]+data[6];
-    let year = data[0]+data[1]+data[2]+data[3];
-    let hour = data[11]+data[12];
-    let min = data[14]+data[15];
-
-    let d = new Date(year,month-1,day,hour,min);
-
-    return d;
-}
-
-exports.onNavigatingTo = function (args) {
+function onNavigatingTo(args) {
     page = args.object;
 
     docentiLezioni = new ObservableArray();
@@ -61,16 +34,50 @@ exports.onNavigatingTo = function (args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
+    getLectures();
+
     page.bindingContext = viewModel;
 }
 
-exports.ontap_save = function() {
+function getLectures(){
+    let anno = appSettings.getString("aa_accad").split(" - ")[0];
+
+    let url = global.url_general + "GAUniparthenope/v1/getProfLectures/"+ anno;
+    loading.visibility = "visible";
+
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        lezioni = response.content.toJSON();
+        showLession(0);
+        loading.visibility = "collapsed";
+    },(e) => {
+        console.log("Error", e);
+        loading.visibility = "collapsed";
+
+        dialogs.alert({
+            title: "Errore: prenotazioni",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
+function showLession(index){
     loading.visibility = "visible";
 
     while(docentiLezioni.length > 0)
         docentiLezioni.pop();
 
     let result = lezioni[index].courses;
+    if(result.length === 0)
+        no_less.visibility = "visible";
+    else
+        no_less.visibility = "collapsed";
 
     for (let i=0; i<result.length; i++){
         let fulldata = convertData(result[i].start);
@@ -101,14 +108,16 @@ exports.ontap_save = function() {
         });
     }
     loading.visibility = "collapsed";
-};
+}
 
-exports.onDrawerButtonTap = function () {
+
+
+function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
 
-exports.onGeneralMenu = function (){
+function onGeneralMenu(){
     const nav =
         {
             moduleName: "home/home-page",
@@ -117,20 +126,69 @@ exports.onGeneralMenu = function (){
     page.frame.navigate(nav);
 }
 
-exports.onItemTap = function (args){
+function onItemTap(args){
     const mainView = args.object;
     const index = args.index;
-    console.log(docentiLezioni.getItem(index).id);
+    //console.log(docentiLezioni.getItem(index).id);
+    const option = {
+        context: {data: docentiLezioni.getItem(index).nome, id: docentiLezioni.getItem(index).id },
+        closeCallback: () => {
+            // Receive data from the modal view. e.g. username & password
+            const nav =
+                {
+                    moduleName: "docenti/docenti-lezioni/docenti-lezioni",
+                    clearHistory: true
+                };
+            page.frame.navigate(nav);
+        },
+        fullscreen: false
+    };
 
-    const adLogId = { data: docentiLezioni.getItem(index).nome, id: docentiLezioni.getItem(index).id,};
+    mainView.showModal(modalViewModule, option);
+}
+exports.onItemTap = onItemTap;
 
-    mainView.showModal(modalViewModule, adLogId, false);
+exports.onGeneralMenu = onGeneralMenu;
+exports.onNavigatingTo = onNavigatingTo;
+exports.onDrawerButtonTap = onDrawerButtonTap;
+
+function dayOfWeek(date) {
+    date = date.getDay();
+    return isNaN(date) ? null : ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'][date];
+
 }
 
-exports.onListPickerLoaded = function (fargs) {
+function monthOfYear(date) {
+
+    return isNaN(date) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][date];
+
+}
+function convertMinutes(data) {
+
+    if(data < 10)
+        return data + "0";
+    else
+        return data;
+
+}
+function convertData(data){
+
+    let day = data[8]+data[9];
+    let month = data[5]+data[6];
+    let year = data[0]+data[1]+data[2]+data[3];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
+
+    let d = new Date(year,month-1,day,hour,min);
+
+    return d;
+}
+function onListPickerLoaded(fargs) {
     const listPickerComponent = fargs.object;
     listPickerComponent.on("selectedIndexChange", (args) => {
         const picker = args.object;
         index = picker.selectedIndex;
+        showLession(index);
     });
 }
+exports.onListPickerLoaded = onListPickerLoaded;

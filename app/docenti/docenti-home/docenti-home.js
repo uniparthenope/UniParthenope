@@ -70,6 +70,8 @@ function updateSession(){
 }
 
 function getLectures(){
+    page.getViewById("activityIndicator2").visibility = "collapsed";
+
     let anno = appSettings.getString("aa_accad").split(" - ")[0];
 
     let url = global.url_general + "GAUniparthenope/v1/getProfLectures/"+ anno;
@@ -98,7 +100,7 @@ function getLectures(){
                 let av_cap =  tot_cap - Math.floor(courses[j].room.availability);
 
                 global.events.push({
-                    title : ""+ courses[j].course_name +"\n"+ courses[j].room.description+"\n"+ courses[j].room.name+"\n Capacità Aula: "+ (tot_cap - av_cap) + "/ "+tot_cap,
+                    title : ""+ courses[j].course_name +"[0101]\n"+ courses[j].room.description+"\n"+ courses[j].room.name+"\n Capacità Aula: "+ (tot_cap - av_cap) + "/ "+tot_cap,
                     data_inizio: data_inizio,
                     data_fine:data_fine,
                     color: color
@@ -106,6 +108,8 @@ function getLectures(){
             }
         }
         insert_event();
+        page.getViewById("activityIndicator2").visibility = "collapsed";
+
 
         loading.visibility = "collapsed";
     },(e) => {
@@ -121,6 +125,8 @@ function getLectures(){
 }
 
 function getCourses() {
+    page.getViewById("activityIndicator3").visibility = "visible";
+
     httpModule.request({
         url: global.url + "professor/getSession",
         method: "GET",
@@ -289,6 +295,8 @@ function getCourses() {
                                 titolo: result2[j].adDes,
                                 items: myarray
                             });
+                            page.getViewById("activityIndicator3").visibility = "collapsed";
+
 
                         },(e) => {
                             dialogs.alert({
@@ -301,6 +309,7 @@ function getCourses() {
 
                     insert_event();
                     global.updatedExam = true;
+
                     getLectures();
 
                 }
@@ -405,10 +414,12 @@ exports.tapBus = function(){
 
 exports.onDaySelected = function(args){
     console.log(args.eventData);
-
     const mainView = args.object;
-
-    const context = { title: args.eventData.title, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
+    let complete = args.eventData.title;
+    let title = complete.split("[0101]")[0];
+    let body = complete.split("[0101]")[1];
+    console.log("BODY",body);
+    const context = { title: title,body:body, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
 
     mainView.showModal(modalViewModule, context, false);
 };
