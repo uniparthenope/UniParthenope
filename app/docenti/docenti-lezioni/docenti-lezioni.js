@@ -80,9 +80,11 @@ function showLession(index){
         no_less.visibility = "collapsed";
 
     for (let i=0; i<result.length; i++){
+        loading.visibility = "visible";
+
         let fulldata = convertData(result[i].start);
         fulldata = "" + dayOfWeek(fulldata) + " " + fulldata.getDate() + " " + monthOfYear(fulldata.getMonth()) + " " + fulldata.getFullYear();
-        console.log(fulldata);
+        //console.log(fulldata);
         let start_data = convertData(result[i].start);
         let end_data = convertData(result[i].end);
         let max_cap = Math.floor(result[i].room.capacity);
@@ -109,8 +111,6 @@ function showLession(index){
     }
     loading.visibility = "collapsed";
 }
-
-
 
 function onDrawerButtonTap() {
     const sideDrawer = app.getRootView();
@@ -186,6 +186,7 @@ function convertData(data){
 function onListPickerLoaded(fargs) {
     const listPickerComponent = fargs.object;
     listPickerComponent.on("selectedIndexChange", (args) => {
+
         const picker = args.object;
         index = picker.selectedIndex;
         showLession(index);

@@ -87,7 +87,7 @@ function calendarCourses() {
                 let title = reserved + result[x].course_name + "[0101]\n" + result[x].prof + "\n" + result[x].room.name +" Capacità Tot.: " + result[x].room.capacity + "\n"+reserved_by;
                 //let title = reserved + result[x].course_name + "\n" + result[x].prof + "\n" + result[x].room.name;
                 global.events.push({
-                    title : title,
+                    title : title.split("[0101]")[0],
                     data_inizio:data_inizio ,
                     data_fine: data_fine,
                     color: color
