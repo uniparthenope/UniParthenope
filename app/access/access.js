@@ -3,7 +3,6 @@ const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
-const utilsModule = require("tns-core-modules/utils/utils");
 const modalViewModule = "modal-covidalert/modal-covidalert";
 
 
@@ -47,7 +46,12 @@ function onListPickerLoaded(fargs) {
     listPickerComponent.on("selectedIndexChange", (args) => {
         const picker = args.object;
         index = picker.selectedIndex;
+        let accessIndex = convertIndex(appSettings.getString("accessType","undefined"));
 
+
+        if(accessIndex !== picker.selectedIndex){
+            saveInfo();
+        }
         //console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
     });
 }
@@ -65,7 +69,6 @@ function getAccess(){
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        console.log(result.accessType);
         appSettings.setString("accessType", result.accessType);
 
         if (response.statusCode === 401 || response.statusCode === 500) {
@@ -82,15 +85,21 @@ function getAccess(){
             my_status = result.accessType;
 
             if (result.accessType === "presence"){
+                page.getViewById("btn-prenotazioni").visibility = "visible";
                 lp.selectedIndex = 2;
+
             }
 
             else if(result.accessType === "distance"){
+                page.getViewById("btn-prenotazioni").visibility = "collapsed";
+
                 lp.selectedIndex = 1;
             }
 
             else {
                 page.getViewById("alert1").visibility = "visible";
+                page.getViewById("btn-prenotazioni").visibility = "collapsed";
+
                 lp.selectedIndex = 0;
             }
 
@@ -172,6 +181,38 @@ function onGeneralMenu()
         };
     page.frame.navigate(nav);
 }
+function saveInfo(){
+    if(isStudent){
+        if(index === 0){
+            setAccess("undefined");
+        }
+        else if(index === 1){
+            setAccess("distance");
+        }
+        else if(index === 2){
+            if (global.my_selfcert){
+                setAccess("presence");
+            }
+            else{
+                dialogs.confirm({
+                    title: "Attenzione!",
+                    message: "Per poter selezionare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
+                    okButtonText: "OK"
+                }).then(function (){
+                    const nav =
+                        {
+                            moduleName: "access/access",
+                            clearHistory: true
+                        };
+                    page.frame.navigate(nav);
+                });
+            }
+        }
+    }
+    else{
+        setSelfCert(global.my_selfcert);
+    }
+}
 
 exports.ontap_save = function(){
     if(isStudent){
@@ -190,6 +231,13 @@ exports.ontap_save = function(){
                     title: "Attenzione!",
                     message: "Per poter selezionare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
                     okButtonText: "OK"
+                }).then(function (){
+                    const nav =
+                        {
+                            moduleName: "access/access",
+                            clearHistory: true
+                        };
+                    page.frame.navigate(nav);
                 });
             }
         }
@@ -299,6 +347,7 @@ function onSwitchLoaded_autocert(args) {
             const options = {
                 context: "some context",
                 closeCallback: () => {
+                    saveInfo();
                     if(!global.my_selfcert)
                         page.getViewById("switch_sondaggio").checked = "false";
                 },
@@ -309,11 +358,49 @@ function onSwitchLoaded_autocert(args) {
 
         }
         else{
-            global.my_selfcert = false;
-            console.log("FALSO");
-            appSettings.setBoolean("selfcert",false);
-        }
+            if(my_status !== "presence"){
+                if(global.my_selfcert){
+                    saveInfo();
+                }
+                global.my_selfcert = false;
+                console.log("FALSO");
+                appSettings.setBoolean("selfcert",false);
+            }
+            else{
+                dialogs.confirm({
+                    title: "Attenzione!",
+                    message: "Per poter salvare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
+                    okButtonText: "OK"
+                }).then(function (){
+                    const nav =
+                        {
+                            moduleName: "access/access",
+                            clearHistory: true
+                        };
+                    page.frame.navigate(nav);
+                });
+            }
 
+        }
     });
 }
 exports.onSwitchLoaded_autocert = onSwitchLoaded_autocert;
+
+function convertIndex(accessType){
+    if (accessType === "presence")
+        return 2;
+    else if (accessType === "distance")
+        return 1;
+    else
+        return 0;
+}
+
+exports.goto_prenotazioni = function () {
+
+    const nav =
+        {
+            moduleName: "lezioni/lezioni",
+            clearHistory: false
+        };
+    page.frame.navigate(nav);
+};

@@ -49,7 +49,6 @@
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
                         <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
                         <Button class="btn-menu" text="Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
-                        <Button class="btn-menu" id="btn-prenotazioni" visibility="visible" text="Prenotazioni" marginBottom="5" marginTop="5" tap="goto_prenotazioni"/>
 
                         <Button class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>
                         <Button class="btn-menu" text="Libretto" marginBottom="5" marginTop="5" tap="goto_libretto"/>

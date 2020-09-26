@@ -49,7 +49,7 @@
 
 
         </StackLayout>
-        <Button margin="5 5 5 5" class="btn" text="Salva" ontap="ontap_save" verticalAlignment="bottom"/>
+        <Button margin="5 5 5 5" id="btn-prenotazioni" class="btn" visibility="collapsed" text="Prenotazione Aule" ontap="goto_prenotazioni" verticalAlignment="bottom"/>
 
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">

@@ -117,7 +117,7 @@
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
             <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
-            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+            <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>
         </StackLayout>
     </GridLayout>
 </Page>

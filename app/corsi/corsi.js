@@ -41,10 +41,10 @@ function getCourses() {
     let courses = global.myExams;
     const act_sem = appSettings.getString("semestre");
 
-    console.log(courses);
+    //console.log(courses);
     for (let i=0; i<courses.length; i++)
     {
-        console.log(courses[i].tipo);
+        //console.log(courses[i].tipo);
         if (courses[i].tipo === 'V')
             if (courses[i].esito === 'P' || courses[i].esito === 'F')
                 items.push({

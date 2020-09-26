@@ -286,16 +286,6 @@ exports.goto_anagrafica = function () {
     });*/
 };
 
-exports.goto_prenotazioni = function () {
-
-    const nav =
-        {
-            moduleName: "lezioni/lezioni",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
 exports.goto_docenti_lezioni = function () {
 
     const nav =

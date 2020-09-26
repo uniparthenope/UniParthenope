@@ -229,8 +229,23 @@ function autoconnect() {
                 let cognome = appSettings.getString("cognome");
                 let username = nome + " " + cognome;
                 setSideMenu("userForm",username);
+            }
+            else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti" || _result.user.grpDes=== "Iscritti"){
+                console.log("REGISTRATI/DOTT/ecc");
+                global.saveInfo(_result);
+                appSettings.setString("matricola","--");
+
+
+                let nome = _result.user.firstName;
+                let cognome = _result.user.lastName;
+                let username = nome + " " + cognome;
+
+                setSideMenu("userOther",username);
+                indicator.visibility = "collapsed";
+                global.isConnected = true;
 
             }
+
             else{
                 global.isConnected = true;
                 let nome = appSettings.getString("nome","");

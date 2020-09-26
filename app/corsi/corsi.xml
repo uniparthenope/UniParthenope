@@ -51,10 +51,7 @@
                                 <StackLayout orientation="vertical" width="70%">
                                     <Label class="examPass" borderWidth="0" borderRadius="0" horizontalAlignment="center" text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" textAlignment="center"/>
                                     <Label class="examPass" borderWidth="0"  borderRadius="0" text="{{ prof }}" fontSize="14" horizontalAlignment="center"/>
-                                    <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="examPass" borderWidth="0"  text="{{ data_inizio }}" fontSize="14" horizontalAlignment="center"/>
-                                        <Label class="examPass" borderWidth="0"  text="{{ data_fine }}" fontSize="14" horizontalAlignment="center"/>
-                                    </StackLayout>
+
                                     <Label class="examPass" borderWidth="0"  borderRadius="0" text="{{ partizione }}" fontSize="14" horizontalAlignment="center"/>
                                     <!--
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">

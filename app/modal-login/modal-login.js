@@ -260,6 +260,7 @@ exports.onShownModally = function (args) {
                     }
                 }
             }
+
             // DOCENTI
             else if(_result.user.grpDes === "Docenti"){
                 normalizeToken(_result.user.userId);
@@ -300,6 +301,7 @@ exports.onShownModally = function (args) {
                     };
                 frame.Frame.topmost().navigate(nav);
             }
+
             // RISTORANTI
             else if(_result.user.grpDes === "Ristorante"){
                 sideDrawer = app.getRootView();
@@ -348,8 +350,10 @@ exports.onShownModally = function (args) {
                     };
                 frame.Frame.topmost().navigate(nav);
             }
+
             // REGISTRATI/DOTTORANDI/IPOT.IMMATRICOLATI/PREISCRITTI/ISCRITTI
             else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti" || _result.user.grpDes=== "Iscritti"){
+
                 normalizeToken(_result.user.userId);
                 sideDrawer = app.getRootView();
                 global.saveInfo(account);
@@ -362,10 +366,9 @@ exports.onShownModally = function (args) {
                     appSettings.setString("token",global.encodedStr);
                     appSettings.setBoolean("rememberMe",true);
                 }
-                global.isConnected = true;
 
-                let nome = appSettings.getString("nome");
-                let cognome = appSettings.getString("cognome");
+                let nome = account.user.firstName;
+                let cognome = account.user.lastName;
 
                 sideDrawer.getViewById("topName").text = nome + " " + cognome;
                 sideDrawer.getViewById("topMatr").text = _result.user.grpDes;
@@ -377,6 +380,8 @@ exports.onShownModally = function (args) {
                 userForm.visibility = "visible";
 
                 closeCallback();
+                global.isConnected = true;
+
                 const nav =
                     {
                         moduleName: "home/home-page",
@@ -384,6 +389,7 @@ exports.onShownModally = function (args) {
                     };
                 frame.Frame.topmost().navigate(nav);
             }
+
             // PTA, ALTRI UTENTI
             else{
                 //console.log(_result.user.grpId);
