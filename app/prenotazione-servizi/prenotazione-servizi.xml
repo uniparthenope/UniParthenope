@@ -34,15 +34,15 @@
     <GridLayout height="100%">
         <StackLayout height="100%">
             <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label class="textPrimary" text="Lezioni" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label class="textPrimary" text="Prenotazione Servizi" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
             <StackLayout padding="5 5 5 5">
 
-            <Label fontSize="12" margin="5 5 5 5" text="Selezionare un corso dall'elenco:"/>
+            <Label fontSize="12" margin="5 5 5 5" text="Selezionare un dipartimento dall'elenco:"/>
 
             <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" height="20%">
-                <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
+                <ListPicker id="listpicker" items="{{ department }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
             </StackLayout>
             <Label margin="5 5 5 5" fontSize="12" text="Selezionare una lezione per mostrare gli iscritti"/>
 

@@ -35,6 +35,11 @@
                 <Label class="textPrimary" text="Accesso" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
+            <GridLayout margin="5 5 5 5" columns="*,50" height="50" >
+                <Label class="textPrimary" id="text_appello" color="#22384f" col="0" text="Autocertificazione Obbligatoria" horizontalAlignment="left" verticalAlignment="center"/>
+                <Switch col="1" id="switch_sondaggio" checked="true" loaded="onSwitchLoaded_autocert" horizontalAlignment="right" verticalAlignment="center"/>
+            </GridLayout>
+
             <StackLayout margin="5 5 5 5" id="scelta_accesso" visibility="collapsed">
 
                 <Label class="textMont_noborder" textWrap="true" text="Intendo frequentare i corsi del primo semestre dell'Anno Accademico 2020/2021:"/>
@@ -42,14 +47,13 @@
                 <ListPicker id="listpicker" items="{{ status }}" selectedIndex="0" loaded="onListPickerLoaded"/>
             </StackLayout>
 
-            <GridLayout margin="5 5 5 5" columns="*,50" height="50" >
-                <Label class="textPrimary" id="text_appello" color="#22384f" col="0" text="Autocertificazione Obbligatoria" horizontalAlignment="left" verticalAlignment="center"/>
-                <Switch col="1" id="switch_sondaggio" checked="true" loaded="onSwitchLoaded_autocert" horizontalAlignment="right" verticalAlignment="center"/>
-            </GridLayout>
-
 
         </StackLayout>
-        <Button margin="5 5 5 5" id="btn-prenotazioni" class="btn" visibility="collapsed" text="Prenotazione Aule" ontap="goto_prenotazioni" verticalAlignment="bottom"/>
+        <StackLayout verticalAlignment="bottom">
+            <Button margin="5 5 5 5" id="btn-prenotazioni" class="btn" visibility="collapsed" text="Prenotazione Aule" ontap="goto_prenotazioni" />
+            <Button margin="5 5 5 5" id="btn-servizi" class="btn" visibility="collapsed" text="Prenotazione Servizi" ontap="goto_prenot_serv" />
+
+        </StackLayout>
 
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">

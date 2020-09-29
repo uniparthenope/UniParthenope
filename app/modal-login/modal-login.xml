@@ -8,7 +8,7 @@
             <ScrollView height="70%" ios:backgroundColor="#22384f">
             <ListView id="listview" class="list-group" ios:backgroundColor="#22384f" ios:separatorColor="#22384fff" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5">
                 <ListView.itemTemplate>
-                    <FlexboxLayout flexDirection="row">
+                    <FlexboxLayout flexDirection="row" ios:backgroundColor="#22384f">
                         <StackLayout orientation="horizontal" width="100%" ios:backgroundColor="#22384fff">
                             <StackLayout orientation="vertical" marginBottom="10" marginTop="10">
                                 <Label text="{{ cdsDes }}" android:color="#22384f" ios:color="white" fontSize="16" marginBottom="5"/>

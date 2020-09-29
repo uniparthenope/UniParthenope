@@ -57,7 +57,7 @@
                     <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
 
                     <ScrollView verticalAlignment="top" margin="5 5 5 5" height="95%">
-                       <ListView id="lezioni_listview" class="list-group" items="{{ docentiLezioni }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                       <ListView id="lezioni_listview" class="list-group" items="{{ prenotazioneServizi }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
                             <ListView.itemTemplate >
                                 <GridLayout rows="*,*,*,*">
                                     <GridLayout row="0" columns="auto,*,auto" backgroundColor="#22384f" color="white" borderRadius="5%" padding="5 5 5 5">

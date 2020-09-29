@@ -25,17 +25,17 @@ function onNavigatingTo(args) {
     loading = page.getViewById("activityIndicator");
 
     getSelfCert();
+    let grpDes = appSettings.getString("grpDes","");
 
-    if (appSettings.getString("grpDes") === "Studenti"){
-        isStudent = true;
-        getAccess();
-        page.getViewById("scelta_accesso").visibility = "visible";
-
-    }
-    else{
+    if (grpDes === "Docenti" || grpDes === "PTA" || grpDes === "Ristoranti" || grpDes === ""){
         isStudent = false;
         page.getViewById("scelta_accesso").visibility = "collapsed";
 
+    }
+    else{
+        isStudent = true;
+        getAccess();
+        page.getViewById("scelta_accesso").visibility = "visible";
     }
 
     page.bindingContext = viewModel;
@@ -83,15 +83,24 @@ function getAccess(){
         {
             let lp = page.getViewById("listpicker");
             my_status = result.accessType;
+            let grpDes = appSettings.getString("grpDes","");
+
 
             if (result.accessType === "presence"){
                 page.getViewById("btn-prenotazioni").visibility = "visible";
                 lp.selectedIndex = 2;
 
+                if (grpDes === "Docenti" || grpDes === "Studenti" || grpDes === "Ricercatori" || grpDes === "PTA" || grpDes === ""){
+                    page.getViewById("btn-servizi").visibility = "visible";
+
+                }
+                else
+                    page.getViewById("btn-servizi").visibility = "collapsed";
             }
 
             else if(result.accessType === "distance"){
                 page.getViewById("btn-prenotazioni").visibility = "collapsed";
+                page.getViewById("btn-servizi").visibility = "collapsed";
 
                 lp.selectedIndex = 1;
             }
@@ -99,10 +108,10 @@ function getAccess(){
             else {
                 page.getViewById("alert1").visibility = "visible";
                 page.getViewById("btn-prenotazioni").visibility = "collapsed";
+                page.getViewById("btn-servizi").visibility = "collapsed";
 
                 lp.selectedIndex = 0;
             }
-
 
             loading.visibility = "collapsed";
         }
@@ -400,6 +409,15 @@ exports.goto_prenotazioni = function () {
     const nav =
         {
             moduleName: "lezioni/lezioni",
+            clearHistory: false
+        };
+    page.frame.navigate(nav);
+};
+exports.goto_prenot_serv = function () {
+
+    const nav =
+        {
+            moduleName: "prenotazione-servizi/prenotazione-servizi",
             clearHistory: false
         };
     page.frame.navigate(nav);
