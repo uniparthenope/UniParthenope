@@ -7,7 +7,6 @@ let BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
 let barcodescanner = new BarcodeScanner();
 const fileSystemModule = require("tns-core-modules/file-system");
 const timerModule = require("tns-core-modules/timer");
-const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "test.png");
 
 let interval = 3;
 let timer_id = 0;
@@ -83,8 +82,7 @@ function onDrawerButtonTap() {
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu()
-{
+function onGeneralMenu() {
     const nav =
         {
             moduleName: "home/home-page",
@@ -209,6 +207,7 @@ function getPIC(personId, value){
         });
     });
 }
+
 exports.tap_zoom = function(){
 
     zoom = !zoom;
@@ -231,12 +230,7 @@ exports.tap_reloadQR = function(){
 
 exports.tap_scanQR = function(){
     let count = 0;
-   /* const nav =
-        {
-            // moduleName:"docenti/docenti-appelli/docenti-appelli"
-            moduleName: "badge/scanqr"
-        };
-    page.frame.navigate(nav);*/
+
     barcodescanner.scan({
         formats: "QR_CODE, EAN_13, CODE_128",
         cancelLabel: "EXIT. Also, try the volume buttons!", // iOS only, default 'Close'
@@ -258,7 +252,7 @@ exports.tap_scanQR = function(){
             barcodescanner.message = "SCANNED";
             
             httpModule.request({
-                url : global.url_general + "Badges/v1/checkQrCode",
+                url : global.url_general + "Badges/v2/checkReciprocQrCode",
                 method : "POST",
                 headers : {
                     "Content-Type": "application/json",
@@ -277,23 +271,15 @@ exports.tap_scanQR = function(){
                 else
                     message = result["status"];
 
-
                     // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
                     dialogs.alert({
                         title: "Result:",
                         message: message,
                         okButtonText: "OK"
                     });
-
-
             }, error => {
                 console.error(error);
             });
-
-
-            if (count === 3) {
-                barcodescanner.stop();
-            }
         },
     }).then(
         function (result) {
@@ -330,6 +316,7 @@ function getRemainingTime(actualData) {
 
     },1000)
 }
+
 function onNavigatedFrom(args) {
     timerModule.clearInterval(timer_id);
 }
