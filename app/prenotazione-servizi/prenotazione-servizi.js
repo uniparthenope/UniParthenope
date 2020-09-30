@@ -10,12 +10,12 @@ let viewModel;
 let sideDrawer;
 let index = 0;
 
-let courses = global.myExams;
+let departments = global.services;
 let prenotazioneServizi;
 let lezioniList;
 let loading;
 let no_less;
-let lezioni;
+let servizi;
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -23,48 +23,19 @@ function onNavigatingTo(args) {
     prenotazioneServizi = new ObservableArray();
 
     viewModel = observableModule.fromObject({
-        department: courses,
-        docentiLezioni: prenotazioneServizi
+        department: departments,
+        prenotazioneServizi: prenotazioneServizi
     });
+
+    console.log(global.services);
 
     no_less = page.getViewById("no_lession");
     loading = page.getViewById("activityIndicator");
 
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-
-    //getLectures();
-
+    showLession(0); //Show default lession
     page.bindingContext = viewModel;
-}
-
-function getLectures(){
-    let anno = appSettings.getString("aa_accad").split(" - ")[0];
-
-    let url = global.url_general + "GAUniparthenope/v1/getProfLectures/"+ anno;
-    loading.visibility = "visible";
-
-    httpModule.request({
-        url: url,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        lezioni = response.content.toJSON();
-        showLession(0);
-        loading.visibility = "collapsed";
-    },(e) => {
-        console.log("Error", e);
-        loading.visibility = "collapsed";
-
-        dialogs.alert({
-            title: "Errore: prenotazioni",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-    });
 }
 function showLession(index){
     loading.visibility = "visible";
@@ -72,7 +43,7 @@ function showLession(index){
     while(prenotazioneServizi.length > 0)
         prenotazioneServizi.pop();
 
-    let result = lezioni[index].courses;
+    let result = departments[index].services;
     if(result.length === 0)
         no_less.visibility = "visible";
     else
@@ -103,8 +74,8 @@ function showLession(index){
             "ava_c" : rem_cap,
         });
         prenotazioneServizi.sort(function (orderA, orderB) {
-            let nameA = orderA.start;
-            let nameB = orderB.start;
+            let nameA = orderA.nome;
+            let nameB = orderB.nome;
             return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
         });
     }
@@ -129,21 +100,8 @@ function onItemTap(args){
     const mainView = args.object;
     const index = args.index;
     //console.log(prenotazioneServizi.getItem(index).id);
-    const option = {
-        context: {data: prenotazioneServizi.getItem(index).nome, id: prenotazioneServizi.getItem(index).id },
-        closeCallback: () => {
-            // Receive data from the modal view. e.g. username & password
-            const nav =
-                {
-                    moduleName: "docenti/docenti-lezioni/docenti-lezioni",
-                    clearHistory: true
-                };
-            page.frame.navigate(nav);
-        },
-        fullscreen: false
-    };
 
-    mainView.showModal(modalViewModule, option);
+    //TODO GESTIRE IL POST!!
 }
 exports.onItemTap = onItemTap;
 

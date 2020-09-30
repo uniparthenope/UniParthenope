@@ -43,7 +43,7 @@
                 <StackLayout height="90%" class="border" borderWidth="2" margin="10 10 10 10" verticalAlignment="top">
                     <Label class="textPrimary" height="10%" text="Storico" textAlignment="center" backgroundColor="#22384f" width="100%" />
 
-                    <ScrollView height="100%">
+                    <StackLayout height="100%">
                         <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
                             <ListView.itemTemplate >
                                 <FlexboxLayout flexDirection="row">
@@ -58,7 +58,7 @@
                                 </FlexboxLayout>
                             </ListView.itemTemplate>
                         </ListView>
-                    </ScrollView>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
 

@@ -70,7 +70,7 @@
             </StackLayout>
         </GridLayout>
 
-        <ScrollView height="65%" verticalAlignment="bottom">
+        <StackLayout height="65%" verticalAlignment="bottom">
             <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5">
                 <ListView.itemTemplate >
                     <FlexboxLayout flexDirection="row">
@@ -90,7 +90,7 @@
                     </FlexboxLayout>
                 </ListView.itemTemplate>
             </ListView>
-        </ScrollView>
+        </StackLayout>
 
     </GridLayout>
 </Page>

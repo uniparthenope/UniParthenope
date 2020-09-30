@@ -51,7 +51,7 @@
 
                 <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
 
-                <ScrollView verticalAlignment="top" margin="5 5 5 5" height="95%">
+                <StackLayout verticalAlignment="top" margin="5 5 5 5" height="95%">
                     <ListView id="lezioni_listview" class="list-group" items="{{prenotazioneServizi}}" itemTap="onItemTap" marginRight="5" marginLeft="5">
                         <ListView.itemTemplate >
                             <GridLayout rows="*,*,*,*">
@@ -90,7 +90,7 @@
                             </GridLayout>
                         </ListView.itemTemplate>
                     </ListView>
-                </ScrollView>
+                </StackLayout>
 
             </GridLayout>
             </StackLayout>

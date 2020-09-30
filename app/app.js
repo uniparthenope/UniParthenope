@@ -35,6 +35,7 @@ global.myPrenotazioni = [];
 global.myLezioni = [];
 global.myAppelli = new ObservableArray();
 global.my_selfcert;
+global.services = [];
 
 /*
 appSettings.setString("aa_accad", result.aa_accad);
@@ -58,6 +59,7 @@ global.clearAll = function(){
     global.myDocenti = [];
     global.myPrenotazioni = [];
     global.myAppelli = new ObservableArray();
+    global.services = [];
 
     appSettings.clear();
 };

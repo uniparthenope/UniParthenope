@@ -92,7 +92,7 @@ function getAccess(){
 
                 if (grpDes === "Docenti" || grpDes === "Studenti" || grpDes === "Ricercatori" || grpDes === "PTA" || grpDes === ""){
                     page.getViewById("btn-servizi").visibility = "visible";
-
+                    getAllServices();
                 }
                 else
                     page.getViewById("btn-servizi").visibility = "collapsed";
@@ -422,3 +422,30 @@ exports.goto_prenot_serv = function () {
         };
     page.frame.navigate(nav);
 };
+
+function getAllServices(){
+
+    let url = global.url_general + "GAUniparthenope/v1/getTodayServices";
+    //loading.visibility = "visible";
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        global.services = response.content.toJSON();
+
+        //loading.visibility = "collapsed";
+    },(e) => {
+        console.log("Error", e);
+        //loading.visibility = "collapsed";
+
+        dialogs.alert({
+            title: "Errore: prenotazioni",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}

@@ -42,16 +42,16 @@
             <Label fontSize="12" margin="5 5 5 5" text="Selezionare un dipartimento dall'elenco:"/>
 
             <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" height="20%">
-                <ListPicker id="listpicker" items="{{ department }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
+                <ListPicker id="listpicker" items="{{ department }}" textField="area" valueField="area" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
             </StackLayout>
-            <Label margin="5 5 5 5" fontSize="12" text="Selezionare una lezione per mostrare gli iscritti"/>
+            <Label margin="5 5 5 5" fontSize="12" text="Selezionare un servizio a cui prenotarsi:"/>
 
             <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
             <GridLayout  borderRadius="20%" borderWidth="2">
 
                 <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
 
-                <ScrollView verticalAlignment="top" margin="5 5 5 5" height="95%">
+                <StackLayout verticalAlignment="top" margin="5 5 5 5" height="95%">
                     <ListView id="lezioni_listview" class="list-group" items="{{prenotazioneServizi}}" itemTap="onItemTap" marginRight="5" marginLeft="5">
                         <ListView.itemTemplate >
                             <GridLayout rows="*,*,*,*">
@@ -61,7 +61,7 @@
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Inizio: " marginRight="5"/>
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ start }}"/>
                                         </StackLayout>
-                                        <Label col="1" borderWidth="0" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                        <Label col="1" borderWidth="0" text="{{ room }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
 
                                         <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Fine: " marginRight="5"/>
@@ -71,7 +71,6 @@
 
                                     <StackLayout row="1" col="3" orientation="horizontal" horizontalAlignment="center">
                                         <Label class="{{ classe }}" color="white" marginRight="10" borderWidth="0" fontSize="12" text="{{ room_place }}"/>
-                                        <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="{{ room }}"/>
                                     </StackLayout>
                                 </GridLayout>
 
@@ -90,7 +89,7 @@
                             </GridLayout>
                         </ListView.itemTemplate>
                     </ListView>
-                </ScrollView>
+                </StackLayout>
 
             </GridLayout>
             </StackLayout>
