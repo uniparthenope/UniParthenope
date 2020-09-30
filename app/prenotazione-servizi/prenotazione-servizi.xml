@@ -53,10 +53,9 @@
             </StackLayout>
             <Label margin="5 5 5 5" fontSize="12" text="Selezionare un servizio a cui prenotarsi:"/>
 
-            <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
             <GridLayout  borderRadius="20%" borderWidth="2">
 
-                <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
+                <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessun Servizio Trovato!"/>
 
                 <StackLayout verticalAlignment="top" margin="5 5 5 5" height="95%">
                     <ListView id="lezioni_listview" class="list-group" items="{{prenotazioneServizi}}" itemTap="onItemTap" marginRight="5" marginLeft="5">
@@ -106,8 +105,8 @@
             </StackLayout>
         </StackLayout>
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Ricerca Lezioni..." horizontalAlignment="center" class="textPrimary"/>
-            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+            <Label text="Ricerca Servizi..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>
         </StackLayout>
 
     </GridLayout>
