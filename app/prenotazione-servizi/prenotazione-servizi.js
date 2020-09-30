@@ -10,16 +10,14 @@ let viewModel;
 let sideDrawer;
 let index = 0;
 
-let departments = [{area: "TEST"}];
+let departments;
 let prenotazioneServizi;
-let lezioniList;
+let servicesList;
 let loading;
 let no_less;
-let servizi;
 
  function onNavigatingTo(args) {
     page = args.object;
-
 
     no_less = page.getViewById("no_lession");
     loading = page.getViewById("activityIndicator");
@@ -29,14 +27,13 @@ let servizi;
     sideDrawer.closeDrawer();
 
     prenotazioneServizi = new ObservableArray();
+    departments = new ObservableArray();
 
-     viewModel = observableModule.fromObject({
+    viewModel = observableModule.fromObject({
         prenotazioneServizi: prenotazioneServizi,
         departments: departments
-
     });
-     console.log(global.services);
-     departments = global.services;
+
      getAllServices();
     page.bindingContext = viewModel;
 }
@@ -46,7 +43,7 @@ function showLession(index){
     while(prenotazioneServizi.length > 0)
         prenotazioneServizi.pop();
 
-    let result = departments[index].services;
+    let result = servicesList[index].services;
     if(result.length === 0)
         no_less.visibility = "visible";
     else
@@ -91,6 +88,11 @@ function showLession(index){
             let nameB = orderB.nome;
             return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
         });
+        prenotazioneServizi.sort(function (orderA, orderB) {
+            let nameA = orderA.isReserved;
+            let nameB = orderB.isReserved;
+            return (nameA < nameB) ? 1 : (nameA > nameB) ? -1 : 0;
+        });
     }
     loading.visibility = "collapsed";
 }
@@ -108,6 +110,11 @@ function onGeneralMenu(){
         };
     page.frame.navigate(nav);
 }
+function onItemTap_department(args) {
+    const index = args.index;
+    showLession(index);
+}
+exports.onItemTap_department = onItemTap_department;
 
 function onItemTap(args) {
     const index = args.index;
@@ -262,19 +269,12 @@ function convertData(data){
 
     return d;
 }
-function onListPickerLoaded(fargs) {
-    const listPickerComponent = fargs.object;
-    listPickerComponent.on("selectedIndexChange", (args) => {
-
-        const picker = args.object;
-        index = picker.selectedIndex;
-        showLession(index);
-    });
-}
-exports.onListPickerLoaded = onListPickerLoaded;
 
 function getAllServices(){
     loading.visibility = "visible";
+    while(departments.length > 0)
+        departments.pop();
+
     let url = global.url_general + "GAUniparthenope/v1/getTodayServices";
     //loading.visibility = "visible";
     httpModule.request({
@@ -285,9 +285,13 @@ function getAllServices(){
             "Authorization" : "Basic "+ global.encodedStr
         }
     }).then((response) => {
-        departments = response.content.toJSON();
-        let t = page.getViewById("listpicker");
-        //t.item(departments);
+        let dep = response.content.toJSON();
+        for(let x = 0; x<dep.length; x++){
+            departments.push({
+                area :dep[x].area
+            });
+            servicesList = dep;
+        }
         showLession(0); //Show default lession
         loading.visibility = "collapsed";
     },(e) => {

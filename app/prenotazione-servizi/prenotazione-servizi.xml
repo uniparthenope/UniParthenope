@@ -42,7 +42,14 @@
             <Label fontSize="12" margin="5 5 5 5" text="Selezionare un dipartimento dall'elenco:"/>
 
             <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" height="20%">
-                <ListPicker id="listpicker" items="{{ departments }}" textField="area" valueField="area" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
+                <ListView id="department-listview" class="list-group" items="{{departments}}" itemTap="onItemTap_department" marginRight="5" marginLeft="5">
+                <ListView.itemTemplate>
+                    <GridLayout>
+                        <Label color="#22384f" text="{{area}}" textAlignment="center"/>
+                    </GridLayout>
+                </ListView.itemTemplate>
+                </ListView>
+
             </StackLayout>
             <Label margin="5 5 5 5" fontSize="12" text="Selezionare un servizio a cui prenotarsi:"/>
 
