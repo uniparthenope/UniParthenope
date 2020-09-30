@@ -27,8 +27,6 @@ function onNavigatingTo(args) {
         prenotazioneServizi: prenotazioneServizi
     });
 
-    console.log(global.services);
-
     no_less = page.getViewById("no_lession");
     loading = page.getViewById("activityIndicator");
 
