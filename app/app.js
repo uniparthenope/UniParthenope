@@ -226,17 +226,16 @@ global.getAllBadge = function(page) {
 };
 
 application.on(application.exitEvent, (args) => {
-    if (!appSettings.getBoolean("rememberMe")){
-        let temp_scelta = appSettings.getBoolean("sondaggio");
+    console.log(appSettings.getBoolean("rememberMe", false));
+    if (!appSettings.getBoolean("rememberMe", false)){
+        let temp_scelta = appSettings.getBoolean("sondaggio", false);
 
         clearAll();
 
         appSettings.setBoolean("sondaggio", temp_scelta);
     }
 
-
     if (args.android) {
-
         if(global.encodedStr !== " "){
             let url = global.url + "logout/" + global.encodedStr + "/" + global.authToken;
             httpModule.request({
