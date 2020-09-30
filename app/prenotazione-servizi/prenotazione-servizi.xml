@@ -42,7 +42,7 @@
             <Label fontSize="12" margin="5 5 5 5" text="Selezionare un dipartimento dall'elenco:"/>
 
             <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" height="20%">
-                <ListPicker id="listpicker" items="{{ department }}" textField="area" valueField="area" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
+                <ListPicker id="listpicker" items="{{ departments }}" textField="area" valueField="area" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
             </StackLayout>
             <Label margin="5 5 5 5" fontSize="12" text="Selezionare un servizio a cui prenotarsi:"/>
 
@@ -77,6 +77,10 @@
 
                                 <StackLayout row="1" orientation="vertical"  width="100%" >
                                     <StackLayout orientation="vertical"  width="100%" >
+                                    </StackLayout>
+
+                                    <StackLayout row="1" horizontalAlignment="center" verticalAlignment="center" visibility="{{ res }}">
+                                        <Label text="PRENOTATO" color="white" width="100%" backgroundColor="rgba(0,200,0,0.8)" verticalAlignment="center" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
                                     </StackLayout>
 
                                     <GridLayout columns="*,auto,auto" horizontalAlignment="center" width="100%" margin="5 5 5 5">

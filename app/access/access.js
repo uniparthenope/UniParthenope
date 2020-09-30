@@ -23,6 +23,7 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     loading = page.getViewById("activityIndicator");
+    global.services = [];
 
     getSelfCert();
     let grpDes = appSettings.getString("grpDes","");
@@ -435,6 +436,7 @@ function getAllServices(){
             "Authorization" : "Basic "+ global.encodedStr
         }
     }).then((response) => {
+        global.services = [];
         global.services = response.content.toJSON();
 
         //loading.visibility = "collapsed";

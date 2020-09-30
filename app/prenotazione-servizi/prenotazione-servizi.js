@@ -10,29 +10,34 @@ let viewModel;
 let sideDrawer;
 let index = 0;
 
-let departments = global.services;
+let departments = [{area: "TEST"}];
 let prenotazioneServizi;
 let lezioniList;
 let loading;
 let no_less;
 let servizi;
 
-function onNavigatingTo(args) {
+ function onNavigatingTo(args) {
     page = args.object;
 
-    prenotazioneServizi = new ObservableArray();
-
-    viewModel = observableModule.fromObject({
-        department: departments,
-        prenotazioneServizi: prenotazioneServizi
-    });
 
     no_less = page.getViewById("no_lession");
     loading = page.getViewById("activityIndicator");
 
+
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-    showLession(0); //Show default lession
+
+    prenotazioneServizi = new ObservableArray();
+
+     viewModel = observableModule.fromObject({
+        prenotazioneServizi: prenotazioneServizi,
+        departments: departments
+
+    });
+     console.log(global.services);
+     departments = global.services;
+     getAllServices();
     page.bindingContext = viewModel;
 }
 function showLession(index){
@@ -58,6 +63,12 @@ function showLession(index){
         let max_cap = Math.floor(result[i].room.capacity);
         let rem_cap = max_cap - Math.floor(result[i].room.availability);
 
+        let res;
+        if (result[i].reservation.reserved)
+            res = "visible";
+        else
+            res = "collapsed";
+
         prenotazioneServizi.push({
             "id": result[i].id,
             "classe": "examPass",
@@ -70,6 +81,10 @@ function showLession(index){
             "availability":rem_cap + "/",
             "max_c" : max_cap,
             "ava_c" : rem_cap,
+            "res" : res,
+            "isReserved": result[i].reservation.reserved,
+            "reserved_by": result[i].reservation.reserved_by,
+            "reserved_id": result[i].reservation.reserved_id
         });
         prenotazioneServizi.sort(function (orderA, orderB) {
             let nameA = orderA.nome;
@@ -94,12 +109,121 @@ function onGeneralMenu(){
     page.frame.navigate(nav);
 }
 
-function onItemTap(args){
-    const mainView = args.object;
+function onItemTap(args) {
     const index = args.index;
-    //console.log(prenotazioneServizi.getItem(index).id);
 
-    //TODO GESTIRE IL POST!!
+    let lez = prenotazioneServizi.getItem(index);
+
+    if(lez.isReserved){
+        dialogs.confirm({
+            title: "Cancellazione posto",
+            message: "Sicuro di voler cancellare la prenotazione ad un posto?",
+            okButtonText: "Sì",
+            cancelButtonText: "No",
+        }).then(function (result) {
+            if (result){
+                httpModule.request({
+                    url: global.url_general + "GAUniparthenope/v1/Reservations/" + lez.reserved_id,
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type" : "application/json",
+                        "Authorization" : "Basic " + global.encodedStr
+                    }
+                }).then((response) => {
+                    const result = response.content.toJSON();
+
+                    if (response.statusCode === 200){
+                        global.updatedExam = false;
+                        dialogs.alert({
+                            title: "Successo",
+                            message: result["status"],
+                            okButtonText: "OK"
+                        }).then(function (){
+                            const nav =
+                                {
+                                    moduleName: "prenotazione-servizi/prenotazione-servizi",
+                                    clearHistory: true
+                                };
+                            page.frame.navigate(nav);
+                        });
+                    }
+                    else{
+                        dialogs.alert({
+                            title: "Errore: Cancellazione Prenotazioni",
+                            message: result['message'],
+                            okButtonText: "OK"
+                        });
+                    }
+
+                },(e) => {
+                    console.log("QUI");
+                    console.log("Error", e);
+                    dialogs.alert({
+                        title: "Errore: Cancellazione prenotazioni",
+                        message: e.toString(),
+                        okButtonText: "OK"
+                    });
+                });
+            }
+        });
+    }
+    else{
+        dialogs.confirm({
+            title: "Prenotazione posto",
+            message: "Sicuro di voler prenotare un posto?",
+            okButtonText: "Sì",
+            cancelButtonText: "No",
+        }).then(function (result) {
+            console.log(result);
+            if (result){
+                httpModule.request({
+                    url : global.url_general + "GAUniparthenope/v1/ServicesReservation",
+                    method: "POST",
+                    headers: {
+                        "Content-Type" : "application/json",
+                        "Authorization" : "Basic " + global.encodedStr
+                    },
+                    content : JSON.stringify({
+                        id_entry: lez.id.toString(),
+                        matricola: appSettings.getString("matricola", ""),
+                    })
+                }).then((response) => {
+                    const result = response.content.toJSON();
+
+                    if (response.statusCode === 200){
+                        dialogs.alert({
+                            title: "Successo",
+                            message: result["status"],
+                            okButtonText: "OK"
+                        }).then(function (){
+                            const nav =
+                                {
+                                    moduleName: "prenotazione-servizi/prenotazione-servizi",
+                                    clearHistory: true
+                                };
+                            page.frame.navigate(nav);
+                        });
+                    }
+                    else{
+                        dialogs.alert({
+                            title: "Errore: Prenotazioni",
+                            message: result["errMsg"],
+                            okButtonText: "OK"
+                        });
+                    }
+
+                },(e) => {
+                    console.log("Error", e);
+                    dialogs.alert({
+                        title: "Errore: prenotazioni",
+                        message: e.toString(),
+                        okButtonText: "OK"
+                    });
+                });
+            }
+        });
+    }
+
 }
 exports.onItemTap = onItemTap;
 
@@ -148,3 +272,32 @@ function onListPickerLoaded(fargs) {
     });
 }
 exports.onListPickerLoaded = onListPickerLoaded;
+
+function getAllServices(){
+    loading.visibility = "visible";
+    let url = global.url_general + "GAUniparthenope/v1/getTodayServices";
+    //loading.visibility = "visible";
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        departments = response.content.toJSON();
+        let t = page.getViewById("listpicker");
+        //t.item(departments);
+        showLession(0); //Show default lession
+        loading.visibility = "collapsed";
+    },(e) => {
+        console.log("Error", e);
+        loading.visibility = "collapsed";
+
+        dialogs.alert({
+            title: "Errore: prenotazioni",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
