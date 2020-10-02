@@ -33,7 +33,6 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     indicator = page.getViewById("activityIndicator");
 
-
     rateApp();
 
     remember = appSettings.getBoolean("rememberMe");
