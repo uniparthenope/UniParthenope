@@ -365,11 +365,13 @@ function onSwitchLoaded_autocert(args) {
             };
             page.showModal(modalViewModule, options);
 
-
         }
         else{
             if(my_status !== "presence"){
                 if(global.my_selfcert){
+                    global.my_selfcert = false;
+                    console.log("FALSO");
+                    appSettings.setBoolean("selfcert",false);
                     saveInfo();
                 }
                 global.my_selfcert = false;
