@@ -70,6 +70,8 @@ global.saveInfo =async function(result) {
     await appSettings.setString("nome",result.user.firstName);
     await appSettings.setString("cognome",result.user.lastName);
     await appSettings.setString("grpDes",result.user.grpDes);
+    await appSettings.setNumber("grpId",result.user.grpId);
+
     //appSettings.setNumber("persId", result.user.persId);
     await appSettings.setString("userId", result.user.userId);
 
@@ -94,6 +96,8 @@ global.saveInfo =async function(result) {
     console.log("SAVE_INFO Name= "+result.user.firstName);
     console.log("SAVE_INFO Surname= "+result.user.lastName);
     console.log("SAVE_INFO grpDes= "+result.user.grpDes);
+    console.log("SAVE_INFO grpId= "+result.user.grpId);
+
     //console.log("SAVE_INFO persId= "+result.user.persId);
     console.log("SAVE_INFO userId= " + result.user.userId);
     console.log("SAVE_INFO AuthToken= " + global.authToken);
@@ -228,8 +232,16 @@ global.getAllBadge = function(page) {
 
 application.on(application.exitEvent, (args) => {
     console.log(appSettings.getBoolean("rememberMe", false));
+
     if (!appSettings.getBoolean("rememberMe", false)){
         let temp_scelta = appSettings.getBoolean("sondaggio", false);
+
+        let grp = "GRP_" + appSettings.getNumber("grpId",0);
+        let cds = "CDS_" + appSettings.getNumber("cdsId",0);
+        if(appSettings.getNumber("grpId",0) !== 0){
+            firebase.unsubscribeFromTopic(grp).then(() => console.log("Unsubscribed from ",grp));
+            firebase.unsubscribeFromTopic(cds).then(() => console.log("Unsubscribed from ",cds));
+        }
 
         clearAll();
 
@@ -330,7 +342,8 @@ firebase.init({
 }).then(
     function () {
         console.log("firebase.init done");
-        firebase.subscribeToTopic("all").then(() => console.log("Subscribed to topic"));
+        firebase.subscribeToTopic("ALL").then(() => console.log("Subscribed ALL"));
+
     },
     function (error) {
         console.log("firebase.init error: " + error);

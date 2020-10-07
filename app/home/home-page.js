@@ -9,6 +9,7 @@ let appversion = require("nativescript-appversion");
 const modalViewModule = "modal-meteo/modal-meteo";
 const platform = require("tns-core-modules/platform");
 const appRater = require("nativescript-rater").appRater;
+let firebase = require("nativescript-plugin-firebase");
 
 let page;
 let viewModel;
@@ -107,7 +108,7 @@ function autoconnect() {
         }).then((response) => {
             let _result = response.content.toJSON();
 
-            if(response.statusCode === 401)
+            if(response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403)
             {
                 dialogs.alert({
                     title: "Autenticazione Fallita!",
@@ -117,158 +118,162 @@ function autoconnect() {
                     args.object.closeModal()
                 );
             }
-            /* Se un utente è di tipo USER TECNICO (ristorante) 202 */
-            else if (_result.user.grpDes === "Ristorante")
-            {
-                let remember = sideDrawer.getViewById("rememberMe").checked;
-                console.log(_result);
+            else if (response.statusCode === 200){
 
-                appSettings.setString("nome", _result.user.nome);
-                appSettings.setString("cognome", _result.user.cognome);
-                appSettings.setString("userId", _result.userId);
-                appSettings.setString("emailAte",_result.user.email);
-                appSettings.setString("ristorante",_result.user.nomeBar);
-                appSettings.setString("matricola",_result.user.nomeBar);
-                appSettings.setString("sesso",_result.user.sesso);
-                appSettings.setString("telRes",_result.user.telefono);
-                appSettings.setString("facDes","--");
-                appSettings.setString("dataNascita","--");
-                /*
-                if (remember){
-                    appSettings.setString("username",user);
-                    appSettings.setString("password",pass);
-                    appSettings.setBoolean("rememberMe",true);
-                }*/
-                global.isConnected = true;
-                sideDrawer.getViewById("topName").text = _result.user.nome + " "+_result.user.cognome;
-                setSideMenu("userRistoratore",_result.user.nome + " "+_result.user.cognome);
-                sideDrawer.getViewById("topMatr").text = _result.user.nomeBar;
-                sideDrawer.getViewById("topEmail").text = _result.user.email;
-                sideDrawer.getViewById("topMatr").visibility = "visible";
-                sideDrawer.getViewById("topEmail").visibility = "visible";
-/*
-                const nav =
-                    {
-                        moduleName: "ristoratore/ristoratore-home",
-                        clearHistory: true
-                    };
-                page.frame.navigate(nav);
+                /* Se un utente è di tipo USER TECNICO (ristorante) 202 */
+                if (_result.user.grpDes === "Ristorante")
+                {
+                    let remember = sideDrawer.getViewById("rememberMe").checked;
+                    console.log(_result);
 
- */
-            }
-            /* Se un utente è di tipo USER TECNICO */
-            else if (_result.user.grpDes === "PTA")
-            {
-                console.log("PTA");
-                appSettings.setString("grpDes",_result.user.grpDes);
-                appSettings.setString("matricola","--");
+                    appSettings.setString("nome", _result.user.nome);
+                    appSettings.setString("cognome", _result.user.cognome);
+                    appSettings.setString("userId", _result.userId);
+                    appSettings.setString("emailAte",_result.user.email);
+                    appSettings.setString("ristorante",_result.user.nomeBar);
+                    appSettings.setString("matricola",_result.user.nomeBar);
+                    appSettings.setString("sesso",_result.user.sesso);
+                    appSettings.setString("telRes",_result.user.telefono);
+                    appSettings.setString("facDes","--");
+                    appSettings.setString("dataNascita","--");
+                    /*
+                    if (remember){
+                        appSettings.setString("username",user);
+                        appSettings.setString("password",pass);
+                        appSettings.setBoolean("rememberMe",true);
+                    }*/
+                    global.isConnected = true;
+                    sideDrawer.getViewById("topName").text = _result.user.nome + " "+_result.user.cognome;
+                    setSideMenu("userRistoratore",_result.user.nome + " "+_result.user.cognome);
+                    sideDrawer.getViewById("topMatr").text = _result.user.nomeBar;
+                    sideDrawer.getViewById("topEmail").text = _result.user.email;
+                    sideDrawer.getViewById("topMatr").visibility = "visible";
+                    sideDrawer.getViewById("topEmail").visibility = "visible";
 
-                let user = appSettings.getString("username",".");
-                let nc = user.split(".");
-                global.isConnected = true;
+                    /*
+                                    const nav =
+                                        {
+                                            moduleName: "ristoratore/ristoratore-home",
+                                            clearHistory: true
+                                        };
+                                    page.frame.navigate(nav);
 
-                appSettings.setString("nome", nc[0].toUpperCase());
-                appSettings.setString("cognome", nc[1].toUpperCase());
-                let username  = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
+                     */
+                }
+                /* Se un utente è di tipo USER TECNICO */
+                else if (_result.user.grpDes === "PTA")
+                {
+                    console.log("PTA");
+                    appSettings.setString("grpDes",_result.user.grpDes);
+                    appSettings.setString("matricola","--");
 
-                //sideDrawer.getViewById("topName").text = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
-                //let userForm = sideDrawer.getViewById("userOther");
-                //let loginForm = sideDrawer.getViewById("loginForm");
-                //loginForm.visibility = "collapsed";
-                //userForm.visibility = "visible";
+                    let user = appSettings.getString("username",".");
+                    let nc = user.split(".");
+                    global.isConnected = true;
 
-                indicator.visibility = "collapsed";
-                setSideMenu("userOther",username);
-/*
-                const nav =
-                    {
-                        moduleName: "home/home-page",
-                        clearHistory: true
-                    };
-                page.frame.navigate(nav);
+                    appSettings.setString("nome", nc[0].toUpperCase());
+                    appSettings.setString("cognome", nc[1].toUpperCase());
+                    let username  = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
 
- */
+                    //sideDrawer.getViewById("topName").text = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
+                    //let userForm = sideDrawer.getViewById("userOther");
+                    //let loginForm = sideDrawer.getViewById("loginForm");
+                    //loginForm.visibility = "collapsed";
+                    //userForm.visibility = "visible";
 
-            }
-            else if(_result.user.grpDes === "Docenti")
-            {
-                appSettings.setNumber("idAb",_result.user.idAb);
-                console.log(_result.user.idAb,"Id");
-                let nome = appSettings.getString("nome");
-                let cognome = appSettings.getString("cognome");
-                let username = nome + " " + cognome;
-                console.log(username);
+                    indicator.visibility = "collapsed";
+                    setSideMenu("userOther",username);
+                    /*
+                                    const nav =
+                                        {
+                                            moduleName: "home/home-page",
+                                            clearHistory: true
+                                        };
+                                    page.frame.navigate(nav);
 
-                setSideMenu("userDocente",username);
+                     */
 
-                console.log("DETAILED PROF");
-                detailedProf(_result.user.docenteId); // Get detailed info of a professor
-                console.log("SAVEINFO");
-                global.saveInfo(_result);
-                setAnagrafe(_result.user.docenteId,_result.user.grpDes);
+                }
+                else if(_result.user.grpDes === "Docenti")
+                {
+                    appSettings.setNumber("idAb",_result.user.idAb);
+                    console.log(_result.user.idAb,"Id");
+                    let nome = appSettings.getString("nome");
+                    let cognome = appSettings.getString("cognome");
+                    let username = nome + " " + cognome;
+                    console.log(username);
 
-                global.isConnected = true;
-                //indicator.visibility = "collapsed";
+                    setSideMenu("userDocente",username);
 
+                    console.log("DETAILED PROF");
+                    detailedProf(_result.user.docenteId); // Get detailed info of a professor
+                    console.log("SAVEINFO");
+                    global.saveInfo(_result);
+                    setAnagrafe(_result.user.docenteId,_result.user.grpDes);
 
-            }
-            else if (_result.user.grpDes === "Studenti")
-            {
-                let carriere = _result.user.trattiCarriera;
-                global.saveInfo(_result);
-                setAnagrafe(_result.user.persId,_result.user.grpDes);
-                let index = appSettings.getNumber("carriera",0);
-                console.log(_result.user.persId);
-                global.saveCarr(carriere[index]);
-                appSettings.setNumber("persId", _result.user.persId);
-
-                getDepartment(carriere[index].stuId);
-                global.isConnected = true;
-                let nome = appSettings.getString("nome");
-                let cognome = appSettings.getString("cognome");
-                let username = nome + " " + cognome;
-                setSideMenu("userForm",username);
-            }
-            else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti" || _result.user.grpDes=== "Iscritti"){
-                console.log("REGISTRATI/DOTT/ecc");
-                global.saveInfo(_result);
-                appSettings.setString("matricola","--");
+                    global.isConnected = true;
+                    //indicator.visibility = "collapsed";
 
 
-                let nome = _result.user.firstName;
-                let cognome = _result.user.lastName;
-                let username = nome + " " + cognome;
+                }
+                else if (_result.user.grpDes === "Studenti")
+                {
+                    let carriere = _result.user.trattiCarriera;
+                    global.saveInfo(_result);
+                    setAnagrafe(_result.user.persId,_result.user.grpDes);
+                    let index = appSettings.getNumber("carriera",0);
+                    console.log(_result.user.persId);
+                    global.saveCarr(carriere[index]);
+                    appSettings.setNumber("persId", _result.user.persId);
 
-                setSideMenu("userOther",username);
-                indicator.visibility = "collapsed";
-                global.isConnected = true;
+                    getDepartment(carriere[index].stuId);
+                    global.isConnected = true;
+                    let nome = appSettings.getString("nome");
+                    let cognome = appSettings.getString("cognome");
+                    let username = nome + " " + cognome;
+                    setSideMenu("userForm",username);
+                }
+                else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti" || _result.user.grpDes=== "Iscritti"){
+                    console.log("REGISTRATI/DOTT/ecc");
+                    global.saveInfo(_result);
+                    appSettings.setString("matricola","--");
 
-            }
 
-            else{
-                global.isConnected = true;
-                let nome = appSettings.getString("nome","");
-                let cognome = appSettings.getString("cognome","");
-                let username = nome + " " + cognome;
+                    let nome = _result.user.firstName;
+                    let cognome = _result.user.lastName;
+                    let username = nome + " " + cognome;
 
-                appSettings.setString("grpDes",_result.user.grpDes);
-                appSettings.setString("matricola","--");
+                    setSideMenu("userOther",username);
+                    indicator.visibility = "collapsed";
+                    global.isConnected = true;
 
-                if  (_result.user.persId !== undefined)
-                    appSettings.setNumber("persId",_result.user.persId);
+                }
 
-                setSideMenu("userOther",username);
-                indicator.visibility = "collapsed";
-                /*
-                const nav =
-                    {
-                        moduleName: "home/home-page",
-                        clearHistory: true
-                    };
-                page.frame.navigate(nav);
+                else{
+                    global.isConnected = true;
+                    let nome = appSettings.getString("nome","");
+                    let cognome = appSettings.getString("cognome","");
+                    let username = nome + " " + cognome;
 
-                 */
-                console.log("ALTRO USER");
+                    appSettings.setString("grpDes",_result.user.grpDes);
+                    appSettings.setString("matricola","--");
+
+                    if  (_result.user.persId !== undefined)
+                        appSettings.setNumber("persId",_result.user.persId);
+
+                    setSideMenu("userOther",username);
+                    indicator.visibility = "collapsed";
+                    /*
+                    const nav =
+                        {
+                            moduleName: "home/home-page",
+                            clearHistory: true
+                        };
+                    page.frame.navigate(nav);
+
+                     */
+                    console.log("ALTRO USER");
+                }
             }
 
         },(e) => {

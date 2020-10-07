@@ -4,6 +4,8 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const utilsModule = require("tns-core-modules/utils/utils");
 const frame = require("tns-core-modules/ui/frame");
+let firebase = require("nativescript-plugin-firebase");
+
 
 
 
@@ -24,10 +26,19 @@ function onNavigatingTo(args) {
         page.getViewById("appello_futuro").visibility = "visible";
     }
 
-    if (remember)
+    if (remember){
+        if(appSettings.getNumber("grpId",0) === 6)
+            page.getViewById("visibility_topic_cdsId").visibility = "visible";
+
+        page.getViewById("visibility_topic_grpId").visibility = "visible";
         page.getViewById("deleteBtn").visibility = "visible";
-    else
+    }
+    else{
+        page.getViewById("visibility_topic_grpId").visibility = "collapsed";
+        page.getViewById("visibility_topic_cdsId").visibility = "collapsed";
         page.getViewById("deleteBtn").visibility = "collapsed";
+
+    }
 
     page.bindingContext = viewModel;
 }
@@ -66,6 +77,14 @@ function onTapDelete(){
             page.getViewById("deleteBtn").visibility = "collapsed";
             sideDrawer.getViewById("topMatr").visibility = "collapsed";
             sideDrawer.getViewById("topEmail").visibility = "collapsed";
+
+            let grp = "GRP_" + appSettings.getNumber("grpId",0);
+            if(appSettings.getNumber("grpId",0) !== 0)
+                firebase.unsubscribeFromTopic(grp).then(() => console.log("Unsubscribed from ",grp));
+
+            let cds = "CDS_" + appSettings.getNumber("cdsId",0);
+            if(appSettings.getNumber("grpId",0) === 6)
+                firebase.unsubscribeFromTopic(cds).then(() => console.log("Unsubscribed from ",cds));
 
             const nav =
                 {
@@ -106,6 +125,44 @@ function onSwitchLoaded_sondaggio(args) {
     });
 }
 exports.onSwitchLoaded_sondaggio = onSwitchLoaded_sondaggio;
+
+function onSwitchLoaded_topic_grpId(args) {
+    page.getViewById("switch_topic_grpId").checked = appSettings.getBoolean("topic_grpId",false);
+    const mySwitch = args.object;
+
+    mySwitch.on("checkedChange", (args) => {
+        const sw = args.object;
+        const isChecked = sw.checked;
+        appSettings.setBoolean("topic_grpId",isChecked);
+
+        let grp = "GRP_" + appSettings.getNumber("grpId",0);
+        if (isChecked)
+            firebase.subscribeToTopic(grp).then(() => console.log("Subscribed to ",grp));
+        else
+            firebase.unsubscribeFromTopic(grp).then(() => console.log("Unsubscribed from ",grp));
+
+    });
+}
+exports.onSwitchLoaded_topic_grpId = onSwitchLoaded_topic_grpId;
+
+function onSwitchLoaded_topic_cdsId(args) {
+    page.getViewById("switch_topic_cdsId").checked = appSettings.getBoolean("topic_cdsId",false);
+    const mySwitch = args.object;
+
+    mySwitch.on("checkedChange", (args) => {
+        const sw = args.object;
+        const isChecked = sw.checked;
+        appSettings.setBoolean("topic_cdsId",isChecked);
+
+        let cds = "CDS_" + appSettings.getNumber("cdsId",0);
+        if (isChecked)
+            firebase.subscribeToTopic(cds).then(() => console.log("Subscribed to ",cds));
+        else
+            firebase.unsubscribeFromTopic(cds).then(() => console.log("Unsubscribed from ",cds));
+
+    });
+}
+exports.onSwitchLoaded_topic_cdsId = onSwitchLoaded_topic_cdsId;
 
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;

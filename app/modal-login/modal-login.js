@@ -9,6 +9,8 @@ const Observable = require("tns-core-modules/data/observable");
 const appSettings = require("tns-core-modules/application-settings");
 let base64= require('base-64');
 let utf8 = require('utf8');
+let firebase = require("nativescript-plugin-firebase");
+
 
 /*
             7	Docenti
@@ -77,6 +79,14 @@ function selectedCarrer(index) {
         appSettings.setString("username",user);
         appSettings.setString("token",global.encodedStr);
         appSettings.setBoolean("rememberMe",true);
+
+        let grpId = "GRP_" + account.user.grpId;
+        firebase.subscribeToTopic(grpId).then(() => console.log("Subscribed to",grpId));
+        appSettings.setBoolean("topic_grpId",true);
+
+        let cdsId = "CDS_" + items.getItem(index).cdsId;
+        firebase.subscribeToTopic(cdsId).then(() => console.log("Subscribed to",cdsId));
+        appSettings.setBoolean("topic_cdsId",true);
     }
     global.isConnected = true;
     let nome = appSettings.getString("nome");
@@ -92,6 +102,7 @@ function selectedCarrer(index) {
     getPIC(appSettings.getNumber("persId"),0);
     loginForm.visibility = "collapsed";
     userForm.visibility = "visible";
+
     closeCallback();
     const nav =
         {
@@ -207,6 +218,7 @@ exports.onShownModally = function (args) {
         }
     }).then((response) => {
         let _result = response.content.toJSON();
+        let grpId = "GRP_"+_result.user.grpId.toString();
 
         console.log(response.statusCode);
 
@@ -274,6 +286,9 @@ exports.onShownModally = function (args) {
                     appSettings.setString("username",_result.user.userId);
                     appSettings.setString("token",global.encodedStr);
                     appSettings.setBoolean("rememberMe",true);
+
+                    firebase.subscribeToTopic(grpId).then(() => console.log("Subscribed to",grpId));
+                    appSettings.setBoolean("topic_grpId",true);
                 }
                 console.log("Docente:" + _result.user.userId);
                 appSettings.setNumber("idAb",_result.user.idAb);
@@ -313,6 +328,9 @@ exports.onShownModally = function (args) {
                     appSettings.setString("username",user);
                     appSettings.setString("token",global.encodedStr);
                     appSettings.setBoolean("rememberMe",true);
+
+                    firebase.subscribeToTopic(grpId).then(() => console.log("Subscribed to",grpId));
+                    appSettings.setBoolean("topic_grpId",true);
                 }
 
                 appSettings.setString("nome", _result.user.nome);
@@ -365,6 +383,9 @@ exports.onShownModally = function (args) {
                     appSettings.setString("username",user);
                     appSettings.setString("token",global.encodedStr);
                     appSettings.setBoolean("rememberMe",true);
+
+                    firebase.subscribeToTopic(grpId).then(() => console.log("Subscribed to",grpId));
+                    appSettings.setBoolean("topic_grpId",true);
                 }
 
                 let nome = account.user.firstName;
@@ -411,6 +432,9 @@ exports.onShownModally = function (args) {
                     appSettings.setString("username",user);
                     appSettings.setString("token",global.encodedStr);
                     appSettings.setBoolean("rememberMe",true);
+
+                    firebase.subscribeToTopic(grpId).then(() => console.log("Subscribed to",grpId));
+                    appSettings.setBoolean("topic_grpId",true);
                 }
                 global.isConnected = true;
 
