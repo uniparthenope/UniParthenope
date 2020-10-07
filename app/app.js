@@ -5,7 +5,8 @@ const ObservableArray = require("tns-core-modules/data/observable-array").Observ
 const appRater = require("nativescript-rater").appRater;
 const app = require("tns-core-modules/application");
 const StoreUpdate = require("nativescript-store-update");
-
+let firebase = require("nativescript-plugin-firebase");
+let dialog = require("tns-core-modules/ui/dialogs");
 
 //let domain = "http://api.uniparthenope.it:5000";
 let domain = "https://api.uniparthenope.it";
@@ -303,5 +304,37 @@ StoreUpdate.StoreUpdate.init({
     countryCode: "it",
     alertOptions: options
 })
+
+//FIREBASE PLUGIN
+firebase.init({
+    showNotifications: true,
+    showNotificationsWhenInForeground: true,
+    onMessageReceivedCallback: function(message) {
+        console.log("Title: " + message.title);
+        console.log("Body: " + message.body);
+        console.log("Value of 'foo': " + message.data);
+        console.log("Foreground: " + message.foreground);
+
+        if (message.foreground){
+            dialog.confirm({
+                title: message.title,
+                message: message.body,
+                okButtonText: "OK",
+                neutralButtonText: "Annulla"
+            });
+        }
+    },
+    onPushTokenReceivedCallback: function(token) {
+        console.log("Firebase push token: " + token);
+    }
+}).then(
+    function () {
+        console.log("firebase.init done");
+        firebase.subscribeToTopic("all").then(() => console.log("Subscribed to topic"));
+    },
+    function (error) {
+        console.log("firebase.init error: " + error);
+    }
+);
 
 application.run({ moduleName: "app-root" });
