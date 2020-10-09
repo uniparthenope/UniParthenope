@@ -66,6 +66,16 @@ function onTapDelete(){
         cancelButtonText: "No"
     }).then(function (result) {
         if (result){
+            let grp = "GRP_" + appSettings.getNumber("grpId",0);
+            console.log(grp);
+            if(appSettings.getNumber("grpId",0) !== 0)
+                firebase.unsubscribeFromTopic(grp).then(() => console.log("Unsubscribed from ",grp));
+
+            let cds = "CDS_" + appSettings.getNumber("cdsId",0);
+            console.log(cds);
+            if(appSettings.getNumber("grpId",0) === 6)
+                firebase.unsubscribeFromTopic(cds).then(() => console.log("Unsubscribed from ",cds));
+
             global.clearAll();
             sideDrawer.getViewById("userForm").visibility="collapsed";
             sideDrawer.getViewById("userDocente").visibility="collapsed";
@@ -77,14 +87,6 @@ function onTapDelete(){
             page.getViewById("deleteBtn").visibility = "collapsed";
             sideDrawer.getViewById("topMatr").visibility = "collapsed";
             sideDrawer.getViewById("topEmail").visibility = "collapsed";
-
-            let grp = "GRP_" + appSettings.getNumber("grpId",0);
-            if(appSettings.getNumber("grpId",0) !== 0)
-                firebase.unsubscribeFromTopic(grp).then(() => console.log("Unsubscribed from ",grp));
-
-            let cds = "CDS_" + appSettings.getNumber("cdsId",0);
-            if(appSettings.getNumber("grpId",0) === 6)
-                firebase.unsubscribeFromTopic(cds).then(() => console.log("Unsubscribed from ",cds));
 
             const nav =
                 {
