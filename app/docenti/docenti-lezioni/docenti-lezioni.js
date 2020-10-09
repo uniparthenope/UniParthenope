@@ -74,6 +74,7 @@ function showLession(index){
         docentiLezioni.pop();
 
     let result = lezioni[index].courses;
+    console.log(result);
     if(result.length === 0)
         no_less.visibility = "visible";
     else
@@ -84,7 +85,6 @@ function showLession(index){
 
         let fulldata = convertData(result[i].start);
         fulldata = "" + dayOfWeek(fulldata) + " " + fulldata.getDate() + " " + monthOfYear(fulldata.getMonth()) + " " + fulldata.getFullYear();
-        //console.log(fulldata);
         let start_data = convertData(result[i].start);
         let end_data = convertData(result[i].end);
         let max_cap = Math.floor(result[i].room.capacity);

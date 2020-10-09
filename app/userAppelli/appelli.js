@@ -79,8 +79,7 @@ exports.tapCalendar = function(){
 
 function getAppelli(adId, adsceId) {
     loading.visibility = "visible";
-    console.log(adId);
-    console.log(adsceId);
+
     httpModule.request({
         url: global.url + "students/checkAppello/" + appSettings.getNumber("cdsId") +"/" + adId,
         method: "GET",
@@ -198,18 +197,12 @@ function onItemTap(args) {
     let adId = items_appelli.getItem(index).adId;
     let appId = items_appelli.getItem(index).appId;
 
-
-    console.log("AppId: " + items_appelli.getItem(index).appId);
-    console.log("AdId: " + items_appelli.getItem(index).adId);
-    console.log("AdsceId: " + items_appelli.getItem(index).adsceId);
-
     dialogs.confirm({
         title: "Prenotazione appello",
         message: "Sicuro di volerti prenotare a questo appello?",
         okButtonText: "Sì",
         cancelButtonText: "No",
     }).then(function (result) {
-        console.log(result);
 
         if(result){
             httpModule.request({
@@ -225,7 +218,6 @@ function onItemTap(args) {
                 })
             }).then((response) => {
                 const result = response.content.toJSON();
-                console.log(result);
 
                 let message;
                 if (response.statusCode === 201){

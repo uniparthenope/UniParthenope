@@ -71,7 +71,7 @@
         </GridLayout>
 
         <StackLayout height="65%" verticalAlignment="bottom">
-            <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5">
+            <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5" height="100%">
                 <ListView.itemTemplate >
                     <FlexboxLayout flexDirection="row">
                         <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
