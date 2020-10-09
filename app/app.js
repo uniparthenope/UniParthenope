@@ -17,6 +17,7 @@ global.url = domain + "/UniparthenopeApp/v1/";
 global.url2 = domain + "/UniparthenopeApp/v2/";
 global.url_general = domain + "/";
 global.version;
+global.notification_token;
 
 global.isConnected = false;
 global.updatedExam = false;
@@ -337,6 +338,7 @@ firebase.init({
         }
     },
     onPushTokenReceivedCallback: function(token) {
+        global.notification_token = token;
         console.log("Firebase push token: " + token);
     }
 }).then(

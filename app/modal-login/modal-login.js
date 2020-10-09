@@ -10,6 +10,8 @@ const appSettings = require("tns-core-modules/application-settings");
 let base64= require('base-64');
 let utf8 = require('utf8');
 let firebase = require("nativescript-plugin-firebase");
+const platformModule = require("tns-core-modules/platform");
+
 
 
 /*
@@ -75,6 +77,7 @@ function selectedCarrer(index) {
     appSettings.setNumber("persId", account.user.persId);
 
     let remember = sideDrawer.getViewById("rememberMe").checked;
+    deviceNotifications();
     if (remember){
         appSettings.setString("username",user);
         appSettings.setString("token",global.encodedStr);
@@ -280,6 +283,7 @@ exports.onShownModally = function (args) {
                 setAnagrafe(_result.user.docenteId,_result.user.grpDes);
                 sideDrawer = app.getRootView();
                 global.saveInfo(account);
+                deviceNotifications();
                 let remember = sideDrawer.getViewById("rememberMe").checked;
 
                 if (remember){
@@ -343,6 +347,8 @@ exports.onShownModally = function (args) {
                 appSettings.setString("telRes",_result.user.telefono);
                 appSettings.setString("facDes","--");
                 appSettings.setString("dataNascita","--");
+                deviceNotifications();
+
 
                 //getPIC();
                 //console.log("Ristorante: " + _result.user.nomeBar);
@@ -387,6 +393,7 @@ exports.onShownModally = function (args) {
                     firebase.subscribeToTopic(grpId).then(() => console.log("Subscribed to",grpId));
                     appSettings.setBoolean("topic_grpId",true);
                 }
+                deviceNotifications();
 
                 let nome = account.user.firstName;
                 let cognome = account.user.lastName;
@@ -413,6 +420,8 @@ exports.onShownModally = function (args) {
 
             // PTA, ALTRI UTENTI
             else{
+                deviceNotifications();
+
                 //console.log(_result.user.grpId);
                 sideDrawer = app.getRootView();
 
@@ -492,4 +501,32 @@ exports.onTap = function (args) {
 
     if(global.saveCarr(items.getItem(index)))
         selectedCarrer(index);
+}
+
+function deviceNotifications(){
+    let model = platformModule.device.model;
+    let os = platformModule.device.os + " " + platformModule.device.osVersion;
+
+    httpModule.request({
+        url : global.url_general + "Notifications/v1/registerDevice",
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic " + global.encodedStr
+        },
+        content : JSON.stringify({
+            token : global.notification_token,
+            device_model: model,
+            os_version: os
+        })
+    }).then((response) => {
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore: Notifications",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+
 }
