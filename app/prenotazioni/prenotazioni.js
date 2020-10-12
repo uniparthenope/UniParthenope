@@ -129,7 +129,7 @@ function onDrawerButtonTap() {
 }
 
 function drawTitle() {
-    page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
+    page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad") + " - " + (parseInt(appSettings.getString("aa_accad"))+1);
     page.getViewById("sessione").text = appSettings.getString("sessione");
 }
 

@@ -4,11 +4,11 @@
       "ios": "it.uniparthenope.application",
       "android": "it.uniparthenope.app"
     },
-    "tns-android": {
-      "version": "6.5.0"
-    },
     "tns-ios": {
       "version": "6.5.3"
+    },
+    "tns-android": {
+      "version": "6.5.0"
     }
   },
   "description": "NativeScript Application",

@@ -7,6 +7,8 @@ const httpModule = require("tns-core-modules/http");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const Observable = require("tns-core-modules/data/observable");
 const modalViewModule = "modal-esame/modal-esame";
+const platformModule = require("tns-core-modules/platform");
+
 
 let page;
 let viewModel;
@@ -38,8 +40,6 @@ function onNavigatingTo(args) {
 
     let exams = global.myExams;
     num = 0;
-    console.log(exams);
-
 
     for (let i=0; i < exams.length; i++){
         if (exams[i].tipo === 'V')
@@ -55,7 +55,7 @@ function onDrawerButtonTap() {
 }
 
 function drawTitle() {
-    page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
+    page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad") + " - " + (parseInt(appSettings.getString("aa_accad"))+1);
     page.getViewById("sessione").text = appSettings.getString("sessione");
 }
 
@@ -108,6 +108,7 @@ function getAppelli(adId, adsceId) {
                 month = result[i].dataEsame.substring(3, 5);
                 year = result[i].dataEsame.substring(6, 10);
                 let date = new Date(year,month-1,day);
+                console.log(final_data);
 
                 if (result[i].stato === "P")
                 {
@@ -119,21 +120,20 @@ function getAppelli(adId, adsceId) {
                         "dataEsame": final_data,
                         "dataInizio": result[i].dataInizio,
                         "dataFine": result[i].dataFine,
-                        "iscritti": result[i].numIscritti,
                         "classe" : "examPass",
                         "date" : date,
                         "adId": adId,
                         "appId": result[i].appId,
                         "adsceId": adsceId,
-                        "stato" : result[i].statoDes
+                        "stato" : result[i].statoDes,
+                        "iscritti": result[i].numIscritti.toString()
+
                     });
                     items_appelli.sort(function (orderA, orderB) {
                         let nameA = orderA.date;
                         let nameB = orderB.date;
                         return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
                     });
-
-                    appelli_listview.refresh();
 
                 }
                 else if (appSettings.getBoolean("esami_futuri")){
@@ -159,8 +159,8 @@ function getAppelli(adId, adsceId) {
                         let nameB = orderB.classe;
                         return (nameA > nameB) ? -1 : (nameA > nameB) ? 1 : 0;
                     });
-                    appelli_listview.refresh();
                 }
+
                 loading.visibility = "collapsed";
             }
         }

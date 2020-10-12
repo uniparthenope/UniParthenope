@@ -44,6 +44,9 @@ function getCourses() {
     //console.log(courses);
     for (let i=0; i<courses.length; i++)
     {
+        let partizione = courses[i].domPartCod;
+        if (partizione === '')
+            partizione = "UNICA";
         //console.log(courses[i].tipo);
         if (courses[i].tipo === 'V')
             if (courses[i].esito === 'P' || courses[i].esito === 'F')
@@ -55,7 +58,7 @@ function getCourses() {
                     //"data_fine": " al " + courses[i].fine,
                     //"ult_mod": courses[i].modifica,
                     "adLogId": courses[i].adLogId,
-                    "partizione": "Partizione: " + courses[i].domPartCod
+                    "partizione": "Partizione: " + partizione
                 });
             //esamiList.refresh();
 
@@ -142,15 +145,15 @@ function onItemTap(args) {
     const mainView = args.object;
     const index = args.index;
 
-    const adLogId = { adLogId: items.getItem(index).adLogId, esame: items.getItem(index).esame, docente: items.getItem(index).prof};
+    //TODO Dettagli Corsi
+    //const adLogId = { adLogId: items.getItem(index).adLogId, esame: items.getItem(index).esame, docente: items.getItem(index).prof};
 
-    mainView.showModal(modalViewModule, adLogId, false);
+    //mainView.showModal(modalViewModule, adLogId, false);
 }
 
 function drawTitle() {
     if (appSettings.getString("aa_accad") !== undefined)
-        page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
-    else
+F    else
     {
         console.log("CORSI.AA_ACCAD = undefined (A.A non recuperato!)");
         page.getViewById("aa").text = "A.A. Non Disponibile";

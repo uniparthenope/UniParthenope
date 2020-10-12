@@ -116,10 +116,8 @@ function getTotExams(matId) {
 
 function getExams() {
     let exams = global.myExams;
-    console.log(exams);
 
     let dim = exams.length;
-    console.log(dim);
 
     for (let i = 0; i<dim; i++)
     {
@@ -136,7 +134,8 @@ function getExams() {
             else
                 voto = "OK";
             if(exams[i].data != null)
-                data = exams[i].data;
+                data = exams[i].data.split(" ")[0];
+
 
             items.push({ "esame": exams[i].nome,
                 "voto" : voto,

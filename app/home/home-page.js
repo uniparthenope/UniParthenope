@@ -511,28 +511,39 @@ exports.onTapStudia = function(){
 };
 
 function getPosition(){
-    console.log("GetPosition ");
+    try {
 
     geolocation.enableLocationRequest().then(function () {
         geolocation.isEnabled().then(function (isEnabled) {
+            if(isEnabled){
 
-            geolocation.getCurrentLocation({desiredAccuracy: 3, updateDistance: 10, maximumAge: 10000, timeout: 10000}).
-            then(function(loc) {
-                console.log("Finding "+loc);
-                if (loc) {
-                    pos = loc;
-                    let position = calculateDistance(loc);
-                    appSettings.setString("position", position);
-                    console.log("MY_POSITION = "+loc.latitude+ " "+loc.longitude);
-                }
-                else { console.log("MY_POSITION = ERROR ");}
-            }, function(e){
+                geolocation.getCurrentLocation({desiredAccuracy: 3, updateDistance: 10, maximumAge: 10000, timeout: 10000}).
+                then(function(loc) {
+                    console.log("Finding "+loc);
+                    if (loc) {
+                        pos = loc;
+                        let position = calculateDistance(loc);
+                        appSettings.setString("position", position);
+                        console.log("MY_POSITION = "+loc.latitude+ " "+loc.longitude);
+                    }
+                    else { console.log("MY_POSITION = ERROR ");}
+                }, function(e){
 
-                console.log("Position Error: " + e.message);
-            });
+                    console.log("Position Error: " + e.message);
+                });
+
+            }
+            else
+                console.log("NOT ENABLED");
+
         })
     });
-    console.log("QUI");
+
+    }
+    catch (e){
+        console.log(e);
+    }
+
 }
 
 function calculateDistance(position) {
