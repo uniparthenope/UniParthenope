@@ -221,10 +221,7 @@ exports.onShownModally = function (args) {
         }
     }).then((response) => {
         let _result = response.content.toJSON();
-        let grpId = "GRP_"+_result.user.grpId.toString();
-
         console.log(response.statusCode);
-
         if(response.statusCode === 401 || response.statusCode === 500) {
             dialogs.confirm({
                 title: "Autenticazione Fallita!",
@@ -244,6 +241,7 @@ exports.onShownModally = function (args) {
             });
         }
         else if(response.statusCode === 200) {
+            let grpId = "GRP_"+_result.user.grpId.toString();
             console.log(_result.user.grpDes);
 
             account = _result;

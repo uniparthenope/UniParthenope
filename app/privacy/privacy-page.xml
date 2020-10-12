@@ -36,12 +36,16 @@
                 <Label class="textPrimary" text="Privacy" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
-            <StackLayout height="90%">
-                <ScrollView height="100%" marginLeft="5" marginRight="5">
-                    <HtmlView id="privacy" html="" color="#22384f"/>
+
+            <GridLayout rows="*">
+                <ScrollView>
+                    <GridLayout rows="*">
+                        <HtmlView html="{{ privacy }}"/>
+                    </GridLayout>
                 </ScrollView>
+            </GridLayout>
+
             </StackLayout>
-        </StackLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
             <Label text="Recupero Privacy Policy..." horizontalAlignment="center" class="textPrimary"/>
