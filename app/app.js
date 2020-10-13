@@ -332,8 +332,7 @@ firebase.init({
             dialog.confirm({
                 title: message.title,
                 message: message.body,
-                okButtonText: "OK",
-                neutralButtonText: "Annulla"
+                okButtonText: "OK"
             });
         }
     },

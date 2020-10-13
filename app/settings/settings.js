@@ -166,6 +166,25 @@ function onSwitchLoaded_topic_cdsId(args) {
 }
 exports.onSwitchLoaded_topic_cdsId = onSwitchLoaded_topic_cdsId;
 
+function onSwitchLoaded_topic_newsall(args) {
+    page.getViewById("switch_topic_newsall").checked = appSettings.getBoolean("topic_newsall",false);
+    const mySwitch = args.object;
+
+    mySwitch.on("checkedChange", (args) => {
+        const sw = args.object;
+        const isChecked = sw.checked;
+        appSettings.setBoolean("topic_newsall",isChecked);
+
+        if (isChecked)
+            firebase.subscribeToTopic("NEWS_ALL").then(() => console.log("Subscribed to ","NEWS_ALL"));
+        else
+            firebase.unsubscribeFromTopic("NEWS_ALL").then(() => console.log("Unsubscribed from ","NEWS_ALL"));
+
+    });
+}
+exports.onSwitchLoaded_topic_newsall = onSwitchLoaded_topic_newsall;
+
+
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

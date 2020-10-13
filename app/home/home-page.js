@@ -36,6 +36,14 @@ function onNavigatingTo(args) {
 
     rateApp();
 
+    //Subscribe to ALL NEWS only the first time
+    if(appSettings.getBoolean("subscribe_newsALL",true)){
+        appSettings.setBoolean("subscribe_newsALL",false);
+        appSettings.setBoolean("topic_newsall",true);
+
+        firebase.subscribeToTopic("NEWS_ALL").then(() => console.log("Subscribed from ","NEWS_ALL"));
+    }
+
     remember = appSettings.getBoolean("rememberMe");
     user = appSettings.getString("username");
 
