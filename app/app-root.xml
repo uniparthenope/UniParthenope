@@ -11,21 +11,21 @@
         <GridLayout android:backgroundColor="rgba(0, 0, 0,0.6)" ios:class="reversed-two-color-gradient">
             <Image src="~/images/logo_new.png" android:opacity="0.3" ios:opacity="0.2" horizontalAlignment="right" verticalAlignment="center" marginTop="50%" width="500"/>
         <!--     Top Menu, foto e nome       -->
-            <StackLayout orientation="vertical" verticalAlignment="top" height="80%" >
+            <StackLayout orientation="vertical" verticalAlignment="top" height="80%" margin="5 5 5 5">
                 <ios>
-                    <StackLayout height="35%" orientation="vertical" verticalAlignment="top" marginTop="10">
+                    <StackLayout height="35%" orientation="vertical" verticalAlignment="top" marginTop="5">
+                        <Label id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" fontSize="12" horizontalAlignment="center"/>
                         <StackLayout class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="120" height="120"/>
-                        <Label id="topName" text="Benvenuto!" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>
-                        <Label id="topEmail" text="EMAIL!" visibility="collapsed" textWrap="true" color="white" marginBottom="5" fontSize="12" horizontalAlignment="center" textAlignment="center"/>
-                        <Label id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" marginBottom="5" fontSize="14" horizontalAlignment="center"/>
+                        <Label id="topName" text="Benvenuto!" color="white" fontSize="18" textWrap="true" horizontalAlignment="center" textAlignment="center"/>
+                        <Label id="topEmail" text="EMAIL!" visibility="collapsed" heigth="100%" textWrap="true" color="white" fontSize="11" horizontalAlignment="center" textAlignment="center"/>
                     </StackLayout>
                 </ios>
                 <android>
                     <StackLayout height="35%" orientation="vertical" verticalAlignment="top" marginTop="10">
+                        <Label id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" marginBottom="5" fontSize="14" horizontalAlignment="center"/>
                         <StackLayout class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="110" height="110"/>
                         <Label id="topName" text="Benvenuto!" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>
                         <Label id="topEmail" text="EMAIL!" visibility="collapsed" textWrap="true" color="white" marginBottom="5" fontSize="12" horizontalAlignment="center" textAlignment="center"/>
-                        <Label id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" marginBottom="5" fontSize="14" horizontalAlignment="center"/>
                     </StackLayout>
                 </android>
 

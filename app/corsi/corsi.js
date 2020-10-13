@@ -153,7 +153,9 @@ function onItemTap(args) {
 
 function drawTitle() {
     if (appSettings.getString("aa_accad") !== undefined)
-F    else
+        page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad") + " - " + (parseInt(appSettings.getString("aa_accad"))+1);
+
+    else
     {
         console.log("CORSI.AA_ACCAD = undefined (A.A non recuperato!)");
         page.getViewById("aa").text = "A.A. Non Disponibile";

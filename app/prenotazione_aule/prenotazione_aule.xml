@@ -65,7 +65,7 @@
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Inizio: " marginRight="5"/>
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ start }}"/>
                                         </StackLayout>
-                                        <Label col="1" borderWidth="0" text="{{ prof }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                        <Label col="1" color="#107dd0" borderWidth="0" text="{{ prof }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
 
                                         <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Fine: " marginRight="5"/>
