@@ -13,50 +13,45 @@ let loading;
 let index;
 let my_status = "";
 let status = ["Non Definito","A Distanza","In Presenza"];
+let _status = ["undefined", "distance", "presence"];
 let isStudent = false;
 
-function onNavigatingTo(args) {
-    page = args.object;
-    viewModel = observableModule.fromObject({
-        status: status
-    });
-    sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-    loading = page.getViewById("activityIndicator");
-    global.services = [];
-
-    getSelfCert();
-    let grpDes = appSettings.getString("grpDes","");
-
-    if (grpDes === "Docenti" || grpDes === "PTA" || grpDes === "Ristoranti" || grpDes === ""){
-        isStudent = false;
-        page.getViewById("scelta_accesso").visibility = "collapsed";
-
-    }
-    else{
-        isStudent = true;
-        getAccess();
-        page.getViewById("scelta_accesso").visibility = "visible";
-    }
-
-    page.bindingContext = viewModel;
+function convertIndex(accessType){
+    if (accessType === "presence")
+        return 2;
+    else if (accessType === "distance")
+        return 1;
+    else
+        return 0;
 }
 
-function onListPickerLoaded(fargs) {
-    const listPickerComponent = fargs.object;
-    listPickerComponent.on("selectedIndexChange", (args) => {
-        const picker = args.object;
-        index = picker.selectedIndex;
-        let accessIndex = convertIndex(appSettings.getString("accessType","undefined"));
+function getAllServices(){
 
-
-        if(accessIndex !== picker.selectedIndex){
-            saveInfo();
+    let url = global.url_general + "GAUniparthenope/v1/getTodayServices";
+    //loading.visibility = "visible";
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
         }
-        //console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
+    }).then((response) => {
+        global.services = [];
+        global.services = response.content.toJSON();
+
+        //loading.visibility = "collapsed";
+    },(e) => {
+        console.log("Error", e);
+        //loading.visibility = "collapsed";
+
+        dialogs.alert({
+            title: "Errore: prenotazioni",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
     });
 }
-exports.onListPickerLoaded = onListPickerLoaded;
 
 function getAccess(){
     loading.visibility = "visible";
@@ -177,86 +172,6 @@ function getSelfCert(){
     });
 }
 
-function onDrawerButtonTap() {
-    const sideDrawer = app.getRootView();
-    sideDrawer.showDrawer();
-}
-
-function onGeneralMenu()
-{
-    const nav =
-        {
-            moduleName: "home/home-page",
-            clearHistory: true
-        };
-    page.frame.navigate(nav);
-}
-function saveInfo(){
-    if(isStudent){
-        if(index === 0){
-            setAccess("undefined");
-        }
-        else if(index === 1){
-            setAccess("distance");
-        }
-        else if(index === 2){
-            if (global.my_selfcert){
-                setAccess("presence");
-            }
-            else{
-                dialogs.confirm({
-                    title: "Attenzione!",
-                    message: "Per poter selezionare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
-                    okButtonText: "OK"
-                }).then(function (){
-                    const nav =
-                        {
-                            moduleName: "access/access",
-                            clearHistory: true
-                        };
-                    page.frame.navigate(nav);
-                });
-            }
-        }
-    }
-    else{
-        setSelfCert(global.my_selfcert);
-    }
-}
-
-exports.ontap_save = function(){
-    if(isStudent){
-        if(index === 0){
-            setAccess("undefined");
-        }
-        else if(index === 1){
-            setAccess("distance");
-        }
-        else if(index === 2){
-            if (global.my_selfcert){
-                setAccess("presence");
-            }
-            else{
-                dialogs.confirm({
-                    title: "Attenzione!",
-                    message: "Per poter selezionare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
-                    okButtonText: "OK"
-                }).then(function (){
-                    const nav =
-                        {
-                            moduleName: "access/access",
-                            clearHistory: true
-                        };
-                    page.frame.navigate(nav);
-                });
-            }
-        }
-    }
-    else{
-        setSelfCert(global.my_selfcert);
-    }
-};
-
 function setSelfCert(flag){
     loading.visibility = "visible";
     httpModule.request({
@@ -325,7 +240,13 @@ function setAccess(scelta){
                 title: "Errore: Access ontapSave",
                 message: result.errMsg,
                 okButtonText: "OK"
-
+            }).then(function () {
+                const nav =
+                    {
+                        moduleName: "access/access",
+                        clearHistory: true
+                    };
+                page.frame.navigate(nav);
             });
         }
         else
@@ -342,11 +263,63 @@ function setAccess(scelta){
 
 }
 
-exports.onGeneralMenu = onGeneralMenu;
-exports.onNavigatingTo = onNavigatingTo;
-exports.onDrawerButtonTap = onDrawerButtonTap;
+exports.onNavigatingTo = function (args) {
+    page = args.object;
+    viewModel = observableModule.fromObject({
+        status: status
+    });
+    sideDrawer = app.getRootView();
+    sideDrawer.closeDrawer();
+    loading = page.getViewById("activityIndicator");
+    global.services = [];
 
-function onSwitchLoaded_autocert(args) {
+    getSelfCert();
+    let grpDes = appSettings.getString("grpDes","");
+
+    if (grpDes === "Docenti" || grpDes === "PTA" || grpDes === "Ristoranti" || grpDes === ""){
+        isStudent = false;
+        page.getViewById("scelta_accesso").visibility = "collapsed";
+
+    }
+    else{
+        isStudent = true;
+        getAccess();
+        page.getViewById("scelta_accesso").visibility = "visible";
+    }
+
+    page.bindingContext = viewModel;
+}
+
+exports.onListPickerLoaded = function (fargs) {
+    const listPickerComponent = fargs.object;
+    listPickerComponent.on("selectedIndexChange", (args) => {
+        const picker = args.object;
+        index = picker.selectedIndex;
+        let accessIndex = convertIndex(appSettings.getString("accessType","undefined"));
+
+
+        if(accessIndex !== picker.selectedIndex){
+            setAccess(_status[picker.selectedIndex]);
+        }
+        //console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
+    });
+}
+
+exports.onDrawerButtonTap = function () {
+    const sideDrawer = app.getRootView();
+    sideDrawer.showDrawer();
+}
+
+exports.onGeneralMenu = function() {
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
+}
+
+exports.onSwitchLoaded_autocert = function (args) {
     const mySwitch = args.object;
 
     mySwitch.on("checkedChange", (args) => {
@@ -357,14 +330,13 @@ function onSwitchLoaded_autocert(args) {
             const options = {
                 context: "some context",
                 closeCallback: () => {
-                    saveInfo();
+                    setSelfCert(global.my_selfcert);
                     if(!global.my_selfcert)
                         page.getViewById("switch_sondaggio").checked = "false";
                 },
                 fullscreen: false
             };
             page.showModal(modalViewModule, options);
-
         }
         else{
             if(my_status !== "presence"){
@@ -372,7 +344,7 @@ function onSwitchLoaded_autocert(args) {
                     global.my_selfcert = false;
                     console.log("FALSO");
                     appSettings.setBoolean("selfcert",false);
-                    saveInfo();
+                    setSelfCert(global.my_selfcert);
                 }
                 global.my_selfcert = false;
                 console.log("FALSO");
@@ -396,19 +368,8 @@ function onSwitchLoaded_autocert(args) {
         }
     });
 }
-exports.onSwitchLoaded_autocert = onSwitchLoaded_autocert;
-
-function convertIndex(accessType){
-    if (accessType === "presence")
-        return 2;
-    else if (accessType === "distance")
-        return 1;
-    else
-        return 0;
-}
 
 exports.goto_prenotazioni = function () {
-
     const nav =
         {
             moduleName: "lezioni/lezioni",
@@ -416,6 +377,7 @@ exports.goto_prenotazioni = function () {
         };
     page.frame.navigate(nav);
 };
+
 exports.goto_prenot_serv = function () {
 
     const nav =
@@ -425,31 +387,3 @@ exports.goto_prenot_serv = function () {
         };
     page.frame.navigate(nav);
 };
-
-function getAllServices(){
-
-    let url = global.url_general + "GAUniparthenope/v1/getTodayServices";
-    //loading.visibility = "visible";
-    httpModule.request({
-        url: url,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        global.services = [];
-        global.services = response.content.toJSON();
-
-        //loading.visibility = "collapsed";
-    },(e) => {
-        console.log("Error", e);
-        //loading.visibility = "collapsed";
-
-        dialogs.alert({
-            title: "Errore: prenotazioni",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-    });
-}
