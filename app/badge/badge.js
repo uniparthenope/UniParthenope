@@ -22,6 +22,7 @@ function onNavigatingTo(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     choseBackground(page);
+    setTitle();
     loading = page.getViewById("activityIndicator");
     getQr();
     console.log(appSettings.getString("grpDes"));
@@ -321,3 +322,7 @@ function onNavigatedFrom(args) {
     timerModule.clearInterval(timer_id);
 }
 exports.onNavigatedFrom = onNavigatedFrom;
+
+function setTitle(){
+    page.getViewById("badge_title").text = appSettings.getString("badgeButton","UniParthenope Card");
+}

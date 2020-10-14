@@ -36,6 +36,7 @@ function onNavigatingTo(args) {
 
     rateApp();
 
+
     //Subscribe to ALL NEWS only the first time
     if(appSettings.getBoolean("subscribe_newsALL",true)){
         appSettings.setBoolean("subscribe_newsALL",false);
@@ -91,7 +92,6 @@ SONDAGGIO MAIN
 }
 
 function onDrawerButtonTap() {
-    const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
 
@@ -99,7 +99,6 @@ function autoconnect() {
     console.log("REMEMBER= "+remember);
     if (remember){
 
-        const sideDrawer = app.getRootView();
         indicator.visibility = "visible";
         let user = appSettings.getString("username");
         console.log("USERNAME (old)= "+user);
@@ -133,6 +132,8 @@ function autoconnect() {
                 {
                     let remember = sideDrawer.getViewById("rememberMe").checked;
                     console.log(_result);
+                    sideDrawer.getViewById("badge_button_risto").text = "Staff Card";
+
 
                     appSettings.setString("nome", _result.user.nome);
                     appSettings.setString("cognome", _result.user.cognome);
@@ -171,6 +172,8 @@ function autoconnect() {
                 /* Se un utente è di tipo USER TECNICO */
                 else if (_result.user.grpDes === "PTA")
                 {
+                    sideDrawer.getViewById("badge_button_other").text = "Staff Card";
+
                     console.log("PTA");
                     appSettings.setString("grpDes",_result.user.grpDes);
                     appSettings.setString("matricola","--");
@@ -204,6 +207,8 @@ function autoconnect() {
                 }
                 else if(_result.user.grpDes === "Docenti")
                 {
+                    sideDrawer.getViewById("badge_button_docenti").text = "Faculty Card";
+
                     appSettings.setNumber("idAb",_result.user.idAb);
                     console.log(_result.user.idAb,"Id");
                     let nome = appSettings.getString("nome");
@@ -227,6 +232,8 @@ function autoconnect() {
                 else if (_result.user.grpDes === "Studenti")
                 {
                     let carriere = _result.user.trattiCarriera;
+                    sideDrawer.getViewById("badge_button").text = "Student Card";
+
                     global.saveInfo(_result);
                     setAnagrafe(_result.user.persId,_result.user.grpDes);
                     let index = appSettings.getNumber("carriera",0);
@@ -243,6 +250,8 @@ function autoconnect() {
                 }
                 else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti" || _result.user.grpDes=== "Iscritti"){
                     console.log("REGISTRATI/DOTT/ecc");
+                    sideDrawer.getViewById("badge_button_other").text = "Student Card";
+
                     global.saveInfo(_result);
                     appSettings.setString("matricola","--");
 
@@ -259,6 +268,8 @@ function autoconnect() {
 
                 else{
                     global.isConnected = true;
+                    sideDrawer.getViewById("badge_button_other").text = "UniParthenope Card";
+
                     let nome = appSettings.getString("nome","");
                     let cognome = appSettings.getString("cognome","");
                     let username = nome + " " + cognome;

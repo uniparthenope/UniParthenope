@@ -34,7 +34,7 @@
 
         <StackLayout>
             <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label class="textPrimary" text="Badge" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label class="textPrimary" id="badge_title" text="UniParthenope Card" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
             <GridLayout width="100%" verticalAlignment="top">

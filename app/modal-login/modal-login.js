@@ -71,7 +71,6 @@ function getPIC(personId, value) {
 }
 
 function selectedCarrer(index) {
-    sideDrawer = app.getRootView();
     appSettings.setNumber("carriera",index);
     getDepartment(items.getItem(index).stuId);
     appSettings.setNumber("persId", account.user.persId);
@@ -92,6 +91,8 @@ function selectedCarrer(index) {
         appSettings.setBoolean("topic_cdsId",true);
     }
     global.isConnected = true;
+    appSettings.setString("badgeButton","Student Card");
+    sideDrawer.getViewById("badge_button").text = "Student Card";
     let nome = appSettings.getString("nome");
     let cognome = appSettings.getString("cognome");
     sideDrawer.getViewById("topName").text = nome + " " + cognome;
@@ -211,6 +212,7 @@ exports.onShownModally = function (args) {
     viewModel = Observable.fromObject({
         items:items
     });
+    sideDrawer = app.getRootView();
 
     httpModule.request({
         url: global.url + "login" ,
@@ -221,6 +223,7 @@ exports.onShownModally = function (args) {
         }
     }).then((response) => {
         let _result = response.content.toJSON();
+
         console.log(response.statusCode);
         if(response.statusCode === 401 || response.statusCode === 500) {
             dialogs.confirm({
@@ -247,6 +250,8 @@ exports.onShownModally = function (args) {
             account = _result;
             // STUDENTE
             if(_result.user.grpDes === "Studenti"){
+
+
                 console.log(_result.user.userId);
 
                 normalizeToken(_result.user.userId);
@@ -279,7 +284,6 @@ exports.onShownModally = function (args) {
                 normalizeToken(_result.user.userId);
                 detailedProf(_result.user.docenteId); // Get detailed info of a professor
                 setAnagrafe(_result.user.docenteId,_result.user.grpDes);
-                sideDrawer = app.getRootView();
                 global.saveInfo(account);
                 deviceNotifications();
                 let remember = sideDrawer.getViewById("rememberMe").checked;
@@ -295,6 +299,7 @@ exports.onShownModally = function (args) {
                 console.log("Docente:" + _result.user.userId);
                 appSettings.setNumber("idAb",_result.user.idAb);
                 global.isConnected = true;
+
                 let nome = appSettings.getString("nome");
                 let cognome = appSettings.getString("cognome");
 
@@ -303,6 +308,8 @@ exports.onShownModally = function (args) {
                 sideDrawer.getViewById("topEmail").text = appSettings.getString("emailAte");
                 sideDrawer.getViewById("topMatr").visibility = "visible";
                 sideDrawer.getViewById("topEmail").visibility = "visible";
+                appSettings.setString("badgeButton","Faculty Card");
+                sideDrawer.getViewById("badge_button_docente").text = "Faculty Card";
                 getPIC(_result.user.idAb,1);
                 //getPIC(appSettings.getNumber("idAb",1));
                 let userForm = sideDrawer.getViewById("userDocente");
@@ -321,7 +328,7 @@ exports.onShownModally = function (args) {
 
             // RISTORANTI
             else if(_result.user.grpDes === "Ristorante"){
-                sideDrawer = app.getRootView();
+
                 appSettings.setString("grpDes",_result.user.grpDes);
                 appSettings.setString("matricola","--");
                 let remember = sideDrawer.getViewById("rememberMe").checked;
@@ -350,6 +357,8 @@ exports.onShownModally = function (args) {
 
                 //getPIC();
                 //console.log("Ristorante: " + _result.user.nomeBar);
+                appSettings.setString("badgeButton","Staff Card");
+                sideDrawer.getViewById("badge_button_risto").text = "Staff Card";
 
                 sideDrawer.getViewById("topName").text = _result.user.nome + " "+_result.user.cognome;
                 global.username = _result.userId;
@@ -377,9 +386,11 @@ exports.onShownModally = function (args) {
             else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti" || _result.user.grpDes=== "Iscritti"){
 
                 normalizeToken(_result.user.userId);
-                sideDrawer = app.getRootView();
                 global.saveInfo(account);
                 appSettings.setString("matricola","--");
+
+                appSettings.setString("badgeButton","Student Card");
+                sideDrawer.getViewById("badge_button_other").text = "Student Card";
 
                 let remember = sideDrawer.getViewById("rememberMe").checked;
 
@@ -419,10 +430,14 @@ exports.onShownModally = function (args) {
             // PTA, ALTRI UTENTI
             else{
                 deviceNotifications();
-
                 //console.log(_result.user.grpId);
-                sideDrawer = app.getRootView();
+                if (_result.user.grpDes === "PTA"){
+                    sideDrawer.getViewById("badge_button_other").text = "Staff Card";
+                    appSettings.setString("badgeButton","Staff Card");
 
+                }
+                else
+                    appSettings.setString("badge_button_other","UniParthenope Card");
                 normalizeToken(_result.user.userId);
 
                 appSettings.setString("grpDes",_result.user.grpDes);
