@@ -18,7 +18,7 @@ let loading;
 
 function getNews(){
     httpModule.request({
-        url: global.url + "general/news",
+        url: global.url + "general/news/10",
         method: "GET"
     }).then((response) => {
         const result = response.content.toJSON();
@@ -44,12 +44,13 @@ function getNews(){
                 if (platformModule.isIOS){
                     arr_desc_not.splice(0, 0, {});
                 }
+
                 article.push({
                     title: result[i].titolo,
                     date:result[i].data,
                     date_text: result[i].data,
                     items: arr_desc_not,
-                    image: "~/images/image1.jpg"
+                    image: result[i].image
                 });
                 article.sort(function (orderA, orderB) {
                     let dataA = Date.parse(orderA.date);

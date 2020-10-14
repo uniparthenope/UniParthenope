@@ -18,7 +18,7 @@ let loading;
 
 function getNotifications(){
     httpModule.request({
-        url: global.url + "general/avvisi",
+        url: global.url + "general/avvisi/10",
         method: "GET"
     }).then((response) => {
         const result = response.content.toJSON();

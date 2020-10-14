@@ -52,11 +52,7 @@
 
                     <accordion:Accordion.itemContentTemplate>
                         <StackLayout>
-                            <TextView text="{{ desc }}" color="#22384f"/>
-
-                            <!--
                             <HtmlView html="{{desc}}" color="#22384f"/>
-                            -->
                         </StackLayout>
                     </accordion:Accordion.itemContentTemplate>
                 </accordion:Accordion>
