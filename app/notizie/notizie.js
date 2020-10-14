@@ -22,7 +22,7 @@ function getNews(){
         method: "GET"
     }).then((response) => {
         const result = response.content.toJSON();
-        loading.visibility = "visible";
+
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
@@ -34,6 +34,7 @@ function getNews(){
         }
         else {
             for (let i=0; i<result.length; i++) {
+
                 let arr_desc_not = [];
                 let items = {
                     desc: result[i].HTML
@@ -44,11 +45,12 @@ function getNews(){
                 if (platformModule.isIOS){
                     arr_desc_not.splice(0, 0, {});
                 }
+                let dat = new Date(result[i].data);
 
                 article.push({
                     title: result[i].titolo,
                     date:result[i].data,
-                    date_text: result[i].data,
+                    date_text: dat.getDate() + "/" + (dat.getMonth()+1) + "/" +dat.getFullYear() + " "+dat.getHours() + ":00",
                     items: arr_desc_not,
                     image: result[i].image
                 });
@@ -59,10 +61,10 @@ function getNews(){
                     return (dataA > dataB) ? -1 : (dataA < dataB) ? 1 : 0;
                 });
             }
+            loading.visibility = "collapsed";
 
         }
 
-        loading.visibility = "collapsed";
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
@@ -70,7 +72,9 @@ function getNews(){
             message: e.toString(),
             okButtonText: "OK"
         });
+
     });
+
 }
 
 exports.onNavigatingTo = function (args) {
@@ -83,6 +87,8 @@ exports.onNavigatingTo = function (args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     loading = page.getViewById("activityIndicator");
+    loading.visibility = "visible";
+
 
     getNews();
 

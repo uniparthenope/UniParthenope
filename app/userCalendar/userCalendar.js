@@ -86,10 +86,15 @@ function calendarCourses() {
                 else
                     color = new Color.Color(colors[x%colors.length]);
 
-                let title = reserved + result[x].course_name + "[0101]\n" + result[x].prof + "\n" + result[x].room.name +" Capacità Tot.: " + result[x].room.capacity + "\n"+reserved_by;
+
+                let tot_cap = Math.floor(result[x].room.capacity);
+                let av_cap =  tot_cap - Math.floor(result[x].room.availability);
+
+                let title = reserved + result[x].course_name + "_\n" + result[x].prof + "\n" + result[x].room.name +"\n Prenotati Aula: "+ av_cap + "/ "+tot_cap + "\n"+reserved_by;
+                console.log(title);
                 //let title = reserved + result[x].course_name + "\n" + result[x].prof + "\n" + result[x].room.name;
                 global.events.push({
-                    title : title.split("[0101]")[0],
+                    title : title,
                     data_inizio:data_inizio ,
                     data_fine: data_fine,
                     color: color
@@ -399,12 +404,10 @@ exports.tapBus = function(){
 };
 
 exports.onDaySelected = function(args){
-    console.log(args.eventData);
     const mainView = args.object;
     let complete = args.eventData.title;
-    let title = complete.split("[0101]")[0];
-    let body = complete.split("[0101]")[1];
-    console.log("BODY",body);
+    let title = complete.split("_")[0];
+    let body = complete.split("_")[1];
     const context = { title: title,body:body, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
 
     mainView.showModal(modalViewModule, context, false);

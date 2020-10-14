@@ -31,8 +31,8 @@
 
     </ActionBar>
 
-    <GridLayout>
-        <StackLayout orientation="vertical" height="100%">
+    <GridLayout backgroundColor="rgb(34, 56, 79)">
+        <StackLayout orientation="vertical" height="100%" >
 
             <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
                 <Label class="textPrimary" text="Notizie" horizontalAlignment="center" verticalAlignment="center"/>
@@ -41,18 +41,18 @@
             <StackLayout verticalAlignment="top"  height="100%">
                 <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%">
                     <accordion:Accordion.itemHeaderTemplate>
-                        <GridLayout marginBottom="10" height="250">
+                        <GridLayout marginBottom="10" height="250" >
                             <Image src="{{ image }}" marginTop="5" horizontalAlignment="center" stretch="aspectFill"/>
-                            <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.6)" width="100%">
+                            <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgb(34, 56, 79,0.7)" width="100%">
                                 <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textWrap="true" margin="5 5 5 5"/>
-                                <Label class="textPrimary" text="{{date_text}}" fontSize="11" margin="5 5 5 5"/>
+                                <Label class="textPrimary" text="{{date_text}}" horizontalAlignment="center" fontSize="11" margin="5 5 5 5"/>
                             </StackLayout>
                         </GridLayout>
                     </accordion:Accordion.itemHeaderTemplate>
 
                     <accordion:Accordion.itemContentTemplate>
-                        <StackLayout>
-                            <HtmlView html="{{desc}}" color="#22384f"/>
+                        <StackLayout margin="5 5 5 5" >
+                            <HtmlView html="{{desc}}" color="#22384f" />
                         </StackLayout>
                     </accordion:Accordion.itemContentTemplate>
                 </accordion:Accordion>
@@ -60,7 +60,7 @@
         </StackLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero Avvisi..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="Recupero Notizie..." horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
     </GridLayout>

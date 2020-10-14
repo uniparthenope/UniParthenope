@@ -104,8 +104,8 @@ function showLession(index){
             "ava_c" : rem_cap,
         });
         docentiLezioni.sort(function (orderA, orderB) {
-            let nameA = orderA.start;
-            let nameB = orderB.start;
+            let nameA = orderA.fulldata;
+            let nameB = orderB.fulldata;
             return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
         });
     }

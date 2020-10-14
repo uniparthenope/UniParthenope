@@ -100,7 +100,7 @@ function getLectures(){
                 let av_cap =  tot_cap - Math.floor(courses[j].room.availability);
 
                 global.events.push({
-                    title : ""+ courses[j].course_name +"[0101]\n"+ courses[j].room.description+"\n"+ courses[j].room.name+"\n Capacità Aula: "+ (tot_cap - av_cap) + "/ "+tot_cap,
+                    title : ""+ courses[j].course_name +"_\n"+ courses[j].room.description+"\n"+ courses[j].room.name+"\n Prenotati Aula: "+ av_cap + " / "+tot_cap,
                     data_inizio: data_inizio,
                     data_fine:data_fine,
                     color: color
@@ -416,8 +416,8 @@ exports.onDaySelected = function(args){
     console.log(args.eventData);
     const mainView = args.object;
     let complete = args.eventData.title;
-    let title = complete.split("[0101]")[0];
-    let body = complete.split("[0101]")[1];
+    let title = complete.split("_")[0];
+    let body = complete.split("_")[1];
     console.log("BODY",body);
     const context = { title: title,body:body, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
 

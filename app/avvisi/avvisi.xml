@@ -41,23 +41,15 @@
             <StackLayout verticalAlignment="top"  height="100%">
                 <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%">
                     <accordion:Accordion.itemHeaderTemplate>
-                        <GridLayout marginBottom="10" height="250">
-                            <Image src="{{ image }}" marginTop="5" horizontalAlignment="center" stretch="aspectFill"/>
-                            <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgba(0,0,0,0.6)" width="100%">
+                            <StackLayout marginBottom="5" marginTop="5" horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgb(34, 56, 79)" width="100%">
                                 <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textWrap="true" margin="5 5 5 5"/>
-                                <Label class="textPrimary" text="{{date_text}}" fontSize="11" margin="5 5 5 5"/>
+                                <Label class="textPrimary" text="{{date_text}}" horizontalAlignment="center" fontSize="11" margin="5 5 5 5"/>
                             </StackLayout>
-                        </GridLayout>
                     </accordion:Accordion.itemHeaderTemplate>
 
                     <accordion:Accordion.itemContentTemplate>
-                        <StackLayout>
-
+                        <StackLayout margin="5 5 5 5">
                             <HtmlView html="{{desc}}" color="#22384f"/>
-
-                            <!--
-                            <TextView text="{{ desc }}" color="#22384f"/>
-                            -->
                         </StackLayout>
                     </accordion:Accordion.itemContentTemplate>
                 </accordion:Accordion>

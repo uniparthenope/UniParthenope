@@ -22,7 +22,7 @@ function getNotifications(){
         method: "GET"
     }).then((response) => {
         const result = response.content.toJSON();
-        loading.visibility = "visible";
+        //loading.visibility = "visible";
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
@@ -38,18 +38,18 @@ function getNotifications(){
                 let items = {
                     desc: result[i].HTML
                 };
-
                 arr_desc_not.push(items);
 
                 if (platformModule.isIOS){
                     arr_desc_not.splice(0, 0, {});
                 }
+
+                let dat = new Date(result[i].data);
                 article.push({
                     title: result[i].titolo,
                     date:result[i].data,
-                    date_text: result[i].data,
+                    date_text: dat.getDate() + "/" + (dat.getMonth()+1) + "/" +dat.getFullYear() + " "+dat.getHours() + ":00",
                     items: arr_desc_not,
-                    image: "~/images/image1.jpg"
                 });
                 article.sort(function (orderA, orderB) {
                     let dataA = Date.parse(orderA.date);
@@ -82,6 +82,8 @@ exports.onNavigatingTo = function (args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     loading = page.getViewById("activityIndicator");
+    loading.visibility = "visible";
+
 
     getNotifications();
 
@@ -94,5 +96,5 @@ exports.onDrawerButtonTap = function() {
 }
 
 exports.onGeneralMenu = function () {
-    page.frame.navigate("home/home-page")
+    page.frame.navigate("home/home-page");
 }

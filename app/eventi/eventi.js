@@ -5,6 +5,8 @@ const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 const calendarModule = require("nativescript-ui-calendar");
 const Color = require("tns-core-modules/color");
+const modalViewModule = "modal-event/modal-event";
+
 
 let new_id = [{id:"a",color:"#555555"},{id:"s",color:"#c47340"},{id:"b",color:"#824bc1"},{id:"c",color:"#4566c1"},{id:"t",color:"#a7f442"},{id:"O",color:"#f49b41"},{id:"Y",color:"#f44155"},
     {id:"z",color:"#41f4b2"}];
@@ -47,14 +49,13 @@ function getTime() {
                 let items = [];
                 for (let i=0; i<result.length; i++)
                 {
-                    let title = result[i].description + "\n" + result[i].course_name + "\n\n" + result[i].room.name+"\n" + result[i].room.description;
+                    let title = result[i].description + "_\n" + result[i].course_name + "\n\n" + result[i].room.name+"\n" + result[i].room.description;
 
                     let data_inizio = convertData(result[i].start);
                     let data_fine = convertData(result[i].end);
 
                     let id = result[i].type;
-                    //console.log(id);
-                    //setId(id);
+
                     let color = getColor(id);
                     //console.log(color);
                     let event = new calendarModule.CalendarEvent(title, data_inizio, data_fine, false, color);
@@ -92,12 +93,13 @@ function getColor(id) {
 }
 
 exports.onDaySelected = function(args){
-    console.log(args.eventData);
     const mainView = args.object;
+    let complete = args.eventData.title;
+    let title = complete.split("_")[0];
+    let body = complete.split("_")[1];
+    const context = { title: title,body:body, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
 
-    const context = { title: args.eventData.title, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
-
-    //mainView.showModal(modalViewModule, context, false);
+    mainView.showModal(modalViewModule, context, false);
 };
 
 exports.onGeneralMenu = onGeneralMenu;

@@ -3,9 +3,9 @@
 
     <GridLayout rows="auto,*">
         <GridLayout row="0" columns="auto,*,auto" backgroundColor="#22384f" height="20%" verticalAlignment="top">
-            <Label col="0" id="event_date_start" fontSize="12" color="white"/>
+            <Label col="0" id="event_date_start" fontSize="12" color="white" marginLeft="10"/>
             <Label col="1" class="textPrimary" id="event_text" text="title" textWrap="true" textAlignment="center" verticalAlignment="center" margin="5 5 5 5"/>
-            <Label col="2" id="event_date_end" fontSize="12" color="white"/>
+            <Label col="2" id="event_date_end" fontSize="12" marginRight="10" color="white"/>
 
         </GridLayout>
 
