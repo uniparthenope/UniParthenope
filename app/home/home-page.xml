@@ -54,12 +54,12 @@
                 <!--    Buttons    -->
                 <GridLayout rows="*,*,*" height="25%" marginRight="10" marginLeft="10" verticalAlignment="top" >
                     <StackLayout orientation="horizontal" row="0" horizontalAlignment="stretch" verticalAlignment="top">
-                        <Button  class="btn" text="Ateneo" horizontalAlignment="center" width="50%" marginRight="5" ontap="onTapAteneo" />
-                        <Button  class="btn" text="Eventi" horizontalAlignment="center" width="50%" ontap="onTapEventi" />
+                        <Button  class="btn" text="Avvisi" horizontalAlignment="center" width="50%" marginRight="5" ontap="onTapAvvisi" />
+                        <Button  class="btn" text="Notizie" horizontalAlignment="center" width="50%" tap="onTapNotizie"/>
                     </StackLayout>
                     <StackLayout orientation="horizontal" row="1" horizontalAlignment="stretch" verticalAlignment="top">
                         <Button  class="btn" text="Studia Con Noi" backgroundColor="#22384f" color="white" horizontalAlignment="center" width="50%" marginRight="5" tap="onTapStudia"/>
-                        <Button  class="btn" text="Notizie" horizontalAlignment="center" width="50%" tap="onTapNotizie"/>
+                        <Button  class="btn" text="Eventi" horizontalAlignment="center" width="50%" ontap="onTapEventi" />
                     </StackLayout>
                     <GridLayout row="2" columns="auto,auto,auto" verticalAlignment="top" horizontalAlignment="center">
                         <StackLayout col="0" horizontalAlignment="right" marginRight="5">

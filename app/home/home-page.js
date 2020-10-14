@@ -320,23 +320,11 @@ exports.onTapMeteo = function(){
 };
 
 exports.onTapTrasporti = function(){
-
     page.frame.navigate("trasporti/trasporti");
-
-
 };
 
-exports.onTapAteneo = function(){
-    if(platform.isIOS)
-        utilsModule.openUrl("https://www.uniparthenope.it/");
-    else{
-        const nav =
-            {
-                moduleName: "portale/portale",
-                context: {link:"https://www.uniparthenope.it/"}
-            };
-        page.frame.navigate(nav);
-    }
+exports.onTapAvvisi = function(){
+    page.frame.navigate("avvisi/avvisi");
 };
 
 exports.onTapEventi = function(){
@@ -345,7 +333,6 @@ exports.onTapEventi = function(){
             moduleName: "eventi/eventi"
         };
     page.frame.navigate(nav);
-
 };
 
 exports.onTapFood = function(){

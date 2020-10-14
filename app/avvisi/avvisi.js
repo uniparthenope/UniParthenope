@@ -16,9 +16,9 @@ let image;
 let article;
 let loading;
 
-function getNews(){
+function getNotifications(){
     httpModule.request({
-        url: global.url + "general/news",
+        url: global.url + "general/avvisi",
         method: "GET"
     }).then((response) => {
         const result = response.content.toJSON();
@@ -83,7 +83,7 @@ exports.onNavigatingTo = function (args) {
     sideDrawer.closeDrawer();
     loading = page.getViewById("activityIndicator");
 
-    getNews();
+    getNotifications();
 
     page.bindingContext = viewModel;
 }
