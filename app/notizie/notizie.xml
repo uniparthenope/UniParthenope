@@ -52,7 +52,7 @@
 
                     <accordion:Accordion.itemContentTemplate>
                         <StackLayout margin="5 5 5 5" >
-                            <HtmlView html="{{desc}}" color="#22384f" />
+                            <HtmlView html="{{desc}}" android:color="white"/>
                         </StackLayout>
                     </accordion:Accordion.itemContentTemplate>
                 </accordion:Accordion>

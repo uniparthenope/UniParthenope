@@ -113,7 +113,6 @@ function calendarCourses() {
     });
 
     let prenotazioni = global.myPrenotazioni;
-    console.log(prenotazioni.length);
     for (let x=0; x < prenotazioni.length ; x++){
         let data_inizio = convertData(prenotazioni[x].dataEsa);
 
@@ -240,7 +239,6 @@ function getAccesso(){
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        console.log(result);
 
         if (response.statusCode === 401 || response.statusCode === 500) {
             dialogs.alert({
@@ -284,8 +282,6 @@ function getPrenotazioni(){
     }).then((response) => {
         const result = response.content.toJSON();
         appSettings.setNumber("appelloBadge", result.length);
-
-        console.log(result);
 
         for (let i = 0; i< result.length; i++){
             global.myPrenotazioni.push(result[i]);

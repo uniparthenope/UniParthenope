@@ -136,7 +136,6 @@ function getCourses() {
         }
     }).then((response) => {
         const result = response.content.toJSON();
-
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
             dialogs.alert({
                 title: "Errore: DocentiHome GetCourses getSession",
@@ -167,7 +166,6 @@ function getCourses() {
                 }
             }).then((response2) => {
                 const result2 = response2.content.toJSON();
-                //console.log(result2);
                 if (response2.statusCode === 401 || response2.statusCode === 500 || response2.statusCode === 403) {
                     dialogs.alert({
                         title: "Errore: DocentiHome GetCourses getCourses",

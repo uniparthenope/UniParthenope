@@ -46,13 +46,19 @@ function getNews(){
                     arr_desc_not.splice(0, 0, {});
                 }
                 let dat = new Date(result[i].data);
+                let img = result[i].image;
+
+//TODO Risolvere problema immagini ANDROID
+                if (platformModule.isAndroid){
+                    img = "~/images/image1.jpg";
+                }
 
                 article.push({
                     title: result[i].titolo,
                     date:result[i].data,
                     date_text: dat.getDate() + "/" + (dat.getMonth()+1) + "/" +dat.getFullYear() + " "+dat.getHours() + ":00",
                     items: arr_desc_not,
-                    image: result[i].image
+                    image: img
                 });
                 article.sort(function (orderA, orderB) {
                     let dataA = Date.parse(orderA.date);
@@ -102,4 +108,25 @@ exports.onDrawerButtonTap = function() {
 
 exports.onGeneralMenu = function () {
     page.frame.navigate("home/home-page")
+}
+
+function getPIC(url){
+
+    httpModule.getFile({
+        "url": url,
+        "method": "GET",
+        headers: {
+            "Content-Type" : "image/jpg",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((source) => {
+         return source["path"];
+    }, (e) => {
+        console.log("[Photo] Error", e);
+        dialogs.alert({
+            title: "Errore: Badge getPic",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
 }
