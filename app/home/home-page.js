@@ -66,12 +66,18 @@ function onNavigatingTo(args) {
 
    if (user !== undefined && !global.isConnected){
        indicator.visibility = "visible";
-       dialogs.alert({
+       dialogs.confirm({
            title: "Bentornato!",
            message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome")+"\n Cliccare OK per autoconnettersi.",
-           okButtonText: "OK"
-       }).then(function (){
-           autoconnect();
+           okButtonText: "OK",
+           cancelButtonText: 'Logout'
+       }).then(function (r){
+           if(r)
+            autoconnect();
+           else{
+               indicator.visibility = "collapsed";
+               logout();
+           }
 
        });
    }
@@ -737,4 +743,35 @@ exports.onDrawerButtonTap = onDrawerButtonTap;
 
 function rateApp() {
     appRater.showRateDialogIfMeetsConditions();
+}
+function logout(){
+    let grp = "GRP_" + appSettings.getNumber("grpId",0);
+    console.log(grp);
+    if(appSettings.getNumber("grpId",0) !== 0)
+        firebase.unsubscribeFromTopic(grp).then(() => console.log("Unsubscribed from ",grp));
+
+    let cds = "CDS_" + appSettings.getNumber("cdsId",0);
+    console.log(cds);
+    if(appSettings.getNumber("grpId",0) === 6)
+        firebase.unsubscribeFromTopic(cds).then(() => console.log("Unsubscribed from ",cds));
+
+    global.clearAll();
+    sideDrawer.getViewById("userForm").visibility="collapsed";
+    sideDrawer.getViewById("userDocente").visibility="collapsed";
+    sideDrawer.getViewById("userRistoratore").visibility="collapsed";
+    sideDrawer.getViewById("userOther").visibility="collapsed";
+    sideDrawer.getViewById("topName").text = "Benvenuto!";
+    sideDrawer.getViewById("loginForm").visibility="visible";
+    sideDrawer.getViewById("topImg").backgroundImage = "~/images/logo_parth.png";
+    page.getViewById("deleteBtn").visibility = "collapsed";
+    sideDrawer.getViewById("topMatr").visibility = "collapsed";
+    sideDrawer.getViewById("topEmail").visibility = "collapsed";
+
+    const nav =
+        {
+            moduleName: "home/home-page",
+            clearHistory: true
+        };
+    page.frame.navigate(nav);
+
 }

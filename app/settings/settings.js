@@ -29,6 +29,8 @@ function onNavigatingTo(args) {
     if (remember){
         if(appSettings.getNumber("grpId",0) === 6)
             page.getViewById("visibility_topic_cdsId").visibility = "visible";
+        else
+            page.getViewById("visibility_topic_cdsId").visibility = "collapsed";
 
         page.getViewById("visibility_topic_grpId").visibility = "visible";
         page.getViewById("deleteBtn").visibility = "visible";
