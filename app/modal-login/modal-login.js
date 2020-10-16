@@ -250,9 +250,7 @@ exports.onShownModally = function (args) {
             account = _result;
             // STUDENTE
             if(_result.user.grpDes === "Studenti"){
-
-
-                console.log(_result.user.userId);
+                global.myform = "userForm";
 
                 normalizeToken(_result.user.userId);
 
@@ -281,6 +279,7 @@ exports.onShownModally = function (args) {
 
             // DOCENTI
             else if(_result.user.grpDes === "Docenti"){
+                global.myform = "userDocente";
                 normalizeToken(_result.user.userId);
                 detailedProf(_result.user.docenteId); // Get detailed info of a professor
                 setAnagrafe(_result.user.docenteId,_result.user.grpDes);
@@ -328,7 +327,7 @@ exports.onShownModally = function (args) {
 
             // RISTORANTI
             else if(_result.user.grpDes === "Ristorante"){
-
+                global.myform = "userRistoratore";
                 appSettings.setString("grpDes",_result.user.grpDes);
                 appSettings.setString("matricola","--");
                 let remember = sideDrawer.getViewById("rememberMe").checked;
@@ -384,7 +383,7 @@ exports.onShownModally = function (args) {
 
             // REGISTRATI/DOTTORANDI/IPOT.IMMATRICOLATI/PREISCRITTI/ISCRITTI
             else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti" || _result.user.grpDes=== "Iscritti"){
-
+                global.myform = "userOther";
                 normalizeToken(_result.user.userId);
                 global.saveInfo(account);
                 appSettings.setString("matricola","--");
@@ -429,6 +428,7 @@ exports.onShownModally = function (args) {
 
             // PTA, ALTRI UTENTI
             else{
+                global.myform = "userOther";
                 deviceNotifications();
                 //console.log(_result.user.grpId);
                 if (_result.user.grpDes === "PTA"){
