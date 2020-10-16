@@ -207,7 +207,7 @@ function autoconnect() {
                 }
                 else if(_result.user.grpDes === "Docenti")
                 {
-                    sideDrawer.getViewById("badge_button_docenti").text = "Faculty Card";
+                    sideDrawer.getViewById("badge_button_docente").text = "Faculty Card";
 
                     appSettings.setNumber("idAb",_result.user.idAb);
                     console.log(_result.user.idAb,"Id");
