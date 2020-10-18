@@ -49,20 +49,14 @@
                         <Button class="btn-menu" text="Mia Home" marginBottom="5" marginTop="20" tap="goto_home"/>
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
                         <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
-                        <Button class="btn-menu" id="badge_button" text="Student Card" marginBottom="5" marginTop="5" tap="goto_badge"/>
+                        <Button class="btn-menu" id="badge_button" text="Student Card/Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
                         <Button class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>
                         <Button class="btn-menu" text="Libretto" marginBottom="5" marginTop="5" tap="goto_libretto"/>
                         <Button class="btn-menu" text="Corsi" marginBottom="5" marginTop="5" tap="goto_corsi"/>
                         <Button class="btn-menu" text="Appelli" marginBottom="5" marginTop="5" tap="goto_appelli"/>
                         <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap="goto_docenti"/>
-                        <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us" />
 
-
-                        <!-- Disabled Buttons
-                         <Button class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>
-                        <Button class="btn-menu" text="Scan Qr-Code" marginBottom="5" marginTop="5" tap=""/>
-                           -->
                     </StackLayout>
                     <!--     Docente       -->
 
@@ -72,19 +66,7 @@
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
                         <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
                         <Button class="btn-menu" text="Lezioni" marginBottom="5" marginTop="5" tap="goto_docenti_lezioni"/>
-                        <Button class="btn-menu" id="badge_button_docente" text="Faculty Card" marginBottom="5" marginTop="5" tap="goto_badge"/>
-
-                        <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us"/>
-
-
-
-                        <!--Disabled Buttons
-                        <Button class="btn-menu" text="Segreteria" marginBottom="5" marginTop="5" tap=""/>
-                        <Button class="btn-menu" text="Anagrafe" marginBottom="5" marginTop="5" tap=""/>
-                        <Button class="btn-menu" text="Ricevimento" marginBottom="5" marginTop="5" tap=""/>
-                        <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap=""/>
-                        <Button class="btn-menu" text="Scan Qr-Code" marginBottom="5" marginTop="5" tap=""/>
-                            -->
+                        <Button class="btn-menu" id="badge_button_docente" text="<b>Faculty Card</b>" marginBottom="5" marginTop="5" tap="goto_badge"/>
                     </StackLayout>
                     <!--     Ristoratore       -->
                     <StackLayout id="userRistoratore" visibility="collapsed">
@@ -93,19 +75,15 @@
                         <Button class="btn-menu" text="Nuovo Pasto" marginBottom="5" marginTop="5" tap="goto_menuNew"/>
                         <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
                         <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
-                        <Button class="btn-menu" id="badge_button_risto" text="Staff Card" marginBottom="5" marginTop="5" tap="goto_badge"/>
-                        <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us" />
+                        <Button class="btn-menu" id="badge_button_risto" text="Staff Card/Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
                     </StackLayout>
-
-
 
                         <!--     Altri User       -->
                         <StackLayout id="userOther" visibility="collapsed">
                             <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_home_public"/>
                             <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
-                            <Button class="btn-menu" id="badge_button_other" text="UniParthenope Card" marginBottom="5" marginTop="5" tap="goto_badge"/>
-                            <Button id="contatti" class="btn-menu" text="Contattaci" tap="contact_us"/>
+                            <Button class="btn-menu" id="badge_button_other" text="UniParthenope Card/Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
                         </StackLayout>
                     </GridLayout>

@@ -35,7 +35,7 @@
         </GridLayout>
 
 
-        <GridLayout height="80%">
+        <GridLayout height="75%">
             <Image src="~/images/logo_new.png" horizontalAlignment="center" verticalAlignment="center" margin="20 20 20 20" opacity="0.3"/>
 
             <StackLayout>
@@ -89,7 +89,11 @@
             </StackLayout>
 
         </GridLayout>
-        <Button textWrap="true" text="Privacy" verticalAlignment="bottom" ontap="onTapPrivacy" class="btn" margin="10 5 0 5"/>
+        <StackLayout margin="5 5 5 5">
+            <Button textWrap="true" text="Contatta gli Sviluppatori" verticalAlignment="bottom" ontap="contact_us" heigth="100%" class="btn" marginBottom="5"/>
+            <Button textWrap="true" text="Privacy" verticalAlignment="bottom" ontap="onTapPrivacy" class="btn" heigth="100%" />
+
+        </StackLayout>
 
     </StackLayout>
 

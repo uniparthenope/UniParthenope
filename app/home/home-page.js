@@ -138,7 +138,7 @@ function autoconnect() {
                 {
                     let remember = sideDrawer.getViewById("rememberMe").checked;
                     console.log(_result);
-                    sideDrawer.getViewById("badge_button_risto").text = "Staff Card";
+                    sideDrawer.getViewById("badge_button_risto").text = "Staff Card/Badge";
 
 
                     appSettings.setString("nome", _result.user.nome);
@@ -178,7 +178,7 @@ function autoconnect() {
                 /* Se un utente è di tipo USER TECNICO */
                 else if (_result.user.grpDes === "PTA")
                 {
-                    sideDrawer.getViewById("badge_button_other").text = "Staff Card";
+                    sideDrawer.getViewById("badge_button_other").text = "Staff Card/Badge";
 
                     console.log("PTA");
                     appSettings.setString("grpDes",_result.user.grpDes);
@@ -213,7 +213,7 @@ function autoconnect() {
                 }
                 else if(_result.user.grpDes === "Docenti")
                 {
-                    sideDrawer.getViewById("badge_button_docente").text = "Faculty Card";
+                    sideDrawer.getViewById("badge_button_docente").text = "Faculty Card/Badge";
 
                     appSettings.setNumber("idAb",_result.user.idAb);
                     console.log(_result.user.idAb,"Id");
@@ -238,7 +238,7 @@ function autoconnect() {
                 else if (_result.user.grpDes === "Studenti")
                 {
                     let carriere = _result.user.trattiCarriera;
-                    sideDrawer.getViewById("badge_button").text = "Student Card";
+                    sideDrawer.getViewById("badge_button").text = "Student Card/Badge";
 
                     global.saveInfo(_result);
                     setAnagrafe(_result.user.persId,_result.user.grpDes);
@@ -256,7 +256,7 @@ function autoconnect() {
                 }
                 else if(_result.user.grpDes === "Registrati" || _result.user.grpDes === "Dottorandi" || _result.user.grpDes === "Ipot. Immatricolati" || _result.user.grpDes === "Preiscritti" || _result.user.grpDes=== "Iscritti"){
                     console.log("REGISTRATI/DOTT/ecc");
-                    sideDrawer.getViewById("badge_button_other").text = "Student Card";
+                    sideDrawer.getViewById("badge_button_other").text = "Student Card/Badge";
 
                     global.saveInfo(_result);
                     appSettings.setString("matricola","--");
@@ -274,7 +274,7 @@ function autoconnect() {
 
                 else{
                     global.isConnected = true;
-                    sideDrawer.getViewById("badge_button_other").text = "UniParthenope Card";
+                    sideDrawer.getViewById("badge_button_other").text = "UniParthenope Card/Badge";
 
                     let nome = appSettings.getString("nome","");
                     let cognome = appSettings.getString("cognome","");
