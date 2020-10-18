@@ -4,6 +4,8 @@ const platformModule = require("tns-core-modules/platform");
 const app = require("tns-core-modules/application");
 const email = require("nativescript-email");
 const dialogs = require("tns-core-modules/ui/dialogs");
+const appSettings = require("tns-core-modules/application-settings");
+
 
 let sideDrawer;
 let page;
