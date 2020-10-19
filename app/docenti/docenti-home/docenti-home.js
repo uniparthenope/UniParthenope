@@ -234,9 +234,9 @@ function getCourses() {
                                     console.log(result3[i].esame);
 
                                     if (appSettings.getBoolean("esami_futuri") && result3[i].stato === "I"){
-
-                                        //Removed adId and cdsId
                                         let items = {
+                                            "cdsId": result2[j].cdsId,
+                                            "adId": result2[j].adId,
                                             "esame": result3[i].esame,
                                             "descrizione": result3[i].descrizione,
                                             "note": result3[i].note,
@@ -256,6 +256,8 @@ function getCourses() {
                                     }
                                     else{
                                         let items = {
+                                            "cdsId": result2[j].cdsId,
+                                            "adId": result2[j].adId,
                                             "esame": result3[i].esame,
                                             "descrizione": result3[i].descrizione,
                                             "note": result3[i].note,

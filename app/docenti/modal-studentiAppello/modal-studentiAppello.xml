@@ -1,0 +1,33 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+      shownModally="onShownModally">
+
+    <GridLayout rows="auto,*,auto">
+        <GridLayout rows="auto,*" row="0" backgroundColor="#22384f" height="20%" verticalAlignment="top">
+            <Label row="0" text="Elenco studenti iscritti" color="white" textAlignment="center"/>
+            <Label row="1" class="textPrimary" id="title" text="title" textWrap="true" textAlignment="center" verticalAlignment="center" margin="5 5 5 5"/>
+        </GridLayout>
+        <GridLayout row="1" rows="30,*" verticalAlignment="center" margin="15 5 5 5" height="100%">
+            <GridLayout row="0" columns="*,*,auto" margin="5 5 5 5">
+                <Label col="0" text="Matricola" />
+                <Label col="1" text="Username"/>
+            </GridLayout>
+            <ScrollView row="1" verticalAlignment="top" margin="5 5 5 5" height="95%">
+                <ListView id="prenotazione_appello" class="list-group" items="{{ students }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                    <ListView.itemTemplate >
+
+                        <GridLayout columns="*,*,auto">
+                            <Label col="0" fontSize="14" text="{{ matricola }}" horizontalAlignment="left"/>
+                            <Label col="1" fontSize="14" text="{{ username }}" />
+                        </GridLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </ScrollView>
+
+        </GridLayout>
+
+        <StackLayout id="activityIndicator" visibility="collapsed" borderRadius="20%" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="Ricerca Prenotati..." horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
+    </GridLayout>
+</Page>
