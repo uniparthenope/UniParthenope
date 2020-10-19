@@ -10,11 +10,15 @@ let page;
 let viewModel;
 let items;
 let esamiList;
+let grpDes = appSettings.getString("grpDes");
 
 function onNavigatingTo(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     drawTitle();
+
+    page.getViewById("selected_col").col = "4";
+
 
     items = new ObservableArray();
     esamiList = page.getViewById("listview");
@@ -30,6 +34,8 @@ function onNavigatingTo(args) {
     getMedie(matId);
 
     getExams();
+
+    global.getAllBadge(page);
 
     page.bindingContext = viewModel;
 }
@@ -50,7 +56,7 @@ function getMedie(matId) {
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore: Libretto getMedie",
+                title: "Errore: libretto getMedie",
                 message: result.errMsg,
                 okButtonText: "OK"
 
@@ -68,7 +74,7 @@ function getMedie(matId) {
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore: Libretto",
+            title: "Errore: libretto",
             message: e.toString(),
             okButtonText: "OK"
         });
@@ -89,7 +95,7 @@ function getTotExams(matId) {
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
-                title: "Errore: Libretto getTotExams",
+                title: "Errore: libretto getTotExams",
                 message: result.errMsg,
                 okButtonText: "OK"
             }).then(
@@ -107,7 +113,7 @@ function getTotExams(matId) {
     },(e) => {
         console.log("Error", e.retErrMsg);
         dialogs.alert({
-            title: "Errore: Libretto",
+            title: "Errore: libretto",
             message: e.toString(),
             okButtonText: "OK"
         });
@@ -193,3 +199,81 @@ function onGeneralMenu() {
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
+
+exports.tapCourses = function(){
+    if (grpDes === "Studenti"){
+        const nav =
+            {
+                moduleName: "corsi/corsi",
+                clearHistory: true,
+                animated: false
+            };
+        page.frame.navigate(nav);
+    }
+    else if (grpDes === "Docenti")
+    {
+        const nav =
+            {
+                moduleName: "docenti/docenti-home/docenti-home",
+                clearHistory: true,
+                animated: false
+            };
+        page.frame.navigate(nav);
+    }
+};
+
+exports.tapFood = function(){
+    const nav =
+        {
+            moduleName: "menu/menu",
+
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+
+exports.tapCalendar = function(){
+    if (grpDes === "Studenti"){
+        const nav =
+            {
+                moduleName: "userCalendar/userCalendar",
+                clearHistory: true,
+                animated: false
+            };
+        page.frame.navigate(nav);
+    }
+    else if (grpDes === "Docenti")
+    {
+        const nav =
+            {
+                moduleName: "docenti/docenti-home/docenti-home",
+                clearHistory: true,
+                animated: false
+            };
+        page.frame.navigate(nav);
+    }
+};
+
+exports.tapAppello = function(){
+    if (grpDes === "Studenti"){
+
+        const nav =
+            {
+                moduleName: "prenotazioni/prenotazioni",
+                clearHistory: true,
+                animated: false
+            };
+        page.frame.navigate(nav);
+    }
+    else if (grpDes === "Docenti")
+    {
+        const nav =
+            {
+                moduleName: "docenti/docenti-home/docenti-home",
+                clearHistory: true,
+                animated: false
+            };
+        page.frame.navigate(nav);
+    }
+};

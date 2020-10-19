@@ -139,16 +139,6 @@ exports.goto_home_public = function () {
 
 };
 
-exports.goto_libretto = function () {
-    const nav =
-        {
-            moduleName: "Libretto/libretto",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-
-};
-
 exports.goto_docenti = function () {
     const nav =
         {

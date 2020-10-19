@@ -389,10 +389,10 @@ exports.tapFood = function(){
     page.frame.navigate(nav);
 };
 
-exports.tapBus = function(){
+exports.tapLibretto = function(){
     const nav =
         {
-            moduleName: "trasporti/trasporti",
+            moduleName: "libretto/libretto",
             clearHistory: true,
             animated: false
         };

@@ -6,22 +6,12 @@
 
 
     <ActionBar class="action-bar" title="UniParthenope">
-        <ActionItem icon="~/images/logo_parth.png"
-                    tap="onGeneralMenu"
-                    android.position="right"
-                    ios:visibility="collapsed"
-                    />
+
 
         <ActionItem icon="res://menu"
                     ios:visibility="collapsed"
                     tap="onDrawerButtonTap"
                     android.position="right">
-        </ActionItem>
-
-        <ActionItem icon="res://navigation/logo_parth"
-                    android:visibility="collapsed"
-                    tap="onGeneralMenu"
-                    ios.position="right">
         </ActionItem>
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"
@@ -67,52 +57,6 @@
                     </accordion:Accordion.itemContentTemplate>
                 </accordion:Accordion>
             </ScrollView>
-            <!--        Bottom bar  -->
-            <GridLayout visibility="visible" id="bottom_bar" row="2" backgroundColor="#107dd0" height="10%" verticalAlignment="bottom" width="100%">
-                <GridLayout columns="*, *, *, *,*" height="60">
-                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
-                    <GridLayout col="0" tap="tapCalendar">
-                        <Image src="~/images/icon/calendar.png" height="23" width="23" />
-                        <StackLayout>
-                            <StackLayout class="badge" id="badge_Calendar">
-                                <Label id=" text_badgeCalendar" class="badge-text" />
-                            </StackLayout>
-                        </StackLayout>
-                    </GridLayout>
-                    <GridLayout col="1" tap="tapCourses">
-                        <Image src="~/images/icon/courses.png" height="23" width="23" />
-                        <StackLayout>
-                            <StackLayout class="badge" id="badge_Courses">
-                                <Label id="text_badgeCourses" class="badge-text" />
-                            </StackLayout>
-                        </StackLayout>
-                    </GridLayout>
-                    <GridLayout col="2" tap="tapAppello">
-                        <Image src="~/images/icon/appelli.png" height="23" width="23" />
-                        <StackLayout>
-                            <StackLayout class="badge" id="badge_appello">
-                                <Label id="text_badgeAppello" class="badge-text" />
-                            </StackLayout>
-                        </StackLayout>
-                    </GridLayout>
-                    <GridLayout col="3" tap="tapFood">
-                        <Image src="~/images/icon/food.png" height="23" width="23" />
-                        <StackLayout>
-                            <StackLayout class="badge" id="badge_Food">
-                                <Label id="text_badgeFood" class="badge-text" />
-                            </StackLayout>
-                        </StackLayout>
-                    </GridLayout>
-                    <GridLayout col="4" tap="tapBus">
-                        <Image src="~/images/icon/front-bus.png" height="23" width="23" />
-                        <StackLayout>
-                            <StackLayout class="badge" id="badge_Bus">
-                                <Label id="text_badgeBus" class="badge-text" />
-                            </StackLayout>
-                        </StackLayout>
-                    </GridLayout>
-                </GridLayout>
-            </GridLayout>
         </GridLayout>
     </GridLayout>
 </Page>

@@ -14,26 +14,12 @@ let page;
 let viewModel;
 let sideDrawer;
 let items;
-let grpDes = appSettings.getString("grpDes");
 
 function onNavigatingTo(args) {
     page = args.object;
 
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-
-    let bottom_bar = page.getViewById("bottom_bar");
-    let grpDes = appSettings.getString("grpDes","");
-
-    if (global.isConnected === false || grpDes === "PTA" || grpDes === "Ristorante" || grpDes === "StudentiNonImm"){
-        bottom_bar.visibility = "collapsed";
-    }
-    else{
-        global.getAllBadge(page);
-        page.getViewById("selected_col").col = "3";
-        bottom_bar.visibility = "visible";
-    }
-
 
     items = new ObservableArray();
     viewModel = Observable.fromObject({
@@ -125,82 +111,6 @@ function onGeneralMenu() {
     page.frame.navigate(nav);
 }
 
-exports.tapBus = function(){
-    const nav =
-        {
-            moduleName: "trasporti/trasporti",
-            clearHistory: true,
-            animated: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-
-exports.tapCourses = function(){
-    if (grpDes === "Studenti"){
-        const nav =
-            {
-                moduleName: "corsi/corsi",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
-    else if (grpDes === "Docenti")
-    {
-        const nav =
-            {
-                moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
-};
-exports.tapCalendar = function(){
-    if (grpDes === "Studenti"){
-        const nav =
-            {
-                moduleName: "userCalendar/userCalendar",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
-    else if (grpDes === "Docenti")
-    {
-        const nav =
-            {
-                moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: false,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
-};
-
-exports.tapAppello = function(){
-    console.log(grpDes);
-    if (grpDes === "Studenti"){
-        const nav =
-            {
-                moduleName: "prenotazioni/prenotazioni",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
-    else if (grpDes === "Docenti")
-    {
-        const nav =
-            {
-                moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
- };
 exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;

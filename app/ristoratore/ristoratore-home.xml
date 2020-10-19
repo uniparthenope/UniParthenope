@@ -4,11 +4,7 @@
       xmlns="http://schemas.nativescript.org/tns.xsd">
 
     <ActionBar class="action-bar" title="UniParthenope">
-        <ActionItem icon="~/images/logo_parth.png"
-                    tap="onGeneralMenu"
-                    android.position="right"
-                    ios:visibility="collapsed"
-        />
+
 
         <ActionItem icon="res://menu"
                     ios:visibility="collapsed"
@@ -16,11 +12,6 @@
                     android.position="right">
         </ActionItem>
 
-        <ActionItem icon="res://navigation/logo_parth"
-                    android:visibility="collapsed"
-                    tap="onGeneralMenu"
-                    ios.position="right">
-        </ActionItem>
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"
                     tap="onDrawerButtonTap"

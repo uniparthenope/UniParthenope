@@ -34,26 +34,11 @@ function pageLoaded(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
-    let bottom_bar = page.getViewById("bottom_bar");
-    let legend = page.getViewById("legend");
-
     dialogs.alert({
         title: "Attenzione",
         message: "La sezione trasporti è ancora in fase di sviluppo!\nPertanto alcune funzionalità potrebbero essere limitate.",
         okButtonText: "OK"
     });
-    let grpDes = appSettings.getString("grpDes","");
-
-    if (global.isConnected === false || grpDes === "PTA" || grpDes === "Ristoratori"){
-        bottom_bar.visibility = "collapsed";
-       legend.row = 2;
-       legend.backgroundColor="rgba(34, 56, 79, 0.8)"
-    }
-    else {
-        global.getAllBadge(page);
-        page.getViewById("selected_col").col = "4";
-        bottom_bar.visibility = "visible";
-    }
     setupWebViewInterface(page);
 
     //Imposto la posizione attuale e la legenda in basso

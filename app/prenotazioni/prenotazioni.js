@@ -18,7 +18,7 @@ let num;
 
 function onNavigatingTo(args) {
     page = args.object;
-    page.getViewById("selected_col").col = "2";
+    page.getViewById("selected_col").col = "3";
     //appSettings.setBoolean("esami_futuri",false);
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
@@ -173,10 +173,10 @@ exports.tapCourses = function(){
     frame.Frame.topmost().navigate(nav);
 };
 
-exports.tapBus = function(){
+exports.tapLibretto = function(){
     const nav =
         {
-            moduleName: "trasporti/trasporti",
+            moduleName: "libretto/libretto",
             clearHistory: true,
             animated: false
         };

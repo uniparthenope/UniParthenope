@@ -5,11 +5,7 @@
       xmlns:x="nativescript-statusbar">
 
     <ActionBar class="action-bar" title="UniParthenope">
-        <ActionItem icon="~/images/logo_parth.png"
-                    tap="onGeneralMenu"
-                    android.position="right"
-                    ios:visibility="collapsed"
-        />
+
 
         <ActionItem icon="res://menu"
                     ios:visibility="collapsed"
@@ -17,11 +13,6 @@
                     android.position="right">
         </ActionItem>
 
-        <ActionItem icon="res://navigation/logo_parth"
-                    android:visibility="collapsed"
-                    tap="onGeneralMenu"
-                    ios.position="right">
-        </ActionItem>
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"
                     tap="onDrawerButtonTap"
@@ -69,7 +60,7 @@
                 </ListView>
             </StackLayout>
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#107dd0" height="10%" verticalAlignment="bottom" width="100%">
+            <GridLayout row="2" backgroundColor="#107dd0" height="10%" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
                     <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
                     <GridLayout col="0" tap="tapCalendar">
@@ -88,7 +79,15 @@
                             </StackLayout>
                         </StackLayout>
                     </GridLayout>
-                    <GridLayout col="2" tap="tapAppello">
+                    <GridLayout col="2" tap="onGeneralMenu">
+                        <Image src="~/images/logo_parth.png" height="40" width="40"/>
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Food">
+                                <Label id="text_badgeFood" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="3" tap="tapAppello">
                         <Image src="~/images/icon/appelli.png" height="23" width="23" />
                         <StackLayout>
                             <StackLayout class="badge" id="badge_appello">
@@ -96,15 +95,8 @@
                             </StackLayout>
                         </StackLayout>
                     </GridLayout>
-                    <GridLayout col="3" tap="tapFood">
-                        <Image src="~/images/icon/food.png" height="23" width="23" />
-                        <StackLayout>
-                            <StackLayout class="badge" id="badge_Food">
-                                <Label id="text_badgeFood" class="badge-text" />
-                            </StackLayout>
-                        </StackLayout>
-                    </GridLayout>
-                    <GridLayout col="4" tap="tapBus">
+
+                    <GridLayout col="4" tap="tapLibretto">
                         <Image src="~/images/icon/front-bus.png" height="23" width="23" />
                         <StackLayout>
                             <StackLayout class="badge" id="badge_Bus">

@@ -1,0 +1,136 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar" title="UniParthenope">
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+
+    </ActionBar>
+    <GridLayout>
+        <GridLayout rows="auto,*,50">
+
+        <GridLayout row="0" class="two-color-gradient" width="100%" height="35%" verticalAlignment="top">
+                <StackLayout verticalAlignment="top" height="100%" marginTop="5">
+                    <Label class="textPrimary" id="cdsDes" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                    <GridLayout height="65%" marginBottom="5">
+
+                        <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="20" verticalAlignment="center">
+                            <Label class="textMontserratRegular" text="Medie" horizontalAlignment="left" color="white" marginBottom="5"/>
+                            <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+                                <Label class="textMontserratRegular" id="medExam" fontSize="18" color="white" text="" verticalAlignment="center"/>
+                                <Label class="textMontserratRegular" id="medExam_tot" color="white" text=""  verticalAlignment="center"/>
+                            </StackLayout>
+                            <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+                                <Label class="textMontserratRegular" id="medPond" fontSize="18" color="white" text="" verticalAlignment="center"/>
+                                <Label class="textMontserratRegular" id="medPond_tot" color="white" text=""  verticalAlignment="center"/>
+                            </StackLayout>
+                        </StackLayout>
+
+                        <GridLayout class="roundedBtn" backgroundColor="Transparent" horizontalAlignment="center" width="100" height="100" marginTop="15" >
+                            <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+                                <Label  id="doneExams" class="textPrimary" text="" fontSize="30" verticalAlignment="center"/>
+                                <Label  id="totExams" class="textPrimary" text=""  fontSize="16" verticalAlignment="center"/>
+                            </StackLayout>
+                        </GridLayout>
+
+                        <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="20" verticalAlignment="center">
+                            <Label class="textMontserratRegular" text="Tot. CFU" horizontalAlignment="left" color="white" marginBottom="5"/>
+                            <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
+                                <Label class="textMontserratRegular" id="cfuPar" fontSize="18" color="white" text="" verticalAlignment="center"/>
+                                <Label class="textMontserratRegular" id="cfuTot" color="white" text=""  verticalAlignment="center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+
+                    <GridLayout  height="10%" verticalAlignment="bottom" marginBottom="5">
+                        <Label text="Voto" horizontalAlignment="left" marginLeft="20" color="white"/>
+                        <Label text="Nome" horizontalAlignment="center" color="white"/>
+                        <Label text="CFU" horizontalAlignment="right" marginRight="20" color="white"/>
+                    </GridLayout>
+                </StackLayout>
+            </GridLayout>
+
+            <StackLayout row="1" height="100%" verticalAlignment="bottom">
+                <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5" height="100%">
+                    <ListView.itemTemplate >
+                        <FlexboxLayout flexDirection="row">
+                            <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
+                                <GridLayout class="{{ classe }}" width="70" height="70">
+                                    <Label  visibility="{{ lode }}" class="lode" text="LODE"/>
+                                    <Label  class="{{ classe }}" borderWidth="0" text="{{ voto }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
+                                </GridLayout>
+                                <StackLayout orientation="vertical" width="70%">
+                                    <Label class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15"/>
+                                    <Label class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ data }}" fontSize="11" horizontalAlignment="center"/>
+                                </StackLayout>
+                                <GridLayout  width="70">
+                                    <Label  class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ cfu }}" horizontalAlignment="center" fontSize="14" verticalAlignment="center"/>
+                                </GridLayout>
+                            </StackLayout>
+                        </FlexboxLayout>
+                    </ListView.itemTemplate>
+                </ListView>
+            </StackLayout>
+            <!--        Bottom bar  -->
+            <GridLayout row="2" backgroundColor="#107dd0" width="100%" verticalAlignment="bottom">
+                <GridLayout columns="*, *, *, *,*" height="60">
+                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout col="0" tap="tapCalendar">
+                        <Image src="~/images/icon/calendar.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Calendar">
+                                <Label id=" text_badgeCalendar" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="1" tap="tapCourses">
+                        <Image src="~/images/icon/courses.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Courses">
+                                <Label id="text_badgeCourses" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="2" tap="onGeneralMenu">
+                        <Image src="~/images/logo_parth.png" height="40" width="40"/>
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Food">
+                                <Label id="text_badgeFood" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="3" tap="tapAppello">
+                        <Image src="~/images/icon/appelli.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_appello">
+                                <Label id="text_badgeAppello" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+
+                    <GridLayout col="4" tap="tapLibretto">
+                        <Image src="~/images/icon/front-bus.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Bus">
+                                <Label id="text_badgeBus" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+
+        </GridLayout>
+    </GridLayout>
+
+</Page>
