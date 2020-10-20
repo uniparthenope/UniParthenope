@@ -120,7 +120,7 @@
                     </GridLayout>
 
                     <GridLayout col="4" tap="tapLibretto">
-                        <Image src="~/images/icon/front-bus.png" height="23" width="23" />
+                        <Image src="~/images/icon/libretto.png" height="23" width="23" />
                         <StackLayout>
                             <StackLayout class="badge" id="badge_Bus">
                                 <Label id="text_badgeBus" class="badge-text" />
