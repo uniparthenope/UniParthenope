@@ -137,7 +137,8 @@ function onItemTap(args){
             const nav =
                 {
                     moduleName: "docenti/docenti-lezioni/docenti-lezioni",
-                    clearHistory: true
+                    clearHistory: true,
+                    animated: false
                 };
             page.frame.navigate(nav);
         },

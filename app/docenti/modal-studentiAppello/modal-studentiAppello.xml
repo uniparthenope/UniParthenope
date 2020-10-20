@@ -1,5 +1,6 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
       shownModally="onShownModally">
+<GridLayout>
 
     <GridLayout rows="auto,*,auto">
         <GridLayout rows="auto,*" row="0" backgroundColor="#22384f" height="20%" verticalAlignment="top">
@@ -11,8 +12,8 @@
                 <Label col="0" text="Matricola" />
                 <Label col="1" text="Username"/>
             </GridLayout>
-            <ScrollView row="1" verticalAlignment="top" margin="5 5 5 5" height="95%">
-                <ListView id="prenotazione_appello" class="list-group" items="{{ students }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+            <StackLayout row="1" verticalAlignment="top" margin="5 5 5 5" height="95%">
+                <ListView id="prenotazione_appello" class="list-group" items="{{ students }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
                     <ListView.itemTemplate >
 
                         <GridLayout columns="*,*,auto">
@@ -21,10 +22,10 @@
                         </GridLayout>
                     </ListView.itemTemplate>
                 </ListView>
-            </ScrollView>
+            </StackLayout>
 
         </GridLayout>
-
+        </GridLayout>
         <StackLayout id="activityIndicator" visibility="collapsed" borderRadius="20%" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
             <Label text="Ricerca Prenotati..." horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
