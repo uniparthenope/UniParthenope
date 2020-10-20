@@ -6,11 +6,7 @@
       xmlns:x="nativescript-statusbar">
 
     <ActionBar class="action-bar" title="UniParthenope">
-        <ActionItem icon="~/images/logo_parth.png"
-                    tap="onGeneralMenu"
-                    android.position="right"
-                    ios:visibility="collapsed"
-        />
+
 
         <ActionItem icon="res://menu"
                     ios:visibility="collapsed"
@@ -18,11 +14,6 @@
                     android.position="right">
         </ActionItem>
 
-        <ActionItem icon="res://navigation/logo_parth"
-                    android:visibility="collapsed"
-                    tap="onGeneralMenu"
-                    ios.position="right">
-        </ActionItem>
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"
                     tap="onDrawerButtonTap"
@@ -31,70 +22,117 @@
 
     </ActionBar>
 
-    <GridLayout height="100%">
-        <StackLayout height="100%">
-            <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+    <GridLayout>
+        <GridLayout rows="auto,*,50">
+            <GridLayout row="0" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
                 <Label class="textPrimary" text="Lezioni" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
+            <StackLayout height="100%" row="1" padding="5 5 5 5">
 
-            <StackLayout padding="5 5 5 5">
+                <Label fontSize="12" margin="0 5 5 5" text="Selezionare un corso dall'elenco:"/>
 
-            <Label fontSize="12" margin="5 5 5 5" text="Selezionare un corso dall'elenco:"/>
+                <StackLayout borderRadius="20%" borderWidth="2" height="20%">
+                    <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
+                </StackLayout>
+                <Label margin="5 5 5 5" fontSize="12" text="Selezionare una lezione per mostrare gli iscritti"/>
 
-            <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" height="20%">
-                <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
-            </StackLayout>
-            <Label margin="5 5 5 5" fontSize="12" text="Selezionare una lezione per mostrare gli iscritti"/>
+                <GridLayout  borderRadius="20%" borderWidth="2">
 
-            <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
-            <GridLayout  borderRadius="20%" borderWidth="2">
+                    <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
 
-                <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
+                    <StackLayout verticalAlignment="top"  height="95%" margin="5 0 0 0">
+                        <ListView id="lezioni_listview" class="list-group" items="{{ docentiLezioni }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                            <ListView.itemTemplate >
+                                <GridLayout rows="*,*,*,*" borderRadius="20%" borderWidth="1" marginBottom="5">
+                                    <GridLayout row="0" rows="*,*" backgroundColor="#22384f" color="white" >
+                                        <GridLayout row="0" columns="auto,*,auto" borderRadius="5%" padding="5 5 5 5">
+                                            <StackLayout col="0" orientation="vertical" horizontalAlignment="left">
+                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Inizio: " marginRight="5"/>
+                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ start }}"/>
+                                            </StackLayout>
+                                            <Label col="1" borderWidth="0" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
 
-                <StackLayout verticalAlignment="top" margin="5 5 5 5" height="95%">
-                    <ListView id="lezioni_listview" class="list-group" items="{{ docentiLezioni }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
-                        <ListView.itemTemplate >
-                            <GridLayout rows="*,*,*,*">
-                                <GridLayout row="0" rows="*,*" backgroundColor="#22384f" color="white" >
-                                    <GridLayout row="0" columns="auto,*,auto" borderRadius="5%" padding="5 5 5 5">
-                                        <StackLayout col="0" orientation="vertical" horizontalAlignment="left">
-                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Inizio: " marginRight="5"/>
-                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ start }}"/>
-                                        </StackLayout>
-                                        <Label col="1" borderWidth="0" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                            <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
+                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Fine: " marginRight="5"/>
+                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ end }}"/>
+                                            </StackLayout>
+                                        </GridLayout>
 
-                                        <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
-                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Fine: " marginRight="5"/>
-                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ end }}"/>
+                                        <StackLayout row="1" col="3" orientation="horizontal" horizontalAlignment="center">
+                                            <Label class="{{ classe }}" color="white" marginRight="10" borderWidth="0" fontSize="12" text="{{ room_place }}"/>
+                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="{{ room }}"/>
                                         </StackLayout>
                                     </GridLayout>
 
-                                    <StackLayout row="1" col="3" orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}" color="white" marginRight="10" borderWidth="0" fontSize="12" text="{{ room_place }}"/>
-                                        <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="{{ room }}"/>
+
+                                    <StackLayout row="1" orientation="vertical"  width="100%" >
+                                        <StackLayout orientation="vertical"  width="100%" >
+                                        </StackLayout>
+
+                                        <GridLayout columns="*,auto,auto" horizontalAlignment="center" width="100%" margin="5 5 5 5">
+                                            <Progress col="0" maxValue="{{max_c}}" value="{{ava_c}}" marginRight="10" marginLeft="10" verticalAlignment="center"/>
+                                            <Label col="1" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ availability }}" verticalAlignment="center"/>
+                                            <Label col="2" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ capacity }}" verticalAlignment="center" marginRight="10"/>
+                                        </GridLayout>
+
                                     </StackLayout>
                                 </GridLayout>
+                            </ListView.itemTemplate>
+                        </ListView>
+                    </StackLayout>
 
+                </GridLayout>
 
-                                <StackLayout row="1" orientation="vertical"  width="100%" >
-                                    <StackLayout orientation="vertical"  width="100%" >
-                                    </StackLayout>
-
-                                    <GridLayout columns="*,auto,auto" horizontalAlignment="center" width="100%" margin="5 5 5 5">
-                                        <Progress col="0" maxValue="{{max_c}}" value="{{ava_c}}" marginRight="10" marginLeft="10" verticalAlignment="center"/>
-                                        <Label col="1" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ availability }}" verticalAlignment="center"/>
-                                        <Label col="2" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ capacity }}" verticalAlignment="center" marginRight="10"/>
-                                    </GridLayout>
-
-                                </StackLayout>
-                            </GridLayout>
-                        </ListView.itemTemplate>
-                    </ListView>
-                </StackLayout>
-
-            </GridLayout>
             </StackLayout>
-        </StackLayout>
+            <!--        Bottom bar  -->
+            <GridLayout row="2" backgroundColor="#107dd0" height="10%" width="100%" verticalAlignment="bottom">
+                <GridLayout columns="*, *, *, *,*" height="60">
+                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout col="0" tap="tapCalendar">
+                        <Image src="~/images/icon/calendar.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Calendar">
+                                <Label id=" text_badgeCalendar" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="1" tap="tapCourses">
+                        <Image src="~/images/icon/courses.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Courses">
+                                <Label id="text_badgeCourses" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="2" tap="onGeneralMenu">
+                        <Image src="~/images/logo_parth.png" height="40" width="40"/>
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Food">
+                                <Label id="text_badgeFood" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                    <GridLayout col="3" tap="tapAppello">
+                        <Image src="~/images/icon/appelli.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_appello">
+                                <Label id="text_badgeAppello" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+
+                    <GridLayout col="4" tap="tapLezioni">
+                        <Image src="~/images/icon/libretto.png" height="23" width="23" />
+                        <StackLayout>
+                            <StackLayout class="badge" id="badge_Bus">
+                                <Label id="text_badgeBus" class="badge-text" />
+                            </StackLayout>
+                        </StackLayout>
+                    </GridLayout>
+                </GridLayout>
+            </GridLayout>
+
+        </GridLayout>
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
             <Label text="Ricerca Lezioni..." horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>

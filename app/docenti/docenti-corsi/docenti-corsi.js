@@ -151,25 +151,15 @@ exports.onItemTap = function(args) {
     mainView.showModal(modalViewModule, adLogId, false);
 }
 
-exports.tapBus = function(){
+exports.tapLezioni = function(){
     const nav =
         {
-            moduleName: "trasporti/trasporti",
+            moduleName: "docenti/docenti-lezioni/docenti-lezioni",
+
             clearHistory: true,
             animated: false
         };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.tapFood = function(){
-    const nav =
-
-        {
-            moduleName: "menu/menu",
-            clearHistory: true,
-            animated: false
-        };
-    frame.Frame.topmost().navigate(nav);
+    page.frame.navigate(nav);
 };
 
 exports.tapAppello = function(){

@@ -27,7 +27,7 @@ function getAppelli() {
 
 exports.onNavigatingTo = function (args) {
     page = args.object;
-    page.getViewById("selected_col").col = "2";
+    page.getViewById("selected_col").col = "3";
     //appSettings.setBoolean("esami_futuri",false);
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
@@ -89,10 +89,10 @@ exports.tapCalendar = function(){
     page.frame.navigate(nav);
 };
 
-exports.tapFood = function(){
+exports.tapLezioni = function(){
     const nav =
         {
-            moduleName: "menu/menu",
+            moduleName: "docenti/docenti-lezioni/docenti-lezioni",
 
             clearHistory: true,
             animated: false
@@ -104,16 +104,6 @@ exports.tapCourses = function(){
     const nav =
         {
             moduleName: "docenti/docenti-corsi/docenti-corsi",
-            clearHistory: true,
-            animated: false
-        };
-    page.frame.navigate(nav);
-};
-
-exports.tapBus = function(){
-    const nav =
-        {
-            moduleName: "trasporti/trasporti",
             clearHistory: true,
             animated: false
         };

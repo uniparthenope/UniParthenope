@@ -6,11 +6,7 @@
       xmlns:x="nativescript-statusbar">
 
     <ActionBar class="action-bar" title="UniParthenope">
-        <ActionItem icon="~/images/logo_parth.png"
-                    tap="onGeneralMenu"
-                    android.position="right"
-                    ios:visibility="collapsed"
-        />
+
 
         <ActionItem icon="res://menu"
                     ios:visibility="collapsed"
@@ -18,11 +14,6 @@
                     android.position="right">
         </ActionItem>
 
-        <ActionItem icon="res://navigation/logo_parth"
-                    android:visibility="collapsed"
-                    tap="onGeneralMenu"
-                    ios.position="right">
-        </ActionItem>
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"
                     tap="onDrawerButtonTap"
@@ -90,67 +81,7 @@
                         </rc:CalendarDayViewStyle>
 
                     </rc:RadCalendar.dayViewStyle>
-<!--
-                    <rc:RadCalendar.monthViewStyle>
-                        <rc:CalendarMonthviewStyle.inlineEventCellStyle>
-                            <rc:InlineEventCellStyle heigth="100" cellBackgroundColor="LightPink" eventTextColor="Gold" eventFontName="Avenir" eventFontStyle="BoldItalic" eventTextSize="12"
-                                                     timeTextColor="DeepSkyBlue" timeFontName="Courier" timeFontStyle="Regular" timeTextSize="14"/>
-                        </rc:CalendarMonthviewStyle.inlineEventCellStyle>
-                        <rc:CalendarMonthViewStyle backgroundColor="Gray" showTitle="true" showWeekNumbers="true" showDayNames="true" >
-                            <rc:CalendarMonthViewStyle.todayCellStyle>
-                                <rc:DayCellStyle cellBackgroundColor="#66bbae" cellBorderWidth="2" cellBorderColor="#f1e8ca" cellTextColor="#5b391e" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="14" />
-                            </rc:CalendarMonthViewStyle.todayCellStyle>
 
-                            <rc:CalendarMonthViewStyle.dayCellStyle>
-                                <rc:DayCellStyle showEventsText="true" eventTextColor="White" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
-                                                 cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#9ebd9e"
-                                                 cellBorderWidth="1" cellBorderColor="#f1e8ca" cellTextColor="#745151" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" ios:cellTextSize="12" android:cellTextSize="10"/>
-                            </rc:CalendarMonthViewStyle.dayCellStyle>
-
-                            <rc:CalendarMonthViewStyle.anotherMonthCellStyle>
-                                <rc:DayCellStyle showEventsText="true" eventTextColor="lightGray" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
-                                                 cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#9ebd9e"
-                                                 cellBorderWidth="1" cellBorderColor="#f1e8ca" cellTextColor="lightGray" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" ios:cellTextSize="11" android:cellTextSize="10"/>
-                            </rc:CalendarMonthViewStyle.anotherMonthCellStyle>
-
-                            <rc:CalendarMonthViewStyle.disabledCellStyle>
-                                <rc:DayCellStyle showEventsText="true" eventTextColor="lightGray" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
-                                                 cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="lightGray"
-                                                 cellBorderWidth="1" cellBorderColor="#f1e8ca" cellTextColor="darkGray" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" ios:cellTextSize="11" android:cellTextSize="10"/>
-                            </rc:CalendarMonthViewStyle.disabledCellStyle>
-
-                            <rc:CalendarMonthViewStyle.weekendCellStyle>
-                                <rc:DayCellStyle eventTextColor="BlueViolet" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
-                                                 cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#dd855c"
-                                                 cellBorderWidth="1" cellBorderColor="#f1e8ca" cellTextColor="#745151" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="12" />
-                            </rc:CalendarMonthViewStyle.weekendCellStyle>
-
-                            <rc:CalendarMonthViewStyle.selectedDayCellStyle>
-                                <rc:DayCellStyle eventTextColor="Blue" eventFontName="Times New Roman" eventFontStyle="Bold" eventTextSize="8"
-                                                 cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#dbcbbb"
-                                                 cellBorderWidth="2" cellBorderColor="#745151" cellTextColor="darkGray" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="18" />
-                            </rc:CalendarMonthViewStyle.selectedDayCellStyle>
-
-                            <rc:CalendarMonthViewStyle.weekNumberCellStyle>
-                                <rc:CellStyle cellBackgroundColor="#bbcbdb" cellBorderWidth="1" cellBorderColor="#f1e8ca" cellTextColor="#745151" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="8" />
-                            </rc:CalendarMonthViewStyle.weekNumberCellStyle>
-
-                            <rc:CalendarMonthViewStyle.dayNameCellStyle>
-                                <rc:CellStyle  cellBackgroundColor="#f1e8ca" cellBorderWidth="1" cellBorderColor="#745151" cellTextColor="#745151" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="10" />
-                            </rc:CalendarMonthViewStyle.dayNameCellStyle>
-
-                            <rc:CalendarMonthViewStyle.titleCellStyle>
-                                <rc:CellStyle  cellBackgroundColor="#bbcbdb" cellBorderWidth="1" cellBorderColor="#745151" cellTextColor="#dd855c" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="18" />
-                            </rc:CalendarMonthViewStyle.titleCellStyle>
-
-                            <rc:CalendarMonthviewStyle.inlineEventCellStyle>
-                                <rc:InlineEventCellStyle cellBackgroundColor="LightPink" eventTextColor="Gold" eventFontName="Avenir" eventFontStyle="BoldItalic" eventTextSize="12"
-                                                         timeTextColor="DeepSkyBlue" timeFontName="Courier" timeFontStyle="Regular" timeTextSize="14"/>
-                            </rc:CalendarMonthviewStyle.inlineEventCellStyle>
-
-                        </rc:CalendarMonthViewStyle>
-                    </rc:RadCalendar.monthViewStyle>
--->
                 </rc:RadCalendar>
                 <!--        Bottom bar  -->
                 <GridLayout row="2" backgroundColor="#107dd0" height="50" width="100%" verticalAlignment="bottom">
@@ -172,7 +103,15 @@
                                 </StackLayout>
                             </StackLayout>
                         </GridLayout>
-                        <GridLayout col="2" tap="tapAppello">
+                        <GridLayout col="2" tap="onGeneralMenu">
+                            <Image src="~/images/logo_parth.png" height="40" width="40"/>
+                            <StackLayout>
+                                <StackLayout class="badge" id="badge_Food">
+                                    <Label id="text_badgeFood" class="badge-text" />
+                                </StackLayout>
+                            </StackLayout>
+                        </GridLayout>
+                        <GridLayout col="3" tap="tapAppello">
                             <Image src="~/images/icon/appelli.png" height="23" width="23" />
                             <StackLayout>
                                 <StackLayout class="badge" id="badge_appello">
@@ -180,16 +119,9 @@
                                 </StackLayout>
                             </StackLayout>
                         </GridLayout>
-                        <GridLayout col="3" tap="tapFood">
-                            <Image src="~/images/icon/food.png" height="23" width="23" />
-                            <StackLayout>
-                                <StackLayout class="badge" id="badge_Food">
-                                    <Label id="text_badgeFood" class="badge-text" />
-                                </StackLayout>
-                            </StackLayout>
-                        </GridLayout>
-                        <GridLayout col="4" tap="tapBus">
-                            <Image src="~/images/icon/front-bus.png" height="23" width="23" />
+
+                        <GridLayout col="4" tap="tapLezioni">
+                            <Image src="~/images/icon/libretto.png" height="23" width="23" />
                             <StackLayout>
                                 <StackLayout class="badge" id="badge_Bus">
                                     <Label id="text_badgeBus" class="badge-text" />
@@ -198,6 +130,8 @@
                         </GridLayout>
                     </GridLayout>
                 </GridLayout>
+
+
             </GridLayout>
         </StackLayout>
         <StackLayout id="activityIndicator2" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">

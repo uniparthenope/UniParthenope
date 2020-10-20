@@ -5,6 +5,8 @@ const httpModule = require("tns-core-modules/http");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const modalViewModule = "docenti/modal-studentiLezione/modal-studentiLezione";
+const frame = require("tns-core-modules/ui/frame");
+
 
 let page;
 let viewModel;
@@ -35,6 +37,9 @@ function onNavigatingTo(args) {
     sideDrawer.closeDrawer();
 
     getLectures();
+    page.getViewById("selected_col").col = "4";
+    global.getAllBadge(page);
+
 
     page.bindingContext = viewModel;
 }
@@ -194,3 +199,34 @@ function onListPickerLoaded(fargs) {
     });
 }
 exports.onListPickerLoaded = onListPickerLoaded;
+
+exports.tapCourses = function(){
+    const nav =
+        {
+            moduleName: "docenti/docenti-corsi/docenti-corsi",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
+};
+
+exports.tapAppello = function(){
+    const nav =
+        {
+            moduleName: "docenti/docenti-appelli/docenti-appelli",
+            clearHistory: true,
+            animated: false
+        };
+    frame.Frame.topmost().navigate(nav);
+
+};
+
+exports.tapCalendar = function(){
+    const nav =
+        {
+            moduleName: "docenti/docenti-home/docenti-home",
+            clearHistory: true,
+            animated: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};

@@ -394,23 +394,16 @@ exports.tapCourses = function(){
     page.frame.navigate(nav);
 };
 
-exports.tapFood = function(){
+exports.tapLezioni = function(){
     const nav =
         {
-            moduleName: "menu/menu",
-            clearHistory: true,
-            animated: false
-        };
-    page.frame.navigate(nav);};
+            moduleName: "docenti/docenti-lezioni/docenti-lezioni",
 
-exports.tapBus = function(){
-    const nav =
-        {
-            moduleName: "trasporti/trasporti",
             clearHistory: true,
             animated: false
         };
-    page.frame.navigate(nav);};
+    page.frame.navigate(nav);
+};
 
 exports.onDaySelected = function(args){
     console.log(args.eventData);
