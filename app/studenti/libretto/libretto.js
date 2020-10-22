@@ -197,68 +197,28 @@ exports.onGeneralMenu = function () {
 }
 
 exports.tapCourses = function(){
-    if (grpDes === "Studenti"){
-        const nav =
-            {
-                moduleName: "studenti/corsi/corsi",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
-    else if (grpDes === "Docenti")
-    {
-        const nav =
-            {
-                moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
+    const nav = {
+            moduleName: "studenti/corsi/corsi",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
 };
 
 exports.tapCalendar = function(){
-    if (grpDes === "Studenti"){
-        const nav =
-            {
-                moduleName: "studenti/userCalendar/userCalendar",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
-    else if (grpDes === "Docenti")
-    {
-        const nav =
-            {
-                moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
+    const nav = {
+            moduleName: "studenti/userCalendar/userCalendar",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
 };
 
 exports.tapAppello = function(){
-    if (grpDes === "Studenti"){
-
-        const nav =
-            {
-                moduleName: "studenti/prenotazioni/prenotazioni",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
-    else if (grpDes === "Docenti")
-    {
-        const nav =
-            {
-                moduleName: "docenti/docenti-home/docenti-home",
-                clearHistory: true,
-                animated: false
-            };
-        page.frame.navigate(nav);
-    }
+    const nav = {
+            moduleName: "studenti/prenotazioni/prenotazioni",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
 };
