@@ -7,7 +7,7 @@ const httpModule = require("http");
 const appSettings = require("tns-core-modules/application-settings");
 const calendarModule = require("nativescript-ui-calendar");
 const Color = require("tns-core-modules/color");
-const modalViewModule = "modal-event/modal-event";
+const modalViewModule = "modal/modal-event/modal-event";
 const platformModule = require("tns-core-modules/platform");
 
 let colors = ["#c47340","#c42340","#a37390","#4566c1","#AA45BB","#824bc1","#a32d13","#382603","#fff766"];
@@ -19,7 +19,6 @@ let result;
 let loading;
 let num;
 let event_calendar;
-
 
 function convertData(data){
     let day = data[8]+data[9];
@@ -331,7 +330,7 @@ function getCourses() {
     });
 }
 
-function onNavigatingTo(args) {
+exports.onNavigatingTo = function(args) {
     page = args.object;
     page.getViewById("selected_col").col = "0";
 
@@ -366,15 +365,6 @@ exports.onDrawerButtonTap = function () {
     sideDrawer.showDrawer();
 }
 
-exports.onGeneralMenu = function () {
-    const nav =
-        {
-            moduleName: "home/home-page",
-            clearHistory: true
-        };
-    page.frame.navigate(nav);
-}
-
 exports.tapAppello = function(){
     const nav =
         {
@@ -405,6 +395,14 @@ exports.tapLezioni = function(){
     page.frame.navigate(nav);
 };
 
+exports.onGeneralMenu = function () {
+    const nav = {
+        moduleName: "general/home/home-page",
+        clearHistory: true
+    };
+    page.frame.navigate(nav);
+}
+
 exports.onDaySelected = function(args){
     console.log(args.eventData);
     const mainView = args.object;
@@ -416,5 +414,3 @@ exports.onDaySelected = function(args){
 
     mainView.showModal(modalViewModule, context, false);
 };
-
-exports.onNavigatingTo = onNavigatingTo;

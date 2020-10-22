@@ -18,26 +18,6 @@ let students;
 let id;
 let loading;
 
-function onShownModally(args) {
-    context = args.context;
-    closeCallback = args.closeCallback;
-    page = args.object;
-    students = new ObservableArray();
-    viewModel = observableModule.fromObject({
-        students: students,
-    });
-    id = context.id;
-    page.getViewById("title").text = context.data;
-    loading = page.getViewById("activityIndicator");
-
-    listStudent();
-    page.bindingContext = viewModel;
-
-    //page.bindingContext = observableModule.fromObject(context);
-
-
-}
-
 function listStudent(){
     let url = global.url_general + "GAUniparthenope/v1/getStudentsList/" + id;
     loading.visibility = "visible";
@@ -80,7 +60,24 @@ function listStudent(){
         });
     });
 }
-exports.onShownModally = onShownModally;
+
+exports.onShownModally = function(args) {
+    context = args.context;
+    closeCallback = args.closeCallback;
+    page = args.object;
+    students = new ObservableArray();
+    viewModel = observableModule.fromObject({
+        students: students,
+    });
+    id = context.id;
+    page.getViewById("title").text = context.data;
+    loading = page.getViewById("activityIndicator");
+
+    listStudent();
+    page.bindingContext = viewModel;
+
+    //page.bindingContext = observableModule.fromObject(context);
+}
 
 exports.onItemTap = function (args) {
     const mainView = args.object;

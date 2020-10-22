@@ -7,7 +7,6 @@ const appSettings = require("tns-core-modules/application-settings");
 const modalViewModule = "docenti/modal-studentiLezione/modal-studentiLezione";
 const frame = require("tns-core-modules/ui/frame");
 
-
 let page;
 let viewModel;
 let sideDrawer;
@@ -15,63 +14,43 @@ let index = 0;
 
 let courses = global.myExams;
 let docentiLezioni;
-let lezioniList;
 let loading;
 let no_less;
 let lezioni;
 
-function onNavigatingTo(args) {
-    page = args.object;
+function dayOfWeek(date) {
+    date = date.getDay();
+    return isNaN(date) ? null : ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'][date];
 
-    docentiLezioni = new ObservableArray();
-
-    viewModel = observableModule.fromObject({
-        courses: courses,
-        docentiLezioni: docentiLezioni
-    });
-
-    no_less = page.getViewById("no_lession");
-    loading = page.getViewById("activityIndicator");
-
-    sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-
-    getLectures();
-    page.getViewById("selected_col").col = "4";
-    global.getAllBadge(page);
-
-
-    page.bindingContext = viewModel;
 }
 
-function getLectures(){
-    let anno = appSettings.getString("aa_accad").split(" - ")[0];
+function monthOfYear(date) {
 
-    let url = global.url_general + "GAUniparthenope/v1/getProfLectures/"+ anno;
-    loading.visibility = "visible";
+    return isNaN(date) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][date];
 
-    httpModule.request({
-        url: url,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        lezioni = response.content.toJSON();
-        showLession(0);
-        loading.visibility = "collapsed";
-    },(e) => {
-        console.log("Error", e);
-        loading.visibility = "collapsed";
-
-        dialogs.alert({
-            title: "Errore: prenotazioni",
-            message: e.toString(),
-            okButtonText: "OK"
-        });
-    });
 }
+
+function convertMinutes(data) {
+
+    if(data < 10)
+        return data + "0";
+    else
+        return data;
+
+}
+
+function convertData(data){
+    let day = data[8]+data[9];
+    let month = data[5]+data[6];
+    let year = data[0]+data[1]+data[2]+data[3];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
+
+    let d = new Date(year,month-1,day,hour,min);
+
+    return d;
+}
+
 function showLession(index){
     loading.visibility = "visible";
 
@@ -117,21 +96,65 @@ function showLession(index){
     loading.visibility = "collapsed";
 }
 
-function onDrawerButtonTap() {
+function getLectures(){
+    let anno = appSettings.getString("aa_accad").split(" - ")[0];
+
+    let url = global.url_general + "GAUniparthenope/v1/getProfLectures/"+ anno;
+    loading.visibility = "visible";
+
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        lezioni = response.content.toJSON();
+        showLession(0);
+        loading.visibility = "collapsed";
+    },(e) => {
+        console.log("Error", e);
+        loading.visibility = "collapsed";
+
+        dialogs.alert({
+            title: "Errore: prenotazioni",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
+
+exports.onNavigatingTo = function(args) {
+    page = args.object;
+
+    docentiLezioni = new ObservableArray();
+
+    viewModel = observableModule.fromObject({
+        courses: courses,
+        docentiLezioni: docentiLezioni
+    });
+
+    no_less = page.getViewById("no_lession");
+    loading = page.getViewById("activityIndicator");
+
+    sideDrawer = app.getRootView();
+    sideDrawer.closeDrawer();
+
+    getLectures();
+    page.getViewById("selected_col").col = "4";
+    global.getAllBadge(page);
+
+
+    page.bindingContext = viewModel;
+}
+
+exports.onDrawerButtonTap = function() {
     const sideDrawer = app.getRootView();
     sideDrawer.showDrawer();
 }
 
-function onGeneralMenu(){
-    const nav =
-        {
-            moduleName: "home/home-page",
-            clearHistory: true
-        };
-    page.frame.navigate(nav);
-}
-
-function onItemTap(args){
+exports.onItemTap = function(args){
     const mainView = args.object;
     const index = args.index;
     //console.log(docentiLezioni.getItem(index).id);
@@ -152,44 +175,8 @@ function onItemTap(args){
 
     mainView.showModal(modalViewModule, option);
 }
-exports.onItemTap = onItemTap;
 
-exports.onGeneralMenu = onGeneralMenu;
-exports.onNavigatingTo = onNavigatingTo;
-exports.onDrawerButtonTap = onDrawerButtonTap;
-
-function dayOfWeek(date) {
-    date = date.getDay();
-    return isNaN(date) ? null : ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'][date];
-
-}
-
-function monthOfYear(date) {
-
-    return isNaN(date) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][date];
-
-}
-function convertMinutes(data) {
-
-    if(data < 10)
-        return data + "0";
-    else
-        return data;
-
-}
-function convertData(data){
-
-    let day = data[8]+data[9];
-    let month = data[5]+data[6];
-    let year = data[0]+data[1]+data[2]+data[3];
-    let hour = data[11]+data[12];
-    let min = data[14]+data[15];
-
-    let d = new Date(year,month-1,day,hour,min);
-
-    return d;
-}
-function onListPickerLoaded(fargs) {
+exports.onListPickerLoaded = function(fargs) {
     const listPickerComponent = fargs.object;
     listPickerComponent.on("selectedIndexChange", (args) => {
 
@@ -198,7 +185,6 @@ function onListPickerLoaded(fargs) {
         showLession(index);
     });
 }
-exports.onListPickerLoaded = onListPickerLoaded;
 
 exports.tapCourses = function(){
     const nav =
@@ -230,3 +216,11 @@ exports.tapCalendar = function(){
         };
     frame.Frame.topmost().navigate(nav);
 };
+
+exports.onGeneralMenu = function () {
+    const nav = {
+        moduleName: "general/home/home-page",
+        clearHistory: true
+    };
+    page.frame.navigate(nav);
+}

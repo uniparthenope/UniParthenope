@@ -4,24 +4,24 @@ const frame = require("tns-core-modules/ui/frame");
 const observableModule = require("tns-core-modules/data/observable");
 const utilsModule = require("tns-core-modules/utils/utils");
 const dialogs = require("tns-core-modules/ui/dialogs");
-const modalViewModule = "modal-login/modal-login";
+const modalViewModule = "modal/modal-login/modal-login";
 const email = require("nativescript-email");
 let base64= require('base-64');
 let appversion = require("nativescript-appversion");
 let utf8 = require('utf8');
 const appSettings = require("tns-core-modules/application-settings");
 
-
 let viewModel;
 let page;
 
-function pageLoaded(args) {
+exports.pageLoaded = function (args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     page.bindingContext = viewModel;
 }
 
-exports.onTapLogin = function(args) {
+// GENERAL
+exports.onTapLogin = function() {
     let sideDrawer = app.getRootView();
     let user = sideDrawer.getViewById("username").text;
     user = user.trim();
@@ -44,34 +44,24 @@ exports.onTapLogin = function(args) {
     }
 };
 
-//Go to taxes page
-exports.goto_tasse = function () {
-    const nav =
-        {
-
-            moduleName: "tasse/tasse",
-        };
-
-    frame.Frame.topmost().navigate(nav);
+exports.ontap_account = function(){
+    utilsModule.openUrl("https://uniparthenope.esse3.cineca.it/Anagrafica/PasswordDimenticata.do");
 };
-
-//Go to Settings page
-exports.goto_settings = function () {
-    const nav =
-        {
-            moduleName: "settings/settings",
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
 
 exports.goto_about = function () {
     const nav =
         {
-            moduleName: "about/about-page",
+            moduleName: "general/about/about-page",
         };
     frame.Frame.topmost().navigate(nav);
+};
 
+exports.goto_settings = function () {
+    const nav =
+        {
+            moduleName: "general/settings/settings",
+        };
+    frame.Frame.topmost().navigate(nav);
 };
 
 exports.contact_us = function () {
@@ -95,7 +85,6 @@ exports.contact_us = function () {
 
                 console.log(my_device);
 
-
                 email.compose({
                     subject: title,
                     body: "Scrivi messaggio ...\n\n\n (Non eliminare le seguenti informazioni)\n" +  my_device,
@@ -109,163 +98,44 @@ exports.contact_us = function () {
                             title: "Errore: Email",
                             message: err.toString(),
                             okButtonText: "OK"
-                        });        });
-
-
+                        });
+                    });
             });
-
         }
     });
-
-};
-
-exports.goto_home = function () {
-    const nav =
-        {
-            moduleName: "userCalendar/userCalendar",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-
 };
 
 exports.goto_home_public = function () {
     const nav =
         {
-            moduleName: "home/home-page",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-
-};
-
-exports.goto_docenti = function () {
-    const nav =
-        {
-            moduleName: "userDocenti/userDocenti",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-
-};
-
-exports.goto_corsi = function () {
-    const nav =
-        {
-            moduleName: "tutticorsi/tutticorsi",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-
-};
-
-exports.goto_segreteria = function () {
-    const nav =
-        {
-            moduleName: "segreteria/segreteria",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-
-};
-
-exports.goto_menuList = function () {
-    const nav =
-        {
-            moduleName: "ristoratore/ristoratore-home",
+            moduleName: "general/home/home-page",
             clearHistory: false
         };
     frame.Frame.topmost().navigate(nav);
 };
 
-exports.goto_menuNew = function () {
-    const nav =
-        {
-            moduleName: "ristoratore/ristoratore-addmenu",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.goto_adminHome = function () {
-    const nav =
-        {
-            moduleName: "admin/admin-home/admin-home",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.goto_adminAccount = function () {
-    const nav =
-        {
-            moduleName: "admin/allUser/allUser",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.goto_adminNew = function () {
-    const nav =
-        {
-            moduleName: "admin/addUser/addUser",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.goto_appelli = function () {
-    const nav =
-        {
-            moduleName: "userAppelli/appelli",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
+//COMMON
 exports.goto_badge = function () {
-    const nav =
-        {
-            moduleName: "badge/badge",
-            clearHistory: false
-        };
+    const nav = {
+        moduleName: "common/badge/badge",
+        clearHistory: false
+    };
     frame.Frame.topmost().navigate(nav);
 };
 
 exports.goto_access = function () {
-    const nav =
-        {
-            moduleName: "access/access",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.goto_taxes = function () {
-    const nav =
-        {
-            moduleName: "tasse/tasse",
-            clearHistory: false
-        };
-    frame.Frame.topmost().navigate(nav);
-};
-
-exports.goto_professor_home = function () {
-    const nav =
-        {
-            moduleName: "docenti/docenti-home/docenti-home",
-            clearHistory: false
-        };
+    const nav = {
+        moduleName: "common/access/access",
+        clearHistory: false
+    };
     frame.Frame.topmost().navigate(nav);
 };
 
 exports.goto_anagrafica = function () {
-
-    const nav =
-        {
-            moduleName: "anagrafica/anagrafica",
-            clearHistory: false
-        };
+    const nav = {
+        moduleName: "common/anagrafica/anagrafica",
+        clearHistory: false
+    };
     frame.Frame.topmost().navigate(nav);
 
     /*
@@ -276,8 +146,108 @@ exports.goto_anagrafica = function () {
     });*/
 };
 
-exports.ontap_account = function(){
-    utilsModule.openUrl("https://uniparthenope.esse3.cineca.it/Anagrafica/PasswordDimenticata.do");
+//STUDENTI
+exports.goto_home = function () {
+    const nav =
+        {
+            moduleName: "studenti/userCalendar/userCalendar",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+
 };
 
-exports.pageLoaded = pageLoaded;
+exports.goto_docenti = function () {
+    const nav = {
+            moduleName: "studenti/userDocenti/userDocenti",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
+
+exports.goto_corsi = function () {
+    const nav =
+        {
+            moduleName: "studenti/tutticorsi/tutticorsi",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+
+};
+
+exports.goto_segreteria = function () {
+    const nav = {
+            moduleName: "general/segreteria/segreteria",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+
+};
+
+exports.goto_appelli = function () {
+    const nav = {
+        moduleName: "studenti/userAppelli/appelli",
+        clearHistory: false
+    };
+    frame.Frame.topmost().navigate(nav);
+};
+
+exports.goto_taxes = function () {
+    const nav =
+        {
+            moduleName: "studenti/tasse/tasse",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
+
+//DOCENTI
+exports.goto_professor_home = function () {
+    const nav = {
+        moduleName: "docenti/docenti-home/docenti-home",
+        clearHistory: false
+    };
+    frame.Frame.topmost().navigate(nav);
+};
+
+//RISTORATORI
+exports.goto_menuList = function () {
+    const nav = {
+            moduleName: "ristoratore/ristoratore-home",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
+
+exports.goto_menuNew = function () {
+    const nav = {
+            moduleName: "ristoratore/ristoratore-addmenu",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
+
+//ADMIN
+exports.goto_adminHome = function () {
+    const nav = {
+            moduleName: "admin/admin-home/admin-home",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
+
+exports.goto_adminAccount = function () {
+    const nav = {
+            moduleName: "admin/allUser/allUser",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};
+
+exports.goto_adminNew = function () {
+    const nav = {
+            moduleName: "admin/addUser/addUser",
+            clearHistory: false
+        };
+    frame.Frame.topmost().navigate(nav);
+};

@@ -1,0 +1,60 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:accordion="nativescript-accordion">
+
+
+    <ActionBar class="action-bar" title="UniParthenope">
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+
+    </ActionBar>
+    <GridLayout>
+        <GridLayout rows="60,*,50">
+
+            <GridLayout row="0" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+                <Label class="textPrimary" text="Servizi di Ristorazione" horizontalAlignment="center" verticalAlignment="center"/>
+            </GridLayout>
+
+            <ScrollView row="1" height="100%" marginLeft="5" marginRight="5" verticalAlignment="top" marginTop="10">
+                <accordion:Accordion  items="{{ items }}" allowMultiple="false" height="95%" verticalAlignment="top">
+                    <accordion:Accordion.itemHeaderTemplate>
+                        <StackLayout class="ristorante-menu" marginBottom="10" height="25%" backgroundImage="{{ image_bar }}">
+                            <StackLayout orientation="vertical" backgroundColor="rgba(0,0,0,0.6)" width="100%">
+                                <Label class="textPrimary-bold"  fontSize="26" text="{{ nome_bar }}" horizontalAlignment="center" textWrap="true" textAlignment="center" />
+                                <Label class="textPrimary" fontSize="14" text="{{ luogo_bar }}" horizontalAlignment="center" textAlignment="center"/>
+                                <Label class="textPrimary" fontSize="14" text="{{ email_bar }}" horizontalAlignment="center" textAlignment="center"/>
+                                <Label class="textPrimary" fontSize="14" text="{{ tel_bar }}" horizontalAlignment="center" textAlignment="center"/>
+
+                            </StackLayout>
+
+                        </StackLayout>
+                    </accordion:Accordion.itemHeaderTemplate>
+
+                    <accordion:Accordion.itemContentTemplate>
+                        <GridLayout width="100%" >
+                            <StackLayout orientation="vertical" height="150" width="100%" verticalAlignment="center" marginTop="10">
+                                <Image src="{{ image }}" stretch="aspectFill"/>
+                            </StackLayout>
+                            <StackLayout orientation="vertical" verticalAlignment="bottom" width="100%" backgroundColor="rgba(0,0,0,0.3)" marginLeft="5">
+                                <Label class="textPrimary textPrimary-bold text-uppercase" fontSize="18" color="#107dd0" text="{{ nome }}" textWrap="true"/>
+                                <Label class="textPrimary" fontSize="12" color="white" text="{{ tipologia }}" textWrap="true"/>
+                                <Label class="textPrimary" fontSize="14" color="white" text="{{ descrizione }}" textWrap="true"/>
+                            </StackLayout>
+                            <Label class="textPrimary " fontSize="18" color="white" text="{{ prezzo }}" textWrap="true" horizontalAlignment="right" verticalAlignment="bottom"/>
+                        </GridLayout>
+                    </accordion:Accordion.itemContentTemplate>
+                </accordion:Accordion>
+            </ScrollView>
+        </GridLayout>
+    </GridLayout>
+</Page>

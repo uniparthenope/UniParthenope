@@ -70,15 +70,6 @@ exports.onDrawerButtonTap = function () {
     sideDrawer.showDrawer();
 }
 
-exports.onGeneralMenu = function (){
-    const nav =
-        {
-            moduleName: "home/home-page",
-            clearHistory: true
-        };
-    page.frame.navigate(nav);
-}
-
 exports.tapCalendar = function(){
     const nav =
         {
@@ -109,3 +100,11 @@ exports.tapCourses = function(){
         };
     page.frame.navigate(nav);
 };
+
+exports.onGeneralMenu = function () {
+    const nav = {
+        moduleName: "general/home/home-page",
+        clearHistory: true
+    };
+    page.frame.navigate(nav);
+}

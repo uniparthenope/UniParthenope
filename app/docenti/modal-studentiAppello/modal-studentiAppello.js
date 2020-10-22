@@ -2,7 +2,6 @@ const observableModule = require("tns-core-modules/data/observable");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const dialogs = require("tns-core-modules/ui/dialogs");
 const httpModule = require("tns-core-modules/http");
-const appSettings = require("tns-core-modules/application-settings");
 require("nativescript-accordion");
 
 let closeCallback;

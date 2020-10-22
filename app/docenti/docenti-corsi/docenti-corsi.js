@@ -1,6 +1,6 @@
 const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
-const modalViewModule = "modal-corsi/modal-corsi";
+const modalViewModule = "modal/modal-corsi/modal-corsi";
 const appSettings = require("tns-core-modules/application-settings");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const Observable = require("tns-core-modules/data/observable");
@@ -132,15 +132,6 @@ exports.onDrawerButtonTap = function () {
     sideDrawer.showDrawer();
 }
 
-exports.onGeneralMenu = function () {
-    const nav =
-        {
-            moduleName: "home/home-page",
-            clearHistory: true
-        };
-    page.frame.navigate(nav);
-}
-
 exports.onItemTap = function(args) {
     const mainView = args.object;
     const index = args.index;
@@ -182,3 +173,11 @@ exports.tapCalendar = function(){
         };
     frame.Frame.topmost().navigate(nav);
 };
+
+exports.onGeneralMenu = function () {
+    const nav = {
+        moduleName: "general/home/home-page",
+        clearHistory: true
+    };
+    page.frame.navigate(nav);
+}
