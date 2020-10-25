@@ -24,97 +24,112 @@
         <x:StatusBar ios:barStyle="light" barColor="rgb(34, 56, 79)"/>
     </android>
 
+    <GridLayout>
+        <GridLayout rows="*,auto">
+            <!-- Top Title-->
+            <GridLayout height="900">
 
-
-    <GridLayout horizontalAlignment="stretch" verticalAlignment="stretch" height="100%">
-        <!--        Top-->
-        <GridLayout verticalAlignment="top">
-            <StackLayout orientation="vertical">
-                <!--    Background squares    -->
-                <StackLayout  class="two-color-gradient" width="100%" height="20%" verticalAlignment="center"/>
-                <StackLayout id="bottom_bar" height="5" width="100%" backgroundColor="#107dd0"/>
-
-                <GridLayout columns="*,*,*,*,*" class="main_image" id="main_image" backgroundImage="~/images/image1.jpg" marginBottom="30" height="34%">
-                    <GridLayout  col="0" id="bg_0" height="35%" width="35%" verticalAlignment="bottom">
-                        <StackLayout id="icon_0" backgroundImage="~/images/icon_home/CDN.png" backgroundColor="white" class="circle" verticalAlignment="center"/>
-                    </GridLayout>
-                    <GridLayout  col="1" id="bg_1" height="35%" width="35%" verticalAlignment="bottom">
-                        <StackLayout id="icon_1" backgroundColor="white" class="circle" verticalAlignment="center"/>
-                    </GridLayout>
-                    <GridLayout   col="2" id="bg_2" height="35%" width="35%" verticalAlignment="bottom">
-                        <StackLayout id="icon_2" backgroundColor="white" class="circle" verticalAlignment="center"/>
-                    </GridLayout>
-                    <GridLayout  col="3" id="bg_3" height="35%" width="35%" verticalAlignment="bottom">
-                        <StackLayout id="icon_3" backgroundColor="white" class="circle" verticalAlignment="center"/>
-                    </GridLayout>
-                    <GridLayout col="4" id="bg_4" height="35%" width="35%" verticalAlignment="bottom">
-                        <StackLayout id="icon_4" backgroundColor="white" class="circle" verticalAlignment="center"/>
-                    </GridLayout>
-                </GridLayout>
-                <!--    Buttons    -->
-                <GridLayout rows="*,*,*" height="25%" marginRight="10" marginLeft="10" verticalAlignment="top" >
-                    <StackLayout orientation="horizontal" row="0" horizontalAlignment="stretch" verticalAlignment="top">
-                        <Button  class="btn" text="Avvisi" horizontalAlignment="center" width="50%" marginRight="5" ontap="onTapAvvisi" />
-                        <Button  class="btn" text="Notizie" horizontalAlignment="center" width="50%" tap="onTapNotizie"/>
-                    </StackLayout>
-                    <StackLayout orientation="horizontal" row="1" horizontalAlignment="stretch" verticalAlignment="top">
-                        <Button  class="btn" text="Studia Con Noi" backgroundColor="#22384f" color="white" horizontalAlignment="center" width="50%" marginRight="5" tap="onTapStudia"/>
-                        <Button  class="btn" text="Eventi" horizontalAlignment="center" width="50%" ontap="onTapEventi" />
-                    </StackLayout>
-                    <GridLayout row="2" columns="auto,auto,auto" verticalAlignment="top" horizontalAlignment="center">
-                        <StackLayout col="0" horizontalAlignment="right" marginRight="5">
-                            <Button class="circle" backgroundColor="#22384f" tap="onTapFood" backgroundImage="~/images/icon/food.png" height="30" width="30"/>
-                        </StackLayout>
-                        <StackLayout col="1" horizontalAlignment="left" marginLeft="5" marginRight="5">
-                            <Button class="circle" backgroundColor="#22384f" tap="onTapMeteo" backgroundImage="~/images/icon/storm.png" height="30" width="30"/>
-                        </StackLayout>
-                        <StackLayout col="2" horizontalAlignment="left" marginLeft="5">
-                            <Button class="circle" backgroundColor="#22384f" tap="onTapTrasporti" backgroundImage="~/images/icon/front-bus.png" height="30" width="30"/>
-                        </StackLayout>
-                    </GridLayout>
-                </GridLayout>
-
-            </StackLayout>
-            <!--    Testo sovrapposto    -->
-
-            <GridLayout verticalAlignment="top">
-                <ios>
-                    <Label class="topTitle" horizontalAlignment="left" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="5" marginLeft="5" marginTop="30"/>
-                </ios>
-                <android>
-                    <Label class="topTitle" horizontalAlignment="right" text="Università degli Studi di Napoli&#xA;Parthenope" textWrap="true" marginRight="10" marginTop="5" textAlignment="right"/>
-                </android>
+                <Image src="~/images/background2.jpg"/>
+                <StackLayout backgroundColor="rgba(0,0,0,0.7)"/>
 
             </GridLayout>
-            <Image  src="~/images/logo_new.png" horizontalAlignment="right" verticalAlignment="top" height="170" width="170" marginTop="90" marginRight="10"/>
+            <GridLayout rows="auto,*" row="0" width="100%">
+
+                <GridLayout row="0" backgroundColor="#1E3258" width="100%" height="30%" verticalAlignment="top">
+                    <ios>
+                        <Image src="~/images/home/toptitle.png" marginLeft="5" height="50%" verticalAlignment="center" horizontalAlignment="left"/>
+                    </ios>
+                    <android>
+                        <Image src="~/images/home/toptitle.png" marginRight="5" height="50%" verticalAlignment="center" horizontalAlignment="right"/>
+                    </android>
+                </GridLayout>
+                <GridLayout row="1" backgroundImage="~/images/background2.jpg">
+                    <StackLayout backgroundColor="rgba(0,0,0,0.6)" width="100%" height="100%"/>
+
+                    <StackLayout id="bottom_bar" height="5" width="100%" verticalAlignment="top" backgroundColor="#2E7C9E"/>
+
+                </GridLayout>
+            </GridLayout>
+            <!-- Dipartimenti-->
+            <GridLayout marginTop="15%" verticalAlignment="top">
+                <StackLayout orientation="horizontal" verticalAlignment="bottom" marginBottom="50" horizontalAlignment="center">
+                    <Button class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/02_Giuris.png" ontap="ontap_fb"/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/03_Inge.png" ontap="ontap_twi"/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/01_Economia.png" ontap="ontap_insta"/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/01_Economia.png" ontap="ontap_you"/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/01_Economia.png" ontap="ontap_insta"/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/04_Tecnologie.png" ontap="ontap_you"/>
+                    <Button  class="roundedBtn_top" text="" backgroundImage="~/images/icon_home/05_Motorie.png" ontap="ontap_linkedin"/>
+
+                </StackLayout>
+            </GridLayout>
 
 
+            <!--Immagine Bottom e Pulsanti-->
+            <GridLayout row="1" height="40%" verticalAlignment="top" backgroundColor="#1E3258">
+                <StackLayout height="100%" verticalAlignment="top">
+                    <Image src="~/images/image_Acton.jpg" id="main_image" verticalAlignment="top"/>
+                </StackLayout>
+
+                <!--Tasti laterali SX-->
+                <GridLayout rows="auto,auto,auto" verticalAlignment="top" horizontalAlignment="left" marginTop="25" marginLeft="10">
+                    <StackLayout row="0" horizontalAlignment="right" marginBottom="15">
+                        <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapNotizie" backgroundImage="~/images/icon/newspaper.png" height="40" width="40"/>
+                    </StackLayout>
+                    <StackLayout row="1" horizontalAlignment="left" marginBottom="15">
+                        <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapAvvisi" backgroundImage="~/images/icon/loud-speaker.png" height="40" width="40"/>
+                    </StackLayout>
+                    <StackLayout row="2" horizontalAlignment="left" marginBottom="15">
+                        <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapEventi" backgroundImage="~/images/icon/event.png" height="40" width="40"/>
+                    </StackLayout>
+                </GridLayout>
+
+                <!--Tasti laterali DX-->
+                <GridLayout rows="auto,auto,auto" verticalAlignment="top" horizontalAlignment="right" marginTop="25" marginRight="10">
+                    <StackLayout row="0" horizontalAlignment="right" marginBottom="15">
+                        <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapFood" backgroundImage="~/images/icon/food.png" height="40" width="40"/>
+                    </StackLayout>
+                    <StackLayout row="1" horizontalAlignment="left" marginBottom="15">
+                        <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapMeteo" backgroundImage="~/images/icon/storm.png" height="40" width="40"/>
+                    </StackLayout>
+                    <StackLayout row="2" horizontalAlignment="left" marginBottom="15">
+                        <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapTrasporti" backgroundImage="~/images/icon/front-bus.png" height="40" width="40"/>
+                    </StackLayout>
+                </GridLayout>
+            </GridLayout>
+
+            <!--Barra colorata 2-->
+            <StackLayout row="1" id="bottom_bar2" verticalAlignment="top" height="5" width="100%" backgroundColor="#2E7C9E"/>
+
+            <!--Social-->
+            <GridLayout row="1" verticalAlignment="bottom">
+                <StackLayout orientation="horizontal" verticalAlignment="bottom" marginBottom="50" horizontalAlignment="center">
+                    <Button class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/fb.png" ontap="ontap_fb"/>
+                    <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/twi.png" ontap="ontap_twi"/>
+                    <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/insta.png" ontap="ontap_insta"/>
+                    <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/you.png" ontap="ontap_you"/>
+                    <Button  class="roundedBtn" text="" backgroundImage="~/images/social/linkedin.png" ontap="ontap_linkedin"/>
+
+                </StackLayout>
+            </GridLayout>
+
+            <!--Versione-->
+            <StackLayout row="1" orientation="vertical" verticalAlignment="bottom">
+                <Label text="Universitá degli Studi di Napoli ''Parthenope''" horizontalAlignment="center" color="white"  marginBottom="5" fontSize="10"/>
+                <Label id="version" horizontalAlignment="center" color="white" verticalAlignment="bottom" marginBottom="5" fontSize="10"/>
+            </StackLayout>
+
+            <!--Hamburger Menu-->
+            <ios>
+                <Button class="myMenu" backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="right" height="20" width="20" marginRight="15" marginTop="15"/>
+            </ios>
+            <android>
+                <Button class="myMenu" backgroundImage="res://menu" ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" height="25" width="25" margin="20 5 10 5"/>
+            </android>
 
         </GridLayout>
-<!--Bottom/Social-->
-        <GridLayout verticalAlignment="bottom">
-            <StackLayout width="100%" height="12%" backgroundColor="#107dd0"/>
-        </GridLayout>
-        <StackLayout orientation="horizontal" verticalAlignment="bottom" marginBottom="50" horizontalAlignment="center">
-            <Button class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/fb.png" ontap="ontap_fb"/>
-            <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/twi.png" ontap="ontap_twi"/>
-            <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/insta.png" ontap="ontap_insta"/>
-            <Button  class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/you.png" ontap="ontap_you"/>
-            <Button  class="roundedBtn" text="" backgroundImage="~/images/social/linkedin.png" ontap="ontap_linkedin"/>
 
-        </StackLayout>
-        <StackLayout orientation="vertical" verticalAlignment="bottom">
-            <Label text="Universitá degli Studi di Napoli ''Parthenope''" horizontalAlignment="center" color="white"  marginBottom="5" fontSize="10"/>
-            <Label id="version" horizontalAlignment="center" color="white" verticalAlignment="bottom" marginBottom="5" fontSize="10"/>
-        </StackLayout>
-
-        <ios>
-            <Button class="myMenu" backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="right" height="20" width="20" marginRight="15" marginTop="15"/>
-        </ios>
-        <android>
-            <Button class="myMenu" backgroundImage="res://menu" ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" height="25" width="25" margin="20 5 10 5"/>
-        </android>
-
+        <!--Loading Screen-->
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
             <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>

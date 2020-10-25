@@ -83,6 +83,8 @@ function calculateDistance(position) {
     let closer = "None";
 
     let bottom_bar = page.getViewById("bottom_bar");
+    let bottom_bar2 = page.getViewById("bottom_bar2");
+
     let image = page.getViewById("main_image");
 
 
@@ -95,7 +97,9 @@ function calculateDistance(position) {
             //console.log("Trovata!");
             closer = array_locations[i].id;
             bottom_bar.background = array_locations[i].color;
-            image.backgroundImage = '~/images/image_' + array_locations[i].id + ".jpg";
+            bottom_bar2.background = array_locations[i].color;
+
+            image.src = '~/images/image_' + array_locations[i].id + ".jpg";
 
         }
 
@@ -554,7 +558,7 @@ exports.onNavigatingTo = function (args) {
     });
 
     checkServer(10000);
-    initializeGraph();
+    //initializeGraph();
     //console.log(global.tempPos);
 
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
@@ -745,6 +749,3 @@ exports.ontap_insta = function(){
     utilsModule.openUrl("https://www.instagram.com/uniparthenope");
 };
 
-exports.onTapStudia = function(){
-    utilsModule.openUrl("https://orienta.uniparthenope.it/");
-};

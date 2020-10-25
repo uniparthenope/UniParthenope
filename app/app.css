@@ -12,7 +12,10 @@ refer to http://docs.nativescript.org/ui/theme.
 /*  Colori app:
     BLU SCURO = #22384f
                 34, 56, 79,
+    BLU SCURO NEW = #1E3258
+
     BLU CHIARO = #107dd0
+    BLU CHIARO NEW = #2E7C9E
 
     VERDE SCURO = #009432
     VERDE CHIARO = #5CC77A
@@ -55,13 +58,29 @@ refer to http://docs.nativescript.org/ui/theme.
     color:#107dd0;
 }
 
-
+.roundedBtn_top
+{
+    border-color: white;
+    border-width: 3;
+    border-radius: 100%;
+    background-color: #1E3258;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50% 50%;
+    height: 45;
+    width: 45;
+}
+.roundedBtn_top:active
+{
+    background-color: #107dd0;
+    border-color: #107dd0;
+}
 .roundedBtn
 {
     border-color: white;
     border-width: 5;
     border-radius: 100%;
-    background-color: #22384f;
+    background-color: #1E3258;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 25% 25%;
