@@ -275,7 +275,7 @@ exports.onNavigatingTo = function (args) {
     getSelfCert();
     let grpDes = appSettings.getString("grpDes","");
 
-    if (grpDes === "Docenti" || grpDes === "PTA" || grpDes === "Ristoranti" || grpDes === ""){
+    if (grpDes === "Docenti" || grpDes === "PTA" || grpDes === "Ristorante" || grpDes === ""){
         isStudent = false;
         page.getViewById("scelta_accesso").visibility = "collapsed";
 

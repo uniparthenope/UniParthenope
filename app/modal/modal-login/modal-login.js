@@ -343,7 +343,7 @@ exports.onShownModally = function (args) {
 
                 appSettings.setString("nome", _result.user.nome);
                 appSettings.setString("cognome", _result.user.cognome);
-                appSettings.setString("userId", _result.userId);
+                appSettings.setString("userId", _result.user.userId);
                 appSettings.setString("emailAte",_result.user.email);
                 appSettings.setString("ristorante",_result.user.nomeBar);
                 appSettings.setString("matricola",_result.user.nomeBar);
