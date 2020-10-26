@@ -212,8 +212,8 @@ Accordion{
 {
     font-family: "Roboto Slab";
     font-size: 18;
-    color: #1E3258;
-    border-color: #1E3258;
+    color: white;
+    border-color: white;
     border-width: 5;
     border-radius: 100%;
 }
@@ -221,8 +221,7 @@ Accordion{
 {
     font-family: "Roboto Slab";
     font-size: 18;
-    color: #1E3258;
-
+    color: white;
 }
 .examNA
 {
@@ -288,7 +287,7 @@ Accordion{
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 100%;
-    border-color: #1E3258;
+    border-color: white;
     border-width: 5;
 }
 
@@ -335,7 +334,12 @@ ActionBar {
     font-family: "Roboto Slab";
 }
 ListView{
-    separator-color: #1E3258;
+    separator-color: white;
+    background-color: #1E3258;
+}
+
+FlexboxLayout{
+    background-color: #1E3258;
 }
 
 TabStrip {

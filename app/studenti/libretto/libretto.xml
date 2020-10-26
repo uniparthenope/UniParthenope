@@ -23,8 +23,7 @@
     </ActionBar>
     <GridLayout>
         <GridLayout rows="auto,*,50">
-
-        <GridLayout row="0" class="two-color-gradient" width="100%" height="35%" verticalAlignment="top">
+            <GridLayout row="0" class="two-color-gradient" width="100%" height="35%" verticalAlignment="top">
                 <StackLayout verticalAlignment="top" height="100%" marginTop="5">
                     <Label class="textPrimary" id="cdsDes" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
                     <GridLayout height="65%" marginBottom="5">

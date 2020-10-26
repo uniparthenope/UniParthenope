@@ -38,9 +38,9 @@
 
             <StackLayout row="1" verticalAlignment="top" height="100%">
                 <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
-                    <ListView.itemTemplate >
+                    <ListView.itemTemplate>
                         <FlexboxLayout flexDirection="row">
-                            <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
+                            <StackLayout orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
                                 <GridLayout class="examPass" width="70" height="70">
                                     <Label  class="examPass" borderWidth="0" text="{{ anno }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
                                 </GridLayout>
