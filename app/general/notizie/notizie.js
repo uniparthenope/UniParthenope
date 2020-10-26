@@ -4,6 +4,7 @@ const Observable = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const httpModule = require("tns-core-modules/http");
 const platformModule = require("tns-core-modules/platform");
+const dialogs = require("tns-core-modules/ui/dialogs");
 
 let page;
 let viewModel;
@@ -26,7 +27,7 @@ function getNews(){
                 message: result.errMsg,
                 okButtonText: "OK"
 
-            }).then();
+            });
         }
         else {
             for (let i=0; i<result.length; i++) {

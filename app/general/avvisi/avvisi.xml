@@ -27,25 +27,28 @@
     <GridLayout>
         <StackLayout orientation="vertical" height="100%" width="100%">
 
-            <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <GridLayout backgroundColor="#1E3258" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
                 <Label class="textPrimary" text="Avvisi" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
-            <StackLayout verticalAlignment="top"  height="100%" width="100%">
-                <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%" width="100%">
-                    <accordion:Accordion.itemHeaderTemplate>
-                            <StackLayout marginBottom="5" marginTop="5" horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgb(34, 56, 79)" width="100%">
-                                <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textAlignment="center" textWrap="true" margin="5 5 5 5" width="100%"/>
-                                <Label class="textPrimary" text="{{date_text}}" horizontalAlignment="center" fontSize="11" margin="5 5 5 5"/>
-                            </StackLayout>
-                    </accordion:Accordion.itemHeaderTemplate>
 
-                    <accordion:Accordion.itemContentTemplate>
-                        <StackLayout margin="5 5 5 5">
-                            <HtmlView html="{{desc}}" color="#22384f"/>
-                        </StackLayout>
-                    </accordion:Accordion.itemContentTemplate>
-                </accordion:Accordion>
+            <StackLayout verticalAlignment="top"  height="100%" width="100%" backgroundColor="#1E3258">
+                <GridLayout>
+                    <accordion:Accordion items="{{items}}" allowMultiple="false" height="100%" width="100%">
+                        <accordion:Accordion.itemHeaderTemplate>
+                                <StackLayout backgroundColor="#1E3258" marginTop="5" horizontalAlignment="center" verticalAlignment="bottom" width="100%">
+                                    <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textAlignment="center" textWrap="true" margin="5 5 5 5" width="100%"/>
+                                    <Label class="textPrimary" text="{{date_text}}" horizontalAlignment="center" fontSize="11" margin="5 5 5 5"/>
+                                </StackLayout>
+                        </accordion:Accordion.itemHeaderTemplate>
+
+                        <accordion:Accordion.itemContentTemplate>
+                            <StackLayout padding="5 5 5 5" backgroundColor="#1E3258">
+                                <HtmlView html="{{desc}}" color="#22384f" android:color="white" backgroundColor="#1E3258"/>
+                            </StackLayout>
+                        </accordion:Accordion.itemContentTemplate>
+                    </accordion:Accordion>
+                </GridLayout>
             </StackLayout>
         </StackLayout>
 

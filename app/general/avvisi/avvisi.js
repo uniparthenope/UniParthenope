@@ -3,8 +3,8 @@ const ObservableArray = require("tns-core-modules/data/observable-array").Observ
 const Observable = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 const httpModule = require("tns-core-modules/http");
-const imageSource = require("tns-core-modules/image-source");
 const platformModule = require("tns-core-modules/platform");
+const dialogs = require("tns-core-modules/ui/dialogs");
 
 let page;
 let viewModel;
@@ -19,7 +19,7 @@ function getNotifications(){
         method: "GET"
     }).then((response) => {
         const result = response.content.toJSON();
-        //loading.visibility = "visible";
+
         if (response.statusCode === 401 || response.statusCode === 500)
         {
             dialogs.alert({
@@ -27,7 +27,7 @@ function getNotifications(){
                 message: result.errMsg,
                 okButtonText: "OK"
 
-            }).then();
+            });
         }
         else {
             for (let i=0; i<result.length; i++) {
@@ -55,10 +55,8 @@ function getNotifications(){
                     return (dataA > dataB) ? -1 : (dataA < dataB) ? 1 : 0;
                 });
             }
-
+            loading.visibility = "collapsed";
         }
-
-        loading.visibility = "collapsed";
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
@@ -80,7 +78,6 @@ exports.onNavigatingTo = function (args) {
     sideDrawer.closeDrawer();
     loading = page.getViewById("activityIndicator");
     loading.visibility = "visible";
-
 
     getNotifications();
 
