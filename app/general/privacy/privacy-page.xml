@@ -11,6 +11,10 @@
                     tap="onDrawerButtonTap"
                     android.position="right">
         </ActionItem>
+
+        <Image src="~/images/home/toptitle.png" android:width="200" class="action-image"/>
+
+
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"
                     tap="onDrawerButtonTap"
@@ -36,7 +40,7 @@
 
             </StackLayout>
 
-        <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+        <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%">
             <Label text="Recupero Privacy Policy..." horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
