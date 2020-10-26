@@ -7,6 +7,7 @@ const app = require("tns-core-modules/application");
 const StoreUpdate = require("nativescript-store-update");
 let firebase = require("nativescript-plugin-firebase");
 let dialog = require("tns-core-modules/ui/dialogs");
+const frame = require("tns-core-modules/ui/frame");
 
 //let domain = "http://api.uniparthenope.it:5000";
 let domain = "https://api.uniparthenope.it";
@@ -325,15 +326,31 @@ firebase.init({
     onMessageReceivedCallback: function(message) {
         console.log("Title: " + message.title);
         console.log("Body: " + message.body);
-        console.log("Value of 'foo': " + message.data);
+        console.log("Value of 'page': " + message.data.page);
         console.log("Foreground: " + message.foreground);
 
         if (message.foreground){
             dialog.confirm({
                 title: message.title,
                 message: message.body,
-                okButtonText: "OK"
+                cancelButtonText: "Annulla",
+                okButtonText: "Vai"
+            }).then(result => {
+                if (result){
+                    const nav = {
+                        moduleName: "general/" + message.data.page + "/" + message.data.page,
+                        clearHistory: false
+                    };
+                    frame.Frame.topmost().navigate(nav);
+                }
             });
+        }
+        else{
+            const nav = {
+                moduleName: "general/" + message.data.page + "/" + message.data.page,
+                clearHistory: false
+            };
+            frame.Frame.topmost().navigate(nav);
         }
     },
     onPushTokenReceivedCallback: function(token) {

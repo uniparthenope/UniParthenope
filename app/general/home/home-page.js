@@ -577,7 +577,7 @@ exports.onNavigatingTo = function (args) {
            cancelButtonText: 'Logout'
        }).then(function (r){
            if(r)
-            autoconnect();
+               autoconnect();
            else{
                indicator.visibility = "collapsed";
                logout();

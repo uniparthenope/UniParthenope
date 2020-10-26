@@ -153,9 +153,11 @@ exports.onNavigatingTo = function(args) {
     num = 0;
 
     for (let i=0; i < exams.length; i++){
-        if (exams[i].tipo === 'V')
-            if (exams[i].esito === 'P')
+        if (exams[i].tipo === 'V'){
+            if (exams[i].esito === 'P' || exams[i].esito === 'F'){
                 getAppelli(exams[i].adId, exams[i].adsceID);
+            }
+        }
     }
     page.bindingContext = viewModel;
 }
