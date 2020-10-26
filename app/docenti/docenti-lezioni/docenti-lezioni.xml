@@ -7,12 +7,14 @@
 
     <ActionBar class="action-bar" title="UniParthenope">
 
-
         <ActionItem icon="res://menu"
                     ios:visibility="collapsed"
                     tap="onDrawerButtonTap"
                     android.position="right">
         </ActionItem>
+
+        <Image src="~/images/home/toptitle.png" android:width="200" class="action-image"/>
+
 
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"

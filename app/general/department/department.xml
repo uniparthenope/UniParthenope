@@ -4,14 +4,16 @@
       xmlns="http://schemas.nativescript.org/tns.xsd"
       backgroundSpanUnderStatusBar="true">
 
-    <ActionBar>
-        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+    <ActionBar class="action-bar" title="UniParthenope">
 
         <ActionItem icon="res://menu"
                     ios:visibility="collapsed"
                     tap="onDrawerButtonTap"
                     android.position="right">
         </ActionItem>
+
+        <Image src="~/images/home/toptitle.png" android:width="200" class="action-image"/>
+
 
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"

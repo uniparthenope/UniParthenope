@@ -153,7 +153,7 @@ exports.onItemTap = function(args) {
     const index = args.index;
 
     //TODO Dettagli Corsi
-    //const adLogId = { adLogId: items.getItem(index).adLogId, esame: items.getItem(index).esame, docente: items.getItem(index).prof};
+    //const adLogId = { adLogId: items.getItem(index).adLogId, esame: items.getItem(index).esame, docente: items.getItem(index).docente};
 
     //mainView.showModal(modalViewModule, adLogId, false);
 }
