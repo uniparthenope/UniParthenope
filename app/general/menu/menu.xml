@@ -41,8 +41,8 @@
                     </accordion:Accordion.itemHeaderTemplate>
 
                     <accordion:Accordion.itemContentTemplate>
-                        <GridLayout width="100%" >
-                            <StackLayout orientation="vertical" height="150" width="100%" verticalAlignment="center" marginTop="10">
+                        <GridLayout width="100%" backgroundColor="rgba(0,0,0,0.3)">
+                            <StackLayout orientation="vertical" height="150" width="100%" verticalAlignment="center" marginTop="10" backgroundColor="rgba(0,0,0,0.3)">
                                 <Image src="{{ image }}" stretch="aspectFill"/>
                             </StackLayout>
                             <StackLayout orientation="vertical" verticalAlignment="bottom" width="100%" backgroundColor="rgba(0,0,0,0.3)" marginLeft="5">

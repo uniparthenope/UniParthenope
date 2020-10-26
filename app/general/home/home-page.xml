@@ -21,7 +21,7 @@
         <x:StatusBar ios:barStyle="light" barColor="rgba(0, 0, 0,0.0)"/>
     </ios>
     <android>
-        <x:StatusBar ios:barStyle="light" barColor="rgb(34, 56, 79)"/>
+        <x:StatusBar ios:barStyle="light" barColor="rgb(30, 50, 88)"/>
     </android>
 
     <GridLayout>
@@ -36,12 +36,7 @@
             <GridLayout rows="auto,*" row="0" width="100%">
 
                 <GridLayout row="0" backgroundColor="#1E3258" width="100%" height="30%" verticalAlignment="top">
-                    <ios>
-                        <Image src="~/images/home/toptitle.png" marginLeft="5" height="50%" verticalAlignment="center" horizontalAlignment="left"/>
-                    </ios>
-                    <android>
-                        <Image src="~/images/home/toptitle.png" marginRight="5" height="50%" verticalAlignment="center" horizontalAlignment="right"/>
-                    </android>
+                    <Image src="~/images/home/toptitle_reversed.png" marginRight="5" height="50%" verticalAlignment="center" horizontalAlignment="right"/>
                 </GridLayout>
                 <GridLayout row="1" backgroundImage="~/images/background2.jpg">
                     <StackLayout backgroundColor="rgba(0,0,0,0.6)" width="100%" height="100%"/>
@@ -121,7 +116,7 @@
 
             <!--Hamburger Menu-->
             <ios>
-                <Button class="myMenu" backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="right" height="20" width="20" marginRight="15" marginTop="15"/>
+                <Button class="myMenu" backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="left" height="20" width="20" marginLeft="15" marginTop="15"/>
             </ios>
             <android>
                 <Button class="myMenu" backgroundImage="res://menu" ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" height="25" width="25" margin="20 5 10 5"/>

@@ -8,7 +8,7 @@
 
     <nsDrawer:RadSideDrawer.drawerContent>
 
-        <GridLayout android:backgroundColor="rgba(0, 0, 0,0.6)" ios:class="reversed-two-color-gradient">
+        <GridLayout android:backgroundColor="rgba(30, 50, 88,0.4)" ios:class="two-color-gradient">
             <Image src="~/images/logo_new.png" android:opacity="0.3" ios:opacity="0.2" horizontalAlignment="right" verticalAlignment="center" marginTop="50%" width="500"/>
         <!--     Top Menu, foto e nome       -->
             <StackLayout orientation="vertical" verticalAlignment="top" height="80%" margin="5 5 5 5">

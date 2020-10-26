@@ -21,32 +21,32 @@
     </ActionBar>
     <GridLayout>
         <StackLayout horizontalAlignment="center" verticalAlignment="top">
-        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-            <Label class="textPrimary" text="Settings" horizontalAlignment="center" verticalAlignment="center"/>
-        </GridLayout>
+            <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+                <Label class="textPrimary" text="Settings" horizontalAlignment="center" verticalAlignment="center"/>
+            </GridLayout>
             <ScrollView height="80%">
                 <StackLayout verticalAlignment="top">
                     <GridLayout id="appello_futuro" margin="5 5 5 5" columns="*,50" height="50" visibility="collapsed">
-                        <Label class="textPrimary" id="text_appello" color="#22384f" col="0" text="Mostra altri appelli" horizontalAlignment="left" verticalAlignment="center"/>
-                        <Switch col="1" id="switch_appello"  checked="false" loaded="onSwitchLoaded_appello" horizontalAlignment="right" verticalAlignment="center"/>
+                        <Label class="textPrimary" id="text_appello"  col="0" text="Mostra altri appelli" horizontalAlignment="left" verticalAlignment="center"/>
+                        <Switch class="switch-app" col="1" id="switch_appello" checked="false" loaded="onSwitchLoaded_appello" horizontalAlignment="right" verticalAlignment="center"/>
                     </GridLayout>
                     <GridLayout margin="5 5 5 5" columns="*,50" height="50" >
-                        <Label class="textPrimary" id="text_appello" color="#22384f" col="0" text="Mostra PopUp Sondaggio" horizontalAlignment="left" verticalAlignment="center"/>
+                        <Label class="textPrimary" id="text_appello"  col="0" text="Mostra PopUp Sondaggio" horizontalAlignment="left" verticalAlignment="center"/>
                         <Switch col="1" id="switch_sondaggio"  checked="false" loaded="onSwitchLoaded_sondaggio" horizontalAlignment="right" verticalAlignment="center"/>
                     </GridLayout>
                     <StackLayout>
-                        <Label class="textPrimary" color="#22384f" text="Notifiche:" margin="15 5 5 5"/>
+                        <Label class="textPrimary"  text="Notifiche:" margin="15 5 5 5"/>
 
                         <GridLayout margin="5 5 5 35" columns="*,50" height="50" id="visibility_topic_newsall">
-                            <Label class="textPrimary" id="text_topic_newsall" color="#22384f" col="0" text="Notifiche Notizie" horizontalAlignment="left" verticalAlignment="center"/>
+                            <Label class="textPrimary" id="text_topic_newsall"  col="0" text="Notifiche Notizie" horizontalAlignment="left" verticalAlignment="center"/>
                             <Switch col="1" id="switch_topic_newsall"  checked="false" loaded="onSwitchLoaded_topic_newsall" horizontalAlignment="right" verticalAlignment="center"/>
                         </GridLayout>
                         <GridLayout margin="5 5 5 35" columns="*,50" height="50" id="visibility_topic_grpId">
-                            <Label class="textPrimary" id="text_topic_grpId" color="#22384f" col="0" text="Notifiche Gruppo" horizontalAlignment="left" verticalAlignment="center"/>
+                            <Label class="textPrimary" id="text_topic_grpId"  col="0" text="Notifiche Gruppo" horizontalAlignment="left" verticalAlignment="center"/>
                             <Switch col="1" id="switch_topic_grpId"  checked="false" loaded="onSwitchLoaded_topic_grpId" horizontalAlignment="right" verticalAlignment="center"/>
                         </GridLayout>
                         <GridLayout margin="5 5 5 35" columns="*,50" height="50" id="visibility_topic_cdsId">
-                            <Label class="textPrimary" id="text_topic_cdsId" color="#22384f" col="0" text="Notifiche Corso di Studio" horizontalAlignment="left" verticalAlignment="center"/>
+                            <Label class="textPrimary" id="text_topic_cdsId"  col="0" text="Notifiche Corso di Studio" horizontalAlignment="left" verticalAlignment="center"/>
                             <Switch col="1" id="switch_topic_cdsId"  checked="false" loaded="onSwitchLoaded_topic_cdsId" horizontalAlignment="right" verticalAlignment="center"/>
                         </GridLayout>
                     </StackLayout>
@@ -58,7 +58,7 @@
             </ScrollView>
         </StackLayout>
         <StackLayout verticalAlignment="bottom">
-            <Button   tap="onTapSurvey" class="btn" text="Partecipa al Sondaggio" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
+            <Button tap="onTapSurvey" class="btn" text="Partecipa al Sondaggio" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
             <Button id="deleteBtn" visibility="collapsed" tap="onTapDelete" class="btn" text="Dimentica Account" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
         </StackLayout>
     </GridLayout>

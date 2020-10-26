@@ -2,7 +2,6 @@
       navigatingTo="onNavigatingTo"
       actionBarHidden="false"
       xmlns="http://schemas.nativescript.org/tns.xsd"
-      xmlns:x="nativescript-statusbar"
       xmlns:accordion="nativescript-accordion">
 
     <ActionBar class="action-bar" title="UniParthenope">
@@ -13,6 +12,9 @@
                     android.position="right">
         </ActionItem>
 
+        <Image src="~/images/home/toptitle.png" android:width="200" class="action-image"/>
+
+
         <ActionItem icon="res://navigation/menu"
                     android:visibility="collapsed"
                     tap="onDrawerButtonTap"
@@ -21,19 +23,22 @@
 
     </ActionBar>
 
-    <GridLayout backgroundColor="rgb(34, 56, 79)">
+    <GridLayout>
         <StackLayout orientation="vertical" height="100%" >
 
-            <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <GridLayout backgroundColor="#1E3258" width="100%" height="10%" verticalAlignment="top">
                 <Label class="textPrimary" text="Notizie" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
-            <StackLayout verticalAlignment="top"  height="100%">
+            <StackLayout verticalAlignment="top" height="100%" backgroundColor="#1E3258">
+                <GridLayout backgroundColor="#1E3258">
+
+
                 <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%">
                     <accordion:Accordion.itemHeaderTemplate>
-                        <GridLayout marginBottom="10" height="250" >
+                        <GridLayout backgroundColor="#1E3258"  height="250" >
                             <Image src="{{ image }}" marginTop="5" horizontalAlignment="center" stretch="aspectFill"/>
-                            <StackLayout horizontalAlignment="center" verticalAlignment="bottom" backgroundColor="rgb(34, 56, 79,0.7)" width="100%">
+                            <StackLayout horizontalAlignment="center" verticalAlignment="bottom" width="100%" >
                                 <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textWrap="true" margin="5 5 5 5"/>
                                 <Label class="textPrimary" text="{{date_text}}" horizontalAlignment="center" fontSize="11" margin="5 5 5 5"/>
                             </StackLayout>
@@ -41,11 +46,12 @@
                     </accordion:Accordion.itemHeaderTemplate>
 
                     <accordion:Accordion.itemContentTemplate>
-                        <StackLayout margin="5 5 5 5" >
-                            <HtmlView html="{{desc}}" android:color="white"/>
+                        <StackLayout padding="5 5 5 5" backgroundColor="#1E3258">
+                            <HtmlView html="{{desc}}" android:color="white" backgroundColor="#1E3258"/>
                         </StackLayout>
                     </accordion:Accordion.itemContentTemplate>
                 </accordion:Accordion>
+                </GridLayout>
             </StackLayout>
         </StackLayout>
 

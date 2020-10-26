@@ -10,33 +10,42 @@ of writing your own CSS rules. For a full list of class names in the theme
 refer to http://docs.nativescript.org/ui/theme.
 */
 /*  Colori app:
-    BLU SCURO = #22384f
-                34, 56, 79,
-    BLU SCURO NEW = #1E3258
 
-    BLU CHIARO = #107dd0
+
+    BLU SCURO NEW = #1E3258
+                30, 50, 88
+
     BLU CHIARO NEW = #2E7C9E
 
     VERDE SCURO = #009432
     VERDE CHIARO = #5CC77A
+        BLU SCURO = #22384f
+                34, 56, 79,
+        BLU CHIARO = #107dd0
 */
 
+Page {
+    background-color: #1E3258;
+}
+Accordion{
+    background-color: #1E3258;
+}
 .btn {
-    color:#22384f;
-    border-color:#22384f;
+    color:#1E3258;
+    border-color:#1E3258;
     background-color: white;
     text-align: center;
     text-transform: none;
     border-width: 2;
-    border-radius: 2 2 2 2;
-    font-family: Montserrat-Regular;
+    border-radius: 5%;
+    font-family: "Roboto Slab";
     height: 45;
     font-size:17;
 }
 .btn:focus
 {
-    border-color: #107dd0;
-    color:#107dd0;
+    border-color: #2E7C9E;
+    color:#2E7C9E;
 }
 
 .btn-menu
@@ -46,16 +55,17 @@ refer to http://docs.nativescript.org/ui/theme.
     text-align: center;
     text-transform: none;
     border-width: 2;
-    border-radius: 2 2 2 2;
-    font-family: Montserrat-Regular;
+    border-radius: 5%;
+    font-family: "Roboto Slab";
     height: 45;
     font-size:17;
     width: 90%;
 }
 .btn-menu:pressed
 {
-    border-color: #107dd0;
-    color:#107dd0;
+
+    background-color: #2E7C9E;
+;
 }
 
 .roundedBtn_top
@@ -72,8 +82,8 @@ refer to http://docs.nativescript.org/ui/theme.
 }
 .roundedBtn_top:active
 {
-    background-color: #107dd0;
-    border-color: #107dd0;
+    background-color: #2E7C9E;
+    border-color: #2E7C9E;
 }
 .roundedBtn
 {
@@ -89,15 +99,15 @@ refer to http://docs.nativescript.org/ui/theme.
 }
 .roundedBtn:active
 {
-    background-color: #107dd0;
-    border-color: #107dd0;
+    background-color: #2E7C9E;
+    border-color: #2E7C9E;
 }
 .imageTop
 {
     border-color: white;
     border-width: 5;
     border-radius: 100%;
-    background-color: #22384f;
+    background-color: #1E3258;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -105,8 +115,8 @@ refer to http://docs.nativescript.org/ui/theme.
 
 .roundedInfo
 {
-    border-color: #22384f;
-    color: #22384f;
+    border-color: #1E3258;
+    color: #1E3258;
     border-width: 5;
     border-radius: 100%;
     background-color: white;
@@ -117,27 +127,27 @@ refer to http://docs.nativescript.org/ui/theme.
 .action-bar
 {
     font-size:18;
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
     vertical-align:center
 }
 
 .two-color-gradient {
-    background: linear-gradient(135deg, #107dd0, #22384f);
+    background: linear-gradient(135deg, #2E7C9E, #1E3258);
 }
 .reversed-two-color-gradient {
-     background: linear-gradient(135deg, #22384f, #107dd0);
+     background: linear-gradient(135deg, #1E3258, #2E7C9E);
  }
 .topTitle
 {
-    font-family: Rasa-Medium;
+    font-family: "Roboto Slab";
     color: white;
     font-size: 28;
 }
 .form-input {
-    border-bottom-color: #107dd0;
+    border-bottom-color: #2E7C9E;
     border-bottom-width: 1;
     color: white;
-    placeholder-color: #107dd0;
+    placeholder-color: #2E7C9E;
     width: 90%;
 }
 .ios-form-input {
@@ -145,25 +155,25 @@ refer to http://docs.nativescript.org/ui/theme.
     border-bottom-width: 1;
     color: white;
     placeholder-color: white;
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
     font-size: 18;
     margin: 10 10 10 10;
 }
 .textPrimary
 {
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
     font-size: 18;
     color: white;
 }
 .textPrimary-bold
 {
-    font-family: Montserrat-Bold;
+    font-family: "Roboto Slab";
     font-size: 18;
     color: white;
 }
 .textMontserratRegular
 {
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
 }
 .lode
 {
@@ -195,28 +205,28 @@ refer to http://docs.nativescript.org/ui/theme.
 .border
 {
     border-width: 3;
-    border-color: #22384f;
+    border-color: #1E3258;
     border-radius: 5;
 }
 .examPass
 {
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
     font-size: 18;
-    color: #22384f;
-    border-color: #22384f;
+    color: #1E3258;
+    border-color: #1E3258;
     border-width: 5;
     border-radius: 100%;
 }
 .textMont_noborder
 {
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
     font-size: 18;
-    color: #22384f;
+    color: #1E3258;
 
 }
 .examNA
 {
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
     font-size: 18;
     color: gray;
     border-color: gray;
@@ -226,7 +236,7 @@ refer to http://docs.nativescript.org/ui/theme.
 
 .examFreq
 {
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
     font-size: 18;
     color: lightgray;
     border-color: lightgray;
@@ -239,18 +249,18 @@ refer to http://docs.nativescript.org/ui/theme.
     margin: 6;
 }
 .color-green{
-    font-family: Montserrat-Regular;
-    color: #22384f;
-    border-color: #22384f;
+    font-family: "Roboto Slab";
+    color: #1E3258;
+    border-color: #1E3258;
 
 }
 .color-gray{
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
     color:gray;
     border-color: gray;
 }
 .color-yellow{
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
     color:orange;
 
 
@@ -278,7 +288,7 @@ refer to http://docs.nativescript.org/ui/theme.
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 100%;
-    border-color: #22384f;
+    border-color: #1E3258;
     border-width: 5;
 }
 
@@ -308,30 +318,45 @@ refer to http://docs.nativescript.org/ui/theme.
     border-radius: 15%;
 }
 ActionBar {
-    background-color: #22384f;
+    background-color: #1E3258;
     color: white;
 }
 
 .ios Button
 {
-    color:rgba(34, 56, 79, 0.9);
-    background-color: rgba(34, 56, 79, 0.7);
-    font-family: Montserrat-Regular;
+    color:rgba(30, 50, 88, 0.9);
+    background-color: rgba(30, 50, 88, 0.7);
+    font-family: "Roboto Slab";
 }
 .android Button
 {
     color:#fff;
     background-color: rgba(34, 56, 79, 0.7);
-    font-family: Montserrat-Regular;
+    font-family: "Roboto Slab";
 }
 ListView{
-    separator-color: #22384f;
+    separator-color: #1E3258;
 }
 
 TabStrip {
     selected-item-color: white;
     un-selected-item-color: gray;
     highlight-color: #107dd0;
-    background-color: rgb(34, 56, 79);
+    background-color: #1E3258;
 }
+
+Dialogs{
+
+    color: #1E3258;
+}
+
+Switch[checked=true]{
+    color:#2E7C9E ;
+    background-color: lightgray;
+}
+
+ Switch[checked=false]{
+        color: gray;
+     background-color: gray;
+ }
 
