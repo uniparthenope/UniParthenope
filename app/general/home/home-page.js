@@ -193,11 +193,11 @@ function setAnagrafe(id, type){
         console.log("MI SPOSTO ...");
         let navigator = "";
         if(type === "Studenti")
-            navigator = "userCalendar/userCalendar";
+            navigator = "studenti/userCalendar/userCalendar";
         else if(type === "Docenti")
             navigator = "docenti/docenti-home/docenti-home";
         else
-            navigator = "home/home-page";
+            navigator = "general/home/home-page";
 
         indicator.visibility = "collapsed";
 

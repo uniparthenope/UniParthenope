@@ -41,12 +41,19 @@ function getDocenti(){
                 if (!flag){
                     let corsi = [];
                     corsi.push(result[i].corso);
+                    console.log(result[i].curriculum);
                     items.push({
                         docenteNome: result[i].docenteNome + " "+ result[i].docenteCognome,
                         docenteCognome: result[i].docenteCognome,
                         corso: corsi,
                         telefono: result[i].telefono,
                         mail: result[i].email,
+                        biography: result[i].biography,
+                        notes: result[i].notes,
+                        curriculum: result[i].curriculum,
+                        pubblications: result[i].publications,
+                        ruolo: result[i].ruolo,
+                        settore: result[i].settore,
                         pic: imageSourceModule.fromBase64(result[i].url_pic),
                         url: result[i].link
                     });
@@ -108,8 +115,18 @@ exports.onItemTap = function(args) {
     const mainView = args.object;
     const index = args.index;
 
-    const adLogId = { nome: items.getItem(index).docenteNome, telefono: items.getItem(index).telefono, mail: items.getItem(index).mail,
-        url: items.getItem(index).url};
+    const adLogId = {
+        nome: items.getItem(index).docenteNome,
+        telefono: items.getItem(index).telefono,
+        mail: items.getItem(index).mail,
+        biography: items.getItem(index).biography,
+        notes: items.getItem(index).notes,
+        url: items.getItem(index).url,
+        curriculum: items.getItem(index).curriculum,
+        pubblications: items.getItem(index).pubblications,
+        ruolo: items.getItem(index).ruolo,
+        settore: items.getItem(index).settore
+    };
     //console.log(adLogId.nome);
     mainView.showModal(modalViewModule, adLogId, false);
 

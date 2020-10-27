@@ -14,8 +14,19 @@ function onShownModally(args) {
     closeCallback = args.closeCallback;
     page = args.object;
     page.getViewById("nome").text = context.nome;
+    page.getViewById("ruolo").text = context.ruolo +" "+ context.settore;
+
     page.getViewById("telefono").text = context.telefono;
     page.getViewById("email").text = context.mail;
+    page.getViewById("note").text = context.notes;
+    page.getViewById("bio").text = context.biography;
+    page.getViewById("curr").text = context.curriculum;
+    page.getViewById("pub").text = context.pubblications;
+
+    console.log(context.curriculum)
+
+
+
 
     page.bindingContext = observableModule.fromObject(context);
 
