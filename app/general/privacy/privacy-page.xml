@@ -33,7 +33,7 @@
             <GridLayout rows="*">
                 <ScrollView>
                     <GridLayout rows="*">
-                        <HtmlView html="{{ privacy }}"/>
+                        <HtmlView html="{{ privacy }}" backgroundColor="#1E3258"/>
                     </GridLayout>
                 </ScrollView>
             </GridLayout>

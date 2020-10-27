@@ -25,32 +25,32 @@
         <GridLayout rows="auto,*,50">
             <GridLayout row="0" class="two-color-gradient" width="100%" height="35%" verticalAlignment="top">
                 <StackLayout verticalAlignment="top" height="100%" marginTop="5">
-                    <Label class="textPrimary" id="cdsDes" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                    <Label class="textPrimary" id="cdsDes" horizontalAlignment="center" textWrap="true" textAlignment="center" margin="5 5 0 5"/>
                     <GridLayout height="65%" marginBottom="5">
 
                         <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="20" verticalAlignment="center">
-                            <Label class="textMontserratRegular" text="Medie" horizontalAlignment="left" color="white" marginBottom="5"/>
+                            <Label class="textMontserratRegular" text="Medie" horizontalAlignment="center" color="white" marginBottom="5"/>
                             <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
-                                <Label class="textMontserratRegular" id="medExam" fontSize="18" color="white" text="" verticalAlignment="center"/>
+                                <Label class="textMontserratRegular" id="medExam" fontSize="18" color="orange" text="" verticalAlignment="center"/>
                                 <Label class="textMontserratRegular" id="medExam_tot" color="white" text=""  verticalAlignment="center"/>
                             </StackLayout>
                             <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
-                                <Label class="textMontserratRegular" id="medPond" fontSize="18" color="white" text="" verticalAlignment="center"/>
+                                <Label class="textMontserratRegular" id="medPond" fontSize="18" color="orange" text="" verticalAlignment="center"/>
                                 <Label class="textMontserratRegular" id="medPond_tot" color="white" text=""  verticalAlignment="center"/>
                             </StackLayout>
                         </StackLayout>
 
-                        <GridLayout class="roundedBtn" backgroundColor="Transparent" horizontalAlignment="center" width="100" height="100" marginTop="15" >
+                        <GridLayout class="roundedBtn" borderColor="orange" backgroundColor="Transparent" horizontalAlignment="center" width="100" height="100" marginTop="15" >
                             <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
-                                <Label  id="doneExams" class="textPrimary" text="" fontSize="30" verticalAlignment="center"/>
+                                <Label  id="doneExams" color="orange" class="textPrimary" text="" fontSize="30" verticalAlignment="center"/>
                                 <Label  id="totExams" class="textPrimary" text=""  fontSize="16" verticalAlignment="center"/>
                             </StackLayout>
                         </GridLayout>
 
                         <StackLayout orientation="vertical" horizontalAlignment="right" marginRight="20" verticalAlignment="center">
-                            <Label class="textMontserratRegular" text="Tot. CFU" horizontalAlignment="left" color="white" marginBottom="5"/>
+                            <Label class="textMontserratRegular" text="Tot. CFU" horizontalAlignment="left" color="white" marginBottom="15"/>
                             <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
-                                <Label class="textMontserratRegular" id="cfuPar" fontSize="18" color="white" text="" verticalAlignment="center"/>
+                                <Label class="textMontserratRegular" id="cfuPar" fontSize="18" color="orange" text="" verticalAlignment="center"/>
                                 <Label class="textMontserratRegular" id="cfuTot" color="white" text=""  verticalAlignment="center"/>
                             </StackLayout>
                         </StackLayout>
@@ -74,7 +74,7 @@
                                     <Label  class="{{ classe }}" borderWidth="0" text="{{ voto }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
                                 </GridLayout>
                                 <StackLayout orientation="vertical" width="70%">
-                                    <Label class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15"/>
+                                    <Label class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" horizontalAlignment="center"/>
                                     <Label class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ data }}" fontSize="11" horizontalAlignment="center"/>
                                 </StackLayout>
                                 <GridLayout  width="70">
@@ -86,9 +86,9 @@
                 </ListView>
             </StackLayout>
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#107dd0" width="100%" verticalAlignment="bottom">
+            <GridLayout row="2" backgroundColor="#2E7C9E" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
-                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout id="selected_col" col="0" backgroundColor="#1E3258"/>
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>

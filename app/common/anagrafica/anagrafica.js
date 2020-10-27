@@ -33,8 +33,8 @@ function choseBackground(page){
         page.getViewById("info_panel").backgroundColor = "rgba(221, 108, 166,0.9)";
     }
     else{
-        page.getViewById("back_image").backgroundImage = "~/images/image1.jpg";
-        page.getViewById("info_panel").backgroundColor = "rgba(34, 56, 79,0.9)";
+        page.getViewById("back_image").backgroundImage = "~/images/newbackground.jpg";
+        page.getViewById("info_panel").backgroundColor = "rgba(30, 50, 88,1)";
     }
 }
 

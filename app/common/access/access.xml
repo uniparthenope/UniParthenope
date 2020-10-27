@@ -34,10 +34,10 @@
                 <Switch col="1" id="switch_sondaggio" checked="true" loaded="onSwitchLoaded_autocert" horizontalAlignment="right" verticalAlignment="center"/>
             </GridLayout>
 
-            <StackLayout margin="5 5 5 5" id="scelta_accesso" visibility="collapsed">
+            <StackLayout margin="25 5 5 5" id="scelta_accesso" visibility="collapsed">
                 <Label class="textMont_noborder" textWrap="true" text="Intendo frequentare i corsi del primo semestre dell'Anno Accademico 2020/2021:"/>
                 <Label id="alert1" visibility="collapsed" textAlignment="center" textWrap="true" text="Attenzione: Non è stato ancora scelto un metodo!" color="red" marginTop="5"/>
-                <ListPicker id="listpicker" items="{{ status }}" selectedIndex="0" loaded="onListPickerLoaded"/>
+                <ListPicker id="listpicker" color="white" items="{{ status }}" selectedIndex="0" loaded="onListPickerLoaded"/>
             </StackLayout>
 
 

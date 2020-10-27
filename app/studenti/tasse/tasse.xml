@@ -34,10 +34,13 @@
                 </StackLayout>
 
                 <StackLayout height="90%" class="border" borderWidth="2" margin="10 10 10 10" verticalAlignment="top">
-                    <Label class="textPrimary" height="10%" text="Storico" textAlignment="center" backgroundColor="#22384f" width="100%" />
+                    <GridLayout class="two-color-gradient" height="10%" width="100%">
+                        <Label class="textPrimary-bold" color="white" text="Storico" verticalAlignment="center" textAlignment="center"  />
+
+                    </GridLayout>
 
                     <StackLayout height="100%">
-                        <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
+                        <ListView id="listview" class="list-group" items="{{ items }}" separatorColor="#ffffffff" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
                             <ListView.itemTemplate >
                                 <FlexboxLayout flexDirection="row">
                                     <StackLayout  width="100%" marginBottom="5" marginTop="5">

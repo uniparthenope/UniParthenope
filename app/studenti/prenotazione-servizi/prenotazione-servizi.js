@@ -210,7 +210,7 @@ exports.onItemTap = function(args) {
                         }).then(function (){
                             const nav =
                                 {
-                                    moduleName: "prenotazione-servizi/prenotazione-servizi",
+                                    moduleName: "studenti/prenotazione-servizi/prenotazione-servizi",
                                     clearHistory: true
                                 };
                             page.frame.navigate(nav);
@@ -267,7 +267,7 @@ exports.onItemTap = function(args) {
                         }).then(function (){
                             const nav =
                                 {
-                                    moduleName: "prenotazione-servizi/prenotazione-servizi",
+                                    moduleName: "studenti/prenotazione-servizi/prenotazione-servizi",
                                     clearHistory: true
                                 };
                             page.frame.navigate(nav);

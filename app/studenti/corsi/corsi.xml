@@ -45,7 +45,7 @@
                                     <Label  class="examPass" borderWidth="0" text="{{ anno }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
                                 </GridLayout>
                                 <StackLayout orientation="vertical" width="70%">
-                                    <Label class="examPass" borderWidth="0" borderRadius="0" horizontalAlignment="center" text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" textAlignment="center"/>
+                                    <Label class="examPass" color="orange" borderWidth="0" borderRadius="0" horizontalAlignment="center" text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" textAlignment="center"/>
                                     <Label class="examPass" borderWidth="0"  borderRadius="0" text="{{ prof }}" fontSize="14" horizontalAlignment="center"/>
 
                                     <Label class="examPass" borderWidth="0"  borderRadius="0" text="{{ partizione }}" fontSize="14" horizontalAlignment="center"/>
@@ -63,9 +63,9 @@
                 </ListView>
             </StackLayout>
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#107dd0" height="10%" width="100%" verticalAlignment="bottom">
+            <GridLayout row="2" backgroundColor="#2E7C9E" height="10%" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
-                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout id="selected_col" col="0" backgroundColor="#1E3258"/>
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>

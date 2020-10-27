@@ -3,7 +3,7 @@ const utilsModule = require("tns-core-modules/utils/utils");
 require("nativescript-accordion");
 let email = require("nativescript-email");
 let phone = require( "nativescript-phone" );
-const modalViewModule = "modal-ricevimento/modal-ricevimento";
+const modalViewModule = "modal/modal-ricevimento/modal-ricevimento";
 let closeCallback;
 
 let context;

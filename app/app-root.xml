@@ -16,7 +16,7 @@
                     <StackLayout height="35%" orientation="vertical" verticalAlignment="top" marginTop="5">
                         <Label id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" fontSize="12" marginBottom="5" horizontalAlignment="center"/>
                         <StackLayout class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="120" height="120"/>
-                        <Label id="topName" text="Benvenuto!" color="white" fontSize="18" textWrap="true" horizontalAlignment="center" textAlignment="center"/>
+                        <Label id="topName" text="Benvenuto!" color="orange" fontSize="18" textWrap="true" horizontalAlignment="center" textAlignment="center"/>
                         <Label id="topEmail" text="EMAIL!" visibility="collapsed" heigth="100%" textWrap="true" color="white" fontSize="11" horizontalAlignment="center" textAlignment="center"/>
                     </StackLayout>
                 </ios>

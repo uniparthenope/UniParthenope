@@ -168,6 +168,7 @@ Accordion{
 .textPrimary-bold
 {
     font-family: "Roboto Slab";
+    font-weight: bold;
     font-size: 18;
     color: white;
 }
@@ -205,7 +206,7 @@ Accordion{
 .border
 {
     border-width: 3;
-    border-color: #1E3258;
+    border-color: white;
     border-radius: 5;
 }
 .examPass
@@ -237,8 +238,8 @@ Accordion{
 {
     font-family: "Roboto Slab";
     font-size: 18;
-    color: lightgray;
-    border-color: lightgray;
+    color: gray;
+    border-color: gray;
     border-width: 5;
     border-radius: 100%;
 }
@@ -287,7 +288,7 @@ Accordion{
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 100%;
-    border-color: white;
+    border-color: orange;
     border-width: 5;
 }
 
@@ -349,18 +350,16 @@ TabStrip {
     background-color: #1E3258;
 }
 
-Dialogs{
-
-    color: #1E3258;
-}
-
 Switch[checked=true]{
     color:#2E7C9E ;
-    background-color: lightgray;
+    background-color: orange;
 }
 
  Switch[checked=false]{
         color: gray;
      background-color: gray;
+ }
+ ListPicker{
+     color: white;
  }
 

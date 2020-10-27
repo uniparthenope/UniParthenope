@@ -26,27 +26,27 @@ function choseBackground(page){
 
     if (code === "D1" || code === "D6"){
         page.getViewById("back_image").backgroundImage = "~/images/image_Parisi.jpg";
-        page.getViewById("info_panel").backgroundColor = "rgba(11, 114, 181,0.9)";
+        page.getViewById("info_panel").backgroundColor = "rgba(11, 114, 181,0.8)";
     }
     else if (code === "D2" || code === "D7"){
         page.getViewById("back_image").backgroundImage = "~/images/image_Parisi.jpg";
-        page.getViewById("info_panel").backgroundColor = "rgba(119, 72, 150,0.9)";
+        page.getViewById("info_panel").backgroundColor = "rgba(119, 72, 150,0.8)";
     }
     else if (code === "D3"){
         page.getViewById("back_image").backgroundImage = "~/images/image_CDN.jpg";
-        page.getViewById("info_panel").backgroundColor = "rgba(36, 36, 36,0.9)";
+        page.getViewById("info_panel").backgroundColor = "rgba(36, 36, 36,0.8)";
     }
     else if (code === "D4"){
         page.getViewById("back_image").backgroundImage = "~/images/image_CDN.jpg";
-        page.getViewById("info_panel").backgroundColor = "rgba(0, 167, 84,0.9)";
+        page.getViewById("info_panel").backgroundColor = "rgba(0, 167, 84,0.8)";
     }
     else if (code === "D4"){
         page.getViewById("back_image").backgroundImage = "~/images/image_Acton.jpg";
-        page.getViewById("info_panel").backgroundColor = "rgba(221, 108, 166,0.9)";
+        page.getViewById("info_panel").backgroundColor = "rgba(221, 108, 166,0.8)";
     }
     else{
-        page.getViewById("back_image").backgroundImage = "~/images/image1.jpg";
-        page.getViewById("info_panel").backgroundColor = "rgba(34, 56, 79,0.9)";
+        page.getViewById("back_image").backgroundImage = "~/images/background2.jpg";
+        page.getViewById("info_panel").backgroundColor = "rgba(30, 50, 88,1)";
     }
 }
 
@@ -170,49 +170,49 @@ exports.onNavigatingTo = function(args) {
     console.log(appSettings.getString("grpDes"));
     if (appSettings.getString("grpDes") === "Studenti"){
 
-        getPIC(appSettings.getNumber("persId"), 0);
-        page.getViewById("name").text = appSettings.getString("nome");
+        getPIC(appSettings.getNumber("persId",0), 0);
+        page.getViewById("name").text = appSettings.getString("nome","");
         page.getViewById("surname").text = appSettings.getString("cognome");
-        page.getViewById("matricola").text = appSettings.getString("matricola");
-        page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
-        page.getViewById("depart").text = appSettings.getString("facDes").toUpperCase();
+        page.getViewById("matricola").text = appSettings.getString("matricola","");
+        page.getViewById("role").text = appSettings.getString("grpDes","").toUpperCase();
+        page.getViewById("depart").text = appSettings.getString("facDes","").toUpperCase();
     }
     else if (appSettings.getString("grpDes") === "Docenti"){
 
-        getPIC(appSettings.getNumber("idAb"), 1);
-        page.getViewById("name").text = appSettings.getString("nome");
-        page.getViewById("surname").text = appSettings.getString("cognome");
+        getPIC(appSettings.getNumber("idAb",0), 1);
+        page.getViewById("name").text = appSettings.getString("nome","");
+        page.getViewById("surname").text = appSettings.getString("cognome","");
         page.getViewById("my_img").backgroundImage = url;
-        page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
-        page.getViewById("matricola").text = appSettings.getString("matricola");
-        page.getViewById("roleID").text = appSettings.getString("settCod");
-        page.getViewById("depart").text = appSettings.getString("facDes").toUpperCase();
+        page.getViewById("role").text = appSettings.getString("grpDes","").toUpperCase();
+        page.getViewById("matricola").text = appSettings.getString("matricola","");
+        page.getViewById("roleID").text = appSettings.getString("settCod","");
+        page.getViewById("depart").text = appSettings.getString("facDes","").toUpperCase();
     }
     else if (appSettings.getString("grpDes") === "PTA"){
 
         getPIC(appSettings.getNumber("persId"), 0);
-        page.getViewById("name").text = appSettings.getString("nome");
-        page.getViewById("surname").text = appSettings.getString("cognome");
-        page.getViewById("matricola").text = appSettings.getString("matricola");
-        page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
+        page.getViewById("name").text = appSettings.getString("nome","");
+        page.getViewById("surname").text = appSettings.getString("cognome","");
+        page.getViewById("matricola").text = appSettings.getString("matricola","");
+        page.getViewById("role").text = appSettings.getString("grpDes","").toUpperCase();
     }
     else if (appSettings.getString("grpDes") === "Ristorante"){
         console.log("BADGE RISTORATORE");
         //getPIC(appSettings.getNumber("persId"), 0);
-        page.getViewById("name").text = appSettings.getString("nome");
-        page.getViewById("surname").text = appSettings.getString("cognome");
-        page.getViewById("matricola").text = appSettings.getString("matricola");
+        page.getViewById("name").text = appSettings.getString("nome","");
+        page.getViewById("surname").text = appSettings.getString("cognome","");
+        page.getViewById("matricola").text = appSettings.getString("matricola","");
         page.getViewById("mat_label").text = "NOME RISTORANTE";
-        page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
+        page.getViewById("role").text = appSettings.getString("grpDes","").toUpperCase();
     }
     else {
         console.log(appSettings.getNumber("persId"));
 
         getPIC(appSettings.getNumber("persId"), 0);
-        page.getViewById("name").text = appSettings.getString("nome");
-        page.getViewById("surname").text = appSettings.getString("cognome");
-        page.getViewById("matricola").text = appSettings.getString("matricola");
-        page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
+        page.getViewById("name").text = appSettings.getString("nome","");
+        page.getViewById("surname").text = appSettings.getString("cognome","");
+        page.getViewById("matricola").text = appSettings.getString("matricola","");
+        page.getViewById("role").text = appSettings.getString("grpDes","").toUpperCase();
     }
 
 

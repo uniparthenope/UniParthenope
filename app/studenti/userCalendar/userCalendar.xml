@@ -77,9 +77,9 @@
                 </rc:RadCalendar.dayViewStyle>
             </rc:RadCalendar>
 <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#107dd0" height="50" width="100%" verticalAlignment="bottom">
+            <GridLayout row="2" backgroundColor="#2E7C9E" height="50" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
-                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout id="selected_col" col="0" backgroundColor="#1E3258"/>
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>

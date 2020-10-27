@@ -34,11 +34,11 @@
 
             <Label fontSize="12" margin="5 5 5 5" text="Selezionare un dipartimento dall'elenco:"/>
 
-            <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" height="20%">
-                <ListView id="department-listview" class="list-group" items="{{departments}}" itemTap="onItemTap_department" marginRight="5" marginLeft="5">
+            <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" borderColor="white" height="20%">
+                <ListView id="department-listview"  items="{{departments}}" itemTap="onItemTap_department" marginRight="5" marginLeft="5">
                 <ListView.itemTemplate>
-                    <GridLayout>
-                        <Label color="#22384f" text="{{area}}" textAlignment="center"/>
+                    <GridLayout backgroundColor="#1E3258">
+                        <Label text="{{area}}" textAlignment="center"/>
                     </GridLayout>
                 </ListView.itemTemplate>
                 </ListView>
@@ -46,25 +46,26 @@
             </StackLayout>
             <Label margin="5 5 5 5" fontSize="12" text="Selezionare un servizio a cui prenotarsi:"/>
 
-            <GridLayout  borderRadius="20%" borderWidth="2">
+            <GridLayout  borderRadius="20%" borderWidth="2" borderColor="white">
 
                 <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessun Servizio Trovato!"/>
 
                 <StackLayout verticalAlignment="top" margin="5 5 5 5" height="95%">
-                    <ListView id="lezioni_listview" class="list-group" items="{{prenotazioneServizi}}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                    <ListView id="lezioni_listview" class="list-group" items="{{prenotazioneServizi}}" itemTap="onItemTap" marginRight="5" marginLeft="5" separatorColor="white">
                         <ListView.itemTemplate >
-                            <GridLayout rows="*,*,*,*">
-                                <GridLayout row="0" rows="*,*" backgroundColor="#22384f" color="white" >
-                                    <GridLayout row="0" columns="auto,*,auto" borderRadius="5%" padding="5 5 5 5">
+                            <GridLayout rows="*,*,*,*" backgroundColor="#1E3258">
+                                <GridLayout row="0" rows="*,*"  color="white" borderRadius="5%" backgroundColor="#1E3258">
+                                    <GridLayout row="0" columns="auto,*,auto"  padding="5 5 5 5">
                                         <StackLayout col="0" orientation="vertical" horizontalAlignment="left">
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Inizio: " marginRight="5"/>
-                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ start }}"/>
+                                            <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ start }}"/>
                                         </StackLayout>
-                                        <Label col="1" borderWidth="0" text="{{ room }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+
+                                        <Label col="1" borderWidth="0" color="orange" text="{{ room }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
 
                                         <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Fine: " marginRight="5"/>
-                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ end }}"/>
+                                            <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ end }}"/>
                                         </StackLayout>
                                     </GridLayout>
 
@@ -74,7 +75,7 @@
                                 </GridLayout>
 
 
-                                <StackLayout row="1" orientation="vertical"  width="100%" >
+                                <StackLayout row="1" orientation="vertical"  width="100%" backgroundColor="#1E3258">
                                     <StackLayout orientation="vertical"  width="100%" >
                                     </StackLayout>
 
@@ -82,8 +83,8 @@
                                         <Label text="PRENOTATO" color="white" width="100%" backgroundColor="rgba(0,200,0,0.8)" verticalAlignment="center" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
                                     </StackLayout>
 
-                                    <GridLayout columns="*,auto,auto" horizontalAlignment="center" width="100%" margin="5 5 5 5">
-                                        <Progress col="0" maxValue="{{max_c}}" value="{{ava_c}}" marginRight="10" marginLeft="10" verticalAlignment="center"/>
+                                    <GridLayout columns="*,auto,auto" horizontalAlignment="center" width="100%" margin="5 5 5 5" >
+                                        <Progress col="0" color="#2E7C9E" maxValue="{{max_c}}" value="{{ava_c}}" marginRight="10" marginLeft="10" verticalAlignment="center"/>
                                         <Label col="1" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ availability }}" verticalAlignment="center"/>
                                         <Label col="2" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ capacity }}" verticalAlignment="center" marginRight="10"/>
                                     </GridLayout>

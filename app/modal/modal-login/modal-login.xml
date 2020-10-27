@@ -14,11 +14,11 @@
                                 <Label text="{{ cdsDes }}" android:color="#22384f" ios:color="white" fontSize="16" marginBottom="10" textWrap="true" textAlignment="center" width="100%"/>
                                 <StackLayout orientation="horizontal" horizontalAlignment="left">
                                     <Label text="Matricola: " ios:color="white" android:color="#22384f"/>
-                                    <Label text="{{ matricola }}" color="#107dd0"/>
+                                    <Label text="{{ matricola }}" color="orange"/>
                                 </StackLayout>
                                 <StackLayout orientation="horizontal" horizontalAlignment="left">
                                     <Label text="Stato: " ios:color="white" android:color="#22384f"/>
-                                    <Label text="{{ status }}" color="#107dd0"/>
+                                    <Label text="{{ status }}" color="orange"/>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
