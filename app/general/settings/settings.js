@@ -87,7 +87,7 @@ exports.onTapDelete = function (){
 
             const nav =
                 {
-                    moduleName: "home/home-page",
+                    moduleName: "general/home/home-page",
                     clearHistory: true
                 };
             page.frame.navigate(nav);        }

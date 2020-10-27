@@ -30,50 +30,57 @@
         </GridLayout>
 
         <rc:RadCalendar id="myCalendar" inlineEventSelected="onDaySelected" selectionMode="Single" viewMode="Month" eventsViewMode="Inline" eventSource="{{ events }}" verticalAlignment="top">
-            <rc:RadCalendar.dayViewStyle>
-                <rc:CalendarDayViewStyle showTitle="true" showDayNames="true" >
-                    <rc:CalendarDayViewStyle.todayCellStyle>
-                        <rc:DayCellStyle cellBorderColor="#940400" cellTextColor="#940400" cellTextFontName="Montserrat-Bold" cellTextSize="14" />
-                    </rc:CalendarDayViewStyle.todayCellStyle>
+            <rc:RadCalendar.monthViewStyle>
+                <rc:CalendarMonthViewStyle backgroundColor="#2E7C9E" showTitle="true" showDayNames="true" >
 
-                    <rc:CalendarDayViewStyle.dayCellStyle>
-                        <rc:DayCellStyle showEventsText="true" eventTextColor="White" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
-                                         cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#107dd0"
-                                         cellTextColor="#ffffff" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" ios:cellTextSize="12" android:cellTextSize="10"/>
-                    </rc:CalendarDayViewStyle.dayCellStyle>
+                    <rc:CalendarMonthViewStyle.todayCellStyle>
+                        <rc:DayCellStyle cellBackgroundColor="#1E3258" cellTextColor="white" cellBorderWidth="2" cellBorderColor="white" />
+                    </rc:CalendarMonthViewStyle.todayCellStyle>
 
-                    <rc:CalendarDayViewStyle.weekendCellStyle>
-                        <rc:DayCellStyle eventTextColor="BlueViolet" eventFontName="Times New Roman" eventFontStyle="BoldItalic" eventTextSize="8"
-                                         cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="#940400"
-                                         cellTextColor="#ffffff" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="12" />
-                    </rc:CalendarDayViewStyle.weekendCellStyle>
+                    <rc:CalendarMonthViewStyle.dayCellStyle>
+                        <rc:DayCellStyle showEventsText="true" eventTextColor="white" eventFontName="Roboto Slab" eventTextSize="8"
+                                         cellBackgroundColor="#1E3258"
+                                         cellTextColor="white" cellTextFontName="Roboto Slab" cellTextFontStyle="Bold" ios:cellTextSize="16" android:cellTextSize="14"/>
+                    </rc:CalendarMonthViewStyle.dayCellStyle>
 
-                    <rc:CalendarDayViewStyle.selectedDayCellStyle>
-                        <rc:DayCellStyle eventTextColor="Blue" eventFontName="Times New Roman" eventFontStyle="Bold" eventTextSize="8"
-                                         cellAlignment="VerticalCenter" cellPaddingHorizontal="10" cellPaddingVertical="5" cellBackgroundColor="White"
-                                         cellBorderWidth="2" cellBorderColor="White" cellTextColor="#22384f" cellTextFontName="Times New Roman" cellTextFontStyle="Bold" cellTextSize="22" />
-                    </rc:CalendarDayViewStyle.selectedDayCellStyle>
+                    <rc:CalendarMonthViewStyle.anotherMonthCellStyle>
+                        <rc:DayCellStyle showEventsText="true" eventTextColor="white" eventFontName="Roboto Slab" eventTextSize="8"
+                                         cellBackgroundColor="#1E3258"
+                                         cellTextColor="gray" cellTextFontName="Roboto Slab" cellTextFontStyle="Bold" ios:cellTextSize="16" android:cellTextSize="14"/>
+                    </rc:CalendarMonthViewStyle.anotherMonthCellStyle>
 
 
+                    <rc:CalendarMonthViewStyle.weekendCellStyle>
+                        <rc:DayCellStyle eventTextColor="white" eventFontName="Roboto Slab" eventTextSize="8"
+                                         cellBackgroundColor="#1E3258"
+                                         cellTextColor="darkred" cellTextFontName="Roboto Slab" cellTextFontStyle="Bold" ios:cellTextSize="16" android:cellTextSize="14"/>
+                    </rc:CalendarMonthViewStyle.weekendCellStyle>
 
-                    <rc:CalendarDayViewStyle.dayNameCellStyle>
-                        <rc:CellStyle  cellBackgroundColor="#ffffff" cellBorderWidth="1" cellBorderColor="#22384f" cellTextColor="#22384f" cellTextFontName="Montserrat-Regular" cellTextSize="10" />
-                    </rc:CalendarDayViewStyle.dayNameCellStyle>
+                    <rc:CalendarMonthViewStyle.selectedDayCellStyle>
+                        <rc:DayCellStyle eventTextColor="white" eventFontName="Roboto Slab" eventFontStyle="Bold" eventTextSize="8"
+                                         cellBackgroundColor="#1E3258"
+                                         cellBorderWidth="2" cellBorderColor="orange" cellTextColor="#1E3258" cellTextFontName="Roboto Slab" cellTextFontStyle="Bold" cellTextSize="18" />
+                    </rc:CalendarMonthViewStyle.selectedDayCellStyle>
 
-                    <rc:CalendarDayViewStyle.titleCellStyle>
-                        <rc:CellStyle cellTextColor="#22384f" cellTextFontName="Montserrat-Regular" cellTextSize="18" />
-                    </rc:CalendarDayViewStyle.titleCellStyle>
+                    <!-- Nomi mesi-->
+                    <rc:CalendarMonthViewStyle.dayNameCellStyle>
+                        <rc:CellStyle  cellBackgroundColor="#2E7C9E" cellTextColor="white" cellTextFontName="Roboto Slab" cellTextFontStyle="Bold" cellTextSize="10" />
+                    </rc:CalendarMonthViewStyle.dayNameCellStyle>
 
-                    <rc:CalendarDayViewStyle.dayEventsViewStyle>
-                        <rc:DayEventsViewStyle
-                                timeLabelFormat="HH:mm" timeLabelTextColor="#22384f"
-                                timeLabelTextSize="12"/>
-                    </rc:CalendarDayViewStyle.dayEventsViewStyle>
+                    <!-- Nome mese attuale titolo-->
+                    <rc:CalendarMonthViewStyle.titleCellStyle>
+                        <rc:CellStyle  cellBackgroundColor="#2E7C9E" cellTextColor="white" cellTextFontName="Roboto Slab" cellTextFontStyle="Bold" cellTextSize="18" />
+                    </rc:CalendarMonthViewStyle.titleCellStyle>
 
+                    <rc:CalendarMonthviewStyle.inlineEventCellStyle>
+                        <rc:InlineEventCellStyle cellBackgroundColor="#2E7C9E" eventTextColor="white"
+                                                 eventFontName="Roboto Slab" eventTextSize="14"
+                                                 timeTextColor="orange" timeFontName="Roboto Slab" timeFontStyle="Regular"
+                                                 timeTextSize="14"/>
+                    </rc:CalendarMonthviewStyle.inlineEventCellStyle>
 
-                </rc:CalendarDayViewStyle>
-
-            </rc:RadCalendar.dayViewStyle>
+                </rc:CalendarMonthViewStyle>
+            </rc:RadCalendar.monthViewStyle>
         </rc:RadCalendar>
 
     </StackLayout>
