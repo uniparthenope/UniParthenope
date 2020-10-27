@@ -54,7 +54,7 @@ function getDocenti(){
                         pubblications: result[i].publications,
                         ruolo: result[i].ruolo,
                         settore: result[i].settore,
-                        pic: imageSourceModule.fromBase64(result[i].url_pic),
+                        pic: result[i].url_pic,
                         url: result[i].link
                     });
 

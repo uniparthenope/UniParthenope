@@ -43,7 +43,6 @@
                         <Label class="textPrimary" color="orange" editable="true" fontSize="12" text="--" horizontalAlignment="center" id="pub" textWrap="true" textAlignment="center"/>
                     </StackLayout>
 
-
                 </GridLayout>
 
             </ScrollView>
