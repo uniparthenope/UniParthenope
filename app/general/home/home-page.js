@@ -51,36 +51,11 @@ function getNews(){
             console.log(result.length);
 
             for (let i=0; i<result.length; i++) {
-                /*
-                let arr_desc_not = [];
-                let items = {
 
-                };
-                arr_desc_not.push(items);
-
-
-
-                if (platformModule.isIOS){
-                    arr_desc_not.splice(0, 0, {});
-                }
-                */
-
-                let dat = new Date(result[i].data);
                 news.push({
                     title: result[i].titolo,
-                    //date:result[i].data,
-                    //date_text: dat.getDate() + "/" + (dat.getMonth()+1) + "/" +dat.getFullYear() + " "+dat.getHours() + ":00",
-                    body: result[i].HTML
+                    body: result[i].abstract
                 });
-                /*
-                news.sort(function (orderA, orderB) {
-                    let dataA = Date.parse(orderA.date);
-                    let dataB = Date.parse(orderB.date);
-
-                    return (dataA > dataB) ? -1 : (dataA < dataB) ? 1 : 0;
-                });
-
-                 */
             }
             loading.visibility = "collapsed";
         }

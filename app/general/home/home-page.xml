@@ -3,8 +3,8 @@
       actionBarHidden="true"
       xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:x="nativescript-statusbar"
-      backgroundSpanUnderStatusBar="true"
-      xmlns:lv="nativescript-ui-listview">
+      xmlns:ns="nativescript-carousel"
+      backgroundSpanUnderStatusBar="true">
 
     <ActionBar >
         <ActionItem icon="res://menu"
@@ -44,17 +44,18 @@
 
                     <!-- Notizie/Avvisi-->
                     <GridLayout backgroundColor="rgba(0,0,0,0.4)" margin = "0 10 0 10" height="70%" borderRadius="15%" >
-                        <lv:RadListView items="{{ news }}" orientation="horizontal">
-                            <lv:RadListView.listViewLayout>
-                                <lv:ListViewStaggeredLayout scrollDirection="Horizontal" spanCount="1"/>
-                            </lv:RadListView.listViewLayout>
-                            <lv:RadListView.itemTemplate>
-                                <StackLayout orientation="vertical" width="300">
-                                    <Label fontSize="20" text="{{ title }}"/>
-                                    <HtmlView fontSize="14" html="{{ body }}" textWrap="true"/>
-                                </StackLayout>
-                            </lv:RadListView.itemTemplate>
-                        </lv:RadListView>
+                        <ns:Carousel id="myCarousel" items="{{ news }}" color="white" indicatorColorUnselected="#50d9bb84"
+                                     pageChanged="myChangeEvent" pageTapped="mySelectedEvent" ios:autoPagingInterval="10" android:indicatorAnimation="THIN_WORM"
+                                     indicatorColor="#d9bb84" indicatorOffset="0,0" showIndicator="true">
+                            <ns:Carousel.itemTemplate>
+                                <ns:CarouselItem backgroundColor="rgba(64,43,18,1)">
+                                    <GridLayout >
+                                        <Label textWrap="true" text="{{ title }}"/>
+                                        <Image src="{{ image }}" stretch="aspectFill" />
+                                    </GridLayout>
+                                </ns:CarouselItem>
+                            </ns:Carousel.itemTemplate>
+                        </ns:Carousel>
 
                         <StackLayout id="activityNews" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
                             <Label text="Recupero Notizie..." horizontalAlignment="center" class="textPrimary"/>
