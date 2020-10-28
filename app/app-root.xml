@@ -9,7 +9,7 @@
     <nsDrawer:RadSideDrawer.drawerContent>
 
         <GridLayout android:backgroundColor="rgba(30, 50, 88,0.4)" ios:backgroundColor="#1E3258">
-            <Image src="~/images/logo_new.png" android:opacity="0.3" ios:opacity="0.2" horizontalAlignment="right" verticalAlignment="center" marginTop="50%" width="500"/>
+            <Image src="~/images/logo_new.png" android:opacity="0.3" ios:opacity="0.2" horizontalAlignment="right" verticalAlignment="center" marginTop="15%" width="500"/>
         <!--     Top Menu, foto e nome       -->
             <StackLayout orientation="vertical" verticalAlignment="top" height="80%" margin="5 5 5 5">
                 <ios>
@@ -61,12 +61,13 @@
 
                     <StackLayout id="userDocente" visibility="collapsed">
 
-                        <Button class="btn" text="Mia Home" marginBottom="5" marginTop="20" tap="goto_professor_home"/>
-                        <Button class="btn" id="badge_button_docente" text="Faculty Card/Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
+                        <Button class="btn-menu" text="Mia Home" marginBottom="5" marginTop="20" tap="goto_professor_home"/>
+                        <Button class="btn-menu" id="badge_button_docente" text="Faculty Card/Badge" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
-                        <Button class="btn" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
-                        <Button class="btn" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
+                        <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
+                        <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
                     </StackLayout>
+
                     <!--     Ristoratore       -->
                     <StackLayout id="userRistoratore" visibility="collapsed">
 
@@ -94,7 +95,7 @@
 
 
             <!--     Bottom Menu, about e settings       -->
-            <StackLayout verticalAlignment="bottom" width="100%" height="20%" marginBottom="10" >
+            <StackLayout verticalAlignment="bottom" width="100%" height="20%" padding="10 10 10 10" >
                 <StackLayout backgroundColor="white" height="1" margin="10 5 10 5"/>
 
                 <Button class="btn" text="Info" marginBottom="5" tap="goto_about"/>

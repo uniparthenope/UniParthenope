@@ -2,16 +2,18 @@
       shownModally="onShownModally">
     <GridLayout ios:height="100%" android:height="50%" ios:class="two-color-gradient">
         <StackLayout orientation="vertical" ios:height="100%">
+
             <StackLayout class="two-color-gradient" height="20%" verticalAlignment="center">
-                <Label ios:verticalAlignment="bottom" ios:horizontalAlignment="center" text="Selezionare una carriera:"  color="white" fontSize="20"/>
+                <Label class="textPrimary" ios:verticalAlignment="bottom" ios:horizontalAlignment="center" text="Selezionare una carriera:"  color="white" fontSize="20"/>
             </StackLayout>
-            <ScrollView height="70%" ios:backgroundColor="#22384f" width="100%">
-            <ListView id="listview" class="list-group" ios:backgroundColor="#22384f" ios:separatorColor="#ffffffff" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5" width="100%">
+
+            <StackLayout ios:backgroundColor="#1E3258" width="100%" height="100%">
+                <ListView id="listview" class="list-group" ios:backgroundColor="#1E3258" ios:separatorColor="#ffffffff" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5" height="100%">
                 <ListView.itemTemplate>
                     <FlexboxLayout flexDirection="row"  width="100%">
-                        <StackLayout orientation="horizontal" width="100%" ios:backgroundColor="#22384f">
+                        <StackLayout orientation="horizontal" width="100%" ios:backgroundColor="#1E3258">
                             <StackLayout orientation="vertical" marginBottom="10" marginTop="10" margin="5 5 5 5">
-                                <Label text="{{ cdsDes }}" android:color="#22384f" ios:color="white" fontSize="16" marginBottom="10" textWrap="true" textAlignment="center" width="100%"/>
+                                <Label class="textPrimary" text="{{ cdsDes }}" android:color="#22384f" ios:color="white" fontSize="16" marginBottom="10" textWrap="true" textAlignment="center" width="100%"/>
                                 <StackLayout orientation="horizontal" horizontalAlignment="left">
                                     <Label text="Matricola: " ios:color="white" android:color="#22384f"/>
                                     <Label text="{{ matricola }}" color="orange"/>
@@ -25,7 +27,7 @@
                     </FlexboxLayout>
                 </ListView.itemTemplate>
             </ListView>
-            </ScrollView>
+            </StackLayout>
         </StackLayout>
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" width="100%" height="100%" backgroundColor="rgba(0,0,0,0.5)">
             <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
