@@ -336,7 +336,7 @@ ActionBar {
 }
 ListView{
     separator-color: white;
-    background-color: #1E3258;
+    background-color: transparent;
 }
 
 FlexboxLayout{

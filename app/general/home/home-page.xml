@@ -43,16 +43,18 @@
                     <StackLayout backgroundColor="rgba(0,0,0,0.6)" width="100%" height="100%"/>
 
                     <!-- Notizie/Avvisi-->
-                    <GridLayout backgroundColor="rgba(0,0,0,0.4)" margin = "0 10 0 10" height="70%" borderRadius="15%" >
-                        <ns:Carousel id="myCarousel" items="{{ news }}" color="white" indicatorColorUnselected="#50d9bb84"
-                                     pageChanged="myChangeEvent" pageTapped="mySelectedEvent" ios:autoPagingInterval="10" android:indicatorAnimation="THIN_WORM"
-                                     indicatorColor="#d9bb84" indicatorOffset="0,0" showIndicator="true">
+                    <GridLayout  margin = "0 5 0 5" height="70%" borderRadius="10%" >
+
+                        <ns:Carousel id="myCarousel" items="{{ news }}" color="white" indicatorColorUnselected="#1E3258"
+                                     pageChanged="myChangeEvent" pageTapped="onTapNotizie" ios:autoPagingInterval="10" android:indicatorAnimation="THIN_WORM"
+                                     indicatorColor="#2E7C9E" indicatorOffset="0,0" showIndicator="true" >
                             <ns:Carousel.itemTemplate>
-                                <ns:CarouselItem backgroundColor="rgba(64,43,18,1)">
-                                    <GridLayout >
-                                        <Label textWrap="true" text="{{ title }}"/>
-                                        <Image src="{{ image }}" stretch="aspectFill" />
-                                    </GridLayout>
+                                <ns:CarouselItem backgroundColor="rgba(30, 50, 88,0.3)">
+                                    <StackLayout padding="10 10 10 10">
+                                        <Label textWrap="true" fontSize="20" text="{{ title }}" marginBottom="5"/>
+                                        <Label textWrap="true" fontSize="12" text="{{ date }}" marginBottom="15"/>
+                                        <HtmlView textWrap="true" fontSize="12" html="{{ body }}" backgroundColor="transparent"/>
+                                    </StackLayout>
                                 </ns:CarouselItem>
                             </ns:Carousel.itemTemplate>
                         </ns:Carousel>
@@ -70,13 +72,13 @@
             <!-- Dipartimenti-->
             <GridLayout marginTop="15%" verticalAlignment="top">
                 <StackLayout orientation="horizontal" verticalAlignment="bottom" marginBottom="50" horizontalAlignment="center">
-                    <Button class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/02_Giuris.png" ontap="ontap_fb"/>
-                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/03_Inge.png" ontap="ontap_twi"/>
-                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/01_Economia.png" ontap="ontap_insta"/>
-                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/01_Economia.png" ontap="ontap_you"/>
-                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/01_Economia.png" ontap="ontap_insta"/>
-                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/04_Tecnologie.png" ontap="ontap_you"/>
-                    <Button  class="roundedBtn_top" text="" backgroundImage="~/images/icon_home/05_Motorie.png" ontap="ontap_linkedin"/>
+                    <Button class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/02_Giuris.png" ontap=""/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/03_Inge.png" ontap=""/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/01_Economia.png" ontap=""/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/01_Economia.png" ontap=""/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/01_Economia.png" ontap=""/>
+                    <Button  class="roundedBtn_top" text="" marginRight="10" backgroundImage="~/images/icon_home/04_Tecnologie.png" ontap=""/>
+                    <Button  class="roundedBtn_top" text="" backgroundImage="~/images/icon_home/05_Motorie.png" ontap=""/>
 
                 </StackLayout>
             </GridLayout>
