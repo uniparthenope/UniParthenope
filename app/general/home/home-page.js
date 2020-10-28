@@ -9,6 +9,9 @@ let appversion = require("nativescript-appversion");
 const modalViewModule = "modal/modal-meteo/modal-meteo";
 const appRater = require("nativescript-rater").appRater;
 let firebase = require("nativescript-plugin-firebase");
+const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
+
+
 
 let page;
 let viewModel;
@@ -17,12 +20,80 @@ let remember;
 let user;
 let pos;
 let indicator;
+let news;
 
 let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553, color: 'linear-gradient(135deg, #5CC77A, #009432)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(0, 167, 84))'},
     {id: 'Medina', lat: 40.840447, long: 14.251863, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(221, 108, 166))'},
     {id: 'Acton', lat: 40.837372, long: 14.253502, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(11, 114, 181))'},
     {id: 'Parisi', lat: 40.832308, long: 14.245027, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(119, 72, 150))'},
     {id: 'Villa', lat: 40.823872, long: 14.216225, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(36, 36, 36))'}];
+
+function getNews(){
+    let loading = page.getViewById("activityNews");
+    //loading.visibility = "visible";
+
+    httpModule.request({
+        url: global.url + "general/avvisi/3",
+        method: "GET"
+    }).then((response) => {
+        const result = response.content.toJSON();
+
+        if (response.statusCode === 401 || response.statusCode === 500)
+        {
+            dialogs.alert({
+                title: "Errore: Notizie getNotifications",
+                message: result.errMsg,
+                okButtonText: "OK"
+
+            });
+        }
+        else {
+            console.log(result.length);
+
+            for (let i=0; i<result.length; i++) {
+                /*
+                let arr_desc_not = [];
+                let items = {
+
+                };
+                arr_desc_not.push(items);
+
+
+
+                if (platformModule.isIOS){
+                    arr_desc_not.splice(0, 0, {});
+                }
+                */
+
+                let dat = new Date(result[i].data);
+                news.push({
+                    title: result[i].titolo,
+                    //date:result[i].data,
+                    //date_text: dat.getDate() + "/" + (dat.getMonth()+1) + "/" +dat.getFullYear() + " "+dat.getHours() + ":00",
+                    body: result[i].HTML
+                });
+                /*
+                news.sort(function (orderA, orderB) {
+                    let dataA = Date.parse(orderA.date);
+                    let dataB = Date.parse(orderB.date);
+
+                    return (dataA > dataB) ? -1 : (dataA < dataB) ? 1 : 0;
+                });
+
+                 */
+            }
+            loading.visibility = "collapsed";
+        }
+    },(e) => {
+        console.log("Error", e);
+        dialogs.alert({
+            title: "Errore: Notizie",
+            message: e.toString(),
+            okButtonText: "OK"
+        });
+    });
+}
+
 
 function checkServer(timeout){
     httpModule.request({
@@ -105,17 +176,6 @@ function calculateDistance(position) {
 
     }
     return closer;
-}
-
-function initializeGraph(){
-    for (let i = 0; i < array_locations.length; i++) {
-        let bg = page.getViewById("bg_" + i.toString());
-        let icon = page.getViewById("icon_" + i.toString());
-
-
-        bg.background = array_locations[i].background;
-        icon.backgroundImage = '~/images/icon_home/' + array_locations[i].id + ".png";
-    }
 }
 
 function getPosition(){
@@ -535,7 +595,11 @@ function autoconnect() {
 
 exports.onNavigatingTo = function (args) {
     page = args.object;
-    viewModel = observableModule.fromObject({});
+    news = new ObservableArray();
+
+    viewModel = observableModule.fromObject({
+        news:news
+    });
     sideDrawer = app.getRootView();
     indicator = page.getViewById("activityIndicator");
 
@@ -560,6 +624,8 @@ exports.onNavigatingTo = function (args) {
     checkServer(10000);
     //initializeGraph();
     //console.log(global.tempPos);
+
+    getNews();
 
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
         console.log("Setto la posizione!");

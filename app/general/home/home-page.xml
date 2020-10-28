@@ -3,7 +3,8 @@
       actionBarHidden="true"
       xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:x="nativescript-statusbar"
-      backgroundSpanUnderStatusBar="true">
+      backgroundSpanUnderStatusBar="true"
+      xmlns:lv="nativescript-ui-listview">
 
     <ActionBar >
         <ActionItem icon="res://menu"
@@ -40,6 +41,23 @@
                 </GridLayout>
                 <GridLayout row="1" backgroundImage="~/images/background2.jpg">
                     <StackLayout backgroundColor="rgba(0,0,0,0.6)" width="100%" height="100%"/>
+
+                    <!-- Notizie/Avvisi-->
+                    <GridLayout backgroundColor="rgba(0,0,0,0.4)" margin = "0 10 0 10" height="70%" borderRadius="15%" >
+                        <lv:RadListView items="{{ news }}" orientation="horizontal">
+                            <lv:RadListView.itemTemplate>
+                                <StackLayout orientation="vertical">
+                                    <Label fontSize="20" text="{{ title }}"/>
+                                    <Label fontSize="14" text="{{ body }}"/>
+                                </StackLayout>
+                            </lv:RadListView.itemTemplate>
+                        </lv:RadListView>
+
+                        <StackLayout id="activityNews" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+                            <Label text="Recupero Notizie..." horizontalAlignment="center" class="textPrimary"/>
+                            <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>
+                        </StackLayout>
+                    </GridLayout>
 
                     <StackLayout id="bottom_bar" height="5" width="100%" verticalAlignment="top" backgroundColor="#2E7C9E"/>
 
