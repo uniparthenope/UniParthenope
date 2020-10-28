@@ -2,27 +2,27 @@
       shownModally="onShownModally"
       xmlns:accordion="nativescript-accordion">
 
-    <StackLayout android:height="75%">
-        <StackLayout backgroundColor="#22384f" marginBottom="10">
-            <Label class="textPrimary" id="esame" textWrap="true" textAlignment="center"/>
+    <StackLayout android:height="75%" backgroundColor="#1E3258">
+        <StackLayout class="two-color-gradient" marginBottom="10" height="15%">
+            <Label class="textPrimary" id="esame" textWrap="true" marginTop="15" textAlignment="center"/>
             <Label class="textPrimary" id="docente" textWrap="true" textAlignment="center"/>
         </StackLayout>
 
-        <ScrollView height="100%" marginLeft="5" marginRight="5" >
-            <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%">
+        <StackLayout height="100%" backgroundColor="#1E3258" >
+            <accordion:Accordion  items="{{items}}" allowMultiple="false" height="100%" backgroundColor="#1E3258" >
                 <accordion:Accordion.itemHeaderTemplate>
-                    <GridLayout horizontalAlignment="center">
-                        <Label class="btn" color="#22384f" text="{{obiettivi}}" horizontalAlignment="center" width="90%" marginBottom="10" verticalAlignment="center"/>
-                    </GridLayout>
+                    <StackLayout horizontalAlignment="center" backgroundColor="#1E3258" width="100%">
+                        <Label class="btn" text="{{obiettivi}}" horizontalAlignment="center" width="90%" marginBottom="10" verticalAlignment="center"/>
+                    </StackLayout>
                 </accordion:Accordion.itemHeaderTemplate>
 
                 <accordion:Accordion.itemContentTemplate>
-                    <StackLayout>
-                        <Label class="textPrimary" color="black" fontSize="12" text="{{ desc }}" textWrap="true" margin="5 5 5 5"/>
+                    <StackLayout backgroundColor="#1E3258" padding="15 15 15 15">
+                        <Label class="textPrimary" color="white" fontSize="12" text="{{ desc }}" textWrap="true"/>
                     </StackLayout>
                 </accordion:Accordion.itemContentTemplate>
             </accordion:Accordion>
-        </ScrollView>
+        </StackLayout>
 
     </StackLayout>
 </Page>

@@ -32,18 +32,18 @@
                 <Label row="1" class="textPrimary" id="sessione" horizontalAlignment="center" verticalAlignment="bottom" fontSize="14"/>
                 <Label row="2" class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="10" fontSize="12"/>
             </GridLayout>
-            <ScrollView row="1" verticalAlignment="top"  height="100%">
+            <StackLayout row="1" verticalAlignment="top"  height="100%">
 
                 <accordion:Accordion id="accordion" itemHeaderTap="tapped" itemContentTap="childTapped" items="{{items_appello}}" allowMultiple="false" heigth="100%">
                     <accordion:Accordion.itemHeaderTemplate>
-                        <GridLayout height="75" backgroundColor="#22384f">
+                        <GridLayout height="75" backgroundColor="#2E7C9E" >
                             <Label class="textPrimary" text="{{ titolo }}" textWrap="true" textAlignment="center" verticalAlignment="center"/>
                         </GridLayout>
                     </accordion:Accordion.itemHeaderTemplate>
                     <accordion:Accordion.itemContentTemplate>
                         <StackLayout>
-                            <GridLayout margin="5 5 5 5">
-                                <StackLayout orientation="vertical"  width="100%" >
+                            <GridLayout padding="5 5 5 5" backgroundColor="#1E3258">
+                                <StackLayout orientation="vertical"  width="100%" backgroundColor="#1E3258">
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">
                                         <Label class="{{ classe }}" borderWidth="0" text="{{ dataEsame }}"/>
                                     </StackLayout>
@@ -70,12 +70,12 @@
                         </StackLayout>
                     </accordion:Accordion.itemContentTemplate>
                 </accordion:Accordion>
-            </ScrollView>
+            </StackLayout>
 
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#107dd0" width="100%" verticalAlignment="bottom">
+            <GridLayout row="2" backgroundColor="#2E7C9E" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
-                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout id="selected_col" col="0" backgroundColor="#1E3258"/>
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>

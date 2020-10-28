@@ -1,7 +1,7 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
       shownModally="onShownModally"
       xmlns:accordion="nativescript-accordion">
-    <GridLayout height="100%" backgroundColor="#22384f">
+    <GridLayout height="100%" backgroundColor="#1E3258">
 
 
 
@@ -9,11 +9,11 @@
             <Label class="textPrimary" text="Meteo@Uniparthenope" textWrap="true" textAlignment="center" verticalAlignment="center"/>
         </GridLayout>
 
-        <GridLayout height="55%" backgroundColor="#22384f">
-            <StackLayout class="pic_rounded" opacity="0.2" verticalAlignment="center" height="100%" width="100%" backgroundImage="~/images/logo_parth.png"/>
+        <GridLayout height="55%" backgroundColor="#1E3258">
+            <StackLayout class="pic_rounded" borderWidth="0" opacity="0.2" verticalAlignment="center" height="100%" width="100%" backgroundImage="~/images/logo_new.png"/>
             <GridLayout rows="auto,auto" verticalAlignment="center" backgroundColor="rgba(0, 0, 0, 0.3)" height="55%">
 
-            <Label row="0" class="textPrimary" fontSize="16" text="Comune" id="position" textWrap="true" horizontalAlignment="center" verticalAlignment="center" marginBottom="10"/>
+            <Label row="0" class="textPrimary" color="orange" fontSize="16" text="Comune" id="position" textWrap="true" horizontalAlignment="center" verticalAlignment="center" marginBottom="10"/>
             <GridLayout row="1" verticalAlignment="center">
                 <GridLayout columns="*,*,*,*" margin="5 5 5 5">
                     <StackLayout col="0" verticalAlignment="center">
@@ -56,7 +56,7 @@
 
         </GridLayout>
         </GridLayout>
-        <StackLayout orientation="horizontal" backgroundColor="rgba(0, 0, 0, 0.3)" verticalAlignment="bottom" height="20%" horizontalAlignment="center" ontap="ontap_download">
+        <StackLayout orientation="horizontal" backgroundColor="rgba(0, 0, 0, 0.3)" verticalAlignment="bottom" height="10%" horizontalAlignment="center" ontap="ontap_download">
             <Image src="~/images/meteo.png" height="60" width="60" horizontalAlignment="center" marginRight="5" marginLeft="10" verticalAlignment="center"/>
             <Label class="textPrimary" text="Scarica gratuitamente la nostra app" textWrap="true" marginRight="10" textAlignment="center" verticalAlignment="center" horizontalAlignment="left"/>
         </StackLayout>

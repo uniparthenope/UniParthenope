@@ -2,8 +2,8 @@
       shownModally="onShownModally">
 
     <StackLayout height="55%">
-        <StackLayout backgroundColor="#22384f" marginBottom="10" height="20%" verticalAlignment="center">
-            <Label class="textPrimary" id="nome" text="TEST!" textWrap="true" textAlignment="center" verticalAlignment="center"/>
+        <StackLayout class="two-color-gradient" marginBottom="10" height="20%" verticalAlignment="center">
+            <Label class="textPrimary" id="nome" text="Ricevimento non ancora implementato!" textWrap="true" textAlignment="center" verticalAlignment="center"/>
         </StackLayout>
         <GridLayout>
 

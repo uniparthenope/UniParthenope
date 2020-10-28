@@ -91,10 +91,10 @@
 
         </GridLayout>
 
-        <Image src="~/images/icon/qr-code_icon.png" width="35" height="35" verticalAlignment="top" horizontalAlignment="right"
+        <Image src="~/images/icon/qr-code_icon.png" width="25" height="25" verticalAlignment="top" horizontalAlignment="right"
                marginTop="20" marginRight="20" ontap="tap_scanQR"/>
 
-        <Image src="~/images/icon/refresh.png" width="35" height="35" verticalAlignment="top" horizontalAlignment="left"
+        <Image src="~/images/icon/refresh.png" width="25" height="25" verticalAlignment="top" horizontalAlignment="left"
                marginTop="20" marginLeft="20" ontap="tap_reloadQR"/>
 
     </GridLayout>

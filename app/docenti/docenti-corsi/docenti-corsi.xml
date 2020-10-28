@@ -35,7 +35,7 @@
             </StackLayout>
 
             <StackLayout row="1" verticalAlignment="top" height="100%">
-                <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
+                <ListView id="listview" separatorColor="#ffffffff" class="list-group" items="{{ items }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
                     <ListView.itemTemplate >
                         <FlexboxLayout flexDirection="row">
                             <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
@@ -43,7 +43,7 @@
                                     <Label  class="examPass" borderWidth="0" text="{{ semestre }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
                                 </GridLayout>
                                 <GridLayout rows="auto,auto,auto,auto">
-                                    <Label row="0" class="examPass" borderRadius="0" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" horizontalAlignment="left"/>
+                                    <Label row="0" class="examPass" color="orange" borderRadius="0" borderWidth="0"  text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" horizontalAlignment="left"/>
                                     <Label row="1" class="examPass" borderRadius="0" borderWidth="0"  text="{{ settCod }}" fontSize="14" horizontalAlignment="center"/>
                                     <StackLayout  row="2" orientation="horizontal" horizontalAlignment="center">
                                         <Label class="examPass" borderWidth="0" borderRadius="0" text="{{ data_inizio }}" fontSize="14" horizontalAlignment="center"/>
@@ -60,9 +60,9 @@
                 </ListView>
             </StackLayout>
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#107dd0" height="10%" width="100%" verticalAlignment="bottom">
+            <GridLayout row="2" backgroundColor="#2E7C9E" height="10%" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
-                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout id="selected_col" col="0" backgroundColor="#1E3258"/>
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>

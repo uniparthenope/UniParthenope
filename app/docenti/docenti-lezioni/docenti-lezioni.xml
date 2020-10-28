@@ -33,30 +33,31 @@
 
                 <Label fontSize="12" margin="0 5 5 5" text="Selezionare un corso dall'elenco:"/>
 
-                <StackLayout borderRadius="20%" borderWidth="2" height="20%">
+                <StackLayout borderRadius="20%" borderWidth="2" height="20%" borderColor="white">
                     <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
                 </StackLayout>
+
                 <Label margin="5 5 5 5" fontSize="12" text="Selezionare una lezione per mostrare gli iscritti"/>
 
-                <GridLayout  borderRadius="20%" borderWidth="2">
+                <GridLayout  borderRadius="20%" borderWidth="2" borderColor="white" backgroundColor="#1E3258">
 
-                    <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
+                    <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" color="white" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
 
-                    <StackLayout verticalAlignment="top"  height="95%" margin="5 0 0 0">
-                        <ListView id="lezioni_listview" class="list-group" items="{{ docentiLezioni }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
+                    <StackLayout verticalAlignment="top" height="95%" margin="5 0 0 0" >
+                        <ListView id="lezioni_listview" separatorColor="#ffffffff" class="list-group" items="{{ docentiLezioni }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
                             <ListView.itemTemplate >
-                                <GridLayout rows="*,*,*,*" borderRadius="20%" borderWidth="1" marginBottom="5">
-                                    <GridLayout row="0" rows="*,*" backgroundColor="#22384f" color="white" >
-                                        <GridLayout row="0" columns="auto,*,auto" borderRadius="5%" padding="5 5 5 5">
+                                <GridLayout rows="*,*,*,*" backgroundColor="#1E3258">
+                                    <GridLayout row="0" rows="*,*" backgroundColor="#1E3258" color="white" >
+                                        <GridLayout row="0" columns="auto,*,auto" borderRadius="5%" padding="5 5 5 5" backgroundColor="#1E3258">
                                             <StackLayout col="0" orientation="vertical" horizontalAlignment="left">
                                                 <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Inizio: " marginRight="5"/>
-                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ start }}"/>
+                                                <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ start }}"/>
                                             </StackLayout>
-                                            <Label col="1" borderWidth="0" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
+                                            <Label col="1" borderWidth="0" color="orange" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
 
                                             <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
                                                 <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Fine: " marginRight="5"/>
-                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="16" text="{{ end }}"/>
+                                                <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ end }}"/>
                                             </StackLayout>
                                         </GridLayout>
 
@@ -67,12 +68,12 @@
                                     </GridLayout>
 
 
-                                    <StackLayout row="1" orientation="vertical"  width="100%" >
+                                    <StackLayout row="1" orientation="vertical"  width="100%" backgroundColor="#1E3258">
                                         <StackLayout orientation="vertical"  width="100%" >
                                         </StackLayout>
 
                                         <GridLayout columns="*,auto,auto" horizontalAlignment="center" width="100%" margin="5 5 5 5">
-                                            <Progress col="0" maxValue="{{max_c}}" value="{{ava_c}}" marginRight="10" marginLeft="10" verticalAlignment="center"/>
+                                            <Progress col="0" color="#2E7C9E" maxValue="{{max_c}}" value="{{ava_c}}" marginRight="10" marginLeft="10" verticalAlignment="center"/>
                                             <Label col="1" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ availability }}" verticalAlignment="center"/>
                                             <Label col="2" class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ capacity }}" verticalAlignment="center" marginRight="10"/>
                                         </GridLayout>
@@ -87,9 +88,9 @@
 
             </StackLayout>
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#107dd0" height="10%" width="100%" verticalAlignment="bottom">
+            <GridLayout row="2" backgroundColor="#2E7C9E" height="10%" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
-                    <GridLayout id="selected_col" col="0" backgroundColor="#22384f"/>
+                    <GridLayout id="selected_col" col="0" backgroundColor="#1E3258"/>
                     <GridLayout col="0" tap="tapCalendar">
                         <Image src="~/images/icon/calendar.png" height="23" width="23" />
                         <StackLayout>
