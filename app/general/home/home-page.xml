@@ -45,10 +45,13 @@
                     <!-- Notizie/Avvisi-->
                     <GridLayout backgroundColor="rgba(0,0,0,0.4)" margin = "0 10 0 10" height="70%" borderRadius="15%" >
                         <lv:RadListView items="{{ news }}" orientation="horizontal">
+                            <lv:RadListView.listViewLayout>
+                                <lv:ListViewStaggeredLayout scrollDirection="Horizontal" spanCount="1"/>
+                            </lv:RadListView.listViewLayout>
                             <lv:RadListView.itemTemplate>
-                                <StackLayout orientation="vertical">
+                                <StackLayout orientation="vertical" width="300">
                                     <Label fontSize="20" text="{{ title }}"/>
-                                    <Label fontSize="14" text="{{ body }}"/>
+                                    <HtmlView fontSize="14" html="{{ body }}" textWrap="true"/>
                                 </StackLayout>
                             </lv:RadListView.itemTemplate>
                         </lv:RadListView>
