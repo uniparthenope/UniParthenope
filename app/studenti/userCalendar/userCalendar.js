@@ -61,11 +61,13 @@ function calendarCourses() {
         const result = response.content.toJSON();
 
         if (response.statusCode === 401 || response.statusCode === 500) {
-            dialogs.alert({
+            dialogs.confirm({
                 title: "Errore: UserCalendar calendarCourses",
                 message: result.errMsg,
                 okButtonText: "OK"
-            });
+            }).then(
+                page.getViewById("activityIndicator3").visibility = "collapsed"
+            );
         }
         else {
             for (let x = 0; x < result.length; x++) {
@@ -105,7 +107,7 @@ function calendarCourses() {
         }
     },(e) => {
         console.log("Error", e);
-        dialogs.alert({
+        dialogs.confirm({
             title: "Errore: UserCalendar",
             message: e.toString(),
             okButtonText: "OK"
@@ -144,11 +146,13 @@ function getMainInfo() {
         page.getViewById("activityIndicator").visibility = "collapsed";
 
         if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
-            dialogs.alert({
+            dialogs.confirm({
                 title: "Errore: UserCalendar getMainInfo",
                 message: result.errMsg,
                 okButtonText: "OK"
-            });
+            }).then(
+                page.getViewById("activityIndicator2").visibility = "collapsed"
+            );
         }
         else {
             appSettings.setString("aa_accad", result.aa_accad);
@@ -170,11 +174,13 @@ function getMainInfo() {
                 const result = response.content.toJSON();
 
                 if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
-                    dialogs.alert({
+                    dialogs.confirm({
                         title: "Errore: UserCalendar examsToFreq",
                         message: result.errMsg,
                         okButtonText: "OK"
-                    });
+                    }).then(
+                        page.getViewById("activityIndicator2").visibility = "collapsed"
+                    );
                 }
                 else {
                     let x = 0;
@@ -212,20 +218,24 @@ function getMainInfo() {
                 }
                 page.getViewById("activityIndicator2").visibility = "collapsed";
             },(e) => {
-                dialogs.alert({
+                dialogs.confirm({
                     title: "Errore: UserCalendar",
                     message: e.toString(),
                     okButtonText: "OK"
-                });
+                }).then(
+                    page.getViewById("activityIndicator2").visibility = "collapsed"
+                );
             });
         }
 
     },(e) => {
-        dialogs.alert({
+        dialogs.confirm({
             title: "Errore: UserCalendar",
             message: e.toString(),
             okButtonText: "OK"
-        });
+        }).then(
+            page.getViewById("activityIndicator2").visibility = "collapsed"
+        );
     });
 }
 
@@ -241,25 +251,24 @@ function getAccesso(){
         const result = response.content.toJSON();
 
         if (response.statusCode === 401 || response.statusCode === 500) {
-            dialogs.alert({
+            dialogs.confirm({
                 title: "Errore: UserCalendar access",
                 message: result.errMsg,
                 okButtonText: "OK"
 
-            }).then();
+            });
         }
         else {
             if (result.accessType === "undefined"){
-                dialogs.alert({
+                dialogs.confirm({
                     title: "Attenzione",
                     message: 'Bisogna scegliere la modalità con cui si intende frequentare i corsi del nuovo A.A!\n Accedere alla pagina "ACCESSO" dal menu laterale!',
                     okButtonText: "OK"
                 });
             }
-
         }
     },(e) => {
-        dialogs.alert({
+        dialogs.confirm({
             title: "Errore: UserCalendar getAccesso",
             message: e.toString(),
             okButtonText: "OK"
@@ -281,36 +290,50 @@ function getPrenotazioni(){
         }
     }).then((response) => {
         const result = response.content.toJSON();
-        appSettings.setNumber("appelloBadge", result.length);
 
-        for (let i = 0; i< result.length; i++){
-            global.myPrenotazioni.push(result[i]);
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
+            dialogs.confirm({
+                title: "Errore: UserCalendar examsToFreq",
+                message: result.errMsg,
+                okButtonText: "OK"
+            }).then(
+                page.getViewById("activityIndicator4").visibility = "collapsed"
+            );
         }
+        else{
+            appSettings.setNumber("appelloBadge", result.length);
 
-        page.getViewById("activityIndicator4").visibility = "collapsed";
-        /*
-        memo) RESULT =
-                "adId": result[i].adId,
-                "appId": result[i].appId,
-                "dataEsame": result[i].dataEsa,
-                "classe": "examPass",
-                "mese_app": result[i].desApp,
-                "esame": result[i].nomeAppello,
-                "docente": result[i].nome_pres + " "+ result[i].cognome_pres,
-                "descrizione": result[i].tipoApp,
-                "edificio": result[i].edificioDes,
-                "aula": result[i].aulaDes,
-                "iscritti": result[i].numIscritti,
-                "note": result[i].note
+            for (let i = 0; i< result.length; i++){
+                global.myPrenotazioni.push(result[i]);
+            }
 
-         */
-        global.getAllBadge(page);
+            page.getViewById("activityIndicator4").visibility = "collapsed";
+            /*
+            memo) RESULT =
+                    "adId": result[i].adId,
+                    "appId": result[i].appId,
+                    "dataEsame": result[i].dataEsa,
+                    "classe": "examPass",
+                    "mese_app": result[i].desApp,
+                    "esame": result[i].nomeAppello,
+                    "docente": result[i].nome_pres + " "+ result[i].cognome_pres,
+                    "descrizione": result[i].tipoApp,
+                    "edificio": result[i].edificioDes,
+                    "aula": result[i].aulaDes,
+                    "iscritti": result[i].numIscritti,
+                    "note": result[i].note
+
+             */
+            global.getAllBadge(page);
+        }
     },(e) => {
-        dialogs.alert({
+        dialogs.confirm({
             title: "Errore: UserCalendar getPrenotazioni",
             message: e.toString(),
             okButtonText: "OK"
-        });
+        }).then(
+            page.getViewById("activityIndicator4").visibility = "collapsed"
+        );
     });
 }
 
