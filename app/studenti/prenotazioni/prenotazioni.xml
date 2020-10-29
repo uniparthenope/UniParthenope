@@ -33,7 +33,7 @@
                 </StackLayout>
             </GridLayout>
 
-            <ScrollView row="1" verticalAlignment="top"  height="100%">
+            <StackLayout row="1" verticalAlignment="top"  height="100%">
                 <ListView id="appelli_listview" class="list-group" items="{{ items_appelli }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
                     <ListView.itemTemplate >
                         <FlexboxLayout flexDirection="row">
@@ -62,7 +62,7 @@
                         </FlexboxLayout>
                     </ListView.itemTemplate>
                 </ListView>
-            </ScrollView>
+            </StackLayout>
 
             <!--        Bottom bar  -->
             <GridLayout row="2" backgroundColor="#2E7C9E" width="100%" verticalAlignment="bottom">

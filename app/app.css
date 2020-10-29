@@ -334,6 +334,7 @@ ActionBar {
     background-color: rgba(34, 56, 79, 0.7);
     font-family: "Roboto Slab";
 }
+
 ListView{
     separator-color: white;
     background-color: transparent;

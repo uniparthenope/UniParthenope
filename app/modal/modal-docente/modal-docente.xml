@@ -2,7 +2,7 @@
       shownModally="onShownModally"
       xmlns:accordion="nativescript-accordion">
 
-    <GridLayout android:height="55%" ios:height="100%">
+    <GridLayout android:height="75%" ios:height="100%">
         <GridLayout class="two-color-gradient" marginBottom="10" height="15%" verticalAlignment="top">
             <StackLayout verticalAlignment="center">
                 <Label class="textPrimary" id="nome" textWrap="true" textAlignment="center" verticalAlignment="center" marginBottom="10"/>
@@ -11,7 +11,7 @@
             </StackLayout>
         </GridLayout>
 
-        <GridLayout height="70%">
+        <GridLayout ios:height="70%" android:height="60%">
             <ScrollView heigth="70%">
                 <GridLayout rows="auto,auto,auto,*,*,*,*" verticalAlignment="center" marginLeft="10" marginRight="10">
                     <StackLayout orientation="vertical" row="0" margin="5 5 5 5">
@@ -49,7 +49,7 @@
 
         </GridLayout>
 
-        <StackLayout verticalAlignment="bottom">
+        <StackLayout verticalAlignment="bottom" marginTop="15">
             <Button class="btn" marginLeft="10" marginRight="10" text="Ricevimento" ontap="ontap_ricevimento" backgroundColor="#22384f" color="white" borderColor="white" verticalAlignment="bottom" marginBottom="10"/>
             <Button class="btn" marginLeft="10" marginRight="10" text="Sito Web" ontap="ontap_scheda" backgroundColor="#22384f" color="white" borderColor="white" verticalAlignment="bottom" marginBottom="15"/>
         </StackLayout>

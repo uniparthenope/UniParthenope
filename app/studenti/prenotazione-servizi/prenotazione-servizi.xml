@@ -32,28 +32,29 @@
 
             <StackLayout padding="5 5 5 5">
 
-            <Label fontSize="12" margin="5 5 5 5" text="Selezionare un dipartimento dall'elenco:"/>
+            <Label fontSize="12" color="white" margin="5 5 5 5" text="Selezionare un dipartimento dall'elenco:"/>
 
             <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" borderColor="white" height="20%">
                 <ListView id="department-listview"  items="{{departments}}" itemTap="onItemTap_department" marginRight="5" marginLeft="5">
                 <ListView.itemTemplate>
                     <GridLayout backgroundColor="#1E3258">
-                        <Label text="{{area}}" textAlignment="center"/>
+                        <Label text="{{area}}" color="white" textAlignment="center"/>
                     </GridLayout>
                 </ListView.itemTemplate>
                 </ListView>
 
             </StackLayout>
-            <Label margin="5 5 5 5" fontSize="12" text="Selezionare un servizio a cui prenotarsi:"/>
+
+            <Label margin="5 5 5 5" color="white" fontSize="12" text="Selezionare un servizio a cui prenotarsi:"/>
 
             <GridLayout  borderRadius="20%" borderWidth="2" borderColor="white">
 
-                <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessun Servizio Trovato!"/>
+                <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessun Servizio Trovato!" color="white" android:fontSize="20"/>
 
                 <StackLayout verticalAlignment="top" margin="5 5 5 5" height="95%">
                     <ListView id="lezioni_listview" class="list-group" items="{{prenotazioneServizi}}" itemTap="onItemTap" marginRight="5" marginLeft="5" separatorColor="white">
                         <ListView.itemTemplate >
-                            <GridLayout rows="*,*,*,*" backgroundColor="#1E3258">
+                            <GridLayout rows="*,*,*,*" ios:backgroundColor="#1E3258">
                                 <GridLayout row="0" rows="*,*"  color="white" borderRadius="5%" backgroundColor="#1E3258">
                                     <GridLayout row="0" columns="auto,*,auto"  padding="5 5 5 5">
                                         <StackLayout col="0" orientation="vertical" horizontalAlignment="left">

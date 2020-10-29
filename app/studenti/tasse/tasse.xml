@@ -44,11 +44,11 @@
                             <ListView.itemTemplate >
                                 <FlexboxLayout flexDirection="row">
                                     <StackLayout  width="100%" marginBottom="5" marginTop="5">
-                                        <Label class="{{ col }}" horizontalAlignment="center" text="{{ desc }}" fontSize="18" textWrap="true" marginBottom="5" marginLeft="15"/>
-                                        <Label class="{{ col }}" borderWidth="0" text="{{ data }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
-                                        <Label class="{{ col }}" borderWidth="0"  text="{{ importo }}" fontSize="14" horizontalAlignment="center"/>
-                                        <Label class="{{ col }}" borderWidth="0"  text="{{ fatt_id }}" fontSize="14" horizontalAlignment="center"/>
-                                        <Label class="{{ col }}" borderWidth="0"  text="{{ iur_iuv }}" fontSize="14" horizontalAlignment="center"/>
+                                        <Label class="{{ col }}" color="white" horizontalAlignment="center" text="{{ desc }}" fontSize="18" textWrap="true" marginBottom="5" marginLeft="15"/>
+                                        <Label class="{{ col }}" color="white" borderWidth="0" text="{{ data }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
+                                        <Label class="{{ col }}" color="white" borderWidth="0"  text="{{ importo }}" fontSize="14" horizontalAlignment="center"/>
+                                        <Label class="{{ col }}" color="white" borderWidth="0"  text="{{ fatt_id }}" fontSize="14" horizontalAlignment="center"/>
+                                        <Label class="{{ col }}" color="white" borderWidth="0"  text="{{ iur_iuv }}" fontSize="14" horizontalAlignment="center"/>
 
                                     </StackLayout>
                                 </FlexboxLayout>
