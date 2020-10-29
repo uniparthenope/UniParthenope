@@ -24,8 +24,8 @@
     </ActionBar>
 
     <GridLayout>
-        <GridLayout rows="100,*,50">
-            <GridLayout rows="*,auto,auto" row="0" class="two-color-gradient" width="100%" height="15%" verticalAlignment="top">
+        <GridLayout rows="auto,*,50">
+            <GridLayout rows="auto,auto,auto" row="0" class="two-color-gradient" width="100%" verticalAlignment="top">
                 <Label row="0" class="textPrimary" text="Miei Corsi" horizontalAlignment="center" verticalAlignment="top" marginBottom="15" marginTop="5"/>
                 <StackLayout row="1">
                     <Label  class="textPrimary" id="semestre" horizontalAlignment="center" verticalAlignment="top" fontSize="13" marginBottom="5"/>
@@ -36,7 +36,7 @@
                 </GridLayout>
             </GridLayout>
 
-            <StackLayout row="1" verticalAlignment="top" height="100%">
+            <StackLayout row="1" verticalAlignment="top">
                 <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
                     <ListView.itemTemplate>
                         <FlexboxLayout flexDirection="row">
@@ -62,8 +62,9 @@
                     </ListView.itemTemplate>
                 </ListView>
             </StackLayout>
+
             <!--        Bottom bar  -->
-            <GridLayout row="2" backgroundColor="#2E7C9E" height="10%" width="100%" verticalAlignment="bottom">
+            <GridLayout row="2" backgroundColor="#2E7C9E" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
                     <GridLayout id="selected_col" col="0" backgroundColor="#1E3258"/>
                     <GridLayout col="0" tap="tapCalendar">

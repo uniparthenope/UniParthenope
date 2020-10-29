@@ -22,13 +22,13 @@
         </ActionItem>
 
     </ActionBar>
-    <StackLayout>
-        <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+
+    <GridLayout rows="auto,*,auto">
+        <GridLayout row="0" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
             <Label class="textPrimary" text="Info" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
 
-
-        <GridLayout height="75%">
+        <GridLayout row="1">
             <Image src="~/images/logo_new.png" horizontalAlignment="center" verticalAlignment="center" margin="20 20 20 20" opacity="0.3"/>
 
             <StackLayout>
@@ -82,12 +82,11 @@
             </StackLayout>
 
         </GridLayout>
-        <StackLayout margin="5 5 5 5" height="20%">
+
+        <StackLayout row="2" margin="5 5 5 5">
             <Button textWrap="true" text="Contatta gli Sviluppatori" verticalAlignment="bottom" ontap="contact_us" heigth="100%" class="btn" marginBottom="5"/>
             <Button textWrap="true" text="Privacy" verticalAlignment="bottom" ontap="onTapPrivacy" class="btn" heigth="100%" />
-
         </StackLayout>
-
-    </StackLayout>
+    </GridLayout>
 
 </Page>

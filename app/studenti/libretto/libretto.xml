@@ -23,10 +23,11 @@
     </ActionBar>
     <GridLayout>
         <GridLayout rows="auto,*,50">
-            <GridLayout row="0" class="two-color-gradient" width="100%" height="35%" verticalAlignment="top">
-                <StackLayout verticalAlignment="top" height="100%" marginTop="5">
-                    <Label class="textPrimary" id="cdsDes" horizontalAlignment="center" textWrap="true" textAlignment="center" margin="5 5 0 5"/>
-                    <GridLayout height="65%" marginBottom="5">
+            <!-- Medie -->
+            <GridLayout row="0" class="two-color-gradient" width="100%" verticalAlignment="top">
+                <GridLayout verticalAlignment="top" height="100%" marginTop="5" rows="*,*,*">
+                    <Label row="0" class="textPrimary" id="cdsDes" horizontalAlignment="center" textWrap="true" textAlignment="center" margin="5 5 0 5"/>
+                    <GridLayout row="1" height="65%" marginBottom="5">
 
                         <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="20" verticalAlignment="center">
                             <Label class="textMontserratRegular" text="Medie" horizontalAlignment="center" color="white" marginBottom="5"/>
@@ -56,15 +57,15 @@
                         </StackLayout>
                     </GridLayout>
 
-                    <GridLayout  height="10%" verticalAlignment="bottom" marginBottom="5">
+                    <GridLayout row="2" height="10%" verticalAlignment="bottom" marginBottom="10">
                         <Label text="Voto" horizontalAlignment="left" marginLeft="20" color="white"/>
                         <Label text="Nome" horizontalAlignment="center" color="white"/>
                         <Label text="CFU" horizontalAlignment="right" marginRight="20" color="white"/>
                     </GridLayout>
-                </StackLayout>
+                </GridLayout>
             </GridLayout>
-
-            <StackLayout row="1" height="100%" verticalAlignment="bottom">
+            <!-- List view -->
+            <StackLayout row="1" verticalAlignment="bottom">
                 <ListView id="listview" class="list-group" items="{{ items }}" itemTap="onTap" marginRight="5" marginLeft="5" height="100%">
                     <ListView.itemTemplate >
                         <FlexboxLayout flexDirection="row">
@@ -85,7 +86,7 @@
                     </ListView.itemTemplate>
                 </ListView>
             </StackLayout>
-            <!--        Bottom bar  -->
+            <!-- Bottom bar -->
             <GridLayout row="2" backgroundColor="#2E7C9E" width="100%" verticalAlignment="bottom">
                 <GridLayout columns="*, *, *, *,*" height="60">
                     <GridLayout id="selected_col" col="0" backgroundColor="#1E3258"/>
