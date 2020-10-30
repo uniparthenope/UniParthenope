@@ -70,7 +70,7 @@
                             <Label class="textPrimary" id="roleID"  text="" horizontalAlignment="center" fontSize="18" color="orange"/>
                         </StackLayout>
                             <StackLayout verticalAlignment="bottom">
-                                <Label fontSize="14" verticalAlignment="bottom" text="Doppio-click su QR-Code per ingrandire" color="orange" horizontalAlignment="center"/>
+                                <Label fontSize="14" verticalAlignment="bottom" text="Doppio-click su QR-Code per ingrandire" color="darkred" horizontalAlignment="center"/>
                             </StackLayout>
 
                         </GridLayout>

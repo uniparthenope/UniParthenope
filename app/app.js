@@ -339,6 +339,23 @@ firebase.init({
         console.log("Value of 'page': " + message.data.page);
         console.log("Foreground: " + message.foreground);
 
+        if (!message.foreground){
+            setTimeout(() => {
+                if (message.data.page) {
+                    const nav = {
+                        moduleName: "general/singleNews/singleNews",
+                        clearHistory: false,
+                        context: {
+                            title: message.data.title,
+                            body: message.data.body
+                        }
+                    };
+                    frame.Frame.topmost().navigate(nav);
+                }
+            }, 50);
+
+        }
+/*
         if (message.foreground){
             dialog.confirm({
                 title: message.title,
@@ -362,20 +379,10 @@ firebase.init({
         }
         else {
             console.log("BACKGROUND");
-            setTimeout(() => {
-                if (message.data.page) {
-                    const nav = {
-                        moduleName: "general/singleNews/singleNews",
-                        clearHistory: false,
-                        context: {
-                            title: message.data.title,
-                            body: message.data.body
-                        }
-                    };
-                    frame.Frame.topmost().navigate(nav);
-                }
-            }, 50);
+
         }
+
+ */
     },
     onPushTokenReceivedCallback: function(token) {
         global.notification_token = token;

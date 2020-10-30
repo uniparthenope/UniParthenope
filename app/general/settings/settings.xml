@@ -60,7 +60,7 @@
                 </StackLayout>
             </ScrollView>
         </StackLayout>
-        <StackLayout verticalAlignment="bottom">
+        <StackLayout verticalAlignment="bottom" margin="5 5 5 5">
             <Button tap="onTapSurvey" class="btn" text="Partecipa al Sondaggio" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
             <Button id="deleteBtn" visibility="collapsed" tap="onTapDelete" class="btn" text="Dimentica Account" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
         </StackLayout>
