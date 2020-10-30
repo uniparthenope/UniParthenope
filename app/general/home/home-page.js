@@ -29,8 +29,8 @@ let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553, color: 'line
     {id: 'Villa', lat: 40.823872, long: 14.216225, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(36, 36, 36))'}];
 
 function getNews(){
-    let loading = page.getViewById("activityNews");
-    //loading.visibility = "visible";
+    let loading = page.getViewById("activityIndicatorNews");
+    loading.visibility = "visible";
 
     httpModule.request({
         url: global.url + "general/avvisi/3",
@@ -51,36 +51,13 @@ function getNews(){
             console.log(result.length);
 
             for (let i=0; i<result.length; i++) {
-                /*
-                let arr_desc_not = [];
-                let items = {
-
-                };
-                arr_desc_not.push(items);
-
-
-
-                if (platformModule.isIOS){
-                    arr_desc_not.splice(0, 0, {});
-                }
-                */
 
                 let dat = new Date(result[i].data);
                 news.push({
                     title: result[i].titolo,
-                    //date:result[i].data,
                     date: dat.getDate() + "/" + (dat.getMonth()+1) + "/" +dat.getFullYear() + " "+dat.getHours() + ":00",
                     body: result[i].abstract
                 });
-                /*
-                news.sort(function (orderA, orderB) {
-                    let dataA = Date.parse(orderA.date);
-                    let dataB = Date.parse(orderB.date);
-
-                    return (dataA > dataB) ? -1 : (dataA < dataB) ? 1 : 0;
-                });
-
-                 */
             }
             loading.visibility = "collapsed";
         }
@@ -170,8 +147,7 @@ function calculateDistance(position) {
             bottom_bar.background = array_locations[i].color;
             bottom_bar2.background = array_locations[i].color;
 
-            image.src = '~/images/image_' + array_locations[i].id + ".jpg";
-
+            image.backgroundImage = '~/images/image_' + array_locations[i].id + ".jpg";
         }
 
     }

@@ -26,7 +26,7 @@
     <GridLayout>
         <StackLayout orientation="vertical" height="100%" >
 
-            <GridLayout backgroundColor="#1E3258" width="100%" height="10%" verticalAlignment="top">
+            <GridLayout backgroundColor="#1E3258" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
                 <Label class="textPrimary" text="Notizie" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 

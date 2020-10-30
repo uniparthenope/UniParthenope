@@ -73,12 +73,12 @@
                         <rc:CellStyle  cellBackgroundColor="#2E7C9E" cellTextColor="white" cellTextFontName="Roboto Slab" cellTextFontStyle="Bold" cellTextSize="18" />
                     </rc:CalendarMonthViewStyle.titleCellStyle>
 
-                        <rc:CalendarMonthviewStyle.inlineEventCellStyle>
-                            <rc:InlineEventCellStyle cellBackgroundColor="#2E7C9E" eventTextColor="white"
-                                                     eventFontName="Roboto Slab" eventTextSize="14"
-                                                     timeTextColor="orange" timeFontName="Roboto Slab" timeFontStyle="Regular"
-                                                     timeTextSize="14"/>
-                        </rc:CalendarMonthviewStyle.inlineEventCellStyle>
+                    <rc:CalendarMonthviewStyle.inlineEventCellStyle>
+                        <rc:InlineEventCellStyle ios:cellBackgroundColor="#2E7C9E" android:cellBackgroundColor="#1E3258" eventTextColor="white"
+                                                 eventFontName="Roboto Slab" eventTextSize="14"
+                                                 timeTextColor="orange" timeFontName="Roboto Slab" timeFontStyle="Regular"
+                                                 timeTextSize="14"/>
+                    </rc:CalendarMonthviewStyle.inlineEventCellStyle>
 
                 </rc:CalendarMonthViewStyle>
                 </rc:RadCalendar.monthViewStyle>

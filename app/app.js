@@ -13,7 +13,6 @@ const frame = require("tns-core-modules/ui/frame");
 let domain = "https://api.uniparthenope.it";
 //let domain = "http://127.0.0.1:5000";
 
-
 global.url = domain + "/UniparthenopeApp/v1/";
 global.url2 = domain + "/UniparthenopeApp/v2/";
 global.url_general = domain + "/";
@@ -288,6 +287,16 @@ application.on(application.suspendEvent, (args) => {
     }
 });
 
+application.on(application.launchEvent, (args) => {
+    if (args.android) {
+        // For Android applications, args.android is an android.content.Intent class.
+        console.log("Launched Android application with the following intent: " + args.android + ".");
+    } else if (args.ios !== undefined) {
+        // For iOS applications, args.ios is NSDictionary (launchOptions).
+        console.log("Launched iOS application with options: " + args.ios);
+    }
+});
+
 
 // RATING APP
 appRater.init({
@@ -324,6 +333,7 @@ firebase.init({
     showNotifications: true,
     showNotificationsWhenInForeground: true,
     onMessageReceivedCallback: function(message) {
+        console.log(message);
         console.log("Title: " + message.title);
         console.log("Body: " + message.body);
         console.log("Value of 'page': " + message.data.page);
@@ -336,21 +346,35 @@ firebase.init({
                 cancelButtonText: "Annulla",
                 okButtonText: "Vai"
             }).then(result => {
+                console.log("PRESS BUTTON NOTIFICATIONS", message.data.title);
                 if (result){
                     const nav = {
-                        moduleName: "general/" + message.data.page + "/" + message.data.page,
-                        clearHistory: false
+                        moduleName: "general/singleNews/singleNews",
+                        clearHistory: false,
+                        context: {
+                            title: message.data.title,
+                            body: message.data.body
+                        }
                     };
                     frame.Frame.topmost().navigate(nav);
                 }
             });
         }
-        else{
-            const nav = {
-                moduleName: "general/" + message.data.page + "/" + message.data.page,
-                clearHistory: false
-            };
-            frame.Frame.topmost().navigate(nav);
+        else {
+            console.log("BACKGROUND");
+            setTimeout(() => {
+                if (message.data.page) {
+                    const nav = {
+                        moduleName: "general/singleNews/singleNews",
+                        clearHistory: false,
+                        context: {
+                            title: message.data.title,
+                            body: message.data.body
+                        }
+                    };
+                    frame.Frame.topmost().navigate(nav);
+                }
+            }, 50);
         }
     },
     onPushTokenReceivedCallback: function(token) {

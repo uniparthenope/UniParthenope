@@ -1,0 +1,36 @@
+<Page class="page"
+      navigatingTo="onNavigatingTo"
+      actionBarHidden="false"
+      xmlns="http://schemas.nativescript.org/tns.xsd">
+
+    <ActionBar class="action-bar" title="UniParthenope">
+
+        <ActionItem icon="res://menu"
+                    ios:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    android.position="right">
+        </ActionItem>
+
+        <Image src="~/images/home/toptitle.png" android:width="200" class="action-image"/>
+
+
+        <ActionItem icon="res://navigation/menu"
+                    android:visibility="collapsed"
+                    tap="onDrawerButtonTap"
+                    ios.position="right">
+        </ActionItem>
+
+    </ActionBar>
+
+    <StackLayout orientation="vertical" height="100%" width="100%">
+        <GridLayout backgroundColor="#1E3258" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
+            <Label id="title" class="textPrimary" text="" horizontalAlignment="center" verticalAlignment="center"/>
+        </GridLayout>
+
+        <StackLayout verticalAlignment="top"  height="100%" width="100%" backgroundColor="#1E3258">
+            <HtmlView id="body" html="" color="#22384f" android:color="white" backgroundColor="#1E3258"/>
+        </StackLayout>
+    </StackLayout>
+</Page>
+
+
