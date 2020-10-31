@@ -213,7 +213,7 @@ function detailedProf(docenteId) {
     });
 }
 
-function setAnagrafe(id, type){
+function setAnagrafe(id, type,flag){
     httpModule.request({
         url: global.url + "general/anagrafica/"+ id,
         method: "GET",
@@ -227,22 +227,25 @@ function setAnagrafe(id, type){
         //console.log(_result);
         global.saveAnagrafe(type,_result);
         console.log("MI SPOSTO ...");
-        let navigator = "";
-        if(type === "Studenti")
-            navigator = "studenti/userCalendar/userCalendar";
-        else if(type === "Docenti")
-            navigator = "docenti/docenti-home/docenti-home";
-        else
-            navigator = "general/home/home-page";
 
         indicator.visibility = "collapsed";
 
-        const nav =
-            {
-                moduleName: navigator,
-                clearHistory: true
-            };
-        page.frame.navigate(nav);
+        if(flag){
+            let navigator = "";
+            if(type === "Studenti")
+                navigator = "studenti/userCalendar/userCalendar";
+            else if(type === "Docenti")
+                navigator = "docenti/docenti-home/docenti-home";
+            else
+                navigator = "general/home/home-page";
+
+            const nav =
+                {
+                    moduleName: navigator,
+                    clearHistory: true
+                };
+            page.frame.navigate(nav);
+        }
 
     },(e) => {
         console.log("Errore Anagrafe", e);
@@ -358,7 +361,7 @@ function logout(){
 
 }
 
-function autoconnect() {
+function autoconnect(flag) {
     console.log("REMEMBER= "+remember);
     if (remember){
 
@@ -485,7 +488,7 @@ function autoconnect() {
                     detailedProf(_result.user.docenteId); // Get detailed info of a professor
                     console.log("SAVEINFO");
                     global.saveInfo(_result);
-                    setAnagrafe(_result.user.docenteId,_result.user.grpDes);
+                    setAnagrafe(_result.user.docenteId,_result.user.grpDes,flag);
 
                     global.isConnected = true;
                     //indicator.visibility = "collapsed";
@@ -498,7 +501,7 @@ function autoconnect() {
                     sideDrawer.getViewById("badge_button").text = "Student Card/Badge";
 
                     global.saveInfo(_result);
-                    setAnagrafe(_result.user.persId,_result.user.grpDes);
+                    setAnagrafe(_result.user.persId,_result.user.grpDes,flag);
                     let index = appSettings.getNumber("carriera",0);
                     console.log(_result.user.persId);
                     global.saveCarr(carriere[index]);
@@ -612,20 +615,27 @@ exports.onNavigatingTo = function (args) {
 
    if (user !== undefined && !global.isConnected){
        indicator.visibility = "visible";
-       dialogs.confirm({
-           title: "Bentornato!",
-           message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome")+"\n Cliccare OK per autoconnettersi.",
-           okButtonText: "OK",
-           cancelButtonText: 'Logout'
-       }).then(function (r){
-           if(r)
-               autoconnect();
-           else{
-               indicator.visibility = "collapsed";
-               logout();
-           }
 
-       });
+       if (!global.notification_flag){
+           dialogs.confirm({
+               title: "Bentornato!",
+               message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome")+"\n Cliccare 'Mia Home' per accedere.",
+               okButtonText: "Mia Home",
+               cancelButtonText: 'Logout',
+               neutralButtonText: 'Chiudi'
+           }).then(function (r){
+               console.log("DIALOG HOME",r);
+               if(r)
+                   autoconnect(true);
+               else if (r === undefined){
+                   autoconnect(false);
+               }
+               else{
+                   indicator.visibility = "collapsed";
+                   logout();
+               }
+           });
+       }
    }
    else if (remember) {
       setSideMenu(global.myform,global.username);

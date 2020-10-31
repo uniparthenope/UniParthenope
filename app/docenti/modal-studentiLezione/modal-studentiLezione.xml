@@ -9,18 +9,18 @@
             </GridLayout>
             <GridLayout row="1" rows="30,*" verticalAlignment="center" margin="15 5 5 5" height="100%">
                 <GridLayout row="0" columns="*,*,auto" margin="5 5 5 5">
-                    <Label col="0" text="Matricola" />
-                    <Label col="1" text="Username"/>
-                    <Label col="2" text="Posto"/>
+                    <Label color="white" col="0" text="Matricola" />
+                    <Label color="white" col="1" text="Username"/>
+                    <Label color="white" col="2" text="Posto"/>
                 </GridLayout>
                 <StackLayout row="1" verticalAlignment="top" margin="5 5 5 5" height="95%">
                     <ListView id="prenotazione_lez" separatorColor="#ffffffff" class="list-group" items="{{ students }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
                         <ListView.itemTemplate >
 
                             <GridLayout columns="*,*,auto" backgroundColor="#1E3258">
-                                <Label col="0" fontSize="16" text="{{ matricola }}" horizontalAlignment="left"/>
+                                <Label color="white" col="0" fontSize="16" text="{{ matricola }}" horizontalAlignment="left"/>
                                 <Label col="1" fontSize="16" text="{{ username }}" color="orange"/>
-                                <Label col="2" fontSize="16" text="{{ posto }}"/>
+                                <Label color="white" col="2" fontSize="16" text="{{ posto }}"/>
                             </GridLayout>
                         </ListView.itemTemplate>
                     </ListView>

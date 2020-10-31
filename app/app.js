@@ -8,6 +8,7 @@ const StoreUpdate = require("nativescript-store-update");
 let firebase = require("nativescript-plugin-firebase");
 let dialog = require("tns-core-modules/ui/dialogs");
 const frame = require("tns-core-modules/ui/frame");
+const platformModule = require("tns-core-modules/platform");
 
 //let domain = "http://api.uniparthenope.it:5000";
 let domain = "https://api.uniparthenope.it";
@@ -38,6 +39,7 @@ global.myLezioni = [];
 global.myAppelli = new ObservableArray();
 global.my_selfcert;
 global.services = [];
+global.notification_flag = false;
 
 /*
 appSettings.setString("aa_accad", result.aa_accad);
@@ -62,6 +64,7 @@ global.clearAll = function(){
     global.myPrenotazioni = [];
     global.myAppelli = new ObservableArray();
     global.services = [];
+    global.notification_flag = false;
 
     appSettings.clear();
 };
@@ -339,50 +342,63 @@ firebase.init({
         console.log("Value of 'page': " + message.data.page);
         console.log("Foreground: " + message.foreground);
 
-        if (!message.foreground){
-            setTimeout(() => {
-                if (message.data.page) {
-                    const nav = {
-                        moduleName: "general/singleNews/singleNews",
-                        clearHistory: false,
-                        context: {
-                            title: message.data.title,
-                            body: message.data.body
-                        }
-                    };
-                    frame.Frame.topmost().navigate(nav);
-                }
-            }, 50);
-
+        if(platformModule.isIOS){
+            global.notification_flag = true;
+            if (!message.foreground){
+                setTimeout(() => {
+                    if (message.data.page) {
+                        const nav = {
+                            moduleName: "general/singleNews/singleNews",
+                            clearHistory: false,
+                            context: {
+                                title: message.data.title,
+                                body: message.data.body
+                            }
+                        };
+                        frame.Frame.topmost().navigate(nav);
+                    }
+                }, 50);
+            }
         }
-/*
-        if (message.foreground){
-            dialog.confirm({
-                title: message.title,
-                message: message.body,
-                cancelButtonText: "Annulla",
-                okButtonText: "Vai"
-            }).then(result => {
-                console.log("PRESS BUTTON NOTIFICATIONS", message.data.title);
-                if (result){
-                    const nav = {
-                        moduleName: "general/singleNews/singleNews",
-                        clearHistory: false,
-                        context: {
-                            title: message.data.title,
-                            body: message.data.body
-                        }
-                    };
-                    frame.Frame.topmost().navigate(nav);
-                }
-            });
+        else if(platformModule.isAndroid){
+            if (message.foreground){
+                dialog.confirm({
+                    title: message.title,
+                    message: message.body,
+                    cancelButtonText: "Annulla",
+                    okButtonText: "Vai"
+                }).then(result => {
+                    console.log("PRESS BUTTON NOTIFICATIONS", message.data.title);
+                    if (result){
+                        const nav = {
+                            moduleName: "general/singleNews/singleNews",
+                            clearHistory: false,
+                            context: {
+                                title: message.data.title,
+                                body: message.data.body
+                            }
+                        };
+                        frame.Frame.topmost().navigate(nav);
+                    }
+                });
+            }
+            else {
+                global.notification_flag = true;
+                setTimeout(() => {
+                    if (message.data.page) {
+                        const nav = {
+                            moduleName: "general/singleNews/singleNews",
+                            clearHistory: false,
+                            context: {
+                                title: message.data.title,
+                                body: message.data.body
+                            }
+                        };
+                        frame.Frame.topmost().navigate(nav);
+                    }
+                }, 50);
+            }
         }
-        else {
-            console.log("BACKGROUND");
-
-        }
-
- */
     },
     onPushTokenReceivedCallback: function(token) {
         global.notification_token = token;

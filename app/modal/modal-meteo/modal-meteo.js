@@ -43,7 +43,7 @@ exports.onShownModally = onShownModally;
 function getWeather(lat, long) {
     loading.visibility = "visible";
     httpModule.request({
-        url: "https://api.meteo.uniparthenope.it/places/search/bycoords/" + lat + "/" + long,
+        url: "https://api.meteo.uniparthenope.it/places/search/bycoords/" + lat + "/" + long + "?filter=com",
         method: "GET",
         headers: {"Content-Type": "application/json"}
     }).then((response) => {

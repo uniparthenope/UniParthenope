@@ -47,7 +47,7 @@
                         <StackLayout row="0" orientation="vertical"  width="100%" horizontalAlignment="center" marginBottom="10">
                             <Label class="textPrimary" id="depart" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="white" textAlignment="center"/>
                         </StackLayout>
-                        <GridLayout row="1" rows="*,*" horizontalAlignment="center" marginBottom="15" width="100%">
+                        <GridLayout row="1" rows="*,*" horizontalAlignment="center" width="100%">
                             <Label row="0" class="textPrimary" id="surname" text="SURNAME" horizontalAlignment="center" fontSize="28" color="orange"/>
                             <Label row="1" class="textPrimary" id="name" text="NAME" horizontalAlignment="center" fontSize="18" color="white"/>
                         </GridLayout>

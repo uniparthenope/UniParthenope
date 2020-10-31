@@ -31,13 +31,13 @@
             </GridLayout>
             <StackLayout height="100%" row="1" padding="5 5 5 5">
 
-                <Label fontSize="12" margin="0 5 5 5" text="Selezionare un corso dall'elenco:"/>
+                <Label color="white" fontSize="12" margin="0 5 5 5" text="Selezionare un corso dall'elenco:"/>
 
                 <StackLayout borderRadius="20%" borderWidth="2" height="20%" borderColor="white">
                     <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
                 </StackLayout>
 
-                <Label margin="5 5 5 5" fontSize="12" text="Selezionare una lezione per mostrare gli iscritti"/>
+                <Label color="white" margin="5 5 5 5" fontSize="12" text="Selezionare una lezione per mostrare gli iscritti"/>
 
                 <GridLayout  borderRadius="20%" borderWidth="2" borderColor="white" backgroundColor="#1E3258">
 

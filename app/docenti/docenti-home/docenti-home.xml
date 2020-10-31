@@ -82,7 +82,7 @@
                             </rc:CalendarMonthViewStyle.titleCellStyle>
 
                             <rc:CalendarMonthviewStyle.inlineEventCellStyle>
-                                <rc:InlineEventCellStyle cellBackgroundColor="#2E7C9E" eventTextColor="white"
+                                <rc:InlineEventCellStyle cellBackgroundColor="#1E3258" eventTextColor="white"
                                                          eventFontName="Roboto Slab" eventTextSize="14"
                                                          timeTextColor="orange" timeFontName="Roboto Slab" timeFontStyle="Regular"
                                                          timeTextSize="14"/>
