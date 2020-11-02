@@ -10,9 +10,9 @@ let dialog = require("tns-core-modules/ui/dialogs");
 const frame = require("tns-core-modules/ui/frame");
 const platformModule = require("tns-core-modules/platform");
 
-//let domain = "http://api.uniparthenope.it:5000";
+let domain = "http://api.uniparthenope.it:5000";
 //let domain = "https://api.uniparthenope.it";
-let domain = "http://192.168.1.9:5000";
+//let domain = "http://192.168.1.9:5000";
 
 global.url = domain + "/UniparthenopeApp/v1/";
 global.url2 = domain + "/UniparthenopeApp/v2/";
@@ -397,12 +397,60 @@ firebase.init({
                                 okButtonText: "Vai"
                             }).then(result => {
                                 if (result){
+                                    let c;
+                                    if(message.info.ruolo === "Studenti"){
+                                        c = {
+                                            nome: message.info.nome,
+                                            cognome: message.info.cognome,
+                                            matricola: message.info.matricola,
+                                            username: message.info.username,
+                                            dataNascita: message.info.dataNascita,
+                                            emailAte: message.info.emailAte,
+                                            email: message.info.email,
+                                            sesso: message.info.sesso,
+                                            telRes: message.info.telRes,
+                                            ruolo: message.info.ruolo,
+                                            desCittadinanza: message.info.desCittadinanza,
+                                            foto: message.info.foto
+                                        }
+                                    }
+                                    else if (message.info.ruolo === "Docenti"){
+                                        c= {
+                                            nome: message.info.nome,
+                                            cognome: message.info.cognome,
+                                            matricola: message.info.matricola,
+                                            username: message.info.username,
+                                            dataNascita: message.info.dataNascita,
+                                            emailAte: message.info.emailAte,
+                                            sesso: message.info.sesso,
+                                            telRes: message.info.telRes,
+                                            ruolo: message.info.ruolo,
+                                            settore: message.info.settore,
+                                            foto: message.info.foto
+                                        }
+                                    }
+                                    else{
+                                        //TODO Da aggiustare
+                                        c = {
+                                            nome: message.info.nome,
+                                            cognome: message.info.cognome,
+                                            matricola: message.info.matricola,
+                                            username: message.info.username,
+                                            dataNascita: message.info.dataNascita,
+                                            emailAte: message.info.emailAte,
+                                            email: message.info.email,
+                                            sesso: message.info.sesso,
+                                            telRes: message.info.telRes,
+                                            ruolo: message.info.ruolo,
+                                            settore: message.info.settore,
+                                            foto: message.info.foto
+                                        }
+                                    }
+                                    console.log(c);
                                     const nav = {
                                         moduleName: "common/anagrafica/anagrafica",
                                         clearHistory: false,
-                                        context: {
-                                            body: message.data.body
-                                        }
+                                        context: c
                                     };
                                     frame.Frame.topmost().navigate(nav);
                                 }

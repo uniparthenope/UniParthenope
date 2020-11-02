@@ -79,7 +79,37 @@ exports.onNavigatingTo = function(args) {
     console.log("Navigation",page.navigationContext);
 
     if(page.navigationContext !== undefined){
-        console.log(page.navigationContext.body);
+        page.getViewById("name").text = page.navigationContext.nome;
+        page.getViewById("surname").text = page.navigationContext.cognome;
+        let role = page.navigationContext.ruolo;
+        page.getViewById("role").text = role;
+        page.getViewById("matricola").text = page.navigationContext.matricola;
+        page.getViewById("depart").text = "--"
+        page.getViewById("uid").text = page.navigationContext.username;
+
+        page.getViewById("sex").text = page.navigationContext.sesso;
+        let nascita = page.navigationContext.dataNascita;
+        page.getViewById("nascita").text = nascita;
+        page.getViewById("email_ist").text = page.navigationContext.emailAte;
+        page.getViewById("tel").text = page.navigationContext.telRes;
+
+        if (page.navigationContext.ruolo  === "Studenti"){
+
+            //getPIC(appSettings.getNumber("persId"), 0);
+
+            page.getViewById("email").text = page.navigationContext.email;
+            page.getViewById("nazione").text =  page.navigationContext.desCittadinanza;
+
+            page.getViewById("email_id").visibility = "visible";
+            page.getViewById("nation_id").visibility = "visible";
+        }
+        else if (page.navigationContext.ruolo === "Docenti"){
+
+            //getPIC(appSettings.getNumber("idAb"), 1);
+
+            //page.getViewById("my_img").backgroundImage = url;
+            page.getViewById("roleID").text =  page.navigationContext.settore;
+        }
     }
     else{
         choseBackground(page);
