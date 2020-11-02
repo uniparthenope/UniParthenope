@@ -1,14 +1,12 @@
 const observableModule = require("tns-core-modules/data/observable");
 const app = require("tns-core-modules/application");
 
-let page;
-let viewModel;
 let sideDrawer;
 
 exports.onNavigatingTo = function (args) {
-    page = args.object;
+    let page = args.object;
 
-    viewModel = observableModule.fromObject({});
+    let viewModel = observableModule.fromObject({});
 
     sideDrawer = app.getRootView();
 

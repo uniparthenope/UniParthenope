@@ -11,8 +11,8 @@ const frame = require("tns-core-modules/ui/frame");
 const platformModule = require("tns-core-modules/platform");
 
 //let domain = "http://api.uniparthenope.it:5000";
-let domain = "https://api.uniparthenope.it";
-//let domain = "http://127.0.0.1:5000";
+//let domain = "https://api.uniparthenope.it";
+let domain = "http://192.168.1.9:5000";
 
 global.url = domain + "/UniparthenopeApp/v1/";
 global.url2 = domain + "/UniparthenopeApp/v2/";
@@ -364,25 +364,87 @@ firebase.init({
         }
         else if(platformModule.isAndroid){
             if (message.foreground){
-                dialog.confirm({
-                    title: message.title,
-                    message: message.body,
-                    cancelButtonText: "Annulla",
-                    okButtonText: "Vai"
-                }).then(result => {
-                    console.log("PRESS BUTTON NOTIFICATIONS", message.data.title);
-                    if (result){
-                        const nav = {
-                            moduleName: "general/singleNews/singleNews",
-                            clearHistory: false,
-                            context: {
-                                title: message.data.title,
-                                body: message.data.body
+                if (message.data.page){
+                    if (message.data.page === "info"){
+                        dialog.confirm({
+                            title: message.title,
+                            message: message.body,
+                            cancelButtonText: "Rifiuta",
+                            okButtonText: "Conferma"
+                        }).then(result => {
+                            if (result){
+                                httpModule.request({
+                                    url : global.url_general + "Badges/v2/sendInfo",
+                                    method : "POST",
+                                    headers : {
+                                        "Content-Type": "application/json",
+                                        "Authorization" : "Basic "+ global.encodedStr
+                                    },
+                                    content : JSON.stringify({
+                                        receivedToken: message.data.receivedToken
+                                    })
+                                }).then((response) => {
+                                    const result = response.content.toJSON();
+                                    console.log(result);
+
+                                    let message;
+                                    if (response.statusCode === 500)
+                                        message = "Error: " + result["errMsg"];
+                                    else
+                                        message = result["message"];
+
+                                    // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
+                                    dialogs.alert({
+                                        title: "Result:",
+                                        message: message,
+                                        okButtonText: "OK"
+                                    });
+                                }, error => {
+                                    console.error(error);
+                                });
                             }
-                        };
-                        frame.Frame.topmost().navigate(nav);
+                        });
                     }
-                });
+                    else if(message.data.page === "info_received"){
+                        dialog.confirm({
+                            title: message.title,
+                            message: message.body,
+                            cancelButtonText: "Annulla",
+                            okButtonText: "Vai"
+                        }).then(result => {
+                            if (result){
+                                const nav = {
+                                    moduleName: "common/anagrafica/anagrafica",
+                                    clearHistory: false,
+                                    context: {
+                                        body: message.data.body
+                                    }
+                                };
+                                frame.Frame.topmost().navigate(nav);
+                            }
+                        });
+                    }
+                    else{
+                        dialog.confirm({
+                            title: message.title,
+                            message: message.body,
+                            cancelButtonText: "Annulla",
+                            okButtonText: "Vai"
+                        }).then(result => {
+                            if (result){
+                                const nav = {
+                                    moduleName: "general/singleNews/singleNews",
+                                    clearHistory: false,
+                                    context: {
+                                        title: message.data.title,
+                                        body: message.data.body
+                                    }
+                                };
+                                frame.Frame.topmost().navigate(nav);
+                            }
+                        });
+                    }
+                }
             }
             else {
                 global.notification_flag = true;

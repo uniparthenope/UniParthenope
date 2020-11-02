@@ -75,44 +75,52 @@ exports.onNavigatingTo = function(args) {
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
-    choseBackground(page);
-    page.getViewById("name").text = appSettings.getString("nome");
-    page.getViewById("surname").text = appSettings.getString("cognome");
-    page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
-    page.getViewById("matricola").text = appSettings.getString("matricola");
-    page.getViewById("depart").text = appSettings.getString("facDes").toUpperCase();
-    page.getViewById("uid").text = appSettings.getString("userId").toLowerCase();
 
+    console.log("Navigation",page.navigationContext);
 
-    page.getViewById("sex").text = appSettings.getString("sesso");
-    page.getViewById("nascita").text = appSettings.getString("dataNascita").substring(0,10);
-    page.getViewById("email_ist").text = appSettings.getString("emailAte");
-    page.getViewById("tel").text = appSettings.getString("telRes");
-
-
-    if (appSettings.getString("grpDes") === "Studenti"){
-
-        getPIC(appSettings.getNumber("persId"), 0);
-
-        page.getViewById("email").text = appSettings.getString("email");
-        page.getViewById("nazione").text = appSettings.getString("desCittadinanza");
-
-        page.getViewById("email_id").visibility = "visible";
-        page.getViewById("nation_id").visibility = "visible";
+    if(page.navigationContext !== undefined){
+        console.log(page.navigationContext.body);
     }
-    else if (appSettings.getString("grpDes") === "Docenti"){
+    else{
+        choseBackground(page);
+        page.getViewById("name").text = appSettings.getString("nome");
+        page.getViewById("surname").text = appSettings.getString("cognome");
+        page.getViewById("role").text = appSettings.getString("grpDes").toUpperCase();
+        page.getViewById("matricola").text = appSettings.getString("matricola");
+        page.getViewById("depart").text = appSettings.getString("facDes").toUpperCase();
+        page.getViewById("uid").text = appSettings.getString("userId").toLowerCase();
 
-        getPIC(appSettings.getNumber("idAb"), 1);
 
-        page.getViewById("my_img").backgroundImage = url;
-        page.getViewById("roleID").text = appSettings.getString("settCod");
-    }
-    else if (appSettings.getString("grpDes") === "Ristorante"){
+        page.getViewById("sex").text = appSettings.getString("sesso");
+        page.getViewById("nascita").text = appSettings.getString("dataNascita").substring(0,10);
+        page.getViewById("email_ist").text = appSettings.getString("emailAte");
+        page.getViewById("tel").text = appSettings.getString("telRes");
 
-        //getPIC(appSettings.getNumber("idAb"), 1);
 
-        //page.getViewById("my_img").backgroundImage = url;
-        page.getViewById("mat_label").text = "NOME RISTORANTE";
+        if (appSettings.getString("grpDes") === "Studenti"){
+
+            getPIC(appSettings.getNumber("persId"), 0);
+
+            page.getViewById("email").text = appSettings.getString("email");
+            page.getViewById("nazione").text = appSettings.getString("desCittadinanza");
+
+            page.getViewById("email_id").visibility = "visible";
+            page.getViewById("nation_id").visibility = "visible";
+        }
+        else if (appSettings.getString("grpDes") === "Docenti"){
+
+            getPIC(appSettings.getNumber("idAb"), 1);
+
+            page.getViewById("my_img").backgroundImage = url;
+            page.getViewById("roleID").text = appSettings.getString("settCod");
+        }
+        else if (appSettings.getString("grpDes") === "Ristorante"){
+
+            //getPIC(appSettings.getNumber("idAb"), 1);
+
+            //page.getViewById("my_img").backgroundImage = url;
+            page.getViewById("mat_label").text = "NOME RISTORANTE";
+        }
     }
 
     page.bindingContext = viewModel;

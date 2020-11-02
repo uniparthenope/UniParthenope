@@ -59,11 +59,12 @@ function getQr(){
         const filePath = fileSystemModule.path.join(fileSystemModule.knownFolders.currentApp().path, "qrCode-" + data.getTime() + ".png");
 
         httpModule.getFile({
-            "url": global.url_general + "Badges/v1/generateQrCode",
+            "url": global.url_general + "Badges/v2/generateQrCode",
             "method": "GET",
             headers: {
                 "Content-Type" : "image/png",
-                "Authorization" : "Basic "+ global.encodedStr
+                "Authorization" : "Basic "+ global.encodedStr,
+                "Token-notification": global.notification_token
             }
         }, filePath).then((source) => {
             page.getViewById("my_qr").backgroundImage = source.path;
@@ -82,11 +83,12 @@ function getQr(){
     }
     if(app.ios){
         httpModule.getFile({
-            "url": global.url_general + "Badges/v1/generateQrCode",
+            "url": global.url_general + "Badges/v2/generateQrCode",
             "method": "GET",
             headers: {
                 "Content-Type" : "image/png",
-                "Authorization" : "Basic "+ global.encodedStr
+                "Authorization" : "Basic "+ global.encodedStr,
+                "Token-notification": global.notification_token
             },
             "dontFollowRedirects": false
         }).then((source) => {
@@ -268,14 +270,15 @@ exports.tap_scanQR = function(){
             barcodescanner.message = "SCANNED";
             
             httpModule.request({
-                url : global.url_general + "Badges/v2/checkReciprocQrCode",
+                url : global.url_general + "Badges/v2/sendRequestInfo",
                 method : "POST",
                 headers : {
                     "Content-Type": "application/json",
                     "Authorization" : "Basic "+ global.encodedStr
                 },
                 content : JSON.stringify({
-                    token : result.text
+                    myToken : global.notification_token,
+                    receivedToken: result.text
                 })
             }).then((response) => {
                 const result = response.content.toJSON();
@@ -285,7 +288,7 @@ exports.tap_scanQR = function(){
                 if (response.statusCode === 500)
                     message = "Error: " + result["errMsg"];
                 else
-                    message = result["status"];
+                    message = result["message"];
 
                     // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
                     dialogs.alert({
