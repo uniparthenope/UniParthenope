@@ -9,54 +9,54 @@
             <Label class="textPrimary" text="Meteo@Uniparthenope" textWrap="true" textAlignment="center" verticalAlignment="center"/>
         </GridLayout>
 
-        <GridLayout height="55%" backgroundColor="#1E3258">
+        <GridLayout height="60%" backgroundColor="#1E3258">
             <StackLayout class="pic_rounded" borderWidth="0" opacity="0.2" verticalAlignment="center" height="100%" width="100%" backgroundImage="~/images/logo_new.png"/>
             <GridLayout rows="auto,auto" verticalAlignment="center" backgroundColor="rgba(0, 0, 0, 0.3)" height="55%">
 
-            <Label row="0" class="textPrimary" color="orange" fontSize="16" text="Comune" id="position" textWrap="true" horizontalAlignment="center" verticalAlignment="center" marginBottom="10"/>
-            <GridLayout row="1" verticalAlignment="center">
-                <GridLayout columns="*,*,*,*" margin="5 5 5 5">
-                    <StackLayout col="0" verticalAlignment="center">
-                        <Label id="date_0" class="font-bol" marginBottom="5" fontSize="12" text="" horizontalAlignment="center"/>
-                        <StackLayout id="image_0" class="main_image" backgroundImage="~/images/logo_parth.png" width="50" height="50" horizontalAlignment="center" marginLeft="5"/>
-                        <Label id="weather_0" class="textPrimary" marginBottom="10" fontSize="12" text="" horizontalAlignment="center"/>
-                        <Label id="temperature_0" row="0" fontSize="12" class="textPrimary" text=" °C" horizontalAlignment="center"/>
-                        <Label id="wind_0" class="textPrimary" fontSize="12" text="?" horizontalAlignment="center"/>
-                        <Label id="wind_speed_0" class="textPrimary" fontSize="10" text=" kn" horizontalAlignment="center" marginRight="10"/>
-                    </StackLayout>
+                <Label row="0" class="textPrimary" color="orange" fontSize="16" text="Comune" id="position" textWrap="true" horizontalAlignment="center" verticalAlignment="center" marginBottom="10"/>
+                <GridLayout row="1" verticalAlignment="center">
+                    <GridLayout columns="*,*,*,*" margin="5 5 5 5">
+                        <StackLayout col="0" verticalAlignment="center">
+                            <Label id="date_0" class="font-bol" marginBottom="5" fontSize="12" text="" horizontalAlignment="center"/>
+                            <StackLayout id="image_0" class="main_image" backgroundImage="~/images/logo_parth.png" width="50" height="50" horizontalAlignment="center" marginLeft="5"/>
+                            <Label id="weather_0" class="textPrimary" marginBottom="10" fontSize="12" text="" horizontalAlignment="center"/>
+                            <Label id="temperature_0" row="0" fontSize="12" class="textPrimary" text=" °C" horizontalAlignment="center"/>
+                            <Label id="wind_0" class="textPrimary" fontSize="12" text="?" horizontalAlignment="center"/>
+                            <Label id="wind_speed_0" class="textPrimary" fontSize="10" text=" kn" horizontalAlignment="center" marginRight="10"/>
+                        </StackLayout>
 
-                    <StackLayout col="1" verticalAlignment="center">
-                        <Label id="date_1" class="font-bol" marginBottom="5" fontSize="12" text="" horizontalAlignment="center"/>
-                        <StackLayout id="image_1" class="main_image" backgroundImage="~/images/logo_parth.png" width="50" height="50" horizontalAlignment="center" marginLeft="5"/>
-                        <Label id="weather_1" class="textPrimary" marginBottom="10" fontSize="12" text="" horizontalAlignment="center"/>
-                        <Label id="temperature_1" row="0" fontSize="12" class="textPrimary" text=" °C" horizontalAlignment="center"/>
-                        <Label id="wind_1" class="textPrimary" fontSize="12" text="?" horizontalAlignment="center"/>
-                        <Label id="wind_speed_1" class="textPrimary" fontSize="10" text=" kn" horizontalAlignment="center" marginRight="10"/>
-                    </StackLayout>
+                        <StackLayout col="1" verticalAlignment="center">
+                            <Label id="date_1" class="font-bol" marginBottom="5" fontSize="12" text="" horizontalAlignment="center"/>
+                            <StackLayout id="image_1" class="main_image" backgroundImage="~/images/logo_parth.png" width="50" height="50" horizontalAlignment="center" marginLeft="5"/>
+                            <Label id="weather_1" class="textPrimary" marginBottom="10" fontSize="12" text="" horizontalAlignment="center"/>
+                            <Label id="temperature_1" row="0" fontSize="12" class="textPrimary" text=" °C" horizontalAlignment="center"/>
+                            <Label id="wind_1" class="textPrimary" fontSize="12" text="?" horizontalAlignment="center"/>
+                            <Label id="wind_speed_1" class="textPrimary" fontSize="10" text=" kn" horizontalAlignment="center" marginRight="10"/>
+                        </StackLayout>
 
-                    <StackLayout col="2" verticalAlignment="center">
-                        <Label id="date_2" class="font-bol" marginBottom="5" fontSize="12" text="" horizontalAlignment="center"/>
-                        <StackLayout id="image_2" class="main_image" backgroundImage="~/images/logo_parth.png" width="50" height="50" horizontalAlignment="center" marginLeft="5"/>
-                        <Label id="weather_2" class="textPrimary" marginBottom="10" fontSize="12" text="" horizontalAlignment="center"/>
-                        <Label id="temperature_2" row="0" fontSize="12" class="textPrimary" text=" °C" horizontalAlignment="center"/>
-                        <Label id="wind_2" class="textPrimary" fontSize="12" text="?" horizontalAlignment="center"/>
-                        <Label id="wind_speed_2" class="textPrimary" fontSize="10" text=" kn" horizontalAlignment="center" marginRight="10"/>
-                    </StackLayout>
+                        <StackLayout col="2" verticalAlignment="center">
+                            <Label id="date_2" class="font-bol" marginBottom="5" fontSize="12" text="" horizontalAlignment="center"/>
+                            <StackLayout id="image_2" class="main_image" backgroundImage="~/images/logo_parth.png" width="50" height="50" horizontalAlignment="center" marginLeft="5"/>
+                            <Label id="weather_2" class="textPrimary" marginBottom="10" fontSize="12" text="" horizontalAlignment="center"/>
+                            <Label id="temperature_2" row="0" fontSize="12" class="textPrimary" text=" °C" horizontalAlignment="center"/>
+                            <Label id="wind_2" class="textPrimary" fontSize="12" text="?" horizontalAlignment="center"/>
+                            <Label id="wind_speed_2" class="textPrimary" fontSize="10" text=" kn" horizontalAlignment="center" marginRight="10"/>
+                        </StackLayout>
 
-                    <StackLayout col="3" verticalAlignment="center">
-                        <Label id="date_3" class="font-bol" marginBottom="5" fontSize="12" text="" horizontalAlignment="center"/>
-                        <StackLayout id="image_3" class="main_image" backgroundImage="~/images/logo_parth.png" width="50" height="50" horizontalAlignment="center" marginLeft="5"/>
-                        <Label id="weather_3" class="textPrimary" marginBottom="10" fontSize="12" text="" horizontalAlignment="center"/>
-                        <Label id="temperature_3" row="0" fontSize="12" class="textPrimary" text=" °C" horizontalAlignment="center"/>
-                        <Label id="wind_3" class="textPrimary" fontSize="12" text="?" horizontalAlignment="center"/>
-                        <Label id="wind_speed_3" class="textPrimary" fontSize="10" text=" kn" horizontalAlignment="center" marginRight="10"/>
-                    </StackLayout>
+                        <StackLayout col="3" verticalAlignment="center">
+                            <Label id="date_3" class="font-bol" marginBottom="5" fontSize="12" text="" horizontalAlignment="center"/>
+                            <StackLayout id="image_3" class="main_image" backgroundImage="~/images/logo_parth.png" width="50" height="50" horizontalAlignment="center" marginLeft="5"/>
+                            <Label id="weather_3" class="textPrimary" marginBottom="10" fontSize="12" text="" horizontalAlignment="center"/>
+                            <Label id="temperature_3" row="0" fontSize="12" class="textPrimary" text=" °C" horizontalAlignment="center"/>
+                            <Label id="wind_3" class="textPrimary" fontSize="12" text="?" horizontalAlignment="center"/>
+                            <Label id="wind_speed_3" class="textPrimary" fontSize="10" text=" kn" horizontalAlignment="center" marginRight="10"/>
+                        </StackLayout>
+                    </GridLayout>
                 </GridLayout>
-            </GridLayout>
 
+            </GridLayout>
         </GridLayout>
-        </GridLayout>
-        <StackLayout orientation="horizontal" backgroundColor="rgba(0, 0, 0, 0.3)" verticalAlignment="bottom" height="10%" horizontalAlignment="center" ontap="ontap_download">
+        <StackLayout orientation="horizontal" backgroundColor="rgba(0, 0, 0, 0.3)" verticalAlignment="bottom" height="10%" horizontalAlignment="center" ontap="ontap_download" width="100%">
             <Image src="~/images/meteo.png" height="60" width="60" horizontalAlignment="center" marginRight="5" marginLeft="10" verticalAlignment="center"/>
             <Label class="textPrimary" text="Scarica gratuitamente la nostra app" textWrap="true" marginRight="10" textAlignment="center" verticalAlignment="center" horizontalAlignment="left"/>
         </StackLayout>

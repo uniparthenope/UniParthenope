@@ -27,16 +27,16 @@
 
     <GridLayout>
         <GridLayout rows="auto,auto,auto" rowSpan="3">
-            <GridLayout row="0" height="20%" columns="auto,*">
+            <GridLayout row="0" height="20%" columns="50%,*" width="100%">
                 <ios>
-                    <Button col="0" class="myMenu" backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="left" marginTop="15"/>
+                    <Button col="0" class="myMenu" backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="left" marginTop="15" marginLeft="5"/>
                 </ios>
                 <android>
-                    <Button col="0" class="myMenu" backgroundImage="res://menu" ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" marginTop="15"/>
+                    <Button col="0" class="myMenu" backgroundImage="res://menu" ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" marginTop="15" />
                 </android>
 
-                <GridLayout col="1" backgroundColor="#1E3258" width="80%" verticalAlignment="center" horizontalAlignment="right">
-                    <Image src="~/images/home/toptitle_reversed.png" marginRight="5" verticalAlignment="center" horizontalAlignment="right"/>
+                <GridLayout col="1" backgroundColor="#1E3258" width="80%" verticalAlignment="top" horizontalAlignment="right" marginTop="15">
+                    <Image src="~/images/home/toptitle_reversed.png" marginRight="5" verticalAlignment="top" horizontalAlignment="right"/>
                 </GridLayout>
             </GridLayout>
 
@@ -74,41 +74,43 @@
                 <GridLayout row="1" rows="auto,auto" backgroundImage="~/images/image_Acton.jpg" class="main_image" id="main_image">
                     <StackLayout row="0" id="bottom_bar2" verticalAlignment="top" height="5" width="100%" backgroundColor="#2E7C9E"/>
 
-                    <GridLayout rows="auto,auto,auto" verticalAlignment="top" horizontalAlignment="left" marginTop="25" marginLeft="10">
+                    <GridLayout row="1" rows="auto,auto,auto" horizontalAlignment="left" marginTop="25" marginLeft="10">
                             <StackLayout row="0" horizontalAlignment="right" marginBottom="15">
-                                <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapNotizie" backgroundImage="~/images/icon/newspaper.png" height="45" width="45"/>
+                                <Button class="roundedBtnCenter" backgroundColor="#22384f" tap="onTapNotizie" backgroundImage="~/images/icon/newspaper.png"/>
                             </StackLayout>
                             <StackLayout row="1" horizontalAlignment="left" marginBottom="15">
-                                <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapAvvisi" backgroundImage="~/images/icon/loud-speaker.png" height="45" width="45"/>
+                                <Button class="roundedBtnCenter"  backgroundColor="#22384f" tap="onTapAvvisi" backgroundImage="~/images/icon/loud-speaker.png" />
                             </StackLayout>
                             <StackLayout row="2" horizontalAlignment="left" marginBottom="15">
-                                <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapEventi" backgroundImage="~/images/icon/event.png" height="45" width="45"/>
+                                <Button class="roundedBtnCenter"  backgroundColor="#22384f" tap="onTapEventi" backgroundImage="~/images/icon/event.png"/>
                             </StackLayout>
                         </GridLayout>
 
-                    <GridLayout rows="auto,auto,auto" verticalAlignment="top" horizontalAlignment="right" marginTop="25" marginRight="10">
+                    <GridLayout row="1" rows="auto,auto,auto" horizontalAlignment="right" marginTop="25" marginRight="10">
                             <StackLayout row="0" horizontalAlignment="right" marginBottom="15">
-                                <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapFood" backgroundImage="~/images/icon/food.png" height="45" width="45"/>
+                                <Button class="roundedBtnCenter" backgroundColor="#22384f" tap="onTapFood" backgroundImage="~/images/icon/food.png" />
                             </StackLayout>
                             <StackLayout row="1" horizontalAlignment="left" marginBottom="15">
-                                <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapMeteo" backgroundImage="~/images/icon/storm.png" height="45" width="45"/>
+                                <Button class="roundedBtnCenter"  backgroundColor="#22384f" tap="onTapMeteo" backgroundImage="~/images/icon/storm.png"/>
                             </StackLayout>
                             <StackLayout row="2" horizontalAlignment="left" marginBottom="15">
-                                <Button class="circle" borderWidth="1" borderColor="white" backgroundColor="#22384f" tap="onTapTrasporti" backgroundImage="~/images/icon/front-bus.png" height="45" width="45"/>
+                                <Button class="roundedBtnCenter" backgroundColor="#22384f" tap="onTapTrasporti" backgroundImage="~/images/icon/front-bus.png" />
                             </StackLayout>
                         </GridLayout>
                 </GridLayout>
             </GridLayout>
 
-            <GridLayout row="2" height="15%" rows="auto,auto">
-                <GridLayout row="0" columns="auto,auto,auto,auto,auto" marginBottom="10" horizontalAlignment="center">
-                    <Button col="0" class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/fb.png" ontap="ontap_fb"/>
-                    <Button col="1" class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/twi.png" ontap="ontap_twi"/>
-                    <Button col="2" class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/insta.png" ontap="ontap_insta"/>
-                    <Button col="3" class="roundedBtn" text="" marginRight="10" backgroundImage="~/images/social/you.png" ontap="ontap_you"/>
-                    <Button col="4" class="roundedBtn" text="" backgroundImage="~/images/social/linkedin.png" ontap="ontap_linkedin"/>
+            <!-- Social -->
+            <GridLayout row="2" height="15%" rows="*,auto" width="100%" >
+                <GridLayout columns="*,*,*,*,*" row="0" >
+                    <Image col="0" src="~/images/social/fb.png" ontap="ontap_fb" width="5%"/>
+                    <Image col="1" src="~/images/social/twi.png" ontap="ontap_twi" width="5%"/>
+                    <Image col="2" src="~/images/social/insta.png" ontap="ontap_insta" width="5%"/>
+                    <Image col="3" src="~/images/social/you.png" ontap="ontap_you" width="5%"/>
+                    <Image col="4" src="~/images/social/linkedin.png" ontap="ontap_linkedin" width="5%"/>
+
                 </GridLayout>
-                <StackLayout row="1" verticalAlignment="bottom">
+                <StackLayout row="1" verticalAlignment="bottom" marginBottom="5">
                     <Label text="Universitá degli Studi di Napoli ''Parthenope''" horizontalAlignment="center" color="white"  marginBottom="5" fontSize="10"/>
                     <Label id="version" horizontalAlignment="center" color="white" verticalAlignment="bottom" marginBottom="5" fontSize="10"/>
                 </StackLayout>

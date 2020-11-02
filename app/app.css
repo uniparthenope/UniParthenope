@@ -102,6 +102,24 @@ Accordion{
     background-color: #2E7C9E;
     border-color: #2E7C9E;
 }
+
+.roundedBtnCenter
+{
+    border-color: white;
+    border-width: 2;
+    border-radius: 100%;
+    background-color: #1E3258;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 45% 45%;
+    height: 45;
+    width: 45;
+}
+.roundedBtnCenter:active
+{
+    background-color: #2E7C9E;
+    border-color: #2E7C9E;
+}
 .imageTop
 {
     border-color: white;
@@ -311,6 +329,7 @@ Accordion{
     background-color: transparent;
     border-width: 0;
     z-index: 0;
+
 }
 .ristorante-menu{
     background-repeat: no-repeat;

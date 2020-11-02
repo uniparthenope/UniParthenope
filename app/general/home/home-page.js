@@ -20,7 +20,7 @@ let remember;
 let user;
 let pos;
 let indicator;
-let news;
+let first_news;
 
 let array_locations = [{id: 'CDN', lat: 40.856831, long: 14.284553, color: 'linear-gradient(135deg, #5CC77A, #009432)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(0, 167, 84))'},
     {id: 'Medina', lat: 40.840447, long: 14.251863, color: 'linear-gradient(135deg, #107dd0, #22384f)', background:'linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(221, 108, 166))'},
@@ -48,17 +48,17 @@ function getNews(){
             });
         }
         else {
-            console.log(result.length);
 
             for (let i=0; i<result.length; i++) {
 
                 let dat = new Date(result[i].data);
-                news.push({
+                global.news.push({
                     title: result[i].titolo,
                     date: dat.getDate() + "/" + (dat.getMonth()+1) + "/" +dat.getFullYear() + " "+dat.getHours() + ":00",
                     body: result[i].abstract
                 });
             }
+
             loading.visibility = "collapsed";
         }
     },(e) => {
@@ -574,10 +574,9 @@ function autoconnect(flag) {
 
 exports.onNavigatingTo = function (args) {
     page = args.object;
-    news = new ObservableArray();
 
     viewModel = observableModule.fromObject({
-        news:news
+        news: global.news
     });
     sideDrawer = app.getRootView();
     indicator = page.getViewById("activityIndicator");
@@ -603,8 +602,8 @@ exports.onNavigatingTo = function (args) {
     checkServer(10000);
     //initializeGraph();
     //console.log(global.tempPos);
-
-    getNews();
+    if(global.news.length === 0)
+        getNews();
 
     if(!global.tempPos){ //Setto la posizione attuale, soltanto alla prima apertura dell'app
         console.log("Setto la posizione!");

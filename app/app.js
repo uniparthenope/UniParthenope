@@ -37,6 +37,7 @@ global.myDocenti = [];
 global.myPrenotazioni = [];
 global.myLezioni = [];
 global.myAppelli = new ObservableArray();
+global.news = new ObservableArray();
 global.my_selfcert;
 global.services = [];
 global.notification_flag = false;
@@ -63,6 +64,7 @@ global.clearAll = function(){
     global.myDocenti = [];
     global.myPrenotazioni = [];
     global.myAppelli = new ObservableArray();
+    global.news = new ObservableArray();
     global.services = [];
     global.notification_flag = false;
 

@@ -1,9 +1,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:gravity="fill">
     <item>
-        <color android:color="#FFFFFF"/>
+        <color android:color="#1E3258"/>
     </item>
     <item>
-
         <bitmap android:gravity="center" android:src="@drawable/icona_logo" />
     </item>
 </layer-list>
