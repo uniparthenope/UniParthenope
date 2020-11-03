@@ -28,6 +28,8 @@
             <GridLayout rows="60,*,50">
             <GridLayout row="0" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
                 <Label class="textPrimary" text="La Mia Home" horizontalAlignment="center" verticalAlignment="center"/>
+                <Image src="~/images/icon/refresh.png" width="25" height="25" verticalAlignment="center" horizontalAlignment="left"
+                        marginLeft="20" ontap="tap_reload"/>
             </GridLayout>
 
             <rc:RadCalendar row="1" id="cal" inlineEventSelected="onDaySelected" selectionMode="Single" viewMode="Month" eventSource="{{ events }}" eventsViewMode="Inline" verticalAlignment="top">
