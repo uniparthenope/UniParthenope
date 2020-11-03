@@ -3,6 +3,7 @@ const app = require("tns-core-modules/application");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
+const imageSourceModule = require("tns-core-modules/image-source");
 
 let page;
 let viewModel;
@@ -81,21 +82,19 @@ exports.onNavigatingTo = function(args) {
     if(page.navigationContext !== undefined){
         page.getViewById("name").text = page.navigationContext.nome;
         page.getViewById("surname").text = page.navigationContext.cognome;
-        let role = page.navigationContext.ruolo;
-        page.getViewById("role").text = role;
+        page.getViewById("role").text = page.navigationContext.ruolo.toUpperCase();
         page.getViewById("matricola").text = page.navigationContext.matricola;
         page.getViewById("depart").text = "--"
         page.getViewById("uid").text = page.navigationContext.username;
 
         page.getViewById("sex").text = page.navigationContext.sesso;
-        let nascita = page.navigationContext.dataNascita;
-        page.getViewById("nascita").text = nascita;
+        page.getViewById("nascita").text = page.navigationContext.dataNascita.substring(0,10);
         page.getViewById("email_ist").text = page.navigationContext.emailAte;
         page.getViewById("tel").text = page.navigationContext.telRes;
 
         if (page.navigationContext.ruolo  === "Studenti"){
 
-            //getPIC(appSettings.getNumber("persId"), 0);
+            page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(page.navigationContext.foto);
 
             page.getViewById("email").text = page.navigationContext.email;
             page.getViewById("nazione").text =  page.navigationContext.desCittadinanza;
@@ -105,9 +104,8 @@ exports.onNavigatingTo = function(args) {
         }
         else if (page.navigationContext.ruolo === "Docenti"){
 
-            //getPIC(appSettings.getNumber("idAb"), 1);
+            page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(page.navigationContext.image);
 
-            //page.getViewById("my_img").backgroundImage = url;
             page.getViewById("roleID").text =  page.navigationContext.settore;
         }
     }

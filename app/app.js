@@ -10,9 +10,9 @@ let dialog = require("tns-core-modules/ui/dialogs");
 const frame = require("tns-core-modules/ui/frame");
 const platformModule = require("tns-core-modules/platform");
 
-let domain = "http://api.uniparthenope.it:5000";
+//let domain = "http://api.uniparthenope.it:5000";
 //let domain = "https://api.uniparthenope.it";
-//let domain = "http://192.168.1.9:5000";
+let domain = "http://192.168.1.7:5000";
 
 global.url = domain + "/UniparthenopeApp/v1/";
 global.url2 = domain + "/UniparthenopeApp/v2/";
@@ -343,6 +343,7 @@ firebase.init({
         console.log("Body: " + message.body);
         console.log("Value of 'page': " + message.data.page);
         console.log("Foreground: " + message.foreground);
+        console.log("Info: " + message.data.info)
 
         if(platformModule.isIOS){
             global.notification_flag = true;
@@ -398,55 +399,57 @@ firebase.init({
                             }).then(result => {
                                 if (result){
                                     let c;
-                                    if(message.info.ruolo === "Studenti"){
+                                    let info_json = JSON.parse(message.data.info);
+
+                                    if(info_json.ruolo === "Studenti"){
                                         c = {
-                                            nome: message.info.nome,
-                                            cognome: message.info.cognome,
-                                            matricola: message.info.matricola,
-                                            username: message.info.username,
-                                            dataNascita: message.info.dataNascita,
-                                            emailAte: message.info.emailAte,
-                                            email: message.info.email,
-                                            sesso: message.info.sesso,
-                                            telRes: message.info.telRes,
-                                            ruolo: message.info.ruolo,
-                                            desCittadinanza: message.info.desCittadinanza,
-                                            foto: message.info.foto
+                                            nome: info_json.nome,
+                                            cognome: info_json.cognome,
+                                            matricola: info_json.matricola,
+                                            username: info_json.username,
+                                            dataNascita: info_json.dataNascita,
+                                            emailAte: info_json.emailAte,
+                                            email: info_json.email,
+                                            sesso: info_json.sesso,
+                                            telRes: info_json.telRes,
+                                            ruolo: info_json.ruolo,
+                                            desCittadinanza: info_json.desCittadinanza,
+                                            foto: info_json.foto
                                         }
                                     }
-                                    else if (message.info.ruolo === "Docenti"){
+                                    else if (info_json.ruolo === "Docenti"){
                                         c= {
-                                            nome: message.info.nome,
-                                            cognome: message.info.cognome,
-                                            matricola: message.info.matricola,
-                                            username: message.info.username,
-                                            dataNascita: message.info.dataNascita,
-                                            emailAte: message.info.emailAte,
-                                            sesso: message.info.sesso,
-                                            telRes: message.info.telRes,
-                                            ruolo: message.info.ruolo,
-                                            settore: message.info.settore,
-                                            foto: message.info.foto
+                                            nome: info_json.nome,
+                                            cognome: info_json.cognome,
+                                            matricola: info_json.matricola,
+                                            username: info_json.username,
+                                            dataNascita: info_json.dataNascita,
+                                            emailAte: info_json.emailAte,
+                                            sesso: info_json.sesso,
+                                            telRes: info_json.telRes,
+                                            ruolo: info_json.ruolo,
+                                            settore: info_json.settore,
+                                            foto: info_json.foto
                                         }
                                     }
                                     else{
                                         //TODO Da aggiustare
                                         c = {
-                                            nome: message.info.nome,
-                                            cognome: message.info.cognome,
-                                            matricola: message.info.matricola,
-                                            username: message.info.username,
-                                            dataNascita: message.info.dataNascita,
-                                            emailAte: message.info.emailAte,
-                                            email: message.info.email,
-                                            sesso: message.info.sesso,
-                                            telRes: message.info.telRes,
-                                            ruolo: message.info.ruolo,
-                                            settore: message.info.settore,
-                                            foto: message.info.foto
+                                            nome: info_json.nome,
+                                            cognome: info_json.cognome,
+                                            matricola: info_json.matricola,
+                                            username: info_json.username,
+                                            dataNascita: info_json.dataNascita,
+                                            emailAte: info_json.emailAte,
+                                            email: info_json.email,
+                                            sesso: info_json.sesso,
+                                            telRes: info_json.telRes,
+                                            ruolo: info_json.ruolo,
+                                            settore: info_json.settore,
+                                            foto: info_json.foto
                                         }
                                     }
-                                    console.log(c);
+
                                     const nav = {
                                         moduleName: "common/anagrafica/anagrafica",
                                         clearHistory: false,
@@ -482,7 +485,7 @@ firebase.init({
         }
         else if(platformModule.isAndroid){
             if (message.foreground){
-                if (message.data.page){
+                if(message.data.page){
                     if (message.data.page === "info"){
                         dialog.confirm({
                             title: message.title,
@@ -531,12 +534,62 @@ firebase.init({
                             okButtonText: "Vai"
                         }).then(result => {
                             if (result){
+                                let c;
+                                let info_json = JSON.parse(message.data.info);
+
+                                if(info_json.ruolo === "Studenti"){
+                                    c = {
+                                        nome: info_json.nome,
+                                        cognome: info_json.cognome,
+                                        matricola: info_json.matricola,
+                                        username: info_json.username,
+                                        dataNascita: info_json.dataNascita,
+                                        emailAte: info_json.emailAte,
+                                        email: info_json.email,
+                                        sesso: info_json.sesso,
+                                        telRes: info_json.telRes,
+                                        ruolo: info_json.ruolo,
+                                        desCittadinanza: info_json.desCittadinanza,
+                                        foto: info_json.foto
+                                    }
+                                }
+                                else if (info_json.ruolo === "Docenti"){
+                                    c= {
+                                        nome: info_json.nome,
+                                        cognome: info_json.cognome,
+                                        matricola: info_json.matricola,
+                                        username: info_json.username,
+                                        dataNascita: info_json.dataNascita,
+                                        emailAte: info_json.emailAte,
+                                        sesso: info_json.sesso,
+                                        telRes: info_json.telRes,
+                                        ruolo: info_json.ruolo,
+                                        settore: info_json.settore,
+                                        foto: info_json.foto
+                                    }
+                                }
+                                else{
+                                    //TODO Da aggiustare
+                                    c = {
+                                        nome: info_json.nome,
+                                        cognome: info_json.cognome,
+                                        matricola: info_json.matricola,
+                                        username: info_json.username,
+                                        dataNascita: info_json.dataNascita,
+                                        emailAte: info_json.emailAte,
+                                        email: info_json.email,
+                                        sesso: info_json.sesso,
+                                        telRes: info_json.telRes,
+                                        ruolo: info_json.ruolo,
+                                        settore: info_json.settore,
+                                        foto: info_json.foto
+                                    }
+                                }
+
                                 const nav = {
                                     moduleName: "common/anagrafica/anagrafica",
                                     clearHistory: false,
-                                    context: {
-                                        body: message.data.body
-                                    }
+                                    context: c
                                 };
                                 frame.Frame.topmost().navigate(nav);
                             }
@@ -616,12 +669,62 @@ firebase.init({
                                 okButtonText: "Vai"
                             }).then(result => {
                                 if (result){
+                                    let c;
+                                    let info_json = JSON.parse(message.data.info);
+
+                                    if(info_json.ruolo === "Studenti"){
+                                        c = {
+                                            nome: info_json.nome,
+                                            cognome: info_json.cognome,
+                                            matricola: info_json.matricola,
+                                            username: info_json.username,
+                                            dataNascita: info_json.dataNascita,
+                                            emailAte: info_json.emailAte,
+                                            email: info_json.email,
+                                            sesso: info_json.sesso,
+                                            telRes: info_json.telRes,
+                                            ruolo: info_json.ruolo,
+                                            desCittadinanza: info_json.desCittadinanza,
+                                            foto: info_json.foto
+                                        }
+                                    }
+                                    else if (info_json.ruolo === "Docenti"){
+                                        c= {
+                                            nome: info_json.nome,
+                                            cognome: info_json.cognome,
+                                            matricola: info_json.matricola,
+                                            username: info_json.username,
+                                            dataNascita: info_json.dataNascita,
+                                            emailAte: info_json.emailAte,
+                                            sesso: info_json.sesso,
+                                            telRes: info_json.telRes,
+                                            ruolo: info_json.ruolo,
+                                            settore: info_json.settore,
+                                            foto: info_json.foto
+                                        }
+                                    }
+                                    else{
+                                        //TODO Da aggiustare
+                                        c = {
+                                            nome: info_json.nome,
+                                            cognome: info_json.cognome,
+                                            matricola: info_json.matricola,
+                                            username: info_json.username,
+                                            dataNascita: info_json.dataNascita,
+                                            emailAte: info_json.emailAte,
+                                            email: info_json.email,
+                                            sesso: info_json.sesso,
+                                            telRes: info_json.telRes,
+                                            ruolo: info_json.ruolo,
+                                            settore: info_json.settore,
+                                            foto: info_json.foto
+                                        }
+                                    }
+
                                     const nav = {
                                         moduleName: "common/anagrafica/anagrafica",
                                         clearHistory: false,
-                                        context: {
-                                            body: message.data.body
-                                        }
+                                        context: c
                                     };
                                     frame.Frame.topmost().navigate(nav);
                                 }
