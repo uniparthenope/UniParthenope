@@ -10,9 +10,9 @@ let dialog = require("tns-core-modules/ui/dialogs");
 const frame = require("tns-core-modules/ui/frame");
 const platformModule = require("tns-core-modules/platform");
 
-//let domain = "http://api.uniparthenope.it:5000";
+let domain = "http://api.uniparthenope.it:5000";
 //let domain = "https://api.uniparthenope.it";
-let domain = "http://192.168.1.7:5000";
+//let domain = "http://192.168.1.7:5000";
 
 global.url = domain + "/UniparthenopeApp/v1/";
 global.url2 = domain + "/UniparthenopeApp/v2/";
@@ -481,6 +481,120 @@ firebase.init({
                         }
                     }
                 }, 50);
+            }
+            else{
+                if (message.data.page){
+                    if (message.data.page === "info"){
+                        dialog.confirm({
+                            title: message.title,
+                            message: message.body,
+                            cancelButtonText: "Rifiuta",
+                            okButtonText: "Conferma"
+                        }).then(result => {
+                            if (result){
+                                httpModule.request({
+                                    url : global.url_general + "Badges/v2/sendInfo",
+                                    method : "POST",
+                                    headers : {
+                                        "Content-Type": "application/json",
+                                        "Authorization" : "Basic "+ global.encodedStr
+                                    },
+                                    content : JSON.stringify({
+                                        receivedToken: message.data.receivedToken
+                                    })
+                                }).then((response) => {
+                                    const result = response.content.toJSON();
+                                    console.log(result);
+
+                                    let message;
+                                    if (response.statusCode === 500)
+                                        message = "Error: " + result["errMsg"];
+                                    else
+                                        message = result["message"];
+
+                                    // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
+                                    dialogs.alert({
+                                        title: "Result:",
+                                        message: message,
+                                        okButtonText: "OK"
+                                    });
+                                }, error => {
+                                    console.error(error);
+                                });
+                            }
+                        });
+                    }
+                    else if(message.data.page === "info_received"){
+                        dialog.confirm({
+                            title: message.title,
+                            message: message.body,
+                            cancelButtonText: "Annulla",
+                            okButtonText: "Vai"
+                        }).then(result => {
+                            if (result){
+                                let c;
+                                let info_json = JSON.parse(message.data.info);
+
+                                if(info_json.ruolo === "Studenti"){
+                                    c = {
+                                        nome: info_json.nome,
+                                        cognome: info_json.cognome,
+                                        matricola: info_json.matricola,
+                                        username: info_json.username,
+                                        dataNascita: info_json.dataNascita,
+                                        emailAte: info_json.emailAte,
+                                        email: info_json.email,
+                                        sesso: info_json.sesso,
+                                        telRes: info_json.telRes,
+                                        ruolo: info_json.ruolo,
+                                        desCittadinanza: info_json.desCittadinanza,
+                                        foto: info_json.foto
+                                    }
+                                }
+                                else if (info_json.ruolo === "Docenti"){
+                                    c= {
+                                        nome: info_json.nome,
+                                        cognome: info_json.cognome,
+                                        matricola: info_json.matricola,
+                                        username: info_json.username,
+                                        dataNascita: info_json.dataNascita,
+                                        emailAte: info_json.emailAte,
+                                        sesso: info_json.sesso,
+                                        telRes: info_json.telRes,
+                                        ruolo: info_json.ruolo,
+                                        settore: info_json.settore,
+                                        foto: info_json.foto
+                                    }
+                                }
+                                else{
+                                    //TODO Da aggiustare
+                                    c = {
+                                        nome: info_json.nome,
+                                        cognome: info_json.cognome,
+                                        matricola: info_json.matricola,
+                                        username: info_json.username,
+                                        dataNascita: info_json.dataNascita,
+                                        emailAte: info_json.emailAte,
+                                        email: info_json.email,
+                                        sesso: info_json.sesso,
+                                        telRes: info_json.telRes,
+                                        ruolo: info_json.ruolo,
+                                        settore: info_json.settore,
+                                        foto: info_json.foto
+                                    }
+                                }
+
+                                const nav = {
+                                    moduleName: "common/anagrafica/anagrafica",
+                                    clearHistory: false,
+                                    context: c
+                                };
+                                frame.Frame.topmost().navigate(nav);
+                            }
+                        });
+                    }
+                }
+
             }
         }
         else if(platformModule.isAndroid){
