@@ -422,6 +422,13 @@ exports.onDaySelected = function(args){
     mainView.showModal(modalViewModule, context, false);
 };
 exports.tap_reload = function(){
-    getPrenotazioni();
+    global.updatedExam = false;
 
+    const nav =
+        {
+            moduleName: "studenti/userCalendar/userCalendar",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
 };
