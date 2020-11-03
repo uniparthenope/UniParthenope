@@ -27,6 +27,7 @@
         <StackLayout orientation="vertical" height="100%" backgroundColor="white">
             <GridLayout rows="75,*,50" backgroundColor="white">
                 <GridLayout row="0" class="two-color-gradient" width="100%" height="15%" verticalAlignment="top">
+
                     <StackLayout orientation="vertical" marginTop="10">
                         <Label class="textPrimary" text="La Mia Home" horizontalAlignment="center" verticalAlignment="center"/>
                         <Label class="textPrimary" text="AA" id="aa" horizontalAlignment="center" verticalAlignment="center" fontSize="12"/>
@@ -35,6 +36,8 @@
                             <Label class="textPrimary" text="Sessione" id="sessione" horizontalAlignment="right" verticalAlignment="center" fontSize="12" />
                         </GridLayout>
                     </StackLayout>
+                    <Image src="~/images/icon/refresh.png" width="25" height="25" verticalAlignment="top" horizontalAlignment="left"
+                           marginLeft="20" ontap="tap_reload" marginTop="15"/>
                 </GridLayout>
 
                 <rc:RadCalendar row="1" id="myCalendar" inlineEventSelected="onDaySelected" selectionMode="Single" viewMode="Month" eventsViewMode="Inline" eventSource="{{ events }}" verticalAlignment="top">

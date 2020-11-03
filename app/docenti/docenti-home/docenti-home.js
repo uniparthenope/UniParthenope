@@ -174,8 +174,12 @@ function getCourses() {
                 }
                 else {
                     global.myAppelli.slice(0);
+                    while(global.myAppelli.length > 0)
+                        global.myAppelli.pop();
                     while(global.myExams.length > 0)
                         global.myExams.pop();
+                    while(global.events.length > 0)
+                        global.events.pop();
                     num = 0;
                     global.events = [];
 
@@ -413,4 +417,16 @@ exports.onDaySelected = function(args){
     const context = { title: title,body:body, start_date: args.eventData.startDate, end_date: args.eventData.endDate, color: args.eventData.eventColor};
 
     mainView.showModal(modalViewModule, context, false);
+};
+
+exports.tap_reload = function(){
+    global.updatedExam = false;
+
+    const nav =
+        {
+            moduleName: "docenti/docenti-home/docenti-home",
+            clearHistory: true,
+            animated: false
+        };
+    page.frame.navigate(nav);
 };

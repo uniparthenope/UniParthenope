@@ -421,3 +421,7 @@ exports.onDaySelected = function(args){
 
     mainView.showModal(modalViewModule, context, false);
 };
+exports.tap_reload = function(){
+    getPrenotazioni();
+
+};
