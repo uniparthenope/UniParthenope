@@ -400,6 +400,7 @@ firebase.init({
                                 okButtonText: "Vai"
                             }).then(result => {
                                 if (result){
+                                    /*
                                     let c;
                                     let info_json = JSON.parse(message.data.info);
 
@@ -452,11 +453,14 @@ firebase.init({
                                         }
                                     }
 
+
+                                     */
                                     const nav = {
                                         moduleName: "common/anagrafica/anagrafica",
                                         clearHistory: false,
-                                        context: c
-                                    };
+                                        context: {
+                                            id: message.data.id_info
+                                        }                                    };
                                     frame.Frame.topmost().navigate(nav);
                                 }
                             });
@@ -537,6 +541,7 @@ firebase.init({
                             okButtonText: "Vai"
                         }).then(result => {
                             if (result){
+                                /*
                                 let c;
                                 let info_json = JSON.parse(message.data.info);
 
@@ -589,11 +594,14 @@ firebase.init({
                                     }
                                 }
 
+
+                                 */
                                 const nav = {
                                     moduleName: "common/anagrafica/anagrafica",
                                     clearHistory: false,
-                                    context: c
-                                };
+                                    context: {
+                                        id: message.data.id_info
+                                    }                                };
                                 frame.Frame.topmost().navigate(nav);
                             }
                         });
@@ -655,6 +663,7 @@ firebase.init({
                             okButtonText: "Vai"
                         }).then(result => {
                             if (result){
+                                /*
                                 let c;
                                 let info_json = JSON.parse(message.data.info);
 
@@ -707,10 +716,14 @@ firebase.init({
                                     }
                                 }
 
+
+                                 */
                                 const nav = {
                                     moduleName: "common/anagrafica/anagrafica",
                                     clearHistory: false,
-                                    context: c
+                                    context: {
+                                        id: message.data.id_info
+                                    }
                                 };
                                 frame.Frame.topmost().navigate(nav);
                             }
@@ -793,6 +806,9 @@ firebase.init({
                                 okButtonText: "Vai"
                             }).then(result => {
                                 if (result){
+                                    //message.data.id_info
+
+                                    /*
                                     let c;
                                     let info_json = JSON.parse(message.data.info);
 
@@ -844,11 +860,13 @@ firebase.init({
                                             foto: info_json.foto
                                         }
                                     }
-
+                                    */
                                     const nav = {
                                         moduleName: "common/anagrafica/anagrafica",
                                         clearHistory: false,
-                                        context: c
+                                        context: {
+                                            id: message.data.id_info
+                                        }
                                     };
                                     frame.Frame.topmost().navigate(nav);
                                 }

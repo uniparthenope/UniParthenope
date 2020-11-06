@@ -13,6 +13,7 @@ const platformModule = require("tns-core-modules/platform");
 let page;
 let viewModel;
 let sideDrawer;
+let info;
 
 function choseBackground(page){
     let code = appSettings.getString("facCod");
@@ -76,45 +77,73 @@ function getPIC(personId, value){
     });
 }
 
+function getRecord(){
+    httpModule.request({
+        url : global.url_general + "Badges/v2/getContactInfo",
+        method : "POST",
+        headers : {
+            "Content-Type": "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        },
+        content : JSON.stringify({
+            id: page.navigationContext.id
+        })
+    }).then((response) => {
+        const result = response.content.toJSON();
+
+        let message;
+        if (response.statusCode === 500)
+            message = "Error: " + result["errMsg"];
+        else
+            info = result;
+    }, error => {
+        console.error(error);
+    });
+
+}
+
 exports.onNavigatingTo = function(args) {
     page = args.object;
     viewModel = observableModule.fromObject({});
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
 
-    console.log("Navigation",page.navigationContext);
+    console.log("Navigation",info);
 
     if(page.navigationContext !== undefined){
         page.getViewById("save_info").visibility = "visible";
+        
+        getRecord();
 
-        page.getViewById("name").text = page.navigationContext.nome;
-        page.getViewById("surname").text = page.navigationContext.cognome;
-        page.getViewById("role").text = page.navigationContext.ruolo.toUpperCase();
-        page.getViewById("matricola").text = page.navigationContext.matricola;
+        page.getViewById("name").text = info.nome;
+        page.getViewById("surname").text = info.cognome;
+        page.getViewById("role").text = info.ruolo.toUpperCase();
+        page.getViewById("matricola").text = info.matricola;
         page.getViewById("depart").text = "--"
-        page.getViewById("uid").text = page.navigationContext.username;
+        page.getViewById("uid").text = info.username;
 
-        page.getViewById("sex").text = page.navigationContext.sesso;
-        page.getViewById("nascita").text = page.navigationContext.dataNascita.substring(0,10);
-        page.getViewById("email_ist").text = page.navigationContext.emailAte;
-        page.getViewById("tel").text = page.navigationContext.telRes;
+        page.getViewById("sex").text = info.sesso;
+        page.getViewById("nascita").text = info.dataNascita.substring(0,10);
+        page.getViewById("email_ist").text = info.emailAte;
+        page.getViewById("tel").text = info.telRes;
 
-        if (page.navigationContext.ruolo  === "Studenti"){
+        if (info.ruolo  === "Studenti"){
 
-            page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(page.navigationContext.foto);
+            page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(info.foto);
 
-            page.getViewById("email").text = page.navigationContext.email;
-            page.getViewById("nazione").text =  page.navigationContext.desCittadinanza;
+            page.getViewById("email").text = info.email;
+            page.getViewById("nazione").text =  info.desCittadinanza;
 
             page.getViewById("email_id").visibility = "visible";
             page.getViewById("nation_id").visibility = "visible";
         }
-        else if (page.navigationContext.ruolo === "Docenti"){
+        else if (info.ruolo === "Docenti"){
 
-            page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(page.navigationContext.image);
+            page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(info.image);
 
-            page.getViewById("roleID").text =  page.navigationContext.settore;
+            page.getViewById("roleID").text = info.settore;
         }
+
     }
     else{
         page.getViewById("save_info").visibility = "collapsed";
@@ -183,17 +212,17 @@ exports.tap_sendMail = function () {
                 array.push(my_mail);
                 //TODO permettere al server di gestire le mail
                 email.compose({
-                    subject: "APP@UNIPARTHENOPE Informazioni utente " + page.navigationContext.nome + " " +
-                        page.navigationContext.cognome,
-                    body: "Informazioni Utente\n\n" + page.navigationContext.nome + " " +
-                        page.navigationContext.cognome + "\n"+
-                        "Ruolo: " + page.navigationContext.ruolo + "\n"+
-                        "Username: " + page.navigationContext.username + "\n"+
-                        "Matricola: " + page.navigationContext.matricola + "\n"+
-                        "Sesso: " + page.navigationContext.sesso + "\n"+
-                        "Nascita: " + page.navigationContext.dataNascita.substring(0,10) + "\n"+
-                        "Email Istituzionale: " + page.navigationContext.emailAte + "\n"+
-                        "Tel. : " + page.navigationContext.telRes + "\n"+
+                    subject: "APP@UNIPARTHENOPE Informazioni utente " + info.nome + " " +
+                        info.cognome,
+                    body: "Informazioni Utente\n\n" + info.nome + " " +
+                        info.cognome + "\n"+
+                        "Ruolo: " + info.ruolo + "\n"+
+                        "Username: " + info.username + "\n"+
+                        "Matricola: " + info.matricola + "\n"+
+                        "Sesso: " + info.sesso + "\n"+
+                        "Nascita: " + info.dataNascita.substring(0,10) + "\n"+
+                        "Email Istituzionale: " + info.emailAte + "\n"+
+                        "Tel. : " + info.telRes + "\n"+
                     "\n\nQuesta email è generata automaticamente da app@uniparthenope",
                     to: array
                 }).then(
@@ -230,16 +259,16 @@ exports.tap_addContact = function () {
 
         if(result){
             let newContact = new contacts.Contact();
-            newContact.name.given = page.navigationContext.nome;
-            newContact.name.family = page.navigationContext.cognome;
+            newContact.name.given = info.nome;
+            newContact.name.family = info.cognome;
             newContact.organization.name = "Università degli Studi di Napoli 'Parthenope'";
-            newContact.organization.jobTitle = page.navigationContext.ruolo + " "+page.navigationContext.matricola;
+            newContact.organization.jobTitle = info.ruolo + " "+info.matricola;
             newContact.phoneNumbers.push({
                 label: contacts.KnownLabel.HOME,
-                value: page.navigationContext.telRes
+                value: info.telRes
             }); // See below for known labels
             newContact.emailAddresses.push({ label: contacts.KnownLabel.HOME,
-                value: page.navigationContext.emailAte});
+                value: info.emailAte});
             //newContact.photo = imageSource.fromFileOrResource("~/photo.png");
             if(platformModule.isAndroid){
                 Permissions.requestPermissions([android.Manifest.permission.GET_ACCOUNTS, android.Manifest.permission.WRITE_CONTACTS], "I need these permissions because I'm cool")
