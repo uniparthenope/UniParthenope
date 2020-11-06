@@ -10,9 +10,9 @@ let dialog = require("tns-core-modules/ui/dialogs");
 const frame = require("tns-core-modules/ui/frame");
 const platformModule = require("tns-core-modules/platform");
 
-//let domain = "http://api.uniparthenope.it:5000";
+let domain = "http://api.uniparthenope.it:5000";
 //let domain = "https://api.uniparthenope.it";
-let domain = "http://192.168.1.7:5000";
+//let domain = "http://192.168.1.20:5000";
 
 global.url = domain + "/UniparthenopeApp/v1/";
 global.url2 = domain + "/UniparthenopeApp/v2/";
@@ -366,7 +366,8 @@ firebase.init({
                                             "Authorization" : "Basic "+ global.encodedStr
                                         },
                                         content : JSON.stringify({
-                                            receivedToken: message.data.receivedToken
+                                            receivedToken: message.data.receivedToken,
+                                            id: message.data.id
                                         })
                                     }).then((response) => {
                                         const result = response.content.toJSON();
@@ -485,7 +486,7 @@ firebase.init({
         }
         else if(platformModule.isAndroid){
             if (message.foreground){
-                if(message.data.page){
+                if (message.data.page){
                     if (message.data.page === "info"){
                         dialog.confirm({
                             title: message.title,
@@ -502,7 +503,8 @@ firebase.init({
                                         "Authorization" : "Basic "+ global.encodedStr
                                     },
                                     content : JSON.stringify({
-                                        receivedToken: message.data.receivedToken
+                                        receivedToken: message.data.receivedToken,
+                                        id: message.data.id
                                     })
                                 }).then((response) => {
                                     const result = response.content.toJSON();
@@ -637,7 +639,8 @@ firebase.init({
                                             "Authorization" : "Basic "+ global.encodedStr
                                         },
                                         content : JSON.stringify({
-                                            receivedToken: message.data.receivedToken
+                                            receivedToken: message.data.receivedToken,
+                                            id: message.data.id
                                         })
                                     }).then((response) => {
                                         const result = response.content.toJSON();
