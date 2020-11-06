@@ -96,24 +96,6 @@ function getRecord(){
             message = "Error: " + result["errMsg"];
         else
             info = result;
-    }, error => {
-        console.error(error);
-    });
-
-}
-
-exports.onNavigatingTo = function(args) {
-    page = args.object;
-    viewModel = observableModule.fromObject({});
-    sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-
-    console.log("Navigation",info);
-
-    if(page.navigationContext !== undefined){
-        page.getViewById("save_info").visibility = "visible";
-        
-        getRecord();
 
         page.getViewById("name").text = info.nome;
         page.getViewById("surname").text = info.cognome;
@@ -143,9 +125,32 @@ exports.onNavigatingTo = function(args) {
 
             page.getViewById("roleID").text = info.settore;
         }
+    }, error => {
+        console.error(error);
+    });
+
+}
+
+exports.onNavigatingTo = function(args) {
+    page = args.object;
+    viewModel = observableModule.fromObject({});
+    sideDrawer = app.getRootView();
+    sideDrawer.closeDrawer();
+
+    console.log("Navigation",info);
+
+    if(page.navigationContext !== undefined){
+        page.getViewById("save_info").visibility = "visible";
+        page.getViewById("title").text = "Informazioni Utente";
+
+        getRecord();
+
+
 
     }
     else{
+        page.getViewById("title").text = "Anagrafica";
+
         page.getViewById("save_info").visibility = "collapsed";
 
         choseBackground(page);
