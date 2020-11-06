@@ -358,6 +358,7 @@ firebase.init({
                                 okButtonText: "Conferma"
                             }).then(result => {
                                 if (result){
+                                    console.log("ID " + message.data.id);
                                     httpModule.request({
                                         url : global.url_general + "Badges/v2/sendInfo",
                                         method : "POST",
@@ -366,7 +367,8 @@ firebase.init({
                                             "Authorization" : "Basic "+ global.encodedStr
                                         },
                                         content : JSON.stringify({
-                                            receivedToken: message.data.receivedToken
+                                            receivedToken: message.data.receivedToken,
+                                            id: message.data.id
                                         })
                                     }).then((response) => {
                                         const result = response.content.toJSON();
@@ -492,6 +494,8 @@ firebase.init({
                             okButtonText: "Conferma"
                         }).then(result => {
                             if (result){
+                                console.log("ID " + message.data.id);
+
                                 httpModule.request({
                                     url : global.url_general + "Badges/v2/sendInfo",
                                     method : "POST",
@@ -500,7 +504,8 @@ firebase.init({
                                         "Authorization" : "Basic "+ global.encodedStr
                                     },
                                     content : JSON.stringify({
-                                        receivedToken: message.data.receivedToken
+                                        receivedToken: message.data.receivedToken,
+                                        id: message.data.id
                                     })
                                 }).then((response) => {
                                     const result = response.content.toJSON();
@@ -608,6 +613,7 @@ firebase.init({
                             okButtonText: "Conferma"
                         }).then(result => {
                             if (result){
+                                console.log("ID " + message.data.id);
                                 httpModule.request({
                                     url : global.url_general + "Badges/v2/sendInfo",
                                     method : "POST",
@@ -616,7 +622,8 @@ firebase.init({
                                         "Authorization" : "Basic "+ global.encodedStr
                                     },
                                     content : JSON.stringify({
-                                        receivedToken: message.data.receivedToken
+                                        receivedToken: message.data.receivedToken,
+                                        id: message.data.id
                                     })
                                 }).then((response) => {
                                     const result = response.content.toJSON();
@@ -743,6 +750,8 @@ firebase.init({
                                 okButtonText: "Conferma"
                             }).then(result => {
                                 if (result){
+                                    console.log("ID " + message.data.id);
+
                                     httpModule.request({
                                         url : global.url_general + "Badges/v2/sendInfo",
                                         method : "POST",
@@ -751,7 +760,8 @@ firebase.init({
                                             "Authorization" : "Basic "+ global.encodedStr
                                         },
                                         content : JSON.stringify({
-                                            receivedToken: message.data.receivedToken
+                                            receivedToken: message.data.receivedToken,
+                                            id: message.data.id
                                         })
                                     }).then((response) => {
                                         const result = response.content.toJSON();
