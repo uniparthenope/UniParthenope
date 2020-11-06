@@ -25,6 +25,7 @@
     "nativescript-camera": "^4.5.0",
     "nativescript-carousel": "^6.1.1",
     "nativescript-checkbox": "^3.0.3",
+    "nativescript-contacts": "^1.6.2",
     "nativescript-email": "^1.6.0",
     "nativescript-geolocation": "^5.1.0",
     "nativescript-phone": "^2.0.0",
