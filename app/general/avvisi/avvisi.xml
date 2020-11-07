@@ -33,18 +33,23 @@
 
 
             <StackLayout verticalAlignment="top"  height="100%" width="100%" backgroundColor="#1E3258">
-                <GridLayout>
+                <GridLayout padding="5 5 5 5">
                     <accordion:Accordion items="{{items}}" allowMultiple="false" height="100%" width="100%">
                         <accordion:Accordion.itemHeaderTemplate>
-                                <StackLayout backgroundColor="#1E3258" marginTop="5" horizontalAlignment="center" verticalAlignment="bottom" width="100%">
-                                    <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textAlignment="center" textWrap="true" margin="5 5 5 5" width="100%"/>
+                                <StackLayout backgroundColor="#1E3258" horizontalAlignment="center" verticalAlignment="bottom" width="100%" height="100" padding="5 5 5 5" borderWidth="1" borderColor="white">
+                                    <Label class="textPrimary" text="{{title}}" horizontalAlignment="center" textAlignment="center" textWrap="true" margin="5 5 5 5" width="100%" height="50%"/>
                                     <Label class="textPrimary" text="{{date_text}}" horizontalAlignment="center" fontSize="11" margin="5 5 5 5"/>
                                 </StackLayout>
                         </accordion:Accordion.itemHeaderTemplate>
 
                         <accordion:Accordion.itemContentTemplate>
                             <StackLayout padding="5 5 5 5" backgroundColor="#1E3258">
-                                <HtmlView html="{{desc}}" color="#22384f" android:color="white" backgroundColor="#1E3258"/>
+                                <StackLayout>
+                                    <Label class="textPrimary" text="{{title}}" color="white" horizontalAlignment="center" textAlignment="center" textWrap="true" margin="5 5 5 5" width="100%"/>
+
+                                    <HtmlView html="{{desc}}" android:color="white" backgroundColor="#1E3258"/>
+                                </StackLayout>
+
                             </StackLayout>
                         </accordion:Accordion.itemContentTemplate>
                     </accordion:Accordion>

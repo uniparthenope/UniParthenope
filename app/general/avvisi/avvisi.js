@@ -31,10 +31,13 @@ function getNotifications(){
         }
         else {
             for (let i=0; i<result.length; i++) {
+
                 let arr_desc_not = [];
                 let items = {
+                    title: result[i].titolo,
                     desc: result[i].HTML
                 };
+
                 arr_desc_not.push(items);
 
                 if (platformModule.isIOS){
@@ -42,11 +45,12 @@ function getNotifications(){
                 }
 
                 let dat = new Date(result[i].data);
+
                 article.push({
                     title: result[i].titolo,
                     date:result[i].data,
                     date_text: dat.getDate() + "/" + (dat.getMonth()+1) + "/" +dat.getFullYear() + " "+dat.getHours() + ":00",
-                    items: arr_desc_not,
+                    items: arr_desc_not
                 });
                 article.sort(function (orderA, orderB) {
                     let dataA = Date.parse(orderA.date);
