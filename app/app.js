@@ -12,7 +12,7 @@ const platformModule = require("tns-core-modules/platform");
 
 let domain = "http://api.uniparthenope.it:5000";
 //let domain = "https://api.uniparthenope.it";
-//let domain = "http://192.168.1.7:5000";
+//let domain = "http://192.168.1.20:5000";
 
 global.url = domain + "/UniparthenopeApp/v1/";
 global.url2 = domain + "/UniparthenopeApp/v2/";
@@ -460,7 +460,8 @@ firebase.init({
                                         clearHistory: false,
                                         context: {
                                             id: message.data.id_info
-                                        }                                    };
+                                        }
+                                    };
                                     frame.Frame.topmost().navigate(nav);
                                 }
                             });

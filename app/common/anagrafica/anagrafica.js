@@ -94,8 +94,40 @@ function getRecord(){
         let message;
         if (response.statusCode === 500)
             message = "Error: " + result["errMsg"];
-        else
+        else {
             info = result;
+
+            console.log(info.image);
+
+            page.getViewById("name").text = info.nome;
+            page.getViewById("surname").text = info.cognome;
+            page.getViewById("role").text = info.ruolo.toUpperCase();
+            page.getViewById("matricola").text = info.matricola;
+            page.getViewById("depart").text = "--"
+            page.getViewById("uid").text = info.username;
+
+            page.getViewById("sex").text = info.sesso;
+            page.getViewById("nascita").text = info.dataNascita.substring(0,10);
+            page.getViewById("email_ist").text = info.emailAte;
+            page.getViewById("tel").text = info.telRes;
+
+            if (info.ruolo  === "Studenti"){
+
+                //page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(info.image);
+
+                page.getViewById("email").text = info.email;
+                page.getViewById("nazione").text =  info.desCittadinanza;
+
+                page.getViewById("email_id").visibility = "visible";
+                page.getViewById("nation_id").visibility = "visible";
+            }
+            else if (info.ruolo === "Docenti"){
+
+                //page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(info.image);
+
+                page.getViewById("roleID").text = info.settore;
+            }
+        }
     }, error => {
         console.error(error);
     });
@@ -114,36 +146,6 @@ exports.onNavigatingTo = function(args) {
         page.getViewById("save_info").visibility = "visible";
         
         getRecord();
-
-        page.getViewById("name").text = info.nome;
-        page.getViewById("surname").text = info.cognome;
-        page.getViewById("role").text = info.ruolo.toUpperCase();
-        page.getViewById("matricola").text = info.matricola;
-        page.getViewById("depart").text = "--"
-        page.getViewById("uid").text = info.username;
-
-        page.getViewById("sex").text = info.sesso;
-        page.getViewById("nascita").text = info.dataNascita.substring(0,10);
-        page.getViewById("email_ist").text = info.emailAte;
-        page.getViewById("tel").text = info.telRes;
-
-        if (info.ruolo  === "Studenti"){
-
-            page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(info.foto);
-
-            page.getViewById("email").text = info.email;
-            page.getViewById("nazione").text =  info.desCittadinanza;
-
-            page.getViewById("email_id").visibility = "visible";
-            page.getViewById("nation_id").visibility = "visible";
-        }
-        else if (info.ruolo === "Docenti"){
-
-            page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(info.image);
-
-            page.getViewById("roleID").text = info.settore;
-        }
-
     }
     else{
         page.getViewById("save_info").visibility = "collapsed";
