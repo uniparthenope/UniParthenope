@@ -26,7 +26,7 @@
     <GridLayout>
         <StackLayout>
             <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label class="textPrimary" text="Anagrafica" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label id="title" class="textPrimary" text="Anagrafica" horizontalAlignment="center" verticalAlignment="center"/>
                 <StackLayout id="save_info" visibility="collapsed" orientation="horizontal" horizontalAlignment="right">
                     <Image src="~/images/icon/email.png" width="25" height="25"  horizontalAlignment="right"
                             marginRight="20" ontap="tap_sendMail"/>
