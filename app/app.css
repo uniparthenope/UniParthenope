@@ -61,9 +61,8 @@ Accordion{
     font-size:17;
     width: 90%;
 }
-.btn-menu:pressed
+.btn-menu:active
 {
-
     background-color: #2E7C9E;
 ;
 }
@@ -129,8 +128,8 @@ Accordion{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
 
 }
 

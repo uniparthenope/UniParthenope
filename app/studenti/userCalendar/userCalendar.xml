@@ -34,14 +34,14 @@
 
             <rc:RadCalendar row="1" id="cal" inlineEventSelected="onDaySelected" selectionMode="Single" viewMode="Month" eventSource="{{ events }}" eventsViewMode="Inline" verticalAlignment="top">
                 <rc:RadCalendar.monthViewStyle>
-                    <rc:CalendarMonthViewStyle backgroundColor="#2E7C9E" showTitle="true" showDayNames="true" >
+                    <rc:CalendarMonthViewStyle backgroundColor="#2E7C9E" cellTextColor="white" showTitle="true" showDayNames="true" >
 
                     <rc:CalendarMonthViewStyle.todayCellStyle>
                         <rc:DayCellStyle cellBackgroundColor="#1E3258" cellTextColor="white" cellBorderWidth="2" cellBorderColor="white" />
                     </rc:CalendarMonthViewStyle.todayCellStyle>
 
                     <rc:CalendarMonthViewStyle.dayCellStyle>
-                        <rc:DayCellStyle showEventsText="true" eventTextColor="white" eventFontName="Roboto Slab" eventTextSize="8"
+                        <rc:DayCellStyle showEventsText="true" eventTextColor="White" eventFontName="Roboto Slab" eventTextSize="8"
                                          cellBackgroundColor="#1E3258"
                                          cellTextColor="white" cellTextFontName="Roboto Slab" cellTextFontStyle="Bold" ios:cellTextSize="16" android:cellTextSize="14"/>
                     </rc:CalendarMonthViewStyle.dayCellStyle>
@@ -76,13 +76,13 @@
                     </rc:CalendarMonthViewStyle.titleCellStyle>
 
                     <rc:CalendarMonthviewStyle.inlineEventCellStyle>
-                        <rc:InlineEventCellStyle ios:cellBackgroundColor="#2E7C9E" android:cellBackgroundColor="#1E3258" eventTextColor="white"
+                        <rc:InlineEventCellStyle ios:cellBackgroundColor="#2E7C9E" android:cellBackgroundColor="#1E3258" android:eventTextColor="white"
                                                  eventFontName="Roboto Slab" eventTextSize="14"
                                                  timeTextColor="orange" timeFontName="Roboto Slab" timeFontStyle="Regular"
                                                  timeTextSize="14"/>
                     </rc:CalendarMonthviewStyle.inlineEventCellStyle>
 
-                </rc:CalendarMonthViewStyle>
+                    </rc:CalendarMonthViewStyle>
                 </rc:RadCalendar.monthViewStyle>
             </rc:RadCalendar>
 <!--        Bottom bar  -->

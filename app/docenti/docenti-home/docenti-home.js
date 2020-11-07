@@ -90,7 +90,9 @@ function getLectures(){
         for (let i=0; i<result.length; i++) {
 
             let courses = result[i].courses;
-            const color = new Color.Color(colors[i%colors.length]);
+            //const color = new Color.Color(colors[i%colors.length]);
+            const color = new Color.Color(setColor(result[i].id_corso));
+
             for (let j=0; j<courses.length; j++){
                 let data_inizio = convertData(courses[j].start);
                 let data_fine = convertData(courses[j].end);
@@ -430,3 +432,46 @@ exports.tap_reload = function(){
         };
     page.frame.navigate(nav);
 };
+
+function setColor(id){
+    let flag_search = false;
+    let color;
+    let my_colors = JSON.parse(appSettings.getString("mycolors", "[]"));
+
+    console.log(id);
+    console.log(my_colors);
+
+
+    if(my_colors.length > 0){
+        for (let i =0; i< my_colors.length; i++){
+            if (my_colors[i].id === id){
+                flag_search = true;
+                color = my_colors[i].color;
+            }
+        }
+
+        if(flag_search)
+            return color;
+        else{
+            let rand_color = "#" +  Math.floor(Math.random()*16777215).toString(16);
+
+            my_colors.push({
+                id: id,
+                color: rand_color
+            });
+            appSettings.setString("mycolors", JSON.stringify(my_colors));
+            return rand_color;
+        }
+    }
+    else{
+        let rand_color = "#" +  Math.floor(Math.random()*16777215).toString(16);
+
+        my_colors.push({
+            id: id,
+            color: rand_color
+        });
+        appSettings.setString("mycolors", JSON.stringify(my_colors));
+
+        return rand_color;
+    }
+}

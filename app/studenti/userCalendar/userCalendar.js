@@ -10,8 +10,8 @@ const modalViewModule = "modal/modal-event/modal-event";
 let firebase = require("nativescript-plugin-firebase");
 
 
-//TODO Aggiungere altri colori
-let colors = ["#c47340","#4566c1","#824bc1","#a32d13","#382603","#fff766"];
+//let colors = ["#c47340","#4566c1","#824bc1","#a32d13","#382603","#fff766"];
+
 let page;
 let viewModel;
 let sideDrawer;
@@ -77,7 +77,6 @@ function calendarCourses() {
                 let reserved = "";
                 let reserved_by = "";
                 if(result[x].reservation.reserved){
-                    color = new Color.Color("red");
                     reserved = "[PRENOTATO] ";
                     if(result[x].reservation.reserved_by === appSettings.getString("userId"))
                         reserved_by = "Prenotato da: me";
@@ -85,15 +84,16 @@ function calendarCourses() {
                         reserved_by = "Prenotato da: "+result[x].reservation.reserved_by;
                 }
 
-                else
-                    color = new Color.Color(colors[x%colors.length]);
+                color = new Color.Color(setColor(result[x].id_corso));
+
+                //Vecchi colori
+                //color = new Color.Color(colors[x%colors.length]);
 
 
                 let tot_cap = Math.floor(result[x].room.capacity);
                 let av_cap =  tot_cap - Math.floor(result[x].room.availability);
 
                 let title = reserved + result[x].course_name + "_\n" + result[x].prof + "\n" + result[x].room.name +"\n Prenotati Aula: "+ av_cap + "/ "+tot_cap + "\n"+reserved_by;
-                console.log(title);
                 //let title = reserved + result[x].course_name + "\n" + result[x].prof + "\n" + result[x].room.name;
                 global.events.push({
                     title : title,
@@ -421,6 +421,7 @@ exports.onDaySelected = function(args){
 
     mainView.showModal(modalViewModule, context, false);
 };
+
 exports.tap_reload = function(){
     global.updatedExam = false;
 
@@ -432,3 +433,46 @@ exports.tap_reload = function(){
         };
     page.frame.navigate(nav);
 };
+
+function setColor(id){
+    let flag_search = false;
+    let color;
+    let my_colors = JSON.parse(appSettings.getString("mycolors", "[]"));
+
+    console.log(id);
+    console.log(my_colors);
+
+
+    if(my_colors.length > 0){
+        for (let i =0; i< my_colors.length; i++){
+            if (my_colors[i].id === id){
+                flag_search = true;
+                color = my_colors[i].color;
+            }
+        }
+
+        if(flag_search)
+            return color;
+        else{
+            let rand_color = "#" +  Math.floor(Math.random()*16777215).toString(16);
+
+            my_colors.push({
+                id: id,
+                color: rand_color
+            });
+            appSettings.setString("mycolors", JSON.stringify(my_colors));
+            return rand_color;
+        }
+    }
+    else{
+        let rand_color = "#" +  Math.floor(Math.random()*16777215).toString(16);
+
+        my_colors.push({
+            id: id,
+            color: rand_color
+        });
+        appSettings.setString("mycolors", JSON.stringify(my_colors));
+
+        return rand_color;
+    }
+}
