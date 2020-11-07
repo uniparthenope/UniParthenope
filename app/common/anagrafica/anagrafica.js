@@ -66,7 +66,7 @@ function getPIC(personId, value){
         },
         "dontFollowRedirects": true
     }).then((source) => {
-        page.getViewById("my_img").backgroundImage = source["path"];
+        page.getViewById("my_img").src = source.path;
     }, (e) => {
         console.log("[Photo] Error", e);
         dialogs.alert({
@@ -96,9 +96,6 @@ function getRecord(){
             message = "Error: " + result["errMsg"];
         else {
             info = result;
-
-            console.log(info.image);
-
             page.getViewById("name").text = info.nome;
             page.getViewById("surname").text = info.cognome;
             page.getViewById("role").text = info.ruolo.toUpperCase();
@@ -112,8 +109,7 @@ function getRecord(){
             page.getViewById("tel").text = info.telRes;
 
             if (info.ruolo  === "Studenti"){
-
-                //page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(info.image);
+                page.getViewById("my_img").src = imageSourceModule.ImageSource.fromBase64Sync(info.image);
 
                 page.getViewById("email").text = info.email;
                 page.getViewById("nazione").text =  info.desCittadinanza;
@@ -123,7 +119,7 @@ function getRecord(){
             }
             else if (info.ruolo === "Docenti"){
 
-                //page.getViewById("my_img").backgroundImage = imageSourceModule.fromBase64(info.image);
+                page.getViewById("my_img").src = imageSourceModule.ImageSource.fromBase64Sync(info.image);
 
                 page.getViewById("roleID").text = info.settore;
             }
@@ -144,10 +140,14 @@ exports.onNavigatingTo = function(args) {
 
     if(page.navigationContext !== undefined){
         page.getViewById("save_info").visibility = "visible";
-        
+        page.getViewById("title").text = "Informazioni Contatto";
+
+
         getRecord();
     }
     else{
+        page.getViewById("title").text = "Anagrafica";
+
         page.getViewById("save_info").visibility = "collapsed";
 
         choseBackground(page);
@@ -258,8 +258,13 @@ exports.tap_addContact = function () {
         okButtonText: "Si",
         cancelButtonText: "Annulla"
     }).then(function (result){
-
         if(result){
+            dialogs.alert({
+                title: "Successo",
+                message: "Contatto salvato con successo!",
+                okButtonText: "OK"
+            });
+
             let newContact = new contacts.Contact();
             newContact.name.given = info.nome;
             newContact.name.family = info.cognome;
@@ -271,7 +276,7 @@ exports.tap_addContact = function () {
             }); // See below for known labels
             newContact.emailAddresses.push({ label: contacts.KnownLabel.HOME,
                 value: info.emailAte});
-            //newContact.photo = imageSource.fromFileOrResource("~/photo.png");
+            newContact.photo = imageSourceModule.ImageSource.fromBase64Sync(info.image);
             if(platformModule.isAndroid){
                 Permissions.requestPermissions([android.Manifest.permission.GET_ACCOUNTS, android.Manifest.permission.WRITE_CONTACTS], "I need these permissions because I'm cool")
                     .then(() => {

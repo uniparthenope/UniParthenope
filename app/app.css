@@ -129,6 +129,9 @@ Accordion{
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    width: 350px;
+    height: 350px;
+
 }
 
 .roundedInfo

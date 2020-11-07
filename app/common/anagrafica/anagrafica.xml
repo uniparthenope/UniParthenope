@@ -27,9 +27,9 @@
         <StackLayout>
             <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
                 <Label id="title" class="textPrimary" text="Anagrafica" horizontalAlignment="center" verticalAlignment="center"/>
-                <StackLayout id="save_info" visibility="collapsed" orientation="horizontal" horizontalAlignment="right">
+                <StackLayout id="save_info" visibility="collapsed" orientation="horizontal" marginLeft="15" horizontalAlignment="right">
                     <Image src="~/images/icon/email.png" width="25" height="25"  horizontalAlignment="right"
-                            marginRight="20" ontap="tap_sendMail"/>
+                            marginRight="10" ontap="tap_sendMail"/>
                     <Image src="~/images/icon/contact.png" width="25" height="25"
                             marginRight="20" ontap="tap_addContact"/>
                 </StackLayout>
@@ -46,7 +46,7 @@
             <Image verticalAlignment="bottom" horizontalAlignment="center" src="~/images/logo_parth.png" height="350" width="350" opacity="0.8"/>
 
             <StackLayout>
-                <Image class="pic_rounded" id="my_img" verticalAlignment="top" horizontalAlignment="center" backgroundImage="~/images/logo_parth.png" height="175" width="175"
+                <Image class="pic_rounded" id="my_img" verticalAlignment="top" horizontalAlignment="center" src="~/images/logo_parth.png" height="175" width="175"
                        marginBottom="10" marginTop="10"/>
                 <StackLayout id="info_panel" orientation="vertical"  height="75%" backgroundColor="rgba(30, 50, 88,0.9)" borderRadius="20">
                     <GridLayout margin="5,5,5,5" rows="*,*,*,*,*,*">

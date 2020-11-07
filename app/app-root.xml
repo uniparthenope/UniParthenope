@@ -24,7 +24,7 @@
                 <android>
                     <GridLayout rows="auto,auto,auto,auto" row="0" orientation="vertical" verticalAlignment="top" marginTop="10">
                         <Label row="0" id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" marginBottom="5" fontSize="14" horizontalAlignment="center"/>
-                        <StackLayout row="1" class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="110" height="110"/>
+                        <StackLayout row="1" class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0"/>
                         <Label row="2" id="topName" text="Benvenuto!" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>
                         <Label row="3" id="topEmail" text="EMAIL!" visibility="collapsed" textWrap="true" color="white" marginBottom="5" fontSize="12" horizontalAlignment="center" textAlignment="center"/>
                     </GridLayout>

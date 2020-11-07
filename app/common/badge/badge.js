@@ -251,7 +251,7 @@ exports.tap_scanQR = function(){
 
     barcodescanner.scan({
         formats: "QR_CODE, EAN_13, CODE_128",
-        cancelLabel: "EXIT. Also, try the volume buttons!", // iOS only, default 'Close'
+        cancelLabel: "Scansionare QR-Code per ottenere informazioni.", // iOS only, default 'Close'
         cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
         message: "Scan QR code", // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
         preferFrontCamera: false,     // Android only, default false
@@ -292,9 +292,11 @@ exports.tap_scanQR = function(){
 
                     // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
                     dialogs.alert({
-                        title: "Result:",
+                        title: "Richiesta Informazioni",
                         message: message,
                         okButtonText: "OK"
+                    }).then(function (){
+                        barcodescanner.stop();
                     });
             }, error => {
                 console.error(error);
