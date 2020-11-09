@@ -285,10 +285,11 @@ exports.tap_scanQR = function(){
                 console.log(result);
 
                 let message;
-                if (response.statusCode === 500)
-                    message = "Error: " + result["errMsg"];
+                if (response.statusCode === 500 || response.statusCode === 403)
+                    message = "Error: " + result.errMsg;
                 else
-                    message = result["message"];
+                    message = result.message;
+
 
                     // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
                     dialogs.alert({

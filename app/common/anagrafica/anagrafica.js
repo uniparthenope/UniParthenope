@@ -109,7 +109,7 @@ function getRecord(){
             page.getViewById("tel").text = info.telRes;
 
             if (info.ruolo  === "Studenti"){
-                page.getViewById("my_img").src = info.image;
+                page.getViewById("my_img").src = imageSourceModule.ImageSource.fromBase64Sync(info.image);
 
                 page.getViewById("email").text = info.email;
                 page.getViewById("nazione").text =  info.desCittadinanza;
