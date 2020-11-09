@@ -343,7 +343,7 @@ firebase.init({
         console.log("Body: " + message.body);
         console.log("Value of 'page': " + message.data.page);
         console.log("Foreground: " + message.foreground);
-        console.log("Info: " + message.data.info)
+        //console.log("Info: " + message.data.info)
 
         if(platformModule.isIOS){
             global.notification_flag = true;
@@ -459,7 +459,7 @@ firebase.init({
                                     })
                                 }).then((response) => {
                                     const result = response.content.toJSON();
-                                    console.log(result);
+                                    console.log("RESULT: ",result);
 
                                     let message;
                                     if (response.statusCode === 500)
@@ -513,6 +513,8 @@ firebase.init({
                         }).then(result => {
                             if (result){
                                 console.log("ID " + message.data.id);
+                                console.log("RCV TOKEN ", message.data.receivedToken);
+
                                 httpModule.request({
                                     url : global.url_general + "Badges/v2/sendInfo",
                                     method : "POST",
@@ -526,7 +528,7 @@ firebase.init({
                                     })
                                 }).then((response) => {
                                     const result = response.content.toJSON();
-                                    console.log(result);
+                                    console.log("RESULT",result);
 
                                     let message;
                                     if (response.statusCode === 500)
