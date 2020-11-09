@@ -56,7 +56,7 @@
                             </rc:CalendarMonthViewStyle.dayCellStyle>
 
                             <rc:CalendarMonthViewStyle.anotherMonthCellStyle>
-                                <rc:DayCellStyle showEventsText="true" eventTextColor="white" eventFontName="Roboto Slab" eventTextSize="8"
+                                <rc:DayCellStyle showEventsText="false" eventTextColor="white" eventFontName="Roboto Slab" eventTextSize="8"
                                                  cellBackgroundColor="#1E3258"
                                                  cellTextColor="gray" cellTextFontName="Roboto Slab" cellTextFontStyle="Bold" ios:cellTextSize="16" android:cellTextSize="14"/>
                             </rc:CalendarMonthViewStyle.anotherMonthCellStyle>
