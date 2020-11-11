@@ -10,8 +10,8 @@ let dialog = require("tns-core-modules/ui/dialogs");
 const frame = require("tns-core-modules/ui/frame");
 const platformModule = require("tns-core-modules/platform");
 
-//let domain = "http://api.uniparthenope.it:5000";
-let domain = "https://api.uniparthenope.it";
+let domain = "http://api.uniparthenope.it:5000";
+//let domain = "https://api.uniparthenope.it";
 //let domain = "http://192.168.1.20:5000";
 
 global.url = domain + "/UniparthenopeApp/v1/";
@@ -268,7 +268,7 @@ application.on(application.exitEvent, (args) => {
                 }
 
             },(e) => {
-                dialogs.alert({
+                dialog.alert({
                     title: "Errore: Logout",
                     message: e.toString(),
                     okButtonText: "OK"
@@ -381,7 +381,7 @@ firebase.init({
                                             message = result["message"];
 
                                         // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
-                                        dialogs.alert({
+                                        dialog.alert({
                                             title: "Result:",
                                             message: message,
                                             okButtonText: "OK"
@@ -468,7 +468,7 @@ firebase.init({
                                         message = result["message"];
 
                                     // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
-                                    dialogs.alert({
+                                    dialog.alert({
                                         title: "Result:",
                                         message: message,
                                         okButtonText: "OK"
@@ -537,7 +537,7 @@ firebase.init({
                                         message = result["message"];
 
                                     // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
-                                    dialogs.alert({
+                                    dialog.alert({
                                         title: "Result:",
                                         message: message,
                                         okButtonText: "OK"
@@ -624,7 +624,7 @@ firebase.init({
                                         else
                                             message = result["message"];
 
-                                        dialogs.alert({
+                                        dialog.alert({
                                             title: "Result:",
                                             message: message,
                                             okButtonText: "OK"
