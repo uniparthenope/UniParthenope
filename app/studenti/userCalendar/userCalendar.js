@@ -439,10 +439,6 @@ function setColor(id){
     let color;
     let my_colors = JSON.parse(appSettings.getString("mycolors", "[]"));
 
-    console.log(id);
-    console.log(my_colors);
-
-
     if(my_colors.length > 0){
         for (let i =0; i< my_colors.length; i++){
             if (my_colors[i].id === id){

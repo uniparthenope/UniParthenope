@@ -618,10 +618,10 @@ exports.onNavigatingTo = function (args) {
        if (!global.notification_flag){
            dialogs.confirm({
                title: "Bentornato!",
-               message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome")+"\n Cliccare 'Mia Home' per accedere.",
-               okButtonText: "Mia Home",
+               message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome"),
+               okButtonText: "Connettiti e vai a Mia Home",
                cancelButtonText: 'Logout',
-               neutralButtonText: 'Chiudi'
+               neutralButtonText: 'Connettiti'
            }).then(function (r){
                console.log("DIALOG HOME",r);
                if(r)
