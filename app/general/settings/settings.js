@@ -4,6 +4,7 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const utilsModule = require("tns-core-modules/utils/utils");
 let firebase = require("nativescript-plugin-firebase");
+const httpModule = require("tns-core-modules/http");
 
 let page;
 let viewModel;
@@ -73,6 +74,23 @@ exports.onTapDelete = function (){
             if(appSettings.getNumber("grpId",0) === 6)
                 firebase.unsubscribeFromTopic(cds).then(() => console.log("Unsubscribed from ",cds));
 
+            httpModule.request({
+                url : global.url_general + "Notifications/v1/unregisterDevice",
+                method : "POST",
+                headers : {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                },
+                content : JSON.stringify({
+                    token: global.notification_token
+                })
+            }).then((response) => {
+                const result = response.content.toJSON();
+                console.log(result);
+            }, error => {
+                console.error(error);
+            });
+
             global.clearAll();
             sideDrawer.getViewById("userForm").visibility="collapsed";
             sideDrawer.getViewById("userDocente").visibility="collapsed";
@@ -90,7 +108,8 @@ exports.onTapDelete = function (){
                     moduleName: "general/home/home-page",
                     clearHistory: true
                 };
-            page.frame.navigate(nav);        }
+            page.frame.navigate(nav);
+        }
     });
 }
 

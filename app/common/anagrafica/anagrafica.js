@@ -96,6 +96,9 @@ function getRecord(){
             message = "Error: " + result["errMsg"];
         else {
             info = result;
+
+            console.log(info);
+
             page.getViewById("name").text = info.nome;
             page.getViewById("surname").text = info.cognome;
             page.getViewById("role").text = info.ruolo.toUpperCase();
