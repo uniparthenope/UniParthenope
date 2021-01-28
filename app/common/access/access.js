@@ -151,11 +151,15 @@ function getSelfCert(){
 
                 global.my_selfcert = true;
                 appSettings.setBoolean("selfcert", true);
+                page.getViewById("btn-servizi").visibility = "visible";
+
                 sw.checked = "true";
             }
             else{
                 global.my_selfcert = false;
                 appSettings.setBoolean("selfcert", false);
+                page.getViewById("btn-servizi").visibility = "collapsed";
+
                 sw.checked = "false";
             }
 
@@ -278,6 +282,7 @@ exports.onNavigatingTo = function (args) {
     if (grpDes === "Docenti" || grpDes === "PTA" || grpDes === "Ristorante" || grpDes === ""){
         isStudent = false;
         page.getViewById("scelta_accesso").visibility = "collapsed";
+        getAllServices();
 
     }
     else{
@@ -285,6 +290,7 @@ exports.onNavigatingTo = function (args) {
         getAccess();
         page.getViewById("scelta_accesso").visibility = "visible";
     }
+
 
     page.bindingContext = viewModel;
 }
@@ -372,7 +378,7 @@ exports.goto_prenot_serv = function () {
 
     const nav =
         {
-            moduleName: "studenti/prenotazione-servizi/prenotazione-servizi",
+            moduleName: "common/prenotazione-servizi/prenotazione-servizi",
             clearHistory: false
         };
     page.frame.navigate(nav);

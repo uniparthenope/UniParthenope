@@ -52,7 +52,7 @@
                 <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" text="Nessun Servizio Trovato!" color="white" android:fontSize="20"/>
 
                 <StackLayout verticalAlignment="top" margin="5 5 5 5" height="95%">
-                    <ListView id="lezioni_listview" class="list-group" items="{{prenotazioneServizi}}" itemTap="onItemTap" marginRight="5" marginLeft="5" separatorColor="white">
+                    <ListView id="lezioni_listview" class="list-group" items="{{prenotazioneServizi}}" itemTap="onItemTap" marginRight="5" marginLeft="5" separatorColor="white" height="100%">
                         <ListView.itemTemplate >
                             <GridLayout rows="*,*,*,*" ios:backgroundColor="#1E3258">
                                 <GridLayout row="0" rows="*,*"  color="white" borderRadius="5%" backgroundColor="#1E3258">
