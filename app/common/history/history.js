@@ -1,20 +1,35 @@
 const observableModule = require("tns-core-modules/data/observable");
+const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 const app = require("tns-core-modules/application");
-const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
+const calendarModule = require("nativescript-ui-calendar");
 
 let page;
 let viewModel;
 let sideDrawer;
 let loading;
 let calendar;
+let event_calendar;
 
+function convertData(data){
+    let day = data[8]+data[9];
+    let month = data[5]+data[6];
+    let year = data[0]+data[1]+data[2]+data[3];
+    let hour = data[11]+data[12];
+    let min = data[14]+data[15];
+
+    let d = new Date(year,month-1,day,hour,min);
+
+    return d;
+}
 
 exports.onNavigatingTo = function (args) {
     page = args.object;
-    viewModel = observableModule.fromObject({
 
+    event_calendar = new ObservableArray();
+    viewModel = observableModule.fromObject({
+        events:event_calendar
     });
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
@@ -39,7 +54,18 @@ function getHistory(){
         const result = response.content.toJSON();
 
         console.log(result);
+        calendar = page.getViewById("cal");
 
+        if (response.statusCode === 200){
+            for (let i=0; i<result.length; i++){
+                if (result[i]["result"] === "OK"){
+                    let data_inizio = convertData(result[i]["timestamp"]);
+                    let data_fine = convertData(result[i]["timestamp"]);
+                    let event = new calendarModule.CalendarEvent(result[i]["tablet"], data_inizio, data_fine, false);
+                    event_calendar.push(event);
+                }
+            }
+        }
 
         loading.visibility = "collapsed";
     });
