@@ -36,12 +36,13 @@ function getNews(){
                 let items = {
                     desc: result[i].HTML
                 };
-
-                arr_desc_not.push(items);
-
                 if (platformModule.isIOS){
                     arr_desc_not.splice(0, 0, {});
                 }
+
+                arr_desc_not.push(items);
+
+
                 let dat = new Date(result[i].data);
                 let img = result[i].image;
 
@@ -57,12 +58,13 @@ function getNews(){
                     items: arr_desc_not,
                     image: img
                 });
-                article.sort(function (orderA, orderB) {
-                    let dataA = Date.parse(orderA.date);
-                    let dataB = Date.parse(orderB.date);
+                    article.sort(function (orderA, orderB) {
+                        let dataA = orderA.date_text;
+                        let dataB = orderB.date_text;
 
-                    return (dataA > dataB) ? -1 : (dataA < dataB) ? 1 : 0;
-                });
+                        return (dataA > dataB) ? -1 : (dataA < dataB) ? 1 : 0;
+                    });
+
             }
             loading.visibility = "collapsed";
 

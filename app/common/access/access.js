@@ -383,3 +383,13 @@ exports.goto_prenot_serv = function () {
         };
     page.frame.navigate(nav);
 };
+
+exports.goto_history = function () {
+
+    const nav =
+        {
+            moduleName: "common/history/history",
+            clearHistory: false
+        };
+    page.frame.navigate(nav);
+};

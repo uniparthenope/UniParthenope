@@ -45,6 +45,7 @@
         <StackLayout verticalAlignment="bottom">
             <Button margin="5 5 5 5" id="btn-prenotazioni" class="btn" visibility="collapsed" text="Prenotazione Aule" ontap="goto_prenotazioni" />
             <Button margin="5 5 5 5" id="btn-servizi" class="btn" visibility="collapsed" text="Prenotazione Servizi" ontap="goto_prenot_serv" />
+            <Button margin="5 5 5 5" id="btn-history" class="btn" text="Storico Accessi" ontap="goto_history" />
 
         </StackLayout>
 
