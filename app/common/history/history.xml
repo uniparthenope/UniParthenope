@@ -77,9 +77,9 @@
                         <rc:CalendarMonthviewStyle.inlineEventCellStyle>
                             <rc:InlineEventCellStyle ios:cellBackgroundColor="#2E7C9E" android:cellBackgroundColor="#1E3258" android:eventTextColor="white"
                                                      eventFontName="Roboto Slab" eventTextSize="14"
-                                                     timeTextColor="orange" timeFontName="Roboto Slab" timeFontStyle="Regular"
-                                                     timeTextSize="14"/>
+                                                     timeTextColor="#2E7C9E" />
                         </rc:CalendarMonthviewStyle.inlineEventCellStyle>
+
 
                     </rc:CalendarMonthViewStyle>
                 </rc:RadCalendar.monthViewStyle>

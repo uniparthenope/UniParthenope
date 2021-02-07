@@ -27,18 +27,24 @@
 
     <GridLayout>
         <GridLayout rows="auto,auto,auto" rowSpan="3">
-            <GridLayout row="0" height="20%" columns="50%,*" width="100%">
-                <ios>
-                    <Button col="0" class="myMenu" backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="left" marginTop="15" marginLeft="5"/>
-                </ios>
-                <android>
-                    <Button col="0" class="myMenu" backgroundImage="res://menu" ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" marginTop="15" />
-                </android>
+            <ios>
+                <GridLayout row="0" height="20%" columns="*,50%" width="100%">
+                    <Button col="1" class="myMenu" backgroundImage="res://navigation/menu" backgroundColor="#000000ff" verticalAlignment="top" ontap="onDrawerButtonTap" horizontalAlignment="right" marginTop="15" marginRight="5"/>
 
-                <GridLayout col="1" backgroundColor="#1E3258" width="80%" verticalAlignment="top" horizontalAlignment="right" marginTop="15">
-                    <Image src="~/images/home/toptitle_reversed.png" marginRight="5" verticalAlignment="top" horizontalAlignment="right"/>
+                    <GridLayout col="0" backgroundColor="#1E3258" width="80%" verticalAlignment="top" horizontalAlignment="right" marginTop="15">
+                        <Image src="~/images/home/toptitle.png" marginRight="5" verticalAlignment="top" horizontalAlignment="left"/>
+                    </GridLayout>
                 </GridLayout>
-            </GridLayout>
+            </ios>
+            <android>
+                <GridLayout row="0" height="20%" columns="50%,*" width="100%">
+                    <Button col="0" class="myMenu" backgroundImage="res://menu" ontap="onDrawerButtonTap" verticalAlignment="top" horizontalAlignment="left" marginTop="15" />
+                    <GridLayout col="1" backgroundColor="#1E3258" width="80%" verticalAlignment="top" horizontalAlignment="right" marginTop="15">
+                        <Image src="~/images/home/toptitle_reversed.png" marginRight="5" verticalAlignment="top" horizontalAlignment="right"/>
+                    </GridLayout>
+                </GridLayout>
+            </android>
+
             <!-- Centro -->
 
             <GridLayout row="1" height="65%" rows="*,*">

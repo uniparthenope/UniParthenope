@@ -71,8 +71,8 @@
                         <FlexboxLayout flexDirection="row">
                             <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
                                 <GridLayout class="{{ classe }}" width="70" height="70">
-                                    <Label  visibility="{{ lode }}" class="lode" text="LODE"/>
                                     <Label  class="{{ classe }}" borderWidth="0" text="{{ voto }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
+                                    <Label  visibility="{{ lode }}" class="lode" text="LODE"/>
                                 </GridLayout>
                                 <StackLayout orientation="vertical" width="70%">
                                     <Label class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" horizontalAlignment="center"/>

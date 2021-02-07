@@ -4,6 +4,8 @@ const app = require("tns-core-modules/application");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 const calendarModule = require("nativescript-ui-calendar");
+const Color = require("tns-core-modules/color");
+
 
 let page;
 let viewModel;
@@ -53,20 +55,34 @@ function getHistory(){
     }).then((response) => {
         const result = response.content.toJSON();
 
-        console.log(result);
+        //console.log(result);
         calendar = page.getViewById("cal");
 
         if (response.statusCode === 200){
             for (let i=0; i<result.length; i++){
-                if (result[i]["result"] === "OK"){
-                    let data_inizio = convertData(result[i]["timestamp"]);
-                    let data_fine = convertData(result[i]["timestamp"]);
-                    let event = new calendarModule.CalendarEvent(result[i]["tablet"], data_inizio, data_fine, false);
-                    event_calendar.push(event);
+                let title;
+                let color;
+
+                if (result[i]["result"] === "OK") {
+                    title = "[" + result[i]["tablet"] + "] " + result[i]["timestamp"].split(" ")[1] + " - Autorizzato";
+                    color = new Color.Color("#0F9851");
                 }
+                else{
+                    title = "[" + result[i]["tablet"] + "] " + result[i]["timestamp"].split(" ")[1] + " - " + result[i]["result"];
+                    color = new Color.Color("orange");
+                }
+                let data = convertData(result[i]["timestamp"]);
+                let event = new calendarModule.CalendarEvent(title, data, data, true,
+                    color);
+                event_calendar.push(event);
+
             }
         }
 
         loading.visibility = "collapsed";
     });
+}
+
+exports.onDrawerButtonTap = function() {
+    sideDrawer.showDrawer();
 }
