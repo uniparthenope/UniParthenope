@@ -595,7 +595,8 @@ exports.onNavigatingTo = function (args) {
     user = appSettings.getString("username");
 
     appversion.getVersionName().then(function(v) {
-        page.getViewById("version").text = "Versione: " + v;
+        console.log(L('version'));
+        page.getViewById("version").text = L('version') + v;
         sideDrawer.getViewById("version").text = "v. "+ v;
     });
 

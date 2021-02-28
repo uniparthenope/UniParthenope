@@ -10,6 +10,8 @@ let base64= require('base-64');
 let appversion = require("nativescript-appversion");
 let utf8 = require('utf8');
 const appSettings = require("tns-core-modules/application-settings");
+require('globals');
+require('nativescript-i18n');
 
 let viewModel;
 let page;

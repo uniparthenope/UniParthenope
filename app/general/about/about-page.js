@@ -17,7 +17,7 @@ exports.onNavigatingTo = function(args) {
     sideDrawer.closeDrawer();
 
     appversion.getVersionName().then(function(v) {
-        page.getViewById("version").text = "Versione " + v;
+        page.getViewById("version").text = L('version') + v;
     });
 
     page.bindingContext = viewModel;

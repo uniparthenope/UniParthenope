@@ -9,9 +9,11 @@ let firebase = require("nativescript-plugin-firebase");
 let dialog = require("tns-core-modules/ui/dialogs");
 const frame = require("tns-core-modules/ui/frame");
 const platformModule = require("tns-core-modules/platform");
+require('globals');
+require('nativescript-i18n');
 
-let domain = "http://api.uniparthenope.it:5000";
-//let domain = "https://api.uniparthenope.it";
+//let domain = "http://api.uniparthenope.it:5000";
+let domain = "https://api.uniparthenope.it";
 //let domain = "http://127.0.0.1:5000";
 
 global.url = domain + "/UniparthenopeApp/v1/";

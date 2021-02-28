@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome">Benvenuto!</string>
+    <string name="version">Versione: </string>
+    <string name="university">Universita degli studi di Napoli \"Parthenope\"</string>
+    <string name="developer">Contatta gli sviluppatori</string>
+    <string name="store_manager">Responsabile Mobile Store</string>
+</resources>
