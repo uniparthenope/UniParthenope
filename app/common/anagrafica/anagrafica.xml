@@ -26,7 +26,7 @@
     <GridLayout>
         <StackLayout>
             <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label id="title" class="textPrimary" text="Anagrafica" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label id="title" class="textPrimary" text="{{L('anagrafica_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
                 <StackLayout id="save_info" visibility="collapsed" orientation="horizontal" marginLeft="15" horizontalAlignment="right">
                     <Image src="~/images/icon/email.png" width="25" height="25"  horizontalAlignment="right"
                             marginRight="10" ontap="tap_sendMail"/>
@@ -59,7 +59,7 @@
                         </GridLayout>
                         <GridLayout row="2" columns="*,auto,*" horizontalAlignment="center" width="100%" height="23%">
                             <StackLayout col="0" orientation="vertical" horizontalAlignment="left" marginLeft="15">
-                                <Label class="textPrimary" id="mat_label" text="MATRICOLA" horizontalAlignment="center" fontSize="16" color="white"/>
+                                <Label class="textPrimary" id="mat_label" text="{{L('matr_normal')}}" horizontalAlignment="center" fontSize="16" color="white"/>
                                 <Label id="matricola" text="--" horizontalAlignment="center" fontSize="14" color="orange"/>
                             </StackLayout>
                             <StackLayout col="1" orientation="vertical" horizontalAlignment="center" marginLeft="15">
@@ -67,14 +67,14 @@
                                 <Label id="uid" text="--" horizontalAlignment="center" textWrap="true" fontSize="14" color="orange"/>
                             </StackLayout>
                             <StackLayout col="2" orientation="vertical" horizontalAlignment="right" marginRight="15" >
-                                <Label class="textPrimary" text="RUOLO" horizontalAlignment="center" fontSize="16" color="white"/>
+                                <Label class="textPrimary" text="{{L('ruolo')}}" horizontalAlignment="center" fontSize="16" color="white"/>
                                 <Label id="role"  text="--" horizontalAlignment="center" fontSize="14" color="orange"/>
                                 <Label id="roleID"  text="" horizontalAlignment="center" fontSize="14" color="orange"/>
                             </StackLayout>
                         </GridLayout>
                         <GridLayout row="3" columns="auto,*,*" horizontalAlignment="center" width="100%" height="17%">
                             <StackLayout col="0" orientation="vertical" horizontalAlignment="left" marginLeft="15">
-                                <Label class="textPrimary" text="DATA NASCITA" horizontalAlignment="center" fontSize="16" color="white"/>
+                                <Label class="textPrimary" text="{{L('nascita')}}" horizontalAlignment="center" fontSize="16" color="white"/>
                                 <Label id="nascita" text="--" horizontalAlignment="center" fontSize="14" color="orange"/>
                             </StackLayout>
                             <StackLayout col="1" orientation="vertical" horizontalAlignment="right" marginRight="15" width="50%" >
@@ -83,7 +83,7 @@
                             </StackLayout>
 
                             <StackLayout col="2" orientation="vertical" horizontalAlignment="right" marginRight="15" >
-                                <Label class="textPrimary" text="SESSO" horizontalAlignment="center" fontSize="16" color="white"/>
+                                <Label class="textPrimary" text="{{L('sex')}}" horizontalAlignment="center" fontSize="16" color="white"/>
                                 <Label id="sex"  text="--" horizontalAlignment="center" fontSize="14" color="orange"/>
                             </StackLayout>
                         </GridLayout>

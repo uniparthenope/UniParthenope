@@ -190,7 +190,7 @@ exports.onNavigatingTo = function(args) {
             //getPIC(appSettings.getNumber("idAb"), 1);
 
             //page.getViewById("my_img").backgroundImage = url;
-            page.getViewById("mat_label").text = "NOME RISTORANTE";
+            page.getViewById("mat_label").text = L('matr_services');
         }
     }
 

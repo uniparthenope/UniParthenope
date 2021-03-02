@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">app@Uniparthenope</string>
+    <string name="title_activity_kimera">app@Uniparthenope</string>
+
     <string name="welcome">Benvenuto!</string>
     <string name="version">Versione: </string>
     <string name="university">Universita degli studi di Napoli \"Parthenope\"</string>
     <string name="developer">Contatta gli sviluppatori</string>
     <string name="store_manager">Responsabile Mobile Store</string>
+
+    <!--ACCESS -->
+    <string name="access_title">Accesso</string>
+    <string name="access_loading">Recupero Accesso</string>
+    <string name="autocert">Autocertificazione Obbligatoria</string>
+    <string name="string_corsi">Intendo frequentare i corsi del primo semestre dell Anno Accademico 2020/2021:</string>
+    <string name="access_warning">Attenzione: Non è stato ancora scelto un metodo!</string>
+    <string name="distance">A Distanza</string>
+    <string name="presence">In Presenza</string>
+    <string name="not_def">Non Definito</string>
+    <string name="btn_prenotazioni">Prenotazioni Aule</string>
+    <string name="btn_servizi">Prenotazione Servizi</string>
+    <string name="btn_history">Storico Accessi</string>
+
+    <!--ANAGRAFICA -->
+    <string name="anagrafica_title">Anagrafica</string>
+    <string name="matr_normal">MATRICOLA</string>
+    <string name="matr_services">NOME RISTORANTE</string>
+    <string name="ruolo">RUOLO</string>
+    <string name="nascita">DATA NASCITA</string>
+    <string name="sex">SESSO</string>
+
+
+
+
+
+
+
+
+
+
 </resources>

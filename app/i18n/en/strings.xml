@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">app@Uniparthenope</string>
+    <string name="title_activity_kimera">app@Uniparthenope</string>
+
     <string name="welcome">Welcome!</string>
     <string name="version">Version: </string>
     <string name="university">University of Studies of Naples \"Parthenope\"</string>
     <string name="developer">Contact developers</string>
     <string name="store_manager">Mobile Store Manager</string>
+
+    <!--MENU LATERALE -->
+    <string name="settings_btn">Settings</string>
+    <string name="info_btn">Settings</string>
+    <!--ACCESS -->
+    <string name="autocert">Mandatory Self-Certification</string>
+    <string name="string_corsi">Mandatory Self-Certification</string>
+
+
+
 </resources>

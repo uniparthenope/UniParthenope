@@ -11,7 +11,7 @@ let sideDrawer;
 let loading;
 let index;
 let my_status = "";
-let status = ["Non Definito","A Distanza","In Presenza"];
+let status = [L('not_def'),L('distance'),L('presence')];
 let _status = ["undefined", "distance", "presence"];
 let isStudent = false;
 
