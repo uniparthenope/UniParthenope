@@ -2,11 +2,11 @@
 <resources>
     <string name="app_name">app@Uniparthenope</string>
     <string name="title_activity_kimera">app@Uniparthenope</string>
+
     <string name="y">Si</string>
     <string name="n">No</string>
     <string name="success">Successo</string>
-
-
+    <string name="warning">Attenzione</string>
 
     <string name="welcome">Benvenuto!</string>
     <string name="version">Versione: </string>
@@ -26,6 +26,8 @@
     <string name="btn_prenotazioni">Prenotazioni Aule</string>
     <string name="btn_servizi">Prenotazione Servizi</string>
     <string name="btn_history">Storico Accessi</string>
+    <string name="access_mess">Per poter salvare il tipo di accesso in PRESENZA bisogna prima accettare Autocertificazione Obbligatoria!</string>
+
 
     <!--ANAGRAFICA -->
     <string name="anagrafica_title">Anagrafica</string>
@@ -50,7 +52,7 @@
 
     <!--PRENOTAZIONE SERVIZI -->
     <string name="pren_title">Prenotazione Servizi</string>
-    <string name="select_depart">Selezionare un dipartimento dall'elenco:</string>
+    <string name="select_depart">Selezionare un dipartimento dall elenco:</string>
     <string name="select_serv">Selezionare un servizio a cui prenotarsi:</string>
     <string name="no_serv">Nessun Servizio Trovato!</string>
     <string name="start">Inizio: </string>
@@ -62,9 +64,6 @@
     <string name="rmv_book">Sicuro di voler cancellare la prenotazione ad un posto?</string>
     <string name="book_title">Prenotazione posto</string>
     <string name="book_pl">Sicuro di voler prenotare un posto?</string>
-    <string name="sex">SESSO</string>
-    <string name="sex">SESSO</string>
-    <string name="sex">SESSO</string>
 
 
 

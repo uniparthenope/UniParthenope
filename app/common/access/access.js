@@ -201,7 +201,7 @@ function setSelfCert(flag){
         else {
             loading.visibility = "collapsed";
             dialogs.confirm({
-                title: "Success",
+                title: L('success'),
                 message: "Modifica effettuata!",
                 okButtonText: "OK"
             }).then(function () {
@@ -348,8 +348,8 @@ exports.onSwitchLoaded_autocert = function (args) {
             }
             else{
                 dialogs.confirm({
-                    title: "Attenzione!",
-                    message: "Per poter salvare il tipo di accesso in PRESENZA bisogna prima accettare l'Autocertificazione Obbligatoria!",
+                    title: L('warning'),
+                    message: L('access_mess'),
                     okButtonText: "OK"
                 }).then(function (){
                     const nav =
