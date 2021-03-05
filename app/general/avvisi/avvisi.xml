@@ -28,7 +28,7 @@
         <StackLayout orientation="vertical" height="100%" width="100%">
 
             <GridLayout backgroundColor="#1E3258" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label class="textPrimary" text="Avvisi" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label class="textPrimary" text="{{L('avvisi_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
 
@@ -58,7 +58,7 @@
         </StackLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero Avvisi..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{L('avvisi_activity')}}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
     </GridLayout>

@@ -28,7 +28,7 @@
         <GridLayout rows="60,*,50">
 
             <GridLayout row="0" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label class="textPrimary" text="Servizi di Ristorazione" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label class="textPrimary" text="{{L('men_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
             <ScrollView row="1" height="100%" marginLeft="5" marginRight="5" verticalAlignment="top" marginTop="10">

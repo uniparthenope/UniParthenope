@@ -29,11 +29,11 @@ function setupWebViewInterface(page){
 }
 
 function loadGraphic(id){
-    page.getViewById("sede").text = "Nessuna sede Parthenope a meno di 200m";
+    page.getViewById("sede").text = L('trasp_error');
 
     for (let i = 0; i < array_locations.length; i++) {
         if (array_locations[i].id === id){
-            page.getViewById("sede").text = "Sede Attuale: " + array_locations[i].name;
+            page.getViewById("sede").text = L('transp_act') + " " + array_locations[i].name;
             page.getViewById("sede_1").text = array_locations[i].sede_1;
             page.getViewById("sede_2").text = array_locations[i].sede_2;
             page.getViewById("sede_3").text = array_locations[i].sede_3;
@@ -98,8 +98,8 @@ exports.pageLoaded = function(args) {
     sideDrawer.closeDrawer();
 
     dialogs.alert({
-        title: "Attenzione",
-        message: "La sezione trasporti è ancora in fase di sviluppo!\nPertanto alcune funzionalità potrebbero essere limitate.",
+        title: L('warning'),
+        message: L('transp_warn'),
         okButtonText: "OK"
     });
     setupWebViewInterface(page);

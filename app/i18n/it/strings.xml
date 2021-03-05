@@ -7,10 +7,53 @@
     <string name="n">No</string>
     <string name="success">Successo</string>
     <string name="warning">Attenzione</string>
+    <string name="semestre">Semestre</string>
+    <string name="p_semestre">Primo Semestre</string>
+    <string name="s_semestre">Secondo Semestre</string>
+
+    <string name="insegnamento">Insegnamento</string>
+    <string name="session">Sessione</string>
+    <string name="subscribed">Iscritti: </string>
+    <string name="sub_from">Prenotazioni: da </string>
+    <string name="sub_to"> a </string>
+    <string name="_exam">[ESAME]</string>
+
+
+    <string name="lunedi">Lunedì</string>
+    <string name="martedi">Martedì</string>
+    <string name="mercoledi">Mercoledì</string>
+    <string name="giovedi">Giovedì</string>
+    <string name="venerdi">Venerdì</string>
+    <string name="sabato">Sabato</string>
+    <string name="domenica">Domenica</string>
+
+    <string name="lun">Lun</string>
+    <string name="mar_d">Mar</string>
+    <string name="mer">Mer</string>
+    <string name="gio">Gio</string>
+    <string name="ven">Ven</string>
+    <string name="sab">Sab</string>
+    <string name="dom">Dom</string>
+
+    <string name="gen">Gen</string>
+    <string name="feb">Feb</string>
+    <string name="mar_m">Mar</string>
+    <string name="apr">Apr</string>
+    <string name="mag">Mag</string>
+    <string name="giu">Giu</string>
+    <string name="lug">Lug</string>
+    <string name="ago">Ago</string>
+    <string name="set">Set</string>
+    <string name="ott">Ott</string>
+    <string name="nov">Nov</string>
+    <string name="dic">Dic</string>
+
 
     <string name="welcome">Benvenuto!</string>
     <string name="version">Versione: </string>
     <string name="university">Universita degli studi di Napoli \"Parthenope\"</string>
+
+    <!--ABOUT-->
     <string name="developer">Contatta gli sviluppatori</string>
     <string name="store_manager">Responsabile Mobile Store</string>
 
@@ -65,10 +108,86 @@
     <string name="book_title">Prenotazione posto</string>
     <string name="book_pl">Sicuro di voler prenotare un posto?</string>
 
+    <!--DOCENTI APPELLI -->
+    <string name="doc_app_title">Appelli Pubblicati</string>
+    <string name="doc_app_activity">Recupero Esami...</string>
 
+    <!--DOCENTI CORSI -->
+    <string name="doc_course_title">Miei Corsi</string>
+    <string name="last_edit">Ult.Mod. :</string>
+    <string name="aa_notget">A.A. Non Disponibile</string>
 
+    <!--DOCENTI HOME -->
+    <string name="doc_home_title">La Mia Home</string>
+    <string name="doc_activity_A">Recupero esami...</string>
+    <string name="doc_activity_B">Recupero calendario...</string>
+    <string name="doc_activity_C">Recupero informazioni...</string>
 
+    <!--DOCENTI LEZIONI -->
+    <string name="doc_lez_title">Lezioni</string>
+    <string name="select_course">Selezionare un corso dall elenco:</string>
+    <string name="select_lec">Selezionare una lezione per mostrare gli iscritti</string>
+    <string name="doc_lez_activity">Ricerca Lezioni...</string>
+    <string name="no_lec">Nessuna lezione trovata!</string>
 
+    <!--MODAL STUDAPPELLO and STUDLEZIONE-->
+    <string name="stud_app_title">Elenco studenti iscritti</string>
+    <string name="mat">Matricola</string>
+    <string name="usr">Username</string>
+    <string name="plc">Posto</string>
+    <string name="stud_app_activity">Ricerca Prenotati...</string>
+    <string name="canc_pl_title">Cancellazione posto</string>
+    <string name="canc_pl">Cancellare la prenotazione di</string>
+
+    <!--AVVISI-->
+    <string name="avvisi_title">Avvisi</string>
+    <string name="avvisi_activity">Recupero Avvisi...</string>
+
+    <!--EVENTI-->
+    <string name="ev_title">Eventi</string>
+
+    <!--HOME-->
+    <string name="connection">Connessione...</string>
+    <string name="get_news">Recupero Notizie...</string>
+    <string name="server_error">Errore Server!</string>
+    <string name="server_down_msg">Il server è attualmente in manutenzione e le principali operazioni potrebbero non essere disponibili. Ci scusiamo per il disagio!</string>
+    <string name="wlc_back">Bentornato</string>
+    <string name="wlc_back_msg">Connettiti e vai a Mia Home</string>
+    <string name="connect">Connettiti</string>
+
+    <!--MENU PASTO-->
+    <string name="men_title">Servizi di Ristorazione</string>
+
+    <!--NOTIZIE-->
+    <string name="news_title">Notizie</string>
+    <string name="news_activity">Recupero Notizie...</string>
+
+    <!--PRIVACY-->
+    <string name="privacy_title">Privacy</string>
+    <string name="privacy_activity">Recupero Privacy Policy...</string>
+
+    <!--IMPOSTAZIONI-->
+    <string name="set_title">Impostazioni</string>
+    <string name="show_b">Mostra altri appelli</string>
+    <string name="show_popup">Mostra PopUp Sondaggio</string>
+    <string name="notif">Notifiche:</string>
+    <string name="not_news">Notifiche Notizie</string>
+    <string name="not_group">Notifiche Gruppo</string>
+    <string name="not_corso">Notifiche Corso di Studio</string>
+    <string name="survey">Partecipa al Sondaggio</string>
+    <string name="forget_account">Dimentica Account</string>
+    <string name="forg_account_title">Rimozione Account</string>
+    <string name="forg_account_msg">Dimenticare tutti i dati?</string>
+
+    <!--TRASPORTI-->
+    <string name="trasp_title">Trasporti</string>
+    <string name="trasp_sede">Sede:</string>
+    <string name="trasp_activity">Recupero informazioni...</string>
+    <string name="trasp_error">Nessuna sede Parthenope a meno di 200m</string>
+    <string name="transp_act">Sede Attuale:</string>
+
+    <string name="transp_warn">La sezione trasporti è ancora in fase di sviluppo!
+        Pertanto alcune funzionalità potrebbero essere limitate.</string>
 
 
 

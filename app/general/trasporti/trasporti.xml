@@ -29,7 +29,7 @@
         <StackLayout orientation="vertical" height="100%">
             <GridLayout rows="auto,*" height="100%">
                 <GridLayout row="0" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                    <Label class="textPrimary" text="Trasporti" horizontalAlignment="center" verticalAlignment="center"/>
+                    <Label class="textPrimary" text="{{L('trasp_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
                 </GridLayout>
 
                 <ContentView row="1" height="100%" width="100%">
@@ -37,7 +37,7 @@
                 </ContentView>
 
                 <GridLayout id="legend" row="1" rows="*,*,*" verticalAlignment="bottom" height="10%" width="100%" backgroundColor="rgba(34, 56, 79,0.6)">
-                    <Label row="0" id="sede"  text="Sede:" horizontalAlignment="center" class="textPrimary" fontSize="14"/>
+                    <Label row="0" id="sede"  text="{{L('trasp_sede')}}" horizontalAlignment="center" class="textPrimary" fontSize="14"/>
                     <GridLayout row="1" columns="*,*">
                         <Label col="0" id="sede_1" text="Via Acton" horizontalAlignment="center" class="textPrimary" fontSize="14" color="red"/>
                         <Label col="1" id="sede_2" text="Villa D&#39;Angri" horizontalAlignment="center" class="textPrimary" fontSize="14" color="blue"/>
@@ -52,7 +52,7 @@
         </StackLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero informazioni..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{L('trasp_activity')}}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
     </GridLayout>

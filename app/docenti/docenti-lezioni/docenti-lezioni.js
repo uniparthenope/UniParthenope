@@ -20,13 +20,13 @@ let lezioni;
 
 function dayOfWeek(date) {
     date = date.getDay();
-    return isNaN(date) ? null : [L('dom'), L('lun'), L('mar'), L('mer'), L('gio'), L('ven'), L('sab')][date];
+    return isNaN(date) ? null : [L('dom'), L('lun'), L('mar_d'), L('mer'), L('gio'), L('ven'), L('sab')][date];
 
 }
 
 function monthOfYear(date) {
 
-    return isNaN(date) ? null : [L('gen'), L('feb'), L('mar'), L('apr'), L('mag'), L('giu'), L('lug'), L('ago'), L('set'), L('ott'), L('nov'), L('dic')][date];
+    return isNaN(date) ? null : [L('gen'), L('feb'), L('mar_m'), L('apr'), L('mag'), L('giu'), L('lug'), L('ago'), L('set'), L('ott'), L('nov'), L('dic')][date];
 
 }
 

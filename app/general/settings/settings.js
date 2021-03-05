@@ -58,10 +58,10 @@ exports.onGeneralMenu = function () {
 
 exports.onTapDelete = function (){
     dialogs.confirm({
-        title: "Rimozione Account",
-        message: "Dimenticare tutti i dati?",
-        okButtonText: "Si",
-        cancelButtonText: "No"
+        title: L('forg_account_title'),
+        message: L('forg_account_msg'),
+        okButtonText: L('y'),
+        cancelButtonText: L('n')
     }).then(function (result) {
         if (result){
             let grp = "GRP_" + appSettings.getNumber("grpId",0);
@@ -96,7 +96,7 @@ exports.onTapDelete = function (){
             sideDrawer.getViewById("userDocente").visibility="collapsed";
             sideDrawer.getViewById("userRistoratore").visibility="collapsed";
             sideDrawer.getViewById("userOther").visibility="collapsed";
-            sideDrawer.getViewById("topName").text = "Benvenuto!";
+            sideDrawer.getViewById("topName").text = L('welcome');
             sideDrawer.getViewById("loginForm").visibility="visible";
             sideDrawer.getViewById("topImg").backgroundImage = "~/images/logo_parth.png";
             page.getViewById("deleteBtn").visibility = "collapsed";

@@ -52,7 +52,7 @@
                     <StackLayout row="0" id="bottom_bar" height="5" width="100%" backgroundColor="#2E7C9E"/>
 
                     <StackLayout row="1" id="activityIndicatorNews" visibility="collapsed" verticalAlignment="center" height="100%" width="" backgroundColor="rgba(30, 50, 88,0.3)">
-                        <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
+                        <Label text="{{L('connection')}}" horizontalAlignment="center" class="textPrimary"/>
                         <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>
                     </StackLayout>
                     <!-- Avvisi -->
@@ -73,7 +73,7 @@
                         </ns:Carousel>
 
                         <StackLayout id="activityNews" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-                            <Label text="Recupero Notizie..." horizontalAlignment="center" class="textPrimary"/>
+                            <Label text="{{L('get_news')}}" horizontalAlignment="center" class="textPrimary"/>
                             <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>
                         </StackLayout>
                     </GridLayout>
@@ -142,7 +142,7 @@
 
         <!--Loading Screen-->
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{L('connection')}}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" color="white" busy="true"/>
         </StackLayout>
     </GridLayout>

@@ -81,8 +81,8 @@ function checkServer(timeout){
         if (response.statusCode !== 200){
             console.log("SERVER DOWN");
             dialogs.alert({
-                title: "Errore Server!",
-                message: "Il server è attualmente in manutenzione e le principali operazioni potrebbero non essere disponibili.\nCi scusiamo per il disagio!",
+                title: L('server_error'),
+                message: L('server_down_msg'),
                 okButtonText: "OK"
             });
         }
@@ -93,7 +93,7 @@ function checkServer(timeout){
 
         dialogs.alert({
             title: "Errore Server!",
-            message: "TIMEOUT\nIl server è attualmente in manutenzione e le principali operazioni potrebbero non essere disponibili.\nCi scusiamo per il disagio!",
+            message: "TIMEOUT\n" + L('server_down_msg'),
             okButtonText: "OK"
         });
     });
@@ -618,11 +618,11 @@ exports.onNavigatingTo = function (args) {
 
        if (!global.notification_flag){
            dialogs.confirm({
-               title: "Bentornato!",
-               message: "Bentornato "+ appSettings.getString("nome") + " " + appSettings.getString("cognome"),
-               okButtonText: "Connettiti e vai a Mia Home",
+               title: L('wlc_back')+"!",
+               message: L('wlc_back') + " "+ appSettings.getString("nome") + " " + appSettings.getString("cognome"),
+               okButtonText: L('wlc_back_msg'),
                cancelButtonText: 'Logout',
-               neutralButtonText: 'Connettiti'
+               neutralButtonText: L('connect')
            }).then(function (r){
                console.log("DIALOG HOME",r);
                if(r)

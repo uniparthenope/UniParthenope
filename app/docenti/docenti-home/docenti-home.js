@@ -43,7 +43,7 @@ function dayOfWeek(date) {
 
 function monthOfYear(date) {
     let month = parseInt(date.substring(3, 5)) - 1;
-    return isNaN(month) ? null : [L('gen'), L('feb'), L('mar'), L('apr'), L('mag'), L('giu'), L('lug'), L('ago'), L('set'), L('ott'), L('nov'), L('dic')][month];
+    return isNaN(month) ? null : [L('gen'), L('feb'), L('mar_m'), L('apr'), L('mag'), L('giu'), L('lug'), L('ago'), L('set'), L('ott'), L('nov'), L('dic')][month];
 }
 
 function insert_event() {
