@@ -85,10 +85,10 @@ exports.onItemTap = function (args) {
     console.log(students.getItem(index));
 
     dialogs.confirm({
-        title: "Cancellazione posto",
-        message: "Cancellare la prenotazione di" + students.getItem(index).username + "?",
-        okButtonText: "Sì",
-        cancelButtonText: "No",
+        title: L('canc_pl_title'),
+        message: L('canc_pl') + students.getItem(index).username + "?",
+        okButtonText: L('y'),
+        cancelButtonText: L('n'),
     }).then(function (result) {
         if (result){
             httpModule.request({

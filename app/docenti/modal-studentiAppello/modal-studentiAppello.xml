@@ -4,13 +4,13 @@
 
     <GridLayout rows="auto,*,auto">
         <GridLayout class="two-color-gradient" rows="auto,*" row="0" backgroundColor="#22384f" height="20%" verticalAlignment="top">
-            <Label row="0" marginTop="10" text="Elenco studenti iscritti" color="white" textAlignment="center"/>
+            <Label row="0" marginTop="10" text="{{L('stud_app_title')}}" color="white" textAlignment="center"/>
             <Label row="1" class="textPrimary" id="title" text="--" color="orange" textWrap="true" textAlignment="center" verticalAlignment="center" margin="5 5 5 5"/>
         </GridLayout>
         <GridLayout row="1" rows="30,*" verticalAlignment="center" margin="15 5 5 5" height="100%">
             <GridLayout row="0" columns="*,*,auto" margin="5 5 5 5">
-                <Label color="white" col="0" text="Matricola" />
-                <Label color="white" col="1" text="Username"/>
+                <Label color="white" col="0" text="{{L('mat')}}" />
+                <Label color="white" col="1" text="{{L('usr')}}"/>
             </GridLayout>
             <StackLayout row="1" verticalAlignment="top" margin="5 5 5 5" height="95%">
                 <ListView id="prenotazione_appello" separatorColor="#ffffffff" class="list-group" items="{{ students }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
@@ -27,7 +27,7 @@
         </GridLayout>
         </GridLayout>
         <StackLayout id="activityIndicator" visibility="collapsed" borderRadius="20%" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Ricerca Prenotati..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{L('stud_app_activity')}}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
     </GridLayout>

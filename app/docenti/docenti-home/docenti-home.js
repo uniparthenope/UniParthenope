@@ -38,12 +38,12 @@ function dayOfWeek(date) {
     let year = date.substring(6, 10);
 
     let dayOfWeek = new Date(year,month-1,day).getDay();
-    return isNaN(dayOfWeek) ? null : ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'][dayOfWeek];
+    return isNaN(dayOfWeek) ? null : [L('domenica'), L('lunedi'), L('martedi'), L('mercoledi'), L('giovedi'), L('venerdi'), L('sabato')][dayOfWeek];
 }
 
 function monthOfYear(date) {
     let month = parseInt(date.substring(3, 5)) - 1;
-    return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
+    return isNaN(month) ? null : [L('gen'), L('feb'), L('mar'), L('apr'), L('mag'), L('giu'), L('lug'), L('ago'), L('set'), L('ott'), L('nov'), L('dic')][month];
 }
 
 function insert_event() {
@@ -62,9 +62,9 @@ function insert_event() {
 function updateSession(){
     page.getViewById("aa").text = "A.A " + appSettings.getString("aa_accad","2020");
     if (appSettings.getString("semestre","1") === "1")
-        page.getViewById("semestre").text = "Primo Semestre";
+        page.getViewById("semestre").text = L('p_semestre');
     else
-        page.getViewById("semestre").text = "Secondo Semestre";
+        page.getViewById("semestre").text = L('s_semestre');
     page.getViewById("sessione").text = appSettings.getString("sessione","???");
 }
 
@@ -147,9 +147,9 @@ function getCourses() {
         else {
             page.getViewById("aa").text = "A.A " + result.aa_curr;
             if (result.semId === 1)
-                page.getViewById("semestre").text = "Primo Semestre";
+                page.getViewById("semestre").text = L('p_semestre');
             else
-                page.getViewById("semestre").text = "Secondo Semestre";
+                page.getViewById("semestre").text = L('s_semestre');
             page.getViewById("sessione").text = result.semDes;
 
             //appSettings.setString("aaId", result.aaId.toString());
@@ -252,9 +252,9 @@ function getCourses() {
                                             "classe" : "examPass",
                                             "date" : date,
                                             "appId": result3[i].appId,
-                                            "prenotazione_da": "Prenotazioni: da ",
-                                            "prenotazione_a": " a ",
-                                            "text_iscritti": "Iscritti: ",
+                                            "prenotazione_da": L('sub_from'),
+                                            "prenotazione_a": L('sub_to'),
+                                            "text_iscritti": L('subscribed'),
                                             "stato" : result3[i].statoDes
                                         };
                                         myarray.push(items);
@@ -273,16 +273,16 @@ function getCourses() {
                                             "classe" : "examPass",
                                             "date" : date,
                                             "appId": result3[i].appId,
-                                            "prenotazione_da": "Prenotazioni: da ",
-                                            "prenotazione_a": " a ",
-                                            "text_iscritti": "Iscritti: ",
+                                            "prenotazione_da": L('sub_from'),
+                                            "prenotazione_a": L('sub_to'),
+                                            "text_iscritti": L('subscribed'),
                                             "stato" : result3[i].statoDes
                                         };
                                         num++;
                                         myarray.push(items);
                                     }
 
-                                    let title = "[ESAME] " + result3[i].esame;
+                                    let title = L('_exam')+" " + result3[i].esame;
                                     global.events.push({
                                         title : title,
                                         data_inizio: date,

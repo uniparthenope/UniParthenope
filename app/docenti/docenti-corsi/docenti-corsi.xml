@@ -25,11 +25,11 @@
     <GridLayout>
         <GridLayout rows="100,*,50">
             <StackLayout row="0" class="two-color-gradient" width="100%" height="15%" verticalAlignment="top">
-                <Label class="textPrimary" text="Miei Corsi" horizontalAlignment="center" verticalAlignment="center" marginBottom="5" marginTop="5"/>
+                <Label class="textPrimary" text="{{L('doc_course_title')}}" horizontalAlignment="center" verticalAlignment="center" marginBottom="5" marginTop="5"/>
                 <Label class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="center" fontSize="12" marginBottom="15"/>
                 <GridLayout>
-                    <Label class="textPrimary" text="Semestre" horizontalAlignment="left" verticalAlignment="center" fontSize="12" marginBottom="5" marginLeft="10"/>
-                    <Label class="textPrimary" text="Insegnamento" horizontalAlignment="center" verticalAlignment="center" fontSize="12" marginBottom="5" marginLeft="10"/>
+                    <Label class="textPrimary" text="{{L('semestre')}}" horizontalAlignment="left" verticalAlignment="center" fontSize="12" marginBottom="5" marginLeft="10"/>
+                    <Label class="textPrimary" text="{{L('insegnamento')}}" horizontalAlignment="center" verticalAlignment="center" fontSize="12" marginBottom="5" marginLeft="10"/>
                 </GridLayout>
 
             </StackLayout>
@@ -50,7 +50,7 @@
                                         <Label class="examPass" borderWidth="0" borderRadius="0" text="{{ data_fine }}" fontSize="14" horizontalAlignment="center"/>
                                     </StackLayout>
                                     <StackLayout row="3" orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="examPass" borderWidth="0"  text="Ult.Mod. :" fontSize="11" horizontalAlignment="center" color="#8b0000"/>
+                                        <Label class="examPass" borderWidth="0"  text="{{L('last_edit')}}" fontSize="11" horizontalAlignment="center" color="#8b0000"/>
                                         <Label class="examPass" borderWidth="0"  text="{{ ult_mod }}" fontSize="11" horizontalAlignment="center" color="#8b0000"/>
                                     </StackLayout>
                                 </GridLayout>

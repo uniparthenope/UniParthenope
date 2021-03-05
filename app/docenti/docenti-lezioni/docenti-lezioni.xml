@@ -27,21 +27,21 @@
     <GridLayout>
         <GridLayout rows="auto,*,50">
             <GridLayout row="0" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label class="textPrimary" text="Lezioni" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label class="textPrimary" text="{{L('doc_lez_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
             <StackLayout height="100%" row="1" padding="5 5 5 5">
 
-                <Label color="white" fontSize="12" margin="0 5 5 5" text="Selezionare un corso dall'elenco:"/>
+                <Label color="white" fontSize="12" margin="0 5 5 5" text="{{L('select_course')}}"/>
 
                 <StackLayout borderRadius="20%" borderWidth="2" height="20%" borderColor="white">
                     <ListPicker id="listpicker" items="{{ courses }}" textField="nome" selectedIndex="0" selectedValue="{{ selectedItem }}" loaded="onListPickerLoaded" width="100%"/>
                 </StackLayout>
 
-                <Label color="white" margin="5 5 5 5" fontSize="12" text="Selezionare una lezione per mostrare gli iscritti"/>
+                <Label color="white" margin="5 5 5 5" fontSize="12" text="{{L('select_lec')}}"/>
 
                 <GridLayout  borderRadius="20%" borderWidth="2" borderColor="white" backgroundColor="#1E3258">
 
-                    <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" color="white" verticalAlignment="center" margin="5 5 5 5" text="Nessuna lezione trovata!"/>
+                    <Label id="no_lession" visibility="collapsed" horizontalAlignment="center" color="white" verticalAlignment="center" margin="5 5 5 5" text="{{L('no_lec')}}"/>
 
                     <StackLayout verticalAlignment="top" height="95%" margin="5 0 0 0" >
                         <ListView id="lezioni_listview" separatorColor="#ffffffff" class="list-group" items="{{ docentiLezioni }}" itemTap="onItemTap" marginRight="5" marginLeft="5">
@@ -50,13 +50,13 @@
                                     <GridLayout row="0" rows="*,*" backgroundColor="#1E3258" color="white" >
                                         <GridLayout row="0" columns="auto,*,auto" borderRadius="5%" padding="5 5 5 5" backgroundColor="#1E3258">
                                             <StackLayout col="0" orientation="vertical" horizontalAlignment="left">
-                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Inizio: " marginRight="5"/>
+                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="{{L('start')}}" marginRight="5"/>
                                                 <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ start }}"/>
                                             </StackLayout>
                                             <Label col="1" borderWidth="0" color="orange" text="{{ nome }}" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
 
                                             <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
-                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="Fine: " marginRight="5"/>
+                                                <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="{{L('end')}}" marginRight="5"/>
                                                 <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ end }}"/>
                                             </StackLayout>
                                         </GridLayout>
@@ -137,7 +137,7 @@
 
         </GridLayout>
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Ricerca Lezioni..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{L('doc_lez_activity')}}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
 

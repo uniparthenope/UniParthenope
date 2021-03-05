@@ -16,7 +16,7 @@ function drawTitle() {
     else
     {
         console.log("CORSI.AA_ACCAD = undefined (A.A non recuperato!)");
-        page.getViewById("aa").text = "A.A. Non Disponibile";
+        page.getViewById("aa").text = L('aa_notget');
     }
 
 }

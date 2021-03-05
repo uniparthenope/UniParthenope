@@ -20,13 +20,13 @@ let lezioni;
 
 function dayOfWeek(date) {
     date = date.getDay();
-    return isNaN(date) ? null : ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'][date];
+    return isNaN(date) ? null : [L('dom'), L('lun'), L('mar'), L('mer'), L('gio'), L('ven'), L('sab')][date];
 
 }
 
 function monthOfYear(date) {
 
-    return isNaN(date) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][date];
+    return isNaN(date) ? null : [L('gen'), L('feb'), L('mar'), L('apr'), L('mag'), L('giu'), L('lug'), L('ago'), L('set'), L('ott'), L('nov'), L('dic')][date];
 
 }
 
@@ -82,7 +82,7 @@ function showLession(index){
             "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
             "room": result[i].room.name,
             "room_place": result[i].room.description,
-            "capacity": max_cap + " Posti",
+            "capacity": max_cap + " " + L('places'),
             "availability":rem_cap + "/",
             "max_c" : max_cap,
             "ava_c" : rem_cap,
