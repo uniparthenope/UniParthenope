@@ -28,7 +28,7 @@
     <GridLayout height="100%">
         <StackLayout height="100%">
             <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label class="textPrimary" text="Storico Accessi" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label class="textPrimary" text="{{L('history_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
             <rc:RadCalendar row="1" id="cal" inlineEventSelected="onDaySelected" selectionMode="Single" viewMode="Month" eventSource="{{ events }}" eventsViewMode="Inline" verticalAlignment="top">
@@ -91,7 +91,7 @@
         </StackLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero Storico Accessi..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{L('activity_history')}}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
     </GridLayout>

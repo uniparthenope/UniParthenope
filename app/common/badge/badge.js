@@ -204,7 +204,7 @@ exports.onNavigatingTo = function(args) {
         page.getViewById("name").text = appSettings.getString("nome","");
         page.getViewById("surname").text = appSettings.getString("cognome","");
         page.getViewById("matricola").text = appSettings.getString("matricola","");
-        page.getViewById("mat_label").text = "NOME RISTORANTE";
+        page.getViewById("mat_label").text = L('matr_services');
         page.getViewById("role").text = appSettings.getString("grpDes","").toUpperCase();
     }
     else {
@@ -251,7 +251,7 @@ exports.tap_scanQR = function(){
 
     barcodescanner.scan({
         formats: "QR_CODE, EAN_13, CODE_128",
-        cancelLabel: "Scansionare QR-Code per ottenere informazioni.", // iOS only, default 'Close'
+        cancelLabel: L('barcode_cancel_scan'), // iOS only, default 'Close'
         cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
         message: "Scan QR code", // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
         preferFrontCamera: false,     // Android only, default false
@@ -267,7 +267,7 @@ exports.tap_scanQR = function(){
         continuousScanCallback: function (result) {
             //count++;
             console.log(result.format + ": " + result.text + " (count: " + count + ")");
-            barcodescanner.message = "SCANNED";
+            barcodescanner.message = L('barcode_success');
             
             httpModule.request({
                 url : global.url_general + "Badges/v2/sendRequestInfo",
@@ -293,7 +293,7 @@ exports.tap_scanQR = function(){
 
                     // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
                     dialogs.alert({
-                        title: "Richiesta Informazioni",
+                        title: L('dialog_titleinfo'),
                         message: message,
                         okButtonText: "OK"
                     }).then(function (){

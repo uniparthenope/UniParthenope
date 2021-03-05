@@ -123,7 +123,7 @@ function showLession(index){
             "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
             "room": result[i].room.name,
             "room_place": result[i].room.description,
-            "capacity": max_cap + " Posti",
+            "capacity": max_cap + " "+L('places'),
             "availability":rem_cap + "/",
             "max_c" : max_cap,
             "ava_c" : rem_cap,
@@ -185,10 +185,10 @@ exports.onItemTap = function(args) {
 
     if(lez.isReserved){
         dialogs.confirm({
-            title: "Cancellazione posto",
-            message: "Sicuro di voler cancellare la prenotazione ad un posto?",
-            okButtonText: "Sì",
-            cancelButtonText: "No",
+            title: L('rmv_book_title'),
+            message: L('rmv_book'),
+            okButtonText: L('y'),
+            cancelButtonText: L('n'),
         }).then(function (result) {
             if (result){
                 httpModule.request({
@@ -238,10 +238,10 @@ exports.onItemTap = function(args) {
     }
     else{
         dialogs.confirm({
-            title: "Prenotazione posto",
-            message: "Sicuro di voler prenotare un posto?",
-            okButtonText: "Sì",
-            cancelButtonText: "No",
+            title: L('book_title'),
+            message: L('book_pl'),
+            okButtonText: L('y'),
+            cancelButtonText: L('n'),
         }).then(function (result) {
             console.log(result);
             if (result){
@@ -261,7 +261,7 @@ exports.onItemTap = function(args) {
 
                     if (response.statusCode === 200){
                         dialogs.alert({
-                            title: "Successo",
+                            title: L('success'),
                             message: result["status"],
                             okButtonText: "OK"
                         }).then(function (){

@@ -2,6 +2,11 @@
 <resources>
     <string name="app_name">app@Uniparthenope</string>
     <string name="title_activity_kimera">app@Uniparthenope</string>
+    <string name="y">Si</string>
+    <string name="n">No</string>
+    <string name="success">Successo</string>
+
+
 
     <string name="welcome">Benvenuto!</string>
     <string name="version">Versione: </string>
@@ -29,6 +34,39 @@
     <string name="ruolo">RUOLO</string>
     <string name="nascita">DATA NASCITA</string>
     <string name="sex">SESSO</string>
+
+    <!--BADGE -->
+    <string name="badge_title">UniParthenope Card</string>
+    <string name="zoom_text">Doppio-click su QR-Code per zoom</string>
+    <string name="activity_badge">Genero QR-Code...</string>
+    <string name="barcode_cancel_scan">Scansionare QR-Code per ottenere informazioni.</string>
+    <string name="barcode_success">SCANSIONATO</string>
+    <string name="dialog_titleinfo">Richiesta Informazioni</string>
+
+    <!--HISTORY -->
+    <string name="history_title">Storico Accessi</string>
+    <string name="activity_history">Recupero Storico Accessi...</string>
+    <string name="authorized">Autorizzato</string>
+
+    <!--PRENOTAZIONE SERVIZI -->
+    <string name="pren_title">Prenotazione Servizi</string>
+    <string name="select_depart">Selezionare un dipartimento dall'elenco:</string>
+    <string name="select_serv">Selezionare un servizio a cui prenotarsi:</string>
+    <string name="no_serv">Nessun Servizio Trovato!</string>
+    <string name="start">Inizio: </string>
+    <string name="end">Fine: </string>
+    <string name="book">PRENOTATO</string>
+    <string name="activity_servic">Ricerca Servizi...</string>
+    <string name="places">Posti</string>
+    <string name="rmv_book_title">Cancellazione posto</string>
+    <string name="rmv_book">Sicuro di voler cancellare la prenotazione ad un posto?</string>
+    <string name="book_title">Prenotazione posto</string>
+    <string name="book_pl">Sicuro di voler prenotare un posto?</string>
+    <string name="sex">SESSO</string>
+    <string name="sex">SESSO</string>
+    <string name="sex">SESSO</string>
+
+
 
 
 

@@ -64,7 +64,7 @@ function getHistory(){
                 let color;
 
                 if (result[i]["result"] === "OK") {
-                    title = "[" + result[i]["tablet"] + "] " + result[i]["timestamp"].split(" ")[1] + " - Autorizzato";
+                    title = "[" + result[i]["tablet"] + "] " + result[i]["timestamp"].split(" ")[1] + " - "+L('authorized');
                     color = new Color.Color("#0F9851");
                 }
                 else{
