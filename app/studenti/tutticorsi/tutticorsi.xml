@@ -25,12 +25,12 @@
     <GridLayout rows="auto,*">
         <GridLayout rows="*,*" class="two-color-gradient" width="100%" height="10%" verticalAlignment="top" row="0">
             <StackLayout verticalAlignment="top" marginTop="5" row="0">
-                <Label class="textPrimary" text="Corsi" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label class="textPrimary" text="{{ L('courses_title') }}" horizontalAlignment="center" verticalAlignment="center"/>
             </StackLayout>
             <GridLayout columns="50,*,50" verticalAlignment="bottom" marginBottom="5" row="1">
-                <Label col="0" text="Anno" horizontalAlignment="center" color="white" />
-                <Label col="1" text="Nome" horizontalAlignment="center" color="white" />
-                <Label col="2" text="CFU" horizontalAlignment="center" color="white" />
+                <Label col="0" text="{{ L('anno') }}" horizontalAlignment="center" color="white" />
+                <Label col="1" text="{{ L('courses_nome') }}" horizontalAlignment="center" color="white" />
+                <Label col="2" text="{{ L('courses_cfu') }}" horizontalAlignment="center" color="white" />
             </GridLayout>
         </GridLayout>
 

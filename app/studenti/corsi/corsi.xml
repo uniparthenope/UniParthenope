@@ -26,13 +26,13 @@
     <GridLayout>
         <GridLayout rows="auto,*,50">
             <GridLayout rows="auto,auto,auto" row="0" class="two-color-gradient" width="100%" verticalAlignment="top">
-                <Label row="0" class="textPrimary" text="Miei Corsi" horizontalAlignment="center" verticalAlignment="top" marginBottom="15" marginTop="5"/>
+                <Label row="0" class="textPrimary" text="{{L('my_courses_title')}}" horizontalAlignment="center" verticalAlignment="top" marginBottom="15" marginTop="5"/>
                 <StackLayout row="1">
                     <Label  class="textPrimary" id="semestre" horizontalAlignment="center" verticalAlignment="top" fontSize="13" marginBottom="5"/>
                     <Label  class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="top" fontSize="12" />
                 </StackLayout>
                  <GridLayout row="2" width="70" verticalAlignment="bottom" horizontalAlignment="left">
-                    <Label  class="textPrimary" text="Anno" fontSize="12" marginBottom="5" horizontalAlignment="center" />
+                    <Label  class="textPrimary" text="{{ L('anno') }}" fontSize="12" marginBottom="5" horizontalAlignment="center" />
                 </GridLayout>
             </GridLayout>
 

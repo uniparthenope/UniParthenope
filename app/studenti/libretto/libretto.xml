@@ -30,7 +30,7 @@
                     <GridLayout row="1" height="65%" marginBottom="5">
 
                         <StackLayout orientation="vertical" horizontalAlignment="left" marginLeft="20" verticalAlignment="center">
-                            <Label class="textMontserratRegular" text="Medie" horizontalAlignment="center" color="white" marginBottom="5"/>
+                            <Label class="textMontserratRegular" text="{{ L('libretto_medie') }}" horizontalAlignment="center" color="white" marginBottom="5"/>
                             <StackLayout orientation="horizontal" verticalAlignment="center" horizontalAlignment="center">
                                 <Label class="textMontserratRegular" id="medExam" fontSize="18" color="orange" text="" verticalAlignment="center"/>
                                 <Label class="textMontserratRegular" id="medExam_tot" color="white" text=""  verticalAlignment="center"/>
@@ -58,9 +58,9 @@
                     </GridLayout>
 
                     <GridLayout row="2" height="10%" verticalAlignment="bottom" marginBottom="10">
-                        <Label text="Voto" horizontalAlignment="left" marginLeft="20" color="white"/>
-                        <Label text="Nome" horizontalAlignment="center" color="white"/>
-                        <Label text="CFU" horizontalAlignment="right" marginRight="20" color="white"/>
+                        <Label text="{{ L('libretto_voto') }}" horizontalAlignment="left" marginLeft="20" color="white"/>
+                        <Label text="{{ L('libretto_nome') }}" horizontalAlignment="center" color="white"/>
+                        <Label text="{{ L('libretto_cfu') }}" horizontalAlignment="right" marginRight="20" color="white"/>
                     </GridLayout>
                 </GridLayout>
             </GridLayout>
@@ -72,7 +72,7 @@
                             <StackLayout  orientation="horizontal" width="100%" marginBottom="5" marginTop="5">
                                 <GridLayout class="{{ classe }}" width="70" height="70">
                                     <Label  class="{{ classe }}" borderWidth="0" text="{{ voto }}" fontSize="28" verticalAlignment="center" horizontalAlignment="center"/>
-                                    <Label  visibility="{{ lode }}" class="lode" text="LODE"/>
+                                    <Label  visibility="{{ lode }}" class="lode" text="{{ L('libretto_lode') }}"/>
                                 </GridLayout>
                                 <StackLayout orientation="vertical" width="70%">
                                     <Label class="{{ classe }}" borderWidth="0" borderRadius="0" text="{{ esame }}" textWrap="true" marginBottom="5" marginLeft="15" horizontalAlignment="center"/>

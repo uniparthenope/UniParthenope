@@ -26,7 +26,7 @@
     <GridLayout>
         <GridLayout rows="auto,*,50">
             <GridLayout rows="auto,auto,auto" row="0" class="two-color-gradient" width="100%" verticalAlignment="top">
-                <Label row="0" class="textPrimary" text="Mie Prenotazioni" horizontalAlignment="center" verticalAlignment="center" marginBottom="15" marginTop="5"/>
+                <Label row="0" class="textPrimary" text="{{ L('prenotazione_esami_title') }}" horizontalAlignment="center" verticalAlignment="center" marginBottom="15" marginTop="5"/>
                 <StackLayout row="1">
                     <Label  class="textPrimary" id="sessione" horizontalAlignment="center" verticalAlignment="top" fontSize="13" marginBottom="5"/>
                     <Label  class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="top" fontSize="12" />
@@ -47,15 +47,15 @@
                                 <Label class="{{ classe }}" borderWidth="0" fontSize="14" text="{{ descrizione }}" horizontalAlignment="center"/>
                                 <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ note }}" horizontalAlignment="center"/>
                                 <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Aula: "/>
+                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ L('prenotazione_esami_aula') }}"/>
                                     <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ aula }}"/>
                                 </StackLayout>
                                 <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Edificio: "/>
+                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ L('prenotazione_esami_edificio') }}"/>
                                     <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ edificio }}"/>
                                 </StackLayout>
                                 <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Iscritti: "/>
+                                    <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ L('prenotazione_esami_iscritti') }}"/>
                                     <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
                                 </StackLayout>
                             </StackLayout>
@@ -114,7 +114,7 @@
         </GridLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero Prenotazioni..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{ L('activity_prenotazioni') }}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
 
