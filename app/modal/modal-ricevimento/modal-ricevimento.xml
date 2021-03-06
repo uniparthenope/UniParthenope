@@ -3,7 +3,7 @@
 
     <StackLayout height="55%">
         <StackLayout class="two-color-gradient" marginBottom="10" height="20%" verticalAlignment="center">
-            <Label class="textPrimary" id="nome" text="Ricevimento non ancora implementato!" textWrap="true" textAlignment="center" verticalAlignment="center"/>
+            <Label class="textPrimary" id="nome" text="{{ L('not_yet') }}" textWrap="true" textAlignment="center" verticalAlignment="center"/>
         </StackLayout>
         <GridLayout>
 

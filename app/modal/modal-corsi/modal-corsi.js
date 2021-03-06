@@ -46,7 +46,7 @@ function onShownModally(args) {
             page.getViewById("docente").text = context.docente;
 
             //console.log(result.metodi);
-            let array = ["Contenuti","Obiettivi","Prerequisiti","Verifica","Testi","Metodi","Altro"];
+            let array = [L('cont'),L('obj'),L('prereq'),L('verif'),L('testi'),L('metod'),L('altro')];
             let array_1 = ["contenuti","obiettivi","prerequisiti","verifica","testi","metodi","altro"];
 
             for (let i=0; i<array.length; i++)

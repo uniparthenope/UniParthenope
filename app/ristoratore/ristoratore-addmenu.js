@@ -17,7 +17,7 @@ let page;
 let viewModel;
 let sideDrawer;
 let img = "";
-let values = ["Offerta","Primo","Secondo","Contorno","Bibita","Altro"];
+let values = [L('offer'),L('prim'),L('sec'),L('contor'),L('bib'),L('altro')];
 
 function onNavigatingTo(args) {
     page = args.object;
@@ -43,10 +43,10 @@ function onTapSave() {
 
 
     dialogs.confirm({
-        title: "Conferma",
-        message: "Sicuro di voler pubblicare il menu?",
-        okButtonText: "Si",
-        cancelButtonText: "No"
+        title: L('confirm'),
+        message: L('pub_menu'),
+        okButtonText: L('y'),
+        cancelButtonText: L('n')
     }).then(function (result) {
         // result argument is boolean
         console.log("Image: " + img);
@@ -74,8 +74,8 @@ function onTapSave() {
 
                 if (response.statusCode === 200) {
                     dialogs.alert({
-                        title: "Menu Caricato!",
-                        message: "Il nuovo menu è stato caricato con successo!",
+                        title: L('menu_pub'),
+                        message: L('menu_pub_msg'),
                         okButtonText: "OK"
                     }).then(function(){
                         const nav =

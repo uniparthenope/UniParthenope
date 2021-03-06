@@ -41,15 +41,15 @@ exports.onGeneralMenu = function() {
 
 exports.contact_us = function () {
     dialogs.confirm({
-        title: "Attenzione!",
-        message: "La funzione 'Contatta gli Sviluppatori' permette di inviare un email al team che lavora alla progettazione e all'implementazione di app@uniparthenope al fine di comunicare problemi tecnici relativi ad essa.\nPer comunicazioni differenti si prega di rivolgersi alla propria segreteria di competenza\nGrazie.",
-        okButtonText: "Contattaci",
-        cancelButtonText: "Annulla"
+        title: L('warning'),
+        message: L('dev_mail'),
+        okButtonText: L('contact'),
+        cancelButtonText: L('cancel')
     }).then(function (result){
         if(result){
             appversion.getVersionName().then(function(v) {
                 let ver = v;
-                let my_device = "DISPOSITIVO UTILIZZATO: \n"+
+                let my_device = L('dev_device') +"\n"+
                     platformModule.device.manufacturer + " " + platformModule.device.os + " "+ platformModule.device.osVersion + "\n"+ platformModule.device.sdkVersion +" \n" +
                     platformModule.device.model + " " + platformModule.device.deviceType + "\n" + platformModule.device.region + " "+ platformModule.device.language;
 
@@ -60,7 +60,7 @@ exports.contact_us = function () {
 
                 email.compose({
                     subject: title,
-                    body: "Scrivi messaggio ...\n\n\n (Non eliminare le seguenti informazioni)\n" +  my_device,
+                    body:  L('dev_wrmsg')+ "\n\n\n "+ L('dev_alert')+"\n" +  my_device,
                     to: ['developer@uniparthenope.it']
                 }).then(
                     function() {

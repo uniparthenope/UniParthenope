@@ -126,7 +126,7 @@ function dateToString(today){
 }
 
 function dateToDDMM(today){
-    const giorno = ["Dom","Lun","Mar","Mer","Gio","Ven","Sab"];
+    const giorno = [ L('dom'), L('lun'), L('mar_d'), L('mer'), L('gio'), L('ven'), L('sab')];
     let month = today.getMonth() + 1;
     if (month < 10)
         month = "0" + month.toString();

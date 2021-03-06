@@ -11,8 +11,8 @@
                 <Label class="textPrimary" id="prenotazione" color="black" textWrap="true" textAlignment="center"/>
                 <Label class="textPrimary" id="data" color="black" textWrap="true" textAlignment="center"/>
             </StackLayout>
-            <Button id="prenotati" class="btn" text="Prenotati" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="25" width="85%" ontap="onTapPrenotati"/>
-            <Button id="disiscriviti" class="btn" text="Disiscriviti" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="25" width="85%" ontap="onTapDisiscriviti"/>
+            <Button id="prenotati" class="btn" text="{{ L('btn_subscr') }}" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="25" width="85%" ontap="onTapPrenotati"/>
+            <Button id="disiscriviti" class="btn" text="{{ L('btn_unsubscr') }}" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="25" width="85%" ontap="onTapDisiscriviti"/>
         </GridLayout>
     </StackLayout>
 </Page>

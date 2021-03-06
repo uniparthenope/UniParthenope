@@ -13,7 +13,7 @@
             <StackLayout class="pic_rounded" borderWidth="0" opacity="0.2" verticalAlignment="center" height="100%" width="100%" backgroundImage="~/images/logo_new.png"/>
             <GridLayout rows="auto,auto" verticalAlignment="center" backgroundColor="rgba(0, 0, 0, 0.3)" height="55%">
 
-                <Label row="0" class="textPrimary" color="orange" fontSize="16" text="Comune" id="position" textWrap="true" horizontalAlignment="center" verticalAlignment="center" marginBottom="10"/>
+                <Label row="0" class="textPrimary" color="orange" fontSize="16" text="{{ L('comune') }}" id="position" textWrap="true" horizontalAlignment="center" verticalAlignment="center" marginBottom="10"/>
                 <GridLayout row="1" verticalAlignment="center">
                     <GridLayout columns="*,*,*,*" margin="5 5 5 5">
                         <StackLayout col="0" verticalAlignment="center">
@@ -58,11 +58,11 @@
         </GridLayout>
         <StackLayout orientation="horizontal" backgroundColor="rgba(0, 0, 0, 0.3)" verticalAlignment="bottom" height="10%" horizontalAlignment="center" ontap="ontap_download" width="100%">
             <Image src="~/images/meteo.png" height="60" width="60" horizontalAlignment="center" marginRight="5" marginLeft="10" verticalAlignment="center"/>
-            <Label class="textPrimary" text="Scarica gratuitamente la nostra app" textWrap="true" marginRight="10" textAlignment="center" verticalAlignment="center" horizontalAlignment="left"/>
+            <Label class="textPrimary" text="{{ L('app_msg') }}" textWrap="true" marginRight="10" textAlignment="center" verticalAlignment="center" horizontalAlignment="left"/>
         </StackLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero Previsioni..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{ L('meteo_activity') }}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
     </GridLayout>

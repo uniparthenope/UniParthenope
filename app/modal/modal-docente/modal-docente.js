@@ -25,9 +25,6 @@ function onShownModally(args) {
 
     console.log(context.curriculum)
 
-
-
-
     page.bindingContext = observableModule.fromObject(context);
 
 
@@ -46,7 +43,7 @@ exports.ontap_phone = function(){
 exports.ontap_email = function(){
     email.compose({
         subject: '',
-        body: '\n\nSent with UniParthenope App',
+        body: '\n\nSent with app@uniparthenope',
         to: [context.mail]
     }).then(
         function() {

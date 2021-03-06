@@ -227,7 +227,7 @@ exports.onShownModally = function (args) {
         console.log(response.statusCode);
         if(response.statusCode === 401 || response.statusCode === 500) {
             dialogs.confirm({
-                title: "Autenticazione Fallita!",
+                title: L('failed_auth'),
                 message: _result.errMsg,
                 okButtonText: "OK"
             }).then(function (result) {
@@ -236,8 +236,8 @@ exports.onShownModally = function (args) {
         }
         if(response.statusCode === 503) {
             dialogs.confirm({
-                title: "Errore Server ESSE3",
-                message: "Il server ESSE3 è momentaneamente non raggiungibile!\n\nPer maggiori info:\nhttps://uniparthenope.esse3.cineca.it/",
+                title: L('server_err'),
+                message: L('server_err_msg') + "\n\n"+L('moreinfo')+"\nhttps://uniparthenope.esse3.cineca.it/",
                 okButtonText: "OK"
             }).then(function (result) {
                 args.object.closeModal();

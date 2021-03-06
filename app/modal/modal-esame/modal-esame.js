@@ -44,7 +44,7 @@ function onShownModally(args) {
             page.getViewById("docente").text = context.docente;
             prenotato = result.prenotato;
             if (prenotato){
-                page.getViewById("prenotazione").text = "Prenotato il: ";
+                page.getViewById("prenotazione").text = L('book_date');
                 page.getViewById("data").text = result.data;
                 page.getViewById("prenotati").visibility = "collapsed";
                 page.getViewById("disiscriviti").visibility = "visible";

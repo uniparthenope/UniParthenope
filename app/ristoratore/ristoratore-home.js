@@ -79,11 +79,11 @@ function onNavigatingTo(args) {
 
                 items.push({
                     nome: result[i].nome,
-                    descrizione: "Descrizione: "+ result[i].descrizione,
-                    prezzo: "Prezzo: "+ result[i].prezzo,
-                    tipologia: "Tipo: "+result[i].tipologia,
+                    descrizione: L('desc')+": "+ result[i].descrizione,
+                    prezzo: L('price')+": "+ result[i].prezzo,
+                    tipologia: L('type')+": "+result[i].tipologia,
                     sempre_att: insert,
-                    full_data:"Inserito il: "+result[i].data,
+                    full_data:L('men_insert')+result[i].data,
                     id: result[i].id,
                     classe:classe,
                     image: img
@@ -113,8 +113,8 @@ exports.tapped = function (args) {
     header_index = items.getItem(ind).id;
 
     dialogs.confirm({
-        title: "Conferma",
-        message: "Sicuro di voler eliminare l'oggetto?",
+        title: L('confirm'),
+        message: L('men_qst'),
         okButtonText: "Si",
         cancelButtonText: "No"
     }).then(function (result) {
@@ -132,8 +132,8 @@ exports.tapped = function (args) {
                     if (response.statusCode === 200)
                     {
                         dialogs.alert({
-                            title: "Menu Cancellato!",
-                            message: "Il menu è stato cancellato con successo!",
+                            title: L('men_canc'),
+                            message: L('men_ok'),
                             okButtonText: "OK"
                         }).then(function () {
                             const nav =
@@ -146,8 +146,8 @@ exports.tapped = function (args) {
                     }
                     else {
                         dialogs.alert({
-                            title: "Errore!",
-                            message: "Il menu non è stato cancellato con successo!",
+                            title: L('error'),
+                            message: L('men_no'),
                             okButtonText: "OK"
                         });
                     }

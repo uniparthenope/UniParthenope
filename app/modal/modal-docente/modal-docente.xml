@@ -15,11 +15,11 @@
             <ScrollView heigth="70%">
                 <GridLayout rows="auto,auto,auto,*,*,*,*" verticalAlignment="center" marginLeft="10" marginRight="10">
                     <StackLayout orientation="vertical" row="0" margin="5 5 5 5">
-                        <Label class="textPrimary" color="white" id="" text="Ufficio" textWrap="true" textAlignment="center"/>
+                        <Label class="textPrimary" color="white" id="" text="{{ L('office') }}" textWrap="true" textAlignment="center"/>
                         <Label class="textPrimary" color="orange" fontSize="14" text="--" horizontalAlignment="center" id="ufficio" ontap="" textWrap="true" textAlignment="center"/>
                     </StackLayout>
                     <StackLayout orientation="vertical" row="1" margin="5 5 5 5">
-                        <Label class="textPrimary" color="white" id="" text="Telefono" textWrap="true" textAlignment="center"/>
+                        <Label class="textPrimary" color="white" id="" text="{{ L('phone') }}" textWrap="true" textAlignment="center"/>
                         <Label class="textPrimary" color="orange" fontSize="14" text="--" horizontalAlignment="center" id="telefono" ontap="ontap_phone" textWrap="true" textAlignment="center"/>
                     </StackLayout>
                     <StackLayout orientation="vertical" row="2" margin="5 5 5 5">
@@ -27,19 +27,19 @@
                         <Label class="textPrimary" color="orange" fontSize="14" text="--" horizontalAlignment="center" id="email" ontap="ontap_email" textWrap="true" textAlignment="center"/>
                     </StackLayout>
                     <StackLayout orientation="vertical" row="3" margin="5 5 5 5">
-                        <Label class="textPrimary" color="white" id="" text="Note" textWrap="true" textAlignment="center"/>
+                        <Label class="textPrimary" color="white" id="" text="{{ L('note') }}" textWrap="true" textAlignment="center"/>
                         <Label class="textPrimary" color="orange" fontSize="14" text="--" horizontalAlignment="center" id="note" textWrap="true" textAlignment="center"/>
                     </StackLayout>
                     <StackLayout orientation="vertical" row="4" margin="5 5 5 5">
-                        <Label class="textPrimary" color="white" id="" text="Biografia" textWrap="true" textAlignment="center"/>
+                        <Label class="textPrimary" color="white" id="" text="{{ L('bio') }}" textWrap="true" textAlignment="center"/>
                         <Label class="textPrimary" color="orange" fontSize="12" text="--" horizontalAlignment="center" id="bio" textWrap="true" textAlignment="center"/>
                     </StackLayout>
                     <StackLayout orientation="vertical" row="5" margin="5 5 5 5">
-                        <Label class="textPrimary" color="white" id="" text="Curriculum" textWrap="true" textAlignment="center"/>
+                        <Label class="textPrimary" color="white" id="" text="{{ L('curr') }}" textWrap="true" textAlignment="center"/>
                         <Label class="textPrimary" color="orange" fontSize="12" text="--" horizontalAlignment="center" id="curr" textWrap="true" textAlignment="center"/>
                     </StackLayout>
                     <StackLayout orientation="vertical" row="6" margin="5 5 5 5">
-                        <Label class="textPrimary" color="white" id="" text="Pubblicazioni" textWrap="true" textAlignment="center"/>
+                        <Label class="textPrimary" color="white" id="" text="{{ L('pubb') }}" textWrap="true" textAlignment="center"/>
                         <Label class="textPrimary" color="orange" editable="true" fontSize="12" text="--" horizontalAlignment="center" id="pub" textWrap="true" textAlignment="center"/>
                     </StackLayout>
 
@@ -50,8 +50,8 @@
         </GridLayout>
 
         <StackLayout verticalAlignment="bottom" marginTop="15">
-            <Button class="btn" marginLeft="10" marginRight="10" text="Ricevimento" ontap="ontap_ricevimento" backgroundColor="#22384f" color="white" borderColor="white" verticalAlignment="bottom" marginBottom="10"/>
-            <Button class="btn" marginLeft="10" marginRight="10" text="Sito Web" ontap="ontap_scheda" backgroundColor="#22384f" color="white" borderColor="white" verticalAlignment="bottom" marginBottom="15"/>
+            <Button class="btn" marginLeft="10" marginRight="10" text="{{ L('ricev') }}" ontap="ontap_ricevimento" backgroundColor="#22384f" color="white" borderColor="white" verticalAlignment="bottom" marginBottom="10"/>
+            <Button class="btn" marginLeft="10" marginRight="10" text="{{ L('website') }}" ontap="ontap_scheda" backgroundColor="#22384f" color="white" borderColor="white" verticalAlignment="bottom" marginBottom="15"/>
         </StackLayout>
     </GridLayout>
 </Page>

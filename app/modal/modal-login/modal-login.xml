@@ -4,7 +4,7 @@
         <StackLayout orientation="vertical" ios:height="100%">
 
             <StackLayout class="two-color-gradient" height="20%" verticalAlignment="center">
-                <Label class="textPrimary" ios:verticalAlignment="bottom" horizontalAlignment="center" text="Selezionare una carriera:"  color="white" fontSize="20"/>
+                <Label class="textPrimary" ios:verticalAlignment="bottom" horizontalAlignment="center" text="{{ L('sel_carrer') }}"  color="white" fontSize="20"/>
             </StackLayout>
 
             <StackLayout ios:backgroundColor="#1E3258" width="100%" height="100%">
@@ -15,11 +15,11 @@
                             <StackLayout orientation="vertical" marginBottom="10" marginTop="10" margin="5 5 5 5">
                                 <Label class="textPrimary" text="{{ cdsDes }}" color="white" fontSize="16" marginBottom="10" textWrap="true" textAlignment="center" width="100%"/>
                                 <StackLayout orientation="horizontal" horizontalAlignment="left">
-                                    <Label text="Matricola: " color="white" />
+                                    <Label text="{{ L('_mat') }}" color="white" />
                                     <Label text="{{ matricola }}" color="orange"/>
                                 </StackLayout>
                                 <StackLayout orientation="horizontal" horizontalAlignment="left">
-                                    <Label text="Stato: " color="white"/>
+                                    <Label text="{{ L('status') }}" color="white"/>
                                     <Label text="{{ status }}" color="orange"/>
                                 </StackLayout>
                             </StackLayout>
@@ -30,7 +30,7 @@
             </StackLayout>
         </StackLayout>
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" width="100%" height="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Connessione..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{ L('login_activity') }}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
     </GridLayout>

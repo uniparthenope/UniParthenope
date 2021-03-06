@@ -12,7 +12,7 @@ function onShownModally(args) {
     context = args.context;
     closeCallback = args.closeCallback;
     const page = args.object;
-
+            //TODO Inserire traduzione da backend
             httpModule.request({
                 url: global.url_general + "Access/v1/covidStatementMessage",
                 method: "GET",
