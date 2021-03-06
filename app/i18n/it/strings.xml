@@ -5,8 +5,12 @@
 
     <string name="y">Si</string>
     <string name="n">No</string>
+    <string name="cancel">Annulla</string>
+
     <string name="success">Successo</string>
     <string name="warning">Attenzione</string>
+    <string name="error">Errore</string>
+
     <string name="semestre">Semestre</string>
     <string name="p_semestre">Primo Semestre</string>
     <string name="s_semestre">Secondo Semestre</string>
@@ -48,13 +52,21 @@
     <string name="nov">Nov</string>
     <string name="dic">Dic</string>
 
-
     <string name="welcome">Benvenuto!</string>
     <string name="version">Versione: </string>
     <string name="university">Universita degli studi di Napoli \"Parthenope\"</string>
 
     <!--ABOUT-->
     <string name="developer">Contatta gli sviluppatori</string>
+    <string name="contact">Contattaci</string>
+    <string name="dev_device">DISPOSITIVO UTILIZZATO:</string>
+    <string name="dev_adv">Contattaci</string>
+    <string name="dev_wrmsg">Scrivi messaggio ...</string>
+    <string name="dev_alert">(Non eliminare le seguenti informazioni)</string>
+
+    <string name="dev_mail">La funzione "Contatta gli Sviluppatori" permette di inviare un email al team che lavora alla progettazione e all implementazione di app@uniparthenope al fine di comunicare problemi tecnici relativi ad essa.
+        Per comunicazioni differenti si prega di rivolgersi alla propria segreteria di competenza
+        Grazie.</string>
     <string name="store_manager">Responsabile Mobile Store</string>
 
     <!--ACCESS -->
@@ -189,10 +201,131 @@
     <string name="transp_warn">La sezione trasporti è ancora in fase di sviluppo!
         Pertanto alcune funzionalità potrebbero essere limitate.</string>
 
+    <!--MODAL CORSI-->
+    <string name="cont">Contenuti</string>
+    <string name="obj">Obiettivi</string>
+    <string name="prereq">Prerequisiti</string>
+    <string name="verif">Verifica</string>
+    <string name="testi">Testi</string>
+    <string name="metod">Metodi</string>
+    <string name="altro">Altro</string>
 
+    <!--MODAL DOCENTE-->
+    <string name="office">Ufficio</string>
+    <string name="phone">Telefono</string>
+    <string name="note">Note</string>
+    <string name="bio">Biografia</string>
+    <string name="curr">Curriculum</string>
+    <string name="pubb">Pubblicazioni</string>
+    <string name="ricev">Ricevimento</string>
+    <string name="website">Sito Web</string>
 
+    <!--MODAL ESAME-->
+    <string name="btn_subscr">Prenotati</string>
+    <string name="btn_unsubscr">Disiscriviti</string>
+    <string name="book_date">Prenotato il: </string>
 
+    <!--MODAL LOGIN-->
+    <string name="sel_carrer">Selezionare una carriera:</string>
+    <string name="_mat">Matricola: </string>
+    <string name="status">Stato: </string>
+    <string name="login_activity">Connessione...</string>
+    <string name="failed_auth">Autenticazione Fallita!</string>
+    <string name="server_err">Errore Server ESSE3</string>
+    <string name="server_err_msg">Il server ESSE3 è momentaneamente non raggiungibile!</string>
+    <string name="moreinfo">Per maggiori info:</string>
 
+    <!--MODAL METEO-->
+    <string name="comune">Comune</string>
+    <string name="app_msg">Scarica gratuitamente la nostra app</string>
+    <string name="meteo_activity">Recupero Previsioni...</string>
 
+    <!--MODAL RICEVIMENTO-->
+    <string name="not_yet">Ricevimento non ancora implementato!</string>
+
+    <!--RISTORATORE ADD MENU-->
+
+    <string name="new_meal">Nuovo Pasto</string>
+    <string name="add_pic">Aggiungi Foto</string>
+    <string name="nm">Nome</string>
+    <string name="desc">Descrizione</string>
+    <string name="price">Prezzo</string>
+    <string name="flg_meal">Mostra pasto ogni giorno</string>
+    <string name="pub_btn">Pubblica</string>
+    <string name="offer">Offerta</string>
+    <string name="prim">Primo Pasto</string>
+    <string name="sec">Secondo Pasto</string>
+    <string name="contor">Contorno</string>
+    <string name="bib">Bibita</string>
+    <string name="confirm">Conferma</string>
+    <string name="pub_menu">Sicuro di voler pubblicare il menu?</string>
+    <string name="menu_pub">Menu Caricato!</string>
+    <string name="menu_pub_mess">Il nuovo menu è stato caricato con successo!</string>
+
+    <!--RISTORATORE MY MENU-->
+    <string name="mymen_tit">I Miei Menu</string>
+    <string name="type">Tipo</string>
+    <string name="men_insert">Inserito il: </string>
+    <string name="men_qst">Sicuro di voler eliminare l oggetto?</string>
+    <string name="men_canc">Menu Cancellato!</string>
+    <string name="men_ok">Il menu è stato cancellato con successo!</string>
+    <string name="men_no">Il menu non è stato cancellato con successo!</string>
+
+    <string name="anno">Anno</string>
+    <!-- STUDENTI -->
+
+    <!-- CORSI -->
+    <string name="my_courses_title">Miei Corsi</string>
+
+    <!-- LEZIONI -->
+    <string name="lectures_title">Lezioni</string>
+    <string name="no_lectures">Nessuna lezione trovata!</string>
+    <string name="activity_lectures">Ricerca Lezioni...</string>
+    <string name="reserved">PRENOTATO</string>
+    <string name="start_lectures">Inizio</string>
+    <string name="end_lectures">Fine</string>
+
+    <!-- LIBRETTO -->
+    <string name="libretto_medie">Medie</string>
+    <string name="libretto_voto">Voto</string>
+    <string name="libretto_nome">Nome</string>
+    <string name="libretto_cfu">CFU</string>
+    <string name="libretto_lode">LODE</string>
+
+    <!-- MIE PRENOTAZIONI -->
+    <string name="prenotazione_esami_title">Mie Prenotazioni</string>
+    <string name="prenotazione_esami_aula">Aula: </string>
+    <string name="prenotazione_esami_edificio">Edificio: </string>
+    <string name="prenotazione_esami_iscritti">Iscritti: </string>
+    <string name="activity_prenotazioni">Ricerca Prenotazioni...</string>
+
+    <!-- TASSE -->
+    <string name="taxes_title">Tasse</string>
+    <string name="taxes_status">Regolare</string>
+    <string name="taxes_history">Storico</string>
+    <string name="activity_taxes">Ricerca Tasse...</string>
+
+    <!-- TUTTI I CORSI -->
+    <string name="courses_title">Corsi</string>
+    <string name="courses_nome">Nome</string>
+    <string name="courses_cfu">CFU</string>
+
+    <!-- APPELLI -->
+    <string name="appelli_title">Appelli Disponibili</string>
+    <string name="appelli_start">Prenotazioni: da </string>
+    <string name="appelli_end"> a </string>
+    <string name="appelli_iscritti">Iscritti: </string>
+    <string name="activity_appelli">Recupero Esami...</string>
+
+    <!-- CALENDAR -->
+    <string name="calendar_title">La Mia Home</string>
+    <string name="activity_calendar_semestre">Recupero semestre...</string>
+    <string name="activity_calendar_exams">Recupero esami...</string>
+    <string name="activity_calendar">Recupero calendario...</string>
+    <string name="activity_calendar_info">Recupero informazioni...</string>
+
+    <!-- PROFESSORI -->
+    <string name="myprof_title">Miei Docenti</string>
+    <string name="activity_myprof">Recupero informazioni...</string>
 
 </resources>
