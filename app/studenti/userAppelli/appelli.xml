@@ -26,7 +26,7 @@
     <GridLayout>
         <GridLayout rows="auto,*">
             <GridLayout row="0" rows="auto,auto,auto" class="two-color-gradient" width="100%" verticalAlignment="top">
-                <Label row="0" class="textPrimary" text="Appelli Disponibili" horizontalAlignment="center" verticalAlignment="top" marginTop="10"/>
+                <Label row="0" class="textPrimary" text="{{ L('appelli_title') }}" horizontalAlignment="center" verticalAlignment="top" marginTop="10"/>
                 <Label row="1" class="textPrimary" id="sessione" fontSize="16" horizontalAlignment="center" verticalAlignment="center" marginTop="5"/>
                 <Label row="2" class="textPrimary" id="aa" horizontalAlignment="center" verticalAlignment="bottom" marginBottom="10" fontSize="12" marginTop="5"/>
             </GridLayout>
@@ -47,14 +47,14 @@
 
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">
                                         <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Prenotazioni: da " />
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ L('appelli_start') }}" />
                                             <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataInizio }}"/>
-                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text=" a " />
+                                            <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ L('appelli_end') }}" />
                                             <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ dataFine }}"/>
                                         </StackLayout>
                                     </StackLayout>
                                     <StackLayout orientation="horizontal" horizontalAlignment="center">
-                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="Iscritti: "/>
+                                        <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ L('appelli_iscritti') }}"/>
                                         <Label class="{{ classe }}"  borderWidth="0" fontSize="12" text="{{ iscritti }}"/>
                                     </StackLayout>
                                 </StackLayout>
@@ -65,7 +65,7 @@
         </GridLayout>
 
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero Esami..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{ L('activity_appelli') }}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
 

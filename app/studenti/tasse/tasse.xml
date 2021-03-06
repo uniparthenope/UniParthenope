@@ -25,17 +25,17 @@
     <GridLayout>
         <StackLayout horizontalAlignment="center" verticalAlignment="top">
             <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label class="textPrimary" text="Tasse" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label class="textPrimary" text="{{ L('taxes_title') }}" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
             <StackLayout>
 
                 <StackLayout id="background_title" verticalAlignment="top" class="rounded" height="30" backgroundColor="#808080" marginTop="10">
-                    <Label id="title" class="textPrimary" text="Regolare" horizontalAlignment="center" verticalAlignment="top"/>
+                    <Label id="title" class="textPrimary" text="{{ L('taxes_status') }}" horizontalAlignment="center" verticalAlignment="top"/>
                 </StackLayout>
 
                 <StackLayout height="90%" class="border" borderWidth="2" margin="10 10 10 10" verticalAlignment="top">
                     <GridLayout class="two-color-gradient" height="10%" width="100%">
-                        <Label class="textPrimary-bold" color="white" text="Storico" verticalAlignment="center" textAlignment="center"  />
+                        <Label class="textPrimary-bold" color="white" text="{{ L('taxes_history') }}" verticalAlignment="center" textAlignment="center"  />
 
                     </GridLayout>
 
@@ -61,7 +61,7 @@
 
         </StackLayout>
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero Tasse..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{ L('activity_taxes') }}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
     </GridLayout>

@@ -25,7 +25,7 @@
 
     <GridLayout>
         <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-            <Label class="textPrimary" text="Miei Docenti" horizontalAlignment="center" verticalAlignment="center"/>
+            <Label class="textPrimary" text="{{ L('myprof_title') }}" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
 
         <StackLayout height="90%" verticalAlignment="bottom">
@@ -48,7 +48,7 @@
             </ListView>
         </StackLayout>
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
-            <Label text="Recupero informazioni..." horizontalAlignment="center" class="textPrimary"/>
+            <Label text="{{ L('activity_myprof') }}" horizontalAlignment="center" class="textPrimary"/>
             <ActivityIndicator horizontalAlignment="center" busy="true"/>
         </StackLayout>
     </GridLayout>
