@@ -35,14 +35,14 @@
                 <Label id="no_lession" visibility="visible" android:fontSize="20" horizontalAlignment="center" verticalAlignment="center" margin="5 5 5 5" color="white" text="{{ L('no_lectures') }}"/>
 
                 <StackLayout verticalAlignment="top" margin="5 5 5 5" height="90%" borderRadius="15%" borderWidth="2" borderColor="white">
-                    <ListView id="lezioni_listview" class="list-group" items="{{ lezioni }}" itemTap="onItemTap" margin="5 5 5 5">
+                    <ListView id="lezioni_listview" class="list-group" items="{{ lezioni }}" itemTap="onItemTap" margin="5 5 5 5" height="100%">
                         <ListView.itemTemplate >
-                            <GridLayout rows="*,*,*,*" height="100%">
+                            <GridLayout rows="*,*,*,*" ios:backgroundColor="#1E3258">
                                 <GridLayout row="0" rows="auto,*" backgroundColor="#22384f" color="white" borderRadius="5%" padding="5 5 5 5">
                                     <GridLayout columns="auto,*,auto">
                                         <StackLayout col="0" orientation="vertical" horizontalAlignment="left">
-                                            <Label class="{{ classe }}" color="#107dd0" borderWidth="0" fontSize="12" horizontalAlignment="center" text="{{ L('start_lectures') }}" marginRight="5"/>
-                                            <Label class="{{ classe }}" color="#107dd0" borderWidth="0" fontSize="16" text="{{ start }}"/>
+                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" horizontalAlignment="center" text="{{ L('start_lectures') }}" marginRight="5"/>
+                                            <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ start }}"/>
                                         </StackLayout>
                                         <StackLayout col="1">
                                             <Label  borderWidth="0" text="{{ nome }}" width="95%" horizontalAlignment="center" textWrap="true" textAlignment="center"/>
@@ -51,14 +51,14 @@
                                         </StackLayout>
 
                                         <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
-                                            <Label class="{{ classe }}" color="#107dd0" borderWidth="0" fontSize="12" horizontalAlignment="center" text="{{ L('end_lectures') }}" marginRight="5"/>
-                                            <Label class="{{ classe }}" color="#107dd0" borderWidth="0" fontSize="16" text="{{ end }}"/>
+                                            <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" horizontalAlignment="center" text="{{ L('end_lectures') }}" marginRight="5"/>
+                                            <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ end }}"/>
                                         </StackLayout>
                                     </GridLayout>
 
-                                    <StackLayout row="1" orientation="horizontal" horizontalAlignment="center" height="100%">
+                                    <StackLayout row="1" orientation="horizontal" horizontalAlignment="center">
                                         <Label class="{{ classe }}" color="white" marginRight="10" borderWidth="0" fontSize="12" text="{{ room_place }}"/>
-                                        <Label class="{{ classe }}" color="white"  borderWidth="0" fontSize="12" text="{{ room }}"/>
+                                        <Label class="{{ classe }}" color="orange"  borderWidth="0" fontSize="12" text="{{ room }}"/>
                                     </StackLayout>
                                 </GridLayout>
 

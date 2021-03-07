@@ -11,12 +11,12 @@ let esamiList;
 
 function drawTitle() {
     if (appSettings.getString("aa_accad") !== undefined)
-        page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad") + " - " + (parseInt(appSettings.getString("aa_accad"))+1);
+        page.getViewById("aa").text = L('my_courses_aa') + appSettings.getString("aa_accad") + " - " + (parseInt(appSettings.getString("aa_accad"))+1);
 
     else
     {
         console.log("CORSI.AA_ACCAD = undefined (A.A non recuperato!)");
-        page.getViewById("aa").text = "A.A. Non Disponibile";
+        page.getViewById("aa").text = L('my_courses_aa_avail');
     }
 
     if (appSettings.getString("semestre") !== undefined)
@@ -24,7 +24,7 @@ function drawTitle() {
     else
     {
         console.log("CORSI.SEMESTRE = undefined (Semestre non recuperato!)");
-        page.getViewById("semestre").text = "Semestre Non Disponibile";
+        page.getViewById("semestre").text = L('my_courses_sem_avail');
     }
 }
 
@@ -48,7 +48,7 @@ function getCourses() {
     {
         let partizione = courses[i].domPartCod;
         if (partizione === '')
-            partizione = "UNICA";
+            partizione = L('my_courses_partition_value');
         //console.log(courses[i].tipo);
         if (courses[i].tipo === 'V')
             if (courses[i].esito === 'P' || courses[i].esito === 'F')
@@ -60,7 +60,7 @@ function getCourses() {
                     //"data_fine": " al " + courses[i].fine,
                     //"ult_mod": courses[i].modifica,
                     "adLogId": courses[i].adLogId,
-                    "partizione": "Partizione: " + partizione
+                    "partizione": L('my_courses_partition') + partizione
                 });
         //esamiList.refresh();
 

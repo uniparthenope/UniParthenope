@@ -15,7 +15,7 @@ let items_appelli;
 let loading;
 
 function drawTitle() {
-    page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad") + " - " + (parseInt(appSettings.getString("aa_accad"))+1);
+    page.getViewById("aa").text = L('my_courses_aa') + appSettings.getString("aa_accad") + " - " + (parseInt(appSettings.getString("aa_accad"))+1);
     page.getViewById("sessione").text = appSettings.getString("sessione");
 }
 
@@ -183,10 +183,10 @@ exports.onItemTap = function(args) {
     console.log("AdId: " + items_appelli.getItem(index).adId);
 
     dialogs.confirm({
-        title: "Prenotazione appello",
-        message: "Sicuro di voler cancellare la prenotazione?",
-        okButtonText: "Sì",
-        cancelButtonText: "No",
+        title: L('prenotazione_reservation'),
+        message: L('prenotazione_reservation_text'),
+        okButtonText: L('y'),
+        cancelButtonText: L('n'),
     }).then(function (result) {
         console.log(result);
 
@@ -208,8 +208,8 @@ exports.onItemTap = function(args) {
                     appSettings.setNumber("appelloBadge", global.myPrenotazioni.length);
 
                     dialogs.confirm({
-                        title: "Successo!",
-                        message: "Prenotazione Cancellata!",
+                        title: L('success'),
+                        message: L('prenotazione_cancellation_text'),
                         okButtonText: "OK"
                     }).then(function (result) {
                         const nav =
@@ -224,7 +224,7 @@ exports.onItemTap = function(args) {
 
                 else{
                     dialogs.alert({
-                        title: "Errore: Prenotazioni",
+                        title: L('lectures_error'),
                         message: result["errMsg"],
                         okButtonText: "OK"
                     });
@@ -233,7 +233,7 @@ exports.onItemTap = function(args) {
             }, error => {
                 console.error(error);
                 dialogs.alert({
-                    title: "Errore: Prenotazioni",
+                    title: L('lectures_error'),
                     message: error.toString(),
                     okButtonText: "OK"
                 });

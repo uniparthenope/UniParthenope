@@ -94,10 +94,10 @@ exports.onNavigatingTo = function(args) {
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
     dialogs.confirm({
-        title: "Attenzione",
-        message: "Questa funzione è in fase sperimentale pertanto richiedere diverso tempo per il completamento!\nContinuare comunque?",
-        okButtonText: "Si",
-        cancelButtonText: "No"
+        title: L('warning'),
+        message: L('myprof_alert'),
+        okButtonText: L('y'),
+        cancelButtonText: L('n')
     }).then(function (result) {
         if (result){
             getDocenti();

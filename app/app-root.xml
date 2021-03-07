@@ -17,7 +17,7 @@
                     <GridLayout rows="auto,auto,auto,auto" row="0" orientation="vertical" verticalAlignment="top" marginTop="5">
                         <Label row="0" id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" fontSize="12" marginBottom="5" horizontalAlignment="center"/>
                         <StackLayout row="1" class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="120" height="120"/>
-                        <Label row="2" id="topName" text="{{ L('welcome') }}" color="orange" fontSize="18" textWrap="true" horizontalAlignment="center" textAlignment="center"/>
+                        <Label row="2" id="topName" text="" color="orange" fontSize="18" textWrap="true" horizontalAlignment="center" textAlignment="center"/>
                         <Label row="3" id="topEmail" text="EMAIL!" visibility="collapsed" heigth="100%" textWrap="true" color="white" fontSize="11" horizontalAlignment="center" textAlignment="center"/>
                     </GridLayout>
                 </ios>
@@ -25,7 +25,7 @@
                     <GridLayout rows="auto,auto,auto,auto" row="0" orientation="vertical" verticalAlignment="top" marginTop="10">
                         <Label row="0" id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" marginBottom="5" fontSize="14" horizontalAlignment="center"/>
                         <StackLayout row="1" class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0"/>
-                        <Label row="2" id="topName" text="{{ L('welcome') }}" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>
+                        <Label row="2" id="topName" text="" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>
                         <Label row="3" id="topEmail" text="EMAIL!" visibility="collapsed" textWrap="true" color="white" marginBottom="5" fontSize="12" horizontalAlignment="center" textAlignment="center"/>
                     </GridLayout>
                 </android>
@@ -40,7 +40,7 @@
                         <TextField android:class="form-input" ios:class="ios-form-input" hint="Password" secure="true" id="password"/>
                         <cb:CheckBox checked="true" backgroundColor="#000000ff" text="Remember me" id="rememberMe" color="white" fillColor="white" marginTop="5" marginLeft="10"/>
                         <Button class="btn-menu" text="Login" marginBottom="5" marginTop="20" tap="onTapLogin"/>
-                        <Label text="Dimenticato account?" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10" ontap="ontap_account"/>
+                        <Label id="account" text="" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10" ontap="ontap_account"/>
 
                     </StackLayout>
 

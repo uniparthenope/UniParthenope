@@ -22,12 +22,10 @@ function onNavigatingTo(args) {
     });
 
     let title = page.getViewById("title");
-    let today = new Date();
-    let final_data = "" + dayOfWeek(today) + " " + today.getDate() + " " + monthOfYear(today.getMonth()) + " " + today.getFullYear();
 
     no_less = page.getViewById("no_lession");
     loading = page.getViewById("activityIndicator");
-    title.text = "Ricerca lezioni di " + final_data;
+    title.text = L('lectures_subtitle');
 
     sideDrawer = app.getRootView();
     sideDrawer.closeDrawer();
@@ -73,7 +71,7 @@ function getLectures(){
                 "end": ""+ end_data.getHours() + ":" + convertMinutes(end_data.getMinutes()),
                 "room": result[i].room.name,
                 "room_place": result[i].room.description,
-                "capacity": max_cap + " Posti",
+                "capacity": max_cap + L('lectures_places'),
                 "availability":rem_cap + "/",
                 "max_c" : max_cap,
                 "ava_c" : rem_cap,
@@ -93,7 +91,7 @@ function getLectures(){
     },(e) => {
         console.log("Error", e);
         dialogs.alert({
-            title: "Errore: prenotazioni",
+            title: L('lectures_error'),
             message: e.toString(),
             okButtonText: "OK"
         });
@@ -121,10 +119,10 @@ function onItemTap(args) {
 
     if(lez.isReserved){
         dialogs.confirm({
-            title: "Cancellazione posto",
-            message: "Sicuro di voler cancellare la prenotazione ad un posto?",
-            okButtonText: "Sì",
-            cancelButtonText: "No",
+            title: L('lectures_place_cancellation'),
+            message: L('lectures_place_cancellation_text'),
+            okButtonText: L('y'),
+            cancelButtonText: L('n'),
         }).then(function (result) {
             if (result){
                 httpModule.request({
@@ -140,7 +138,7 @@ function onItemTap(args) {
                     if (response.statusCode === 200){
                         global.updatedExam = false;
                         dialogs.alert({
-                            title: "Successo",
+                            title: L('success'),
                             message: result["status"],
                             okButtonText: "OK"
                         }).then(function (){
@@ -154,7 +152,7 @@ function onItemTap(args) {
                     }
                     else{
                         dialogs.alert({
-                            title: "Errore: Cancellazione Prenotazioni",
+                            title: L('lectures_error'),
                             message: result['message'],
                             okButtonText: "OK"
                         });
@@ -164,7 +162,7 @@ function onItemTap(args) {
                     console.log("QUI");
                     console.log("Error", e);
                     dialogs.alert({
-                        title: "Errore: Cancellazione prenotazioni",
+                        title: L('lectures_error'),
                         message: e.toString(),
                         okButtonText: "OK"
                     });
@@ -174,10 +172,10 @@ function onItemTap(args) {
     }
     else{
         dialogs.confirm({
-            title: "Prenotazione posto",
-            message: "Sicuro di voler prenotare un posto?",
-            okButtonText: "Sì",
-            cancelButtonText: "No",
+            title: L('lectures_place_reservation'),
+            message: L('lectures_place_reservation_text'),
+            okButtonText: L('y'),
+            cancelButtonText: L('n'),
         }).then(function (result) {
             console.log(result);
             if (result){
@@ -199,7 +197,7 @@ function onItemTap(args) {
 
                     if (response.statusCode === 200){
                         dialogs.alert({
-                            title: "Successo",
+                            title: L('success'),
                             message: result["status"],
                             okButtonText: "OK"
                         }).then(function (){
@@ -213,7 +211,7 @@ function onItemTap(args) {
                     }
                     else{
                         dialogs.alert({
-                            title: "Errore: Prenotazioni",
+                            title: L('lectures_error'),
                             message: result["errMsg"],
                             okButtonText: "OK"
                         });
@@ -222,7 +220,7 @@ function onItemTap(args) {
                 },(e) => {
                     console.log("Error", e);
                     dialogs.alert({
-                        title: "Errore: prenotazioni",
+                        title: L('lectures_error'),
                         message: e.toString(),
                         okButtonText: "OK"
                     });
@@ -238,17 +236,6 @@ exports.onGeneralMenu = onGeneralMenu;
 exports.onNavigatingTo = onNavigatingTo;
 exports.onDrawerButtonTap = onDrawerButtonTap;
 
-function dayOfWeek(date) {
-    date = date.getDay();
-    return isNaN(date) ? null : ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'][date];
-
-}
-
-function monthOfYear(date) {
-
-    return isNaN(date) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][date];
-
-}
 function convertMinutes(data) {
 
     if(data < 10)

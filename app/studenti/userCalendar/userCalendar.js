@@ -77,11 +77,11 @@ function calendarCourses() {
                 let reserved = "";
                 let reserved_by = "";
                 if(result[x].reservation.reserved){
-                    reserved = "[PRENOTATO] ";
+                    reserved = L('calendar_res');
                     if(result[x].reservation.reserved_by === appSettings.getString("userId"))
-                        reserved_by = "Prenotato da: me";
+                        reserved_by = L('calendar_res_me');
                     else
-                        reserved_by = "Prenotato da: "+result[x].reservation.reserved_by;
+                        reserved_by = L('calendar_res_by') + result[x].reservation.reserved_by;
                 }
 
                 color = new Color.Color(setColor(result[x].id_corso));
@@ -93,7 +93,7 @@ function calendarCourses() {
                 let tot_cap = Math.floor(result[x].room.capacity);
                 let av_cap =  tot_cap - Math.floor(result[x].room.availability);
 
-                let title = reserved + result[x].course_name + "_\n" + result[x].prof + "\n" + result[x].room.name +"\n Prenotati Aula: "+ av_cap + "/ "+tot_cap + "\n"+reserved_by;
+                let title = reserved + result[x].course_name + "_\n" + result[x].prof + "\n" + result[x].room.name +"\n" + L('calendar_res_room') + av_cap + "/ "+tot_cap + "\n"+reserved_by;
                 //let title = reserved + result[x].course_name + "\n" + result[x].prof + "\n" + result[x].room.name;
                 global.events.push({
                     title : title,
@@ -119,7 +119,7 @@ function calendarCourses() {
         let data_inizio = convertData(prenotazioni[x].dataEsa);
 
         global.events.push({
-            title : "[ESAME] "+ prenotazioni[x].nomeAppello,
+            title : L('calendar_exam') + prenotazioni[x].nomeAppello,
             data_inizio: data_inizio,
             data_fine: data_inizio,
             color: new Color.Color("#0F9851")
@@ -158,8 +158,8 @@ function getMainInfo() {
             appSettings.setString("aa_accad", result.aa_accad);
             appSettings.setString("sessione", result.curr_sem);
             appSettings.setString("semestre", result.semestre);
-            console.log("AA= "+ appSettings.getString("aa_accad"));
-            console.log("Semestre= "+ appSettings.getString("semestre"));
+            console.log(L('calendar_aa') + appSettings.getString("aa_accad"));
+            console.log(L('calendar_sem') + appSettings.getString("semestre"));
 
             page.getViewById("activityIndicator2").visibility = "visible";
 
@@ -261,8 +261,8 @@ function getAccesso(){
         else {
             if (result.accessType === "undefined"){
                 dialogs.confirm({
-                    title: "Attenzione",
-                    message: 'Bisogna scegliere la modalità con cui si intende frequentare i corsi del nuovo A.A!\n Accedere alla pagina "ACCESSO" dal menu laterale!',
+                    title: L('warning'),
+                    message: L('calendar_access'),
                     okButtonText: "OK"
                 });
             }

@@ -15,7 +15,7 @@ let loading;
 let num;
 
 function drawTitle() {
-    page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad") + " - " + (parseInt(appSettings.getString("aa_accad"))+1);
+    page.getViewById("aa").text = L('my_courses_aa') + appSettings.getString("aa_accad") + " - " + (parseInt(appSettings.getString("aa_accad"))+1);
     page.getViewById("sessione").text = appSettings.getString("sessione");
 }
 
@@ -25,13 +25,13 @@ function dayOfWeek(date) {
     let year = date.substring(6, 10);
 
     let dayOfWeek = new Date(year,month-1,day).getDay();
-    return isNaN(dayOfWeek) ? null : ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'][dayOfWeek];
+    return isNaN(dayOfWeek) ? null : [L('domenica'), L('lunedi'), L('martedi'), L('mercoledi'), L('giovedi'), L('venerdi'), L('sabato')][dayOfWeek];
 
 }
 
 function monthOfYear(date) {
     let month = parseInt(date.substring(3, 5)) - 1;
-    return isNaN(month) ? null : ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"][month];
+    return isNaN(month) ? null : [L('gen'), L('feb'), L('mar_m'), L('apr'), L('mag'), L('giu'), L('lug'), L('ago'), L('set'), L('ott'), L('nov'), L('dic')][month];
 
 }
 
@@ -176,10 +176,10 @@ exports.onItemTap = function(args) {
     let appId = items_appelli.getItem(index).appId;
 
     dialogs.confirm({
-        title: "Prenotazione appello",
-        message: "Sicuro di volerti prenotare a questo appello?",
-        okButtonText: "Sì",
-        cancelButtonText: "No",
+        title: L('prenotazione_reservation'),
+        message: L('appelli_reservation_text'),
+        okButtonText: L('y'),
+        cancelButtonText: L('n'),
     }).then(function (result) {
 
         if(result){
@@ -200,8 +200,8 @@ exports.onItemTap = function(args) {
                 let message;
                 if (response.statusCode === 201){
                     dialogs.confirm({
-                        title: "Successo!",
-                        message: "Prenotazione Effettuata",
+                        title: L('success'),
+                        message: L('appelli_message'),
                         okButtonText: "OK"
                     }).then(function (result) {
                         global.updatedExam = false;

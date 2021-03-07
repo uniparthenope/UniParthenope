@@ -13,7 +13,7 @@ let items_appello;
 let loading;
 
 function drawTitle() {
-    page.getViewById("aa").text = "A.A. " + appSettings.getString("aa_accad");
+    page.getViewById("aa").text = L('my_courses_aa') + appSettings.getString("aa_accad");
     page.getViewById("sessione").text = appSettings.getString("sessione");
 }
 

@@ -28,15 +28,15 @@ function getTaxes() {
 
 
             if (_response["semaforo"] === "GIALLO"){
-                page.getViewById("title").text = "Da Pagare";
+                page.getViewById("title").text = L('taxes_topay');
                 page.getViewById("background_title").backgroundColor = "orange";
             }
             else if (_response["semaforo"] === "ROSSO"){
-                page.getViewById("title").text = "Scadute";
+                page.getViewById("title").text = L('taxes_expired');
                 page.getViewById("background_title").backgroundColor = "red";
             }
             else {
-                page.getViewById("title").text = "Regolare";
+                page.getViewById("title").text = L('taxes_regular');
                 page.getViewById("background_title").backgroundColor = "green";
             }
 
@@ -46,7 +46,7 @@ function getTaxes() {
                     "data": _response["to_pay"][i].scadFattura,
                     "desc": _response["to_pay"][i].desc,
                     "importo":  _response["to_pay"][i].importo,
-                    "fatt_id": "Cod.Fattura " + _response["to_pay"][i].fattId,
+                    "fatt_id": L('taxes_code') + _response["to_pay"][i].fattId,
                     "iur_iuv": "IUV " + _response["to_pay"][i].iuv,
                     "col": "color-yellow"
                 });
@@ -54,7 +54,7 @@ function getTaxes() {
             }
             for (let i=0; i<_response["payed"].length; i++) {
                 if (_response["payed"][i].iur === null)
-                    cod = "N.Bollettino " + _response["payed"][i].nBollettino;
+                    cod = L('taxes_postal') + _response["payed"][i].nBollettino;
                 else
                     cod = "IUR " + _response["payed"][i].iur;
 
@@ -62,7 +62,7 @@ function getTaxes() {
                     "data": _response["payed"][i].dataPagamento,
                     "desc": _response["payed"][i].desc,
                     "importo": _response["payed"][i].importo,
-                    "fatt_id": "Cod.Fattura " + _response["payed"][i].fattId,
+                    "fatt_id": L('taxes_code') + _response["payed"][i].fattId,
                     "iur_iuv": cod,
                     "col": "color-grey"
                 });
