@@ -107,7 +107,7 @@
 
     <!--PRENOTAZIONE SERVIZI -->
     <string name="pren_title">Prenotazione Servizi</string>
-    <string name="select_depart">Selezionare un dipartimento dall elenco:</string>
+    <string name="select_depart">Selezionare un edificio dall elenco:</string>
     <string name="select_serv">Selezionare un servizio a cui prenotarsi:</string>
     <string name="no_serv">Nessun Servizio Trovato!</string>
     <string name="start">Inizio: </string>
@@ -360,5 +360,35 @@
     <string name="activity_myprof">Recupero informazioni...</string>
     <string name="myprof_alert">Questa funzione è in fase sperimentale pertanto richiedere diverso tempo per il completamento!
         Continuare comunque?</string>
+
+    <!-- MENU LATERALE -->
+    <string name="forg_pwd">Password Dimenticata?</string>
+    <string name="st_my">Mia Home</string>
+    <string name="st_acc">Accesso</string>
+    <string name="st_anag">Anagrafica</string>
+    <string name="st_tax">Tasse</string>
+    <string name="st_cor">Corsi</string>
+    <string name="st_app">Appelli</string>
+    <string name="st_prof">Professori</string>
+
+    <string name="pr_my">Mia Home</string>
+    <string name="pr_acc">Accesso</string>
+    <string name="pr_anag">Anagrafica</string>
+
+    <string name="ris_men">Miei Menu</string>
+    <string name="ris_acc">Accesso</string>
+    <string name="ris_anag">Anagrafica</string>
+    <string name="ris_new">Nuovo Pasto</string>
+
+    <string name="oth_my">Mia Home</string>
+    <string name="oth_acc">Accesso</string>
+
+    <string name="btn_info">Info</string>
+    <string name="btn_set">Impostazioni</string>
+
+    <string name="rememberMe">Ricordami</string>
+
+
+
 
 </resources>

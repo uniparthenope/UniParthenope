@@ -54,14 +54,14 @@
     <string name="university">University of Studies of Naples \"Parthenope\"</string>
 
     <!--ABOUT-->
-    <string name="developer">Contact the App Developers</string>
+    <string name="developer">Contact Developers</string>
     <string name="store_manager">Mobile Store Manager</string>
 
     <!--ACCESS -->
     <string name="access_title">Access</string>
     <string name="access_loading">Retrieving Access</string>
     <string name="autocert">Mandatory Self-Certification</string>
-    <string name="string_corsi">I inted to attend the first semester classes for the academic year 2020/2021:</string>
+    <string name="string_corsi">I intend to attend the first semester classes for the academic year 2020/2021:</string>
     <string name="access_warning">Warning: You have not yet selected a learning delivery modality!</string>
     <string name="distance">Online</string>
     <string name="presence">In Presence</string>
@@ -70,6 +70,33 @@
     <string name="btn_servizi">Book Services</string>
     <string name="btn_history">History of Accesses</string>
     <string name="access_mess">In order to save the type of access IN PRESENCE, you must first accept Mandatory Self-Certification!</string>
+
+    <!-- MENU LATERALE -->
+    <string name="forg_pwd">Forgot Password?</string>
+    <string name="st_my">My Home</string>
+    <string name="st_acc">Access</string>
+    <string name="st_anag">Personal Data</string>
+    <string name="st_tax">Taxes</string>
+    <string name="st_cor">Courses</string>
+    <string name="st_app">Exams</string>
+    <string name="st_prof">Professors</string>
+
+    <string name="pr_my">My Home</string>
+    <string name="pr_acc">Access</string>
+    <string name="pr_anag">Personal Data</string>
+
+    <string name="ris_men">My Menu</string>
+    <string name="ris_acc">Access</string>
+    <string name="ris_anag">Personal Data</string>
+    <string name="ris_new">New Meal</string>
+
+    <string name="oth_my">My Home</string>
+    <string name="oth_acc">Access</string>
+
+    <string name="btn_info">Info</string>
+    <string name="btn_set">Settings</string>
+
+    <string name="rememberMe">Remember Me</string>
 
 
     <!--ANAGRAFICA -->
@@ -95,9 +122,9 @@
 
     <!--PRENOTAZIONE SERVIZI -->
     <string name="pren_title">Book Services</string>
-    <string name="select_depart">Select a Department from the list:</string>
+    <string name="select_depart">Select a building from the list:</string>
     <string name="select_serv">Select a service to book:</string>
-    <string name="no_serv">Service not found!</string>
+    <string name="no_serv">No services found!</string>
     <string name="start">Start: </string>
     <string name="end">End: </string>
     <string name="book">BOOKED</string>
@@ -214,8 +241,8 @@
 
     <!--MODAL LOGIN-->
     <string name="sel_carrer">Select a career:</string>
-    <string name="_mat">Identification Number: </string>
-    <string name="status">Status: </string>
+    <string name="_mat">ID : </string>
+    <string name="status">Status : </string>
     <string name="login_activity">Connecting...</string>
     <string name="failed_auth">Authentication failed!</string>
     <string name="server_err">ESSE3 Server Error</string>
