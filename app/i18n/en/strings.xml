@@ -261,6 +261,11 @@
     <string name="anno">Year</string>
     <!-- CORSI -->
     <string name="my_courses_title">My courses</string>
+    <string name="my_courses_aa">A.Y. </string>
+    <string name="my_courses_aa_avail">A.Y. Not Available</string>
+    <string name="my_courses_sem_avail">Semester Not Available</string>
+    <string name="my_courses_partition">Partition: </string>
+    <string name="my_courses_partition_value">SINGLE</string>
 
     <!-- LEZIONI -->
     <string name="lectures_title">Lessons</string>
@@ -269,6 +274,13 @@
     <string name="reserved">RESERVED</string>
     <string name="start_lectures">Begin</string>
     <string name="end_lectures">End</string>
+    <string name="lectures_subtitle">Search for next lessons 24H</string>
+    <string name="lectures_places"> Seats</string>
+    <string name="lectures_error">Error: reservations</string>
+    <string name="lectures_place_cancellation">Seat cancellation</string>
+    <string name="lectures_place_cancellation_text">Are you sure you want to cancel your seat reservation?</string>
+    <string name="lectures_place_reservation">Seat reservation</string>
+    <string name="lectures_place_reservation_text">Are you sure you want to reserve a seat?</string>
 
     <!-- LIBRETTO -->
     <string name="libretto_medie">Averages</string>
@@ -283,12 +295,20 @@
     <string name="prenotazione_esami_edificio">Building: </string>
     <string name="prenotazione_esami_iscritti">Subscribers: </string>
     <string name="activity_prenotazioni">Retrieving reservations...</string>
+    <string name="prenotazione_reservation">Exam Booking</string>
+    <string name="prenotazione_reservation_text">Are you sure you want to cancel your reservation?</string>
+    <string name="prenotazione_cancellation_text">Booking cancelled!</string>
 
     <!-- TASSE -->
     <string name="taxes_title">Taxes</string>
     <string name="taxes_status">Regular</string>
     <string name="taxes_history">History</string>
     <string name="activity_taxes">Retrieving taxes...</string>
+    <string name="taxes_topay">To Pay</string>
+    <string name="taxes_expired">Expired</string>
+    <string name="taxes_regular">Regular</string>
+    <string name="taxes_code">Invoice Code </string>
+    <string name="taxes_postal">Postal Number  </string>
 
     <!-- TUTTI I CORSI -->
     <string name="courses_title">Courses</string>
@@ -301,6 +321,8 @@
     <string name="appelli_end"> to </string>
     <string name="appelli_iscritti">Subscribers: </string>
     <string name="activity_appelli">Retrieving exams...</string>
+    <string name="appelli_reservation_text">Are you sure you want to book this session?</string>
+    <string name="appelli_message">Reservation Done</string>
 
     <!-- CALENDAR -->
     <string name="calendar_title">My Homepage</string>
@@ -308,10 +330,20 @@
     <string name="activity_calendar_exams">Retrieving exams...</string>
     <string name="activity_calendar">Retrieving calendar...</string>
     <string name="activity_calendar_info">Retrieving informations...</string>
+    <string name="calendar_res">[RESERVED] </string>
+    <string name="calendar_res_me">Booked by: me</string>
+    <string name="calendar_res_by">Booked by </string>
+    <string name="calendar_res_room">Booked in the class</string>
+    <string name="calendar_exam">[EXAM] </string>
+    <string name="calendar_aa">AY= </string>
+    <string name="calendar_sem">Semester= </string>
+    <string name="calendar_access">You have to choose the way in which you intend to attend the courses of the new A.A!
+        Access the \"ACCESS\" page from the side menu!</string>
 
     <!-- PROFESSORI -->
     <string name="myprof_title">My Professors</string>
     <string name="activity_myprof">Retrieving informations...</string>
-
+    <string name="myprof_alert">This feature is in an experimental phase so it may take some time to complete!
+        Continue anyway?</string>
 
 </resources>

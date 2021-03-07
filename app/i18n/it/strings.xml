@@ -64,7 +64,7 @@
     <string name="dev_wrmsg">Scrivi messaggio ...</string>
     <string name="dev_alert">(Non eliminare le seguenti informazioni)</string>
 
-    <string name="dev_mail">La funzione "Contatta gli Sviluppatori" permette di inviare un email al team che lavora alla progettazione e all implementazione di app@uniparthenope al fine di comunicare problemi tecnici relativi ad essa.
+    <string name="dev_mail">La funzione \"Contatta gli Sviluppatori\" permette di inviare un email al team che lavora alla progettazione e all implementazione di app@uniparthenope al fine di comunicare problemi tecnici relativi ad essa.
         Per comunicazioni differenti si prega di rivolgersi alla propria segreteria di competenza
         Grazie.</string>
     <string name="store_manager">Responsabile Mobile Store</string>
@@ -276,6 +276,11 @@
 
     <!-- CORSI -->
     <string name="my_courses_title">Miei Corsi</string>
+    <string name="my_courses_aa">A.A. </string>
+    <string name="my_courses_aa_avail">A.A. Non Disponibile</string>
+    <string name="my_courses_sem_avail">Semestre Non Disponibile</string>
+    <string name="my_courses_partition">Partizione: </string>
+    <string name="my_courses_partition_value">UNICA</string>
 
     <!-- LEZIONI -->
     <string name="lectures_title">Lezioni</string>
@@ -284,6 +289,13 @@
     <string name="reserved">PRENOTATO</string>
     <string name="start_lectures">Inizio</string>
     <string name="end_lectures">Fine</string>
+    <string name="lectures_subtitle">Ricerca lezioni prossime 24H</string>
+    <string name="lectures_places"> Posti</string>
+    <string name="lectures_error">Errore: prenotazioni</string>
+    <string name="lectures_place_cancellation">Cancellazione posto</string>
+    <string name="lectures_place_cancellation_text">Sicuro di voler cancellare la prenotazione ad un posto?</string>
+    <string name="lectures_place_reservation">Prenotazione posto</string>
+    <string name="lectures_place_reservation_text">Sicuro di voler prenotare un posto?</string>
 
     <!-- LIBRETTO -->
     <string name="libretto_medie">Medie</string>
@@ -298,12 +310,20 @@
     <string name="prenotazione_esami_edificio">Edificio: </string>
     <string name="prenotazione_esami_iscritti">Iscritti: </string>
     <string name="activity_prenotazioni">Ricerca Prenotazioni...</string>
+    <string name="prenotazione_reservation">Prenotazione appello</string>
+    <string name="prenotazione_reservation_text">Sicuro di voler cancellare la prenotazione?</string>
+    <string name="prenotazione_cancellation_text">Prenotazione Cancellata!</string>
 
     <!-- TASSE -->
     <string name="taxes_title">Tasse</string>
     <string name="taxes_status">Regolare</string>
     <string name="taxes_history">Storico</string>
     <string name="activity_taxes">Ricerca Tasse...</string>
+    <string name="taxes_topay">Da Pagare</string>
+    <string name="taxes_expired">Scadute</string>
+    <string name="taxes_regular">Regolare</string>
+    <string name="taxes_code">Cod.Fattura </string>
+    <string name="taxes_postal">N.Bollettino  </string>
 
     <!-- TUTTI I CORSI -->
     <string name="courses_title">Corsi</string>
@@ -316,6 +336,8 @@
     <string name="appelli_end"> a </string>
     <string name="appelli_iscritti">Iscritti: </string>
     <string name="activity_appelli">Recupero Esami...</string>
+    <string name="appelli_reservation_text">Sicuro di volerti prenotare a questo appello?</string>
+    <string name="appelli_message">Prenotazione Effettuata</string>
 
     <!-- CALENDAR -->
     <string name="calendar_title">La Mia Home</string>
@@ -323,9 +345,20 @@
     <string name="activity_calendar_exams">Recupero esami...</string>
     <string name="activity_calendar">Recupero calendario...</string>
     <string name="activity_calendar_info">Recupero informazioni...</string>
+    <string name="calendar_res">[PRENOTATO] </string>
+    <string name="calendar_res_me">Prenotato da: me</string>
+    <string name="calendar_res_by">Prenotato da </string>
+    <string name="calendar_res_room">Prenotati Aula</string>
+    <string name="calendar_exam">[ESAME] </string>
+    <string name="calendar_aa">AA= </string>
+    <string name="calendar_sem">Semestre= </string>
+    <string name="calendar_access">Bisogna scegliere la modalità con cui si intende frequentare i corsi del nuovo A.A!
+        Accedere alla pagina \"ACCESSO\" dal menu laterale!</string>
 
     <!-- PROFESSORI -->
     <string name="myprof_title">Miei Docenti</string>
     <string name="activity_myprof">Recupero informazioni...</string>
+    <string name="myprof_alert">Questa funzione è in fase sperimentale pertanto richiedere diverso tempo per il completamento!
+        Continuare comunque?</string>
 
 </resources>
