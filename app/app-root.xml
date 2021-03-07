@@ -17,7 +17,7 @@
                     <GridLayout rows="auto,auto,auto,auto" row="0" orientation="vertical" verticalAlignment="top" marginTop="5">
                         <Label row="0" id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" fontSize="12" marginBottom="5" horizontalAlignment="center"/>
                         <StackLayout row="1" class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="120" height="120"/>
-                        <Label row="2" id="topName" text="{{ L('welcome') }}" color="orange" fontSize="18" textWrap="true" horizontalAlignment="center" textAlignment="center"/>
+                        <Label row="2" id="topName" text="Welcome!" color="orange" fontSize="18" textWrap="true" horizontalAlignment="center" textAlignment="center"/>
                         <Label row="3" id="topEmail" text="EMAIL!" visibility="collapsed" heigth="100%" textWrap="true" color="white" fontSize="11" horizontalAlignment="center" textAlignment="center"/>
                     </GridLayout>
                 </ios>
@@ -25,7 +25,7 @@
                     <GridLayout rows="auto,auto,auto,auto" row="0" orientation="vertical" verticalAlignment="top" marginTop="10">
                         <Label row="0" id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" marginBottom="5" fontSize="14" horizontalAlignment="center"/>
                         <StackLayout row="1" class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0"/>
-                        <Label row="2" id="topName" text="{{ L('welcome') }}" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>
+                        <Label row="2" id="topName" text="Welcome!" color="white" marginBottom="5" fontSize="18" horizontalAlignment="center"/>
                         <Label row="3" id="topEmail" text="EMAIL!" visibility="collapsed" textWrap="true" color="white" marginBottom="5" fontSize="12" horizontalAlignment="center" textAlignment="center"/>
                     </GridLayout>
                 </android>
@@ -40,53 +40,53 @@
                         <TextField android:class="form-input" ios:class="ios-form-input" hint="Password" secure="true" id="password"/>
                         <cb:CheckBox checked="true" backgroundColor="#000000ff" text="Remember me" id="rememberMe" color="white" fillColor="white" marginTop="5" marginLeft="10"/>
                         <Button class="btn-menu" text="Login" marginBottom="5" marginTop="20" tap="onTapLogin"/>
-                        <Label text="Dimenticato account?" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10" ontap="ontap_account"/>
+                        <Label id="forg_acc" text="Dimenticato account?" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10" ontap="ontap_account"/>
 
                     </StackLayout>
 
                     <!--     Studente       -->
                     <StackLayout id="userForm" visibility="collapsed">
 
-                        <Button class="btn-menu" text="Mia Home" marginBottom="5" marginTop="20" tap="goto_home"/>
+                        <Button id="st_my" class="btn-menu" text="Mia Home" marginBottom="5" marginTop="20" tap="goto_home"/>
                         <Button class="btn-menu btn" id="badge_button" text="Student Card" marginBottom="5" marginTop="5" tap="goto_badge" color="#1E3258"/>
-                        <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
-                        <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
+                        <Button id="st_acc" class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
+                        <Button id="st_anag" class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
 
-                        <Button class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>
-                        <Button class="btn-menu" text="Corsi" marginBottom="5" marginTop="5" tap="goto_corsi"/>
-                        <Button class="btn-menu" text="Appelli" marginBottom="5" marginTop="5" tap="goto_appelli"/>
-                        <Button class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap="goto_docenti"/>
+                        <Button id="st_tax" class="btn-menu" text="Tasse" marginBottom="5" marginTop="5" tap="goto_taxes"/>
+                        <Button id="st_cor" class="btn-menu" text="Corsi" marginBottom="5" marginTop="5" tap="goto_corsi"/>
+                        <Button id="st_app" class="btn-menu" text="Appelli" marginBottom="5" marginTop="5" tap="goto_appelli"/>
+                        <Button id="st_prof" class="btn-menu" text="Professori" marginBottom="5" marginTop="5" tap="goto_docenti"/>
 
                     </StackLayout>
                     <!--     Docente       -->
 
                     <StackLayout id="userDocente" visibility="collapsed">
 
-                        <Button class="btn-menu" text="Mia Home" marginBottom="5" marginTop="20" tap="goto_professor_home"/>
+                        <Button id="pr_my" class="btn-menu" text="Mia Home" marginBottom="5" marginTop="20" tap="goto_professor_home"/>
                         <Button class="btn-menu btn" color="#1E3258" id="badge_button_docente" text="Faculty Card" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
-                        <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
-                        <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
+                        <Button id="pr_acc" class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
+                        <Button id="pr_anag" class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
                     </StackLayout>
 
                     <!--     Ristoratore       -->
                     <StackLayout id="userRistoratore" visibility="collapsed">
 
-                        <Button class="btn-menu" text="Miei Menu" marginBottom="5" marginTop="20" tap="goto_menuList"/>
+                        <Button id="ris_men" class="btn-menu" text="Miei Menu" marginBottom="5" marginTop="20" tap="goto_menuList"/>
                         <Button class="btn-menu btn" color="#1E3258" id="badge_button_risto" text="Staff Card" marginBottom="5" marginTop="5" tap="goto_badge"/>
-                        <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
-                        <Button class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
+                        <Button id="ris_acc" class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
+                        <Button id="ris_anag" class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
 
-                        <Button class="btn-menu" text="Nuovo Pasto" marginBottom="5" marginTop="5" tap="goto_menuNew"/>
+                        <Button id="ris_new" class="btn-menu" text="Nuovo Pasto" marginBottom="5" marginTop="5" tap="goto_menuNew"/>
 
                     </StackLayout>
 
                         <!--     Altri User       -->
                         <StackLayout id="userOther" visibility="collapsed">
-                            <Button class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_home_public"/>
+                            <Button id="oth_my" class="btn-menu" text="Home" marginBottom="5" marginTop="20" tap="goto_home_public"/>
                             <Button class="btn-menu btn" color="#1E3258" id="badge_button_other" text="UniParthenope Card" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
-                            <Button class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
+                            <Button id="oth_acc" class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
 
                         </StackLayout>
                     </GridLayout>
@@ -98,9 +98,9 @@
             <StackLayout row="1" verticalAlignment="bottom" width="100%" padding="10 10 0 10" >
                 <StackLayout backgroundColor="white" height="1" margin="10 5 10 5"/>
 
-                <Button class="btn" text="Info" marginBottom="5" tap="goto_about"/>
+                <Button id="btn_info" class="btn" text="Info" marginBottom="5" tap="goto_about"/>
 
-                <Button class="btn" text="Settings" marginBottom="5" tap="goto_settings"/>
+                <Button id="btn_set" class="btn" text="Settings" marginBottom="5" tap="goto_settings"/>
 
                 <Label id="version" fontSize="11" textAlignment="center" horizontalAlignment="center" color="white" text="v.--"/>
             </StackLayout>

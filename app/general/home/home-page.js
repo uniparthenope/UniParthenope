@@ -9,6 +9,7 @@ let appversion = require("nativescript-appversion");
 const modalViewModule = "modal/modal-meteo/modal-meteo";
 const appRater = require("nativescript-rater").appRater;
 let firebase = require("nativescript-plugin-firebase");
+const platformModule = require("tns-core-modules/platform");
 const ObservableArray = require("tns-core-modules/data/observable-array").ObservableArray;
 
 
@@ -572,6 +573,37 @@ function autoconnect(flag) {
     }
 }
 
+function translateSide(){
+    let sd = app.getRootView();
+
+    sd.getViewById("forg_acc").text = L('forg_pwd');
+    sd.getViewById("rememberMe").text = L('rememberMe');
+
+//STUDENTI
+    sd.getViewById("st_my").text = L('st_my');
+    sd.getViewById("st_acc").text = L('st_acc');
+    sd.getViewById("st_cor").text = L('st_cor');
+    sd.getViewById("st_anag").text = L('st_anag');
+    sd.getViewById("st_tax").text = L('st_tax');
+    sd.getViewById("st_app").text = L('st_app');
+    sd.getViewById("st_prof").text = L('st_prof');
+    //DOCENTI
+    sd.getViewById("pr_my").text = L('pr_my');
+    sd.getViewById("pr_acc").text = L('pr_acc');
+    sd.getViewById("pr_anag").text = L('pr_anag');
+
+    sd.getViewById("ris_men").text = L('ris_men');
+    sd.getViewById("ris_acc").text = L('ris_acc');
+    sd.getViewById("ris_anag").text = L('ris_anag');
+    sd.getViewById("ris_new").text = L('ris_new');
+
+    sd.getViewById("oth_my").text = L('oth_my');
+    sd.getViewById("oth_acc").text = L('oth_acc');
+
+    sd.getViewById("btn_info").text = L('btn_info');
+    sd.getViewById("btn_set").text = L('btn_set');
+}
+
 exports.onNavigatingTo = function (args) {
     page = args.object;
 
@@ -582,6 +614,7 @@ exports.onNavigatingTo = function (args) {
     indicator = page.getViewById("activityIndicator");
 
     rateApp();
+    translateSide();
 
     //Subscribe to ALL NEWS only the first time
     if(appSettings.getBoolean("subscribe_newsALL",true)){
