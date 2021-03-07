@@ -302,6 +302,7 @@ application.on(application.launchEvent, (args) => {
         // For iOS applications, args.ios is NSDictionary (launchOptions).
         console.log("Launched iOS application with options: " + args.ios);
     }
+
 });
 
 
