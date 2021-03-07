@@ -357,8 +357,6 @@ exports.onNavigatingTo = function (args) {
         getMainInfo();
         getAccesso();
         getPrenotazioni();
-
-
     }
     else {
         insert_event();
@@ -424,6 +422,9 @@ exports.onDaySelected = function(args){
 
 exports.tap_reload = function(){
     global.updatedExam = false;
+
+    global.myExams = [];
+    global.myPrenotazioni = [];
 
     const nav =
         {
