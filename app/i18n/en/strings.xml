@@ -3,19 +3,315 @@
     <string name="app_name">app@Uniparthenope</string>
     <string name="title_activity_kimera">app@Uniparthenope</string>
 
+    <string name="y">Yes</string>
+    <string name="n">No</string>
+    <string name="success">Success</string>
+    <string name="warning">Warning</string>
+    <string name="semestre">Semester</string>
+    <string name="p_semestre">First Semester</string>
+    <string name="s_semestre">Second Semester</string>
+
+    <string name="insegnamento">Course</string>
+    <string name="session">Session</string>
+    <string name="subscribed">Registrations: </string>
+    <string name="sub_from">Registration deadlines: from </string>
+    <string name="sub_to"> to </string>
+    <string name="_exam">[EXAM]</string>
+
+
+    <string name="lunedi">Monday</string>
+    <string name="martedi">Tuesday</string>
+    <string name="mercoledi">Wednesday</string>
+    <string name="giovedi">Thursday</string>
+    <string name="venerdi">Friday</string>
+    <string name="sabato">Saturday</string>
+    <string name="domenica">Sunday</string>
+
+    <string name="lun">Mon</string>
+    <string name="mar_d">Tue</string>
+    <string name="mer">Wed</string>
+    <string name="gio">Thu</string>
+    <string name="ven">Fri</string>
+    <string name="sab">Sat</string>
+    <string name="dom">Sun</string>
+
+    <string name="gen">Jan</string>
+    <string name="feb">Feb</string>
+    <string name="mar_m">Mar</string>
+    <string name="apr">Apr</string>
+    <string name="mag">May</string>
+    <string name="giu">Jun</string>
+    <string name="lug">Jul</string>
+    <string name="ago">Ago</string>
+    <string name="set">Sep</string>
+    <string name="ott">Oct</string>
+    <string name="nov">Nov</string>
+    <string name="dic">Dec</string>
+
+
     <string name="welcome">Welcome!</string>
     <string name="version">Version: </string>
     <string name="university">University of Studies of Naples \"Parthenope\"</string>
-    <string name="developer">Contact developers</string>
+
+    <!--ABOUT-->
+    <string name="developer">Contact the App Developers</string>
     <string name="store_manager">Mobile Store Manager</string>
 
-    <!--MENU LATERALE -->
-    <string name="settings_btn">Settings</string>
-    <string name="info_btn">Settings</string>
     <!--ACCESS -->
+    <string name="access_title">Access</string>
+    <string name="access_loading">Retrieving Access</string>
     <string name="autocert">Mandatory Self-Certification</string>
-    <string name="string_corsi">Mandatory Self-Certification</string>
+    <string name="string_corsi">I inted to attend the first semester classes for the academic year 2020/2021:</string>
+    <string name="access_warning">Warning: You have not yet selected a learning delivery modality!</string>
+    <string name="distance">Online</string>
+    <string name="presence">In Presence</string>
+    <string name="not_def">Not Defined</string>
+    <string name="btn_prenotazioni">Book Rooms</string>
+    <string name="btn_servizi">Book Services</string>
+    <string name="btn_history">History of Accesses</string>
+    <string name="access_mess">In order to save the type of access IN PRESENCE, you must first accept Mandatory Self-Certification!</string>
 
+
+    <!--ANAGRAFICA -->
+    <string name="anagrafica_title">Personal Data</string>
+    <string name="matr_normal">ID</string>
+    <string name="matr_services">RESTAURANT NAME</string>
+    <string name="ruolo">ROLE</string>
+    <string name="nascita">DATE OF BIRTH</string>
+    <string name="sex">GENDER</string>
+
+    <!--BADGE -->
+    <string name="badge_title">UniParthenope Card</string>
+    <string name="zoom_text">Duble-click on QR-Code to zoom</string>
+    <string name="activity_badge">Generating QR-Code...</string>
+    <string name="barcode_cancel_scan">Scan QR-Code for more information.</string>
+    <string name="barcode_success">SCANNED</string>
+    <string name="dialog_titleinfo">Request Information</string>
+
+    <!--HISTORY -->
+    <string name="history_title">History of Accesses</string>
+    <string name="activity_history">Retrieving History of Accesses...</string>
+    <string name="authorized">Authorized</string>
+
+    <!--PRENOTAZIONE SERVIZI -->
+    <string name="pren_title">Book Services</string>
+    <string name="select_depart">Select a Department from the list:</string>
+    <string name="select_serv">Select a service to book:</string>
+    <string name="no_serv">Service not found!</string>
+    <string name="start">Start: </string>
+    <string name="end">End: </string>
+    <string name="book">BOOKED</string>
+    <string name="activity_servic">Searching Services...</string>
+    <string name="places">Seats</string>
+    <string name="rmv_book_title">Delete seat reservation</string>
+    <string name="rmv_book">Are you sure you want to delete your seat reservation?</string>
+    <string name="book_title">Reserve a seat</string>
+    <string name="book_pl">Are you sure you want to reserve a seat?</string>
+
+    <!--DOCENTI APPELLI -->
+    <string name="doc_app_title">Exam Sessions</string>
+    <string name="doc_app_activity">Retrieving Exams...</string>
+
+    <!--DOCENTI CORSI -->
+    <string name="doc_course_title">My Courses</string>
+    <string name="last_edit">Last Modified :</string>
+    <string name="aa_notget">A.Y. Not Available</string>
+
+    <!--DOCENTI HOME -->
+    <string name="doc_home_title">My Home Page</string>
+    <string name="doc_activity_A">Retrieving exams...</string>
+    <string name="doc_activity_B">Retrieving academic calendar...</string>
+    <string name="doc_activity_C">Retrieving information...</string>
+
+    <!--DOCENTI LEZIONI -->
+    <string name="doc_lez_title">Classes</string>
+    <string name="select_course">Select a class from the list:</string>
+    <string name="select_lec">Select a class to show the students registered</string>
+    <string name="doc_lez_activity">Search Classes...</string>
+    <string name="no_lec">Class not found!</string>
+
+    <!--MODAL STUDAPPELLO and STUDLEZIONE-->
+    <string name="stud_app_title">Registered students list</string>
+    <string name="mat">Identification Number</string>
+    <string name="usr">Username</string>
+    <string name="plc">Seat</string>
+    <string name="stud_app_activity">Searching registered students...</string>
+    <string name="canc_pl_title">Delete seat reservation</string>
+    <string name="canc_pl">Delete the reservation of</string>
+
+    <!--AVVISI-->
+    <string name="avvisi_title">Notices</string>
+    <string name="avvisi_activity">Retrieving Notices...</string>
+
+    <!--EVENTI-->
+    <string name="ev_title">Events</string>
+
+    <!--HOME-->
+    <string name="connection">Connecting...</string>
+    <string name="get_news">Retrieving News...</string>
+    <string name="server_error">Server Error!</string>
+    <string name="server_down_msg">The server is currently under maintenance and major operations may not be available. We apologize for the inconvenience!</string>
+    <string name="wlc_back">Welcome back</string>
+    <string name="wlc_back_msg">Log in and go to My Home Page</string>
+    <string name="connect">Log in</string>
+
+    <!--MENU PASTO-->
+    <string name="men_title">Food Services</string>
+
+    <!--NOTIZIE-->
+    <string name="news_title">News</string>
+    <string name="news_activity">Retrieving News...</string>
+
+    <!--PRIVACY-->
+    <string name="privacy_title">Privacy</string>
+    <string name="privacy_activity">Retrieving Privacy Policy...</string>
+
+    <!--IMPOSTAZIONI-->
+    <string name="set_title">Setting</string>
+    <string name="show_b">Show more sessions</string>
+    <string name="show_popup">Show PopUp Survey</string>
+    <string name="notif">Alerts:</string>
+    <string name="not_news">News Alerts</string>
+    <string name="not_group">Group Alerts</string>
+    <string name="not_corso">Degree programme Alerts</string>
+    <string name="survey">Participate in the Survey</string>
+    <string name="forget_account">Forget Account</string>
+    <string name="forg_account_title">Remove Account</string>
+    <string name="forg_account_msg">Remove all the saved data (username, password...)?</string>
+
+    <!--TRASPORTI-->
+    <string name="trasp_title">Trasport</string>
+    <string name="trasp_sede">Location:</string>
+    <string name="trasp_activity">Retrieving information...</string>
+    <string name="trasp_error">No Parthenope branch within 200m found</string>
+    <string name="transp_act">Current Location:</string>
+
+    <string name="transp_warn">The transport section is still under development!
+        Therefore, some features may be limited.</string>
+    <!--MODAL CORSI-->
+    <string name="cont">Contents</string>
+    <string name="obj">Obijectives</string>
+    <string name="prereq">Prerequisites</string>
+    <string name="verif">Assessment methods</string>
+    <string name="testi">Readings/Bibliography</string>
+    <string name="metod">Teaching methods</string>
+    <string name="altro">Other information</string>
+
+    <!--MODAL DOCENTE-->
+    <string name="office">Office</string>
+    <string name="phone">Phone</string>
+    <string name="note">Notes</string>
+    <string name="bio">Biography</string>
+    <string name="curr">Curriculum vitae</string>
+    <string name="pubb">Pubblications</string>
+    <string name="ricev">Office Hours</string>
+    <string name="website">Website</string>
+
+    <!--MODAL ESAME-->
+    <string name="btn_subscr">Register</string>
+    <string name="btn_unsubscr">Cancel Registration</string>
+    <string name="book_date">Registration date: </string>
+
+    <!--MODAL LOGIN-->
+    <string name="sel_carrer">Select a career:</string>
+    <string name="_mat">Identification Number: </string>
+    <string name="status">Status: </string>
+    <string name="login_activity">Connecting...</string>
+    <string name="failed_auth">Authentication failed!</string>
+    <string name="server_err">ESSE3 Server Error</string>
+    <string name="server_err_msg">ESSE3 Server is temporarily unreachable!</string>
+    <string name="moreinfo">For more information:</string>
+
+    <!--MODAL METEO-->
+    <string name="comune">City</string>
+    <string name="app_msg">Download our App for free</string>
+    <string name="meteo_activity">Retrieving Weather Forecasts...</string>
+
+    <!--MODAL RICEVIMENTO-->
+    <string name="not_yet">The Office Hours section is still under development!!</string>
+
+    <!--RISTORATORE ADD MENU-->
+
+    <string name="new_meal">New Meal</string>
+    <string name="add_pic">Add Picture</string>
+    <string name="nm">Name</string>
+    <string name="desc">Description</string>
+    <string name="price">Price</string>
+    <string name="flg_meal">Show Meal every day</string>
+    <string name="pub_btn">Publish</string>
+    <string name="offer">Offer</string>
+    <string name="prim">First Course</string>
+    <string name="sec">Main Course</string>
+    <string name="contor">Side dish</string>
+    <string name="bib">Beverage</string>
+    <string name="confirm">Confirm</string>
+    <string name="pub_menu">Are you sure you want to publish the menu?</string>
+    <string name="menu_pub">Menu Uploaded!</string>
+    <string name="menu_pub_mess">The new menu was successfully uploaded!</string>
+
+    <!--RISTORATORE MY MENU-->
+    <string name="mymen_tit">My Menus</string>
+    <string name="type">Type</string>
+    <string name="men_insert">Inserito il: </string>
+    <string name="men_qst">Are you sure you want to delete the object?</string>
+    <string name="men_canc">Menu Deleted!</string>
+    <string name="men_ok">The new menu was successfully deleted!</string>
+    <string name="men_no">An error has occurred, please try again.</string>
+
+    <string name="anno">Year</string>
+    <!-- CORSI -->
+    <string name="my_courses_title">My courses</string>
+
+    <!-- LEZIONI -->
+    <string name="lectures_title">Lessons</string>
+    <string name="no_lectures">No lesson found!</string>
+    <string name="activity_lectures">Retrieving lessons...</string>
+    <string name="reserved">RESERVED</string>
+    <string name="start_lectures">Begin</string>
+    <string name="end_lectures">End</string>
+
+    <!-- LIBRETTO -->
+    <string name="libretto_medie">Averages</string>
+    <string name="libretto_voto">Mark</string>
+    <string name="libretto_nome">Name</string>
+    <string name="libretto_cfu">CFU</string>
+    <string name="libretto_lode">CUM LAUDE</string>
+
+    <!-- MIE PRENOTAZIONI -->
+    <string name="prenotazione_esami_title">My Reservations</string>
+    <string name="prenotazione_esami_aula">Room: </string>
+    <string name="prenotazione_esami_edificio">Building: </string>
+    <string name="prenotazione_esami_iscritti">Subscribers: </string>
+    <string name="activity_prenotazioni">Retrieving reservations...</string>
+
+    <!-- TASSE -->
+    <string name="taxes_title">Taxes</string>
+    <string name="taxes_status">Regular</string>
+    <string name="taxes_history">History</string>
+    <string name="activity_taxes">Retrieving taxes...</string>
+
+    <!-- TUTTI I CORSI -->
+    <string name="courses_title">Courses</string>
+    <string name="courses_nome">Name</string>
+    <string name="courses_cfu">CFU</string>
+
+    <!-- APPELLI -->
+    <string name="appelli_title">Available Exams</string>
+    <string name="appelli_start">Subscribers: from </string>
+    <string name="appelli_end"> to </string>
+    <string name="appelli_iscritti">Subscribers: </string>
+    <string name="activity_appelli">Retrieving exams...</string>
+
+    <!-- CALENDAR -->
+    <string name="calendar_title">My Homepage</string>
+    <string name="activity_calendar_semestre">Retrieving semester...</string>
+    <string name="activity_calendar_exams">Retrieving exams...</string>
+    <string name="activity_calendar">Retrieving calendar...</string>
+    <string name="activity_calendar_info">Retrieving informations...</string>
+
+    <!-- PROFESSORI -->
+    <string name="myprof_title">My Professors</string>
+    <string name="activity_myprof">Retrieving informations...</string>
 
 
 </resources>
