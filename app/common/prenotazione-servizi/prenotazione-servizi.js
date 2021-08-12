@@ -86,7 +86,7 @@ function getAllServices(){
     });
 }
 
-function showLession(index){
+function showServices(index){
     loading.visibility = "visible";
 
     while(prenotazioneServizi.length > 0)
@@ -164,7 +164,7 @@ exports.onNavigatingTo = function(args) {
         departments: departments
     });
 
-     getAllServices();
+    showServices();
     page.bindingContext = viewModel;
 }
 
