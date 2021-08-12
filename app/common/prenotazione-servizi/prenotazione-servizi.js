@@ -72,7 +72,7 @@ function getAllServices(){
             });
             servicesList = dep;
         }
-        showLession(0); //Show default lession
+        showService(0); //Show default lession
         loading.visibility = "collapsed";
     },(e) => {
         console.log("Error", e);
@@ -86,7 +86,7 @@ function getAllServices(){
     });
 }
 
-function showServices(index){
+function showService(index){
     loading.visibility = "visible";
 
     while(prenotazioneServizi.length > 0)
@@ -164,7 +164,7 @@ exports.onNavigatingTo = function(args) {
         departments: departments
     });
 
-    showServices();
+    getAllServices();
     page.bindingContext = viewModel;
 }
 
@@ -175,7 +175,7 @@ exports.onDrawerButtonTap = function() {
 
 exports.onItemTap_department = function(args) {
     const index = args.index;
-    showLession(index);
+    showService(index);
 }
 
 exports.onItemTap = function(args) {
