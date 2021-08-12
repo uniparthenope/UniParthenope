@@ -107,8 +107,12 @@
 
     <!--PRENOTAZIONE SERVIZI -->
     <string name="pren_title">Prenotazione Servizi</string>
+    <string name="less_title">Prenotazione Lezioni</string>
+
     <string name="select_depart">Selezionare un edificio dall elenco:</string>
     <string name="select_serv">Selezionare un servizio a cui prenotarsi:</string>
+    <string name="select_less">Selezionare una lezione a cui prenotarsi:</string>
+
     <string name="no_serv">Nessun Servizio Trovato!</string>
     <string name="start">Inizio: </string>
     <string name="end">Fine: </string>

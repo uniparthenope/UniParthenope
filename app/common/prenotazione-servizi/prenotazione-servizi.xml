@@ -35,13 +35,8 @@
             <Label fontSize="12" color="white" margin="5 5 5 5" text="{{L('select_depart')}}"/>
 
             <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" borderColor="white" height="20%">
-                <ListView id="department-listview"  items="{{departments}}" itemTap="onItemTap_department" marginRight="5" marginLeft="5">
-                <ListView.itemTemplate>
-                    <GridLayout backgroundColor="#1E3258">
-                        <Label text="{{area}}" color="white" textAlignment="center"/>
-                    </GridLayout>
-                </ListView.itemTemplate>
-                </ListView>
+                <ListPicker id="department-listview" color="white" items="{{ departments }}" selectedIndex="0" loaded="onListPickerLoaded"/>
+
 
             </StackLayout>
 

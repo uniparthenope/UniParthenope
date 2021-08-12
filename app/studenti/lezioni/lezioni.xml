@@ -27,7 +27,7 @@
     <GridLayout height="100%">
         <StackLayout height="100%">
             <GridLayout class="two-color-gradient" width="100%" height="10%" verticalAlignment="top">
-                <Label class="textPrimary" text="{{L('lectures_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
+                <Label class="textPrimary" text="{{L('less_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
             <StackLayout padding="5 5 5 5">
@@ -35,17 +35,11 @@
                 <Label fontSize="12" color="white" margin="5 5 5 5" text="{{L('select_depart')}}"/>
 
                 <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" borderColor="white" height="20%">
-                    <ListView id="department-listview"  items="{{departments}}" itemTap="onItemTap_department" marginRight="5" marginLeft="5">
-                        <ListView.itemTemplate>
-                            <GridLayout backgroundColor="#1E3258">
-                                <Label text="{{area}}" color="white" textAlignment="center"/>
-                            </GridLayout>
-                        </ListView.itemTemplate>
-                    </ListView>
+                    <ListPicker id="department-listview" color="white" items="{{ departments }}" selectedIndex="0" loaded="onListPickerLoaded"/>
 
                 </StackLayout>
 
-                <Label margin="5 5 5 5" color="white" fontSize="12" text="{{L('select_serv')}}"/>
+                <Label margin="5 5 5 5" color="white" fontSize="12" text="{{L('select_less')}}"/>
 
                 <GridLayout  borderRadius="20%" borderWidth="2" borderColor="white">
 

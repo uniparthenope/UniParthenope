@@ -66,16 +66,20 @@ function getAllTodayRooms(){
     }).then((response) => {
         let dep = response.content.toJSON();
         for(let x = 0; x<dep.length; x++){
-            departments.push({
-                area :dep[x].area
-            });
+            departments.push(
+                dep[x].area
+            );
             servicesList = dep;
         }
         showLession(0); //Show default lession
         loading.visibility = "collapsed";
+        page.bindingContext = viewModel;
+
     },(e) => {
         console.log("Error", e);
         loading.visibility = "collapsed";
+        page.bindingContext = viewModel;
+
 
         dialogs.alert({
             title: "Errore: prenotazioni",
@@ -92,6 +96,7 @@ function showLession(index){
         prenotazioneAule.pop();
 
     let result = servicesList[index].services;
+    console.log(result);
     if(result.length === 0)
         no_less.visibility = "visible";
     else
@@ -121,8 +126,8 @@ function showLession(index){
             "nome": fulldata,
             "start": ""+ start_data.getHours() + ":"+ convertMinutes(start_data.getMinutes()),
             "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
-            "room": result[i].room.name,
-            "room_place": result[i].room.description,
+            "room_place": result[i].room.name,
+            "room": result[i].course_name,
             "capacity": max_cap + " "+L('places'),
             "availability":rem_cap + "/",
             "max_c" : max_cap,
@@ -157,7 +162,7 @@ exports.onNavigatingTo = function(args) {
     sideDrawer.closeDrawer();
 
     prenotazioneAule = new ObservableArray();
-    departments = new ObservableArray();
+    departments = [];
 
     viewModel = observableModule.fromObject({
         prenotazioneAule: prenotazioneAule,
@@ -165,7 +170,6 @@ exports.onNavigatingTo = function(args) {
     });
 
     getAllTodayRooms();
-    page.bindingContext = viewModel;
 }
 
 exports.onDrawerButtonTap = function() {
@@ -293,4 +297,15 @@ exports.onItemTap = function(args) {
         });
     }
 
+}
+
+exports.onListPickerLoaded = function (fargs) {
+    const listPickerComponent = fargs.object;
+    listPickerComponent.on("selectedIndexChange", (args) => {
+        const picker = args.object;
+        let index = picker.selectedIndex;
+        showLession(index);
+
+        //console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
+    });
 }
