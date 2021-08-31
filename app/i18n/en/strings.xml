@@ -66,7 +66,7 @@
     <string name="distance">Online</string>
     <string name="presence">In Presence</string>
     <string name="not_def">Not Defined</string>
-    <string name="btn_prenotazioni">Book Rooms</string>
+    <string name="btn_prenotazioni">Book Classrooms</string>
     <string name="btn_servizi">Book Services</string>
     <string name="btn_history">History of Accesses</string>
     <string name="access_mess">In order to save the type of access IN PRESENCE, you must first accept Mandatory Self-Certification!</string>
@@ -376,5 +376,11 @@
     <string name="activity_myprof">Retrieving informations...</string>
     <string name="myprof_alert">This feature is in an experimental phase so it may take some time to complete!
         Continue anyway?</string>
+
+    <!-- GREEN PASS -->
+    <string name="gp_status_message">GreenPass informations:</string>
+    <string name="gp_ok">Accepted</string>
+    <string name="gp_bad">Not Provided</string>
+    <string name="gp_expire">Expiry Date:</string>
 
 </resources>

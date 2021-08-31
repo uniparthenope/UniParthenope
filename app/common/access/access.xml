@@ -29,6 +29,15 @@
                 <Label class="textPrimary" text="{{L('access_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
+            <StackLayout margin="5 5 5 5">
+                <Label class="textPrimary" id="gp_message" col="0" text="{{L('gp_status_message')}}" horizontalAlignment="left" verticalAlignment="center"/>
+                <Label class="textPrimary" id="gp_status" col="0" text="N/A" horizontalAlignment="center" verticalAlignment="center" fontSize="24"/>
+                <StackLayout orientation="horizontal" id="gp_exp" visibility="collapsed" horizontalAlignment="center">
+                    <Label class="textPrimary" id="gp_exp_msg" col="0" text="{{L('gp_expire')}}"  verticalAlignment="center" marginRight="10"/>
+                    <Label class="textPrimary" id="gp_exp_date" col="0" text="--"  verticalAlignment="center" fontSize="24"/>
+                </StackLayout>
+            </StackLayout>
+<!--
             <GridLayout margin="5 5 5 5" columns="*,50" height="50" >
                 <Label class="textPrimary" id="text_appello" col="0" text="{{L('autocert')}}" horizontalAlignment="left" verticalAlignment="center"/>
                 <Switch col="1" id="switch_sondaggio" checked="true" loaded="onSwitchLoaded_autocert" horizontalAlignment="right" verticalAlignment="center"/>
@@ -40,11 +49,12 @@
                 <ListPicker id="listpicker" color="white" items="{{ status }}" selectedIndex="0" loaded="onListPickerLoaded"/>
             </StackLayout>
 
+-->
 
         </StackLayout>
         <StackLayout verticalAlignment="bottom">
-            <Button margin="5 5 5 5" id="btn-prenotazioni" class="btn" visibility="collapsed" text="{{L('btn_prenotazioni')}}" ontap="goto_prenotazioni" />
-            <Button margin="5 5 5 5" id="btn-servizi" class="btn" visibility="collapsed" text="{{L('btn_servizi')}}" ontap="goto_prenot_serv" />
+            <Button margin="5 5 5 5" id="btn-prenotazioni" class="btn" visibility="visible" text="{{L('btn_prenotazioni')}}" ontap="goto_prenotazioni" />
+            <Button margin="5 5 5 5" id="btn-servizi" class="btn" visibility="visible" text="{{L('btn_servizi')}}" ontap="goto_prenot_serv" />
             <Button margin="5 5 5 5" id="btn-history" class="btn" text="{{L('btn_history')}}" ontap="goto_history" />
 
         </StackLayout>

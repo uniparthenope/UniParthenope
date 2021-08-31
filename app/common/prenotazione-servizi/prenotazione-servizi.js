@@ -210,12 +210,15 @@ exports.onItemTap = function(args) {
                             message: result["status"],
                             okButtonText: "OK"
                         }).then(function (){
-                            const nav =
+                            /*const nav =
                                 {
                                     moduleName: "common/prenotazione-servizi/prenotazione-servizi",
-                                    clearHistory: true
+                                    clearHistory: false
                                 };
                             page.frame.navigate(nav);
+
+                             */
+                            getAllServices();
                         });
                     }
                     else{
@@ -267,12 +270,16 @@ exports.onItemTap = function(args) {
                             message: result["status"],
                             okButtonText: "OK"
                         }).then(function (){
+                            /*
                             const nav =
                                 {
                                     moduleName: "common/prenotazione-servizi/prenotazione-servizi",
-                                    clearHistory: true
+                                    clearHistory: false
                                 };
                             page.frame.navigate(nav);
+
+                             */
+                            getAllServices();
                         });
                     }
                     else{

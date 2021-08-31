@@ -392,7 +392,10 @@
 
     <string name="rememberMe">Ricordami</string>
 
-
-
+    <!-- GREEN PASS -->
+    <string name="gp_status_message">GreenPass informazioni:</string>
+    <string name="gp_ok">Accettato</string>
+    <string name="gp_bad">Mancante</string>
+    <string name="gp_expire">Data Scadenza:</string>
 
 </resources>

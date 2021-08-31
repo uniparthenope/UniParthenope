@@ -9,11 +9,181 @@ let page;
 let viewModel;
 let sideDrawer;
 let loading;
-let index;
-let my_status = "";
-let status = [L('not_def'),L('distance'),L('presence')];
-let _status = ["undefined", "distance", "presence"];
-let isStudent = false;
+//let index;
+//let my_status = "";
+//let status = [L('not_def'),L('distance'),L('presence')];
+//let _status = ["undefined", "distance", "presence"];
+//let isStudent = false;
+
+
+exports.onNavigatingTo = function (args) {
+    page = args.object;
+    viewModel = observableModule.fromObject({
+        //status: status
+    });
+    sideDrawer = app.getRootView();
+    sideDrawer.closeDrawer();
+    loading = page.getViewById("activityIndicator");
+    global.services = [];
+
+    getGPStatus();
+    //getSelfCert();
+    /*
+    let grpDes = appSettings.getString("grpDes","");
+
+    if (grpDes === "Docenti" || grpDes === "PTA" || grpDes === "Ristorante" || grpDes === ""){
+        isStudent = false;
+        page.getViewById("scelta_accesso").visibility = "collapsed";
+        getAllServices();
+
+    }
+    else{
+        isStudent = true;
+        getAccess();
+        page.getViewById("scelta_accesso").visibility = "visible";
+    }
+    */
+
+    page.bindingContext = viewModel;
+}
+
+exports.onDrawerButtonTap = function () {
+    const sideDrawer = app.getRootView();
+    sideDrawer.showDrawer();
+}
+
+
+exports.goto_prenotazioni = function () {
+    const nav =
+        {
+            moduleName: "studenti/lezioni/lezioni",
+            clearHistory: false
+        };
+    page.frame.navigate(nav);
+};
+
+exports.goto_prenot_serv = function () {
+
+    const nav =
+        {
+            moduleName: "common/prenotazione-servizi/prenotazione-servizi",
+            clearHistory: false
+        };
+    page.frame.navigate(nav);
+};
+
+exports.goto_history = function () {
+
+    const nav =
+        {
+            moduleName: "common/history/history",
+            clearHistory: false
+        };
+    page.frame.navigate(nav);
+};
+function getGPStatus(){
+    let status = page.getViewById("gp_status");
+    let exp = page.getViewById("gp_exp");
+    let exp_date = page.getViewById("gp_exp_date");
+
+    let url = global.url_general + "Badges/v3/greenPassStatus";
+    //loading.visibility = "visible";
+    httpModule.request({
+        url: url,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        if(response.statusCode === 200){
+            let _response = response.content.toJSON();
+            console.log(_response);
+            if(_response.autocertification){
+                exp.visibility = "visible";
+                status.text = L('gp_ok');
+                status.color = "green";
+                exp_date.text = _response.expiry;
+                exp_date.color = "green";
+            }
+            else {
+                exp.visibility = "collapsed";
+                status.text = L('gp_bad');
+                status.color = "red";
+                //Show button
+            }
+        }
+
+    });
+
+}
+/*
+// OLD CODE FOR SELF-CERTIFICATION ACCESS
+exports.onSwitchLoaded_autocert = function (args) {
+    const mySwitch = args.object;
+
+    mySwitch.on("checkedChange", (args) => {
+        const sw = args.object;
+        const isChecked = sw.checked;
+
+        if(isChecked){
+            const options = {
+                context: "some context",
+                closeCallback: () => {
+                    setSelfCert(global.my_selfcert);
+                    if(!global.my_selfcert)
+                        page.getViewById("switch_sondaggio").checked = "false";
+                },
+                fullscreen: false
+            };
+            page.showModal(modalViewModule, options);
+        }
+        else{
+            if(my_status !== "presence"){
+                if(global.my_selfcert){
+                    global.my_selfcert = false;
+                    console.log("FALSO");
+                    appSettings.setBoolean("selfcert",false);
+                    setSelfCert(global.my_selfcert);
+                }
+                global.my_selfcert = false;
+                console.log("FALSO");
+                appSettings.setBoolean("selfcert",false);
+            }
+            else{
+                dialogs.confirm({
+                    title: L('warning'),
+                    message: L('access_mess'),
+                    okButtonText: "OK"
+                }).then(function (){
+                    const nav =
+                        {
+                            moduleName: "common/access/access",
+                            clearHistory: true
+                        };
+                    page.frame.navigate(nav);
+                });
+            }
+
+        }
+    });
+}
+
+exports.onListPickerLoaded = function (fargs) {
+    const listPickerComponent = fargs.object;
+    listPickerComponent.on("selectedIndexChange", (args) => {
+        const picker = args.object;
+        index = picker.selectedIndex;
+        let accessIndex = convertIndex(appSettings.getString("accessType","undefined"));
+
+
+        if(accessIndex !== picker.selectedIndex){
+            setAccess(_status[picker.selectedIndex]);
+        }
+        //console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
+    });
+}
+
 
 function convertIndex(accessType){
     if (accessType === "presence")
@@ -265,131 +435,4 @@ function setAccess(scelta){
     });
 
 }
-
-exports.onNavigatingTo = function (args) {
-    page = args.object;
-    viewModel = observableModule.fromObject({
-        status: status
-    });
-    sideDrawer = app.getRootView();
-    sideDrawer.closeDrawer();
-    loading = page.getViewById("activityIndicator");
-    global.services = [];
-
-    getSelfCert();
-    let grpDes = appSettings.getString("grpDes","");
-
-    if (grpDes === "Docenti" || grpDes === "PTA" || grpDes === "Ristorante" || grpDes === ""){
-        isStudent = false;
-        page.getViewById("scelta_accesso").visibility = "collapsed";
-        getAllServices();
-
-    }
-    else{
-        isStudent = true;
-        getAccess();
-        page.getViewById("scelta_accesso").visibility = "visible";
-    }
-
-
-    page.bindingContext = viewModel;
-}
-
-exports.onListPickerLoaded = function (fargs) {
-    const listPickerComponent = fargs.object;
-    listPickerComponent.on("selectedIndexChange", (args) => {
-        const picker = args.object;
-        index = picker.selectedIndex;
-        let accessIndex = convertIndex(appSettings.getString("accessType","undefined"));
-
-
-        if(accessIndex !== picker.selectedIndex){
-            setAccess(_status[picker.selectedIndex]);
-        }
-        //console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
-    });
-}
-
-exports.onDrawerButtonTap = function () {
-    const sideDrawer = app.getRootView();
-    sideDrawer.showDrawer();
-}
-
-exports.onSwitchLoaded_autocert = function (args) {
-    const mySwitch = args.object;
-
-    mySwitch.on("checkedChange", (args) => {
-        const sw = args.object;
-        const isChecked = sw.checked;
-
-        if(isChecked){
-            const options = {
-                context: "some context",
-                closeCallback: () => {
-                    setSelfCert(global.my_selfcert);
-                    if(!global.my_selfcert)
-                        page.getViewById("switch_sondaggio").checked = "false";
-                },
-                fullscreen: false
-            };
-            page.showModal(modalViewModule, options);
-        }
-        else{
-            if(my_status !== "presence"){
-                if(global.my_selfcert){
-                    global.my_selfcert = false;
-                    console.log("FALSO");
-                    appSettings.setBoolean("selfcert",false);
-                    setSelfCert(global.my_selfcert);
-                }
-                global.my_selfcert = false;
-                console.log("FALSO");
-                appSettings.setBoolean("selfcert",false);
-            }
-            else{
-                dialogs.confirm({
-                    title: L('warning'),
-                    message: L('access_mess'),
-                    okButtonText: "OK"
-                }).then(function (){
-                    const nav =
-                        {
-                            moduleName: "common/access/access",
-                            clearHistory: true
-                        };
-                    page.frame.navigate(nav);
-                });
-            }
-
-        }
-    });
-}
-
-exports.goto_prenotazioni = function () {
-    const nav =
-        {
-            moduleName: "studenti/lezioni/lezioni",
-            clearHistory: false
-        };
-    page.frame.navigate(nav);
-};
-
-exports.goto_prenot_serv = function () {
-
-    const nav =
-        {
-            moduleName: "common/prenotazione-servizi/prenotazione-servizi",
-            clearHistory: false
-        };
-    page.frame.navigate(nav);
-};
-
-exports.goto_history = function () {
-
-    const nav =
-        {
-            moduleName: "common/history/history",
-            clearHistory: false
-        };
-    page.frame.navigate(nav);
-};
+ */
