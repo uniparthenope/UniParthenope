@@ -382,5 +382,7 @@
     <string name="gp_ok">Accepted</string>
     <string name="gp_bad">Not Provided</string>
     <string name="gp_expire">Expiry Date:</string>
+    <string name="btn_greenpass">Scan GreenPass</string>
+    <string name="access_gp">Get GreenPass Informations ...</string>
 
 </resources>

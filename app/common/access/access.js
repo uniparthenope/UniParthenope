@@ -4,11 +4,17 @@ const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 const httpModule = require("tns-core-modules/http");
 const modalViewModule = "modal/modal-covidalert/modal-covidalert";
+let BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
+let barcodescanner = new BarcodeScanner();
+const frame = require("tns-core-modules/ui/frame");
+let toasty = require("nativescript-toasty");
+
 
 let page;
 let viewModel;
 let sideDrawer;
 let loading;
+
 //let index;
 //let my_status = "";
 //let status = [L('not_def'),L('distance'),L('presence')];
@@ -43,8 +49,6 @@ exports.onNavigatingTo = function (args) {
         page.getViewById("scelta_accesso").visibility = "visible";
     }
     */
-
-    page.bindingContext = viewModel;
 }
 
 exports.onDrawerButtonTap = function () {
@@ -85,9 +89,10 @@ function getGPStatus(){
     let status = page.getViewById("gp_status");
     let exp = page.getViewById("gp_exp");
     let exp_date = page.getViewById("gp_exp_date");
+    let gp_btn = page.getViewById("btn-scangp");
 
     let url = global.url_general + "Badges/v3/greenPassStatus";
-    //loading.visibility = "visible";
+    loading.visibility = "visible";
     httpModule.request({
         url: url,
         method: "GET",
@@ -98,25 +103,98 @@ function getGPStatus(){
     }).then((response) => {
         if(response.statusCode === 200){
             let _response = response.content.toJSON();
-            console.log(_response);
+            loading.visibility = "collapsed";
+            //console.log(_response);
             if(_response.autocertification){
                 exp.visibility = "visible";
                 status.text = L('gp_ok');
                 status.color = "green";
                 exp_date.text = _response.expiry;
                 exp_date.color = "green";
+                gp_btn.visibility = "collapsed";
             }
             else {
                 exp.visibility = "collapsed";
                 status.text = L('gp_bad');
                 status.color = "red";
                 //Show button
+                if(appSettings.getNumber("grpId") !== 99)
+                    gp_btn.visibility = "visible";
             }
+            page.bindingContext = viewModel;
         }
 
     });
 
 }
+exports.scan_gp = function()
+{
+    let loading_gp = page.getViewById("activityIndicator_gp");
+    loading_gp.visibility = "visible";
+    let count = 0;
+    barcodescanner.scan({
+        formats: "QR_CODE, EAN_13, CODE_128",
+        cancelLabel: "EXIT.", // iOS only, default 'Close'
+        cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
+        message: 'SCANSIONE GREEN PASS\n\n\nAvvicinare il GreenPass in corso di validità alla fotocamera del dispositivo ed attendere il beep.\n\nUniversità degli Studi di Napoli "Parthenope"', // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
+        //message: "Scan QR",
+        preferFrontCamera: false,     // Android only, default false
+        showFlipCameraButton: true,   // default false
+        showTorchButton: false,       // iOS only, default false
+        torchOn: false,               // launch with the flashlight on (default false)
+        resultDisplayDuration: 0,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text// Android only, default undefined (sensor-driven orientation), other options: portrait|landscape
+        beepOnScan: true,             // Play or Suppress beep on scan (default true)
+        openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
+        reportDuplicates: false
+
+    }).then(
+        function(result) {
+            httpModule.request({
+                url : global.url_general + "Badges/v3/checkGreenPassMobile",
+                method : "POST",
+                headers : {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                },
+                content : JSON.stringify({
+                    token_GP : result.text
+                    //id_tablet : appSettings.getString("id_tab","NA")
+                })
+            }).then((response) => {
+                const result = response.content.toJSON();
+                loading_gp.visibility = "collapsed";
+
+
+                if(response.statusCode === 500){
+                    new toasty.Toasty({"text": result.message,
+                        position: toasty.ToastPosition.CENTER,
+                        duration: toasty.ToastDuration.LONG,
+                        yAxisOffset: 100,
+                        backgroundColor: result.color}).show();
+                }
+                else {
+                    new toasty.Toasty({"text": result.message,
+                        position: toasty.ToastPosition.CENTER,
+                        duration: toasty.ToastDuration.LONG,
+                        yAxisOffset: 100,
+                        backgroundColor: result.color}).show();
+
+                    //barcodescanner.stop();
+                    //frame.Frame.topmost().goBack();
+                    //frame.Frame.topmost().navigate(nav);
+                    getGPStatus();
+                }
+
+            }, error => {
+                console.error(error);
+            });
+        },
+        function(error) {
+            console.log("No scan: " + error);
+        }
+    );
+
+    }
 /*
 // OLD CODE FOR SELF-CERTIFICATION ACCESS
 exports.onSwitchLoaded_autocert = function (args) {

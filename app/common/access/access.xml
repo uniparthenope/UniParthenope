@@ -32,6 +32,8 @@
             <StackLayout margin="5 5 5 5">
                 <Label class="textPrimary" id="gp_message" col="0" text="{{L('gp_status_message')}}" horizontalAlignment="left" verticalAlignment="center"/>
                 <Label class="textPrimary" id="gp_status" col="0" text="N/A" horizontalAlignment="center" verticalAlignment="center" fontSize="24"/>
+                <Button margin="5 5 5 5" id="btn-scangp" class="btn" visibility="collapsed" text="{{L('btn_greenpass')}}" ontap="scan_gp" />
+
                 <StackLayout orientation="horizontal" id="gp_exp" visibility="collapsed" horizontalAlignment="center">
                     <Label class="textPrimary" id="gp_exp_msg" col="0" text="{{L('gp_expire')}}"  verticalAlignment="center" marginRight="10"/>
                     <Label class="textPrimary" id="gp_exp_date" col="0" text="--"  verticalAlignment="center" fontSize="24"/>
@@ -63,6 +65,10 @@
         <StackLayout id="activityIndicator" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
         <Label text="{{L('access_loading')}}" horizontalAlignment="center" class="textPrimary"/>
         <ActivityIndicator horizontalAlignment="center" busy="true"/>
-    </StackLayout>
+        </StackLayout>
+        <StackLayout id="activityIndicator_gp" visibility="collapsed" verticalAlignment="center" height="100%" width="100%" backgroundColor="rgba(0,0,0,0.5)">
+            <Label text="{{L('access_gp')}}" horizontalAlignment="center" class="textPrimary"/>
+            <ActivityIndicator horizontalAlignment="center" busy="true"/>
+        </StackLayout>
     </GridLayout>
 </Page>

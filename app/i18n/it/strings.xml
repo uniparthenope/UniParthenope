@@ -397,5 +397,7 @@
     <string name="gp_ok">Accettato</string>
     <string name="gp_bad">Mancante</string>
     <string name="gp_expire">Data Scadenza:</string>
+    <string name="btn_greenpass">Scansiona GreenPass</string>
+    <string name="access_gp">Recupero Informazioni GreenPass ...</string>
 
 </resources>
