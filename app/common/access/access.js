@@ -32,7 +32,14 @@ exports.onNavigatingTo = function (args) {
     loading = page.getViewById("activityIndicator");
     global.services = [];
 
-    getGPStatus();
+    let grpId = appSettings.getNumber("grpId",7);
+    if (grpId !== 7 && grpId !== 99)
+        getGPStatus();
+    else{
+        let pren = page.getViewById("btn-prenotazioni");
+        page.bindingContext = viewModel;
+        pren.visibility = "collapsed";
+    }
     //getSelfCert();
     /*
     let grpDes = appSettings.getString("grpDes","");

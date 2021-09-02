@@ -37,8 +37,14 @@ function insert_event() {
 
         let temp = global.events;
         for (let x=0; x<temp.length; x++){
-            let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
-            event_calendar.push(event);
+            try {
+                let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
+                event_calendar.push(event);
+
+            }catch (e) {
+                console.log(e);
+            }
+
         }
     }
 }
@@ -114,18 +120,76 @@ function calendarCourses() {
         });
     });
 
-    let prenotazioni = global.myPrenotazioni;
-    for (let x=0; x < prenotazioni.length ; x++){
-        let data_inizio = convertData(prenotazioni[x].dataEsa);
+    page.getViewById("activityIndicator4").visibility = "visible";
 
-        global.events.push({
-            title : L('calendar_exam') + prenotazioni[x].nomeAppello,
-            data_inizio: data_inizio,
-            data_fine: data_inizio,
-            color: new Color.Color("#0F9851")
-        });
-    }
-    insert_event();
+    let matId = appSettings.getNumber("matId").toString();
+
+    httpModule.request({
+        url: global.url + "students/getReservations/" + matId,
+        method: "GET",
+        headers: {
+            "Content-Type" : "application/json",
+            "Authorization" : "Basic "+ global.encodedStr
+        }
+    }).then((response) => {
+        const result = response.content.toJSON();
+        //console.log(result);
+
+        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
+            dialogs.confirm({
+                title: "Errore: UserCalendar examsToFreq",
+                message: result.errMsg,
+                okButtonText: "OK"
+            }).then(
+                page.getViewById("activityIndicator4").visibility = "collapsed"
+            );
+        }
+        else{
+            appSettings.setNumber("appelloBadge", result.length);
+
+            for (let x = 0; x< result.length; x++){
+                global.myPrenotazioni.push(result[x]);
+
+                let data_inizio = convertData(result[x].dataEsa);
+
+                global.events.push({
+                    title : L('calendar_exam') + result[x].nomeAppello,
+                    data_inizio: data_inizio,
+                    data_fine: data_inizio,
+                    color: new Color.Color("#0F9851")
+                });
+            }
+            insert_event();
+
+            page.getViewById("activityIndicator4").visibility = "collapsed";
+            /*
+            memo) RESULT =
+                    "adId": result[i].adId,
+                    "appId": result[i].appId,
+                    "dataEsame": result[i].dataEsa,
+                    "classe": "examPass",
+                    "mese_app": result[i].desApp,
+                    "esame": result[i].nomeAppello,
+                    "docente": result[i].nome_pres + " "+ result[i].cognome_pres,
+                    "descrizione": result[i].tipoApp,
+                    "edificio": result[i].edificioDes,
+                    "aula": result[i].aulaDes,
+                    "iscritti": result[i].numIscritti,
+                    "note": result[i].note
+
+             */
+            global.getAllBadge(page);
+        }
+    },(e) => {
+        dialogs.confirm({
+            title: "Errore: UserCalendar getPrenotazioni",
+            message: e.toString(),
+            okButtonText: "OK"
+        }).then(
+            page.getViewById("activityIndicator4").visibility = "collapsed"
+        );
+    });
+
 }
 
 function getMainInfo() {
@@ -217,6 +281,7 @@ function getMainInfo() {
                     calendarCourses();
                 }
                 page.getViewById("activityIndicator2").visibility = "collapsed";
+
             },(e) => {
                 dialogs.confirm({
                     title: "Errore: UserCalendar",
@@ -238,7 +303,7 @@ function getMainInfo() {
         );
     });
 }
-
+/*
 function getAccesso(){
     httpModule.request({
         url: global.url_general + "Access/v1/classroom",
@@ -276,65 +341,9 @@ function getAccesso(){
     });
 }
 
+ */
 function getPrenotazioni(){
-    page.getViewById("activityIndicator4").visibility = "visible";
 
-    let matId = appSettings.getNumber("matId").toString();
-
-    httpModule.request({
-        url: global.url + "students/getReservations/" + matId,
-        method: "GET",
-        headers: {
-            "Content-Type" : "application/json",
-            "Authorization" : "Basic "+ global.encodedStr
-        }
-    }).then((response) => {
-        const result = response.content.toJSON();
-
-        if (response.statusCode === 401 || response.statusCode === 500 || response.statusCode === 403) {
-            dialogs.confirm({
-                title: "Errore: UserCalendar examsToFreq",
-                message: result.errMsg,
-                okButtonText: "OK"
-            }).then(
-                page.getViewById("activityIndicator4").visibility = "collapsed"
-            );
-        }
-        else{
-            appSettings.setNumber("appelloBadge", result.length);
-
-            for (let i = 0; i< result.length; i++){
-                global.myPrenotazioni.push(result[i]);
-            }
-
-            page.getViewById("activityIndicator4").visibility = "collapsed";
-            /*
-            memo) RESULT =
-                    "adId": result[i].adId,
-                    "appId": result[i].appId,
-                    "dataEsame": result[i].dataEsa,
-                    "classe": "examPass",
-                    "mese_app": result[i].desApp,
-                    "esame": result[i].nomeAppello,
-                    "docente": result[i].nome_pres + " "+ result[i].cognome_pres,
-                    "descrizione": result[i].tipoApp,
-                    "edificio": result[i].edificioDes,
-                    "aula": result[i].aulaDes,
-                    "iscritti": result[i].numIscritti,
-                    "note": result[i].note
-
-             */
-            global.getAllBadge(page);
-        }
-    },(e) => {
-        dialogs.confirm({
-            title: "Errore: UserCalendar getPrenotazioni",
-            message: e.toString(),
-            okButtonText: "OK"
-        }).then(
-            page.getViewById("activityIndicator4").visibility = "collapsed"
-        );
-    });
 }
 
 exports.onNavigatingTo = function (args) {
@@ -352,11 +361,11 @@ exports.onNavigatingTo = function (args) {
     calendar = page.getViewById("cal");
 
     console.log("UPDATED= "+global.updatedExam);
-
+    //global.updatedExam = false;
     if (!global.updatedExam) {
         getMainInfo();
-        getAccesso();
-        getPrenotazioni();
+        //getAccesso();
+        //getPrenotazioni();
     }
     else {
         insert_event();
@@ -423,8 +432,11 @@ exports.onDaySelected = function(args){
 exports.tap_reload = function(){
     global.updatedExam = false;
 
-    global.myExams = [];
-    global.myPrenotazioni = [];
+    while (global.myPrenotazioni.length>0)
+        global.myPrenotazioni.pop();
+    while (global.myExams.length>0)
+        global.myExams.pop();
+
 
     const nav =
         {
