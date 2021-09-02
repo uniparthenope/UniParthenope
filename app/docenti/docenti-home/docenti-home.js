@@ -158,6 +158,8 @@ function getCourses() {
             appSettings.setString("sessione", result.semDes.toString());
             appSettings.setString("semestre", result.semId.toString());
 
+            console.log(result.aaId.toString());
+
             httpModule.request({
                 url: global.url + "professor/getCourses/" + result.aaId.toString(),
                 method: "GET",
@@ -184,6 +186,9 @@ function getCourses() {
                         global.events.pop();
                     num = 0;
                     global.events = [];
+
+                    if(result2.length === 0)
+                        page.getViewById("activityIndicator3").visibility = "collapsed";
 
                     for(let j=0; j<result2.length; j++){
                         let myarray = [];
@@ -218,6 +223,7 @@ function getCourses() {
                             }
                         }).then((response3) => {
                             const result3 = response3.content.toJSON();
+                            page.getViewById("activityIndicator3").visibility = "collapsed";
 
                             if (response3.statusCode === 401 || response3.statusCode === 500) {
                                 dialogs.alert({
@@ -228,6 +234,8 @@ function getCourses() {
                                 });
                             }
                             else{
+                                console.log("ELSEEEE");
+                                page.getViewById("activityIndicator3").visibility = "collapsed";
                                 for (let i=0; i<result3.length; i++) {
                                     let day,year,month;
                                     let final_data ="" + dayOfWeek(result3[i].dataEsame) + " " + result3[i].dataEsame.substring(0, 2)+ " " + monthOfYear(result3[i].dataEsame) + " " + result3[i].dataEsame.substring(6, 10);
@@ -300,9 +308,6 @@ function getCourses() {
                                 titolo: result2[j].adDes,
                                 items: myarray
                             });
-                            page.getViewById("activityIndicator3").visibility = "collapsed";
-
-
                         },(e) => {
                             dialogs.alert({
                                 title: "Errore: DocentiAppelli",

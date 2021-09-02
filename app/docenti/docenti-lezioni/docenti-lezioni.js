@@ -57,43 +57,49 @@ function showLession(index){
     while(docentiLezioni.length > 0)
         docentiLezioni.pop();
 
-    let result = lezioni[index].courses;
-    console.log(result);
-    if(result.length === 0)
-        no_less.visibility = "visible";
-    else
-        no_less.visibility = "collapsed";
+    if (lezioni.length > 0){
+        let result = lezioni[index].courses;
+        console.log(result);
 
-    for (let i=0; i<result.length; i++){
-        loading.visibility = "visible";
+        if(result.length === 0)
+            no_less.visibility = "visible";
+        else
+            no_less.visibility = "collapsed";
 
-        let fulldata = convertData(result[i].start);
-        fulldata = "" + dayOfWeek(fulldata) + " " + fulldata.getDate() + " " + monthOfYear(fulldata.getMonth()) + " " + fulldata.getFullYear();
-        let start_data = convertData(result[i].start);
-        let end_data = convertData(result[i].end);
-        let max_cap = Math.floor(result[i].room.capacity);
-        let rem_cap = max_cap - Math.floor(result[i].room.availability);
+        for (let i=0; i<result.length; i++){
+            loading.visibility = "visible";
 
-        docentiLezioni.push({
-            "id": result[i].id,
-            "classe": "examPass",
-            "nome": fulldata,
-            "start": ""+ start_data.getHours() + ":"+ convertMinutes(start_data.getMinutes()),
-            "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
-            "room": result[i].room.name,
-            "room_place": result[i].room.description,
-            "capacity": max_cap + " " + L('places'),
-            "availability":rem_cap + "/",
-            "max_c" : max_cap,
-            "ava_c" : rem_cap,
-        });
-        docentiLezioni.sort(function (orderA, orderB) {
-            let nameA = orderA.fulldata;
-            let nameB = orderB.fulldata;
-            return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-        });
+            let fulldata = convertData(result[i].start);
+            fulldata = "" + dayOfWeek(fulldata) + " " + fulldata.getDate() + " " + monthOfYear(fulldata.getMonth()) + " " + fulldata.getFullYear();
+            let start_data = convertData(result[i].start);
+            let end_data = convertData(result[i].end);
+            let max_cap = Math.floor(result[i].room.capacity);
+            let rem_cap = max_cap - Math.floor(result[i].room.availability);
+
+            docentiLezioni.push({
+                "id": result[i].id,
+                "classe": "examPass",
+                "nome": fulldata,
+                "start": ""+ start_data.getHours() + ":"+ convertMinutes(start_data.getMinutes()),
+                "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
+                "room": result[i].room.name,
+                "room_place": result[i].room.description,
+                "capacity": max_cap + " " + L('places'),
+                "availability":rem_cap + "/",
+                "max_c" : max_cap,
+                "ava_c" : rem_cap,
+            });
+            docentiLezioni.sort(function (orderA, orderB) {
+                let nameA = orderA.fulldata;
+                let nameB = orderB.fulldata;
+                return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+            });
+        }
+        loading.visibility = "collapsed";
     }
-    loading.visibility = "collapsed";
+    else {
+        loading.visibility = "collapsed";
+    }
 }
 
 function getLectures(){
