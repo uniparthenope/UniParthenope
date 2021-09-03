@@ -234,7 +234,7 @@ function getCourses() {
                                 });
                             }
                             else{
-                                console.log("ELSEEEE");
+
                                 page.getViewById("activityIndicator3").visibility = "collapsed";
                                 for (let i=0; i<result3.length; i++) {
                                     let day,year,month;
@@ -244,7 +244,7 @@ function getCourses() {
                                     year = result3[i].dataEsame.substring(6, 10);
                                     let date = new Date(year,month-1,day);
 
-                                    console.log(result3[i].esame);
+                                    //console.log(result3[i].esame);
 
                                     if (appSettings.getBoolean("esami_futuri") && result3[i].stato === "I"){
                                         let items = {

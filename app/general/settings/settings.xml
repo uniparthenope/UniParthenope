@@ -45,14 +45,20 @@
                             <Switch col="1" id="switch_topic_newsall"  checked="false" loaded="onSwitchLoaded_topic_newsall" horizontalAlignment="right" verticalAlignment="center"/>
                         </GridLayout>
                         <GridLayout margin="5 5 5 35" columns="*,50" height="50" id="visibility_topic_grpId">
-                            <Label class="textPrimary" color="white"  id="text_topic_grpId"  col="0" text="{{L('not_gruppo')}}" horizontalAlignment="left" verticalAlignment="center"/>
+                            <Label class="textPrimary" color="white"  id="text_topic_grpId"  col="0" text="{{L('not_group')}}" horizontalAlignment="left" verticalAlignment="center"/>
                             <Switch col="1" id="switch_topic_grpId"  checked="false" loaded="onSwitchLoaded_topic_grpId" horizontalAlignment="right" verticalAlignment="center"/>
                         </GridLayout>
                         <GridLayout margin="5 5 5 35" columns="*,50" height="50" id="visibility_topic_cdsId">
                             <Label class="textPrimary" color="white"  id="text_topic_cdsId"  col="0" text="{{L('not_corso')}}" horizontalAlignment="left" verticalAlignment="center"/>
                             <Switch col="1" id="switch_topic_cdsId"  checked="false" loaded="onSwitchLoaded_topic_cdsId" horizontalAlignment="right" verticalAlignment="center"/>
                         </GridLayout>
+
                     </StackLayout>
+
+                    <GridLayout margin="5 5 5 5" columns="*,50" height="50" id="visibility_topic_gp" visibility="collapsed">
+                        <Label class="textPrimary" color="white"  id="text_topic_cdsId"  col="0" text="{{L('set_greenpass')}}" horizontalAlignment="left" verticalAlignment="center"/>
+                        <Switch col="1" id="switch_topic_gp"  checked="false" loaded="onSwitchLoaded_topic_gp" horizontalAlignment="right" verticalAlignment="center"/>
+                    </GridLayout>
 
 
                     <!-- Insert here other settings (Duplicate GridLayout above!) -->

@@ -109,7 +109,7 @@
 
     <!--BADGE -->
     <string name="badge_title">UniParthenope Card</string>
-    <string name="zoom_text">Duble-click on QR-Code to zoom</string>
+    <string name="zoom_text">Double-click on QR-Code to zoom</string>
     <string name="activity_badge">Generating QR-Code...</string>
     <string name="barcode_cancel_scan">Scan QR-Code for more information.</string>
     <string name="barcode_success">SCANNED</string>
@@ -211,7 +211,7 @@
     <string name="forg_account_msg">Remove all the saved data (username, password...)?</string>
 
     <!--TRASPORTI-->
-    <string name="trasp_title">Trasport</string>
+    <string name="trasp_title">Transport</string>
     <string name="trasp_sede">Location:</string>
     <string name="trasp_activity">Retrieving information...</string>
     <string name="trasp_error">No Parthenope branch within 200m found</string>
@@ -221,7 +221,7 @@
         Therefore, some features may be limited.</string>
     <!--MODAL CORSI-->
     <string name="cont">Contents</string>
-    <string name="obj">Obijectives</string>
+    <string name="obj">Objectives</string>
     <string name="prereq">Prerequisites</string>
     <string name="verif">Assessment methods</string>
     <string name="testi">Readings/Bibliography</string>
@@ -234,7 +234,7 @@
     <string name="note">Notes</string>
     <string name="bio">Biography</string>
     <string name="curr">Curriculum vitae</string>
-    <string name="pubb">Pubblications</string>
+    <string name="pubb">Publications</string>
     <string name="ricev">Office Hours</string>
     <string name="website">Website</string>
 
@@ -360,7 +360,7 @@
     <string name="activity_calendar_semestre">Retrieving semester...</string>
     <string name="activity_calendar_exams">Retrieving exams...</string>
     <string name="activity_calendar">Retrieving calendar...</string>
-    <string name="activity_calendar_info">Retrieving informations...</string>
+    <string name="activity_calendar_info">Retrieving information...</string>
     <string name="calendar_res">[RESERVED] </string>
     <string name="calendar_res_me">Booked by: me</string>
     <string name="calendar_res_by">Booked by </string>
@@ -373,16 +373,16 @@
 
     <!-- PROFESSORI -->
     <string name="myprof_title">My Professors</string>
-    <string name="activity_myprof">Retrieving informations...</string>
+    <string name="activity_myprof">Retrieving information...</string>
     <string name="myprof_alert">This feature is in an experimental phase so it may take some time to complete!
         Continue anyway?</string>
 
     <!-- GREEN PASS -->
-    <string name="gp_status_message">GreenPass informations:</string>
+    <string name="gp_status_message">GreenPass information:</string>
     <string name="gp_ok">Accepted</string>
     <string name="gp_bad">Not Provided</string>
-    <string name="gp_expire">Expiry Date:</string>
     <string name="btn_greenpass">Scan GreenPass</string>
-    <string name="access_gp">Get GreenPass Informations ...</string>
+    <string name="access_gp">Get GreenPass Information ...</string>
+    <string name="set_greenpass">GreenPass Information</string>
 
 </resources>

@@ -24,7 +24,13 @@ exports.onNavigatingTo = function (args) {
     }
 
     if (remember){
-        if(appSettings.getNumber("grpId",0) === 6)
+        let grpId = appSettings.getNumber("grpId",0);
+        if(grpId === 7 || grpId === 99)
+            page.getViewById("visibility_topic_gp").visibility = "visible";
+        else
+            page.getViewById("visibility_topic_gp").visibility = "collapsed";
+
+        if(grpId === 6)
             page.getViewById("visibility_topic_cdsId").visibility = "visible";
         else
             page.getViewById("visibility_topic_cdsId").visibility = "collapsed";
@@ -190,5 +196,15 @@ exports.onSwitchLoaded_topic_newsall = function (args) {
         else
             firebase.unsubscribeFromTopic("NEWS_ALL").then(() => console.log("Unsubscribed from ","NEWS_ALL"));
 
+    });
+}
+exports.onSwitchLoaded_topic_gp = function (args) {
+    page.getViewById("switch_topic_gp").checked = appSettings.getBoolean("greenpass_flag",false);
+    const mySwitch = args.object;
+
+    mySwitch.on("checkedChange", (args) => {
+        const sw = args.object;
+        const isChecked = sw.checked;
+        appSettings.setBoolean("greenpass_flag",isChecked);
     });
 }

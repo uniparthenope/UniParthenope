@@ -32,30 +32,25 @@ exports.onNavigatingTo = function (args) {
     loading = page.getViewById("activityIndicator");
     global.services = [];
 
+
+
     let grpId = appSettings.getNumber("grpId",7);
     if (grpId !== 7 && grpId !== 99)
         getGPStatus();
     else{
+        let gp_flag = appSettings.getBoolean("greenpass_flag",false);
+        if(gp_flag){
+            page.getViewById("layout-greenpass").visibility = "visible";
+            getGPStatus();
+        }
+        else{
+            page.getViewById("layout-greenpass").visibility = "collapsed";
+        }
         let pren = page.getViewById("btn-prenotazioni");
-        page.bindingContext = viewModel;
         pren.visibility = "collapsed";
-    }
-    //getSelfCert();
-    /*
-    let grpDes = appSettings.getString("grpDes","");
-
-    if (grpDes === "Docenti" || grpDes === "PTA" || grpDes === "Ristorante" || grpDes === ""){
-        isStudent = false;
-        page.getViewById("scelta_accesso").visibility = "collapsed";
-        getAllServices();
+        page.bindingContext = viewModel;
 
     }
-    else{
-        isStudent = true;
-        getAccess();
-        page.getViewById("scelta_accesso").visibility = "visible";
-    }
-    */
 }
 
 exports.onDrawerButtonTap = function () {
@@ -94,7 +89,6 @@ exports.goto_history = function () {
 };
 function getGPStatus(){
     let status = page.getViewById("gp_status");
-    let exp = page.getViewById("gp_exp");
     let exp_date = page.getViewById("gp_exp_date");
     let gp_btn = page.getViewById("btn-scangp");
 
@@ -111,25 +105,24 @@ function getGPStatus(){
         if(response.statusCode === 200){
             let _response = response.content.toJSON();
             loading.visibility = "collapsed";
-            //console.log(_response);
+            console.log(_response);
             if(_response.autocertification){
-                exp.visibility = "visible";
+
                 status.text = L('gp_ok');
                 status.color = "green";
-                exp_date.text = _response.expiry;
-                exp_date.color = "green";
                 gp_btn.visibility = "collapsed";
             }
             else {
-                exp.visibility = "collapsed";
+
                 status.text = L('gp_bad');
                 status.color = "red";
                 //Show button
-                if(appSettings.getNumber("grpId") !== 99)
-                    gp_btn.visibility = "visible";
+                gp_btn.visibility = "visible";
+
             }
-            page.bindingContext = viewModel;
         }
+        page.bindingContext = viewModel;
+
 
     });
 

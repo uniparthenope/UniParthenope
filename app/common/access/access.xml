@@ -29,15 +29,11 @@
                 <Label class="textPrimary" text="{{L('access_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
-            <StackLayout margin="5 5 5 5">
+            <StackLayout margin="5 5 5 5" id="layout-greenpass">
                 <Label class="textPrimary" id="gp_message" col="0" text="{{L('gp_status_message')}}" horizontalAlignment="left" verticalAlignment="center"/>
-                <Label class="textPrimary" id="gp_status" col="0" text="N/A" horizontalAlignment="center" verticalAlignment="center" fontSize="24"/>
+                <Label class="textPrimary" id="gp_status" col="0" text="--" horizontalAlignment="center" verticalAlignment="center" fontSize="24"/>
                 <Button margin="5 5 5 5" id="btn-scangp" class="btn" visibility="collapsed" text="{{L('btn_greenpass')}}" ontap="scan_gp" />
 
-                <StackLayout orientation="horizontal" id="gp_exp" visibility="collapsed" horizontalAlignment="center">
-                    <Label class="textPrimary" id="gp_exp_msg" col="0" text="{{L('gp_expire')}}"  verticalAlignment="center" marginRight="10"/>
-                    <Label class="textPrimary" id="gp_exp_date" col="0" text="--"  verticalAlignment="center" fontSize="24"/>
-                </StackLayout>
             </StackLayout>
 <!--
             <GridLayout margin="5 5 5 5" columns="*,50" height="50" >
