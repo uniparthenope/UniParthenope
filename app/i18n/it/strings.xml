@@ -397,8 +397,12 @@
     <string name="gp_ok">Accettato</string>
     <string name="gp_bad">Mancante</string>
     <string name="btn_greenpass">Scansiona GreenPass</string>
+    <string name="btn_removegp">Annulla Verifica</string>
     <string name="access_gp">Recupero Informazioni GreenPass ...</string>
     <string name="set_greenpass">Informazioni GreenPass</string>
+    <string name="rm_greenpass">Sicuro di voler annullare verifica?</string>
+    <string name="rm_gp_ok">Verifica annullata con successo!</string>
+    <string name="rm_gp_bad">Errore durante annullamento della verifica!</string>
 
     <string name="result">Risultato</string>
 

@@ -90,7 +90,7 @@ exports.goto_history = function () {
 function getGPStatus(){
     let status = page.getViewById("gp_status");
     let exp_date = page.getViewById("gp_exp_date");
-    let gp_btn = page.getViewById("btn-scangp");
+    let rm_btn = page.getViewById("btn-removegp");
 
     let url = global.url_general + "Badges/v3/greenPassStatus";
     loading.visibility = "visible";
@@ -110,12 +110,14 @@ function getGPStatus(){
 
                 status.text = "\u2705";
                 status.color = "green";
+                rm_btn.visibility = "visible";
                 //gp_btn.visibility = "collapsed";
             }
             else {
 
                 status.text = "\u274C";
                 status.color = "red";
+                rm_btn.visibility = "collapsed";
                 //Show button
                 //gp_btn.visibility = "visible";
 
@@ -208,7 +210,46 @@ exports.scan_gp = function()
         }
     );
 
-    }
+}
+exports.remove_gp = function(){
+    dialogs.confirm({
+        title: L('warning'),
+        message: L('rm_greenpass'),
+        okButtonText: L('y'),
+        cancelButtonText:L('n')
+        }).then(function (result){
+        if(result){
+            let url = global.url_general + "Badges/v3/greenPassRemove";
+            loading.visibility = "visible";
+            httpModule.request({
+                url: url,
+                method: "DELETE",
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization" : "Basic "+ global.encodedStr
+                }
+            }).then((response) => {
+                page.getViewById("btn-removegp").visibility = "collapsed";
+
+                if(response.statusCode === 200){
+                    dialogs.alert({
+                        title: L('result'),
+                        message: L('rm_gp_ok'),
+                        okButtonText: "OK"})
+                    loading.visibility = "collapsed";
+                    getGPStatus();
+                }
+                else{
+                    dialogs.alert({
+                        title: L('result'),
+                        message: L('rm_gp_bad'),
+                        okButtonText: "OK"})
+                }
+                });
+        }
+    })
+
+}
 /*
 // OLD CODE FOR SELF-CERTIFICATION ACCESS
 exports.onSwitchLoaded_autocert = function (args) {
