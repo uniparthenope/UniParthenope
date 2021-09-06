@@ -378,11 +378,13 @@
         Continue anyway?</string>
 
     <!-- GREEN PASS -->
-    <string name="gp_status_message">GreenPass information:</string>
+    <string name="gp_status_message">GreenPass status:</string>
     <string name="gp_ok">Accepted</string>
     <string name="gp_bad">Not Provided</string>
     <string name="btn_greenpass">Scan GreenPass</string>
     <string name="access_gp">Get GreenPass Information ...</string>
     <string name="set_greenpass">GreenPass Information</string>
+
+    <string name="result">Response</string>
 
 </resources>

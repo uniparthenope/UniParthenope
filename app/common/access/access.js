@@ -108,16 +108,16 @@ function getGPStatus(){
             console.log(_response);
             if(_response.autocertification){
 
-                status.text = L('gp_ok');
+                status.text = "\u2705";
                 status.color = "green";
-                gp_btn.visibility = "collapsed";
+                //gp_btn.visibility = "collapsed";
             }
             else {
 
-                status.text = L('gp_bad');
+                status.text = "\u274C";
                 status.color = "red";
                 //Show button
-                gp_btn.visibility = "visible";
+                //gp_btn.visibility = "visible";
 
             }
         }
@@ -166,18 +166,32 @@ exports.scan_gp = function()
 
 
                 if(response.statusCode === 500){
+                    dialogs.alert({
+                        title: L('result'),
+                        message: result.message,
+                        okButtonText: "OK"})
+                        /*
                     new toasty.Toasty({"text": result.message,
                         position: toasty.ToastPosition.CENTER,
                         duration: toasty.ToastDuration.LONG,
                         yAxisOffset: 100,
                         backgroundColor: result.color}).show();
+
+                         */
                 }
                 else {
+                    /*
                     new toasty.Toasty({"text": result.message,
                         position: toasty.ToastPosition.CENTER,
                         duration: toasty.ToastDuration.LONG,
                         yAxisOffset: 100,
                         backgroundColor: result.color}).show();
+
+                     */
+                    dialogs.alert({
+                        title: L('result'),
+                        message: result.message,
+                        okButtonText: "OK"})
 
                     //barcodescanner.stop();
                     //frame.Frame.topmost().goBack();

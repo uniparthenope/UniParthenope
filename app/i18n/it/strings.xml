@@ -393,11 +393,14 @@
     <string name="rememberMe">Ricordami</string>
 
     <!-- GREEN PASS -->
-    <string name="gp_status_message">GreenPass informazioni:</string>
+    <string name="gp_status_message">GreenPass stato:</string>
     <string name="gp_ok">Accettato</string>
     <string name="gp_bad">Mancante</string>
     <string name="btn_greenpass">Scansiona GreenPass</string>
     <string name="access_gp">Recupero Informazioni GreenPass ...</string>
     <string name="set_greenpass">Informazioni GreenPass</string>
+
+    <string name="result">Risultato</string>
+
 
 </resources>

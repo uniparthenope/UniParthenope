@@ -30,9 +30,11 @@
             </GridLayout>
 
             <StackLayout margin="5 5 5 5" id="layout-greenpass">
-                <Label class="textPrimary" id="gp_message" col="0" text="{{L('gp_status_message')}}" horizontalAlignment="left" verticalAlignment="center"/>
-                <Label class="textPrimary" id="gp_status" col="0" text="--" horizontalAlignment="center" verticalAlignment="center" fontSize="24"/>
-                <Button margin="5 5 5 5" id="btn-scangp" class="btn" visibility="collapsed" text="{{L('btn_greenpass')}}" ontap="scan_gp" />
+                <GridLayout verticalAlignment="top">
+                    <Label class="textPrimary" id="gp_message" col="0" text="{{L('gp_status_message')}}" horizontalAlignment="left" verticalAlignment="center"/>
+                    <Label class="textPrimary" id="gp_status" col="0" text="--" horizontalAlignment="right" verticalAlignment="center" fontSize="24"/>
+                </GridLayout>
+                 <Button marginTop="15" id="btn-scangp" class="btn" text="{{L('btn_greenpass')}}" ontap="scan_gp" />
 
             </StackLayout>
 <!--
