@@ -9,6 +9,7 @@ let page;
 let viewModel;
 let sideDrawer;
 let index = 0;
+let picker_index = 0;
 
 let departments;
 let prenotazioneServizi;
@@ -73,7 +74,7 @@ function getAllServices(){
             servicesList = dep;
         }
 
-        showService(0); //Show default lession
+        showService(picker_index); //Show default lession
         loading.visibility = "collapsed";
         page.bindingContext = viewModel;
     },(e) => {
@@ -307,8 +308,8 @@ exports.onListPickerLoaded = function (fargs) {
     const listPickerComponent = fargs.object;
     listPickerComponent.on("selectedIndexChange", (args) => {
         const picker = args.object;
-        let index = picker.selectedIndex;
-        showService(index);
+        picker_index = picker.selectedIndex;
+        showService(picker_index);
 
         //console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
     });
