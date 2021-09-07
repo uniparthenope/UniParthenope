@@ -393,13 +393,13 @@
     <string name="rememberMe">Ricordami</string>
 
     <!-- GREEN PASS -->
-    <string name="gp_status_message">GreenPass stato:</string>
-    <string name="gp_ok">Accettato</string>
+    <string name="gp_status_message">Certificazione verde COVID-19 stato:</string>
+    <string name="gp_ok">Verificato</string>
     <string name="gp_bad">Mancante</string>
-    <string name="btn_greenpass">Scansiona GreenPass</string>
+    <string name="btn_greenpass">Verifica Certificazione verde</string>
     <string name="btn_removegp">Annulla Verifica</string>
-    <string name="access_gp">Recupero Informazioni GreenPass ...</string>
-    <string name="set_greenpass">Informazioni GreenPass</string>
+    <string name="access_gp">Recupero Informazioni Certificazione verde ...</string>
+    <string name="set_greenpass">Informazioni Certificazione verde</string>
     <string name="rm_greenpass">Sicuro di voler annullare verifica?</string>
     <string name="rm_gp_ok">Verifica annullata con successo!</string>
     <string name="rm_gp_bad">Errore durante annullamento della verifica!</string>

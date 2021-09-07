@@ -378,14 +378,14 @@
         Continue anyway?</string>
 
     <!-- GREEN PASS -->
-    <string name="gp_status_message">GreenPass status:</string>
+    <string name="gp_status_message">EU digital COVID-19 Certificate status:</string>
     <string name="gp_ok">Accepted</string>
     <string name="gp_bad">Not Provided</string>
-    <string name="btn_greenpass">Scan GreenPass</string>
-    <string name="btn_removegp">Remove GreenPass</string>
-    <string name="access_gp">Get GreenPass Information ...</string>
-    <string name="set_greenpass">GreenPass Information</string>
-    <string name="rm_greenpass">Are you sure to remove GreenPass?</string>
+    <string name="btn_greenpass">Check Certificate</string>
+    <string name="btn_removegp">Cancel Certificate</string>
+    <string name="access_gp">Get Certificate Information ...</string>
+    <string name="set_greenpass">Certificate Information</string>
+    <string name="rm_greenpass">Are you sure to cancel certificate?</string>
 
     <string name="result">Response</string>
 
