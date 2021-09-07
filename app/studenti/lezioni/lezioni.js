@@ -8,6 +8,7 @@ const appSettings = require("tns-core-modules/application-settings");
 let page;
 let viewModel;
 let sideDrawer;
+let picker_index = 0;
 
 let departments;
 let prenotazioneAule;
@@ -71,7 +72,7 @@ function getAllTodayRooms(){
             );
             servicesList = dep;
         }
-        showLession(0); //Show default lession
+        showLession(picker_index); //Show default lession
         loading.visibility = "collapsed";
         page.bindingContext = viewModel;
 
@@ -96,7 +97,6 @@ function showLession(index){
         prenotazioneAule.pop();
 
     let result = servicesList[index].services;
-    console.log(result);
     if(result.length === 0)
         no_less.visibility = "visible";
     else
@@ -142,6 +142,11 @@ function showLession(index){
         prenotazioneAule.sort(function (orderA, orderB) {
             let nameA = orderA.nome;
             let nameB = orderB.nome;
+            return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+        });
+        prenotazioneAule.sort(function (orderA, orderB) {
+            let nameA = orderA.start_date;
+            let nameB = orderB.start_date;
             return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
         });
         prenotazioneAule.sort(function (orderA, orderB) {
@@ -214,12 +219,7 @@ exports.onItemTap = function(args) {
                             message: result["status"],
                             okButtonText: "OK"
                         }).then(function (){
-                            const nav =
-                                {
-                                    moduleName: "studenti/lezioni/lezioni",
-                                    clearHistory: true
-                                };
-                            page.frame.navigate(nav);
+                            getAllTodayRooms();
                         });
                     }
                     else{
@@ -271,12 +271,7 @@ exports.onItemTap = function(args) {
                             message: result["status"],
                             okButtonText: "OK"
                         }).then(function (){
-                            const nav =
-                                {
-                                    moduleName: "studenti/lezioni/lezioni",
-                                    clearHistory: true
-                                };
-                            page.frame.navigate(nav);
+                            getAllTodayRooms();
                         });
                     }
                     else{
@@ -305,8 +300,8 @@ exports.onListPickerLoaded = function (fargs) {
     const listPickerComponent = fargs.object;
     listPickerComponent.on("selectedIndexChange", (args) => {
         const picker = args.object;
-        let index = picker.selectedIndex;
-        showLession(index);
+        picker_index = picker.selectedIndex;
+        showLession(picker_index);
 
         //console.log(`index: ${picker.selectedIndex}; item" ${status[picker.selectedIndex]}`);
     });
