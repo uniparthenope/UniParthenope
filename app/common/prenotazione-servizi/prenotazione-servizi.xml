@@ -54,6 +54,7 @@
                                     <GridLayout row="0" columns="auto,*,auto"  padding="5 5 5 5">
                                         <StackLayout col="0" orientation="vertical" horizontalAlignment="left">
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="{{L('start')}}" marginRight="5"/>
+                                            <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ start_date }}"/>
                                             <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ start }}"/>
                                         </StackLayout>
 
@@ -61,6 +62,7 @@
 
                                         <StackLayout col="2" orientation="vertical" horizontalAlignment="right">
                                             <Label class="{{ classe }}" color="white" borderWidth="0" fontSize="12" text="{{L('end')}}" marginRight="5"/>
+                                            <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ end_date }}"/>
                                             <Label class="{{ classe }}" color="orange" borderWidth="0" fontSize="16" text="{{ end }}"/>
                                         </StackLayout>
                                     </GridLayout>

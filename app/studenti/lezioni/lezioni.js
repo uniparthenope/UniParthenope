@@ -126,6 +126,8 @@ function showLession(index){
             "nome": fulldata,
             "start": ""+ start_data.getHours() + ":"+ convertMinutes(start_data.getMinutes()),
             "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
+            "start_date": ""+ global.monthOfYear(start_data.getMonth()) + " " + start_data.getDate(),
+            "end_date": ""+ global.monthOfYear(end_data.getMonth()) + " " + end_data.getDate(),
             "room_place": result[i].room.name,
             "room": result[i].course_name,
             "capacity": max_cap + " "+L('places'),

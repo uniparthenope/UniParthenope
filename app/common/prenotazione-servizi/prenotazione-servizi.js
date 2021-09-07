@@ -106,7 +106,7 @@ function showService(index){
         loading.visibility = "visible";
 
         let fulldata = convertData(result[i].start);
-        fulldata = "" + dayOfWeek(fulldata) + " " + fulldata.getDate() + " " + monthOfYear(fulldata.getMonth()) + " " + fulldata.getFullYear();
+        fulldata = "" + global.dayOfWeek(fulldata) + " " + fulldata.getDate() + " " + global.monthOfYear(fulldata.getMonth()) + " " + fulldata.getFullYear();
         //console.log(fulldata);
         let start_data = convertData(result[i].start);
         let end_data = convertData(result[i].end);
@@ -125,6 +125,8 @@ function showService(index){
             "nome": fulldata,
             "start": ""+ start_data.getHours() + ":"+ convertMinutes(start_data.getMinutes()),
             "end": ""+ end_data.getHours() + ":"+convertMinutes(end_data.getMinutes()),
+            "start_date": ""+ global.monthOfYear(start_data.getMonth()) + " " + start_data.getDate(),
+            "end_date": ""+ global.monthOfYear(end_data.getMonth()) + " " + end_data.getDate(),
             "room": result[i].room.name,
             "room_place": result[i].room.description,
             "capacity": max_cap + " "+L('places'),

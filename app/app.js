@@ -73,6 +73,17 @@ global.clearAll = function(){
     appSettings.clear();
 };
 
+global.dayOfWeek = function(date) {
+    date = date.getDay();
+    return isNaN(date) ? null : [L('dom'), L('lun'), L('mar'), L('mer'), L('gio'), L('ven'), L('sab')][date];
+}
+
+global.monthOfYear = function(date) {
+
+    return isNaN(date) ? null : [L('gen'), L('feb'), L('mar_m'), L('apr'), L('mag'), L('giu'), L('lug'), L('ago'), L('set'), L('ott'), L('nov'), L('dic')][date];
+
+}
+
 global.saveInfo =async function(result) {
     await appSettings.setString("codFis",result.user.codFis);
     await appSettings.setString("nome",result.user.firstName);

@@ -91,6 +91,8 @@ function getGPStatus(){
     let status = page.getViewById("gp_status");
     let exp_date = page.getViewById("gp_exp_date");
     let rm_btn = page.getViewById("btn-removegp");
+    let room_btn = page.getViewById("btn-prenotazioni");
+    let service_btn = page.getViewById("btn-servizi");
 
     let url = global.url_general + "Badges/v3/greenPassStatus";
     loading.visibility = "visible";
@@ -111,6 +113,12 @@ function getGPStatus(){
                 status.text = "\u2705";
                 status.color = "green";
                 rm_btn.visibility = "visible";
+                if(appSettings.getNumber("grpId") !== 7 && appSettings.getNumber("grpId") !== 99){
+                    room_btn.visibility = "visible";
+                    service_btn.visibility = "visible";
+                }
+
+
                 //gp_btn.visibility = "collapsed";
             }
             else {
@@ -118,6 +126,10 @@ function getGPStatus(){
                 status.text = "\u274C";
                 status.color = "red";
                 rm_btn.visibility = "collapsed";
+                if(appSettings.getNumber("grpId") !== 7 && appSettings.getNumber("grpId") !== 99){
+                    room_btn.visibility = "collapsed";
+                    service_btn.visibility = "collapsed";
+                }
                 //Show button
                 //gp_btn.visibility = "visible";
 
