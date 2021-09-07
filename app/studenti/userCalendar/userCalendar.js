@@ -38,6 +38,7 @@ function insert_event() {
         let temp = global.events;
         for (let x=0; x<temp.length; x++){
             try {
+                console.log(temp[x]);
                 let event = new calendarModule.CalendarEvent(temp[x].title, temp[x].data_inizio, temp[x].data_fine, false, temp[x].color);
                 event_calendar.push(event);
 
@@ -108,7 +109,7 @@ function calendarCourses() {
                     color: color
                 });
             }
-            insert_event();
+            //insert_event();
             page.getViewById("activityIndicator3").visibility = "collapsed";
         }
     },(e) => {
@@ -159,27 +160,12 @@ function calendarCourses() {
                     color: new Color.Color("#0F9851")
                 });
             }
-            insert_event();
 
             page.getViewById("activityIndicator4").visibility = "collapsed";
-            /*
-            memo) RESULT =
-                    "adId": result[i].adId,
-                    "appId": result[i].appId,
-                    "dataEsame": result[i].dataEsa,
-                    "classe": "examPass",
-                    "mese_app": result[i].desApp,
-                    "esame": result[i].nomeAppello,
-                    "docente": result[i].nome_pres + " "+ result[i].cognome_pres,
-                    "descrizione": result[i].tipoApp,
-                    "edificio": result[i].edificioDes,
-                    "aula": result[i].aulaDes,
-                    "iscritti": result[i].numIscritti,
-                    "note": result[i].note
 
-             */
             global.getAllBadge(page);
         }
+        insert_event();
     },(e) => {
         dialogs.confirm({
             title: "Errore: UserCalendar getPrenotazioni",
@@ -342,9 +328,6 @@ function getAccesso(){
 }
 
  */
-function getPrenotazioni(){
-
-}
 
 exports.onNavigatingTo = function (args) {
     page = args.object;

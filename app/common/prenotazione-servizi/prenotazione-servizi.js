@@ -144,6 +144,11 @@ function showService(index){
             return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
         });
         prenotazioneServizi.sort(function (orderA, orderB) {
+            let nameA = orderA.start_date;
+            let nameB = orderB.start_date;
+            return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+        });
+        prenotazioneServizi.sort(function (orderA, orderB) {
             let nameA = orderA.isReserved;
             let nameB = orderB.isReserved;
             return (nameA < nameB) ? 1 : (nameA > nameB) ? -1 : 0;
