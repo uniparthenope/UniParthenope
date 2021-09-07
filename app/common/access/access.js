@@ -159,7 +159,10 @@ exports.scan_gp = function()
         resultDisplayDuration: 0,   // Android only, default 1500 (ms), set to 0 to disable echoing the scanned text// Android only, default undefined (sensor-driven orientation), other options: portrait|landscape
         beepOnScan: true,             // Play or Suppress beep on scan (default true)
         openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
-        reportDuplicates: false
+        reportDuplicates: false,
+        closeCallback(){
+            loading_gp.visibility = "collapsed";
+        }
 
     }).then(
         function(result) {
