@@ -20,6 +20,7 @@ const platformModule = require("tns-core-modules/platform");
             8	Preiscritti
             9	Registrati
             6	Studenti
+            99  PTA
 */
 
 let page;
@@ -251,7 +252,6 @@ exports.onShownModally = function (args) {
             // STUDENTE
             if(_result.user.grpDes === "Studenti"){
                 global.myform = "userForm";
-
                 normalizeToken(_result.user.userId);
 
                 carriere = _result.user.trattiCarriera;

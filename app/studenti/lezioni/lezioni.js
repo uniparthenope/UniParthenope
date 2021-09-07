@@ -248,7 +248,6 @@ exports.onItemTap = function(args) {
             okButtonText: L('y'),
             cancelButtonText: L('n'),
         }).then(function (result) {
-            console.log(result);
             if (result){
                 httpModule.request({
                     url : global.url_general + "GAUniparthenope/v2/RoomsReservation",

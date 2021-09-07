@@ -33,7 +33,7 @@ exports.onTapLogin = function() {
     if (user !== "" && pass!== "")
     {
         let token = user + ":" + pass;
-        var bytes = utf8.encode(token);
+        let bytes = utf8.encode(token);
         global.encodedStr = base64.encode(bytes);
         sideDrawer.showModal(modalViewModule, {user:user, pass:pass}, () => {}, false);
     }
