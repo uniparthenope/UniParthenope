@@ -438,9 +438,9 @@ exports.onShownModally = function (args) {
                 }
                 else
                     appSettings.setString("badge_button_other","UniParthenope Card");
-                normalizeToken(_result.user.userId);
 
-                appSettings.setString("grpDes",_result.user.grpDes);
+                normalizeToken(_result.user.userId);
+                global.saveInfo(account);
 
                 if  (_result.user.persId !== undefined)
                     appSettings.setNumber("persId",_result.user.persId);

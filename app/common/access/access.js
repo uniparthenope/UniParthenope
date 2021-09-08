@@ -32,8 +32,6 @@ exports.onNavigatingTo = function (args) {
     loading = page.getViewById("activityIndicator");
     global.services = [];
 
-
-
     let grpId = appSettings.getNumber("grpId",7);
     if (grpId !== 7 && grpId !== 99)
         getGPStatus();
@@ -89,13 +87,13 @@ exports.goto_history = function () {
 };
 function getGPStatus(){
     let status = page.getViewById("gp_status");
-    let exp_date = page.getViewById("gp_exp_date");
     let rm_btn = page.getViewById("btn-removegp");
     let room_btn = page.getViewById("btn-prenotazioni");
     let service_btn = page.getViewById("btn-servizi");
 
     let url = global.url_general + "Badges/v3/greenPassStatus";
     loading.visibility = "visible";
+
     httpModule.request({
         url: url,
         method: "GET",
@@ -107,37 +105,35 @@ function getGPStatus(){
         if(response.statusCode === 200){
             let _response = response.content.toJSON();
             loading.visibility = "collapsed";
-            console.log(_response);
+
+            if (_response.room_button && appSettings.getNumber("grpId") !== 7 && appSettings.getNumber("grpId") !== 99){
+                room_btn.visibility = "visible";
+            }
+            else{
+                room_btn.visibility = "collapsed";
+            }
+
+            if (_response.service_button){
+                service_btn.visibility = "visible";
+            }
+            else{
+                service_btn.visibility = "collapsed";
+            }
+
             if(_response.autocertification){
 
                 status.text = "\u2705";
                 status.color = "green";
                 rm_btn.visibility = "visible";
-                if(appSettings.getNumber("grpId") !== 7 && appSettings.getNumber("grpId") !== 99){
-                    room_btn.visibility = "visible";
-                    service_btn.visibility = "visible";
-                }
-
-
-                //gp_btn.visibility = "collapsed";
             }
             else {
 
                 status.text = "\u274C";
                 status.color = "red";
                 rm_btn.visibility = "collapsed";
-                if(appSettings.getNumber("grpId") !== 7 && appSettings.getNumber("grpId") !== 99){
-                    room_btn.visibility = "collapsed";
-                    service_btn.visibility = "collapsed";
-                }
-                //Show button
-                //gp_btn.visibility = "visible";
-
             }
         }
         page.bindingContext = viewModel;
-
-
     });
 
 }
