@@ -253,3 +253,11 @@ exports.goto_adminNew = function () {
         };
     frame.Frame.topmost().navigate(nav);
 };
+
+exports.goto_aule = function () {
+    const nav =
+        {
+            moduleName: "studenti/lezioni/lezioni",
+        };
+    frame.Frame.topmost().navigate(nav);
+};

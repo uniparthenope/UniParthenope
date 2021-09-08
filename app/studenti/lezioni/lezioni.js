@@ -5,6 +5,9 @@ const httpModule = require("tns-core-modules/http");
 const dialogs = require("tns-core-modules/ui/dialogs");
 const appSettings = require("tns-core-modules/application-settings");
 
+const modalViewModule = "docenti/modal-studentiLezione/modal-studentiLezione";
+
+
 let page;
 let viewModel;
 let sideDrawer;
@@ -15,6 +18,7 @@ let prenotazioneAule;
 let servicesList;
 let loading;
 let no_less;
+let grpId;
 
 function dayOfWeek(date) {
     date = date.getDay();
@@ -170,6 +174,16 @@ exports.onNavigatingTo = function(args) {
 
     prenotazioneAule = new ObservableArray();
     departments = [];
+    grpId = appSettings.getNumber("grpId",6);
+    if (grpId === 6){
+        page.getViewById("top_title").text = L('less_title');
+        page.getViewById("des_book").text = L('select_less');
+
+    }
+    else if (grpId === 7){
+        page.getViewById("top_title").text = L('less_title_doc');
+        page.getViewById("des_book").text = L('select_less_doc');
+    }
 
     viewModel = observableModule.fromObject({
         prenotazioneAule: prenotazioneAule,
@@ -191,108 +205,131 @@ exports.onItemTap_department = function(args) {
 
 exports.onItemTap = function(args) {
     const index = args.index;
+    const mainView = args.object;
 
     let lez = prenotazioneAule.getItem(index);
 
-    if(lez.isReserved){
-        dialogs.confirm({
-            title: L('rmv_book_title'),
-            message: L('rmv_book'),
-            okButtonText: L('y'),
-            cancelButtonText: L('n'),
-        }).then(function (result) {
-            if (result){
-                httpModule.request({
-                    url: global.url_general + "GAUniparthenope/v2/RoomsReservation/" + lez.reserved_id,
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type" : "application/json",
-                        "Authorization" : "Basic " + global.encodedStr
-                    }
-                }).then((response) => {
-                    const result = response.content.toJSON();
+    if (grpId === 6){
 
-                    if (response.statusCode === 200){
-                        global.updatedExam = false;
-                        dialogs.alert({
-                            title: "Successo",
-                            message: result["status"],
-                            okButtonText: "OK"
-                        }).then(function (){
-                            getAllTodayRooms();
-                        });
-                    }
-                    else{
-                        dialogs.alert({
-                            title: "Errore: Cancellazione Prenotazioni",
-                            message: result['message'],
-                            okButtonText: "OK"
-                        });
-                    }
+        if(lez.isReserved){
+            dialogs.confirm({
+                title: L('rmv_book_title'),
+                message: L('rmv_book'),
+                okButtonText: L('y'),
+                cancelButtonText: L('n'),
+            }).then(function (result) {
+                if (result){
+                    httpModule.request({
+                        url: global.url_general + "GAUniparthenope/v2/RoomsReservation/" + lez.reserved_id,
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type" : "application/json",
+                            "Authorization" : "Basic " + global.encodedStr
+                        }
+                    }).then((response) => {
+                        const result = response.content.toJSON();
 
-                },(e) => {
-                    console.log("Error", e);
-                    dialogs.alert({
-                        title: "Errore: Cancellazione prenotazioni",
-                        message: e.toString(),
-                        okButtonText: "OK"
+                        if (response.statusCode === 200){
+                            global.updatedExam = false;
+                            dialogs.alert({
+                                title: "Successo",
+                                message: result["status"],
+                                okButtonText: "OK"
+                            }).then(function (){
+                                getAllTodayRooms();
+                            });
+                        }
+                        else{
+                            dialogs.alert({
+                                title: "Errore: Cancellazione Prenotazioni",
+                                message: result['message'],
+                                okButtonText: "OK"
+                            });
+                        }
+
+                    },(e) => {
+                        console.log("Error", e);
+                        dialogs.alert({
+                            title: "Errore: Cancellazione prenotazioni",
+                            message: e.toString(),
+                            okButtonText: "OK"
+                        });
                     });
-                });
-            }
-        });
-    }
-    else{
-        dialogs.confirm({
-            title: L('book_title'),
-            message: L('book_pl'),
-            okButtonText: L('y'),
-            cancelButtonText: L('n'),
-        }).then(function (result) {
-            if (result){
-                httpModule.request({
-                    url : global.url_general + "GAUniparthenope/v2/RoomsReservation",
-                    method: "POST",
-                    headers: {
-                        "Content-Type" : "application/json",
-                        "Authorization" : "Basic " + global.encodedStr
-                    },
-                    content : JSON.stringify({
-                        id_lezione: lez.id.toString(),
-                        id_corso: lez.id_corso.toString(),
-                        matricola: appSettings.getString("matricola", "")
-                    })
-                }).then((response) => {
-                    const result = response.content.toJSON();
+                }
+            });
+        }
+        else{
+            dialogs.confirm({
+                title: L('book_title'),
+                message: L('book_pl'),
+                okButtonText: L('y'),
+                cancelButtonText: L('n'),
+            }).then(function (result) {
+                if (result){
+                    httpModule.request({
+                        url : global.url_general + "GAUniparthenope/v2/RoomsReservation",
+                        method: "POST",
+                        headers: {
+                            "Content-Type" : "application/json",
+                            "Authorization" : "Basic " + global.encodedStr
+                        },
+                        content : JSON.stringify({
+                            id_lezione: lez.id.toString(),
+                            id_corso: lez.id_corso.toString(),
+                            matricola: appSettings.getString("matricola", "")
+                        })
+                    }).then((response) => {
+                        const result = response.content.toJSON();
 
-                    if (response.statusCode === 200){
-                        dialogs.alert({
-                            title: L('success'),
-                            message: result["status"],
-                            okButtonText: "OK"
-                        }).then(function (){
-                            getAllTodayRooms();
-                        });
-                    }
-                    else{
-                        dialogs.alert({
-                            title: "Errore: Prenotazioni",
-                            message: result["errMsg"],
-                            okButtonText: "OK"
-                        });
-                    }
+                        if (response.statusCode === 200){
+                            dialogs.alert({
+                                title: L('success'),
+                                message: result["status"],
+                                okButtonText: "OK"
+                            }).then(function (){
+                                getAllTodayRooms();
+                            });
+                        }
+                        else{
+                            dialogs.alert({
+                                title: "Errore: Prenotazioni",
+                                message: result["errMsg"],
+                                okButtonText: "OK"
+                            });
+                        }
 
-                },(e) => {
-                    console.log("Error", e);
-                    dialogs.alert({
-                        title: "Errore: prenotazioni",
-                        message: e.toString(),
-                        okButtonText: "OK"
+                    },(e) => {
+                        console.log("Error", e);
+                        dialogs.alert({
+                            title: "Errore: prenotazioni",
+                            message: e.toString(),
+                            okButtonText: "OK"
+                        });
                     });
-                });
-            }
-        });
-    }
+                }
+            });
+        }
 
+    }
+    else if (grpId === 7){
+        //console.log(lez);
+        const option = {
+            context: {data: lez.room, id: lez.id },
+            closeCallback: () => {
+                // Receive data from the modal view. e.g. username & password
+                const nav =
+                    {
+                        moduleName: "studenti/lezioni/lezioni",
+                        clearHistory: true,
+                        animated: false
+                    };
+                page.frame.navigate(nav);
+            },
+            fullscreen: false
+        };
+
+        mainView.showModal(modalViewModule, option);
+    }
 }
 
 exports.onListPickerLoaded = function (fargs) {

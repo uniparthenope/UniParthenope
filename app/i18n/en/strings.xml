@@ -84,6 +84,7 @@
     <string name="pr_my">My Home</string>
     <string name="pr_acc">Access</string>
     <string name="pr_anag">Personal Data</string>
+    <string name="pr_aule">Classrooms</string>
 
     <string name="ris_men">My Menu</string>
     <string name="ris_acc">Access</string>
@@ -123,10 +124,13 @@
     <!--PRENOTAZIONE SERVIZI -->
     <string name="pren_title">Book Services</string>
     <string name="less_title">Book Lessons</string>
+    <string name="less_title_doc">Classrooms</string>
+
 
     <string name="select_depart">Select a building from the list:</string>
     <string name="select_serv">Select a service to book:</string>
     <string name="select_less">Select a lesson to book:</string>
+    <string name="select_less_doc">Select a lesson to show registered students:</string>
 
     <string name="no_serv">No services found!</string>
     <string name="start">Start: </string>
@@ -163,7 +167,7 @@
 
     <!--MODAL STUDAPPELLO and STUDLEZIONE-->
     <string name="stud_app_title">Registered students list</string>
-    <string name="mat">Identification Number</string>
+    <string name="mat">Id. Number</string>
     <string name="usr">Username</string>
     <string name="plc">Seat</string>
     <string name="stud_app_activity">Searching registered students...</string>

@@ -66,6 +66,7 @@
                         <Button class="btn-menu btn" color="#1E3258" id="badge_button_docente" text="Faculty Card" marginBottom="5" marginTop="5" tap="goto_badge"/>
 
                         <Button id="pr_acc" class="btn-menu" text="Accesso" marginBottom="5" marginTop="5" tap="goto_access"/>
+                        <Button id="pr_aule" class="btn-menu" text="Aule" marginBottom="5" marginTop="5" tap="goto_aule"/>
                         <Button id="pr_anag" class="btn-menu" text="Anagrafica" marginBottom="5" marginTop="5" tap="goto_anagrafica"/>
                     </StackLayout>
 

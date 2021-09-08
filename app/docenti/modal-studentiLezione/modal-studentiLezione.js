@@ -34,8 +34,8 @@ function listStudent(){
             loading.visibility = "collapsed";
 
         for (let i=0; i<result.length; i++){
-            console.log(result[i]);
-            console.log(result[i].matricola);
+            //console.log(result[i]);
+            //console.log(result[i].matricola);
             students.push({
                 "id": result[i].id,
                 "username": result[i].username,
@@ -82,7 +82,6 @@ exports.onShownModally = function(args) {
 exports.onItemTap = function (args) {
     const mainView = args.object;
     const index = args.index;
-    console.log(students.getItem(index));
 
     dialogs.confirm({
         title: L('canc_pl_title'),
@@ -119,7 +118,6 @@ exports.onItemTap = function (args) {
                 }
 
             },(e) => {
-                console.log("QUI");
                 console.log("Error", e);
                 dialogs.alert({
                     title: "Errore: Cancellazione prenotazioni",
@@ -143,7 +141,7 @@ exports.tap_scan = function(){
         formats: "QR_CODE, EAN_13, CODE_128",
         cancelLabel: "EXIT. Also, try the volume buttons!", // iOS only, default 'Close'
         cancelLabelBackgroundColor: "#333333", // iOS only, default '#000000' (black)
-        message: "Scan QR code", // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
+        message: "Scansionare il QR-Code di un utente per prenotarlo alla lezione selezionata.\n\nUniversità Degli Studi di Napoli 'Parthenope'", // Android only, default is 'Place a barcode inside the viewfinder rectangle to scan it.'
         preferFrontCamera: false,     // Android only, default false
         showFlipCameraButton: false,   // default false
         showTorchButton: false,       // iOS only, default false
@@ -156,7 +154,6 @@ exports.tap_scan = function(){
         },
         continuousScanCallback: function (result) {
             //count++;
-            console.log(result.format + ": " + result.text + " (count: " + count + ")");
             barcodescanner.message = "SCANNED";
             let byte = base64.decode(result.text);
             let qr = utf8.decode(byte,'ascii');
@@ -177,7 +174,6 @@ exports.tap_scan = function(){
                 })
             }).then((response) => {
                 const result = response.content.toJSON();
-                console.log(result);
 
                 let message;
                 if (response.statusCode === 500)

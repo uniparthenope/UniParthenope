@@ -594,6 +594,7 @@ function translateSide(){
     sd.getViewById("pr_my").text = L('pr_my');
     sd.getViewById("pr_acc").text = L('pr_acc');
     sd.getViewById("pr_anag").text = L('pr_anag');
+    sd.getViewById("pr_aule").text = L('pr_aule');
 
     sd.getViewById("ris_men").text = L('ris_men');
     sd.getViewById("ris_acc").text = L('ris_acc');
