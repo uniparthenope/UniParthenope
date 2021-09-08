@@ -29,6 +29,7 @@ global.authToken="";
 global.tempNum = 0;
 global.myform = "";
 global.username = "";
+global.topMatr = "";
 global.data_today;
 global.events = [];
 global.tempPos = false;
@@ -59,6 +60,7 @@ global.clearAll = function(){
     global.encodedStr = "";
     global.authToken="";
     global.myform = "";
+    global.topMatr = "";
     global.username = "";
     global.events = [];
     global.freqExams = [];

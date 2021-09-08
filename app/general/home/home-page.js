@@ -323,7 +323,10 @@ function setSideMenu(type,username) {
     }
     else if(type === "userOther"){
         getPIC(appSettings.getNumber("persId"),0);
-        sideDrawer.getViewById("topMatr").text = appSettings.getString("grpDes","");
+        if (appSettings.getString("grpDes","")  === "")
+            sideDrawer.getViewById("topMatr").text = global.topMatr;
+        else
+            sideDrawer.getViewById("topMatr").text = appSettings.getString("grpDes","");
         sideDrawer.getViewById("topMatr").visibility = "visible";
 
     }
@@ -671,6 +674,8 @@ exports.onNavigatingTo = function (args) {
        }
    }
    else if (remember) {
+       console.log(global.username);
+       console.log(global.myform);
       setSideMenu(global.myform,global.username);
    }
 

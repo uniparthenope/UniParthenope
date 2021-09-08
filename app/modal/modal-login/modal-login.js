@@ -409,7 +409,16 @@ exports.onShownModally = function (args) {
                 sideDrawer.getViewById("topName").text = nome + " " + cognome;
                 sideDrawer.getViewById("topMatr").text = _result.user.grpDes;
                 sideDrawer.getViewById("topMatr").visibility = "visible";
-                getPIC(_result.user.persId,0);
+                global.username = nome + " " + cognome;
+                global.topMatr = _result.user.grpDes;
+
+
+                if  (_result.user.persId !== undefined){
+                    appSettings.setNumber("persId",_result.user.persId);
+
+                }
+                //getPIC(_result.user.persId,0);
+
                 let userForm = sideDrawer.getViewById("userOther");
                 let loginForm = sideDrawer.getViewById("loginForm");
                 loginForm.visibility = "collapsed";
