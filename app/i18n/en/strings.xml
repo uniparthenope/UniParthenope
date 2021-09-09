@@ -171,8 +171,8 @@
     <string name="usr">Username</string>
     <string name="plc">Seat</string>
     <string name="stud_app_activity">Searching registered students...</string>
-    <string name="canc_pl_title">Delete seat reservation</string>
-    <string name="canc_pl">Delete the reservation of</string>
+    <string name="canc_pl_title">Delete seat reservation </string>
+    <string name="canc_pl">Delete the reservation of </string>
 
     <!--AVVISI-->
     <string name="avvisi_title">Notices</string>
@@ -316,6 +316,8 @@
     <string name="lectures_place_cancellation_text">Are you sure you want to cancel your seat reservation?</string>
     <string name="lectures_place_reservation">Seat reservation</string>
     <string name="lectures_place_reservation_text">Are you sure you want to reserve a seat?</string>
+    <string name="lectures_place_reservation_prof">Are you sure you want to reserve a seat to </string>
+
 
     <!-- LIBRETTO -->
     <string name="libretto_medie">Averages</string>

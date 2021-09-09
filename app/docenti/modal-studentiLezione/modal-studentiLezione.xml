@@ -7,24 +7,24 @@
                 <Label row="1" class="textPrimary" color="orange" id="title" text="--" textWrap="true" textAlignment="center" verticalAlignment="center" margin="5 5 5 5"/>
                 <Image ontap="tap_scan" src="~/images/icon/add.png" width="25" height="25" margin="20 20 20 20" verticalAlignment="top" horizontalAlignment="right"/>
             </GridLayout>
-            <GridLayout row="1" rows="30,*" verticalAlignment="center" margin="15 5 5 5" height="100%">
+            <GridLayout row="1" rows="30,*" verticalAlignment="center" margin="15 5 5 5" height="90%">
                 <GridLayout row="0" columns="*,*,auto" margin="5 5 5 5">
                     <Label color="white" col="0" text="{{L('mat')}}" />
                     <Label color="white" col="1" text="{{L('usr')}}"/>
                     <Label color="white" col="2" text="{{L('plc')}}"/>
                 </GridLayout>
-                <StackLayout row="1" verticalAlignment="top" margin="5 5 5 5" height="95%">
-                    <ListView id="prenotazione_lez" separatorColor="#ffffffff" class="list-group" items="{{ students }}" itemTap="onItemTap" marginRight="5" marginLeft="5" height="100%">
-                        <ListView.itemTemplate >
 
-                            <GridLayout columns="*,*,auto" backgroundColor="#1E3258">
-                                <Label color="white" col="0" fontSize="16" text="{{ matricola }}" horizontalAlignment="left"/>
-                                <Label col="1" fontSize="16" text="{{ username }}" color="orange"/>
-                                <Label color="white" col="2" fontSize="16" text="{{ posto }}"/>
-                            </GridLayout>
+                    <ListView row="1" id="prenotazione_lez" separatorColor="#ffffffff" class="list-group" items="{{ students }}" itemTap="onItemTap" marginRight="5" marginLeft="5" marginBottom="10" height="100%">
+                        <ListView.itemTemplate>
+
+                                <GridLayout columns="auto,*,auto" backgroundColor="#1E3258" >
+                                    <Label color="white" col="0" fontSize="16" text="{{ matricola }}" horizontalAlignment="left"  marginRight="10" verticalAlignment="center"/>
+                                    <Label col="1" fontSize="16" text="{{ username }}" color="orange" horizontalAlignment="left" verticalAlignment="center" textAlignment="center"/>
+                                    <Label color="white" col="2" fontSize="16" text="{{ posto }}" marginLeft="5" height="40" verticalAlignment="bottom"/>
+                                </GridLayout>
+
                         </ListView.itemTemplate>
                     </ListView>
-                </StackLayout>
 
             </GridLayout>
 

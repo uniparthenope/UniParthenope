@@ -21,6 +21,10 @@ let loading;
 function listStudent(){
     let url = global.url_general + "GAUniparthenope/v1/getStudentsList/" + id;
     loading.visibility = "visible";
+
+    while (students.length >0)
+        students.pop();
+
     httpModule.request({
         url: url,
         method: "GET",
@@ -49,7 +53,7 @@ function listStudent(){
             });
             loading.visibility = "collapsed";
         }
-
+        page.bindingContext = viewModel;
 
     },(e) => {
         console.log("Error", e);
@@ -74,7 +78,7 @@ exports.onShownModally = function(args) {
     loading = page.getViewById("activityIndicator");
 
     listStudent();
-    page.bindingContext = viewModel;
+
 
     //page.bindingContext = observableModule.fromObject(context);
 }
@@ -106,7 +110,8 @@ exports.onItemTap = function (args) {
                         message: result["status"],
                         okButtonText: "OK"
                     }).then(function (){
-                        students.splice(index);
+                        //students.splice(index);
+                        listStudent();
                     });
                 }
                 else{
@@ -158,48 +163,62 @@ exports.tap_scan = function(){
             let byte = base64.decode(result.text);
             let qr = utf8.decode(byte,'ascii');
             qr = qr.split(":");
+            let matr = "--"
+            if (qr.length > 3)
+                matr = qr[3];
 
-            httpModule.request({
-                url : global.url_general + "GAUniparthenope/v1/ReservationByProf",
-                method : "POST",
-                headers : {
-                    "Content-Type": "application/json",
-                    "Authorization" : "Basic "+ global.encodedStr
-                },
-                content : JSON.stringify({
-                    id_lezione : id,
-                    username: qr[0],
-                    matricola: qr[3],
-                    aaId: appSettings.getString("aaId","2019")
-                })
-            }).then((response) => {
-                const result = response.content.toJSON();
+            dialogs.confirm({
+                title: L('book_title'),
+                message: L('lectures_place_reservation_prof') + qr[0],
+                okButtonText: L('y'),
+                cancelButtonText: L('n')
+            }).then(function (r){
+               if(r){
+                   httpModule.request({
+                       url : global.url_general + "GAUniparthenope/v1/ReservationByProf",
+                       method : "POST",
+                       headers : {
+                           "Content-Type": "application/json",
+                           "Authorization" : "Basic "+ global.encodedStr
+                       },
+                       content : JSON.stringify({
+                           id_lezione : id,
+                           username: qr[0],
+                           matricola: matr,
+                           aaId: appSettings.getString("aaId","2019")
+                       })
+                   }).then((response) => {
+                       const result = response.content.toJSON();
 
-                let message;
-                if (response.statusCode === 500)
-                    message = "Error: " + result["errMsg"];
-                else{
-                    message = result["status"];
-                    students.push({
-                        "username": qr[0],
-                        "matricola": qr[3],
-                        "posto": "--"
-                    });
-                }
+                       let message;
+                       if (response.statusCode === 500)
+                           message = "Error: " + result["errMsg"];
+                       else{
+                           message = result["status"];
+                           students.push({
+                               "username": qr[0],
+                               "matricola": matr,
+                               "posto": "--"
+                           });
+                       }
 
-                // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
-                dialogs.alert({
-                    title: "Result:",
-                    message: message,
-                    okButtonText: "OK"
-                }).then(function (){
-                    barcodescanner.stop();
-                });
+                       // Inserire risposta nell'alert (Nome,Cognome,Email,Matr e Autorizzazione)
+                       dialogs.alert({
+                           title: "Result:",
+                           message: message,
+                           okButtonText: "OK"
+                       }).then(function (){
+                           barcodescanner.stop();
+                       });
 
 
-            }, error => {
-                console.error(error);
+                   }, error => {
+                       console.error(error);
+                   });
+               }
             });
+
+
 
 
 

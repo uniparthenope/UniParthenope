@@ -156,8 +156,8 @@
     <string name="usr">Username</string>
     <string name="plc">Posto</string>
     <string name="stud_app_activity">Ricerca Prenotati...</string>
-    <string name="canc_pl_title">Cancellazione posto</string>
-    <string name="canc_pl">Cancellare la prenotazione di</string>
+    <string name="canc_pl_title">Cancellazione posto </string>
+    <string name="canc_pl">Cancellare la prenotazione di </string>
 
     <!--AVVISI-->
     <string name="avvisi_title">Avvisi</string>
@@ -304,6 +304,8 @@
     <string name="lectures_place_cancellation_text">Sicuro di voler cancellare la prenotazione ad un posto?</string>
     <string name="lectures_place_reservation">Prenotazione posto</string>
     <string name="lectures_place_reservation_text">Sicuro di voler prenotare un posto?</string>
+    <string name="lectures_place_reservation_prof">Sicuro di voler prenotare un posto a </string>
+
 
     <!-- LIBRETTO -->
     <string name="libretto_medie">Medie</string>
