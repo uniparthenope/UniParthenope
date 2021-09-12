@@ -178,14 +178,15 @@ exports.onNavigatingTo = function(args) {
     prenotazioneAule = new ObservableArray();
     departments = [];
     grpId = appSettings.getNumber("grpId",6);
-    if (grpId === 6){
+
+    if (grpId === 7 || grpId === 99){
+        page.getViewById("top_title").text = L('less_title_doc');
+        page.getViewById("des_book").text = L('select_less_doc');
+    }
+    else {
         page.getViewById("top_title").text = L('less_title');
         page.getViewById("des_book").text = L('select_less');
 
-    }
-    else if (grpId === 7){
-        page.getViewById("top_title").text = L('less_title_doc');
-        page.getViewById("des_book").text = L('select_less_doc');
     }
 
     viewModel = observableModule.fromObject({
@@ -212,7 +213,27 @@ exports.onItemTap = function(args) {
 
     let lez = prenotazioneAule.getItem(index);
 
-    if (grpId === 6){
+    if (grpId === 7){
+        //console.log(lez);
+        const option = {
+            context: {data: lez.room, id: lez.id },
+            closeCallback: () => {
+                // Receive data from the modal view. e.g. username & password
+                const nav =
+                    {
+                        moduleName: "studenti/lezioni/lezioni",
+                        clearHistory: true,
+                        animated: false
+                    };
+                page.frame.navigate(nav);
+            },
+            fullscreen: false
+        };
+
+        mainView.showModal(modalViewModule, option);
+    }
+
+    else{
 
         if(lez.isReserved){
             dialogs.confirm({
@@ -314,25 +335,7 @@ exports.onItemTap = function(args) {
         }
 
     }
-    else if (grpId === 7){
-        //console.log(lez);
-        const option = {
-            context: {data: lez.room, id: lez.id },
-            closeCallback: () => {
-                // Receive data from the modal view. e.g. username & password
-                const nav =
-                    {
-                        moduleName: "studenti/lezioni/lezioni",
-                        clearHistory: true,
-                        animated: false
-                    };
-                page.frame.navigate(nav);
-            },
-            fullscreen: false
-        };
 
-        mainView.showModal(modalViewModule, option);
-    }
 }
 
 exports.onListPickerLoaded = function (fargs) {
