@@ -143,11 +143,14 @@ function showLession(index){
             "reserved_by": result[i].reservation.reserved_by,
             "reserved_id": result[i].reservation.reserved_id
         });
+        /*
+        //ALREADY DONE BY SERVER
         prenotazioneAule.sort(function (orderA, orderB) {
-            let nameA = orderA.nome;
-            let nameB = orderB.nome;
+            let nameA = orderA.room;
+            let nameB = orderB.room;
             return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
         });
+         */
         prenotazioneAule.sort(function (orderA, orderB) {
             let nameA = orderA.start_date;
             let nameB = orderB.start_date;
