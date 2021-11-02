@@ -35,7 +35,7 @@
                 <Label fontSize="12" color="white" margin="5 5 5 5" text="{{L('select_depart')}}"/>
 
                 <StackLayout margin="5 10 5 10" borderRadius="20%" borderWidth="2" borderColor="white" height="20%">
-                    <ListPicker id="department-listview" color="white" items="{{ departments }}" selectedIndex="0" loaded="onListPickerLoaded"/>
+                    <ListPicker id="department-listview" color="white" items="{{ courses }}" selectedIndex="0" loaded="onListPickerLoaded" flexWrapBefore="true"/>
 
                 </StackLayout>
 
