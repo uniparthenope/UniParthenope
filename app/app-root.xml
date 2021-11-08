@@ -1,6 +1,5 @@
 <nsDrawer:RadSideDrawer id="sideDrawer"
                         xmlns:nsDrawer="nativescript-ui-sidedrawer"
-                        xmlns:cb="@nstudio/nativescript-checkbox"
                         loaded="onLoaded">
     <nsDrawer:RadSideDrawer.drawerTransition>
         <nsDrawer:SlideInOnTopTransition/>
@@ -38,7 +37,11 @@
                     <StackLayout id="loginForm" visibility="visible">
                         <TextField android:class="form-input" ios:class="ios-form-input" autocapitalizationType="none" hint="Username" id="username"/>
                         <TextField android:class="form-input" ios:class="ios-form-input" hint="Password" secure="true" id="password"/>
-                        <cb:CheckBox checked="true" backgroundColor="#000000ff" text="Remember me" id="rememberMe" color="white" fillColor="white" marginTop="5" marginLeft="10"/>
+                        <GridLayout rows="*" padding="0,10,0,10">
+                            <Label class="textPrimary" row="0" text="Remember me " horizontalAlignment="left" verticalAlignment="center"/>
+                            <Switch row="0" checked="true" backgroundColor="#000000ff"  id="rememberMe" color="white" marginTop="5" marginLeft="10" horizontalAlignment="right"/>
+                        </GridLayout>
+
                         <Button class="btn-menu" text="Login" marginBottom="5" marginTop="20" tap="onTapLogin"/>
                         <Label id="forg_acc" text="Dimenticato account?" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10" ontap="ontap_account"/>
 

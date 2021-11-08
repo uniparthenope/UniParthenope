@@ -191,8 +191,18 @@ exports.onSwitchLoaded_topic_newsall = function (args) {
         const isChecked = sw.checked;
         appSettings.setBoolean("topic_newsall",isChecked);
 
-        if (isChecked)
-            firebase.subscribeToTopic("NEWS_ALL").then(() => console.log("Subscribed to ","NEWS_ALL"));
+        console.log("QUI");
+
+        if (isChecked){
+            try{
+                firebase.subscribeToTopic("NEWS_ALL").then(() => console.log("Subscribed to ","NEWS_ALL"));
+            }
+            catch (e) {
+                console.log(e);
+            }
+
+        }
+
         else
             firebase.unsubscribeFromTopic("NEWS_ALL").then(() => console.log("Unsubscribed from ","NEWS_ALL"));
 
