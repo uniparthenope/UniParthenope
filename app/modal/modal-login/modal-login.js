@@ -450,10 +450,14 @@ exports.onShownModally = function (args) {
 
                 normalizeToken(_result.user.userId);
                 global.saveInfo(account);
+                console.log("QUI");
 
-                if  (_result.user.persId !== undefined)
+                if  (_result.user.persId !== undefined){
                     appSettings.setNumber("persId",_result.user.persId);
+                    getPIC(_result.user.persId,0);
+                }
 
+                console.log("QUI");
                 appSettings.setString("matricola","--");
 
                 let remember = sideDrawer.getViewById("rememberMe").checked;
@@ -469,7 +473,6 @@ exports.onShownModally = function (args) {
                 }
                 global.isConnected = true;
 
-                getPIC(_result.user.persId,0);
 
                 let nc;
 
@@ -488,6 +491,7 @@ exports.onShownModally = function (args) {
                 appSettings.setString("cognome", nc[1].toUpperCase());
 
                 sideDrawer.getViewById("topName").text = nc[0].toUpperCase() + " " + nc[1].toUpperCase();
+                sideDrawer.getViewById("topName").visibility = "visible";
                 sideDrawer.getViewById("topMatr").text = appSettings.getString("grpDes");
                 sideDrawer.getViewById("topMatr").visibility = "visible";
                 let userForm = sideDrawer.getViewById("userOther");

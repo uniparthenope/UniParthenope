@@ -112,7 +112,11 @@ global.saveInfo =async function(result) {
                 console.log("SAVE_INFO GA Corso= "+result.user.trattiCarriera[index].corsoGaId);
     }
 
-    global.authToken= result.authToken;
+    if  (result.authToken !== undefined){
+        global.authToken= result.authToken;
+        console.log("SAVE_INFO AuthToken= " + global.authToken);
+    }
+
     console.log("SAVE_INFO CF= "+result.user.codFis);
     console.log("SAVE_INFO Name= "+result.user.firstName);
     console.log("SAVE_INFO Surname= "+result.user.lastName);
@@ -121,7 +125,7 @@ global.saveInfo =async function(result) {
 
     //console.log("SAVE_INFO persId= "+result.user.persId);
     console.log("SAVE_INFO userId= " + result.user.userId);
-    console.log("SAVE_INFO AuthToken= " + global.authToken);
+
 };
 global.saveAnagrafe = function(type,result){
     console.log("SAVE_ANAGR dataNascita= "+result.dataNascita);
