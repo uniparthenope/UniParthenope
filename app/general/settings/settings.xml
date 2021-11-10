@@ -68,7 +68,7 @@
         </StackLayout>
         <StackLayout verticalAlignment="bottom" margin="5 5 5 5">
             <Button tap="onTapSurvey" class="btn" text="{{L('survey')}}" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
-            <Button id="deleteBtn" visibility="collapsed" tap="onTapDelete" class="btn" text="{{L('forget_account')}}" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
+            <Button id="deleteBtn" backgroundColor="brown" color="white" visibility="collapsed" tap="onTapDelete" class="btn" text="{{L('forget_account')}}" horizontalAlignment="center" width="90%" verticalAlignment="bottom" marginBottom="10"/>
         </StackLayout>
     </GridLayout>
 </Page>

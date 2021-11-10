@@ -167,6 +167,7 @@ Accordion{
     border-bottom-color: #2E7C9E;
     border-bottom-width: 1;
     color: white;
+    font-family: "Roboto Slab";
     placeholder-color: #2E7C9E;
     width: 90%;
 }

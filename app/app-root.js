@@ -257,7 +257,7 @@ exports.goto_adminNew = function () {
 exports.goto_aule = function () {
     const nav =
         {
-            moduleName: "studenti/lezioni/lezioni",
+            moduleName: "common/lezioni/lezioni",
         };
     frame.Frame.topmost().navigate(nav);
 };

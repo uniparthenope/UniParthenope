@@ -39,10 +39,12 @@ exports.onNavigatingTo = function (args) {
         let gp_flag = appSettings.getBoolean("greenpass_flag",false);
         if(gp_flag){
             page.getViewById("layout-greenpass").visibility = "visible";
+            page.getViewById("greenpass-label").visibility = "collapsed";
             getGPStatus();
         }
         else{
             page.getViewById("layout-greenpass").visibility = "collapsed";
+            page.getViewById("greenpass-label").visibility = "visible";
         }
         let pren = page.getViewById("btn-prenotazioni");
         pren.visibility = "collapsed";
@@ -60,7 +62,7 @@ exports.onDrawerButtonTap = function () {
 exports.goto_prenotazioni = function () {
     const nav =
         {
-            moduleName: "studenti/lezioni/lezioni",
+            moduleName: "common/lezioni/lezioni",
             clearHistory: false
         };
     page.frame.navigate(nav);

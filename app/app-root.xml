@@ -15,7 +15,7 @@
                 <ios>
                     <GridLayout rows="auto,auto,auto,auto" row="0" orientation="vertical" verticalAlignment="top" marginTop="5">
                         <Label row="0" id="topMatr" text="MATR!" visibility="collapsed" textWrap="true" textAlignment="center" color="white" fontSize="12" marginBottom="5" horizontalAlignment="center"/>
-                        <StackLayout row="1" class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0" width="120" height="120"/>
+                        <StackLayout row="1" class="imageTop" id="topImg" backgroundImage="~/images/logo_parth.png" horizontalAlignment="center" backgroundColor="#107dd0"/>
                         <Label row="2" id="topName" text="Welcome!" color="orange" fontSize="18" textWrap="true" horizontalAlignment="center" textAlignment="center"/>
                         <Label row="3" id="topEmail" text="EMAIL!" visibility="collapsed" heigth="100%" textWrap="true" color="white" fontSize="11" horizontalAlignment="center" textAlignment="center"/>
                     </GridLayout>
@@ -38,12 +38,12 @@
                         <TextField android:class="form-input" ios:class="ios-form-input" autocapitalizationType="none" hint="Username" id="username"/>
                         <TextField android:class="form-input" ios:class="ios-form-input" hint="Password" secure="true" id="password"/>
                         <GridLayout rows="*" padding="0,10,0,10">
-                            <Label class="textPrimary" row="0" text="Remember me " horizontalAlignment="left" verticalAlignment="center"/>
-                            <Switch row="0" checked="true" backgroundColor="#000000ff"  id="rememberMe" color="white" marginTop="5" marginLeft="10" horizontalAlignment="right"/>
+                            <Label color="lightgray" row="0" text="Remember me " horizontalAlignment="left" verticalAlignment="center"/>
+                            <Switch row="0" checked="true" id="rememberMe" color="white" marginTop="5" marginLeft="10" horizontalAlignment="right"/>
                         </GridLayout>
 
                         <Button class="btn-menu" text="Login" marginBottom="5" marginTop="20" tap="onTapLogin"/>
-                        <Label id="forg_acc" text="Dimenticato account?" color="white" textAlignment="center" horizontalAlignment="center" marginTop="10" ontap="ontap_account"/>
+                        <Label id="forg_acc" text="Dimenticato account?" color="lightgray" textAlignment="center" horizontalAlignment="center" marginTop="10" ontap="ontap_account"/>
 
                     </StackLayout>
 

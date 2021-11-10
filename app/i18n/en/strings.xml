@@ -70,6 +70,7 @@
     <string name="btn_servizi">Book Services</string>
     <string name="btn_history">History of Accesses</string>
     <string name="access_mess">In order to save the type of access IN PRESENCE, you must first accept Mandatory Self-Certification!</string>
+    <string name="gp_message">To show EU digital COVID-19 Certificate informations enable Certificate Informations in Settings page.</string>
 
     <!-- MENU LATERALE -->
     <string name="forg_pwd">Forgot Password?</string>

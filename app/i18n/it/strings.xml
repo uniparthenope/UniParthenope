@@ -82,6 +82,7 @@
     <string name="btn_servizi">Prenotazione Servizi</string>
     <string name="btn_history">Storico Accessi</string>
     <string name="access_mess">Per poter salvare il tipo di accesso in PRESENZA bisogna prima accettare Autocertificazione Obbligatoria!</string>
+    <string name="gp_message">Per visualizzare le informazioni Certificazione verde COVID-19 abilitare Informazioni Certificazione verde dal menu Impostazioni.</string>
 
 
     <!--ANAGRAFICA -->

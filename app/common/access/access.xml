@@ -29,6 +29,8 @@
                 <Label class="textPrimary" text="{{L('access_title')}}" horizontalAlignment="center" verticalAlignment="center"/>
             </GridLayout>
 
+            <Label marginTop="35" color="gray" textWrap="true" class="textPrimary" id="greenpass-label" text="{{L('gp_message')}}" horizontalAlignment="center" verticalAlignment="center"/>
+
             <StackLayout margin="5 5 5 5" padding="5 5 5 5" id="layout-greenpass" borderColor="white" borderWidth="2" borderRadius="15">
                 <GridLayout verticalAlignment="top">
                     <Label class="textPrimary" id="gp_message" col="0" text="{{L('gp_status_message')}}" horizontalAlignment="left" verticalAlignment="center"/>

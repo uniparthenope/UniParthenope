@@ -57,7 +57,7 @@ function convertData(data){
 
 function getGACourses(){
     loading.visibility = "visible";
-    let my_c = appSettings.getNumber("cdsId").toString();
+    let my_c = appSettings.getNumber("cdsId", null);
     while(courses.length > 0)
         courses.pop();
 
@@ -90,7 +90,7 @@ function getGACourses(){
             );
 
             if(crs[x].cdsId !== null) //Select default index for my course
-                if ((crs[x].cdsId).includes(my_c)){
+                if ((crs[x].cdsId.toString()).includes(my_c)){
                     picker_index = x;
                 }
 
@@ -256,7 +256,7 @@ exports.onItemTap = function(args) {
                 // Receive data from the modal view. e.g. username & password
                 const nav =
                     {
-                        moduleName: "studenti/lezioni/lezioni",
+                        moduleName: "common/lezioni/lezioni",
                         clearHistory: true,
                         animated: false
                     };
